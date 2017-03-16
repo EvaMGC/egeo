@@ -1,5 +1,6 @@
 <span class="st-tooltip">
-   <span class="tooltip-content" [ngClass]="{'on-hover':!showOnClick, 'on-click':showOnClick && isActive}" (click)="openTooltip()" (mouseenter)="openTooltipOnHover()" (mouseLeave)="closeTooltipOnHover()">
+   <span class="tooltip-content" [ngClass]="{'on-hover':!showOnClick, 'on-click':showOnClick && isActive}"
+         (click)="openTooltip()" (mouseenter)="openTooltipOnHover()" (mouseleave)="closeTooltipOnHover()">
       <a [attr.id]="qaTag"><ng-content></ng-content></a>
       <span>{{text}}</span>
    </span>
