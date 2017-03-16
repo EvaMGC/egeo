@@ -14,9 +14,6 @@ export class StTooltip extends EventWindowManager implements OnDestroy {
    @Input() showOnClick: boolean;
    @Input() qaTag: string;
 
-   private clicked: boolean = false;
-   private clickListener: Function;
-   private clickInside: boolean;
    constructor(private elementRef: ElementRef, private renderer: Renderer, private cd: ChangeDetectorRef) {
       super(renderer, cd, elementRef);
    }
