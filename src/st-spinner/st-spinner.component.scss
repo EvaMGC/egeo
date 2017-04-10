@@ -1,66 +1,7 @@
-@import '../../node_modules/@stratio/egeo-ui-base/utils/typography';
-@import '../../node_modules/@stratio/egeo-ui-base/utils/colors';
-
-$spinner-size: 40px !default;
-$dots: 10 !default;
-$animation-speed: 12 !default;
-$dot-size: 17%;
+$spinner-size: 100% !default;
 
 .st-spinner {
   width: $spinner-size;
   height: $spinner-size;
-  position: relative;
-  margin: 25px auto;
-
-  & .dot {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  & .dot:before {
-    width: $dot-size;
-    height: $dot-size;
-    display: block;
-    margin: 0 auto;
-    border-radius: 100%;
-    background-color: #333;
-    -webkit-animation: fade ($dots / $animation-speed)+s infinite ease-in-out both;
-    animation: fade ($dots / $animation-speed)+s infinite ease-in-out both;
-    content: '';
-  }
-
-  @for $i from 2 through $dots{
-    & .dot-#{$i} {
-      -webkit-transform: rotate((360/$dots)*($i - 1)+deg);
-      -ms-transform: rotate((360/$dots)*($i - 1)+deg);
-      transform: rotate((360/$dots)*($i - 1)+deg);
-    }
-    & .dot-#{$i}:before {
-      -webkit-animation-delay: -(($dots - ($i - 1))/$animation-speed)+s;
-      animation-delay: -((($dots - ($i - 1)))/$animation-speed)+s;
-    }
-  }
-
-    @keyframes fade {
-    0%, 49%, 100% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fade {
-    0%, 49%, 100% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
 }
-
 
