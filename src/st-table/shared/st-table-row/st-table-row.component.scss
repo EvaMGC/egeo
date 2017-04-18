@@ -1,0 +1,33 @@
+@import '../../../../node_modules/@stratio/egeo-ui-base/utils/typography';
+@import '../../../../node_modules/@stratio/egeo-ui-base/utils/colors';
+
+:host {
+   position: relative;
+   width: 100%;
+   height: 55px;
+   border-bottom: 1px solid egeo-get-color(n3);
+   font-family: egeo-get-font(body);
+   font-size: 13px;
+   line-height: 2.77;
+   color: egeo-get-color(n6);
+}
+
+:host(.st-table-row--compacted)  {
+   height: 45px;
+}
+
+:host:hover {
+   background-color: rgba(egeo-get-color(a1), 0.1);
+}
+
+.hover-menu {
+   width: 100%;
+   float: right;
+   opacity: 0;
+   margin: 5px;
+   text-align: right;
+}
+
+.hover-menu--show {
+   opacity: 1 !important;
+}

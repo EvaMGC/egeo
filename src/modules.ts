@@ -21,6 +21,7 @@ import { StToggleButtonsModule } from './st-toggle-buttons';
 import { StTooltipModule } from './st-tooltip';
 import { StTwoListSelectionModule } from './st-two-list-selection';
 import { StVerticalTabsModule } from './st-vertical-tabs';
+import { StTableModule } from "./st-table";
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -45,5 +46,6 @@ export const DECLARATIONS: any[] = [
    StVerticalTabsModule,
    StPaginationModule,
    StModalModule,
-   StRadioModule
+   StRadioModule,
+   StTableModule
 ];
