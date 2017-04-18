@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StTableRowComponent } from "./st-table-row.component";
+import { StTableRowComponent } from './st-table-row.component';
 
 let fixture: ComponentFixture<StTableRowComponent>;
 let component: StTableRowComponent;
@@ -36,7 +36,7 @@ describe('StTableRowComponent', () => {
          let cells = fixture.nativeElement.children;
          let hoverMenu = fixture.nativeElement.children[cells.length - 1];
 
-         expect(hoverMenu.classList).toContain('hover-menu--show')
+         expect(hoverMenu.classList).toContain('hover-menu--show');
       });
    });
 
@@ -53,11 +53,11 @@ describe('StTableRowComponent', () => {
          let cells = fixture.nativeElement.children;
          let hoverMenu = fixture.nativeElement.children[cells.length - 1];
 
-         expect(hoverMenu.classList).not.toContain('hover-menu--show')
+         expect(hoverMenu.classList).not.toContain('hover-menu--show');
       });
    });
 
-   describe('should displayed compacted or not', ()=> {
+   describe('should displayed compacted or not', () => {
       it('if compacted input is true, compacted class is added to it', () => {
          component.compacted = true;
          fixture.detectChanges();
@@ -71,6 +71,5 @@ describe('StTableRowComponent', () => {
 
          expect(fixture.nativeElement.classList).not.toContain('st-table-row--compacted');
       });
-
-   })
+   });
 });

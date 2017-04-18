@@ -1,10 +1,10 @@
-<table class="st-table" [attr.id]="qaTag">
+<table class='st-table' [attr.id]='qaTag'>
    <thead>
-   <tr [ngClass]="{'st-table__header--hidden': !header}" class="st-table__header">
-      <th *ngFor="let field of fields" class="st-table__header-item" [ngClass]="{'st-table__header-item--selected': isSortedByField(field)}" (click)="onChangeOrder(field)">
-         <label class="st-table__header-text">{{field}}
-            <i *ngIf="sortable" class="st-table__order-arrow"
-               [ngClass]="{'icon-arrow2_down': !isSortedByFieldAndDirection(field, orderTypes.ASC), 'icon-arrow2_up': isSortedByFieldAndDirection(field, orderTypes.ASC)}">
+   <tr [ngClass]='{'st-table__header--hidden': !header}' class='st-table__header'>
+      <th *ngFor='let field of fields' class='st-table__header-item' [ngClass]='{'st-table__header-item--selected': isSortedByField(field)}' (click)='onChangeOrder(field)'>
+         <label class='st-table__header-text'>{{field}}
+            <i *ngIf='sortable' class='st-table__order-arrow'
+               [ngClass]='{'icon-arrow2_down': !isSortedByFieldAndDirection(field, orderTypes.ASC), 'icon-arrow2_up': isSortedByFieldAndDirection(field, orderTypes.ASC)}'>
             </i>
          </label>
       </th>

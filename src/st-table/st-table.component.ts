@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CheckRequired, Required } from '../decorators';
-import { Order, ORDER_TYPE } from "./shared/order";
+import { Order, ORDER_TYPE } from './shared/order';
 
 @CheckRequired()
 @Component({
@@ -11,7 +11,7 @@ import { Order, ORDER_TYPE } from "./shared/order";
 })
 
 export class StTableComponent {
-   @Input() @Required() fields: Array<string>;
+   @Input() @Required() fields: string[];
    @Input() @Required() qaTag: string;
    @Input() header: boolean = true;
    @Input() sortable: boolean = true;

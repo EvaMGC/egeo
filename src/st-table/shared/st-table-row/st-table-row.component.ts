@@ -1,7 +1,7 @@
 import {
-   ChangeDetectionStrategy, Component, Input, Renderer, ElementRef, ChangeDetectorRef
+   ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer
 } from '@angular/core';
-import { CheckRequired } from "../../../decorators";
+import { CheckRequired } from '../../../decorators';
 
 @CheckRequired()
 @Component({
@@ -17,7 +17,7 @@ import { CheckRequired } from "../../../decorators";
 export class StTableRowComponent {
    @Input() compacted: boolean = false;
 
-   public showHoverMenu = false;
+   public showHoverMenu: boolean = false;
 
    constructor(private elementRef: ElementRef, private renderer: Renderer, private cd: ChangeDetectorRef) {
       this.renderer.listen(this.elementRef.nativeElement, 'mouseover', () => {

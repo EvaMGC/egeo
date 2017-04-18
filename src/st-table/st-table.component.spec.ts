@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Order, ORDER_TYPE } from './shared/order';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StTableComponent } from './st-table.component';
-import { Order, ORDER_TYPE } from "./shared/order";
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
 let fakeFields = ['id', 'name', 'lastName', 'phone'];
+
 describe('StTableComponent', () => {
 
    beforeEach(() => {
@@ -22,7 +23,7 @@ describe('StTableComponent', () => {
 
    });
 
-   describe('If developer does not specify some inputs, they will be set by default', ()=> {
+   describe('If developer does not specify some inputs, they will be set by default', () => {
       beforeEach(() => {
          fixture.detectChanges();
       });
@@ -32,7 +33,7 @@ describe('StTableComponent', () => {
 
       it('table is sortable by default', () => {
          expect(component.sortable).toBeTruthy();
-      })
+      });
    });
 
    it('If fields input is not introduced, it throws an error', () => {
@@ -60,12 +61,12 @@ describe('StTableComponent', () => {
          fixture.detectChanges();
       });
 
-      it ('if current order is not defined yet, all header fields will be displayed with a down arrow', () => {
+      it('if current order is not defined yet, all header fields will be displayed with a down arrow', () => {
          component.currentOrder = undefined;
          fixture.detectChanges();
          let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
 
-         for (let i = 0; i < headerItems.length; ++i){
+         for (let i = 0; i < headerItems.length; ++i) {
             let headerItem = headerItems[i];
             expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
          }
@@ -167,7 +168,7 @@ describe('StTableComponent', () => {
          expect(component.changeOrder.emit).not.toHaveBeenCalled();
       });
 
-      it ('should display in bold the field`s header which table is sorted by', () => {
+      it('should display in bold the field`s header which table is sorted by', () => {
          let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Required, CheckRequired } from "../../../decorators";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CheckRequired } from '../../../decorators';
 
 @CheckRequired()
 @Component({
@@ -10,5 +10,4 @@ import { Required, CheckRequired } from "../../../decorators";
 })
 
 export class StTableCellComponent {
-   
 }
