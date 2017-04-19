@@ -19,6 +19,10 @@ describe('StTableRowComponent', () => {
       component = fixture.componentInstance;
    });
 
+   it ('theme class is added to the component root', () => {
+      expect(fixture.nativeElement.classList).toContain('sth-table-row');
+   });
+
    describe('should be able to listen when mouse is over it', () => {
       beforeEach(() => {
          fixture.nativeElement.dispatchEvent(new Event('mouseover'));
