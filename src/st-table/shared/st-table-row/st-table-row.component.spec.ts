@@ -6,22 +6,18 @@ import { StTableRowComponent } from './st-table-row.component';
 let fixture: ComponentFixture<StTableRowComponent>;
 let component: StTableRowComponent;
 
-
 describe('StTableRowComponent', () => {
    beforeEach(() => {
       TestBed.configureTestingModule({
          imports: [CommonModule, RouterTestingModule],
          declarations: [StTableRowComponent]
       });
-
-
    });
 
    beforeEach(() => {
       fixture = TestBed.createComponent(StTableRowComponent);
       component = fixture.componentInstance;
    });
-
 
    describe('should be able to listen when mouse is over it', () => {
       beforeEach(() => {
@@ -62,14 +58,14 @@ describe('StTableRowComponent', () => {
          component.compacted = true;
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.classList).toContain('st-table-row--compacted');
+         expect(fixture.nativeElement.classList).toContain('sth-table-row--compacted');
       });
 
       it('if compacted input is false, compacted class is not added to it', () => {
          component.compacted = false;
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.classList).not.toContain('st-table-row--compacted');
+         expect(fixture.nativeElement.classList).not.toContain('sth-table-row--compacted');
       });
    });
 });

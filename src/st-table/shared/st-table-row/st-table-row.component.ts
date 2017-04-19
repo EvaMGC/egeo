@@ -1,16 +1,15 @@
 import {
    ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer
 } from '@angular/core';
-import { CheckRequired } from '../../../decorators';
 
-@CheckRequired()
 @Component({
    selector: '[st-table-row]',
    templateUrl: './st-table-row.component.html',
    styleUrls: ['./st-table-row.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    host: {
-      '[class.st-table-row--compacted]': 'compacted'
+      'class': 'sth-table-row',
+      '[class.sth-table-row--compacted]': 'compacted'
    }
 })
 

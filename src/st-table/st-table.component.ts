@@ -15,18 +15,10 @@ export class StTableComponent {
    @Input() @Required() qaTag: string;
    @Input() header: boolean = true;
    @Input() sortable: boolean = true;
+   @Input() currentOrder: Order;
    @Output() changeOrder: EventEmitter<Order> = new EventEmitter();
 
-   public currentOrder: Order;
    public orderTypes: any = ORDER_TYPE;
-
-   public isSortedByFieldAndDirection(field: string, orderType: ORDER_TYPE): boolean {
-      return this.isSortedByField(field) && this.currentOrder.type === orderType;
-   }
-
-   public isSortedByField(field: string): boolean {
-      return this.currentOrder && this.currentOrder.orderBy === field;
-   }
 
    public onChangeOrder(field: string): void {
       if (field) {
@@ -39,7 +31,21 @@ export class StTableComponent {
       }
    }
 
+   public getHeaderItemClass(field: string): string {
+      let isOrderAsc = this.isSortedByFieldAndDirection(field, this.orderTypes.ASC);
+      return isOrderAsc ? 'icon-arrow2_up' : 'icon-arrow2_down';
+   }
+
+   public isSortedByField(field: string): boolean {
+      return this.currentOrder && this.currentOrder.orderBy === field;
+   }
+
+   private isSortedByFieldAndDirection(field: string, orderType: ORDER_TYPE): boolean {
+      return this.isSortedByField(field) && this.currentOrder.type === orderType;
+   }
+
    private changeOrderDirection(): void {
-      this.currentOrder.type = this.currentOrder.type === ORDER_TYPE.ASC ? ORDER_TYPE.DESC : ORDER_TYPE.ASC;
+      let newDirection = this.currentOrder.type === ORDER_TYPE.ASC ? ORDER_TYPE.DESC : ORDER_TYPE.ASC;
+      this.currentOrder = new Order(this.currentOrder.orderBy, newDirection);
    }
 }

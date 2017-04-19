@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Order, ORDER_TYPE } from './shared/order';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
 
 let fixture: ComponentFixture<StTableComponent>;
@@ -56,7 +57,7 @@ describe('StTableComponent', () => {
       }
    });
 
-   describe('Should return if table is currently sorted by a specific field and a direction', () => {
+   describe('Should return the class name for header items according to the current order and direction', () => {
       beforeEach(() => {
          fixture.detectChanges();
       });
@@ -64,47 +65,32 @@ describe('StTableComponent', () => {
       it('if current order is not defined yet, all header fields will be displayed with a down arrow', () => {
          component.currentOrder = undefined;
          fixture.detectChanges();
-         let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+         let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.sth-table__header-item');
 
-         for (let i = 0; i < headerItems.length; ++i) {
-            let headerItem = headerItems[i];
-            expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
+         for (let headerItem of headerItems) {
+            expect(headerItem.querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
          }
-
       });
 
-      it('if table is sort by the introduced field but not in the specified direction, it returns false', () => {
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.ASC);
-
-         expect(component.isSortedByFieldAndDirection(fakeFields[0], ORDER_TYPE.DESC)).toBeFalsy();
-
+      it('if table is sort by the field but not in ascending direction, it returns icon-arrow2_down', () => {
          component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.DESC);
 
-         expect(component.isSortedByFieldAndDirection(fakeFields[0], ORDER_TYPE.ASC)).toBeFalsy();
+         expect(component.getHeaderItemClass(fakeFields[0])).toBe('icon-arrow2_down');
       });
 
-      it('if table is sort in the specified direction but not by the introduced field, it returns false', () => {
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.ASC);
+      it('if table is sort in ascending direction but not by the introduced field, it returns icon-arrow2_down', () => {
+         component.currentOrder = new Order(fakeFields[1], ORDER_TYPE.ASC);
 
-         expect(component.isSortedByFieldAndDirection(fakeFields[2], ORDER_TYPE.ASC)).toBeFalsy();
-
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.DESC);
-
-         expect(component.isSortedByFieldAndDirection(fakeFields[2], ORDER_TYPE.DESC)).toBeFalsy();
+         expect(component.getHeaderItemClass(fakeFields[0])).toBe('icon-arrow2_down');
       });
 
-      it('if table is sort by that field and in the specified direction, it returns true', () => {
+      it('if table is sort by that field and in ascending direction, it returns icon-arrow2_up', () => {
          component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.ASC);
 
-         expect(component.isSortedByFieldAndDirection(fakeFields[0], ORDER_TYPE.ASC)).toBeTruthy();
-
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.DESC);
-
-         expect(component.isSortedByFieldAndDirection(fakeFields[0], ORDER_TYPE.DESC)).toBeTruthy();
+         expect(component.getHeaderItemClass(fakeFields[0])).toBe('icon-arrow2_up');
       });
 
    });
-
 
    describe('When user clicks on a field in the table header, order is changed', () => {
       beforeEach(() => {
@@ -114,7 +100,7 @@ describe('StTableComponent', () => {
       it('if field is different to the current order`s one, current order is changed to the selected field and in direction ASC', () => {
          component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.ASC);
 
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
@@ -126,21 +112,21 @@ describe('StTableComponent', () => {
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
 
-         expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
+         expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
       });
 
       it('if field is the same to the current order`s one, only order direction is changed', () => {
          // ascent sorting
          component.currentOrder = new Order(fakeFields[1], ORDER_TYPE.ASC);
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[1];
          headerItem.click();
          fixture.detectChanges();
 
          expect(component.currentOrder.orderBy).toBe(fakeFields[1]);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.DESC);
          // also order arrow is updated
-         expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
+         expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
 
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
 
@@ -152,7 +138,7 @@ describe('StTableComponent', () => {
          expect(component.currentOrder.orderBy).toBe(fakeFields[1]);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.ASC);
          // also order arrow is updated
-         expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
+         expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
 
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
       });
@@ -169,14 +155,15 @@ describe('StTableComponent', () => {
       });
 
       it('should display in bold the field`s header which table is sorted by', () => {
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
 
-         expect(headerItem.classList).toContain('st-table__header-item--selected');
+         expect(headerItem.classList).toContain('sth-table__header-item--selected');
       });
 
    });
 
-});
+})
+;

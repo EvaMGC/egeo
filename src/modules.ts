@@ -17,11 +17,11 @@ import { StRadioMenuModule } from './st-radio-menu';
 import { StSearchModule } from './st-search';
 import { StSpinnerModule } from './st-spinner';
 import { StTabBoxModule } from './st-tab-box';
+import { StTableModule } from './st-table';
 import { StToggleButtonsModule } from './st-toggle-buttons';
 import { StTooltipModule } from './st-tooltip';
 import { StTwoListSelectionModule } from './st-two-list-selection';
 import { StVerticalTabsModule } from './st-vertical-tabs';
-import { StTableModule } from "./st-table";
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -46,6 +46,6 @@ export const DECLARATIONS: any[] = [
    StVerticalTabsModule,
    StPaginationModule,
    StModalModule,
-   StRadioModule,
-   StTableModule
+   StTableModule,
+   StRadioModule
 ];

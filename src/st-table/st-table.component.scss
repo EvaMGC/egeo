@@ -1,60 +1,28 @@
-@import '../../node_modules/@stratio/egeo-ui-base/utils/typography';
-@import '../../node_modules/@stratio/egeo-ui-base/utils/colors';
-
-.st-table {
+.sth-table {
    width: 100%;
    height: 100%;
 }
 
-.st-table__header {
-   border-bottom: 1px solid egeo-get-color(n4);
-}
-
-.st-table__header--hidden {
+.sth-table__header--hidden {
    visibility: hidden;
 }
 
-.st-table__header-item {
-   font-family: egeo-get-font(body);
-   font-size: 13px;
-   font-weight: bold;
-   line-height: 2.77;
-   text-align: left;
-   color: egeo-get-color(n8);
+.sth-table__header-item {
    cursor: pointer;
    padding: 0 20px;
    text-transform: capitalize;
 }
 
-.st-table__header-text {
+.sth-table__header-text {
    display: flex;
    flex-direction: row;
    flex-wrap: nowrap;
    align-items: center;
    margin-bottom: 6px;
-   line-height: 18px;
    justify-content: flex-start;
    cursor: pointer;
 }
 
-.st-table__header-item--selected {
-   font-weight: 800;
-   .st-table__order-arrow {
-      font-weight: 800;
-      color: egeo-get-color(n9) !important;
-   }
-}
-
-.st-table__order-arrow {
-   font-family: egeo-get-font(icon);
-   font-size: 13px;
-   line-height: 2.08;
-   text-align: left;
-   color: egeo-get-color(n4);
+.sth-table__order-arrow {
    padding-left: 9px;
 }
-
-.st-table__order-arrow:hover {
-   color: egeo-get-color(n9);
-}
-
