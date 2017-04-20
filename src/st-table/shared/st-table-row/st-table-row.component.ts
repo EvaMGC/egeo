@@ -1,5 +1,5 @@
 import {
-   ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer
+   ChangeDetectionStrategy, Component, HostListener, Input
 } from '@angular/core';
 
 @Component({
@@ -18,14 +18,12 @@ export class StTableRowComponent {
 
    public showHoverMenu: boolean = false;
 
-   constructor(private elementRef: ElementRef, private renderer: Renderer, private cd: ChangeDetectorRef) {
-      this.renderer.listen(this.elementRef.nativeElement, 'mouseover', () => {
-         this.showHoverMenu = true;
-         this.cd.markForCheck();
-      });
-      this.renderer.listen(this.elementRef.nativeElement, 'mouseout', () => {
-         this.showHoverMenu = false;
-         this.cd.markForCheck();
-      });
+   @HostListener('mouseover') onShowHoverMenu(): void {
+      this.showHoverMenu = true;
+   };
+
+   @HostListener('mouseout') onHideHoverMenu(): void {
+      this.showHoverMenu = false;
    };
 }
+
