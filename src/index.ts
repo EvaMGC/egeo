@@ -15,6 +15,7 @@ export * from './st-pagination';
 export * from './st-radio-menu';
 export * from './st-search';
 export * from './st-spinner';
+export * from './st-table/st-table.module';
 export * from './st-tab-box';
 export * from './st-toggle-buttons';
 export * from './st-tooltip';
