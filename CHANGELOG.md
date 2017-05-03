@@ -4,6 +4,8 @@
 
 * Update angular version to angular 4.1.0
 * Refactor of build method
+* Create form label component
+* Create switch component
 
 ## 1.5.0 (April 25, 2017)
 
