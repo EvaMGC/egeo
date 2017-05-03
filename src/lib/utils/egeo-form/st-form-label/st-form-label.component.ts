@@ -1,10 +1,10 @@
 import {
    ChangeDetectionStrategy,
    Component,
-   Input,
+   Input
 } from '@angular/core';
-import { StFormLabelStatus } from "./st-form-label-status.enum";
-import { Required, CheckRequired } from "../../../decorators/require-decorators";
+import { StFormLabelStatus } from './st-form-label-status.enum';
+import { Required, CheckRequired } from '../../../decorators/require-decorators';
 
 @Component({
    selector: 'st-form-label',
@@ -32,7 +32,7 @@ export class StFormLabelComponent {
          case StFormLabelStatus.FOCUS:
             return 'active';
          default:
-              return ''
+            return '';
       }
    }
 }

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { StFormLabelModule } from "../utils/egeo-form/st-form-label/st-form-label.module";
+import { StFormLabelModule } from '../utils/egeo-form/st-form-label/st-form-label.module';
 import { StSwitchComponent } from './st-switch.component';
 
 let fixture: ComponentFixture<StSwitchComponent>;
@@ -28,7 +28,6 @@ describe('StSwitchComponent', () => {
       component = fixture.componentInstance;
       component.stModel = false;
       component.qaTag = 'qa tag';
-      // fixture.detectChanges();
    });
 
    it('if model is not introduced as input, it throws an error', () => {
@@ -55,7 +54,7 @@ describe('StSwitchComponent', () => {
    });
 
    it('qa tag is added as id to the clickable element', () => {
-      let qaTag = "fakeQATag";
+      let qaTag = 'fakeQATag';
       component.qaTag = qaTag;
       component.ngOnInit();
       fixture.detectChanges();
@@ -74,7 +73,7 @@ describe('StSwitchComponent', () => {
          fixture.detectChanges();
 
          expect(component.internalFormControl.disabled).toBeFalsy();
-      })
+      });
    });
 
    describe('Should update its class when disabled attribute changes', () => {
@@ -123,7 +122,7 @@ describe('StSwitchComponent', () => {
          component.stModel = false;
          fixture.detectChanges();
 
-         let switchBox: HTMLDivElement = fixture.nativeElement.querySelector(".st-switch__toggle");
+         let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
          switchBox.click();
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
@@ -147,7 +146,7 @@ describe('StSwitchComponent', () => {
          component.stModel = false;
          fixture.detectChanges();
 
-         let switchBox: HTMLDivElement = fixture.nativeElement.querySelector(".st-switch__toggle");
+         let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
          switchBox.click();
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
@@ -193,13 +192,13 @@ describe('StSwitchComponent', () => {
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
          let label: HTMLElement = fixture.nativeElement.querySelector('.st-switch__label');
-         console.log(label.classList)
+
          expect(label.classList).toContain('st-switch__label--right');
       });
 
    });
 
-   it('Callback function is initialized on registerOnChange function in order to be called when there is a change', ()=> {
+   it('Callback function is initialized on registerOnChange function in order to be called when there is a change', () => {
       let callbackFunction = jasmine.createSpy('callbackFunction');
       component.ngOnInit();
 

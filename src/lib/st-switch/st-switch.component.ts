@@ -10,8 +10,8 @@ import {
    ControlValueAccessor,
    NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { CheckRequired, Required } from "../decorators/require-decorators";
-import { StFormLabelStatus } from "../utils/egeo-form/st-form-label/st-form-label-status.enum";
+import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-label-status.enum';
 
 @Component({
    selector: 'st-switch',
@@ -46,7 +46,7 @@ export class StSwitchComponent implements ControlValueAccessor, OnInit {
    }
 
    getLabelStatus(): StFormLabelStatus {
-      if (this.disabled){
+      if (this.disabled) {
          return StFormLabelStatus.DISABLED;
       }
    }

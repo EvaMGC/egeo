@@ -1,5 +1,5 @@
 export class EgeoFormUtils {
-   
+
    // Get error message in function of error list.
    public getErrorMessage(formErrors: any, errorMessages: { [key: string]: any }): string {
       if (!errorMessages) {
