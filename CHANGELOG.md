@@ -6,6 +6,7 @@
 * Refactor of build method
 * Create form label component
 * Create switch component
+* St-table: Allow to introduce a model with id and label as header item
 
 ## 1.5.0 (April 25, 2017)
 
