@@ -4,10 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
+import { StTableHeader } from "./shared/table-header.interface";
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
-let fakeFields = ['id', 'name', 'lastName', 'phone'];
+let fakeFields: StTableHeader[] = [{ id: 'id', label: 'ID' }, { id: 'name', label: 'Name' },
+   { id: 'lastName', label: 'Last name' }, { id: 'phone', label: 'Phone' }];
 
 describe('StTableComponent', () => {
 
@@ -76,19 +78,19 @@ describe('StTableComponent', () => {
       });
 
       it('if table is sort by the field but not in ascending direction, it returns icon-arrow2_down', () => {
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.DESC);
+         component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.DESC);
 
          expect(component.getHeaderItemClass(fakeFields[0])).toBe('icon-arrow2_down');
       });
 
       it('if table is sort in ascending direction but not by the introduced field, it returns icon-arrow2_down', () => {
-         component.currentOrder = new Order(fakeFields[1], ORDER_TYPE.ASC);
+         component.currentOrder = new Order(fakeFields[1].id, ORDER_TYPE.ASC);
 
          expect(component.getHeaderItemClass(fakeFields[0])).toBe('icon-arrow2_down');
       });
 
       it('if table is sort by that field and in ascending direction, it returns icon-arrow2_up', () => {
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.ASC);
+         component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.ASC);
 
          expect(component.getHeaderItemClass(fakeFields[0])).toBe('icon-arrow2_up');
       });
@@ -101,14 +103,14 @@ describe('StTableComponent', () => {
          fixture.detectChanges();
       });
       it('if field is different to the current order`s one, current order is changed to the selected field and in direction ASC', () => {
-         component.currentOrder = new Order(fakeFields[0], ORDER_TYPE.ASC);
+         component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.ASC);
 
          let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
 
-         expect(component.currentOrder.orderBy).toBe(fakeFields[1]);
+         expect(component.currentOrder.orderBy).toBe(fakeFields[1].id);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.ASC);
          // also order arrow is updated
 
@@ -121,12 +123,12 @@ describe('StTableComponent', () => {
 
       it('if field is the same to the current order`s one, only order direction is changed', () => {
          // ascent sorting
-         component.currentOrder = new Order(fakeFields[1], ORDER_TYPE.ASC);
+         component.currentOrder = new Order(fakeFields[1].id, ORDER_TYPE.ASC);
          let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[1];
          headerItem.click();
          fixture.detectChanges();
 
-         expect(component.currentOrder.orderBy).toBe(fakeFields[1]);
+         expect(component.currentOrder.orderBy).toBe(fakeFields[1].id);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.DESC);
          // also order arrow is updated
          expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
@@ -134,11 +136,11 @@ describe('StTableComponent', () => {
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
 
          // descent sorting
-         component.currentOrder = new Order(fakeFields[1], ORDER_TYPE.DESC);
+         component.currentOrder = new Order(fakeFields[1].id, ORDER_TYPE.DESC);
          headerItem.click();
          fixture.detectChanges();
 
-         expect(component.currentOrder.orderBy).toBe(fakeFields[1]);
+         expect(component.currentOrder.orderBy).toBe(fakeFields[1].id);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.ASC);
          // also order arrow is updated
          expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
@@ -147,12 +149,12 @@ describe('StTableComponent', () => {
       });
 
       it('if field is undefined, order is not changed', () => {
-         component.currentOrder = new Order(fakeFields[1], ORDER_TYPE.DESC);
+         component.currentOrder = new Order(fakeFields[1].id, ORDER_TYPE.DESC);
 
          component.onChangeOrder(undefined);
          fixture.detectChanges();
 
-         expect(component.currentOrder.orderBy).toBe(fakeFields[1]);
+         expect(component.currentOrder.orderBy).toBe(fakeFields[1].id);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.DESC);
          expect(component.changeOrder.emit).not.toHaveBeenCalled();
       });
@@ -169,4 +171,4 @@ describe('StTableComponent', () => {
    });
 
 })
-   ;
+;

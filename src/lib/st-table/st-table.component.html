@@ -2,7 +2,7 @@
    <thead>
    <tr [ngClass]="{'sth-table__header--hidden': !header}" class='sth-table__header'>
       <th *ngFor='let field of fields' class='sth-table__header-item' [ngClass]="{'sth-table__header-item--selected': isSortedByField(field)}" (click)="onChangeOrder(field)">
-         <label class='sth-table__header-text'>{{field}}
+         <label class='sth-table__header-text'>{{field.label}}
             <i *ngIf="sortable" class='sth-table__order-arrow'
                [ngClass]="getHeaderItemClass(field)">
             </i>

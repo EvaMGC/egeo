@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 import { CheckRequired, Required } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
+import { StTableHeader } from "./shared/table-header.interface";
 
 @CheckRequired()
 @Component({
@@ -12,7 +13,7 @@ import { Order, ORDER_TYPE } from './shared/order';
 })
 
 export class StTableComponent {
-   @Input() @Required() fields: string[];
+   @Input() @Required() fields: StTableHeader[];
    @Input() @Required() qaTag: string;
    @Input() header: boolean = true;
    @Input() sortable: boolean = true;
@@ -21,27 +22,27 @@ export class StTableComponent {
 
    public orderTypes: any = ORDER_TYPE;
 
-   public onChangeOrder(field: string): void {
+   public onChangeOrder(field: StTableHeader): void {
       if (field) {
-         if (this.currentOrder && this.currentOrder.orderBy === field) {
+         if (this.currentOrder && this.currentOrder.orderBy === field.id) {
             this.changeOrderDirection();
          } else {
-            this.currentOrder = new Order(field, ORDER_TYPE.ASC);
+            this.currentOrder = new Order(field.id, ORDER_TYPE.ASC);
          }
          this.changeOrder.emit(this.currentOrder);
       }
    }
 
-   public getHeaderItemClass(field: string): string {
+   public getHeaderItemClass(field: StTableHeader): string {
       let isOrderAsc = this.isSortedByFieldAndDirection(field, this.orderTypes.ASC);
       return isOrderAsc ? 'icon-arrow2_up' : 'icon-arrow2_down';
    }
 
-   public isSortedByField(field: string): boolean {
-      return this.currentOrder && this.currentOrder.orderBy === field;
+   public isSortedByField(field: StTableHeader): boolean {
+      return this.currentOrder && this.currentOrder.orderBy === field.id;
    }
 
-   private isSortedByFieldAndDirection(field: string, orderType: ORDER_TYPE): boolean {
+   private isSortedByFieldAndDirection(field: StTableHeader, orderType: ORDER_TYPE): boolean {
       return this.isSortedByField(field) && this.currentOrder.type === orderType;
    }
 
