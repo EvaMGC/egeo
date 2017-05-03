@@ -1,0 +1,12 @@
+<section>
+   <st-form-label class="st-switch__label sth-switch__label st-switch__label--{{labelPosition}}" [label]="label" qaTag="{{qaTag}}-label"
+                  [contextualHelp]="contextualHelp"
+                  [status]="getLabelStatus()">
+   </st-form-label>
+   <div class="st-switch__toggle sth-switch__toggle" (click)="onChange(!_stModel)" [attr.id]="qaTag"
+        [ngClass]="{ 'st-switch--disabled': disabled, 'st-switch--on': _stModel, 'st-switch--off': !_stModel}">
+      <div class="st-switch__box sth-switch__box">
+         <span class="st-switch__circle sth-switch__circle"></span>
+      </div>
+   </div>
+</section>

@@ -1,0 +1,74 @@
+$st-switch__toggle-width: 35px;
+
+.st-switch {
+   position: relative;
+   box-sizing: border-box;
+   font-size: 1rem;
+   display: inline-block;
+   max-width: 100%;
+   padding-top: 20px;
+   padding-bottom: 7px;
+
+   &__label {
+      display: inline-block;
+      width: calc(100% - (#{$st-switch__toggle-width + 5}));
+
+      &--top {
+         width: 100%;
+         padding-bottom: 2px;
+      }
+
+      &--left {
+         padding-right: 12px;
+         float: left;
+         width: auto;
+      }
+
+      &--right {
+         padding-left: 12px;
+         float: right;
+      }
+
+   }
+
+   //toggle
+   &__toggle {
+      position: relative;
+      height: 22px;
+      width: $st-switch__toggle-width;
+      display: inline-block;
+      cursor: pointer;
+   }
+
+   &__box {
+      -webkit-border-radius: 42px;
+      -moz-border-radius: 42px;
+      border-radius: 42px;
+      height: 100%;
+      width: 100%;
+   }
+
+   &__circle {
+      width: 18px;
+      height: 18px;
+      top: 2px;
+      left: 3px;
+      border-radius: 100%;
+      position: absolute;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      transition: all 0.3s;
+   }
+
+   &--disabled {
+      opacity: 0.5;
+   }
+
+   &--on {
+      .st-switch__circle {
+         margin-left: 13px;
+      }
+   }
+}

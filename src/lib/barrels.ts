@@ -4,6 +4,7 @@ import { StButtonModule } from './st-button/st-button.module';
 import { StDropdownModule } from './st-dropdown/st-dropdown.module';
 import { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 import { StFooterModule } from './st-footer/st-footer.module';
+import { StFormLabelModule } from "./utils/egeo-form/st-form-label/st-form-label.module";
 import { StHeaderModule } from './st-header/st-header.module';
 import { StHorizontalTabsModule } from './st-horizontal-tabs/st-horizontal-tabs.module';
 import { StInfoBoxModule } from './st-info-box/st-info-box.module';
@@ -22,6 +23,7 @@ import { StToggleButtonsModule } from './st-toggle-buttons/st-toggle-buttons.mod
 import { StTooltipModule } from './st-tooltip/st-tooltip.module';
 import { StTwoListSelectionModule } from './st-two-list-selection/st-two-list-selection.module';
 import { StVerticalTabsModule } from './st-vertical-tabs/st-vertical-tabs.module';
+import { StSwitchModule } from "./st-switch/st-switch.module";
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -30,6 +32,7 @@ export const DECLARATIONS: any[] = [
    StDropdownModule,
    StDropdownMenuModule,
    StFooterModule,
+   StFormLabelModule,
    StHeaderModule,
    StHorizontalTabsModule,
    StInfoBoxModule,
@@ -46,6 +49,7 @@ export const DECLARATIONS: any[] = [
    StVerticalTabsModule,
    StPaginationModule,
    StModalModule,
-   StTableModule,
-   StRadioModule
+   StRadioModule,
+   StSwitchModule,
+   StTableModule
 ];
