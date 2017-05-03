@@ -20,6 +20,7 @@ export * from './st-pagination/index';
 export * from './st-radio-menu/index';
 export * from './st-search/index';
 export * from './st-spinner/index';
+export * from './st-switch/index';
 export * from './st-table/index';
 export * from './st-tab-box/index';
 export * from './st-toggle-buttons/index';
