@@ -1,9 +1,12 @@
-<label class="st-form-label-title sth-form-label" [ngClass]="getStatusClass()"
+<label class="sth-form-label" [ngClass]="getStatusClass()"
        [attr.for]="name">
-   <st-tooltip *ngIf="contextualHelp" [text]="contextualHelp" [showOnClick]="true" [qaTag]="qaTag + '-contextual-help'">
+   <div class="st-form-label__label st-form-label__label--{{labelPosition}}">
       <span>{{label}}</span>
-      <span class="icon-help2"></span>
-   </st-tooltip>
-   <span *ngIf="!contextualHelp">{{label}}</span>
+      <st-tooltip *ngIf="contextualHelp" class="st-form-label__tooltip" [text]="contextualHelp"
+                  [showOnClick]="showTooltipOnClick" (click)="onTooltipClick($event)"
+                  [qaTag]="qaTag + '-contextual-help'">
+         <span class="icon-help2"></span>
+      </st-tooltip>
+   </div>
    <ng-content></ng-content>
 </label>

@@ -21,6 +21,8 @@ export class StFormLabelComponent {
    @Input() contextualHelp: string;
    @Input() status: StFormLabelStatus;
    @Input() name: string;
+   @Input() showTooltipOnClick: boolean = true;
+   @Input() labelPosition: 'top' | 'right' | 'left' = 'top';
 
    getStatusClass(): string {
       switch (this.status) {
@@ -33,5 +35,10 @@ export class StFormLabelComponent {
          default:
             return '';
       }
+   }
+
+   onTooltipClick(event: MouseEvent): void {
+      event.stopPropagation();
+      event.preventDefault();
    }
 }

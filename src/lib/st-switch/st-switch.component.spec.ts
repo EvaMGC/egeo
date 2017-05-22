@@ -173,27 +173,27 @@ describe('StSwitchComponent', () => {
          component.labelPosition = 'top';
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
-         let label: HTMLElement = fixture.nativeElement.querySelector('.st-switch__label');
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__label');
 
-         expect(label.classList).toContain('st-switch__label--top');
+         expect(label.classList).toContain('st-form-label__label--top');
       });
 
       it('label is placed on the left, when labelPosition is "left"', () => {
          component.labelPosition = 'left';
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
-         let label: HTMLElement = fixture.nativeElement.querySelector('.st-switch__label');
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__label');
 
-         expect(label.classList).toContain('st-switch__label--left');
+         expect(label.classList).toContain('st-form-label__label--left');
       });
 
       it('label is placed on the right, when labelPosition is "right"', () => {
          component.labelPosition = 'right';
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
-         let label: HTMLElement = fixture.nativeElement.querySelector('.st-switch__label');
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__label');
 
-         expect(label.classList).toContain('st-switch__label--right');
+         expect(label.classList).toContain('st-form-label__label--right');
       });
 
    });

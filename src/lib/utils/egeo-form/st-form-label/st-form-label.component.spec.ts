@@ -35,7 +35,7 @@ describe('StFormLabelComponent', () => {
    });
 
    it('it has to have  sth-form-label class in its root element', () => {
-      let rootElement: HTMLElement = fixture.nativeElement.querySelector('.st-form-label-title');
+      let rootElement: HTMLElement = fixture.nativeElement.querySelector('label');
 
       expect(rootElement.classList).toContain('sth-form-label');
    });
@@ -45,7 +45,7 @@ describe('StFormLabelComponent', () => {
          component.status = StFormLabelStatus.DISABLED;
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
-         let rootElement: HTMLElement = fixture.nativeElement.querySelector('.st-form-label-title');
+         let rootElement: HTMLElement = fixture.nativeElement.querySelector('label');
 
          expect(rootElement.classList).toContain('disabled');
       });
@@ -54,7 +54,7 @@ describe('StFormLabelComponent', () => {
          component.status = StFormLabelStatus.FOCUS;
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
-         let rootElement: HTMLElement = fixture.nativeElement.querySelector('.st-form-label-title');
+         let rootElement: HTMLElement = fixture.nativeElement.querySelector('label');
 
          expect(rootElement.classList).toContain('active');
       });
@@ -63,11 +63,56 @@ describe('StFormLabelComponent', () => {
          component.status = StFormLabelStatus.ERROR;
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
-         let rootElement: HTMLElement = fixture.nativeElement.querySelector('.st-form-label-title');
+         let rootElement: HTMLElement = fixture.nativeElement.querySelector('label');
 
          expect(rootElement.classList).toContain('error');
       });
    });
 
-});
+   describe('label is positioned according to the input labelPosition', () => {
 
+      it('label is placed on top, when labelPosition is "top"', () => {
+         component.labelPosition = 'top';
+         fixture.detectChanges();
+         fixture.changeDetectorRef.markForCheck();
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__label');
+
+         expect(label.classList).toContain('st-form-label__label--top');
+      });
+
+      it('label is placed on the left, when labelPosition is "left"', () => {
+         component.labelPosition = 'left';
+         fixture.detectChanges();
+         fixture.changeDetectorRef.markForCheck();
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__label');
+
+         expect(label.classList).toContain('st-form-label__label--left');
+      });
+
+      it('label is placed on the right, when labelPosition is "right"', () => {
+         component.labelPosition = 'right';
+         fixture.detectChanges();
+         fixture.changeDetectorRef.markForCheck();
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__label');
+
+         expect(label.classList).toContain('st-form-label__label--right');
+      });
+
+   });
+
+   it('When tooltip is clicked, click propagation is stopped', () => {
+      spyOn(MouseEvent.prototype, 'stopPropagation');
+      spyOn(MouseEvent.prototype, 'preventDefault');
+
+      component.contextualHelp = 'Tooltip text';
+      fixture.detectChanges();
+      fixture.changeDetectorRef.markForCheck();
+
+      let tooltip: HTMLElement = fixture.nativeElement.querySelector('.st-form-label__tooltip');
+
+      tooltip.click();
+
+      expect(MouseEvent.prototype.stopPropagation).toHaveBeenCalled();
+      expect(MouseEvent.prototype.preventDefault).toHaveBeenCalled();
+   });
+});

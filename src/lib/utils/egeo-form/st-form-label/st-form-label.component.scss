@@ -1,12 +1,31 @@
-.st-form-label__title {
-   padding: 0;
+.st-form-label__label {
+   vertical-align: top;
    position: relative;
    margin-bottom: 7px;
-   display: block;
-   float: left;
-   width: 100%;
+   display: inline-block;
+
+   &--top {
+      width: 100%;
+      padding-bottom: 2px;
+   }
+
+   &--left {
+      padding-right: 12px;
+      float: left;
+      width: auto;
+   }
+
+   &--right {
+      padding-left: 12px;
+      float: right;
+   }
 }
 
 .disabled {
    opacity: 0.5;
+}
+
+.st-form-label__tooltip {
+   display: inline-block;
+   vertical-align: bottom;
 }
