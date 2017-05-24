@@ -9,7 +9,7 @@
       </div>
       <input class="st-switch__input"
              data-qa-elem
-             name="{{name}}"
+             [name]="name"
              [attr.type]="'checkbox'"
              [checked]="stModel"
              (click)="onChange($event.target.checked)"
