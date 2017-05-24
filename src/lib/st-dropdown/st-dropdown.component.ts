@@ -11,7 +11,8 @@ import {
    OnInit,
    Output,
    Renderer,
-   ViewChild
+   ViewChild,
+   HostListener
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -91,7 +92,26 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
 
    onClickEvent(event: MouseEvent): void {
       this.openElement();
+      this.fixPosition();
       this.click.emit(true);
+   }
+
+   @HostListener('window:scroll')
+   @HostListener('document:keydown', ['$event'])
+   public hideMenu(event?: KeyboardEvent): void {
+      if (event && (event.keyCode && event.keyCode !== 27 || event.key && event.key !== 'Escape')) {
+         return;
+      }
+      this.closeElement();
+   }
+
+   private fixPosition(): void {
+      let size: ClientRect = (this.buttonElement.nativeElement as HTMLButtonElement).getBoundingClientRect();
+      let element: HTMLElement = this.menuElement.nativeElement;
+      element.style.position = 'fixed';
+      element.style.width = `${size.width}px`;
+      element.style.left = `${size.left}px`;
+      element.style.top = `${size.top}px`;
    }
 
    private findSelected(): void {
