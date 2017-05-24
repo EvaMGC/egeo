@@ -9,13 +9,12 @@
       </div>
       <input class="st-switch__input"
              data-qa-elem
-             [formControl]="internalFormControl"
              name="{{name}}"
              [attr.type]="'checkbox'"
-             [ngModel]="stModel"
              [checked]="stModel"
              (click)="onChange($event.target.checked)"
              [attr.data-qa]="label + ' ' + name"
       />
    </div>
+   <ng-content></ng-content>
 </st-form-label>

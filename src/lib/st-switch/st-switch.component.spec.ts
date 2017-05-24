@@ -33,7 +33,6 @@ describe('StSwitchComponent', () => {
    it('if model is not introduced as input, it throws an error', () => {
       component.stModel = undefined;
       try {
-         component.ngOnInit();
          fixture.detectChanges();
          expect(component.stModel).toThrow();
       } catch (error) {
@@ -45,7 +44,6 @@ describe('StSwitchComponent', () => {
       component.qaTag = undefined;
 
       try {
-         component.ngOnInit();
          fixture.detectChanges();
          expect(component.qaTag).toThrow();
       } catch (error) {
@@ -56,7 +54,6 @@ describe('StSwitchComponent', () => {
    it('qa tag is added as id to the clickable element', () => {
       let qaTag = 'fakeQATag';
       component.qaTag = qaTag;
-      component.ngOnInit();
       fixture.detectChanges();
       fixture.changeDetectorRef.markForCheck();
 
@@ -66,20 +63,9 @@ describe('StSwitchComponent', () => {
       expect(clickableElement.click).toBeDefined();
    });
 
-   describe('when it is initialised', () => {
-      it('an internal form control is created with the associated model', () => {
-         component.stModel = model;
-         component.ngOnInit();
-         fixture.detectChanges();
-
-         expect(component.internalFormControl.disabled).toBeFalsy();
-      });
-   });
-
    describe('Should update its class when disabled attribute changes', () => {
       beforeEach(() => {
          component.stModel = model;
-         component.ngOnInit();
       });
 
       it('if it is disabled, class "st-switch--disabled" has to be added to toggle', () => {
@@ -100,12 +86,10 @@ describe('StSwitchComponent', () => {
    describe('should listen any external change and update internal form control and model', () => {
       let newValue: boolean = false;
       beforeEach(() => {
-         component.ngOnInit();
          component.writeValue(newValue);
       });
 
-      it('internal form control and model are updated with new value', () => {
-         expect(component.internalFormControl.value).toBe(newValue);
+      it('nd model is updated with new value', () => {
          expect(component.stModel).toBe(newValue);
       });
    });
@@ -114,7 +98,6 @@ describe('StSwitchComponent', () => {
       beforeEach(() => {
          spyOn(component.change, 'emit');
          component.stModel = false;
-         component.ngOnInit();
       });
       it('if switch is not disabled, model has to change', () => {
          component.disabled = false;
@@ -200,13 +183,35 @@ describe('StSwitchComponent', () => {
 
    it('Callback function is initialized on registerOnChange function in order to be called when there is a change', () => {
       let callbackFunction = jasmine.createSpy('callbackFunction');
-      component.ngOnInit();
 
       component.registerOnChange(callbackFunction);
 
       component.onChange(true);
 
       expect(callbackFunction).toHaveBeenCalledWith(true);
+   });
+
+   it('If model is changed from outside, switch is updated', () => {
+      spyOn(component.change, 'emit').and.callThrough();
+      let model: boolean = true;
+      component.stModel = model;
+      fixture.detectChanges();
+      fixture.changeDetectorRef.markForCheck();
+
+      let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
+
+      expect(component._stModel).toBeTruthy();
+      expect(switchBox.classList).toContain('st-switch--on');
+
+      model = false;
+      component.stModel = model;
+      fixture.detectChanges();
+      fixture.changeDetectorRef.markForCheck();
+
+      switchBox = fixture.nativeElement.querySelector('.st-switch__toggle');
+
+      expect(component._stModel).toBeFalsy();
+      expect(switchBox.classList).toContain('st-switch--off');
    });
 
 });

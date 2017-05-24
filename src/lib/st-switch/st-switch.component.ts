@@ -24,8 +24,7 @@ import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-labe
 })
 
 @CheckRequired()
-export class StSwitchComponent implements ControlValueAccessor, OnInit {
-   @Input() @Required() stModel: boolean;
+export class StSwitchComponent implements ControlValueAccessor {
    @Input() @Required() qaTag: string;
    @Input() label: string;
    @Input() labelPosition: 'top' | 'right' | 'left' = 'top';
@@ -34,15 +33,19 @@ export class StSwitchComponent implements ControlValueAccessor, OnInit {
 
    public _stModel: boolean;
    public disabled: boolean;
-   public internalFormControl: FormControl;
    private registeredOnChange: (_: any) => void;
 
    constructor(private _cd: ChangeDetectorRef) {
    }
 
-   ngOnInit(): void {
-      this._stModel = this.stModel;
-      this.internalFormControl = new FormControl({ value: this._stModel });
+   @Input() @Required()
+   get stModel(): boolean {
+      return this._stModel;
+   }
+
+   set stModel(value: boolean) {
+      this._stModel = value;
+      this._cd.markForCheck();
    }
 
    getLabelStatus(): StFormLabelStatus {
@@ -53,7 +56,6 @@ export class StSwitchComponent implements ControlValueAccessor, OnInit {
 
    // load external change
    writeValue(value: boolean): void {
-      this.internalFormControl.setValue(value);
       this.onChange(value);
       this._cd.markForCheck();
    }
