@@ -89,7 +89,7 @@ describe('StSwitchComponent', () => {
          component.writeValue(newValue);
       });
 
-      it('nd model is updated with new value', () => {
+      it('model is updated with new value', () => {
          expect(component.stModel).toBe(newValue);
       });
    });
