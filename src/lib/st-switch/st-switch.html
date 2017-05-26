@@ -12,7 +12,7 @@
              [name]="name"
              [attr.type]="'checkbox'"
              [checked]="stModel"
-             (click)="onChange($event.target.checked)"
+             (change)="onChange($event.target.checked)"
              [attr.data-qa]="label + ' ' + name"
       />
    </div>

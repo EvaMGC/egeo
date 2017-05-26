@@ -29,10 +29,10 @@ export class StSwitchComponent implements ControlValueAccessor {
    @Input() label: string;
    @Input() labelPosition: 'top' | 'right' | 'left' = 'top';
    @Input() contextualHelp: string;
+   @Input() disabled: boolean;
    @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+   
    public _stModel: boolean;
-   public disabled: boolean;
    private registeredOnChange: (_: any) => void;
 
    constructor(private _cd: ChangeDetectorRef) {
