@@ -2,7 +2,7 @@
 
 ## 2.3.0 (upcoming)
 
-* Pending changelog
+* Bugfix st-switch component emits event twice
 
 ## 2.2.2 (June 06, 2017)
 
