@@ -33,7 +33,7 @@ export class StSwitchComponent implements ControlValueAccessor {
    @Input() name: string;
    @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-   public _stModel: boolean;
+   private _stModel: boolean;
    private registeredOnChange: (_: any) => void;
 
    constructor(private _cd: ChangeDetectorRef) {
@@ -57,8 +57,7 @@ export class StSwitchComponent implements ControlValueAccessor {
 
    // load external change
    writeValue(value: boolean): void {
-      this.onChange(value);
-      this._cd.markForCheck();
+      this._stModel = value;
    }
 
    // internal change callback
@@ -74,8 +73,10 @@ export class StSwitchComponent implements ControlValueAccessor {
       this._cd.markForCheck();
    }
 
-   onChange(value: boolean): void {
+   onChange(event: MouseEvent): void {
       if (!this.disabled) {
+         event.stopPropagation();
+         let value: boolean = (<HTMLInputElement> event.target).checked;
          this._stModel = value;
          this.change.emit(this._stModel);
          if (this.registeredOnChange) {

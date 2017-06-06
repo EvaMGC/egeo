@@ -99,7 +99,7 @@ describe('StSwitchComponent', () => {
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
 
-         expect(component._stModel).toBeTruthy();
+         expect(component.stModel).toBeTruthy();
          expect(component.change.emit).toHaveBeenCalledWith(true);
          expect(switchBox.classList).toContain('st-switch--on');
 
@@ -107,7 +107,7 @@ describe('StSwitchComponent', () => {
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
 
-         expect(component._stModel).toBeFalsy();
+         expect(component.stModel).toBeFalsy();
          expect(component.change.emit).toHaveBeenCalledWith(false);
          expect(switchBox.classList).toContain('st-switch--off');
       });
@@ -123,7 +123,7 @@ describe('StSwitchComponent', () => {
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
 
-         expect(component._stModel).toBeFalsy();
+         expect(component.stModel).toBeFalsy();
          expect(component.change.emit).not.toHaveBeenCalled();
          expect(switchBox.classList).toContain('st-switch--off');
 
@@ -131,7 +131,7 @@ describe('StSwitchComponent', () => {
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
 
-         expect(component._stModel).toBeFalsy();
+         expect(component.stModel).toBeFalsy();
          expect(component.change.emit).not.toHaveBeenCalled();
          expect(switchBox.classList).toContain('st-switch--off');
       });
@@ -172,10 +172,12 @@ describe('StSwitchComponent', () => {
 
    it('Callback function is initialized on registerOnChange function in order to be called when there is a change', () => {
       let callbackFunction = jasmine.createSpy('callbackFunction');
-
       component.registerOnChange(callbackFunction);
+      component.stModel = false;
+      fixture.detectChanges();
 
-      component.onChange(true);
+      let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
+      switchBox.click();
 
       expect(callbackFunction).toHaveBeenCalledWith(true);
    });
@@ -189,7 +191,7 @@ describe('StSwitchComponent', () => {
 
       let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
 
-      expect(component._stModel).toBeTruthy();
+      expect(component.stModel).toBeTruthy();
       expect(switchBox.classList).toContain('st-switch--on');
 
       model = false;
@@ -199,7 +201,7 @@ describe('StSwitchComponent', () => {
 
       switchBox = fixture.nativeElement.querySelector('.st-switch__toggle');
 
-      expect(component._stModel).toBeFalsy();
+      expect(component.stModel).toBeFalsy();
       expect(switchBox.classList).toContain('st-switch--off');
    });
 
