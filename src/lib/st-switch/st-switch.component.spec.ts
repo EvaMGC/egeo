@@ -184,7 +184,7 @@ describe('StSwitchComponent', () => {
 
    it('If model is changed from outside, switch is updated', () => {
       spyOn(component.change, 'emit').and.callThrough();
-      let model: boolean = true;
+      model = true;
       component.stModel = model;
       fixture.detectChanges();
       fixture.changeDetectorRef.markForCheck();
