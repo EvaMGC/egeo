@@ -28,6 +28,10 @@ import { StToggleButtonsModule } from './st-toggle-buttons/st-toggle-buttons.mod
 import { StTooltipModule } from './st-tooltip/st-tooltip.module';
 import { StTwoListSelectionModule } from './st-two-list-selection/st-two-list-selection.module';
 import { StVerticalTabsModule } from './st-vertical-tabs/st-vertical-tabs.module';
+import { StSwitchModule } from './st-switch/st-switch.module';
+import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
+import { StNotificationModule } from "./st-notification/st-notification.module";
+import { StPopModule } from './st-pop/st-pop.module';
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -45,6 +49,7 @@ export const DECLARATIONS: any[] = [
    StInfoCardModule,
    StInputModule,
    StModalModule,
+   StNotificationModule,
    StPageTitleModule,
    StPaginationModule,
    StPopModule,

@@ -73,8 +73,13 @@ export {
    StModalType,
    StModalWidth
 } from './st-modal/st-modal.interface';
+
 export { StModalService } from './st-modal/st-modal.service';
 export { StModalModule } from './st-modal/st-modal.module';
+
+// Notification
+export { StNotificationModule } from './st-notification/st-notification.module';
+export { StNotificationType } from './st-notification/st-notification.type';
 
 // Page Title
 export { StPageTitleModule } from './st-page-title/st-page-title.module';

@@ -1,0 +1,13 @@
+<st-pop [hidden]="false" placement="top-start">
+   <div pop-button>
+      <ng-content select='[st-notification-container]'></ng-content>
+   </div>
+   <div pop-content class="st-notification sth-notification"
+        [ngClass]="{active: visible, info: (type == TYPES.INFO), warning: (type ==  TYPES.WARNING),  error: (type == TYPES.ERROR)}"
+
+        [style.left]="margin + 'px'"
+        [style.right]="margin + 'px'"
+        [style.max-height]="maxHeight + 'px'">
+      <ng-content select='[st-notification-content]'></ng-content>
+   </div>
+</st-pop>

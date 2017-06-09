@@ -1,0 +1,54 @@
+@import '../../../node_modules/@stratio/egeo-ui-base/utils/typography';
+@import '../../../node_modules/@stratio/egeo-ui-base/utils/colors';
+
+$st-notification---index: 9999;
+$st-notification---position: relative;
+$st-notification---border: 1px solid rgba(egeo-get-color(n10), 0.35);
+$st-notification---border-top: none;
+$st-notification---box-shadow: 0 3px 8px -4px rgba(egeo-get-color(n10), 0.35);
+$st-notification---min-width: 80%;
+$st-notification---padding: 8px 8px;
+$st-notification---float: none;
+$st-notification---width: 80%;
+$st-notification---vertical-align: middle;
+$st-notification---margin: auto;
+$st-notification---top: 0;
+$st-notification---left: 0;
+$st-notification---right: 0;
+$st-notification---height: auto;
+$st-notification---text-align: center;
+
+:host {
+   overflow: hidden;
+}
+
+.st-notification {
+   transition: all .2s ease;
+   background-color: egeo-get-color(n1);
+   border: egeo-get-color(n10);
+   border-top: none;
+   box-shadow: $st-notification---box-shadow;
+   //padding: $st-notification---padding;
+   //float: $st-notification---float;
+   vertical-align: $st-notification---vertical-align;
+   //top: 0;
+   height: 40px;
+   font-size: egeo-get-font-size(body_medium);
+   text-align: $st-notification---text-align;
+}
+
+.error {
+   color: egeo-get-color(s3);
+}
+
+.warning {
+   color: egeo-get-color(s2);
+}
+
+.info {
+   color: egeo-get-color(n7);
+}
+
+.hidden {
+   //visibility: hidden;
+}
