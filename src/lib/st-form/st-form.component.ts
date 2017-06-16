@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { StRequired } from '../decorators/require-decorators';
 
 @Component({
    selector: 'st-form',
    templateUrl: './st-form.component.html'
 })
 
+
 export class StFormComponent {
+   @Input() @StRequired() schema: any;
+
    constructor() {}
 }
