@@ -41,7 +41,7 @@ export { PipesModule } from './pipes/pipes.module';
 export { StFilterList } from './pipes/search-filter.pipe';
 
 /**************************** DIRECTIVES ***************************************************/
-export { StInputAdjustable } from './directives';
+export { StInputAdjustable } from './directives/st-input-adjustable';
 
 /**************************** MODULES *************************************************/
 
