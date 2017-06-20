@@ -94,7 +94,7 @@
       "karma-typescript": "3.0.1",
       "karma-typescript-angular2-transform": "1.0.0",
       "madge": "1.6.0",
-      "node-sass": "4.5.2",
+      "node-sass": "4.5.3",
       "phantomjs-polyfill": "0.0.2",
       "resolve-bin": "0.4.0",
       "rollup": "0.41.6",

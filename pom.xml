@@ -21,8 +21,7 @@
    </issueManagement>
 
    <properties>
-      <nodeVer>v6.9.2</nodeVer>
-      <npmVer>3.8.8</npmVer>
+      <nodeVer>v8.1.2</nodeVer>
       <nodeURL>http://tools.stratio.com/buildtools</nodeURL>
    </properties>
 
@@ -50,7 +49,6 @@
                   <phase>validate</phase>
                   <configuration>
                      <nodeVersion>${nodeVer}</nodeVersion>
-                     <npmVersion>${npmVer}</npmVersion>
                      <nodeDownloadRoot>${customnodeDownloadRoot}</nodeDownloadRoot>
                      <npmDownloadRoot>${customnpmDownloadRoot}</npmDownloadRoot>
                      <skip.installnodenpm>${skip.installnodenpm}</skip.installnodenpm>
@@ -121,7 +119,6 @@
          <id>node</id>
          <properties>
             <customnodeDownloadRoot>${nodeURL}/node/</customnodeDownloadRoot>
-            <customnpmDownloadRoot>${nodeURL}/npm/${npmVer}/</customnpmDownloadRoot>
          </properties>
       </profile>
    </profiles>
