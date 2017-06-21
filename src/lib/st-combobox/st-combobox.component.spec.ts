@@ -15,7 +15,7 @@
  */
 import { Component, DebugElement, SimpleChanges, SimpleChange } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, NgControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { StFormLabelModule } from '../utils/egeo-form/st-form-label/st-form-label.module';
@@ -278,7 +278,7 @@ describe('StCombobox', () => {
    });
 
    it('st-combobox should validate with default message', () => {
-      let control: FormControl = new FormControl();
+      let control: FormControl = new FormControl(undefined, [Validators.required]);
       component.selectedValue = options[2];
       component.forceValidations = true;
       control.setValue(options[2]);
@@ -289,7 +289,7 @@ describe('StCombobox', () => {
       expect(component.showError()).toBeFalsy();
 
       // Third if in checkValidations
-      control.setValue({ label: 'test', value: '' });
+      control.setValue(undefined);
       fixture.detectChanges();
       component.validate(control);
       expect(component.showError()).toBeTruthy();
@@ -312,11 +312,6 @@ describe('StCombobox', () => {
 
       // First if in checkValidations
       control.setValue({});
-      fixture.detectChanges();
-      component.validate(control);
-      expect(component.showError()).toBeTruthy();
-
-      control.setValue(undefined);
       fixture.detectChanges();
       component.validate(control);
       expect(component.showError()).toBeTruthy();
