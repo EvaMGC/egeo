@@ -22,7 +22,6 @@ import {
    forwardRef,
    Input,
    OnChanges,
-   OnInit,
    Output,
    Renderer,
    SimpleChange,
@@ -49,7 +48,7 @@ import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-labe
    styleUrls: ['./st-combobox.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StComboboxComponent extends EventWindowManager implements ControlValueAccessor {
+export class StComboboxComponent extends EventWindowManager implements ControlValueAccessor, OnDestroy, OnChanges {
    @Input() public qaTag: string;
    @Input() public name: string = '';
    @Input() public options: StDropDownMenuItem[] = [];
@@ -85,10 +84,7 @@ export class StComboboxComponent extends EventWindowManager implements ControlVa
          this.sub.unsubscribe();
       }
       this.sub = control.statusChanges.subscribe(() => this.checkErrors(control));
-      let errors: { [key: string]: any } = this.getErrorObject(control);
-      this.errorMessage = this.getErrorMessage(errors);
-      this.cd.markForCheck();
-      return errors;
+      this.checkErrors(control);
    }
 
    hasOptions(): boolean {
@@ -186,9 +182,6 @@ export class StComboboxComponent extends EventWindowManager implements ControlVa
       if (typeof control.value !== 'object' || !this.isDefined(control.value.value) || !this.isDefined(control.value.label)) {
          return true;
       }
-      if (control.value.value.length === 0) {
-         return true;
-      }
       return false;
    }
 
@@ -199,7 +192,7 @@ export class StComboboxComponent extends EventWindowManager implements ControlVa
    // When status change call this function to check if have errors
    private checkErrors(control: FormControl): void {
       this.pristine = control.pristine;
-      let errors: { [key: string]: any } = control.errors;
+      let errors: { [key: string]: any } = this.getErrorObject(control);
       this.errorMessage = this.getErrorMessage(errors);
       this.cd.markForCheck();
    }
