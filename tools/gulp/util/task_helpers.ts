@@ -48,6 +48,21 @@ export function sassBuildTask(dest: string, root: string, minify: boolean = fals
    };
 }
 
+/** Build an task that depends on all application build tasks. */
+export function buildAppTask(appName: string): any {
+  const buildTasks = ['ts', 'scss', 'assets']
+    .map(taskName => `:build:${appName}:${taskName}`)
+    .filter(taskName => gulp.hasTask(taskName));
+
+  return (done: () => void) => {
+    gulpRunSequence(
+      'egeo:clean-build',
+      [...buildTasks],
+      done
+    );
+  };
+}
+
 
 /** Options that can be passed to execTask or execNodeTask. */
 export interface ExecTaskOptions {

@@ -97,6 +97,7 @@ export {
 
 // Info box
 export { StInfoBoxModule } from './st-info-box/st-info-box.module';
+export { StInfoBoxDemoModule } from './st-info-box/st-info-box-demo.module';
 
 // Info card
 export { StInfoCardModule } from './st-info-card/st-info-card.module';
@@ -202,3 +203,6 @@ export {
 } from './st-vertical-tabs/st-vertical-tabs.module';
 
 export { StPopModule } from './st-pop/st-pop.module';
+
+// Utils
+export { StDemoGeneratorModule } from './utils/demo-generator/demo-generator.module';

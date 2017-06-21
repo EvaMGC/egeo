@@ -1,0 +1,9 @@
+{
+   "extends": "./tsconfig-build",
+   "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+         "@stratio/egeo": ["../../dist/packages/egeo/public_api"]
+      }
+   }
+}

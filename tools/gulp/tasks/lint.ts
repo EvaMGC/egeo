@@ -7,7 +7,7 @@ import { buildConfig } from '../packaging/build-config';
 const stylesGlob = '+(tools|src)/**/*.+(css|scss)';
 
 /** List of flags that will passed to the different TSLint tasks. */
-let tsconfigFile = join(buildConfig.packagesDir, 'tsconfig.json');
+let tsconfigFile = join(buildConfig.packagesDir, 'lib', 'tsconfig-build.json');
 const tsLintBaseFlags = ['-c', 'tslint.json', '--type-check', '-p', tsconfigFile];
 
 /** Path to the output of the egeo package. */
