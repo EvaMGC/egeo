@@ -14,9 +14,37 @@
  * limitations under the License.
  */
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+
+import { MenuOption, OPTIONS } from './layout.menu';
 
 @Component({
    selector: 'layout',
-   templateUrl: 'layout.component.html'
+   templateUrl: './layout.component.html',
+   styles: [ './layout.scss']
 })
-export class LayoutComponent { }
+export class LayoutComponent {
+   public options: string[] = OPTIONS.map(option => option.name);
+   public selected: string = '';
+
+   constructor(private _router: Router, private _activeRoute: ActivatedRoute) {
+      this._router.events.subscribe(change => this.changeRoute(change));
+   }
+
+   public changeOption(selected: string): void {
+      let option: MenuOption = OPTIONS.find(opt => opt.name.toLocaleLowerCase() === selected.toLocaleLowerCase());
+      if (option) {
+         this._router.navigate([option.route]);
+      }
+   }
+
+   private changeRoute(event: any): void {
+      if (event instanceof NavigationEnd) {
+         let urlParts: string[] = event.urlAfterRedirects.split('/');
+         let option: MenuOption = OPTIONS.find(opt => opt.route === urlParts[urlParts.length - 1]);
+         if (option) {
+            this.selected = option.name;
+         }
+      }
+   }
+}

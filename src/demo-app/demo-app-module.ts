@@ -24,6 +24,7 @@ import { AppComponent } from './app/app.component';
 import { routing } from './app/app.routing';
 import { SharedModule } from './app/shared/shared.module';
 import { LayoutComponent } from './app/layout/layout.component';
+import { MainComponent } from './app/main/main';
 
 // Hot Loader
 import { AppStore, State } from './app/app.store';
@@ -49,7 +50,8 @@ import './styles/global.scss';
    ],
    declarations: [
       AppComponent,
-      LayoutComponent
+      LayoutComponent,
+      MainComponent
    ],
    entryComponents: [AppComponent],
    providers: [AppStore]
