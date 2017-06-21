@@ -53,7 +53,7 @@ const ROLLUP_GLOBALS = {
       // Other dependencies
    'lodash/index': 'lodash',
    'angular2-virtual-scroll': 'angular2-virtual-scroll',
-   'popper.js/dist/umd/popper.js': 'popper.js'
+   'popper.js/index': 'Popper'
 };
 
 export type BundleConfig = {

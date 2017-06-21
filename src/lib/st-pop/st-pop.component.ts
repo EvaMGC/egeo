@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, ElementRef, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import * as Popper from 'popper.js/dist/umd/popper.js';
+import Popper from 'popper.js';
 
 export type PopperPlacement = 'top' | 'top-start' | 'top-end' |
    'right' | 'right-start' | 'right-end' |
@@ -37,18 +37,20 @@ export class StPopComponent implements OnInit {
    constructor(private el: ElementRef) { }
 
    ngOnInit(): void {
-
-      this.popper = new Popper.default(
-         this.el.nativeElement.querySelector('[pop-button]'),
-         this.el.nativeElement.querySelector('[pop-content]'),
-         {
+      let options: Popper.PopperOptions = {
             placement: this.placement,
             removeOnDestroy: true,
-            gpuAcceleration: this.gpuAcceleration,
-            preventOverflow: {
-               enabled: true
+            modifiers: {
+               applyStyle: {
+                  gpuAcceleration: this.gpuAcceleration
+               }
             }
-         }
+      };
+
+      this.popper = new Popper(
+         this.el.nativeElement.querySelector('[pop-button]'),
+         this.el.nativeElement.querySelector('[pop-content]'),
+         options
       );
 
    }
