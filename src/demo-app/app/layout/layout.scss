@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Routes, RouterModule } from '@angular/router';
-
-import { LayoutComponent } from './layout/layout.component';
-import { MainComponent } from './main/main';
-
-export const routes: Routes = [
-   {
-      path: '', component: LayoutComponent, children: [
-         // Main redirection
-         { path: '', redirectTo: 'main', pathMatch: 'full' },
-         { path: 'main', component: MainComponent },
-         { path: 'info-box-demo', loadChildren: '@stratio/egeo#StInfoBoxDemoModule' }
-      ]
+a {
+   color: egeo-get-color(a1);
+   &:hover {
+      text-decoration: underline;
    }
-];
+}
 
-export const routing = RouterModule.forRoot(routes, { useHash: true });
+.main-content {
+   min-height: 100vh;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   padding: 30px;
+}

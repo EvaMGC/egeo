@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Routes, RouterModule } from '@angular/router';
+export interface MenuOption {
+   route: string;
+   name: string;
+}
 
-import { LayoutComponent } from './layout/layout.component';
-import { MainComponent } from './main/main';
-
-export const routes: Routes = [
-   {
-      path: '', component: LayoutComponent, children: [
-         // Main redirection
-         { path: '', redirectTo: 'main', pathMatch: 'full' },
-         { path: 'main', component: MainComponent },
-         { path: 'info-box-demo', loadChildren: '@stratio/egeo#StInfoBoxDemoModule' }
-      ]
-   }
+export const OPTIONS: MenuOption[] = [
+   { route: 'main', name: 'main' },
+   { route: 'info-box-demo', name: 'info-box' }
 ];
-
-export const routing = RouterModule.forRoot(routes, { useHash: true });
