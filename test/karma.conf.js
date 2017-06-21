@@ -27,6 +27,7 @@ module.exports = function(config) {
       ],
       frameworks: ['jasmine', 'karma-typescript'],
       karmaTypescriptConfig: {
+         tsconfig: 'src/lib/tsconfig-test.json',
          bundlerOptions: {
             directories: [
                path.resolve(process.cwd(), 'node_modules'),
@@ -37,14 +38,8 @@ module.exports = function(config) {
                require("karma-typescript-angular2-transform")
             ]
          },
-         compilerOptions: {
-            baseUrl: path.resolve(process.cwd(), 'src/lib'),
-            lib: ["ES2015", "DOM"],
-            types: ['jasmine'],
-            exclude: ['dist', 'tools']
-         },
          coverageOptions: {
-            exclude: /(\.d|\.spec|\.module|barrels|public_api)\.ts/i,
+            exclude: /(\.d|\.spec|\.module|\.routing|barrels|public_api)\.ts/i,
             instrumentation: true
          },
          reports: {

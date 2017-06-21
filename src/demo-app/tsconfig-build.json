@@ -1,0 +1,39 @@
+{
+   "compilerOptions": {
+      "declaration": false,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "lib": ["es6", "es2015", "dom"],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noEmitOnError": true,
+      "noImplicitAny": true,
+      "outDir": "../../dist/packages/demo-app",
+      "sourceMap": true,
+      "target": "es5",
+      "stripInternal": false,
+      "typeRoots": [
+         "../../node_modules/@types"
+      ],
+      "types": ["node", "popper.js", "lodash", "jasmine"],
+      "baseUrl": ".",
+      "paths": {
+         "@stratio/egeo": ["../lib/public_api"]
+      }
+   },
+   "files": [
+      "./main.ts",
+      "./polyfills.ts",
+      "./custom-typings.d.ts"
+   ],
+   "exclude": [
+      "node_modules",
+      "target",
+      "../**/*.spec.ts",
+      "../**/*.e2e.ts"
+   ],
+   "awesomeTypescriptLoaderOptions": {
+      "forkChecker": true,
+      "useWebpackText": true
+   }
+}
