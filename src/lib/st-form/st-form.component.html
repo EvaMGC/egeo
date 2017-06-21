@@ -16,4 +16,8 @@
 
 -->
 
-<ng-content></ng-content>
+<st-form-field></st-form-field>
+
+
+<st-form-field [propertySchema]="property" *ngFor="let property of fields.properties | stJsonToArray">
+</st-form-field>

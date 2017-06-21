@@ -18,10 +18,11 @@ import { CommonModule }  from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { StFormComponent } from './st-form.component';
+import {StFormFieldComponent} from "./st-form-field/st-form-field.component";
 
 @NgModule({
    imports: [ CommonModule ],
-   declarations: [ StFormComponent ],
+   declarations: [ StFormComponent, StFormFieldComponent ],
    exports: [ StFormComponent ]
 })
 
