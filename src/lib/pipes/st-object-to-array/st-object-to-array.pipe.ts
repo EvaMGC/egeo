@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
-import { StFilterList } from './search-filter.pipe';
-import {StObjectToArrayPipe} from './st-object-to-array/st-object-to-array.pipe';
-
-@NgModule({
-   imports: [CommonModule],
-   declarations: [StFilterList, StObjectToArrayPipe],
-   exports: [StFilterList, StObjectToArrayPipe]
-})
-export class PipesModule { }
+@Pipe({ 'name': 'stObjectToArray' })
+export class StObjectToArrayPipe implements PipeTransform {
+   transform (obj: Object): {key: string, value: any}[] {
+      return obj ? Object.keys(obj).map(key => ({key, value: obj[key]})) : [];
+   }
+}
