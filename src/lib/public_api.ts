@@ -56,6 +56,7 @@ export { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 
 // Combobox
 export { StComboboxModule } from './st-combobox/st-combobox.module';
+export { StComboboxDemoModule } from './st-combobox/demo/combobox-demo.module';
 
 // Dropdown
 export { StDropdownModule } from './st-dropdown/st-dropdown.module';
