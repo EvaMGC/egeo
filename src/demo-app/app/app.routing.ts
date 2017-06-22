@@ -24,6 +24,7 @@ export const routes: Routes = [
          // Main redirection
          { path: '', redirectTo: 'main', pathMatch: 'full' },
          { path: 'main', component: MainComponent },
+         { path: 'combobox-demo', loadChildren: '@stratio/egeo#StComboboxDemoModule' },
          { path: 'info-box-demo', loadChildren: '@stratio/egeo#StInfoBoxDemoModule' }
       ]
    }

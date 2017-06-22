@@ -1,0 +1,78 @@
+<!--
+
+    Copyright (C) 2016 Stratio (http://stratio.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<section class="container-liquid">
+   <h2>TEMPLATE DRIVEN EXAMPLE</h2>
+   <form #templateDrivenForm="ngForm" novalidate autocomplete="off"class="col-md-10">
+      <div class="form-group">
+
+         <st-combobox [options]="options" qaTag="combo-option1-template-example" label="Option 1" name="option1-template" contextualHelp="Select option from list"
+             placeholder="Select option" [errorRequiredMessage]="errorMessage" [forceValidations]="forceValidations" [(ngModel)]="model.option1" required></st-combobox>
+         <br>
+         <st-combobox [options]="options" qaTag="combo-option2-template-example" label="Option 2" name="option2-template" placeholder="Select option" [errorRequiredMessage]="errorMessage"
+             [forceValidations]="forceValidations" [(ngModel)]="model.option2" required></st-combobox>
+
+      </div>
+      <br>
+      <br>
+      <st-button inputType="submit" text="Submit" qaTag="button-submit" leftIcon="icon-circle-check"></st-button>
+      <br>
+      <br>
+      <div *ngIf="templateDrivenForm.valid">
+         <h2>Form status: VALID</h2>
+      </div>
+      <div *ngIf="!templateDrivenForm.valid">
+         <h2>Form status: INVALID</h2>
+      </div>
+   </form>
+
+   <br>
+   <br>
+
+   <h2>MODEL DRIVEN / REACTIVE EXAMPLE</h2>
+   <form [formGroup]="reactiveForm" novalidate autocomplete="off" class="col-md-10">
+      <div class="form-group">
+
+         <st-combobox [options]="options" qaTag="combo-option1-template-example" label="Option 1" name="option1" contextualHelp="Select option from list" placeholder="Select option"
+             [errorRequiredMessage]="errorMessage" [forceValidations]="forceValidations" formControlName="option1"></st-combobox>
+         <br>
+         <st-combobox [options]="options" qaTag="combo-option2-template-example" label="Option 2" name="option2" placeholder="Select option" [errorRequiredMessage]="errorMessage"
+             [forceValidations]="forceValidations" formControlName="option2"></st-combobox>
+
+      </div>
+      <br>
+      <br>
+      <st-button inputType="submit" text="Submit" qaTag="button-submit" leftIcon="icon-circle-check"></st-button>
+      <br>
+      <br>
+      <div *ngIf="reactiveForm.valid">
+         <h2>Form status: VALID</h2>
+      </div>
+      <div *ngIf="!reactiveForm.valid">
+         <h2>Form status: INVALID</h2>
+      </div>
+   </form>
+
+   <br>
+   <st-button inputType="button" subtypeClass="subtype3" text="Force validations" qaTag="button-validate" leftIcon="icon-circle-check" (onClick)="changeForceValidations()"></st-button>
+   <st-button inputType="button" subtypeClass="subtype2" text="Change disable status" qaTag="button-disable" leftIcon="icon-circle-check" (onClick)="changeDisabled()"></st-button>
+
+   <div>
+      {{model | json}}
+   </div>
+
+</section>
