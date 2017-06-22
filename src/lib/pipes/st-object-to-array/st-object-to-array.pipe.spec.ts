@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2016 Stratio (http://stratio.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import {StObjectToArrayPipe} from "./st-object-to-array.pipe";
 
 class FakeClass {
@@ -50,20 +66,6 @@ describe('Pipe: StObjectToArrayPipe', () => {
             expect(array[1].key).toEqual("server2");
             expect(array[1].value.available).toBe(fakeJSON.server2.available);
             expect(array[1].value.ip).toEqual(fakeJSON.server2.ip);
-         });
-
-         it('only own properties are added to the array', () => {
-            let fakeObject = new FakeClass('fake name', 'fake last name');
-
-            // force to exclude the property 'name' from its own properties
-            spyOn(Object.prototype, 'hasOwnProperty').and.callFake((property: string) => {
-               return property !== 'name';
-            });
-
-            let array: [any] = pipe.transform(fakeObject);
-
-            expect(array.length).toBe(1);
-            expect(array[0].key).toEqual("lastName");
          });
       });
    });

@@ -17,13 +17,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({ 'name': 'stObjectToArray' })
 export class StObjectToArrayPipe implements PipeTransform {
-   transform (object: any): any[] {
-      let keys: any[] = [];
-      for ( let key in object ) {
-         if ( object.hasOwnProperty(key) ) {
-            keys.push({ key: key, value: object[key] });
-         }
-      }
-      return keys;
+   transform (obj: Object): {key: string, value: any}[] {
+      return obj ? Object.keys(obj).map(key => ({key, value: obj[key]})) : [];
    }
 }
