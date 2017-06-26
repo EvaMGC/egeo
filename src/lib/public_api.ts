@@ -60,6 +60,7 @@ export { StComboboxDemoModule } from './st-combobox/demo/combobox-demo.module';
 
 // Dropdown
 export { StDropdownModule } from './st-dropdown/st-dropdown.module';
+export { StDropdownDemoModule } from './st-dropdown/demo/st-dropdown-demo.module';
 
 // Dropdown menu
 export {
@@ -68,9 +69,9 @@ export {
    StDropDownMenuItem,
    StDropDownMenuItemSchema
 } from './st-dropdown-menu/st-dropdown-menu.interface';
-export {
-   StDropdownMenuModule
-} from './st-dropdown-menu/st-dropdown-menu.module';
+export { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
+export { StDropdownMenuDemoModule } from './st-dropdown-menu/demo/st-dropdown-menu-demo.module';
+
 
 // Footers
 export { StFooterModule } from './st-footer/st-footer.module';

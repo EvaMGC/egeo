@@ -20,6 +20,8 @@ export interface MenuOption {
 
 export const OPTIONS: MenuOption[] = [
    { route: 'main', name: 'main' },
+   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
+   { route: 'dropdown-demo', name: 'Dropdown' },
    { route: 'combobox-demo', name: 'Combobox' },
    { route: 'info-box-demo', name: 'info-box' }
 ];

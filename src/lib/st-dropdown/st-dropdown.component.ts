@@ -42,7 +42,7 @@ import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-
    styleUrls: ['./st-dropdown.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StDropdownComponent extends EventWindowManager implements AfterViewInit, OnDestroy, OnInit, OnChanges {
+export class StDropdownComponent extends EventWindowManager implements OnDestroy, OnInit, OnChanges {
 
    @Input() button: string;
    @Input() active: boolean;
@@ -56,7 +56,6 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
    @Output() click: EventEmitter<boolean> = new EventEmitter<boolean>();
    @Output() change: EventEmitter<Object> = new EventEmitter<Object>();
    @ViewChild('buttonId') buttonElement: ElementRef;
-   @ViewChild('menuId') menuElement: ElementRef;
 
    public widthMenu: string;
 
@@ -66,17 +65,6 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
       @ViewChild('buttonId') buttonElement: ElementRef
    ) {
       super(renderer, cd, buttonElement);
-   }
-
-   ngAfterViewInit(): void {
-      this.updateWidth();
-   }
-
-   updateWidth(): void {
-      setTimeout(() => {
-         this.widthMenu = this.buttonElement.nativeElement.offsetWidth + 'px';
-         this.cd.markForCheck();
-      });
    }
 
    ngOnInit(): void {
@@ -92,7 +80,6 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
       if (values.items) {
          this.checkFirstSelected();
          this.findSelected();
-         this.updateWidth();
       }
    }
 
@@ -112,25 +99,15 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
 
    onClickEvent(event: MouseEvent): void {
       this.openElement();
-      this.fixPosition();
       this.click.emit(true);
    }
 
-   @HostListener('window:scroll')
    @HostListener('document:keydown', ['$event'])
    public hideMenu(event?: KeyboardEvent): void {
       if (event && (event.keyCode && event.keyCode !== 27 || event.key && event.key !== 'Escape')) {
          return;
       }
       this.closeElement();
-   }
-
-   private fixPosition(): void {
-      let size: ClientRect = (this.buttonElement.nativeElement as HTMLButtonElement).getBoundingClientRect();
-      let element: HTMLElement = this.menuElement.nativeElement;
-      element.style.position = 'fixed';
-      element.style.left = `${size.left}px`;
-      element.style.top = `${size.top}px`;
    }
 
    private findSelected(): void {
