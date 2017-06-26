@@ -18,9 +18,10 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { StDropdownMenuItemComponent } from './st-dropdown-menu-item/st-dropdown-menu-item.component';
 import { StDropdownMenuComponent } from './st-dropdown-menu.component';
+import { StPopModule } from '../st-pop/st-pop.module';
 
 @NgModule({
-   imports: [CommonModule],
+   imports: [CommonModule, StPopModule],
    declarations: [StDropdownMenuComponent, StDropdownMenuItemComponent],
    exports: [StDropdownMenuComponent]
 })

@@ -15,19 +15,26 @@
     limitations under the License.
 
 -->
-<div class="sth-dropdown-menu dropdown-menu" *ngIf="active" [ngClass]="{'active': active}">
-   <ul *ngIf="!itemsGroup.length" [attr.aria-hidden]="!active" aria-label="submenu">
-      <st-dropdown-menu-item (change)="onChange($event)" *ngFor="let i of items" [item]="i"></st-dropdown-menu-item>
-   </ul>
-
-   <div *ngIf="itemsGroup.length">
-      <ul *ngFor="let item of itemsGroup" [attr.aria-hidden]="!active" aria-label="submenu">
-         <li class="sth-dropdown-menu-parent"><h3>{{ item.title }}</h3>
-            <ul>
-               <st-dropdown-menu-item (change)="onChange($event)" *ngFor="let i of item.items" [item]="i"></st-dropdown-menu-item>
-            </ul>
-         </li>
-      </ul>
+<st-pop [hidden]="false" [placement]="placement">
+   <div pop-button #buttonId>
+      <ng-content></ng-content>
    </div>
-</div>
+   <div pop-content [style.z-index]="9">
+      <div class="sth-dropdown-menu dropdown-menu" *ngIf="active" [ngClass]="{'active': active}" [style.minWidth]='widthMenu'>
+         <ul *ngIf="!itemsGroup.length" [attr.aria-hidden]="!active" aria-label="submenu">
+            <st-dropdown-menu-item (change)="onChange($event)" *ngFor="let i of items" [item]="i"></st-dropdown-menu-item>
+         </ul>
 
+         <div *ngIf="itemsGroup.length">
+            <ul *ngFor="let item of itemsGroup" [attr.aria-hidden]="!active" aria-label="submenu">
+               <li class="sth-dropdown-menu-parent">
+                  <h3>{{ item.title }}</h3>
+                  <ul>
+                     <st-dropdown-menu-item (change)="onChange($event)" *ngFor="let i of item.items" [item]="i"></st-dropdown-menu-item>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</st-pop>

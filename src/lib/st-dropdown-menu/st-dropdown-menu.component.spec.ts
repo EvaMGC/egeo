@@ -17,6 +17,7 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import {StPopModule} from '../st-pop/st-pop.module';
 import { StDropdownMenuItemComponent } from './st-dropdown-menu-item/st-dropdown-menu-item.component';
 import { StDropdownMenuComponent } from './st-dropdown-menu.component';
 import { StDropDownMenuItem } from './st-dropdown-menu.interface';
@@ -32,7 +33,7 @@ let items: StDropDownMenuItem[] = [
    }
 ];
 
-describe('StDropdownMenuComponent', () => {
+fdescribe('StDropdownMenuComponent', () => {
 
    let component: StDropdownMenuComponent;
    let fixture: ComponentFixture<StDropdownMenuComponent>;
@@ -40,6 +41,7 @@ describe('StDropdownMenuComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
+         imports: [StPopModule],
          declarations: [StDropdownMenuComponent, StDropdownMenuItemComponent]
       })
       .compileComponents();  // compile template and css
@@ -66,12 +68,13 @@ describe('StDropdownMenuComponent', () => {
       expect(fixture.debugElement.nativeElement.querySelector('.dropdown-menu')).toBeNull();
    });
 
-   it('should show the menu active', () => {
+   it('should show the menu active', async(() => {
       component.items = items;
       component.active = true;
-      fixture.detectChanges();
-      expect(fixture.debugElement.nativeElement.querySelector('.dropdown-menu')).toBeDefined();
-   });
+      fixture.whenStable().then(() => {
+         expect(fixture.debugElement.nativeElement.querySelector('.dropdown-menu')).toBeDefined();
+      });
+   }));
 
 
 });

@@ -19,6 +19,7 @@
    padding: 7px 0;
    max-height: 265px;
    overflow: auto;
+   z-index: 9;
 
    &.active {
       display: block;
