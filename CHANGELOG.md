@@ -6,6 +6,7 @@
 * Bugfix of left button position in page title
 * Feat add to dropdown-menu option to be always floating
 * New component st-tip
+* New component st-help
 
 ## 2.3.2 (June 21, 2017)
 
