@@ -88,6 +88,10 @@ export {
 } from './st-header/st-header.model';
 export { StHeaderModule } from './st-header/st-header.module';
 
+// Help
+export { StHelpModule } from './st-help/st-help.module';
+export { StHelpDemoModule } from './st-help/st-help-demo.module';
+
 // Horizontal Tabs
 export {
    StHorizontalTabsModule
