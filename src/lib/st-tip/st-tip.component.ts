@@ -13,16 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface MenuOption {
-   route: string;
-   name: string;
-}
+import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
-export const OPTIONS: MenuOption[] = [
-   { route: 'main', name: 'main' },
-   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
-   { route: 'dropdown-demo', name: 'Dropdown' },
-   { route: 'combobox-demo', name: 'Combobox' },
-   { route: 'info-box-demo', name: 'info-box' },
-   { route: 'tip-demo', name: 'tip' }
-];
+import { StEgeo, StRequired } from '../decorators/require-decorators';
+
+@StEgeo()
+@Component({
+   selector: 'st-tip',
+   templateUrl: './st-tip.component.html',
+   styleUrls: ['./st-tip.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class StTipComponent {
+
+  @Input() @StRequired() text: string = '';
+  @Input() qaTag: string;
+  @Input() theme: string = 'themeA';
+
+  constructor() {
+  }
+
+}
