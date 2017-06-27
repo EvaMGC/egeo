@@ -60,7 +60,6 @@ export class StComboboxComponent extends EventWindowManager implements ControlVa
    @Input() public errorRequiredMessage: string = '';
    @Input() public forceValidations: boolean = false;
 
-   public width: string = '0px';
    public errorMessage: string = undefined;
    public onChange: (_: any) => void;
    public onTouched: () => void;
@@ -135,7 +134,6 @@ export class StComboboxComponent extends EventWindowManager implements ControlVa
       if (!this.disabled) {
          (this.inputElement.nativeElement as HTMLInputElement).focus();
          this.openElement();
-         this.width = (this.buttonElement.nativeElement as HTMLDivElement).getBoundingClientRect().width + 'px';
       }
    }
 

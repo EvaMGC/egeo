@@ -17,20 +17,15 @@
 -->
 <div class="st-combobox sth-combobox">
    <st-form-label [label]="label" [qaTag]="qaTag + '-label'" [contextualHelp]="contextualHelp" [status]="getLabelStatus()" [name]="name"></st-form-label>
-   <st-pop [hidden]="disabled" placement="top-start">
-      <div pop-button>
-         <div class="st-input-container sth-input-container" [ngClass]="{disabled: disabled, error: showError()}" (click)="onClickButton($event)" #buttonId>
-            <input [attr.id]="qaTag" type="text" [name]="name" readonly class="st-input-remove-default sth-input-remove-default" [placeholder]="placeholder" [value]="selectedValue && selectedValue.label ? selectedValue.label : ''"
-                [disabled]="disabled" (focus)="onFocus($event)" (focusout)="onFocusOut($event)" (blur)="onFocusOut($event)" #input>
-            <i class="icon-arrow4_down arrow"></i>
-            <span class="st-input-bar" [ngClass]="getBarType()"></span>
-         </div>
+   <st-dropdown-menu [items]="options" [attr.id]="qaTag + 'menu'" (change)="changeOption($event)" [active]="isActive" class="combo-menu"
+       [placement]="'top-start'">
+      <div class="st-input-container sth-input-container" [ngClass]="{disabled: disabled, error: showError()}" (click)="onClickButton($event)" #buttonId>
+         <input [attr.id]="qaTag" type="text" [name]="name" readonly class="st-input-remove-default sth-input-remove-default" [placeholder]="placeholder" [value]="selectedValue && selectedValue.label ? selectedValue.label : ''"
+             [disabled]="disabled" (focus)="onFocus($event)" (focusout)="onFocusOut($event)" (blur)="onFocusOut($event)" #input>
+         <i class="icon-arrow4_down arrow"></i>
+         <span class="st-input-bar" [ngClass]="getBarType()"></span>
       </div>
-      <div pop-content class="st-combobox__pop-content">
-         <st-dropdown-menu [items]="options" [attr.id]="qaTag + 'menu'" (change)="changeOption($event)" [active]="isActive" [ngStyle]="{'min-width': width}"
-             class="combo-menu"></st-dropdown-menu>
-      </div>
-   </st-pop>
+   </st-dropdown-menu>
    <div class="st-input-error-layout" *ngIf="showError()">
       <span class="st-input-error-message sth-input-error-message">{{errorMessage}}</span>
    </div>

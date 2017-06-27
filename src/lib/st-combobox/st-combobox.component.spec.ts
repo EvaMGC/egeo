@@ -21,7 +21,6 @@ import { By } from '@angular/platform-browser';
 import { StFormLabelModule } from '../utils/egeo-form/st-form-label/st-form-label.module';
 import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-label-status.enum';
 import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
-import { StPopModule } from '../st-pop/st-pop.module';
 import { StComboboxComponent } from './st-combobox.component';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
@@ -49,7 +48,7 @@ describe('StCombobox', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StFormLabelModule, StDropdownMenuModule, StPopModule],
+         imports: [FormsModule, ReactiveFormsModule, StFormLabelModule, StDropdownMenuModule],
          declarations: [StComboboxComponent]
       })
          .compileComponents();  // compile template and css
