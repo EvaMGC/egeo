@@ -40,6 +40,7 @@ import { StSwitchModule } from './st-switch/st-switch.module';
 import { StTabBoxModule } from './st-tab-box/st-tab-box.module';
 import { StTableModule } from './st-table/st-table.module';
 import { StTextareaModule } from './st-textarea/st-textarea.module';
+import { StTipModule } from './st-tip/st-tip.module';
 import { StToggleButtonsModule } from './st-toggle-buttons/st-toggle-buttons.module';
 import { StTooltipModule } from './st-tooltip/st-tooltip.module';
 import { StTwoListSelectionModule } from './st-two-list-selection/st-two-list-selection.module';
@@ -73,6 +74,7 @@ export const DECLARATIONS: any[] = [
    StTabBoxModule,
    StTableModule,
    StTextareaModule,
+   StTipModule,
    StToggleButtonsModule,
    StTooltipModule,
    StTwoListSelectionModule,

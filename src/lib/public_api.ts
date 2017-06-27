@@ -172,6 +172,10 @@ export {
 } from './st-textarea/st-textarea.error.model';
 export { StTextareaModule } from './st-textarea/st-textarea.module';
 
+// Tip
+export { StTipModule } from './st-tip/st-tip.module';
+export { StTipDemoModule } from './st-tip/st-tip-demo.module';
+
 // Toogle buttons
 export {
    StToggleButton,

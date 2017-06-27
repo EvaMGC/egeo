@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface MenuOption {
-   route: string;
-   name: string;
-}
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-export const OPTIONS: MenuOption[] = [
-   { route: 'main', name: 'main' },
-   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
-   { route: 'dropdown-demo', name: 'Dropdown' },
-   { route: 'combobox-demo', name: 'Combobox' },
-   { route: 'info-box-demo', name: 'info-box' },
-   { route: 'tip-demo', name: 'tip' }
-];
+import { StTipComponent } from './st-tip.component';
+
+@NgModule({
+   imports: [CommonModule],
+   declarations: [StTipComponent],
+   exports: [StTipComponent]
+})
+export class StTipModule { }
