@@ -174,7 +174,6 @@ describe('StCombobox', () => {
       spyOn(component, 'onClickButton').and.callThrough();
       component.options = options;
       fixture.detectChanges();
-      expect(component.width).toEqual('0px');
 
       component.setDisabledState(true);
       fixture.detectChanges();
@@ -182,7 +181,6 @@ describe('StCombobox', () => {
       fixture.detectChanges();
       expect(component.onClickButton).toHaveBeenCalled();
       expect(component.onClickButton).toHaveBeenCalledTimes(1);
-      expect(component.width).toEqual('0px');
       expect(component.isActive).toBeFalsy();
    });
 
@@ -190,14 +188,12 @@ describe('StCombobox', () => {
       spyOn(component, 'onClickButton').and.callThrough();
       component.options = options;
       fixture.detectChanges();
-      expect(component.width).toEqual('0px');
 
       fixture.detectChanges();
       comboInput.click();
       fixture.detectChanges();
       expect(component.onClickButton).toHaveBeenCalled();
       expect(component.onClickButton).toHaveBeenCalledTimes(1);
-      expect(component.width).not.toEqual('0px');
       expect(component.isActive).toBeTruthy();
    });
 

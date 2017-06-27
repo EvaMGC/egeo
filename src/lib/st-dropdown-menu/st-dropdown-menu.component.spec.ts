@@ -33,7 +33,7 @@ let items: StDropDownMenuItem[] = [
    }
 ];
 
-fdescribe('StDropdownMenuComponent', () => {
+describe('StDropdownMenuComponent', () => {
 
    let component: StDropdownMenuComponent;
    let fixture: ComponentFixture<StDropdownMenuComponent>;

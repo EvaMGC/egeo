@@ -2,8 +2,9 @@
 
 ## 2.4.0 (upcoming)
 
-*  Create st-object-to-array pipe to iterate over an object in a template
+* Create st-object-to-array pipe to iterate over an object in a template
 * Bugfix of left button position in page title
+* Feat add to dropdown-menu option to be always floating
 
 ## 2.3.2 (June 21, 2017)
 
