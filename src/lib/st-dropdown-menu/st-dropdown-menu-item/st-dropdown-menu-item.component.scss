@@ -16,9 +16,12 @@
 li {
    padding: 7px 14px;
    cursor: pointer;
-   white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
+
+   span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
 
    i {
       padding-right: 5px;

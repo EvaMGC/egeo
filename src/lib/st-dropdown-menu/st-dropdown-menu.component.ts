@@ -23,7 +23,8 @@ import {
    AfterViewInit,
    ChangeDetectorRef,
    ElementRef,
-   ViewChild
+   ViewChild,
+   HostListener
 } from '@angular/core';
 
 import { StDropDownMenuGroup, StDropDownMenuItem } from './st-dropdown-menu.interface';
@@ -94,6 +95,10 @@ export class StDropdownMenuComponent implements OnInit, AfterViewInit {
 
    onChange(value: StDropDownMenuItem): void {
       this.change.emit(value);
+   }
+
+   @HostListener('window:resize', ['$event']) onResize(event) {
+      this.updateWidth();
    }
 
    private updateWidth(): void {

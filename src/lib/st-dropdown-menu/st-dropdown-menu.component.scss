@@ -35,17 +35,12 @@
       h3 {
          padding: 7px 14px;
          margin: 10px 0 0 0;
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
-      }
 
-      li.children {
-         padding: 7px 14px;
-         cursor: pointer;
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
+         span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+         }
       }
    }
 }
