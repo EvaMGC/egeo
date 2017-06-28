@@ -23,6 +23,9 @@
       <div class="sth-dropdown-menu dropdown-menu" *ngIf="active" [ngClass]="{'active': active}" [style.minWidth]='widthMenu'>
          <ul *ngIf="!itemsGroup.length" [attr.aria-hidden]="!active" aria-label="submenu">
             <st-dropdown-menu-item (change)="onChange($event)" *ngFor="let i of items" [item]="i"></st-dropdown-menu-item>
+            <div *ngIf="!items || items.length === 0" class="without-results sth-dropdown-menu-without-results" [style.maxWidth]='widthMenu'>
+               {{emptyListMessage}}
+            </div>
          </ul>
 
          <div *ngIf="itemsGroup.length">
@@ -31,6 +34,9 @@
                   <h3><span>{{ item.title }}</span></h3>
                   <ul>
                      <st-dropdown-menu-item (change)="onChange($event)" *ngFor="let i of item.items" [item]="i"></st-dropdown-menu-item>
+                     <div *ngIf="!items || !item.items || items.length === 0" class="without-results sth-dropdown-menu-without-results" [style.maxWidth]='widthMenu'>
+                        {{emptyListMessage}}
+                     </div>
                   </ul>
                </li>
             </ul>

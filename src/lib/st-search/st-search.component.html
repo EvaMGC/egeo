@@ -15,17 +15,12 @@
     limitations under the License.
 
 -->
-<div class="st-search sth-search">
-   <input
-      [attr.id]="qaTag"
-      [formControl]="searchBox"
-      [placeholder]="placeholder"
-      (focus)="onFocus($event)"
-      (blur)="onBlur($event)"
-      (keypress)="onKeyPress($event)"
-      class="st-search-input sth-search-input"
-   />
-   <i class="st-search-icon sth-search-icon icon-search" tabindex="0" *ngIf="!focus || !hasClearButton" (mousedown)="launchSearch(true, true)" (keyup.enter)="launchSearch(true, true)"></i>
-   <i class="st-search-icon sth-search-icon icon-cross" tabindex="0" *ngIf="focus && hasClearButton" (mousedown)="clearInput()" (keyup.enter)="clearInput()" ></i>
-</div>
-
+<st-dropdown-menu [items]="autocompleteList" [qaTag]="qaTag + 'autocomplete-menu'" (change)="changeOption($event)" [active]="isActive"
+    [placement]="'bottom-start'" [emptyListMessage]="emptyAutocompleteListMessage">
+   <div class="st-search sth-search" #buttonId>
+      <input [attr.id]="qaTag" [formControl]="searchBox" [placeholder]="placeholder" (keypress)="onKeyPress($event)"
+          class="st-search-input sth-search-input" />
+      <i class="st-search-icon sth-search-icon icon-search" tabindex="0" *ngIf="!showClear"></i>
+      <i class="st-search-icon sth-search-icon icon-cross" tabindex="0" *ngIf="showClear" (mousedown)="clearInput()" (keyup.enter)="clearInput()"></i>
+   </div>
+</st-dropdown-menu>

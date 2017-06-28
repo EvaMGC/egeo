@@ -40,7 +40,7 @@
       "@angular/http": "~4.1.0",
       "@angular/platform-browser-dynamic": "~4.1.0",
       "@angular/router": "~4.1.0",
-      "@stratio/egeo-theme": "~0.11.0",
+      "@stratio/egeo-theme": "~0.12.0",
       "typescript": "~2.2.0"
    },
    "dependencies": {
@@ -63,7 +63,7 @@
       "@angular/router": "4.1.2",
       "@angularclass/hmr": "1.2.2",
       "@angularclass/hmr-loader": "3.0.2",
-      "@stratio/egeo-theme": "0.11.0",
+      "@stratio/egeo-theme": "0.12.0",
       "@stratio/egeo-ui-base": "1.4.0",
       "@types/chalk": "0.4.31",
       "@types/fs-extra": "3.0.3",

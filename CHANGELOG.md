@@ -2,13 +2,24 @@
 
 ## 2.4.0 (upcoming)
 
+**Fixed bugs:**
+
+* Fix of left button position in page title
+* Fix a wrong overflow of dropdown-menu items in firefox
+
+**New features:**
+
 * Create st-object-to-array pipe to iterate over an object in a template
-* Bugfix of left button position in page title
-* Feat add to dropdown-menu option to be always floating
+* Add to dropdown-menu option to be always floating
+* Add to dropdown-menu to resize update when resize the main window.
 * New component st-tip
 * New component st-help
-* Bugfix a wrong overflow of dropdown-menu items in firefox
-* Feat add to dropdown-menu to resize update when resize the main window.
+* Add option to autocomplete in search
+
+**Deprecated:**
+
+* st-search: hasClearButton, that will be removed in a future release
+* st-search: searchOnlyOnClick, that will be removed in a future release
 
 ## 2.3.2 (June 21, 2017)
 

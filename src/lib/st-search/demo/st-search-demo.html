@@ -1,0 +1,64 @@
+<!--
+
+    Copyright (C) 2016 Stratio (http://stratio.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<section class="container-fluid col-md-24">
+   <div class="search-container">
+
+      <div class="search-example">
+         <h3>Normal search:</h3>
+         <st-search [placeholder]="placeholder" [qaTag]="qaTag" [value]="searched" [debounce]="debounceTime" [minLength]="minLength" (search)="onSearchResult($event)"></st-search>
+      </div>
+
+      <div class="search-example">
+         <h3>With clear button:</h3>
+         <st-search [placeholder]="placeholder" [qaTag]="qaTag" [value]="searched" [debounce]="debounceTime" [minLength]="minLength" (search)="onSearchResult($event)"
+             [hasClearButton]="true"></st-search>
+      </div>
+
+      <div class="search-example">
+         <h3>Live Search false:</h3>
+         <st-search [placeholder]="placeholder" [qaTag]="qaTag" [value]="searched" [debounce]="debounceTime" [minLength]="minLength" (search)="onSearchResult($event)"
+             [liveSearch]="false"></st-search>
+      </div>
+
+      <div class="search-example">
+         <h3>Disabled:</h3>
+         <st-search placeholder="Text for search with clear button" [value]="searched" [qaTag]="qaTag" [debounce]="debounceTime" hasClearButton="true" [minLength]="minLength"
+             (search)="onSearchResult($event)"></st-search>
+      </div>
+
+      <div class="search-example">
+         <h3>Autocomplete:</h3>
+         <st-search placeholder="Text for search with clear button" [value]="searchedAutocomplete" [qaTag]="qaTag" [debounce]="debounceTime" hasClearButton="true" [minLength]="minLength"
+             [autocompleteList]="filteredMenu" [withAutocomplete]="true" [emptyAutocompleteListMessage]="'There are no matches for your search. Please, try it again with another term.'" (search)="searchWithAutocompleteSearch($event)"></st-search>
+      </div>
+
+   </div>
+   <div class="option">
+      <span class="option-title">Search value: </span>
+      <span class="option-value">normal {{searched}}</span>
+      <span class="option-value">autocomplete {{searchedAutocomplete}}</span>
+   </div>
+   <div class="option">
+      <span class="option-title">debounce: </span>
+      <input type="number" [(ngModel)]="debounceTime" min="0" class="debounceTime">
+   </div>
+   <div class="option">
+      <span class="option-title">minLength: </span>
+      <input type="number" [(ngModel)]="minLength" min="0" class="debounceTime">
+   </div>
+</section>
