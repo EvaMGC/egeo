@@ -15,14 +15,21 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
-import { StSearchComponent } from './st-search.component';
+import { StDemoGeneratorModule } from '../../utils/demo-generator/demo-generator.module';
+import { StSearchModule } from '../st-search.module';
+import { StSearchComponent } from '../st-search.component';
+import { StSearchDemoComponent } from './st-search-demo';
+
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StDropdownMenuModule],
-   declarations: [StSearchComponent],
-   exports: [StSearchComponent]
+   imports: [
+      CommonModule,
+      StSearchModule,
+      FormsModule,
+      StDemoGeneratorModule.withComponents({ components: [StSearchDemoComponent, StSearchComponent] })
+   ],
+   declarations: [StSearchDemoComponent]
 })
-export class StSearchModule { }
+export class StSearchDemoModule { }

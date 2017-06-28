@@ -29,7 +29,8 @@ export const routes: Routes = [
          { path: 'combobox-demo', loadChildren: '@stratio/egeo#StComboboxDemoModule' },
          { path: 'help-demo', loadChildren: '@stratio/egeo#StHelpDemoModule' },
          { path: 'info-box-demo', loadChildren: '@stratio/egeo#StInfoBoxDemoModule' },
-         { path: 'tip-demo', loadChildren: '@stratio/egeo#StTipDemoModule' }
+         { path: 'tip-demo', loadChildren: '@stratio/egeo#StTipDemoModule' },
+         { path: 'search-demo', loadChildren: '@stratio/egeo#StSearchDemoModule' }
       ]
    }
 ];

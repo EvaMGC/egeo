@@ -153,6 +153,7 @@ export {
 
 // Search
 export { StSearchModule } from './st-search/st-search.module';
+export { StSearchDemoModule } from './st-search/demo/st-search-demo.module';
 
 // Spinner
 export { StSpinnerModule } from './st-spinner/st-spinner.module';

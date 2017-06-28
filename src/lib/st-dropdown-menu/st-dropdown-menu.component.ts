@@ -56,6 +56,9 @@ export class StDropdownMenuComponent implements OnInit, AfterViewInit {
    /* tslint:disable-next-line:max-line-length */
    /** @input { 'top', 'top-start', 'top-end', 'right', 'right-start', 'right-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end'} [placement='bottom-start'] Posible possitions of menu with respect element to attach */
    @Input() placement: string = 'bottom-start';
+   /** @input {string} [emptyListMessage=''] Message to show in case of empty list */
+   @Input() emptyListMessage: string = '';
+
    /** @output {StDropDownMenuItem} change Event emitted when user select an item */
    @Output() change: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
 
