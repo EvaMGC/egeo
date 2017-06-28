@@ -7,6 +7,8 @@
 * Feat add to dropdown-menu option to be always floating
 * New component st-tip
 * New component st-help
+* Bugfix a wrong overflow of dropdown-menu items in firefox
+* Feat add to dropdown-menu to resize update when resize the main window.
 
 ## 2.3.2 (June 21, 2017)
 
