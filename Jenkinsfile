@@ -7,7 +7,7 @@ hose {
     RELEASETIMEOUT = 30
     REPOSITORY = 'github.com/egeo'
     LANG = 'typescript'
-    FOSS = true
+   //  FOSS = true
 
     DEV = { config ->
 
