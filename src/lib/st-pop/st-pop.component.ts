@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, ElementRef, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import Popper from 'popper.js';
+import Popper from 'popper.js/dist/umd/popper.js';
 
 export type PopperPlacement = 'top' | 'top-start' | 'top-end' |
    'right' | 'right-start' | 'right-end' |
