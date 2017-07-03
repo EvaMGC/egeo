@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import {StObjectToArrayPipe} from "./st-object-to-array.pipe";
+import {StObjectToArrayPipe} from './st-object-to-array.pipe';
 
 class FakeClass {
    private name: string;
    private lastName: string;
 
-   constructor(name, lastName) {
+   constructor(name: string, lastName: string) {
       this.name = name;
       this.lastName = lastName;
    }
@@ -32,11 +32,11 @@ describe('Pipe: StObjectToArrayPipe', () => {
    let fakeJSON: any = {
       server1: {
          available: true,
-         ip: "1.1.1.1"
+         ip: '1.1.1.1'
       },
       server2: {
          available: false,
-         ip: "0.0.0.0"
+         ip: '0.0.0.0'
       }
    };
 
@@ -59,11 +59,11 @@ describe('Pipe: StObjectToArrayPipe', () => {
          it('It returns an array of JSONs with the key and value of each property', () => {
             let array: [any] = pipe.transform(fakeJSON);
 
-            expect(array[0].key).toEqual("server1");
+            expect(array[0].key).toEqual('server1');
             expect(array[0].value.available).toBe(fakeJSON.server1.available);
             expect(array[0].value.ip).toEqual(fakeJSON.server1.ip);
 
-            expect(array[1].key).toEqual("server2");
+            expect(array[1].key).toEqual('server2');
             expect(array[1].value.available).toBe(fakeJSON.server2.available);
             expect(array[1].value.ip).toEqual(fakeJSON.server2.ip);
          });

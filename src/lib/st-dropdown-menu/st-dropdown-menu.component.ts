@@ -100,7 +100,7 @@ export class StDropdownMenuComponent implements OnInit, AfterViewInit {
       this.change.emit(value);
    }
 
-   @HostListener('window:resize', ['$event']) onResize(event: Event) {
+   @HostListener('window:resize', ['$event']) onResize(event: Event): void {
       this.updateWidth();
    }
 

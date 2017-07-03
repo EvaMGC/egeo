@@ -3,7 +3,7 @@ const gulp = require('gulp');
 
 task('default', ['help']);
 
-task('help', function() {
+task('help', function(): void {
   const taskList = Object.keys(gulp.tasks)
     .filter(taskName => !taskName.startsWith(':'))
     .filter(taskName => taskName !== 'default')
