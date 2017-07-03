@@ -115,6 +115,17 @@ export {
    StInputErrorSchema
 } from './st-input/st-input.error.model';
 
+// Item List
+export {
+   StItemListModule
+} from './st-item-list/st-item-list.module';
+export {
+   StItemListElement,
+   StItemListConfig,
+   StItemListConfigSchema
+} from './st-item-list/st-item-list.model'
+export { StItemListDemoModule } from './st-item-list/demo/st-item-list-demo.module';
+
 // Modal
 export {
    StModalButton,
