@@ -8,6 +8,10 @@
 * Fix styles on st-vertical-tabs
 * Fix styles on st-horizontal-tabs
 
+**New features:**
+
+* New component st-items-list
+
 ## 2.4.1 (June 30, 2017)
 
 **Fixed bugs:**
