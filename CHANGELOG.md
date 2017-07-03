@@ -2,7 +2,9 @@
 
 ## 2.5.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
+* Fix styles on st-input
 
 ## 2.4.1 (June 30, 2017)
 
