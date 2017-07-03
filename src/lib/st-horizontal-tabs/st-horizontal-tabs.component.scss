@@ -33,9 +33,10 @@
 }
 
 .st-horizontal-tabs__option__text {
+   cursor: pointer;
+   display: block;
    margin-top: 2px;
    margin-left: 15px;
-   cursor: pointer;
 }
 
 :host {
