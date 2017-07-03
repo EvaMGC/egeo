@@ -5,6 +5,7 @@
 **Fixed bugs:**
 
 * Fix styles on st-input
+* Fix styles on st-vertical-tabs
 
 ## 2.4.1 (June 30, 2017)
 
