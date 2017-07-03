@@ -16,7 +16,7 @@ const classExtendsIfeeRegex =
  * @param fileContent The content of the file for which `@__PURE__` will be added.
  * @returns The content of the file with `@__PURE__` annotations added.
  */
-export function addPureAnnotations(fileContent: string) {
+export function addPureAnnotations(fileContent: string): string {
    return fileContent
       // Prefix downleveled classes w/ the @__PURE__ annotation.
       .replace(classIfeeRegex, '$1/*@__PURE__*/$3')
@@ -25,7 +25,7 @@ export function addPureAnnotations(fileContent: string) {
 }
 
 /** Adds Uglify "@__PURE__" decorations to the specified file. */
-export function addPureAnnotationsToFile(inputFile: string) {
+export function addPureAnnotationsToFile(inputFile: string): void {
    const originalContent = readFileSync(inputFile, 'utf-8');
    const annotatedContent = addPureAnnotations(originalContent);
 
