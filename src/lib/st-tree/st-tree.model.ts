@@ -13,4 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-declare var module: {id: string};
+export class StNodeTree {
+   name: string;
+   icon: string;
+   children?: StNodeTree[];
+   expanded?: boolean;
+}

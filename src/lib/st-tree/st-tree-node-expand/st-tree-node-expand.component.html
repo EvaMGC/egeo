@@ -1,0 +1,33 @@
+<!--
+
+    Copyright (C) 2016 Stratio (http://stratio.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" [attr.width]="getWidth()" height="9" [attr.viewBox]="getViewBox()">
+    <defs>
+        <path id="a" [attr.d]="getDeffDots()"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <use fill="#FFF" xlink:href="#a"/>
+            <path stroke="#777" [attr.d]="getGraphDots()"/>
+        </g>
+        <path *ngIf="!isRoot()" stroke="#000" stroke-linecap="square" [attr.d]="getPathDots()"/>
+        <text *ngIf="isRoot()" fill="#000" font-family="LucidaGrande, Lucida Grande" font-size="14">
+            <tspan x="2" y="5">…</tspan>
+        </text>
+    </g>
+</svg>
+
