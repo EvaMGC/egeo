@@ -204,6 +204,11 @@ export {
 // Tooltip
 export { StTooltipModule } from './st-tooltip/st-tooltip.module';
 
+// Tree
+export { StTreeModule } from './st-tree/st-tree.module';
+export { StNodeTree } from './st-tree/st-tree.model';
+export { StTreeDemoModule } from './st-tree/demo/st-tree-demo.module';
+
 // Two list selection
 export {
    StTwoListSelectionModule

@@ -11,6 +11,7 @@
 **New features:**
 
 * New component st-items-list
+* New component st-tree
 
 ## 2.4.1 (June 30, 2017)
 
