@@ -83,7 +83,9 @@ export class StDropdownMenuComponent implements OnInit, AfterViewInit {
    }
 
    ngAfterViewInit(): void {
-      this.updateWidth();
+      setTimeout(() => {
+         this.updateWidth();
+      }, 0);
    }
 
    checkGroup(): void {
