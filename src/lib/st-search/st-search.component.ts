@@ -120,10 +120,12 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
 
    public changeOption(item: StDropDownMenuItem): void {
       if (item && item.label) {
+         this.subscriptionSearch.unsubscribe();
          this.searchBox.setValue(item.label);
+         this.cd.markForCheck();
          this.closeElement();
          this.emitValue(true);
-         this.cd.markForCheck();
+         this.manageSubscription();
       }
    }
 
@@ -176,7 +178,11 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
 
    private checkValueChange(changes: SimpleChanges): void {
       if (changes && changes.value) {
+         if (this.subscriptionSearch) {
+            this.subscriptionSearch.unsubscribe();
+         }
          this.searchBox.setValue(changes.value.currentValue);
+         this.manageSubscription();
       }
    }
 
