@@ -1,22 +1,8 @@
-<st-form-input *ngIf="((type == 'string' || type == 'number')"
-               [stFormGroup]="stFormGroup"
-               [stFormControl]="stFormControl"
-               (stModelChange)="onChange($event)"
-               [name]="propertyName"
-               [required]="required"
-               pattern="{{field.value.pattern}}"
-               [min]="field.value.minimum"
-               [max]="field.value.maximum"
-               type="{{type}}"
-               label="{{field.value.title}}"
-               placeholder="{{field.value.placeholder}}"
-               [minLength]="field.value.minLength"
-               [maxLength]="field.value.maxLength"
-               help="{{field.value.description}}"
-               default="{{field.value.default}}"
-               [stModel]="stModel[propertyName]"
-               [disabled]="disabled"
-               [qaTag]="qaTag"
->
-</st-form-input>
-
+<st-input *ngIf="type == 'string' || type == 'number'"
+          name="{{schema.key}}"
+          fieldType="{{schema.value.type}}"
+          label="{{schema.value.title}}"
+          placeholder="{{schema.value.placeholder}}"
+          contextualHelp="{{schema.value.description}}"
+          [qaTag]="schema.key">
+</st-input>

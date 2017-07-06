@@ -15,16 +15,20 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { StRequired } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
+import {FormGroup} from "@angular/forms";
 
 @Component({
    selector: 'st-form',
    templateUrl: './st-form.component.html'
 })
 
-
+@StEgeo()
 export class StFormComponent {
    @Input() @StRequired() schema: any;
+   @Input() form: FormGroup;
 
-   constructor() {}
+   constructor() {
+      this.form = new FormGroup({});
+   }
 }

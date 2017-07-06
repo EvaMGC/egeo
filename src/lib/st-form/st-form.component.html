@@ -15,9 +15,7 @@
     limitations under the License.
 
 -->
-
-<st-form-field></st-form-field>
-
-
-<st-form-field [propertySchema]="property" *ngFor="let property of fields.properties | stJsonToArray">
-</st-form-field>
+<form #templateDrivenForm="ngForm" novalidate autocomplete="off">
+   <st-form-field [schema]="property" *ngFor="let property of schema.properties | stObjectToArray">
+   </st-form-field>
+</form>

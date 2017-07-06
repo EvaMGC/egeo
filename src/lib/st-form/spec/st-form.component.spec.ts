@@ -14,31 +14,36 @@
  * limitations under the License.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StFormComponent } from '../st-form.component';
-import { schemaWithInputs } from './resources/json-schema-with-inputs';
+import {StFormComponent} from '../st-form.component';
+import {schemaWithInputs} from './resources/json-schema-with-inputs';
+import {StFormFieldComponent} from "../st-form-field/st-form-field.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PipesModule} from "../../pipes/pipes.module";
+import {StInputModule} from "../../st-input/st-input.module";
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
 
-describe('StFormComponent', () => {
-
+fdescribe('StFormComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         declarations: [StFormComponent]
+         imports: [FormsModule, ReactiveFormsModule, StInputModule, PipesModule],
+         declarations: [StFormComponent, StFormFieldComponent]
       })
-         .compileComponents();
+         .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
+      fixture = TestBed.createComponent(StFormComponent);
       component = fixture.componentInstance;
       component.schema = schemaWithInputs;
-
+      fixture.detectChanges();
    });
 
    describe('should render a form according its json schema', () => {
-      xit('inputs are created with their ids', () => {
+      it('a control is created for each property with its ids', () => {
          for (let propertyId in schemaWithInputs.properties) {
             if (schemaWithInputs.hasOwnProperty(propertyId)) {
                expect(fixture.nativeElement.querySelector('#' + propertyId)).not.toBeNull();
@@ -46,7 +51,7 @@ describe('StFormComponent', () => {
          }
       });
 
-      xit('tooltips are generated using their descriptions', () => {
+      it('tooltips are generated using their descriptions', () => {
          for (let propertyId in schemaWithInputs.properties) {
             if (schemaWithInputs.hasOwnProperty(propertyId)) {
                let property: any = schemaWithInputs[propertyId];
@@ -58,7 +63,7 @@ describe('StFormComponent', () => {
          }
       });
 
-      xit('inputs are displayed with their default value', () => {
+      it('inputs are displayed with their default value', () => {
          for (let propertyId in schemaWithInputs.properties) {
             if (schemaWithInputs.hasOwnProperty(propertyId)) {
                let property: any = schemaWithInputs[propertyId];
@@ -71,7 +76,7 @@ describe('StFormComponent', () => {
 
          describe('number input', () => {
 
-            xit('if user tries to type text, input value is not updated', () => {
+            it('if user tries to type text, input value is not updated', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#requiredNumber');
                input.focus();
                input.value = 'fake test';
@@ -82,7 +87,7 @@ describe('StFormComponent', () => {
                expect(input.value).toBe('');
             });
 
-            xit('required input', () => {
+            it('required input', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#requiredNumber');
                input.focus();
                input.value = '';
@@ -98,7 +103,7 @@ describe('StFormComponent', () => {
                expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).not.toContain('This field is required');
             });
 
-            xit('min number validation', () => {
+            it('min number validation', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#minNumber');
                let minValue: number = schemaWithInputs.properties.minNumber.minimum;
                input.focus();
@@ -115,7 +120,7 @@ describe('StFormComponent', () => {
                expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
             });
 
-            xit('max number validation', () => {
+            it('max number validation', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#maxNumber');
                let maxNumber: number = schemaWithInputs.properties.maxNumber.maximum;
                input.focus();
@@ -133,7 +138,7 @@ describe('StFormComponent', () => {
             });
 
 
-            xdescribe('number has to be between a certain range', () => {
+            describe('number has to be between a certain range', () => {
                let input: HTMLInputElement;
                let minValue: number;
                let maxValue: number;
@@ -144,7 +149,7 @@ describe('StFormComponent', () => {
                   maxValue = schemaWithInputs.properties.minAndMaxNumber.maximum;
                });
 
-               xit('if minimum is exclusive, when user puts a value equal or minor than the minimum, validation error is displayed', () => {
+               it('if minimum is exclusive, when user puts a value equal or minor than the minimum, validation error is displayed', () => {
                   input.focus();
                   // minor than the minimum
                   input.value = (minValue - 1).toString();
@@ -161,7 +166,7 @@ describe('StFormComponent', () => {
                   expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
                });
 
-               xit('if minimum is not exclusive, when user puts a value equal to the minimum, input will be valid', () => {
+               it('if minimum is not exclusive, when user puts a value equal to the minimum, input will be valid', () => {
                   schemaWithInputs.properties.minAndMaxNumber.exclusiveMinimum = false;
                   fixture.detectChanges();
 
@@ -175,7 +180,7 @@ describe('StFormComponent', () => {
                   expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
                });
 
-               xit('if maximum is exclusive, when user puts a value equal or major than the maximum, validation error is displayed', () => {
+               it('if maximum is exclusive, when user puts a value equal or major than the maximum, validation error is displayed', () => {
                   input.focus();
                   // major than the maximum
                   input.value = (maxValue + 1).toString();
@@ -192,7 +197,7 @@ describe('StFormComponent', () => {
                   expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
                });
 
-               xit('if maximum is not exclusive, when user puts a value equal to the maximum, input will be valid', () => {
+               it('if maximum is not exclusive, when user puts a value equal to the maximum, input will be valid', () => {
                   schemaWithInputs.properties.minAndMaxNumber.exclusiveMaximum = false;
                   fixture.detectChanges();
 
@@ -210,7 +215,7 @@ describe('StFormComponent', () => {
 
          xdescribe('text input', () => {
             let fakeText = 'fake text';
-            xit('required validation', () => {
+            it('required validation', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#requiredText');
                input.focus();
                input.value = fakeText;
@@ -227,7 +232,7 @@ describe('StFormComponent', () => {
                expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
             });
 
-            xit('min length validation', () => {
+            it('min length validation', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#minLengthText');
                let minLength: number = schemaWithInputs.properties.minLengthText.minLength;
                input.focus();
@@ -247,7 +252,7 @@ describe('StFormComponent', () => {
                expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
             });
 
-            xit('max length validation', () => {
+            it('max length validation', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#maxLengthText');
                let maxLength: number = schemaWithInputs.properties.maxLengthText.maxLength;
                input.focus();
@@ -267,7 +272,7 @@ describe('StFormComponent', () => {
                expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
             });
 
-            xit('pattern validation', () => {
+            it('pattern validation', () => {
                // this input only admits a valid url
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#url');
 
