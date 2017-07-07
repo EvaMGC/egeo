@@ -1,11 +1,6 @@
 {
    "rules": {
       "align": false,
-      "ban": [
-         true,
-         ["describe", "only"],
-         ["it", "only"]
-      ],
       "class-name": true,
       "comment-format": [
          true,
@@ -121,6 +116,7 @@
          "allow-leading-underscore",
          "ban-keywords"
       ],
+      "ban": [true, ["fit"], ["fdescribe"], ["xit"], ["xdescribe"]],
       "whitespace": [
          true,
          "check-branch",

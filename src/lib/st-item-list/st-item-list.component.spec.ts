@@ -37,7 +37,7 @@ let qaTag: string = 'st-item-list-test';
 let config: StItemListConfig = {
    title: 'List title',
    searchPlaceholder: 'List search'
-}
+};
 
 function generateData(numData: number): StItemListElement[] {
    return _times(numData, (i) => {
