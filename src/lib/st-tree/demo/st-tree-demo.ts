@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 import { Component } from '@angular/core';
+import { cloneDeep as _cloneDeep, get as _get} from 'lodash';
 
-import { StNodeTree } from '../st-tree.model';
+import { StNodeTree, StNodeTreeChange } from '../st-tree.model';
 
 @Component({
    selector: 'st-tree-demo',
@@ -26,30 +27,49 @@ export class StTreeDemoComponent {
    public tree: StNodeTree = {
       name: 'hdfs',
       icon: 'icon-folder',
-      expanded: true,
+      expanded: false,
       children: [
-         {name: 'folder A', icon: 'icon-folder' },
-         {name: 'folder B', icon: 'icon-folder', expanded: true, children: [
-            {name: 'folder B.0', icon: 'icon-folder', children: [
-               {name: 'folder B.0.0', icon: 'icon-file'},
-               {name: 'folder B.0.1', icon: 'icon-file'}
-            ]},
-            {name: 'folder B.1', icon: 'icon-folder', expanded: true, children: [
-               {name: 'folder B.1.0', icon: 'icon-file'},
-               {name: 'folder B.1.1', icon: 'icon-file'}
-            ]},
-            {name: 'folder B.2', icon: 'icon-file'},
-            {name: 'folder B.3', icon: 'icon-file'},
-            {name: 'folder B.4', icon: 'icon-folder', expanded: true, children: [
-               {name: 'folder B.4.0', icon: 'icon-file'},
-               {name: 'folder B.4.1', icon: 'icon-file'},
-               {name: 'folder B.4.2', icon: 'icon-file'},
-               {name: 'folder B.4.3', icon: 'icon-file'},
-               {name: 'folder B.4.4', icon: 'icon-file'}
-            ]}
-         ]},
-         {name: 'folder C', icon: 'icon-file'},
-         {name: 'folder D', icon: 'icon-folder'}
+         { name: 'folder A', icon: 'icon-folder' },
+         {
+            name: 'folder B', icon: 'icon-folder', expanded: false, children: [
+               {
+                  name: 'folder B.0', icon: 'icon-folder', children: [
+                     { name: 'folder B.0.0', icon: 'icon-file' },
+                     { name: 'folder B.0.1', icon: 'icon-file' }
+                  ]
+               },
+               {
+                  name: 'folder B.1', icon: 'icon-folder', expanded: false, children: [
+                     { name: 'folder B.1.0', icon: 'icon-file' },
+                     { name: 'folder B.1.1', icon: 'icon-file' }
+                  ]
+               },
+               { name: 'folder B.2', icon: 'icon-file' },
+               { name: 'folder B.3', icon: 'icon-file' },
+               {
+                  name: 'folder B.4', icon: 'icon-folder', expanded: true, children: [
+                     { name: 'folder B.4.0', icon: 'icon-file' },
+                     { name: 'folder B.4.1', icon: 'icon-file' },
+                     { name: 'folder B.4.2', icon: 'icon-file' },
+                     { name: 'folder B.4.3', icon: 'icon-file' },
+                     { name: 'folder B.4.4', icon: 'icon-file' }
+                  ]
+               }
+            ]
+         },
+         { name: 'folder C', icon: 'icon-file' },
+         { name: 'folder D', icon: 'icon-folder' }
       ]
    };
+
+   onToogleNode(nodeChange: StNodeTreeChange): void {
+      console.log('toogle node', nodeChange.path, '  status: ', nodeChange.node.expanded);
+      let node: StNodeTree = _get<StNodeTree>(this.tree, nodeChange.path, this.tree);
+      node.expanded = nodeChange.node.expanded;
+      this.tree = _cloneDeep(this.tree);
+   }
+
+   onClick(): void {
+      this.tree = { name: 'hdfs', icon: 'icon-folder' };
+   }
 }
