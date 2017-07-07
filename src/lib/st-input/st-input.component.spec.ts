@@ -80,14 +80,6 @@ describe('StInputComponent', () => {
       input.focus();
       expect(component.focus).toBe(true);
    });
-
-   // TODO: Review this test because something is wrong
-   xit('Input should be focused as default', () => {
-      fixture.detectChanges();
-      component.isFocused = true;
-      fixture.detectChanges();
-      expect(component.focus).toBe(true);
-   });
 });
 
 @Component({

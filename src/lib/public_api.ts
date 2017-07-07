@@ -123,7 +123,7 @@ export {
    StItemListElement,
    StItemListConfig,
    StItemListConfigSchema
-} from './st-item-list/st-item-list.model'
+} from './st-item-list/st-item-list.model';
 export { StItemListDemoModule } from './st-item-list/demo/st-item-list-demo.module';
 
 // Modal

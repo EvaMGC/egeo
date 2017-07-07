@@ -22,7 +22,7 @@ import { ItemListItemComponent } from '../item-list-item/item-list-item.componen
 import { ItemListScrollComponent } from './item-list-scroll.component';
 
 // Model
-import { StItemListElement } from '../st-item-list.model'
+import { StItemListElement } from '../st-item-list.model';
 
 let comp: ItemListScrollComponent;
 let fixture: ComponentFixture<ItemListScrollComponent>;

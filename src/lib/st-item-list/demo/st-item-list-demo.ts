@@ -50,18 +50,20 @@ export class StItemListDemoComponent {
    public configAll: StItemListConfig = {
        title: 'List Title',
        searchPlaceholder: 'Text for search'
-   }
+   };
+
    public configTitle: StItemListConfig = {
        title: 'List Title',
        searchPlaceholder: ''
-   }
+   };
+
    public configSearch: StItemListConfig = {
        title: '',
        searchPlaceholder: 'Text for search'
-   }
+   };
 
-   public themeA = 'themeA';
-   public themeB = 'themeB';
+   public themeA: string = 'themeA';
+   public themeB: string = 'themeB';
 
    onSelectItem(item: StItemListElement): void {
       item.selected = !item.selected;
@@ -85,7 +87,7 @@ export class StItemListDemoComponent {
       }
    }
 
-   private filterList(list: StItemListElement[], filter: string) {
+   private filterList(list: StItemListElement[], filter: string): StItemListElement[] {
        return _filter(list, (item) => item.name.indexOf(filter) > -1);
    }
 

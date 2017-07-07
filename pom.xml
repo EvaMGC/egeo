@@ -76,6 +76,17 @@
                   </configuration>
                </execution>
                <execution>
+                  <id>npm lint</id>
+                  <goals>
+                     <goal>npm</goal>
+                  </goals>
+                  <phase>test</phase>
+                  <configuration>
+                     <skipTests>${skipUTs}</skipTests>
+                     <arguments>run-script lint</arguments>
+                  </configuration>
+               </execution>
+               <execution>
                   <id>npm test</id>
                   <goals>
                      <goal>npm</goal>
