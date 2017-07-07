@@ -1,7 +1,11 @@
 {
    "rules": {
       "align": false,
-      "ban": false,
+      "ban": [
+         true,
+         ["describe", "only"],
+         ["it", "only"]
+      ],
       "class-name": true,
       "comment-format": [
          true,

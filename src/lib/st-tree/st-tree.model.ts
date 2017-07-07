@@ -19,3 +19,8 @@ export class StNodeTree {
    children?: StNodeTree[];
    expanded?: boolean;
 }
+
+export class StNodeTreeChange {
+   node: StNodeTree;
+   path: string;
+}

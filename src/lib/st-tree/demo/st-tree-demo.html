@@ -16,5 +16,7 @@
 
 -->
 <section class="container-liquid">
-  <st-tree [tree]="tree"></st-tree>
+  <st-tree [tree]="tree" (toogleNode)="onToogleNode($event)"></st-tree>
+
+  <button (click)="onClick()">Click</button>
 </section>

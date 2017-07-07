@@ -84,41 +84,40 @@ describe('StTreeComponent', () => {
 
 
       it('should init correctly', () => {
-         comp.father = ['root'];
+         comp.father = [];
+         comp.pos = 0;
          comp.node = mockTree;
          fixture.detectChanges();
 
-         expect(comp.actualPath).toEqual(['root', mockTree.name]);
+         expect(comp.actualPath).toEqual([0]);
          expect(comp.getType()).toEqual('expanded');
          expect(comp.hasChildren()).toBeTruthy();
       });
 
       it('should react to changes', () => {
-         comp.father = ['root'];
+         comp.father = [0];
+         comp.pos = 0;
          comp.node = mockTree;
          fixture.detectChanges();
 
-         expect(comp.actualPath).toEqual(['root', mockTree.name]);
+         expect(comp.actualPath).toEqual([0, 0]);
          expect(comp.getType()).toEqual('expanded');
          expect(comp.hasChildren()).toBeTruthy();
 
-         let newNode: StNodeTree = _cloneDeep(mockTree);
-         newNode.expanded = false;
-         newNode.name = 'newTest';
-         let changes: SimpleChanges = { node: new SimpleChange(mockTree, newNode, true) };
-         comp.node = newNode;
-         comp.ngOnChanges(changes);
+         comp.ngOnChanges({ father: new SimpleChange([0], [1], true) });
+         comp.father = [1];
+         fixture.detectChanges();
+         expect(comp.actualPath).toEqual([1, 0]);
 
-         expect(comp.actualPath).toEqual(['root', newNode.name]);
-         expect(comp.getType()).toEqual('collapsed');
-         expect(comp.hasChildren()).toBeTruthy();
-
-         comp.ngOnChanges({ father: new SimpleChange(['root'], ['newRoot'], true) });
-         expect(comp.actualPath).toEqual(['newRoot', newNode.name]);
+         comp.ngOnChanges({ pos: new SimpleChange(0, 1, true) });
+         comp.pos = 1;
+         fixture.detectChanges();
+         expect(comp.actualPath).toEqual([1, 1]);
       });
 
       it('should check if has children correctly', () => {
-         comp.father = ['root'];
+         comp.father = [0];
+         comp.pos = 1;
          comp.node = mockTree;
          fixture.detectChanges();
 
@@ -131,6 +130,118 @@ describe('StTreeComponent', () => {
          newNode.children = [];
          comp.node = newNode;
          expect(comp.hasChildren()).toBeFalsy();
+      });
+
+      it('should emit when click on expand a node for a internal node', () => {
+         let responseFunction = jasmine.createSpy('response');
+         comp.toogleNode.subscribe(responseFunction);
+         comp.father = [0, 1];
+         comp.pos = 4;
+         comp.node = { name: 'testNode', icon: '', expanded: false };
+         fixture.detectChanges();
+
+         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+
+         comp.onToogleNode(new Event('click'));
+         expect(responseFunction).toHaveBeenCalled();
+         expect(responseFunction).toHaveBeenCalledTimes(1);
+         expect(responseFunction).toHaveBeenCalledWith({ node: expectedResult, path: 'children[1].children[4]' });
+      });
+
+      it('should emit when click on expand a node for a child from root node', () => {
+         let responseFunction = jasmine.createSpy('response');
+         comp.toogleNode.subscribe(responseFunction);
+         comp.father = [0];
+         comp.pos = 4;
+         comp.node = { name: 'testNode', icon: '', expanded: false };
+         fixture.detectChanges();
+
+         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+
+         comp.onToogleNode(new Event('click'));
+         expect(responseFunction).toHaveBeenCalled();
+         expect(responseFunction).toHaveBeenCalledTimes(1);
+         expect(responseFunction).toHaveBeenCalledWith({ node: expectedResult, path: 'children[4]' });
+      });
+
+      it('should emit when click on expand a node for root node', () => {
+         let responseFunction = jasmine.createSpy('response');
+         comp.toogleNode.subscribe(responseFunction);
+         comp.father = [];
+         comp.pos = 0;
+         comp.node = { name: 'testNode', icon: '', expanded: false };
+         fixture.detectChanges();
+
+         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+
+         comp.onToogleNode(new Event('click'));
+         expect(responseFunction).toHaveBeenCalled();
+         expect(responseFunction).toHaveBeenCalledTimes(1);
+         expect(responseFunction).toHaveBeenCalledWith({ node: expectedResult, path: '' });
+      });
+
+
+      it('should emit when click on select a node for a internal node', () => {
+         let onToogleFunction = jasmine.createSpy('response');
+         let onSelectFunction = jasmine.createSpy('response');
+         comp.toogleNode.subscribe(onToogleFunction);
+         comp.selectNode.subscribe(onSelectFunction);
+         comp.father = [0, 1];
+         comp.pos = 4;
+         comp.node = { name: 'testNode', icon: '', expanded: false };
+         fixture.detectChanges();
+
+         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+
+         comp.onClickForSelect(new Event('click'));
+         expect(onToogleFunction).toHaveBeenCalled();
+         expect(onToogleFunction).toHaveBeenCalledTimes(1);
+         expect(onToogleFunction).toHaveBeenCalledWith({ node: expectedResult, path: 'children[1].children[4]' });
+         expect(onSelectFunction).toHaveBeenCalled();
+         expect(onSelectFunction).toHaveBeenCalledTimes(1);
+         expect(onSelectFunction).toHaveBeenCalledWith({ node: expectedResult, path: 'children[1].children[4]' });
+      });
+
+      it('should emit when click on select a node for a child from root node', () => {
+         let onToogleFunction = jasmine.createSpy('response');
+         let onSelectFunction = jasmine.createSpy('response');
+         comp.toogleNode.subscribe(onToogleFunction);
+         comp.selectNode.subscribe(onSelectFunction);
+         comp.father = [0];
+         comp.pos = 4;
+         comp.node = { name: 'testNode', icon: '', expanded: false };
+         fixture.detectChanges();
+
+         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+
+         comp.onClickForSelect(new Event('click'));
+         expect(onToogleFunction).toHaveBeenCalled();
+         expect(onToogleFunction).toHaveBeenCalledTimes(1);
+         expect(onToogleFunction).toHaveBeenCalledWith({ node: expectedResult, path: 'children[4]' });
+         expect(onSelectFunction).toHaveBeenCalled();
+         expect(onSelectFunction).toHaveBeenCalledTimes(1);
+         expect(onSelectFunction).toHaveBeenCalledWith({ node: expectedResult, path: 'children[4]' });
+      });
+
+      it('should emit when click on select a node for root node', () => {
+         let onToogleFunction = jasmine.createSpy('response');
+         let onSelectFunction = jasmine.createSpy('response');
+         comp.toogleNode.subscribe(onToogleFunction);
+         comp.selectNode.subscribe(onSelectFunction);
+         comp.father = [];
+         comp.pos = 0;
+         comp.node = { name: 'testNode', icon: '', expanded: false };
+         fixture.detectChanges();
+
+         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+
+         comp.onClickForSelect(new Event('click'));
+         expect(onToogleFunction).toHaveBeenCalled();
+         expect(onToogleFunction).toHaveBeenCalledTimes(1);
+         expect(onToogleFunction).toHaveBeenCalledWith({ node: expectedResult, path: '' });
+         expect(onSelectFunction).toHaveBeenCalled();
+         expect(onSelectFunction).toHaveBeenCalledTimes(1);
+         expect(onSelectFunction).toHaveBeenCalledWith({ node: expectedResult, path: '' });
       });
    });
 });

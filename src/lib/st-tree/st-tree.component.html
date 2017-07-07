@@ -16,5 +16,11 @@
 
 -->
 <div>
-   <st-node-tree [father]="fatherNode" [node]="internalTree" ></st-node-tree>
+   <st-node-tree
+      [father]="fatherNode"
+      [node]="internalTree"
+      [pos]="0"
+      (toogleNode)="onToogleNode($event)"
+      (selectNode)="onSelectNode($event)">
+   </st-node-tree>
 </div>

@@ -20,10 +20,12 @@ import {
    OnInit,
    OnChanges,
    SimpleChanges,
-   ChangeDetectorRef
+   ChangeDetectorRef,
+   EventEmitter,
+   Output
 } from '@angular/core';
 
-import { StNodeTree } from '../st-tree.model';
+import { StNodeTree, StNodeTreeChange } from '../st-tree.model';
 
 /**
  * @description {Component} Node-Tree
@@ -42,26 +44,30 @@ import { StNodeTree } from '../st-tree.model';
 export class StNodeTreeComponent implements OnInit, OnChanges {
 
    /** @Input {string[]} fahter Variable to get full path for father */
-   @Input() father: string[];
+   @Input() father: number[];
    /** @Input {StNodeTree} node Subtree structure */
    @Input() node: StNodeTree;
+   @Input() pos: number;
 
-   public actualPath: string[] = [];
+   @Output() toogleNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
+   @Output() selectNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
+
+   public actualPath: number[] = [];
 
    constructor(private _cd: ChangeDetectorRef) { }
 
    ngOnInit(): void {
-      this.actualPath = this.buildActualPath(this.father, this.node.name);
+      this.actualPath = this.buildActualPath(this.father, this.pos);
    }
 
    ngOnChanges(changes: SimpleChanges): void {
       if (changes && changes.father) {
-         this.actualPath = this.buildActualPath(changes.father.currentValue, this.node.name);
+         this.actualPath = this.buildActualPath(changes.father.currentValue, this.pos);
          this._cd.markForCheck();
       }
 
-      if (changes && changes.node) {
-         this.actualPath = this.buildActualPath(this.father, changes.node.currentValue.name);
+      if (changes && changes.pos) {
+         this.actualPath = this.buildActualPath(this.father, changes.pos.currentValue);
          this._cd.markForCheck();
       }
    }
@@ -74,7 +80,30 @@ export class StNodeTreeComponent implements OnInit, OnChanges {
       return this.node && this.node.children && this.node.children.length > 0;
    }
 
-   private buildActualPath(fatherPath: string[], actualNode: string): string[] {
+   onClickForSelect(event: Event): void {
+      event.stopImmediatePropagation();
+      this.node.expanded = !this.node.expanded;
+      let changeEvent: StNodeTreeChange = { node: this.node, path: this.getPath() };
+      this.toogleNode.emit(changeEvent);
+      this.selectNode.emit(changeEvent);
+   }
+
+   onToogleNode(event: Event): void {
+      event.stopImmediatePropagation();
+      this.node.expanded = !this.node.expanded;
+      this.toogleNode.emit({ node: this.node, path: this.getPath() });
+   }
+
+   private getPath(): string {
+      if (this.father.length === 0) {
+         return '';
+      } else if (this.father.length === 1) {
+         return `children[${this.pos}]`;
+      }
+      return [...this.father.slice(1).map((father) => `children[${father}]`), ...[`children[${this.pos}]`]].join('.');
+   }
+
+   private buildActualPath(fatherPath: number[], actualNode: number): number[] {
       return [...fatherPath, actualNode];
    }
 }
