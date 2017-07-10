@@ -61,15 +61,37 @@ export class StTreeDemoComponent {
          { name: 'folder D', icon: 'icon-folder' }
       ]
    };
+   public maxLevel: number = 3;
 
    onToogleNode(nodeChange: StNodeTreeChange): void {
-      console.log('toogle node', nodeChange.path, '  status: ', nodeChange.node.expanded);
+      console.log('toogle node', nodeChange);
       let node: StNodeTree = _get<StNodeTree>(this.tree, nodeChange.path, this.tree);
       node.expanded = nodeChange.node.expanded;
       this.tree = _cloneDeep(this.tree);
    }
 
+   onSelectNode(nodeChange: StNodeTreeChange): void {
+      console.log('selecte node', nodeChange);
+   }
+
    onClick(): void {
-      this.tree = { name: 'hdfs', icon: 'icon-folder' };
+      this.tree = this.generateTree(10, 50, 'Node', 0);
+   }
+
+   private generateNode(name: string, children?: StNodeTree[]): StNodeTree {
+      return children ? { name: name, icon: 'icon-folder', expanded: true, children: children } : { name: name, icon: 'icon-file' };
+   }
+
+   private generateTree(levels: number, levelNodes: number, nodeName: string, startNode: number): StNodeTree {
+      let node: StNodeTree;
+      let childNodes: StNodeTree[];
+      if (levels > 0) {
+         childNodes = [];
+         for (let i: number = 0; i < levelNodes; i++) {
+            // Only generate childrens for the first child
+            childNodes.push(this.generateTree(i === 0 ? levels - 1 : 0, levelNodes, `${nodeName}-${startNode}.${i}`, startNode + 1));
+         }
+      }
+      return this.generateNode(nodeName, childNodes);
    }
 }

@@ -92,6 +92,7 @@ describe('StTreeComponent', () => {
          expect(comp.actualPath).toEqual([0]);
          expect(comp.getType()).toEqual('expanded');
          expect(comp.hasChildren()).toBeTruthy();
+         expect(comp.isLevelOverflow()).toBeFalsy();
       });
 
       it('should react to changes', () => {
@@ -103,6 +104,7 @@ describe('StTreeComponent', () => {
          expect(comp.actualPath).toEqual([0, 0]);
          expect(comp.getType()).toEqual('expanded');
          expect(comp.hasChildren()).toBeTruthy();
+         expect(comp.isLevelOverflow()).toBeFalsy();
 
          comp.ngOnChanges({ father: new SimpleChange([0], [1], true) });
          comp.father = [1];
@@ -130,6 +132,22 @@ describe('StTreeComponent', () => {
          newNode.children = [];
          comp.node = newNode;
          expect(comp.hasChildren()).toBeFalsy();
+      });
+
+      it('should check if if overflow the maximum level of the tree', () => {
+         comp.father = [];
+         comp.pos = 1;
+         comp.node = mockTree;
+         fixture.detectChanges();
+
+         expect(comp.isLevelOverflow()).toBeFalsy();
+
+         comp.maxLevel = 3;
+         comp.father = [0, 1, 3, 4];
+         expect(comp.isLevelOverflow()).toBeTruthy();
+
+         comp.father = [0, 1];
+         expect(comp.isLevelOverflow()).toBeFalsy();
       });
 
       it('should emit when click on expand a node for a internal node', () => {

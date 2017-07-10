@@ -16,7 +16,11 @@
 
 -->
 <section class="container-liquid">
-  <st-tree [tree]="tree" (toogleNode)="onToogleNode($event)"></st-tree>
-
-  <button (click)="onClick()">Click</button>
+  <st-tree
+     [tree]="tree"
+     [maxLevel]="maxLevel"
+     (toogleNode)="onToogleNode($event)"
+     (selectNode)="onSelectNode($event)">
+  </st-tree>
+  <button (click)="onClick()">Generate Long Tree</button>
 </section>

@@ -48,6 +48,7 @@ export class StNodeTreeComponent implements OnInit, OnChanges {
    /** @Input {StNodeTree} node Subtree structure */
    @Input() node: StNodeTree;
    @Input() pos: number;
+   @Input() maxLevel: number;
 
    @Output() toogleNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
    @Output() selectNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
@@ -78,6 +79,10 @@ export class StNodeTreeComponent implements OnInit, OnChanges {
 
    hasChildren(): boolean {
       return this.node && this.node.children && this.node.children.length > 0;
+   }
+
+   isLevelOverflow(): boolean {
+      return this.maxLevel !== undefined && this.father && this.father.length >= this.maxLevel;
    }
 
    onClickForSelect(event: Event): void {
