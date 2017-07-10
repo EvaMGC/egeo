@@ -21,6 +21,8 @@
       [node]="internalTree"
       [pos]="0"
       [maxLevel]="maxLevel"
+      [changeStreamNotification]="changeStreamNotification"
+      (internalNodeUpdate)="onInternalNodeUpdate($event)"
       (toogleNode)="onToogleNode($event)"
       (selectNode)="onSelectNode($event)">
    </st-node-tree>

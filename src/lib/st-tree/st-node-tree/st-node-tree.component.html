@@ -28,6 +28,8 @@
             [node]="child"
             [pos]="i"
             [maxLevel]="maxLevel"
+            [changeStreamNotification]="changeStreamNotification"
+            (internalNodeUpdate)="internalNodeUpdate.emit($event)"
             (toogleNode)="toogleNode.emit($event)"
             (selectNode)="selectNode.emit($event)">
          </st-node-tree>

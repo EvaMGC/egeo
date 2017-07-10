@@ -18,9 +18,9 @@ import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testi
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { cloneDeep as _cloneDeep } from 'lodash';
+import { Subject } from 'rxjs/Subject';
 
-
-import { StNodeTree } from '../st-tree.model';
+import { StNodeTree, StNodeTreeChange } from '../st-tree.model';
 import { StNodeTreeComponent } from './st-node-tree.component';
 import { StTreeNodeExpandComponent } from '../st-tree-node-expand/st-tree-node-expand.component';
 
@@ -260,6 +260,63 @@ describe('StTreeComponent', () => {
          expect(onSelectFunction).toHaveBeenCalled();
          expect(onSelectFunction).toHaveBeenCalledTimes(1);
          expect(onSelectFunction).toHaveBeenCalledWith({ node: expectedResult, path: '' });
+      });
+
+      it('should update single node when path is equal to own path', () => {
+         let subject: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+
+         comp.father = [0];
+         comp.pos = 1;
+         comp.node = { name: 'test', icon: '' };
+         comp.changeStreamNotification = subject.asObservable();
+         fixture.detectChanges();
+
+         expect(comp.node.name).toEqual('test');
+         let newNode: StNodeTree = {name: 'new value', icon: ''};
+         subject.next({node: newNode, path: 'children[1]'});
+         fixture.detectChanges();
+
+         expect(comp.node.name).toEqual('new value');
+      });
+
+      it('should not update node when path is not equal to own path', () => {
+         let subject: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+
+         comp.father = [0];
+         comp.pos = 1;
+         comp.node = { name: 'test', icon: '' };
+         comp.changeStreamNotification = subject.asObservable();
+         fixture.detectChanges();
+
+         expect(comp.node.name).toEqual('test');
+         let newNode: StNodeTree = {name: 'new value', icon: ''};
+         subject.next({node: newNode, path: 'children[5]'});
+         fixture.detectChanges();
+
+         expect(comp.node.name).toEqual('test');
+      });
+
+      it('should update subscription to node update', () => {
+         let subject1: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+         let subject2: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+
+         comp.father = [0];
+         comp.pos = 1;
+         comp.node = { name: 'test', icon: '' };
+         comp.changeStreamNotification = subject1.asObservable();
+         fixture.detectChanges();
+
+         expect(comp.node.name).toEqual('test');
+
+         comp.changeStreamNotification = subject2;
+         comp.ngOnChanges({changeStreamNotification: new SimpleChange(subject1, subject2, true)});
+         fixture.detectChanges();
+
+         let newNode: StNodeTree = {name: 'new value', icon: ''};
+         subject2.next({node: newNode, path: 'children[1]'});
+         fixture.detectChanges();
+
+         expect(comp.node.name).toEqual('new value');
       });
    });
 });

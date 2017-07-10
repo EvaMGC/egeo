@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 import { Component } from '@angular/core';
-import { cloneDeep as _cloneDeep, get as _get} from 'lodash';
+import {
+   cloneDeep as _cloneDeep,
+   get as _get,
+   set as _set
+} from 'lodash';
 
 import { StNodeTree, StNodeTreeChange } from '../st-tree.model';
+
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
    selector: 'st-tree-demo',
@@ -63,6 +70,13 @@ export class StTreeDemoComponent {
    };
    public maxLevel: number = 3;
 
+   public notificationChangeStream: Observable<StNodeTreeChange>;
+   private subject: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+
+   constructor() {
+      this.notificationChangeStream = this.subject.asObservable();
+   }
+
    onToogleNode(nodeChange: StNodeTreeChange): void {
       console.log('toogle node', nodeChange);
       let node: StNodeTree = _get<StNodeTree>(this.tree, nodeChange.path, this.tree);
@@ -76,6 +90,13 @@ export class StTreeDemoComponent {
 
    onClick(): void {
       this.tree = this.generateTree(10, 50, 'Node', 0);
+   }
+
+   onUpdateNode(): void {
+      let node: StNodeTree = _cloneDeep(this.tree.children[0]);
+      node.name = 'New name';
+      _set(this.tree, 'children[0]', node);
+      this.subject.next({ node: node, path: 'children[0]' });
    }
 
    private generateNode(name: string, children?: StNodeTree[]): StNodeTree {

@@ -20,7 +20,9 @@
      [tree]="tree"
      [maxLevel]="maxLevel"
      (toogleNode)="onToogleNode($event)"
-     (selectNode)="onSelectNode($event)">
+     (selectNode)="onSelectNode($event)"
+     [changeStreamNotification]="notificationChangeStream">
   </st-tree>
   <button (click)="onClick()">Generate Long Tree</button>
+  <button (click)="onUpdateNode()">Update tree node</button>
 </section>
