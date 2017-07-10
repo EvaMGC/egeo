@@ -59,6 +59,8 @@ export class StTreeComponent implements OnInit, OnChanges {
    @Input() @StRequired() tree: StNodeTree;
    /** @Input {number} maxLevel Maximum level of child nodes to display */
    @Input() maxLevel: number;
+   /** @Input {isRoot} isRoot Defines whether it is a partial or full tree  */
+   @Input() isRoot: boolean = true;
 
    @Input() expandFatherBranch: boolean = true;
    @Input() collapseChildsBranch: boolean = true;
@@ -67,6 +69,7 @@ export class StTreeComponent implements OnInit, OnChanges {
 
    @Output() toogleNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
    @Output() selectNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
+   @Output() navigatePrevious: EventEmitter<Event> = new EventEmitter<Event>();
 
    public internalTree: StNodeTree;
    public fatherNode: number[] = [];
