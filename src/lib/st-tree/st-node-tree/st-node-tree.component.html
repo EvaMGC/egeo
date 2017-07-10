@@ -21,12 +21,13 @@
       <i [ngClass]="node.icon" class="filetype-icon sth-tree-node-filetype"></i>
       <span class="node-name sth-tree-node-name">{{node.name}}</span>
    </div>
-   <ul *ngIf="node.children && node.children.length > 0 && node.expanded" class="childrens">
+   <ul *ngIf="node.children && node.children.length > 0 && node.expanded && !isLevelOverflow()" class="childrens">
       <li *ngFor="let child of node.children; let i = index">
          <st-node-tree
             [father]="actualPath"
             [node]="child"
             [pos]="i"
+            [maxLevel]="maxLevel"
             (toogleNode)="toogleNode.emit($event)"
             (selectNode)="selectNode.emit($event)">
          </st-node-tree>

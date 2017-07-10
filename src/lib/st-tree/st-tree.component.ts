@@ -56,6 +56,8 @@ export class StTreeComponent implements OnInit, OnChanges {
    @Input() qaTag: string = '';
    /** @Input {StNodeTree} tree Tree structure */
    @Input() @StRequired() tree: StNodeTree;
+   /** @Input {number} maxLevel Maximum level of child nodes to display */
+   @Input() maxLevel: number;
 
    @Input() expandFatherBranch: boolean = true;
    @Input() collapseChildsBranch: boolean = true;
@@ -135,7 +137,6 @@ export class StTreeComponent implements OnInit, OnChanges {
 
    private getFatherNode(tree: StNodeTree, path: string, levelsToUp: number): StNodeTreeChange {
       let pathParts: string[] = path.split('.');
-
       if (pathParts && pathParts.length >= levelsToUp) {
          pathParts = pathParts.slice(0, pathParts.length - levelsToUp);
          if (pathParts.length === 0) {

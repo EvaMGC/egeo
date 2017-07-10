@@ -92,6 +92,7 @@ describe('StTreeComponent', () => {
 
       expect(comp.fatherNode).toEqual([]);
       expect(comp.qaTag).toEqual('');
+      expect(comp.maxLevel).toBeUndefined();
 
       // Tree and mockTree are the same, internalTree its equal but not the same
       expect(comp.internalTree).toEqual(mockTree);
