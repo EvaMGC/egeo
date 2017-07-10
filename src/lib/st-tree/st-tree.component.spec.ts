@@ -443,4 +443,21 @@ describe('StTreeComponent', () => {
       comp.toogleNode.unsubscribe();
    });
 
+   it('should update when internal node update event', () => {
+       let node: StNodeTree = { name: 'name', icon: '', expanded: true};
+      comp.tree = { name: 'root', icon: '', expanded: true, children: [node] };
+      comp.collapseChildsBranch = false;
+      comp.expandFatherBranch = false;
+      fixture.detectChanges();
+
+      let nodeToSend: StNodeTree = _cloneDeep(comp.internalTree.children[0]);
+      let newName: string = 'New node name';
+      nodeToSend.name = newName;
+      let change: StNodeTreeChange = { node: nodeToSend, path: 'children[0]' };
+
+      expect(comp.internalTree.children[0].name).toEqual(node.name);
+      comp.onInternalNodeUpdate(change);
+
+      expect(comp.internalTree.children[0].name).toEqual(newName);
+   });
 });

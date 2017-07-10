@@ -30,6 +30,7 @@ import {
    set as _set,
    isEqual as _isEqual
 } from 'lodash';
+import { Observable } from 'rxjs/Observable';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { StNodeTree, StNodeTreeChange } from './st-tree.model';
@@ -62,6 +63,8 @@ export class StTreeComponent implements OnInit, OnChanges {
    @Input() expandFatherBranch: boolean = true;
    @Input() collapseChildsBranch: boolean = true;
 
+   @Input() changeStreamNotification: Observable<StNodeTreeChange>;
+
    @Output() toogleNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
    @Output() selectNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
 
@@ -79,7 +82,7 @@ export class StTreeComponent implements OnInit, OnChanges {
    }
 
    ngOnChanges(changes: SimpleChanges): void {
-      if (changes && changes.tree && !changes.tree.firstChange) {
+      if (changes && changes.tree && !changes.tree.firstChange && !_isEqual(changes.tree.currentValue, changes.tree.previousValue)) {
          if (!_isEqual(this.internalTree, changes.tree.currentValue)) {
             this.internalTree = this.createTreeCopy(changes.tree.currentValue);
             this.checkTreeExpand();
@@ -95,6 +98,10 @@ export class StTreeComponent implements OnInit, OnChanges {
 
    onSelectNode(node: StNodeTreeChange): void {
       this.selectNode.emit(node);
+   }
+
+   onInternalNodeUpdate(update: StNodeTreeChange): void {
+      _set(this.internalTree, update.path, update.node);
    }
 
    private checkTreeExpand(): void {
