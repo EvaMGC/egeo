@@ -19,10 +19,12 @@
   <st-tree
      [tree]="tree"
      [maxLevel]="maxLevel"
+     [isRoot]="root"
      (toogleNode)="onToogleNode($event)"
      (selectNode)="onSelectNode($event)"
+     (navigatePrevious)="onNavigatePrevious($event)"
      [changeStreamNotification]="notificationChangeStream">
   </st-tree>
-  <button (click)="onClick()">Generate Long Tree</button>
+  <button (click)="onGenerateTree()">Generate Long Tree</button>
   <button (click)="onUpdateNode()">Update tree node</button>
 </section>

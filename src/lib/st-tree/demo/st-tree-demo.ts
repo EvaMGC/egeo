@@ -69,6 +69,7 @@ export class StTreeDemoComponent {
       ]
    };
    public maxLevel: number = 3;
+   public root: boolean = false;
 
    public notificationChangeStream: Observable<StNodeTreeChange>;
    private subject: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
@@ -85,10 +86,14 @@ export class StTreeDemoComponent {
    }
 
    onSelectNode(nodeChange: StNodeTreeChange): void {
-      console.log('selecte node', nodeChange);
+      console.log('select node', nodeChange);
    }
 
-   onClick(): void {
+   onNavigatePrevious(nodeChange: StNodeTreeChange): void {
+      console.log('navigate previous', nodeChange);
+   }
+
+   onGenerateTree(): void {
       this.tree = this.generateTree(10, 50, 'Node', 0);
    }
 

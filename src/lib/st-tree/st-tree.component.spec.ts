@@ -93,6 +93,7 @@ describe('StTreeComponent', () => {
       expect(comp.fatherNode).toEqual([]);
       expect(comp.qaTag).toEqual('');
       expect(comp.maxLevel).toBeUndefined();
+      expect(comp.isRoot).toBeTruthy();
 
       // Tree and mockTree are the same, internalTree its equal but not the same
       expect(comp.internalTree).toEqual(mockTree);
@@ -444,7 +445,7 @@ describe('StTreeComponent', () => {
    });
 
    it('should update when internal node update event', () => {
-       let node: StNodeTree = { name: 'name', icon: '', expanded: true};
+      let node: StNodeTree = { name: 'name', icon: '', expanded: true};
       comp.tree = { name: 'root', icon: '', expanded: true, children: [node] };
       comp.collapseChildsBranch = false;
       comp.expandFatherBranch = false;
@@ -460,4 +461,22 @@ describe('StTreeComponent', () => {
 
       expect(comp.internalTree.children[0].name).toEqual(newName);
    });
+
+   it('should emit a navigate previous event', () => {
+      let el: DebugElement;
+      let responseFunction = jasmine.createSpy('response');
+      comp.tree = mockTree;
+      comp.isRoot = false;
+      comp.navigatePrevious.subscribe(responseFunction);
+      fixture.detectChanges();
+
+      el = fixture.debugElement.query(By.css('st-tree-node-expand'));
+      el.nativeElement.dispatchEvent(new Event('click'));
+
+      expect(responseFunction).toHaveBeenCalled();
+      expect(responseFunction).toHaveBeenCalledTimes(1);
+
+      comp.navigatePrevious.unsubscribe();
+   });
+
 });
