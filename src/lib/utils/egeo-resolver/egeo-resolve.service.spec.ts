@@ -181,6 +181,7 @@ let expectedTranslatedKeysWhenServiceFail: TestStTranslated[] = [
 ];
 
 let translateEmpty: TestStTranslateService[] = [{ name: 'Name1', country: { key: '', translate: true } }];
+let translateWithoutKeys: TestStTranslated[]  = [{ name: 'Name1', country: 'EEUU' }];
 let expectedTranslateEmptyResponse: TestStTranslated[] = [{ name: 'Name1', country: '' }];
 
 
@@ -264,5 +265,13 @@ describe('EgeoResolveService', () => {
       service.translate(translateEmpty, translateServiceEmpty).subscribe(responseFunction);
       expect(responseFunction).toHaveBeenCalled();
       expect(responseFunction).toHaveBeenCalledWith(expectedTranslateEmptyResponse);
+   });
+
+   it('should return the same if not exists translations', () => {
+      let responseFunction = jasmine.createSpy('response');
+
+      service.translate(translateWithoutKeys, translateServiceEmpty).subscribe(responseFunction);
+      expect(responseFunction).toHaveBeenCalled();
+      expect(responseFunction).toHaveBeenCalledWith(translateWithoutKeys);
    });
 });
