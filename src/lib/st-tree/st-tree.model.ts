@@ -18,6 +18,7 @@ export class StNodeTree {
    icon: string;
    children?: StNodeTree[];
    expanded?: boolean;
+   selected?: boolean;
 }
 
 export class StNodeTreeChange {

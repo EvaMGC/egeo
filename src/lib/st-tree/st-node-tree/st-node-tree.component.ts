@@ -54,6 +54,7 @@ export class StNodeTreeComponent implements OnInit, OnChanges, OnDestroy {
    @Input() pos: number;
    @Input() maxLevel: number;
    @Input() changeStreamNotification: Observable<StNodeTreeChange>;
+   @Input() selectedPath: string;
 
    @Output() internalNodeUpdate: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
    @Output() toogleNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
@@ -73,7 +74,9 @@ export class StNodeTreeComponent implements OnInit, OnChanges, OnDestroy {
    ngOnChanges(changes: SimpleChanges): void {
       if (changes && changes.father) {
          this.actualPath = this.buildActualPath(changes.father.currentValue, this.pos);
+         this._cd.markForCheck();
       }
+
       if (changes && changes.pos) {
          this.actualPath = this.buildActualPath(this.father, changes.pos.currentValue);
       }
@@ -101,9 +104,14 @@ export class StNodeTreeComponent implements OnInit, OnChanges, OnDestroy {
       return this.maxLevel !== undefined && this.father && this.father.length >= this.maxLevel;
    }
 
+   isNodeSelected(): boolean {
+      return (this.selectedPath && this.getPath() === this.selectedPath) || this.node.selected;
+   }
+
    onClickForSelect(event: Event): void {
       event.stopImmediatePropagation();
       this.node.expanded = !this.node.expanded;
+      this.node.selected = true;
       let changeEvent: StNodeTreeChange = { node: this.node, path: this.getPath() };
       this.toogleNode.emit(changeEvent);
       this.selectNode.emit(changeEvent);

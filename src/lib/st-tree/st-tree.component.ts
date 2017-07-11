@@ -73,6 +73,7 @@ export class StTreeComponent implements OnInit, OnChanges {
 
    public internalTree: StNodeTree;
    public fatherNode: number[] = [];
+   public selectedPath: string = '';
 
    constructor(
       private _resolver: EgeoResolveService,
@@ -99,8 +100,10 @@ export class StTreeComponent implements OnInit, OnChanges {
       this.toogleNode.emit(nodeChange);
    }
 
-   onSelectNode(node: StNodeTreeChange): void {
-      this.selectNode.emit(node);
+   onSelectNode(nodeChange: StNodeTreeChange): void {
+      this.selectNode.emit(nodeChange);
+      this.selectedPath = nodeChange.path;
+      this._cd.markForCheck();
    }
 
    onInternalNodeUpdate(update: StNodeTreeChange): void {
