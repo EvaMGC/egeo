@@ -13,23 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
+import {TranslateableElement} from '../utils/egeo-resolver/egeo-resolve-model';
 
 export interface StInputError {
-  generic?: string;
-  required?: string;
-  minLength?: string;
-  maxLength?: string;
-  type?: string;
-  pattern?: string;
+   generic?: string;
+   required?: string;
+   minLength?: string;
+   maxLength?: string;
+   min?: string;
+   max?: string;
+   type?: string;
+   pattern?: string;
 }
 
 export interface StInputErrorSchema {
-  generic?: TranslateableElement;
-  required?: TranslateableElement;
-  minLength?: TranslateableElement;
-  maxLength?: TranslateableElement;
-  type?: TranslateableElement;
-  pattern?: TranslateableElement;
+   generic?: TranslateableElement;
+   required?: TranslateableElement;
+   minLength?: TranslateableElement;
+   maxLength?: TranslateableElement;
+   min?: TranslateableElement;
+   max?: TranslateableElement;
+   type?: TranslateableElement;
+   pattern?: TranslateableElement;
 }
 

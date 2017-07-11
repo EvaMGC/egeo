@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, DebugElement, OnInit } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -50,10 +50,22 @@ describe('StInputComponent', () => {
       expect(input.getAttribute('placeholder')).toContain('Placeholder sample');
    });
 
-   it('Input should be a password Input', () => {
+   it('Input can be a password Input', () => {
       component.fieldType = 'password';
       fixture.detectChanges();
       expect(input.getAttribute('type')).toContain('password');
+   });
+
+   it('Input can be a text Input', () => {
+      component.fieldType = 'text';
+      fixture.detectChanges();
+      expect(input.getAttribute('type')).toContain('text');
+   });
+
+   it('Input can be a number Input', () => {
+      component.fieldType = 'number';
+      fixture.detectChanges();
+      expect(input.getAttribute('type')).toContain('number');
    });
 
    it('Input should be disabled', () => {
@@ -80,6 +92,7 @@ describe('StInputComponent', () => {
       input.focus();
       expect(component.focus).toBe(true);
    });
+
 });
 
 @Component({
@@ -106,6 +119,8 @@ class FormReactiveComponent implements OnInit {
    public reactiveForm: FormGroup;
    public minLength: number = 3;
    public maxLength: number = 20;
+   public min: number = 10;
+   public max: number = 100;
    public pattern: string = '[a-z]*';
    public model: any = {
       name: 'Egeo',
@@ -118,6 +133,8 @@ class FormReactiveComponent implements OnInit {
       required: 'This field is required',
       minLength: 'The field min length is: ' + this.minLength,
       maxLength: 'The field max length is: ' + this.maxLength,
+      min: 'The number has to be higher than: ' + this.min,
+      max: 'The number has to be minor than: ' + this.max,
       pattern: 'Invalid value'
    };
 

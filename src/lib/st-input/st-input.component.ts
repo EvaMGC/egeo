@@ -27,18 +27,21 @@ import {
    SimpleChanges,
    ViewChildren
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import {
+   ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators,
+   ValidatorFn
+} from '@angular/forms';
+import {Subscription} from 'rxjs/Subscription';
 
-import { StInputError } from './st-input.error.model';
+import {StInputError} from './st-input.error.model';
 
 @Component({
    selector: 'st-input',
    templateUrl: './st-input.component.html',
    styleUrls: ['./st-input.component.scss'],
    providers: [
-      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StInputComponent), multi: true },
-      { provide: NG_VALIDATORS, useExisting: forwardRef(() => StInputComponent), multi: true }
+      {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StInputComponent), multi: true},
+      {provide: NG_VALIDATORS, useExisting: forwardRef(() => StInputComponent), multi: true}
    ],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -48,12 +51,14 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    @Input() placeholder: string = '';
    @Input() name: string = '';
    @Input() label: string = '';
-   @Input() fieldType: 'string' | 'number' | 'password' = 'string';
+   @Input() fieldType: 'text' | 'number' | 'password' = 'text';
    @Input() errors: StInputError;
    @Input() qaTag: string;
    @Input() forceValidations: boolean = false;
    @Input() contextualHelp: string;
    @Input() maxLength: number;
+   @Input() min: number;
+   @Input() max: number;
    @Input() isFocused: boolean = false;
    @Input() readonly: boolean = false;
 
@@ -62,7 +67,6 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    public isDisabled: boolean = false; // To check disable
    public focus: boolean = false;
    public internalControl: FormControl;
-   public internalType: string = 'text';
    public errorMessage: string = undefined;
 
    private sub: Subscription;
@@ -91,7 +95,6 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
 
    ngOnInit(): void {
       this.internalControl = new FormControl(this.internalInputModel);
-      this.internalType = this.fieldType === 'password' ? 'password' : 'text';
       this.valueChangeSub = this.internalControl.valueChanges.subscribe((value) => this.onChange(value));
    }
 
@@ -113,8 +116,8 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
 
    // When value is received from outside
    writeValue(value: any): void {
-      this.internalControl.setValue(value);
       this.internalInputModel = value;
+      this.internalControl.setValue(value);
    }
 
    // Registry the change function to propagate internal model changes
@@ -185,6 +188,12 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
       }
       if (errors.hasOwnProperty('pattern')) {
          return this.errors.pattern || this.errors.generic || '';
+      }
+      if (errors.hasOwnProperty('min')) {
+         return this.errors.min || this.errors.generic || '';
+      }
+      if (errors.hasOwnProperty('max')) {
+         return this.errors.max || this.errors.generic || '';
       }
       return '';
    }
