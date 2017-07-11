@@ -16,15 +16,136 @@
 
 -->
 <section class="container-liquid">
-  <st-tree
-     [tree]="tree"
-     [maxLevel]="maxLevel"
-     [isRoot]="root"
-     (toogleNode)="onToogleNode($event)"
-     (selectNode)="onSelectNode($event)"
-     (navigatePrevious)="onNavigatePrevious($event)"
-     [changeStreamNotification]="notificationChangeStream">
-  </st-tree>
-  <button (click)="onGenerateTree()">Generate Long Tree</button>
-  <button (click)="onUpdateNode()">Update tree node</button>
+   <div class="row">
+      <div class="col-md-12 tree-background-A">
+         <h2>Root Tree</h2>
+         <div class="tree-container">
+            <st-tree
+               [tree]="treeA"
+               [maxLevel]="treeModel.max"
+               [isRoot]="true"
+               (toogleNode)="onToogleNode($event, treeA)"
+               (selectNode)="onSelectNode($event, treeA)"
+               (navigatePrevious)="onNavigatePrevious($event)"
+               [changeStreamNotification]="notificationChangeStream">
+            </st-tree>
+         </div>
+      </div>
+
+      <div class="col-md-12 tree-background-B">
+         <h2>Partial Tree</h2>
+         <div class="tree-container">
+            <st-tree
+               [tree]="treeB"
+               [maxLevel]="treeModel.max"
+               [isRoot]="false"
+               (toogleNode)="onToogleNode($event, treeB)"
+               (selectNode)="onSelectNode($event, treeB)"
+               (navigatePrevious)="onNavigatePrevious($event)"
+               [changeStreamNotification]="notificationChangeStream">
+            </st-tree>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-12 tree-background-B">
+            <form [formGroup]="treeForm" novalidate autocomplete="off" (ngSubmit)="onGenerateTrees()">
+               <h2>Generate Trees</h2>
+               <div class="row">
+                  <div class="col-md-12" style="margin-bottom: 10px;">
+                     <st-input
+                        label="Levels"
+                        placeholder="Number of tree levels"
+                        [forceValidations]="forceTreeValidations"
+                        [errors]="errors"
+                        fieldType="number"
+                        name="levels"
+                        qaTag="levels-input"
+                        contextualHelp="Number of levels of the tree to generate"
+                        formControlName="levels">
+                     </st-input>
+                  </div>
+                  <div class="col-md-12" style="margin-bottom: 10px;">
+                     <st-input
+                        label="Nodes"
+                        placeholder="Number of nodes"
+                        [forceValidations]="forceTreeValidations"
+                        [errors]="errors"
+                        fieldType="number"
+                        name="nodes"
+                        qaTag="nodes-input"
+                        contextualHelp="Number of nodes of the tree to generate"
+                        formControlName="nodes">
+                     </st-input>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12" style="margin-bottom: 10px;">
+                     <st-input
+                        label="Max Level"
+                        placeholder="Maximum tree level"
+                        [forceValidations]="forceTreeValidations"
+                        [errors]="errors"
+                        fieldType="number"
+                        name="max"
+                        qaTag="max-input"
+                        contextualHelp="Maximum of tree levels to display"
+                        formControlName="max">
+                     </st-input>
+                  </div>
+                  <div class="col-md-12" style="margin-bottom: 10px;">
+                     <st-input
+                        label="Node name"
+                        placeholder="Name of nodes"
+                        [forceValidations]="forceTreeValidations"
+                        [errors]="errors"
+                        fieldType="string"
+                        name="name"
+                        qaTag="name-input"
+                        contextualHelp="Name of nodes of the tree to generate"
+                        formControlName="name">
+                     </st-input>
+                  </div>
+               </div>
+               <st-button inputType="submit" text="Generate" qaTag="button-submit"></st-button>
+         </form>
+      </div>
+
+      <div class="col-md-12 tree-background-A">
+            <form [formGroup]="nodeForm" novalidate autocomplete="off" (ngSubmit)="onUpdateNodes()">
+               <h2>Update Nodes</h2>
+               <div class="row">
+                  <div class="col-md-12" style="margin-bottom: 10px;">
+                     <st-input
+                        label="New name"
+                        placeholder="Node name"
+                        [forceValidations]="forceNodeValidations"
+                        [errors]="errors"
+                        fieldType="string"
+                        name="name"
+                        qaTag="node-name-input"
+                        contextualHelp="Name to update in the node tree"
+                        formControlName="name">
+                     </st-input>
+                  </div>
+                  <div class="col-md-12" style="margin-bottom: 10px;">
+                     <st-input
+                        label="Node path"
+                        placeholder="Path of node"
+                        [forceValidations]="forceNodeValidations"
+                        [errors]="errors"
+                        fieldType="string"
+                        name="path"
+                        qaTag="path-input"
+                        contextualHelp="Path of node to update in the trees"
+                        formControlName="path">
+                     </st-input>
+                  </div>
+               </div>
+               <st-button inputType="submit" text="Update" qaTag="button-submit"></st-button>
+         </form>
+      </div>
+   </div>
+
 </section>
