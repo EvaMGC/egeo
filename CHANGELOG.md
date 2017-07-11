@@ -7,6 +7,7 @@
 * Fix styles on st-input
 * Fix styles on st-vertical-tabs
 * Fix styles on st-horizontal-tabs
+* Add number inputs and min/max validations
 
 **New features:**
 
