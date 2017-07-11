@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {TranslateableElement} from '../utils/egeo-resolver/egeo-resolve-model';
+import { NgModule, Type } from '@angular/core';
 
-export interface StInputError {
-   generic?: string;
-   required?: string;
-   minLength?: string;
-   maxLength?: string;
-   min?: string;
-   max?: string;
-   type?: string;
-   pattern?: string;
+import { StMinValidator } from  './st-min-validator/st-min-validator';
+import { StMaxValidator } from  './st-max-validator/st-max-validator';
+
+
+export const SHARED_FORM_DIRECTIVES: Type<any>[] = [
+   StMinValidator,
+   StMaxValidator
+];
+
+
+@NgModule({
+   declarations: SHARED_FORM_DIRECTIVES,
+   exports: SHARED_FORM_DIRECTIVES
+})
+
+export class StFormDirectiveModule {
 }
-
-export interface StInputErrorSchema {
-   generic?: TranslateableElement;
-   required?: TranslateableElement;
-   minLength?: TranslateableElement;
-   maxLength?: TranslateableElement;
-   min?: TranslateableElement;
-   max?: TranslateableElement;
-   type?: TranslateableElement;
-   pattern?: TranslateableElement;
-}
-
