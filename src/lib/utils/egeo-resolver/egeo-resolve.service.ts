@@ -25,6 +25,7 @@ import {
    omit as _omit
 } from 'lodash';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 import 'rxjs/add/operator/map';
 
@@ -43,9 +44,17 @@ export class EgeoResolveService {
 
    translate(object: any, translateService: TranslateServiceType): Observable<any> {
       let keys: EgeoResolverKeys[] = this.getKeys(object, 'translate'); // Get keys
-      let toTranslate: string[] = this.extractTranslationKeys(keys); // Extract keys for translate service
-      return translateService.get(toTranslate) // return object translation
-         .map((translation) => this.remapObjectWithTranslations(translation, keys, object));
+      // If not found translateable elements, return the same because if not, translate service broke on try to translate an empty array.
+      if (keys && keys.length > 0) {
+         let toTranslate: string[] = this.extractTranslationKeys(keys); // Extract keys for translate service
+         return translateService.get(toTranslate) // return object translation
+            .map((translation) => this.remapObjectWithTranslations(translation, keys, object));
+      } else {
+         return Observable.create((observer: Observer<any>) => {
+            observer.next(object);
+            observer.complete();
+         });
+      }
    }
 
    translateArrayOfKeys(keys: string[], translateService: TranslateServiceType): Observable<string[]> {

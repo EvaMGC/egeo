@@ -14,7 +14,13 @@
 * New component st-tree
 * Add number inputs and min/max validations
 
-## 2.4.2 (July 5, 2017)
+## 2.4.3 (July 11, 2017)
+
+**Fixed bugs:**
+
+* Fix when resolve not found any translateable element and pass empty array to translate
+
+## 2.4.2 (July 05, 2017)
 
 **Fixed bugs:**
 
