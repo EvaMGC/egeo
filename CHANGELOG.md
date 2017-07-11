@@ -7,12 +7,12 @@
 * Fix styles on st-input
 * Fix styles on st-vertical-tabs
 * Fix styles on st-horizontal-tabs
-* Add number inputs and min/max validations
 
 **New features:**
 
 * New component st-items-list
 * New component st-tree
+* Add number inputs and min/max validations
 
 ## 2.4.2 (July 5, 2017)
 
