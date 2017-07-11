@@ -23,6 +23,7 @@
    margin-bottom: 4px;
 
    & .filetype-icon {
+      display: inherit;
       margin-left: 22px;
    }
 
@@ -36,6 +37,13 @@
 
    & .node-name {
       margin-left: 5px;
+      white-space: nowrap;
+      width: 100%;
+   }
+
+   & .node-icon {
+      margin-top: 3px;
+      margin-right: 4px;
    }
 }
 

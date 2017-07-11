@@ -15,17 +15,23 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StDemoGeneratorModule } from '../../utils/demo-generator/demo-generator.module';
 import { StTreeModule } from '../st-tree.module';
 import { StTreeComponent } from '../st-tree.component';
 import { StTreeDemoComponent } from './st-tree-demo';
-
+import { StButtonModule } from '../../st-button/st-button.module';
+import { StInputModule } from '../../st-input/st-input.module';
 
 @NgModule({
    imports: [
       CommonModule,
       StTreeModule,
+      FormsModule,
+      ReactiveFormsModule,
+      StButtonModule,
+      StInputModule,
       StDemoGeneratorModule.withComponents({ components: [StTreeDemoComponent, StTreeComponent] })
    ],
    declarations: [StTreeDemoComponent]
