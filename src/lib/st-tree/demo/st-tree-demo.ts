@@ -68,11 +68,13 @@ export class StTreeDemoComponent {
          { name: 'folder D', icon: 'icon-folder' }
       ]
    };
+
    public maxLevel: number = 3;
    public root: boolean = false;
 
    public notificationChangeStream: Observable<StNodeTreeChange>;
    private subject: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+   private selectedPath: string;
 
    constructor() {
       this.notificationChangeStream = this.subject.asObservable();
@@ -86,7 +88,16 @@ export class StTreeDemoComponent {
    }
 
    onSelectNode(nodeChange: StNodeTreeChange): void {
-      console.log('select node', nodeChange);
+      console.log('selected node', nodeChange);
+      let node: StNodeTree;
+      if (this.selectedPath) {
+         node = _get<StNodeTree>(this.tree, this.selectedPath, this.tree);
+         node.selected = false;
+      }
+      this.selectedPath = nodeChange.path;
+      node = _get<StNodeTree>(this.tree, nodeChange.path, this.tree);
+      node.selected = true;
+      this.tree = _cloneDeep(this.tree);
    }
 
    onNavigatePrevious(nodeChange: StNodeTreeChange): void {

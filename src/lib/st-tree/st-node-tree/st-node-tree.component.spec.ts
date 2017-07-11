@@ -209,7 +209,7 @@ describe('StTreeComponent', () => {
          comp.node = { name: 'testNode', icon: '', expanded: false };
          fixture.detectChanges();
 
-         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+         let expectedResult = { name: 'testNode', icon: '', expanded: true, selected: true };
 
          comp.onClickForSelect(new Event('click'));
          expect(onToogleFunction).toHaveBeenCalled();
@@ -230,7 +230,7 @@ describe('StTreeComponent', () => {
          comp.node = { name: 'testNode', icon: '', expanded: false };
          fixture.detectChanges();
 
-         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+         let expectedResult = { name: 'testNode', icon: '', expanded: true, selected: true };
 
          comp.onClickForSelect(new Event('click'));
          expect(onToogleFunction).toHaveBeenCalled();
@@ -251,7 +251,7 @@ describe('StTreeComponent', () => {
          comp.node = { name: 'testNode', icon: '', expanded: false };
          fixture.detectChanges();
 
-         let expectedResult = { name: 'testNode', icon: '', expanded: true };
+         let expectedResult = { name: 'testNode', icon: '', expanded: true, selected: true };
 
          comp.onClickForSelect(new Event('click'));
          expect(onToogleFunction).toHaveBeenCalled();
@@ -317,6 +317,24 @@ describe('StTreeComponent', () => {
          fixture.detectChanges();
 
          expect(comp.node.name).toEqual('new value');
+      });
+
+      it('Select node changes selected property model', () => {
+         comp.father = [0, 1];
+         comp.pos = 4;
+         comp.node = mockTree;
+         comp.node.selected = true;
+         fixture.detectChanges();
+         expect(comp.isNodeSelected()).toBeTruthy();
+      });
+
+      it('Selected path is equal to received path', () => {
+         comp.father = [0, 1];
+         comp.pos = 4;
+         comp.node = mockTree;
+         comp.selectedPath = 'children[1].children[4]';
+         fixture.detectChanges();
+         expect(comp.isNodeSelected()).toBeTruthy();
       });
    });
 });
