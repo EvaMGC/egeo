@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface MenuOption {
-   route: string;
-   name: string;
-}
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-export const OPTIONS: MenuOption[] = [
-   { route: 'main', name: 'main' },
-   { route: 'alerts-demo', name: 'Alerts' },
-   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
-   { route: 'dropdown-demo', name: 'Dropdown' },
-   { route: 'combobox-demo', name: 'Combobox' },
-   { route: 'help-demo', name: 'help' },
-   { route: 'info-box-demo', name: 'info-box' },
-   { route: 'item-list-demo', name: 'item-list' },
-   { route: 'tip-demo', name: 'tip' },
-   { route: 'search-demo', name: 'Search' },
-   { route: 'tree-demo', name: 'Tree' }
-];
+import { StAlertBoxComponent } from './alert-box/st-alert-box.component';
+import { StAlertsComponent } from './st-alerts.component';
+
+@NgModule({
+   imports: [CommonModule],
+   declarations: [StAlertsComponent, StAlertBoxComponent],
+   exports: [StAlertsComponent]
+})
+export class StAlertsModule { }

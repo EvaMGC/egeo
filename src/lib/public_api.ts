@@ -47,6 +47,12 @@ export { StMaxValidator } from './directives/form/st-max-validator/st-max-valida
 
 /**************************** MODULES *************************************************/
 
+// Alerts
+export { StAlertsModule } from './st-alerts/st-alerts.module';
+export { StAlertLink, STALERT_SEVERITY } from './st-alerts/st-alerts.model';
+export { StAlertsService } from './st-alerts/st-alerts.service';
+export { StAlertsDemoModule } from './st-alerts/demo/st-alerts-demo.module';
+
 // Breadcrumb
 export { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 
