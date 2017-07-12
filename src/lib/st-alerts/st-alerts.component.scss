@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface MenuOption {
-   route: string;
-   name: string;
+.st-alert-box {
+   margin-top: 15px;
+   display: block;
 }
 
-export const OPTIONS: MenuOption[] = [
-   { route: 'main', name: 'main' },
-   { route: 'alerts-demo', name: 'Alerts' },
-   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
-   { route: 'dropdown-demo', name: 'Dropdown' },
-   { route: 'combobox-demo', name: 'Combobox' },
-   { route: 'help-demo', name: 'help' },
-   { route: 'info-box-demo', name: 'info-box' },
-   { route: 'item-list-demo', name: 'item-list' },
-   { route: 'tip-demo', name: 'tip' },
-   { route: 'search-demo', name: 'Search' },
-   { route: 'tree-demo', name: 'Tree' }
-];
+.st-alerts {
+   width: 288px;
+   position: fixed;
+   right: 15px;
+   top: 0;
+   z-index: 99999;
+}

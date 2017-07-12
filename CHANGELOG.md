@@ -12,6 +12,7 @@
 
 * New component st-items-list
 * New component st-tree
+* New component st-alerts
 * Add number inputs and min/max validations
 
 ## 2.4.3 (July 11, 2017)
