@@ -43,6 +43,11 @@ module.exports = function(config) {
             instrumentation: true
          },
          reports: {
+            'cobertura': {
+               'directory': 'target',
+               'subdirectory': '.',
+               'filename': 'coverage.xml'
+            },
             'text-summary': null,
             'html': './target/coverage/html',
             'json': './target/coverage',
