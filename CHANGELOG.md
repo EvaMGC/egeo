@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 (upcoming)
+
+* Pending changelog
+
 ## 2.5.0 (upcoming)
 
 **Fixed bugs:**
