@@ -2,7 +2,9 @@
 
 ## 3.0.0 (upcoming)
 
-* Pending changelog
+**Breaking changes:**
+
+* st-combobox renamed to st-select
 
 ## 2.5.0 (July 13, 2017)
 

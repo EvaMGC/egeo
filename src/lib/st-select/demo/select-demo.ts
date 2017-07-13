@@ -19,8 +19,8 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
 
 @Component({
-   selector: 'combobox-demo',
-   templateUrl: 'combobox-demo.html',
+   selector: 'select-demo',
+   templateUrl: 'select-demo.html',
    styles: [`
             p span {
                color: #999;
@@ -32,7 +32,7 @@ import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.inte
    `]
 })
 
-export class ComboboxDemoComponent {
+export class SelectDemoComponent {
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
 
    public options: StDropDownMenuItem[] = [];

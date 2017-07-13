@@ -62,10 +62,6 @@ export { StButtonModule } from './st-button/st-button.module';
 // Checkbox
 export { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 
-// Combobox
-export { StComboboxModule } from './st-combobox/st-combobox.module';
-export { StComboboxDemoModule } from './st-combobox/demo/combobox-demo.module';
-
 // Dropdown
 export { StDropdownModule } from './st-dropdown/st-dropdown.module';
 export { StDropdownDemoModule } from './st-dropdown/demo/st-dropdown-demo.module';
@@ -173,6 +169,10 @@ export {
 // Search
 export { StSearchModule } from './st-search/st-search.module';
 export { StSearchDemoModule } from './st-search/demo/st-search-demo.module';
+
+// Select
+export { StSelectModule } from './st-select/st-select.module';
+export { StSelectDemoModule } from './st-select/demo/select-demo.module';
 
 // Spinner
 export { StSpinnerModule } from './st-spinner/st-spinner.module';

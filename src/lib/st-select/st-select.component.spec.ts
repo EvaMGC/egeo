@@ -21,7 +21,7 @@ import { By } from '@angular/platform-browser';
 import { StFormLabelModule } from '../utils/egeo-form/st-form-label/st-form-label.module';
 import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-label-status.enum';
 import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
-import { StComboboxComponent } from './st-combobox.component';
+import { StSelectComponent } from './st-select.component';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 
@@ -39,49 +39,49 @@ let options: StDropDownMenuItem[] = [
    { label: 'label10', value: 'value10' }
 ];
 
-describe('StCombobox', () => {
+describe('StSelect', () => {
 
-   let component: StComboboxComponent;
-   let fixture: ComponentFixture<StComboboxComponent>;
+   let component: StSelectComponent;
+   let fixture: ComponentFixture<StSelectComponent>;
    let compiled: any;
    let de: DebugElement;
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, ReactiveFormsModule, StFormLabelModule, StDropdownMenuModule],
-         declarations: [StComboboxComponent]
+         declarations: [StSelectComponent]
       })
          .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
-      fixture = TestBed.createComponent(StComboboxComponent);
+      fixture = TestBed.createComponent(StSelectComponent);
       comboInput = fixture.debugElement.query(By.css('input')).nativeElement;
       component = fixture.componentInstance;
       compiled = fixture.debugElement.nativeElement;
 
    });
 
-   it('st-combobox should have a placeholder', () => {
+   it('st-select should have a placeholder', () => {
       let placeholder: string = 'Select option';
       component.placeholder = placeholder;
       fixture.detectChanges();
       expect(comboInput.placeholder).toEqual(placeholder);
    });
 
-   it('st-combobox should be init with options', () => {
+   it('st-select should be init with options', () => {
       component.options = options;
       fixture.detectChanges();
       expect(component.hasOptions()).toBeTruthy();
    });
 
-   it('st-combobox should be init by default with empty options', () => {
+   it('st-select should be init by default with empty options', () => {
       fixture.detectChanges();
       expect(component.hasOptions()).toBeFalsy();
       expect(component.options).toEqual([]);
    });
 
-   it('st-combobox should change disabled status', () => {
+   it('st-select should change disabled status', () => {
       fixture.detectChanges();
       expect(component.disabled).toBeFalsy();
 
@@ -94,7 +94,7 @@ describe('StCombobox', () => {
       expect(component.disabled).toBeFalsy();
    });
 
-   it('st-combobox should change value when come from outside', () => {
+   it('st-select should change value when come from outside', () => {
       fixture.detectChanges();
       expect(component.selectedValue).toBeUndefined();
 
@@ -104,7 +104,7 @@ describe('StCombobox', () => {
       expect(component.selectedValue).toEqual(options[2]);
    });
 
-   it('st-combobox should register onChange function', () => {
+   it('st-select should register onChange function', () => {
       fixture.detectChanges();
       expect(component.onChange).toBeUndefined();
 
@@ -117,7 +117,7 @@ describe('StCombobox', () => {
       expect(fakeFunction).toHaveBeenCalledWith(options[1]);
    });
 
-   it('st-combobox should register onTouched function', () => {
+   it('st-select should register onTouched function', () => {
       fixture.detectChanges();
       expect(component.onTouched).toBeUndefined();
 
@@ -129,7 +129,7 @@ describe('StCombobox', () => {
       expect(fakeFunction).toHaveBeenCalled();
    });
 
-   it('st-combobox should write value when update forceValidations input', () => {
+   it('st-select should write value when update forceValidations input', () => {
       spyOn(component, 'writeValue').and.callThrough();
       fixture.detectChanges();
       expect(component.writeValue).not.toHaveBeenCalled();
@@ -145,7 +145,7 @@ describe('StCombobox', () => {
       expect(component.writeValue).toHaveBeenCalled();
    });
 
-   it('st-combobox should change option and notify', () => {
+   it('st-select should change option and notify', () => {
       component.options = options;
       fixture.detectChanges();
 
@@ -170,7 +170,7 @@ describe('StCombobox', () => {
       expect(component.onTouched).toHaveBeenCalled();
    });
 
-   it('st-combobox should not open menu when is disabled', () => {
+   it('st-select should not open menu when is disabled', () => {
       spyOn(component, 'onClickButton').and.callThrough();
       component.options = options;
       fixture.detectChanges();
@@ -184,7 +184,7 @@ describe('StCombobox', () => {
       expect(component.isActive).toBeFalsy();
    });
 
-   it('st-combobox should open menu', () => {
+   it('st-select should open menu', () => {
       spyOn(component, 'onClickButton').and.callThrough();
       component.options = options;
       fixture.detectChanges();
@@ -197,7 +197,7 @@ describe('StCombobox', () => {
       expect(component.isActive).toBeTruthy();
    });
 
-   it('st-combobox should change between normal and disable StFormLabelStatus', () => {
+   it('st-select should change between normal and disable StFormLabelStatus', () => {
       component.options = options;
       fixture.detectChanges();
       expect(component.getLabelStatus()).toEqual(StFormLabelStatus.FOCUS);
@@ -207,7 +207,7 @@ describe('StCombobox', () => {
       expect(component.getLabelStatus()).toEqual(StFormLabelStatus.DISABLED);
    });
 
-   it('st-combobox should change between error and disable StFormLabelStatus', () => {
+   it('st-select should change between error and disable StFormLabelStatus', () => {
       spyOn(component, 'showError').and.returnValue(true);
       component.options = options;
       fixture.detectChanges();
@@ -220,7 +220,7 @@ describe('StCombobox', () => {
    });
 
 
-   it('st-combobox should return error only in certain cases', () => {
+   it('st-select should return error only in certain cases', () => {
       component.options = options;
 
       fixture.detectChanges();
@@ -247,7 +247,7 @@ describe('StCombobox', () => {
       expect(component.showError()).toBeFalsy();
    });
 
-   it('st-combobox should change classes when error', () => {
+   it('st-select should change classes when error', () => {
       fixture.detectChanges();
       expect(component.getBarType()).toEqual('st-input-normal-bar sth-input-normal-bar');
 
@@ -257,7 +257,7 @@ describe('StCombobox', () => {
       expect(component.getBarType()).toEqual('st-input-error-bar sth-input-error-bar');
    });
 
-   it('st-combobox should focus input', () => {
+   it('st-select should focus input', () => {
       component.errorMessage = 'error';
       component.forceValidations = true;
       fixture.detectChanges();
@@ -272,7 +272,7 @@ describe('StCombobox', () => {
       expect(component.showError()).toBeTruthy();
    });
 
-   it('st-combobox should validate with default message', () => {
+   it('st-select should validate with default message', () => {
       let control: FormControl = new FormControl(undefined, [Validators.required]);
       component.selectedValue = options[2];
       component.forceValidations = true;
@@ -312,7 +312,7 @@ describe('StCombobox', () => {
       expect(component.showError()).toBeTruthy();
    });
 
-   it('st-combobox should validate with custom message', () => {
+   it('st-select should validate with custom message', () => {
       let control: FormControl = new FormControl();
       component.selectedValue = options[2];
       component.forceValidations = true;

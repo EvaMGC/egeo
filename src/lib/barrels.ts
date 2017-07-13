@@ -18,7 +18,6 @@ import { StAlertsModule } from './st-alerts/st-alerts.module';
 import { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 import { StButtonModule } from './st-button/st-button.module';
 import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
-import { StComboboxModule } from './st-combobox/st-combobox.module';
 import { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 import { StDropdownModule } from './st-dropdown/st-dropdown.module';
 import { StFooterModule } from './st-footer/st-footer.module';
@@ -37,6 +36,7 @@ import { StPopModule } from './st-pop/st-pop.module';
 import { StRadioMenuModule } from './st-radio-menu/st-radio-menu.module';
 import { StRadioModule } from './st-radio/st-radio.module';
 import { StSearchModule } from './st-search/st-search.module';
+import { StSelectModule } from './st-select/st-select.module';
 import { StSpinnerModule } from './st-spinner/st-spinner.module';
 import { StSwitchModule } from './st-switch/st-switch.module';
 import { StTabBoxModule } from './st-tab-box/st-tab-box.module';
@@ -56,7 +56,6 @@ export const DECLARATIONS: any[] = [
    StBreadcrumbsModule,
    StButtonModule,
    StCheckboxModule,
-   StComboboxModule,
    StDropdownMenuModule,
    StDropdownModule,
    StFooterModule,
@@ -75,6 +74,7 @@ export const DECLARATIONS: any[] = [
    StRadioMenuModule,
    StRadioModule,
    StSearchModule,
+   StSelectModule,
    StSpinnerModule,
    StSwitchModule,
    StTabBoxModule,
