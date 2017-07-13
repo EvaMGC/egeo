@@ -39,16 +39,16 @@ import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-labe
 
 @StEgeo()
 @Component({
-   selector: 'st-combobox',
-   templateUrl: './st-combobox.component.html',
+   selector: 'st-select',
+   templateUrl: './st-select.component.html',
    providers: [
-      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StComboboxComponent), multi: true },
-      { provide: NG_VALIDATORS, useExisting: forwardRef(() => StComboboxComponent), multi: true }
+      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StSelectComponent), multi: true },
+      { provide: NG_VALIDATORS, useExisting: forwardRef(() => StSelectComponent), multi: true }
    ],
-   styleUrls: ['./st-combobox.component.scss'],
+   styleUrls: ['./st-select.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StComboboxComponent extends EventWindowManager implements ControlValueAccessor, OnDestroy, OnChanges {
+export class StSelectComponent extends EventWindowManager implements ControlValueAccessor, OnDestroy, OnChanges {
    @Input() public qaTag: string;
    @Input() public name: string = '';
    @Input() public options: StDropDownMenuItem[] = [];

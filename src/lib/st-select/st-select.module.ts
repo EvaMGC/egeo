@@ -14,25 +14,16 @@
  * limitations under the License.
  */
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { StDemoGeneratorModule } from '../../utils/demo-generator/demo-generator.module';
-import { StButtonModule } from '../../st-button/st-button.module';
-import { StComboboxModule } from '../st-combobox.module';
-import { StComboboxComponent } from '../st-combobox.component';
-import { ComboboxDemoComponent } from './combobox-demo';
-
+import { StFormLabelModule } from '../utils/egeo-form/st-form-label/st-form-label.module';
+import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
+import { StSelectComponent } from './st-select.component';
 
 @NgModule({
-   imports: [
-      CommonModule,
-      StComboboxModule,
-      FormsModule,
-      StButtonModule,
-      ReactiveFormsModule,
-      StDemoGeneratorModule.withComponents({ components: [ComboboxDemoComponent, StComboboxComponent] })
-   ],
-   declarations: [ComboboxDemoComponent]
+   imports: [CommonModule, FormsModule, ReactiveFormsModule, StFormLabelModule, StDropdownMenuModule],
+   declarations: [StSelectComponent],
+   exports: [StSelectComponent]
 })
-export class StComboboxDemoModule { }
+export class StSelectModule { }
