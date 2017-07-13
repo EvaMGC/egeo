@@ -1,28 +1,13 @@
-## TYPE
-- Bugfix, New component, New service, Utils, etc.
-
-## Description
-Add a description of your changes here.
-
 ### Documentation
-- [ ] Have explained API (Inputs, Outpus, Models, Functions, etc)
-- [ ] Have example running
-- [ ] Have example code (HTML, ts)
-- [ ] Have changelog.md updated
+- [ ] Add the issue in PR description
+- [ ] Have changelog updated
+- [ ] You fill the milestone value
+- [ ] You add some label
+- [ ] Have example running in demo app
 
 ### Code
-- [ ] Have 3 spaces indentation
-- [ ] Pass ts lint Task
-- [ ] Pass Sass lint Task
-- [ ] Have QA-tags
+- [ ] Pass Sass lint task
+- [ ] Have qaTags
 
 ### Tests
-- [ ] Have 70% Tests coverage
-
-### Other observations
-- Add other information you consider important
-
-### Post-review reminder
-- Remember reviewer approve changes inside the Files Changed tab (Review changes dropdown)
-- Squash commits
-- Release version in case of breaking changes and notify of all front
+- [ ] Have at least 70% tests coverage
