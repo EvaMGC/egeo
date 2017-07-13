@@ -18,13 +18,38 @@
 
 const path = require('path');
 
+function parseTestPattern(argv) {
+   var found = false;
+   var pattern = argv.map(function(v) {
+      if (found) {
+         return v;
+      }
+      if (v === '--') {
+         found = true;
+      }
+   }).
+   filter(function(a) {
+      return a
+   }).
+   join(' ');
+   return pattern ? ['--grep', pattern] : [];
+}
+
+var args = parseTestPattern(process.argv);
+
 module.exports = function(config) {
    config.set({
       basePath: path.join(__dirname, '..'),
-      files: [
-         { pattern: 'test/base.spec.ts' },
-         { pattern: 'src/lib/**/*.+(ts|html)' }
+      files: [{
+            pattern: 'test/base.spec.ts'
+         },
+         {
+            pattern: 'src/lib/**/*.+(ts|html)'
+         }
       ],
+      client: {
+         args: args
+      },
       frameworks: ['jasmine', 'karma-typescript'],
       karmaTypescriptConfig: {
          tsconfig: 'src/lib/tsconfig-test.json',
@@ -60,6 +85,9 @@ module.exports = function(config) {
          "test/**/*.ts": ["karma-typescript"]
       },
       reporters: ['mocha', 'karma-typescript'],
+      mochaReporter: {
+         ignoreSkipped: args && args.length > 0
+      },
 
       logLevel: config.LOG_INFO,
       autoWatch: false,

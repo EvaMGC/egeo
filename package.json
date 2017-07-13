@@ -46,7 +46,8 @@
       "angular2-virtual-scroll": "0.1.7",
       "lodash": "4.17.4",
       "popper.js": "1.9.9",
-      "reflect-metadata": "0.1.10"
+      "reflect-metadata": "0.1.10",
+      "tslib": "1.7.1"
    },
    "devDependencies": {
       "@angular/animations": "4.2.5",
