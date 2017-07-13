@@ -4,7 +4,7 @@
 
 * Pending changelog
 
-## 2.5.0 (upcoming)
+## 2.5.0 (July 13, 2017)
 
 **Fixed bugs:**
 
