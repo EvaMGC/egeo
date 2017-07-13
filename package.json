@@ -40,7 +40,7 @@
       "@angular/http": "~4.2.0",
       "@angular/platform-browser-dynamic": "~4.2.0",
       "@angular/router": "~4.2.0",
-      "@stratio/egeo-theme": "~0.12.0"
+      "@stratio/egeo-theme": "~0.13.0"
    },
    "dependencies": {
       "angular2-virtual-scroll": "0.1.7",
@@ -62,8 +62,8 @@
       "@angular/router": "4.2.5",
       "@angularclass/hmr": "1.2.2",
       "@angularclass/hmr-loader": "3.0.2",
-      "@stratio/egeo-theme": "0.12.0",
-      "@stratio/egeo-ui-base": "1.4.0",
+      "@stratio/egeo-theme": "0.13.0",
+      "@stratio/egeo-ui-base": "1.4.1",
       "@types/chalk": "0.4.31",
       "@types/fs-extra": "3.0.3",
       "@types/glob": "5.0.30",
