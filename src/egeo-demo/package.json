@@ -1,12 +1,12 @@
 {
-   "name": "@stratio/egeo",
+   "name": "@stratio/egeo-demo",
    "version": "0.0.0-PLACEHOLDER",
-   "description": "Stratio egeo library of components in Angular 2",
+   "description": "Stratio egeo demo library based in egeo library",
    "author": "Stratio",
-   "main": "./bundles/egeo.umd.js",
-   "module": "./@stratio/egeo.es5.js",
-   "es2015": "./@stratio/egeo.js",
-   "typings": "./egeo.d.ts",
+   "main": "./bundles/egeo-demo.umd.js",
+   "module": "./@stratio/egeo-demo.es5.js",
+   "es2015": "./@stratio/egeo-demo.js",
+   "typings": "./egeo-demo.d.ts",
    "repository": {
       "type": "git",
       "url": "https://github.com/Stratio/egeo.git"
@@ -14,6 +14,7 @@
    "keywords": [
       "angular",
       "egeo",
+      "egeo-demo",
       "stratio",
       "components",
       "rollup",
@@ -33,13 +34,7 @@
       "@angular/http": "~4.2.0",
       "@angular/platform-browser-dynamic": "~4.2.0",
       "@angular/router": "~4.2.0",
+      "@stratio/egeo": "~2.5.0",
       "@stratio/egeo-theme": "~0.13.0"
-   },
-   "dependencies": {
-      "angular2-virtual-scroll": "0.1.7",
-      "lodash": "4.17.4",
-      "popper.js": "1.9.9",
-      "reflect-metadata": "0.1.10",
-      "tslib": "1.7.1"
    }
 }

@@ -5,7 +5,8 @@
       "noUnusedParameters": false,
       "outDir": ".",
       "paths": {
-         "@stratio/egeo": ["./egeo"]
+         "@stratio/egeo": ["./egeo"],
+         "@stratio/egeo-demo": ["../egeo-demo/public_api"]
       }
    },
    "files": [

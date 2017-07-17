@@ -3,10 +3,9 @@ import { copySync } from 'fs-extra';
 import { join } from 'path';
 
 
-import { inlineResourcesForDirectory } from '../packaging/inline-resources';
-import { sequenceTask, execNodeTask, tsBuildTask, sassBuildTask, copyTask, buildAppTask } from '../util/task_helpers';
-import { buildConfig } from '../packaging/build-config';
+import { execNodeTask, tsBuildTask, copyTask, buildAppTask } from '../util/task_helpers';
 import { renameScssForCssInFolder } from '../util/rename-scss';
+import { buildConfig, sequenceTask, buildScssTask } from 'build-tools';
 
 const { outputDir, packagesDir, projectDir } = buildConfig;
 
@@ -23,7 +22,7 @@ const tsconfigFile = join(demoAppOut, 'tsconfig-aot.json');
 task('aot:deps', sequenceTask(
    'clean',
    'build:devapp',
-   'egeo:build-release',
+   ['egeo:build-release', 'egeo-demo:build-release'],
    'aot:copy-release'
 ));
 
@@ -31,6 +30,7 @@ task('aot:deps', sequenceTask(
 // copy the Egeo and CDK ESM output inside of the demo-app output.
 task('aot:copy-release', () => {
    copySync(join(releasesDir, 'egeo'), join(demoAppOut, 'egeo'));
+   copySync(join(releasesDir, 'egeo-demo'), join(demoAppOut, 'egeo-demo'));
 });
 
 /** Build the demo-app and a release to confirm that the library is AOT-compatible. */
@@ -48,7 +48,7 @@ const outDir = join(outputDir, 'packages', 'demo-app');
 const tsconfigPath = join(appDir, 'tsconfig-build-gulp.json');
 
 task(':build:devapp:ts', tsBuildTask(tsconfigPath));
-task(':build:devapp:scss', sassBuildTask(outDir, appDir));
+task(':build:devapp:scss', buildScssTask(outDir, appDir));
 task(':build:devapp:assets', copyTask(appDir, outDir));
 task(':build:devapp:rename', () => renameScssForCssInFolder(outDir));
 task(':build:compile-project', buildAppTask('devapp'));

@@ -16,13 +16,15 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+   StDemoGeneratorModule,
+   StButtonModule,
+   StAlertsModule,
+   StAlertsService
+} from '@stratio/egeo';
 
-import { StDemoGeneratorModule } from '../../utils/demo-generator/demo-generator.module';
-import { StButtonModule } from '../../st-button/st-button.module';
-import { StAlertsModule } from '../st-alerts.module';
-import { StAlertsComponent } from '../st-alerts.component';
-import { StAlertsService } from '../st-alerts.service';
 import { StAlertsDemoComponent } from './st-alerts-demo';
+
 
 
 @NgModule({
@@ -30,7 +32,7 @@ import { StAlertsDemoComponent } from './st-alerts-demo';
       CommonModule,
       StAlertsModule,
       StButtonModule,
-      StDemoGeneratorModule.withComponents({ components: [StAlertsDemoComponent, StAlertsComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StAlertsDemoComponent] })
    ],
    declarations: [StAlertsDemoComponent],
    providers: [StAlertsService]

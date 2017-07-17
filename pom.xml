@@ -116,7 +116,7 @@
                   </goals>
                   <phase>deploy</phase>
                   <configuration>
-                     <arguments>publish</arguments>
+                     <arguments>run-script release</arguments>
                   </configuration>
                </execution>
             </executions>

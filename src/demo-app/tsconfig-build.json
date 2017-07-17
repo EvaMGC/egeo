@@ -18,7 +18,8 @@
       "types": ["node", "popper.js", "lodash", "jasmine"],
       "baseUrl": ".",
       "paths": {
-         "@stratio/egeo": ["../lib/public_api"]
+         "@stratio/egeo": ["../lib/public_api"],
+         "@stratio/egeo-demo": ["../egeo-demo/public_api"]
       }
    },
    "files": [
