@@ -12,7 +12,7 @@
       "baseUrl": ".",
       "paths": {
          "@stratio/egeo": [
-            "./lib/public_api.ts"
+            "../lib/public_api.ts"
          ]
       }
    },

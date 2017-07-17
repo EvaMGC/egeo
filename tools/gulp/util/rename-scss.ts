@@ -12,13 +12,13 @@ export function renameScssForCssInFolder(folderPath: string): void {
 export function renameResources(filePath: string): void {
    let fileContent = readFileSync(filePath, 'utf-8');
 
-   fileContent = renameScssForCss(fileContent, filePath);
+   fileContent = renameScssForCss(fileContent);
    writeFileSync(filePath, fileContent, 'utf-8');
 }
 
 /** Inlines the external styles of Angular components for a specified source file. */
-function renameScssForCss(fileContent: string, filePath: string): string {
-   return fileContent.replace(/styleUrls:\s*(\[[\s\S]*?])/gm, (match, styleUrlsValue) => {
+function renameScssForCss(fileContent: string): string {
+   return fileContent.replace(/styleUrls:\s*(\[[\s\S]*?])/gm, (_match, styleUrlsValue) => {
       // The RegExp matches the array of external style files. This is a string right now and
       // can to be parsed using the `eval` method. The value looks like "['AAA.css', 'BBB.css']"
       const styleUrls = eval(styleUrlsValue) as string[];

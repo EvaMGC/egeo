@@ -3,7 +3,7 @@ import { task } from 'gulp';
 import { join } from 'path';
 import { statSync } from 'fs';
 
-import { buildConfig } from '../packaging/build-config';
+import { buildConfig } from 'build-tools';
 
 /** Path to the directory where all bundles are living. */
 const bundlesDir = join(buildConfig.outputDir, 'bundles');

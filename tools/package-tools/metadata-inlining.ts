@@ -11,7 +11,7 @@ export function inlineMetadataResources(metadata: any, componentResources: Map<s
    // Convert `templateUrl` to `template`
    if (metadata.templateUrl) {
       const fullResourcePath = componentResources.get(basename(metadata.templateUrl));
-      metadata.template = readFileSync(fullResourcePath, 'utf-8');
+      metadata.template = readFileSync(fullResourcePath!, 'utf-8');
       delete metadata.templateUrl;
    }
 
@@ -21,7 +21,7 @@ export function inlineMetadataResources(metadata: any, componentResources: Map<s
       for (let styleUrl of metadata.styleUrls) {
          styleUrl = styleUrl.replace('.scss', '.css');
          const fullResourcePath = componentResources.get(basename(styleUrl));
-         metadata.styles.push(readFileSync(fullResourcePath, 'utf-8'));
+         metadata.styles.push(readFileSync(fullResourcePath!, 'utf-8'));
       }
       delete metadata.styleUrls;
    }

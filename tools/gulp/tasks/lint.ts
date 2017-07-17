@@ -1,7 +1,7 @@
 import { task } from 'gulp';
 import { execNodeTask } from '../util/task_helpers';
 import { join } from 'path';
-import { buildConfig } from '../packaging/build-config';
+import { buildConfig } from 'build-tools';
 
 /** Glob that matches all SCSS or CSS files that should be linted. */
 const stylesGlob = '+(tools|src)/**/*.+(css|scss)';
@@ -22,7 +22,7 @@ task('madge', ['egeo:clean-build'], execNodeTask(
    'madge', ['--circular', egeoOutput])
 );
 
-/** Task to lint Angular Material's scss stylesheets. */
+/** Task to lint egeo scss stylesheets. */
 // TODO: REVIEW AND ACTIVATE
 // task('stylelint', execNodeTask(
 //    'stylelint', [stylesGlob, '--config', 'stylelint-config.json', '--syntax', 'scss']

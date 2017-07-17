@@ -37,11 +37,12 @@ const HMR = helpers.hasProcessFlag('hot');
 module.exports = function(options) {
    sourceFolder = helpers.root();
    tsconfigFile = helpers.root('tsconfig-build.json');
-   stylesFiles = [helpers.root('app'), helpers.root('../lib')];
+   stylesFiles = [helpers.root('app'), helpers.root('../lib'), helpers.root('../egeo-demo')];
    indexFile = helpers.root('index.html');
-   modules = [sourceFolder, helpers.root('../../node_modules'), helpers.root('../lib')];
+   modules = [sourceFolder, helpers.root('../../node_modules'), helpers.root('../lib'), helpers.root('../egeo-demo')];
    alias = {
-      '@stratio/egeo': helpers.root('../lib/public_api')
+      '@stratio/egeo': helpers.root('../lib/public_api'),
+      '@stratio/egeo-demo': helpers.root('../egeo-demo/public_api')
    };
    entry = {
       'polyfills': helpers.root('polyfills.ts'),

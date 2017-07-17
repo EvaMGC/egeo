@@ -15,8 +15,7 @@
  */
 import { Component } from '@angular/core';
 
-import { STALERT_SEVERITY } from '../st-alerts.model';
-import { StAlertsService } from '../st-alerts.service';
+import { STALERT_SEVERITY, StAlertsService } from '@stratio/egeo';
 
 @Component({
    selector: 'st-alerts-demo',

@@ -24,7 +24,7 @@ export const routes: Routes = [
          // Main redirection
          { path: '', redirectTo: 'main', pathMatch: 'full' },
          { path: 'main', component: MainComponent },
-         { path: 'alerts-demo', loadChildren: '@stratio/egeo#StAlertsDemoModule' },
+         { path: 'alerts-demo', loadChildren: '@stratio/egeo-demo#StAlertsDemoModule' },
          { path: 'dropdown-menu-demo', loadChildren: '@stratio/egeo#StDropdownMenuDemoModule' },
          { path: 'dropdown-demo', loadChildren: '@stratio/egeo#StDropdownDemoModule' },
          { path: 'select-demo', loadChildren: '@stratio/egeo#StSelectDemoModule' },
