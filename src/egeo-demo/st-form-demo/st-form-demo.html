@@ -15,8 +15,21 @@
     limitations under the License.
 
 -->
-<form [formGroup]="form" novalidate>
-   <st-form-field [schema]="property" *ngFor="let property of schema.properties | stObjectToArray" [formControl]="form.controls[property.key]" ngDefaultControl>
-   </st-form-field>
 
-</form>
+<st-form [schema]="jsonSchema" [form] = "form"></st-form>
+
+
+<st-input
+   label="Components"
+   placeholder="Number of components"
+   name="components-template"
+   fieldType="number"
+   qaTag="components-input-template"
+   required
+   [min]="5"
+   [max]="10"
+   contextualHelp="This is the contextual help of the components"
+></st-input>
+<br>
+<st-button subtypeClass="subtype3" text="SHOW FORM STATUS" (click)="showFormStatus()"></st-button>
+<br>

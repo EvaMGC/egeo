@@ -91,33 +91,43 @@ fdescribe('StFormComponent', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#requiredNumber');
                input.focus();
                input.value = '';
+               input.dispatchEvent(new Event('input'));
                input.blur();
-
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is required');
+               expect(<Element> (fixture.nativeElement.querySelector('#requiredNumber').parentNode.parentNode.querySelector('.st-input-error-layout span')).innerHTML).toBe('This field is required');
 
                input.value = '50';
+               input.dispatchEvent(new Event('input'));
+               input.blur();
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).not.toContain('This field is required');
+               expect(<Element> fixture.nativeElement.querySelector('#requiredNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
 
             it('min number validation', () => {
                let input: HTMLInputElement = fixture.nativeElement.querySelector('#minNumber');
                let minValue: number = schemaWithInputs.properties.minNumber.minimum;
+               console.log(minValue)
                input.focus();
                input.value = (minValue - 1).toString();
+               input.dispatchEvent(new Event('input'));
                input.blur();
 
                fixture.detectChanges();
-
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+               fixture.changeDetectorRef.markForCheck();
+console.log(fixture.nativeElement.querySelector('#minNumber').parentNode.parentNode)
+               expect(<Element> (fixture.nativeElement.querySelector('#minNumber').parentNode.parentNode.querySelector('.st-input-error-layout span')).innerHTML).toBe('This field is invalid');
 
                input.value = minValue.toString();
-               fixture.detectChanges();
+               input.dispatchEvent(new Event('input'));
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+               fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
+
+               expect(<Element> fixture.nativeElement.querySelector('#minNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
 
             it('max number validation', () => {
@@ -125,16 +135,22 @@ fdescribe('StFormComponent', () => {
                let maxNumber: number = schemaWithInputs.properties.maxNumber.maximum;
                input.focus();
                input.value = (maxNumber + 1).toString();
+               input.dispatchEvent(new Event('input'));
+
                input.blur();
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                expect(<Element> fixture.nativeElement.querySelector('#maxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
 
                input.value = maxNumber.toString();
-               fixture.detectChanges();
+               input.dispatchEvent(new Event('input'));
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+               fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
+
+               expect(<Element> fixture.nativeElement.querySelector('#maxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
 
 
@@ -153,17 +169,20 @@ fdescribe('StFormComponent', () => {
                   input.focus();
                   // minor than the minimum
                   input.value = (minValue - 1).toString();
+                  input.dispatchEvent(new Event('input'));
+
                   input.blur();
 
                   fixture.detectChanges();
+                  fixture.changeDetectorRef.markForCheck();
 
-                  expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                   expect(<Element> fixture.nativeElement.querySelector('#minAndMaxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
 
                   // equal to the minimum
                   input.value = minValue.toString();
                   fixture.detectChanges();
 
-                  expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                   expect(<Element> fixture.nativeElement.querySelector('#minAndMaxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
                });
 
                it('if minimum is not exclusive, when user puts a value equal to the minimum, input will be valid', () => {
@@ -176,8 +195,9 @@ fdescribe('StFormComponent', () => {
                   input.blur();
 
                   fixture.detectChanges();
+                  fixture.changeDetectorRef.markForCheck();
 
-                  expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+                  expect(<Element> fixture.nativeElement.querySelector('#minAndMaxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
                });
 
                it('if maximum is exclusive, when user puts a value equal or major than the maximum, validation error is displayed', () => {
@@ -187,14 +207,16 @@ fdescribe('StFormComponent', () => {
                   input.blur();
 
                   fixture.detectChanges();
+                  fixture.changeDetectorRef.markForCheck();
 
-                  expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                   expect(<Element> fixture.nativeElement.querySelector('#minAndMaxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
 
                   // equal to the maximum
                   input.value = maxValue.toString();
                   fixture.detectChanges();
+                  fixture.changeDetectorRef.markForCheck();
 
-                  expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                   expect(<Element> fixture.nativeElement.querySelector('#minAndMaxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
                });
 
                it('if maximum is not exclusive, when user puts a value equal to the maximum, input will be valid', () => {
@@ -207,8 +229,9 @@ fdescribe('StFormComponent', () => {
                   input.blur();
 
                   fixture.detectChanges();
+                  fixture.changeDetectorRef.markForCheck();
 
-                  expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+                  expect(<Element> fixture.nativeElement.querySelector('#minAndMaxNumber').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
                });
             });
          });
@@ -223,13 +246,15 @@ fdescribe('StFormComponent', () => {
                input.blur();
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is required');
+                expect(<Element> fixture.nativeElement.querySelector('#requiredText').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is required');
 
                input.value = fakeText;
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+               expect(<Element> fixture.nativeElement.querySelector('#requiredText').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
 
             it('min length validation', () => {
@@ -242,14 +267,16 @@ fdescribe('StFormComponent', () => {
                input.blur();
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                expect(<Element> fixture.nativeElement.querySelector('#minLengthText').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
 
                input.value = 'a'.repeat(minLength);
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+               expect(<Element> fixture.nativeElement.querySelector('#minLengthText').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
 
             it('max length validation', () => {
@@ -262,14 +289,16 @@ fdescribe('StFormComponent', () => {
                input.blur();
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                expect(<Element> fixture.nativeElement.querySelector('#maxLengthText').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
 
                input.value = 'a'.repeat(maxLength);
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+               expect(<Element> fixture.nativeElement.querySelector('#maxLengthText').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
 
             it('pattern validation', () => {
@@ -281,14 +310,16 @@ fdescribe('StFormComponent', () => {
                input.value = 'a';
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toContain('This field is invalid');
+                expect(<Element> fixture.nativeElement.querySelector('#url').parentNode.parentNode.querySelector('st-input-error-layout span')).toContain('This field is invalid');
 
                input.value = 'www.egeo.stratio.com';
 
                fixture.detectChanges();
+               fixture.changeDetectorRef.markForCheck();
 
-               expect((<Element> input.parentNode.parentNode).querySelector('.sth-input-container error')).toBeNull();
+               expect(<Element> fixture.nativeElement.querySelector('#url').parentNode.parentNode.querySelector('st-input-error-layout span')).toBeNull();
             });
          });
 

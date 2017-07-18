@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { StEgeo, StRequired } from '../decorators/require-decorators';
-import {FormGroup} from "@angular/forms";
+import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 
 @Component({
    selector: 'st-form',
@@ -24,11 +24,33 @@ import {FormGroup} from "@angular/forms";
 })
 
 @StEgeo()
-export class StFormComponent {
+export class StFormComponent implements OnInit {
    @Input() @StRequired() schema: any;
-   @Input() form: FormGroup;
+   @Input() form: FormGroup = new FormGroup({});
+   @Input() model: any = {};
 
    constructor() {
-      this.form = new FormGroup({});
+   }
+
+   ngOnInit() {
+      for (let propertyName in this.schema.properties) {
+         let property: any = this.schema.properties[propertyName];
+         let formControl: FormControl | FormArray;
+         if (property.type !== 'list') {
+            formControl = new FormControl({value: this.model[propertyName], required: this.isRequired(propertyName)});
+         }
+         else {
+            formControl = new FormArray([]);
+         }
+
+         this.form.addControl(propertyName, formControl);
+      }
+   }
+
+   isRequired(propertyName: string): boolean {
+      if (!propertyName || !this.schema.required) {
+         return false;
+      }
+      return this.schema.required.indexOf(propertyName) !== -1;
    }
 }

@@ -6,9 +6,10 @@ import {
 } from '@angular/core';
 
 import {
-   ControlValueAccessor
+   ControlValueAccessor, FormControl, Validator, Validators
 } from '@angular/forms';
-import {StEgeo, StRequired} from '../../decorators/require-decorators';
+import { StEgeo, StRequired } from '../../decorators/require-decorators';
+import { StInputError } from "../../st-input/st-input.error.model";
 
 @Component({
    selector: 'st-form-field',
@@ -20,14 +21,29 @@ import {StEgeo, StRequired} from '../../decorators/require-decorators';
 @StEgeo()
 export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() @StRequired() schema: any;
+   @Input() required: boolean = false;
+   @Input() formControl: FormControl = new FormControl('');
 
    public type: string;
+   public errorMessages: StInputError;
+
    private registeredOnChange: (_: any) => void;
 
-   constructor() {}
+   constructor() {
+   }
 
    ngOnInit(): void {
-      this.type = this.schema.value.type;
+      this.type = this.schema.value.type == 'string' ? 'text' : this.schema.value.type;
+      this.formControl.validator = Validators.compose([Validators.required]);
+      this.errorMessages = {
+         generic: 'Error',
+         required: 'This field is required',
+         minLength: 'The field min length is: ' + this.schema.value.minLength,
+         maxLength: 'The field max length is: ' + this.schema.value.maxLength,
+         min: 'The number has to be higher than: ' + this.schema.value.min,
+         max: 'The number has to be minor than: ' + this.schema.value.max,
+         pattern: 'Invalid value'
+      };
    }
 
    writeValue(value: any): void {
@@ -42,7 +58,6 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    onChange(value: any): void {
-
       if (this.registeredOnChange) {
          this.registeredOnChange(value);
       }
