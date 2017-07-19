@@ -6,8 +6,8 @@
           contextualHelp="{{schema.value.description}}"
           [formControl]="formControl"
           [errors]="errorMessages"
-          [min]="schema.value.minimum"
-          [max]="schema.value.maximum"
+          min="{{getMin()}}"
+          max="{{getMax()}}"
           [minlength]="schema.value.minLength"
           [maxlength]="schema.value.maxLength"
           [qaTag]="schema.key">

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 import {
-   ControlValueAccessor, FormControl, Validator, Validators
+   ControlValueAccessor, FormControl, Validators
 } from '@angular/forms';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StInputError } from "../../st-input/st-input.error.model";
@@ -38,10 +38,10 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       this.errorMessages = {
          generic: 'Error',
          required: 'This field is required',
-         minLength: 'The field min length is: ' + this.schema.value.minLength,
-         maxLength: 'The field max length is: ' + this.schema.value.maxLength,
-         min: 'The number has to be higher than: ' + this.schema.value.min,
-         max: 'The number has to be minor than: ' + this.schema.value.max,
+         minLength: 'The field min length is ' + this.schema.value.minLength,
+         maxLength: 'The field max length is ' + this.schema.value.maxLength,
+         min: 'The number has to be higher than ' + this.schema.value.minimum,
+         max: 'The number has to be minor than ' + this.schema.value.maximum,
          pattern: 'Invalid value'
       };
    }
@@ -55,6 +55,14 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    registerOnTouched(fn: () => void): void {
+   }
+
+   getMin(): number {
+      return  this.schema.value.exclusiveMinimum ? this.schema.value.minimum: this.schema.value.minimum
+   }
+
+   getMax(): number {
+      return  this.schema.value.exclusiveMaximum ? this.schema.value.maximum: this.schema.value.maximum
    }
 
    onChange(value: any): void {
