@@ -13,80 +13,85 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
-import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
-// Component
+import { RouterStub } from '../tests/router-stub';
+import { StWindowRefService } from '../utils/window-service';
 import { StHeaderComponent } from './st-header.component';
+import { StHeaderAppComponent } from './app/app';
+import { StHeaderMenuComponent } from './menu/menu';
+import { StHeaderMenuOptionComponent } from './menu-option/menu-option';
+import { StUserMenuComponent } from './user-menu/user-menu';
+import { StHeaderMenuOption, StHeaderUserMenu } from './st-header.model';
 
-// Other components
-import { AppNameComponent } from './app-name/app-name.component';
-import { NavigationLinksComponent } from './navigation-links/navigation-links.component';
-import { StHeaderBehaviorDirective } from './st-header-behavior/header-behavior.directive';
-import { SubmenuComponent } from './submenu/submenu.component';
-import { SubmenuPosDirective } from './submenu-pos/submenu-pos.directive';
-import { UserMenuComponent } from './user-menu/user-menu.component';
-
-// Models
-import { StHeaderUserMenuModel, StHeaderModel } from './st-header.model';
-
-
-@Component({
-   template: ''
-})
-class DummyComponent { }
 
 let comp: StHeaderComponent;
 let fixture: ComponentFixture<StHeaderComponent>;
 let de: DebugElement;
 
-let userMenu: StHeaderUserMenuModel = {
+let userMenu: StHeaderUserMenu = {
    userName: 'Antonio H.',
-   logoutLabel: 'Logout',
-   logoutPath: 'path'
+   options: [{ label: 'Logout', value: 'path' }]
 };
 
-let menu: StHeaderModel[] = [
+let menu: StHeaderMenuOption[] = [
    {
       icon: 'icon-head',
       label: 'IDENTITIES',
       link: '/navigation/header/test1',
       subMenus: [{
          label: 'USER',
-         link: '/navigation/header/test1/subtest1',
-         isActive: true
+         link: '/navigation/header/test1/subtest1'
       },
       {
          label: 'GROUP',
-         link: '/navigation/header/test1/subtest2',
-         isActive: true
-      }],
-      isActive: true
+         link: '/navigation/header/test1/subtest2'
+      }]
    },
    {
       icon: 'icon-puzzle',
       label: 'SERVICES',
       link: '/navigation/header/test2',
-      subMenus: [],
-      isActive: true
+      subMenus: []
    }
 ];
 
 let appName: string = 'Test App';
-let companyName: string = 'Stratio';
 
-describe('StHeader component', () => {
+class WindowMock {
+   innerWidth: number = 0;
+
+   setInnerWidth(newValue: number): void {
+      this.innerWidth = newValue;
+   }
+}
+let windowMock: WindowMock = new WindowMock();
+
+class WindowRefMock {
+ get nativeWindow (): any {
+        return windowMock;
+    }
+}
+
+describe('StHeaderComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [RouterTestingModule.withRoutes([
-            { path: 'navigation/header/test1/subtest1', component: DummyComponent },
-            { path: 'navigation/header/test1/subtest2', component: DummyComponent }
-         ])
+         declarations: [
+            StHeaderComponent,
+            StHeaderAppComponent,
+            StHeaderMenuComponent,
+            StHeaderMenuOptionComponent,
+            StUserMenuComponent
          ],
-         declarations: [AppNameComponent, NavigationLinksComponent, SubmenuComponent, SubmenuPosDirective, UserMenuComponent, StHeaderComponent, DummyComponent]
+         schemas: [NO_ERRORS_SCHEMA],
+         providers: [
+            { provide: Router, useClass: RouterStub },
+            { provide: StWindowRefService, useClass: WindowRefMock }
+         ]
       })
          .compileComponents();  // compile template and css
    }));
@@ -94,18 +99,80 @@ describe('StHeader component', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(StHeaderComponent);
       comp = fixture.componentInstance;
+   });
+
+   it('should be able to select a menu option', inject([Router], (router: Router) => {
+      windowMock.setInnerWidth(2000);
+      spyOn(router, 'navigate');
+      let responseFunction = jasmine.createSpy('response');
+      comp.selectMenu.subscribe(responseFunction);
 
       comp.appName = appName;
-      comp.companyName = companyName;
       comp.userMenu = userMenu;
       comp.menu = menu;
-   });
-   it('should be init correctly', () => {
-      spyOn(comp, 'ngOnInit');
       fixture.detectChanges();
 
-      expect(comp.ngOnInit).toHaveBeenCalled();
-      expect(comp.hasUserMenu()).toBeTruthy();
+      comp.onSelectMenu('test');
+      expect(router.navigate).toHaveBeenCalled();
+      expect(router.navigate).toHaveBeenCalledWith(['test']);
+      expect(responseFunction).toHaveBeenCalled();
+      expect(responseFunction).toHaveBeenCalledWith('test');
 
+      expect(comp.showMenuNames).toBeTruthy();
+      expect(comp.showUserName).toBeTruthy();
+
+      windowMock.setInnerWidth(1000);
+      window.dispatchEvent(new Event('resize'));
+      fixture.detectChanges();
+      expect(comp.showMenuNames).toBeTruthy();
+      expect(comp.showUserName).toBeTruthy();
+   }));
+
+   it(`should hide the user and menu labels when they doesn't fit on the screen`, () => {
+      windowMock.setInnerWidth(2000);
+      comp.appName = appName;
+      comp.userMenu = userMenu;
+      comp.menu = menu;
+      fixture.detectChanges();
+
+      expect(comp.showMenuNames).toBeTruthy();
+      expect(comp.showUserName).toBeTruthy();
+
+      windowMock.setInnerWidth(50);
+      comp.onResize();
+      fixture.detectChanges();
+
+      expect(comp.showMenuNames).toBeFalsy();
+      expect(comp.showUserName).toBeFalsy();
+   });
+
+   it('should only change showMenuNames value', () => {
+      windowMock.setInnerWidth(2000);
+      comp.appName = appName;
+      comp.userMenu = userMenu;
+      comp.menu = menu;
+      fixture.detectChanges();
+
+      comp.showMenuNames = false;
+      comp.onResize();
+      fixture.detectChanges();
+
+      expect(comp.showMenuNames).toBeTruthy();
+      expect(comp.showUserName).toBeTruthy();
+   });
+
+   it('should only change showUserName value', () => {
+      windowMock.setInnerWidth(2000);
+      comp.appName = appName;
+      comp.userMenu = userMenu;
+      comp.menu = menu;
+      fixture.detectChanges();
+
+      comp.showUserName = false;
+      comp.onResize();
+      fixture.detectChanges();
+
+      expect(comp.showMenuNames).toBeTruthy();
+      expect(comp.showUserName).toBeTruthy();
    });
 });

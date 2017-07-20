@@ -13,32 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonModule } from '@angular/common';
+
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import {
+   StDemoGeneratorModule,
+   StHeaderModule
+} from '@stratio/egeo';
 
-import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
-
-import { StHeaderComponent } from './st-header.component';
-import { StHeaderAppComponent } from './app/app';
-import { StHeaderMenuOptionComponent } from './menu-option/menu-option';
-import { StHeaderMenuComponent } from './menu/menu';
-import { StUserMenuComponent } from './user-menu/user-menu';
+import { StHeaderDemoComponent } from './st-header-demo.component';
+import { StFakePageComponent } from './fake-page.component';
+import { routing } from './st-header-demo.routing';
 
 
 @NgModule({
    imports: [
       CommonModule,
       RouterModule,
-      StDropdownMenuModule
+      StHeaderModule,
+      StDemoGeneratorModule.withComponents({ components: [StHeaderDemoComponent] }),
+      routing
    ],
-   declarations: [
-      StHeaderComponent,
-      StHeaderAppComponent,
-      StHeaderMenuOptionComponent,
-      StHeaderMenuComponent,
-      StUserMenuComponent
-   ],
-   exports: [StHeaderComponent]
+   declarations: [StHeaderDemoComponent, StFakePageComponent]
 })
-export class StHeaderModule { }
+export class StHeaderDemoModule { }
+

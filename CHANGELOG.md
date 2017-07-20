@@ -2,9 +2,26 @@
 
 ## 3.0.0 (upcoming)
 
+**New features:**
+
+* st-header: Menu notifies navigation
+* st-header: User menu notifies on select option
+
 **Breaking changes:**
 
 * st-combobox renamed to st-select
+* st-header: Remove stHeaderBehavior directive because now it's unnecesary
+* st-header: Change contentChangeOffset parameter by changeHeight
+* st-header: User menu model now accept multiple menu options
+* st-header: User menu not navigate on select option
+* st-header: Company name now it's not necesary
+* st-header: Remove disable parameter of menu and submenu model
+* st-header: Models change of name
+* st-header: Change behaivor and design
+
+**Others**
+
+* Refactor of st-header
 
 ## 2.5.0 (July 13, 2017)
 

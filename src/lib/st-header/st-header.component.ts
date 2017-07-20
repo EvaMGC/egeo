@@ -13,98 +13,103 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Event, Router } from '@angular/router';
+import {
+   ChangeDetectionStrategy,
+   ChangeDetectorRef,
+   Component,
+   ElementRef,
+   EventEmitter,
+   Input,
+   OnInit,
+   Output,
+   ViewChild,
+   HostListener,
+   AfterViewInit
+} from '@angular/core';
+import { Router } from '@angular/router';
 
-import { StHeaderModel, StHeaderUserMenuModel, StSubMenuModel } from './st-header.model';
+import { StUserMenuComponent } from './user-menu/user-menu';
+import { StHeaderMenuOption, StHeaderUserMenu, StHeaderSubMenuOption } from './st-header.model';
+import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { StWindowRefService } from '../utils/window-service';
 
 @Component({
    selector: 'st-header',
    templateUrl: './st-header.component.html',
-   styleUrls: ['./st-header.component.scss']
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StHeaderComponent implements OnInit {
+export class StHeaderComponent implements AfterViewInit {
 
-   @Input() appName: string | undefined;
-   @Input() companyName: string = 'Stratio';
-
-   // TODO: In the future this header can use image or text for now, only use text
-   appLogoPath: string | undefined;
+   @Input() appName: string = '';
+   @Input() menu: StHeaderMenuOption[] = [];
 
    @Input() maxWidth: number;
+   @Input() userMenu: StHeaderUserMenu;
+   @Input() qaTag: string = '';
 
-   @Input() menu: StHeaderModel[] = [];
+   @Output() selectMenu: EventEmitter<string> = new EventEmitter<string>();
+   @Output() selectUserMenuOption: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
+   @Output() changeHeight: EventEmitter<number> = new EventEmitter<number>();
 
-   @Input() userMenu: StHeaderUserMenuModel;
-   @Input() qaTag: string;
+   @ViewChild('headerDivElement') headerDivElement: ElementRef;
+   @ViewChild('headerFixPart') headerFixPart: ElementRef;
+   @ViewChild('userMenuContainerElement') userMenuContainer: ElementRef;
+   @ViewChild('userMenuElement') userMenuElement: StUserMenuComponent;
 
-   @Output() contentChangeOffset: EventEmitter<number> = new EventEmitter<number>();
+   public showUserName: boolean = true;
+   public showMenuNames: boolean = true;
+   private userMenuSize: number = 0;
+   private fixPartSize: number = 0;
+   private _window: Window;
 
-   selectedSubmenu: StSubMenuModel[] = [];
-   navigationOffset: number = 0;
-
-   private headerOffset: number = 0;
-   private showSubmenu: boolean = false;
+   // Constants
+   private userCollapsedSize: number = 76;
+   private gapBetweenMenuAndUserMenu: number = 40;
 
    constructor(
-      private _router: Router,
       private _cd: ChangeDetectorRef,
-      private el: ElementRef
-   ) { }
-
-   public hasSubmenu(): boolean {
-      let menu: StHeaderModel | undefined = this.menu.find((menuOption) => this._router.url.includes(menuOption.link));
-      if (menu !== undefined && menu.subMenus !== undefined && menu.subMenus.length > 0) {
-         this.selectedSubmenu = menu.subMenus;
-         this.checkIfNotify(true);
-         return true;
-      } else {
-         this.selectedSubmenu = [];
-         this.checkIfNotify(false);
-         return false;
-      }
+      private _router: Router,
+      private _windowRefService: StWindowRefService
+   ) {
+      this._window = _windowRefService.nativeWindow;
    }
 
-   public ngOnInit(): void {
-      if (!this.qaTag) {
-         throw new Error('qaTag is a necesary field');
-      }
-      this.headerOffset = this.el.nativeElement.getBoundingClientRect().left;
-      this.showSubmenu = this.hasSubmenu();
-      this.notifyOffset();
+   public ngAfterViewInit(): void {
+      this.userMenuSize = this.userMenuElement.elementRef.nativeElement.scrollWidth;
+      this.fixPartSize = this.headerFixPart.nativeElement.scrollWidth;
+
+      this.checkMenuLabelVisibility();
    }
 
-   public onPositionChange(newPosition: number): void {
-      this.navigationOffset = newPosition - this.headerOffset;
-      this._cd.markForCheck();
+   @HostListener('window:resize', [])
+   onResize(): void {
+      this.checkMenuLabelVisibility();
    }
 
-   public hasUserMenu(): boolean {
-      return this.userMenu !== undefined;
+   public onSelectMenu(link: string): void {
+      this._router.navigate([link]);
+      this.selectMenu.emit(link);
    }
 
-   public getHeaderStyle(): Object {
-      if (this.maxWidth !== undefined && typeof this.maxWidth === 'number' && this.maxWidth > 0) {
-         return {
-            'max-width': `${this.maxWidth}px`
-         };
-      } else {
-         return {};
-      }
+   public get height(): number {
+      return this.showMenuNames ? 70 : 55;
    }
 
-   private checkIfNotify(hasSubMenu: boolean): void {
-      if (this.showSubmenu !== hasSubMenu) {
-         this.showSubmenu = hasSubMenu;
-         this.notifyOffset();
-      }
-   }
+   private checkMenuLabelVisibility(): void {
+      let containerSize: number = (this.userMenuContainer.nativeElement as HTMLDivElement).clientWidth;
+      let windowSize: number = this._window.innerWidth;
 
-   private notifyOffset(): void {
-      if (this.showSubmenu) {
-            this.contentChangeOffset.emit(140);
-         } else {
-            this.contentChangeOffset.emit(95);
+      let canShowMenuNames = windowSize >= (this.fixPartSize + this.userCollapsedSize);
+      let canShowUserName = canShowMenuNames && containerSize > (this.userMenuSize + this.gapBetweenMenuAndUserMenu);
+      if (this.showMenuNames !== canShowMenuNames || this.showUserName !== canShowUserName) {
+         if (this.showMenuNames !== canShowMenuNames) {
+            this.showMenuNames = canShowMenuNames;
+            this.changeHeight.emit(this.height);
          }
+         if (this.showUserName !== canShowUserName) {
+            this.showUserName = canShowUserName;
+         }
+         this._cd.markForCheck();
+      }
    }
 }

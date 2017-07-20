@@ -21,6 +21,7 @@ import { StModalService } from './st-modal/st-modal.service';
 import { StPaginationService } from './st-pagination/st-pagination.service';
 import { EgeoResolveService } from './utils/egeo-resolver/egeo-resolve.service';
 import { SelectOneDispatcher } from './utils/unique-dispatcher';
+import { StWindowRefService } from './utils/window-service';
 
 import { DECLARATIONS } from './barrels';
 
@@ -38,7 +39,14 @@ export class EgeoModule {
    static forRoot(): ModuleWithProviders {
       return {
          ngModule: EgeoModule,
-         providers: [StModalService, StPaginationService, EgeoResolveService, SelectOneDispatcher, StAlertsService]
+         providers: [
+            StModalService,
+            StPaginationService,
+            EgeoResolveService,
+            SelectOneDispatcher,
+            StAlertsService,
+            StWindowRefService
+         ]
       };
    }
 }

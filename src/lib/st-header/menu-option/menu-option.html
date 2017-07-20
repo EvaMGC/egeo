@@ -1,0 +1,26 @@
+<!--
+
+    Copyright (C) 2016 Stratio (http://stratio.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<st-dropdown-menu [items]="submenuList || []" [qaTag]="qaId" (change)="changeOption($event)" [active]="isActive && hasSubmenu" [placement]="'bottom-start'" [offset]="'25px, 10px'">
+   <div class="sth-header-menu-option" [attr.id]="qaId" routerLinkActive="active">
+      <a class="sth-header-menu-option-name" [routerLink]="option.link">
+         <i [ngClass]="option.icon" class="sth-header-menu-option-icon" [title]="option.label"></i>
+         <div *ngIf="showMenuName" class="sth-header-menu-option-label">{{option.label}}</div>
+      </a>
+      <i *ngIf="hasSubmenu" class="icon-arrow2_down sth-header-menu-option-arrow" (click)="changeStatus($event)"></i>
+   </div>
+</st-dropdown-menu>
