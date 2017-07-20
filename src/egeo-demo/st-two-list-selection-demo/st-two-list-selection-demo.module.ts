@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,40 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-:host {
-   display: flex;
-   flex: 1;
-   flex-grow: 1;
-   max-height: 100%;
-   min-height: 100%;
-}
 
-.st-two-list {
-   width: 100%;
-   display: flex;
-   justify-content: space-between;
-   max-height: 100%;
-}
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+   StDemoGeneratorModule,
+   StTwoListSelectionModule,
+   StButtonModule
+} from '@stratio/egeo';
 
-.list {
-   padding: 33px 20px 20px 20px;
-   flex-grow: 1;
-   overflow: auto;
-}
+import { StTwoListSelectionDemoComponent } from './st-two-list-selection-demo';
 
-.not-editable {
-   width: 100%;
-}
+@NgModule({
+   imports: [
+      CommonModule,
+      StButtonModule,
+      StTwoListSelectionModule,
+      StDemoGeneratorModule.withComponents({ components: [StTwoListSelectionDemoComponent] })
+   ],
+   declarations: [StTwoListSelectionDemoComponent]
+})
+export class StTwoListSelectionDemoModule { }
 
-.pick-buttons {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 73px;
-   min-width: 73px;
-   max-width: 73px;
-   margin: auto;
-   st-button {
-      margin-bottom: 10px;
-   }
-}

@@ -38,7 +38,7 @@ export class ListItemComponent {
    constructor() { }
 
    get itemName(): string {
-      return this.item.name;
+      return this.item && this.item.name !== undefined && this.item.name !== null ? this.item.name : '';
    }
 
    get itemQaTag(): string {

@@ -2,6 +2,10 @@
 
 ## 3.0.0 (upcoming)
 
+**Fixed bugs:**
+
+* st-two-list-selection: Fix when list is empty, height not showing correctly
+
 **New features:**
 
 * st-header: Menu notifies navigation
@@ -9,7 +13,7 @@
 
 **Breaking changes:**
 
-* st-combobox renamed to st-select
+* st-combobox: Renamed to st-select
 * st-header: Remove stHeaderBehavior directive because now it's unnecesary
 * st-header: Change contentChangeOffset parameter by changeHeight
 * st-header: User menu model now accept multiple menu options

@@ -16,3 +16,4 @@
 
 export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
 export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
+export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
