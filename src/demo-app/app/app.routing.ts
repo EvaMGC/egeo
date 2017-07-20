@@ -34,7 +34,8 @@ export const routes: Routes = [
          { path: 'search-demo', loadChildren: '@stratio/egeo#StSearchDemoModule' },
          { path: 'select-demo', loadChildren: '@stratio/egeo#StSelectDemoModule' },
          { path: 'tip-demo', loadChildren: '@stratio/egeo#StTipDemoModule' },
-         { path: 'tree-demo', loadChildren: '@stratio/egeo#StTreeDemoModule' }
+         { path: 'tree-demo', loadChildren: '@stratio/egeo#StTreeDemoModule' },
+         { path: 'two-list-selection-demo', loadChildren: '@stratio/egeo-demo#StTwoListSelectionDemoModule' }
       ]
    }
 ];

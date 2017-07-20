@@ -13,40 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-:host {
-   display: flex;
-   flex: 1;
-   flex-grow: 1;
-   max-height: 100%;
-   min-height: 100%;
+.page-header span{
+  color: #999;
 }
 
-.st-two-list {
-   width: 100%;
-   display: flex;
-   justify-content: space-between;
-   max-height: 100%;
-}
 
-.list {
-   padding: 33px 20px 20px 20px;
-   flex-grow: 1;
-   overflow: auto;
-}
-
-.not-editable {
-   width: 100%;
-}
-
-.pick-buttons {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 73px;
-   min-width: 73px;
-   max-width: 73px;
-   margin: auto;
-   st-button {
-      margin-bottom: 10px;
-   }
+:host /deep/ .example-options {
+   margin-left: 30px;
 }
