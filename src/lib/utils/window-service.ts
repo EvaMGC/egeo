@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,24 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.link-list {
-   list-style: none;
-   display: flex;
-   flex-direction: row;
-   flex-wrap: nowrap;
+import { Injectable } from '@angular/core';
+
+function getWindow (): any {
+    return window;
 }
 
-.option {
-   margin-left: 20px;
-   margin-right: 20px;
-   height: 35px;
-   line-height: 35px;
-   cursor: pointer;
-   display: flex;
-   flex-direction: row;
-   flex-wrap: nowrap;
-
-   & .link-icon {
-     margin-right: 8px;
-   }
+@Injectable()
+export class StWindowRefService {
+    get nativeWindow (): Window {
+        return getWindow();
+    }
 }

@@ -19,15 +19,16 @@ export interface MenuOption {
 }
 
 export const OPTIONS: MenuOption[] = [
-   { route: 'main', name: 'main' },
    { route: 'alerts-demo', name: 'Alerts' },
-   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
    { route: 'dropdown-demo', name: 'Dropdown' },
-   { route: 'select-demo', name: 'Select' },
+   { route: 'dropdown-menu-demo', name: 'Dropdown Menu' },
+   { route: 'header-demo', name: 'Header' },
    { route: 'help-demo', name: 'help' },
    { route: 'info-box-demo', name: 'info-box' },
    { route: 'item-list-demo', name: 'item-list' },
-   { route: 'tip-demo', name: 'tip' },
+   { route: 'main', name: 'main' },
    { route: 'search-demo', name: 'Search' },
+   { route: 'select-demo', name: 'Select' },
+   { route: 'tip-demo', name: 'tip' },
    { route: 'tree-demo', name: 'Tree' }
 ];

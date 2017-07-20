@@ -23,16 +23,17 @@ export const routes: Routes = [
       path: '', component: LayoutComponent, children: [
          // Main redirection
          { path: '', redirectTo: 'main', pathMatch: 'full' },
-         { path: 'main', component: MainComponent },
          { path: 'alerts-demo', loadChildren: '@stratio/egeo-demo#StAlertsDemoModule' },
-         { path: 'dropdown-menu-demo', loadChildren: '@stratio/egeo#StDropdownMenuDemoModule' },
          { path: 'dropdown-demo', loadChildren: '@stratio/egeo#StDropdownDemoModule' },
-         { path: 'select-demo', loadChildren: '@stratio/egeo#StSelectDemoModule' },
+         { path: 'dropdown-menu-demo', loadChildren: '@stratio/egeo#StDropdownMenuDemoModule' },
+         { path: 'header-demo', loadChildren: '@stratio/egeo-demo#StHeaderDemoModule' },
          { path: 'help-demo', loadChildren: '@stratio/egeo#StHelpDemoModule' },
          { path: 'info-box-demo', loadChildren: '@stratio/egeo#StInfoBoxDemoModule' },
          { path: 'item-list-demo', loadChildren: '@stratio/egeo#StItemListDemoModule' },
-         { path: 'tip-demo', loadChildren: '@stratio/egeo#StTipDemoModule' },
+         { path: 'main', component: MainComponent },
          { path: 'search-demo', loadChildren: '@stratio/egeo#StSearchDemoModule' },
+         { path: 'select-demo', loadChildren: '@stratio/egeo#StSelectDemoModule' },
+         { path: 'tip-demo', loadChildren: '@stratio/egeo#StTipDemoModule' },
          { path: 'tree-demo', loadChildren: '@stratio/egeo#StTreeDemoModule' }
       ]
    }

@@ -15,17 +15,10 @@
     limitations under the License.
 
 -->
-<div class="sth-app">
-   <div *ngIf="showAppName()">
-      <i class="icon-stratio_standard logo"></i>
-      <div class="app-label">
-         <span [attr.id]="qaTag + '-company-name'" class="sth-company-name company-name">{{companyName}}</span>
-         <br>
-         <span [attr.id]="qaTag + '-app-name'" class="sth-app-name">{{appName}}</span>
-      </div>
+<st-dropdown-menu [items]="userMenu.options || []" [qaTag]="qaId" (change)="changeOption($event)" [active]="isActive" [placement]="'bottom-start'" [offset]="'0, 8px'">
+   <div class="sth-header-user-menu-combo" (click)="changeMenuState($event)">
+      <i class="icon-head sth-header-user-menu-ico"></i>
+      <span *ngIf="showUserName" class="sth-header-user-menu-name">{{userMenu.userName}}</span>
+      <i class="icon-arrow2_down sth-header-user-menu-arrow"></i>
    </div>
-
-   <div *ngIf="!showAppName()">
-      <img [attr.id]="qaTag + '-company-logo'" [src]="appLogoPath" alt="">
-   </div>
-</div>
+</st-dropdown-menu>

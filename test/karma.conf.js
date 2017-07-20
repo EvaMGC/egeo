@@ -64,7 +64,7 @@ module.exports = function(config) {
             ]
          },
          coverageOptions: {
-            exclude: /(\.d\.ts|\.spec\.ts|\.module\.ts|\.routing\.ts|barrels\.ts|public_api\.ts|demo)/i,
+            exclude: /(\.d\.ts|\.spec\.ts|\.module\.ts|\.routing\.ts|barrels\.ts|public_api\.ts|demo|tests)/i,
             instrumentation: true
          },
          reports: {

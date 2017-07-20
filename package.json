@@ -33,7 +33,7 @@
    "dependencies": {
       "angular2-virtual-scroll": "0.1.7",
       "lodash": "4.17.4",
-      "popper.js": "1.9.9",
+      "popper.js": "1.10.8",
       "reflect-metadata": "0.1.10",
       "tslib": "1.7.1"
    },
@@ -61,7 +61,7 @@
       "@types/lodash": "4.14.68",
       "@types/minimist": "1.2.0",
       "@types/node": "7.0.31",
-      "@types/popper.js": "1.8.1",
+      "@types/popper.js": "1.10.0",
       "@types/run-sequence": "0.0.29",
       "add-asset-html-webpack-plugin": "2.0.1",
       "angular2-template-loader": "0.6.2",

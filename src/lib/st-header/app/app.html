@@ -15,11 +15,7 @@
     limitations under the License.
 
 -->
-<ul class="submenu-option-list" [ngStyle]="getOffset()">
-   <div class="sth-header-submenu-pointer submenu-pointer submenu-pointer-size"></div>
-   <li *ngFor="let option of submenu" class="sth-header-submenu-option submenu-option" [attr.id]="qaTag + '-sub-menu-option-' + option.label"
-   [routerLink]="option.link" routerLinkActive="sth-header-submenu-active"
-   [ngClass]="isActive(option)">
-      <div class="link-label">{{option.label}}</div>
-   </li>
-</ul>
+<div class="sth-header-app">
+   <i class="icon-stratio_standard sth-header-app-logo"></i>
+   <span [attr.id]="qaId" class="sth-header-app-name">{{appName}}</span>
+</div>

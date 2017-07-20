@@ -13,4 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
+export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';

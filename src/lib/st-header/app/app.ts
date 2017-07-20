@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,27 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-ul {
-   list-style: none;
-   padding: 0;
-}
+import {
+   ChangeDetectionStrategy,
+   Component,
+   Input,
+   ElementRef
+} from '@angular/core';
 
-.user-combo {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-}
+@Component({
+   selector: 'st-header-app',
+   templateUrl: './app.html',
+   changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class StHeaderAppComponent {
 
-.user-combo-element {
-   margin: 0 5px 0 7px;
-}
+   @Input() appName: string;
+   @Input() qaTag: string;
 
-.combo-list-item {
-   height: 35px;
-   padding-left: 10px;
-   line-height: 35px;
-}
+   constructor(public elementRef: ElementRef) { }
 
-.combo-list-container {
-   position: relative;
+   get qaId(): string {
+      return this.qaTag + '-logo';
+   }
 }
