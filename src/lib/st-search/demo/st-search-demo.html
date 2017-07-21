@@ -25,8 +25,7 @@
 
       <div class="search-example">
          <h3>With clear button:</h3>
-         <st-search [placeholder]="placeholder" [qaTag]="qaTag" [value]="searched" [debounce]="debounceTime" [minLength]="minLength" (search)="onSearchResult($event)"
-             [hasClearButton]="true"></st-search>
+         <st-search [placeholder]="placeholder" [qaTag]="qaTag" [value]="searched" [debounce]="debounceTime" [minLength]="minLength" (search)="onSearchResult($event)"></st-search>
       </div>
 
       <div class="search-example">
@@ -37,13 +36,13 @@
 
       <div class="search-example">
          <h3>Disabled:</h3>
-         <st-search placeholder="Text for search with clear button" [value]="searched" [qaTag]="qaTag" [debounce]="debounceTime" hasClearButton="true" [minLength]="minLength"
+         <st-search placeholder="Text for search with clear button" [value]="searched" [qaTag]="qaTag" [debounce]="debounceTime" [minLength]="minLength"
              (search)="onSearchResult($event)"></st-search>
       </div>
 
       <div class="search-example">
          <h3>Autocomplete:</h3>
-         <st-search placeholder="Text for search with clear button" [value]="searchedAutocomplete" [qaTag]="qaTag" [debounce]="debounceTime" hasClearButton="true" [minLength]="minLength"
+         <st-search placeholder="Text for search with clear button" [value]="searchedAutocomplete" [qaTag]="qaTag" [debounce]="debounceTime" [minLength]="minLength"
              [autocompleteList]="filteredMenu" [withAutocomplete]="true" [emptyAutocompleteListMessage]="'There are no matches for your search. Please, try it again with another term.'" (search)="searchWithAutocompleteSearch($event)"></st-search>
       </div>
 
