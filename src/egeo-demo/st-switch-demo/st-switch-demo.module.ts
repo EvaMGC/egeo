@@ -13,9 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+   StDemoGeneratorModule,
+   StButtonModule,
+   StSwitchModule
+} from '@stratio/egeo';
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
-export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
+import { StSwitchDemoComponent } from './st-switch-demo';
+
+@NgModule({
+   imports: [
+      CommonModule,
+      StSwitchModule,
+      StButtonModule,
+      ReactiveFormsModule,
+      FormsModule,
+      StDemoGeneratorModule.withComponents({ components: [StSwitchDemoComponent] })
+   ],
+   declarations: [StSwitchDemoComponent]
+})
+export class StSwitchDemoModule { }
+

@@ -13,9 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
-export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
+
+@Component({
+   selector: 'st-tooltip-demo',
+   templateUrl: './st-tooltip-demo.html',
+   styleUrls: ['./st-tooltip-demo.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+export class StTooltipDemoComponent {
+   public qaTag: string = 'example';
+}

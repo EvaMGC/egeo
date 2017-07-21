@@ -14,8 +14,22 @@
  * limitations under the License.
  */
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
-export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { StDemoGeneratorModule, StTooltipModule } from '@stratio/egeo';
+
+import { StTooltipDemoComponent } from './st-tooltip-demo';
+
+
+@NgModule({
+   imports: [
+      CommonModule,
+      RouterModule,
+      StTooltipModule,
+      StDemoGeneratorModule.withComponents({ components: [StTooltipDemoComponent] })
+   ],
+   declarations: [StTooltipDemoComponent]
+})
+export class StTooltipDemoModule { }
+
