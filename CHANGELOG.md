@@ -22,6 +22,7 @@
 * st-header: Remove disable parameter of menu and submenu model
 * st-header: Models change of name
 * st-header: Change behaivor and design
+* st-search: Remove searchOnlyOnClick and hasClearButton parameters
 
 **Others**
 

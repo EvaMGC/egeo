@@ -35,9 +35,7 @@ import 'rxjs/add/operator/debounceTime';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { EventWindowManager } from '../utils/event-window-manager';
-import { StEgeo, StDeprecated } from '../decorators/require-decorators';
 
-@StEgeo()
 @Component({
    selector: 'st-search',
    templateUrl: './st-search.component.html',
@@ -46,12 +44,10 @@ import { StEgeo, StDeprecated } from '../decorators/require-decorators';
 })
 export class StSearchComponent extends EventWindowManager implements OnChanges, OnDestroy, OnInit {
    @Input() debounce: number = 0;
-   @Input() @StDeprecated(true) hasClearButton: boolean; // This field will be removed
    @Input() liveSearch: boolean = true;
    @Input() minLength: number = 0;
    @Input() placeholder: string = 'Search';
    @Input() qaTag: string;
-   @Input() @StDeprecated(false) searchOnlyOnClick: boolean; // This field will be removed
    @Input() value: string;
    @Input() disabled: boolean = false;
 
