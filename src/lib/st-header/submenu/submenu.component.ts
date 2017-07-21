@@ -13,33 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-   ChangeDetectionStrategy,
-   Component,
-   Input,
-   ElementRef,
-   Output,
-   EventEmitter
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { StHeaderMenuOption } from '../st-header.model';
+import { StSubMenuModel } from '../st-header.model';
 
 @Component({
-   selector: 'st-header-menu',
-   templateUrl: './menu.html',
+   selector: 'submenu',
+   styleUrls: ['./submenu.component.scss'],
+   templateUrl: './submenu.component.html',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StHeaderMenuComponent {
+export class SubmenuComponent {
 
-   @Input() menu: StHeaderMenuOption[];
-   @Input() showMenuNames: boolean;
+   @Input() submenu: StSubMenuModel[] = [];
    @Input() qaTag: string;
+   @Input() offset: number = 0;
 
-   @Output() selectMenu: EventEmitter<string> = new EventEmitter<string>();
+   public getOffset(): Object {
+      return {
+         'margin-left': `${this.offset}px`
+      };
+   }
 
-   constructor(public elementRef: ElementRef) { }
-
-   public get qaId(): string {
-      return this.qaTag + '-menu';
+   public isActive(option: StSubMenuModel): string {
+      if (!option.isActive) {
+         return 'sth-header-submenu-disable-option';
+      } else {
+         return '';
+      }
    }
 }

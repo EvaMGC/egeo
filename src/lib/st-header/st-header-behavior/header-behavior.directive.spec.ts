@@ -13,44 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Component } from '@angular/core';
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-// Component
-import { StHeaderAppComponent } from './app';
+// Directive
+import { StHeaderBehaviorDirective } from './header-behavior.directive';
 
-let comp: StHeaderAppComponent;
-let fixture: ComponentFixture<StHeaderAppComponent>;
+
+@Component({
+   styles: ['body {height: 1600px; overflow-y: scroll}'],
+   template: '<div stHeaderBehavior></div>'
+})
+class DummyComponent { }
+
+let comp: DummyComponent;
+let fixture: ComponentFixture<DummyComponent>;
 let de: DebugElement;
 
 
-describe('StHeaderComponent', () => {
-   describe('StHeaderAppComponent', () => {
+describe('StHeader component', () => {
+   describe('StHeader componentBehavior directive', () => {
       beforeEach(async(() => {
          TestBed.configureTestingModule({
-            declarations: [StHeaderAppComponent]
+            declarations: [StHeaderBehaviorDirective, DummyComponent]
          })
             .compileComponents();  // compile template and css
       }));
 
       beforeEach(() => {
-         fixture = TestBed.createComponent(StHeaderAppComponent);
+         fixture = TestBed.createComponent(DummyComponent);
          comp = fixture.componentInstance;
+
+         fixture.autoDetectChanges(true);
       });
 
-      it('should be initialized correctly', () => {
-         comp.appName = 'Test';
-         comp.qaTag = 'test-id';
-         fixture.detectChanges();
+      it('should be init with st-header-normal', () => {
+         let div: DebugElement = fixture.debugElement.query(By.css('div'));
 
-         let expectedId: string = comp.qaTag + '-logo';
-         let appLabel: HTMLDivElement = fixture.debugElement.query(By.css(`#${expectedId}`)).nativeElement;
-
-         expect(comp.qaId).toEqual(expectedId);
-         expect(appLabel).toBeDefined();
-         expect(appLabel.textContent).toEqual(comp.appName);
+         expect(div.classes['st-header-normal']).toBeTruthy();
       });
+
+      // TODO: Simulate scroll and test change of class
    });
 });

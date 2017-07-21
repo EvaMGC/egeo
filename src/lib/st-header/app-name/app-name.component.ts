@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-   selector: 'fake-page',
-   template: `
-      <div>
-         <h1>YOU NAVIGATE TO PAGE</h1>
-           <p [innerHTML]="pageName"></p>
-         <br><br>
-         <router-outlet></router-outlet>
-      </div>`,
-   styles: [' div { max-width: 1700px; margin: auto; } '],
+   selector: 'app-name',
+   styleUrls: ['./app-name.component.scss'],
+   templateUrl: './app-name.component.html',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
+export class AppNameComponent {
 
-export class StFakePageComponent {
-   public pageName: string = 'ERROR';
+   @Input() companyName: string | undefined = 'STRATIO';
+   @Input() appName: string | undefined;
+   @Input() appLogoPath: string | undefined;
+   @Input() qaTag: string;
 
-   constructor(private _router: ActivatedRoute) {
-      let id: string = 'pageName';
-      this._router.data.subscribe(data => this.pageName = data[id]);
+   public showAppName(): boolean {
+      return this.appName !== undefined;
    }
 }
