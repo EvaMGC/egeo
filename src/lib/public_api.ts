@@ -82,9 +82,12 @@ export { StFooterLink } from './st-footer/st-footer.model';
 
 // Header
 export {
-   StHeaderMenuOption,
-   StHeaderSubMenuOption,
-   StHeaderUserMenu
+   StHeaderModel,
+   StSubMenuModel,
+   StHeaderUserMenuModel,
+   StHeaderModelSchema,
+   StHeaderUserMenuModelSchema,
+   StSubMenuModelSchema
 } from './st-header/st-header.model';
 export { StHeaderModule } from './st-header/st-header.module';
 

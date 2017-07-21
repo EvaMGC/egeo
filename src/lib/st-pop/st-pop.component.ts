@@ -30,7 +30,6 @@ export class StPopComponent implements OnInit {
 
    @Input() placement: PopperPlacement = 'left';
    @Input() hidden: boolean = true;
-   @Input() offset: string = '';
    @Input() gpuAcceleration: boolean = true;
 
    private popper: any;
@@ -40,15 +39,11 @@ export class StPopComponent implements OnInit {
    ngOnInit(): void {
       let options: Popper.PopperOptions = {
             placement: this.placement,
-            eventsEnabled: true,
             removeOnDestroy: true,
             modifiers: {
-               flip: {enabled: false},
-               offset: {
-                  enabled: true,
-                  offset: this.offset
-               },
-               hide: {enabled: this.hidden}
+               applyStyle: {
+                  gpuAcceleration: this.gpuAcceleration
+               }
             }
       };
 
@@ -61,5 +56,3 @@ export class StPopComponent implements OnInit {
    }
 
 }
-
-

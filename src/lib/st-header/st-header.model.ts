@@ -13,21 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
 
-export class StHeaderMenuOption {
-   icon: string;
+export interface StHeaderModel {
+   icon?: string;
    label: string;
    link: string;
-   subMenus: StHeaderSubMenuOption[];
+   isActive: boolean;
+   subMenus: StSubMenuModel[];
+   notifications?: number;
 }
 
-export class StHeaderSubMenuOption {
+export interface StSubMenuModel {
    label: string;
    link: string;
+   isActive: boolean;
 }
 
-export class StHeaderUserMenu {
+/** For translate service */
+export interface StHeaderModelSchema {
+   icon?: string;
+   label: TranslateableElement;
+   link: string;
+   isActive: boolean;
+   subMenus: StSubMenuModelSchema[];
+   notifications?: number;
+}
+
+export interface StSubMenuModelSchema {
+   label: TranslateableElement;
+   link: string;
+   isActive: boolean;
+}
+
+export interface StHeaderUserMenuModel {
+   logoutLabel: string;
    userName: string;
-   options: StDropDownMenuItem[];
+   logoutPath: string;
+}
+
+export interface StHeaderUserMenuModelSchema {
+   logoutLabel: TranslateableElement;
+   userName: string;
+   logoutPath: string;
 }

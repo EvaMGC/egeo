@@ -15,16 +15,20 @@
     limitations under the License.
 
 -->
-
-<div class="sth-header" [ngStyle]="{height: height + 'px'}" #headerDivElement>
-   <div class="sth-header-container" [ngStyle]="{'max-width': maxWidth + 'px'}">
-      <div class="sth-header-container-fix-part" #headerFixPart>
-         <st-header-app class="sth-header-app-component" [appName]="appName" [qaTag]="qaTag"></st-header-app>
-         <st-header-menu class="sth-header-menu-component" [menu]="menu" [qaTag]="qaTag" [showMenuNames]="showMenuNames" (selectMenu)="onSelectMenu($event)"></st-header-menu>
+<div class="sth-header header basic-header" [ngStyle]="getHeaderStyle()">
+   <div class="menu menu-height st-header-menu">
+      <div class="sth-header-border header-border">
+         <div class="sth-header-user-container" *ngIf="hasUserMenu()">
+            <div class="sth-header-border-separator"></div>
+            <user-menu [userMenuModel]="userMenu" [qaTag]="qaTag"></user-menu>
+         </div>
       </div>
-      <div class="sth-header-user-menu-container" #userMenuContainerElement>
-         <st-header-user-menu #userMenuElement class="sth-header-user-menu-component" [userMenu]="userMenu" [qaTag]="qaTag" (selectOption)="selectUserMenuOption.emit($event)"
-             [showUserName]="showUserName"></st-header-user-menu>
+      <app-name [appName]="appName" [companyName]="companyName" [appLogoPath]="appLogoPath" [qaTag]="qaTag" class="app-name"></app-name>
+      <navigation-links [menu]="menu" class="navigation-links" (positionChange)="onPositionChange($event)" [qaTag]="qaTag"></navigation-links>
+   </div>
+   <div class="sth-sub-menu sub-menu">
+      <div *ngIf="hasSubmenu()" class="submenu-wrapper">
+      <submenu [submenu]="selectedSubmenu" [offset]="navigationOffset" [qaTag]="qaTag"></submenu>
       </div>
    </div>
 </div>

@@ -58,7 +58,6 @@ export class StDropdownMenuComponent implements OnInit, AfterViewInit {
    @Input() placement: string = 'bottom-start';
    /** @input {string} [emptyListMessage=''] Message to show in case of empty list */
    @Input() emptyListMessage: string = '';
-   @Input() offset: string = '';
 
    /** @output {StDropDownMenuItem} change Event emitted when user select an item */
    @Output() change: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();

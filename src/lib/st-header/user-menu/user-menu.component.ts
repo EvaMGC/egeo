@@ -13,53 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-   ChangeDetectionStrategy,
-   ChangeDetectorRef,
-   Component,
-   ElementRef,
-   Input,
-   OnDestroy,
-   Renderer,
-   Output,
-   EventEmitter
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, Renderer } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
 import { EventWindowManager } from '../../utils/event-window-manager';
-import { StHeaderUserMenu } from '../st-header.model';
+import { StHeaderUserMenuModel } from '../st-header.model';
 
 @Component({
-   selector: 'st-header-user-menu',
-   templateUrl: './user-menu.html',
+   selector: 'user-menu',
+   styleUrls: ['./user-menu.component.scss'],
+   templateUrl: './user-menu.component.html',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StUserMenuComponent extends EventWindowManager implements OnDestroy {
+export class UserMenuComponent extends EventWindowManager implements OnDestroy {
 
-   @Input() userMenu: StHeaderUserMenu;
+   @Input() userMenuModel: StHeaderUserMenuModel;
    @Input() qaTag: string;
-   @Input() showUserName: boolean = true;
-
-   @Output() selectOption: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
 
    constructor(
+      private router: Router,
       private renderer: Renderer,
       private cd: ChangeDetectorRef,
-      public elementRef: ElementRef
+      private elementRef: ElementRef
    ) {
       super(renderer, cd, elementRef);
    }
 
-   public get qaId(): string {
-      return this.qaTag + '-profile-menu';
-   }
 
    public changeMenuState(event: MouseEvent): void {
       this.openElement();
    }
 
-   public changeOption(option: StDropDownMenuItem): void {
-      this.selectOption.emit(option);
+   public navigateToLogout(): void {
+      this.router.navigate([`/${this.userMenuModel.logoutPath}`]);
       this.closeElement();
    }
 

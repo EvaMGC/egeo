@@ -17,28 +17,26 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
+import {AppNameComponent} from './app-name/app-name.component';
+import {NavigationLinksComponent} from './navigation-links/navigation-links.component';
+import {StHeaderBehaviorDirective} from './st-header-behavior/header-behavior.directive';
+import {SubmenuComponent} from './submenu/submenu.component';
+import {SubmenuPosDirective} from './submenu-pos/submenu-pos.directive';
+import {UserMenuComponent} from './user-menu/user-menu.component';
 
 import { StHeaderComponent } from './st-header.component';
-import { StHeaderAppComponent } from './app/app';
-import { StHeaderMenuOptionComponent } from './menu-option/menu-option';
-import { StHeaderMenuComponent } from './menu/menu';
-import { StUserMenuComponent } from './user-menu/user-menu';
-
 
 @NgModule({
-   imports: [
-      CommonModule,
-      RouterModule,
-      StDropdownMenuModule
-   ],
+   imports: [CommonModule, RouterModule],
    declarations: [
+      SubmenuPosDirective,
       StHeaderComponent,
-      StHeaderAppComponent,
-      StHeaderMenuOptionComponent,
-      StHeaderMenuComponent,
-      StUserMenuComponent
+      AppNameComponent,
+      NavigationLinksComponent,
+      SubmenuComponent,
+      UserMenuComponent,
+      StHeaderBehaviorDirective
    ],
-   exports: [StHeaderComponent]
+   exports: [StHeaderComponent, StHeaderBehaviorDirective]
 })
 export class StHeaderModule { }

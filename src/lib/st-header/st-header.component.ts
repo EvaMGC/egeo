@@ -13,103 +13,98 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-   ChangeDetectionStrategy,
-   ChangeDetectorRef,
-   Component,
-   ElementRef,
-   EventEmitter,
-   Input,
-   OnInit,
-   Output,
-   ViewChild,
-   HostListener,
-   AfterViewInit
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Event, Router } from '@angular/router';
 
-import { StUserMenuComponent } from './user-menu/user-menu';
-import { StHeaderMenuOption, StHeaderUserMenu, StHeaderSubMenuOption } from './st-header.model';
-import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { StWindowRefService } from '../utils/window-service';
+import { StHeaderModel, StHeaderUserMenuModel, StSubMenuModel } from './st-header.model';
 
 @Component({
    selector: 'st-header',
    templateUrl: './st-header.component.html',
-   changeDetection: ChangeDetectionStrategy.OnPush
+   styleUrls: ['./st-header.component.scss']
 })
-export class StHeaderComponent implements AfterViewInit {
+export class StHeaderComponent implements OnInit {
 
-   @Input() appName: string = '';
-   @Input() menu: StHeaderMenuOption[] = [];
+   @Input() appName: string | undefined;
+   @Input() companyName: string = 'Stratio';
+
+   // TODO: In the future this header can use image or text for now, only use text
+   appLogoPath: string | undefined;
 
    @Input() maxWidth: number;
-   @Input() userMenu: StHeaderUserMenu;
-   @Input() qaTag: string = '';
 
-   @Output() selectMenu: EventEmitter<string> = new EventEmitter<string>();
-   @Output() selectUserMenuOption: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
-   @Output() changeHeight: EventEmitter<number> = new EventEmitter<number>();
+   @Input() menu: StHeaderModel[] = [];
 
-   @ViewChild('headerDivElement') headerDivElement: ElementRef;
-   @ViewChild('headerFixPart') headerFixPart: ElementRef;
-   @ViewChild('userMenuContainerElement') userMenuContainer: ElementRef;
-   @ViewChild('userMenuElement') userMenuElement: StUserMenuComponent;
+   @Input() userMenu: StHeaderUserMenuModel;
+   @Input() qaTag: string;
 
-   public showUserName: boolean = true;
-   public showMenuNames: boolean = true;
-   private userMenuSize: number = 0;
-   private fixPartSize: number = 0;
-   private _window: Window;
+   @Output() contentChangeOffset: EventEmitter<number> = new EventEmitter<number>();
 
-   // Constants
-   private userCollapsedSize: number = 76;
-   private gapBetweenMenuAndUserMenu: number = 40;
+   selectedSubmenu: StSubMenuModel[] = [];
+   navigationOffset: number = 0;
+
+   private headerOffset: number = 0;
+   private showSubmenu: boolean = false;
 
    constructor(
-      private _cd: ChangeDetectorRef,
       private _router: Router,
-      private _windowRefService: StWindowRefService
-   ) {
-      this._window = _windowRefService.nativeWindow;
-   }
+      private _cd: ChangeDetectorRef,
+      private el: ElementRef
+   ) { }
 
-   public ngAfterViewInit(): void {
-      this.userMenuSize = this.userMenuElement.elementRef.nativeElement.scrollWidth;
-      this.fixPartSize = this.headerFixPart.nativeElement.scrollWidth;
-
-      this.checkMenuLabelVisibility();
-   }
-
-   @HostListener('window:resize', [])
-   onResize(): void {
-      this.checkMenuLabelVisibility();
-   }
-
-   public onSelectMenu(link: string): void {
-      this._router.navigate([link]);
-      this.selectMenu.emit(link);
-   }
-
-   public get height(): number {
-      return this.showMenuNames ? 70 : 55;
-   }
-
-   private checkMenuLabelVisibility(): void {
-      let containerSize: number = (this.userMenuContainer.nativeElement as HTMLDivElement).clientWidth;
-      let windowSize: number = this._window.innerWidth;
-
-      let canShowMenuNames = windowSize >= (this.fixPartSize + this.userCollapsedSize);
-      let canShowUserName = canShowMenuNames && containerSize > (this.userMenuSize + this.gapBetweenMenuAndUserMenu);
-      if (this.showMenuNames !== canShowMenuNames || this.showUserName !== canShowUserName) {
-         if (this.showMenuNames !== canShowMenuNames) {
-            this.showMenuNames = canShowMenuNames;
-            this.changeHeight.emit(this.height);
-         }
-         if (this.showUserName !== canShowUserName) {
-            this.showUserName = canShowUserName;
-         }
-         this._cd.markForCheck();
+   public hasSubmenu(): boolean {
+      let menu: StHeaderModel | undefined = this.menu.find((menuOption) => this._router.url.includes(menuOption.link));
+      if (menu !== undefined && menu.subMenus !== undefined && menu.subMenus.length > 0) {
+         this.selectedSubmenu = menu.subMenus;
+         this.checkIfNotify(true);
+         return true;
+      } else {
+         this.selectedSubmenu = [];
+         this.checkIfNotify(false);
+         return false;
       }
+   }
+
+   public ngOnInit(): void {
+      if (!this.qaTag) {
+         throw new Error('qaTag is a necesary field');
+      }
+      this.headerOffset = this.el.nativeElement.getBoundingClientRect().left;
+      this.showSubmenu = this.hasSubmenu();
+      this.notifyOffset();
+   }
+
+   public onPositionChange(newPosition: number): void {
+      this.navigationOffset = newPosition - this.headerOffset;
+      this._cd.markForCheck();
+   }
+
+   public hasUserMenu(): boolean {
+      return this.userMenu !== undefined;
+   }
+
+   public getHeaderStyle(): Object {
+      if (this.maxWidth !== undefined && typeof this.maxWidth === 'number' && this.maxWidth > 0) {
+         return {
+            'max-width': `${this.maxWidth}px`
+         };
+      } else {
+         return {};
+      }
+   }
+
+   private checkIfNotify(hasSubMenu: boolean): void {
+      if (this.showSubmenu !== hasSubMenu) {
+         this.showSubmenu = hasSubMenu;
+         this.notifyOffset();
+      }
+   }
+
+   private notifyOffset(): void {
+      if (this.showSubmenu) {
+            this.contentChangeOffset.emit(140);
+         } else {
+            this.contentChangeOffset.emit(95);
+         }
    }
 }
