@@ -1,0 +1,46 @@
+<!--
+
+    Copyright (C) 2016 Stratio (http://stratio.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<section class="container-liquid">
+   <div class="col-sm-8 contains-tooltip">
+      <h3>Label with icon (Showing on click)</h3>
+      <st-tooltip text="Ports 5666, 9042 and 9160 must be accessible from the Stratio Admin." [showOnClick]="true" [qaTag]="qaTag + '-example1-contextual-help'">
+         <span>Port</span>
+          <span class="icon-help2"></span>
+      </st-tooltip>
+   </div>
+   <div class="col-sm-8 contains-tooltip">
+      <h3>Label with icon 2 (Showing on click)</h3>
+      <st-tooltip text="only one tooltip should be open at the same time" [showOnClick]="true" [qaTag]="qaTag + '-example2-contextual-help'">
+         <span> Port 2</span>
+         <span class="icon-help2"></span>
+      </st-tooltip>
+   </div>
+   <div class="col-sm-8 contains-tooltip">
+      <h3>Icon (Showing on hover)</h3>
+      <st-tooltip text="This is the tooltip activated on hover" [showOnClick]="false" [qaTag]="qaTag + '-example3-contextual-help'">
+          <span class="icon-help1"></span>
+      </st-tooltip>
+   </div>
+
+   <div class="col-sm-8 contains-tooltip">
+      <h3>Icon 2 (Showing on hover)</h3>
+      <st-tooltip text="This is the tooltip activated on hover" [showOnClick]="false" [qaTag]="qaTag + '-example3-contextual-help'">
+         <span class="icon-help1"></span>
+      </st-tooltip>
+   </div>
+</section>

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+.loading-content{
+   width: 100%;
+   min-height: 400px;
+   padding: 10%;
+}
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
-export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
+.content{
+   width: 100%;
+   min-height: 400px;
+   padding: 0;
+   line-height: 400px;
+}
+
+h1 {
+   margin: 0;
+}
