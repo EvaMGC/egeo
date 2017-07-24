@@ -11,6 +11,9 @@
 * st-combobox: Renamed to st-select
 * st-search: Remove searchOnlyOnClick and hasClearButton parameters
 
+**New features:**
+* st-toggle-buttons: Add an optional id to the interface
+
 ## 2.5.0 (July 13, 2017)
 
 **Fixed bugs:**
