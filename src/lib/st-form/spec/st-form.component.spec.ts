@@ -27,7 +27,7 @@ import { StFormDirectiveModule } from "../../directives/form/form-directives.mod
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
 
-fdescribe('StFormComponent', () => {
+describe('StFormComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, ReactiveFormsModule, StInputModule, PipesModule, StFormDirectiveModule],

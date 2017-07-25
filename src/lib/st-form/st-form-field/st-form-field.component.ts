@@ -23,9 +23,9 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() @StRequired() schema: any;
    @Input() required: boolean = false;
    @Input() formControl: FormControl = new FormControl('');
+   @Input() errorMessages: StInputError;
 
    public type: string;
-   public errorMessages: StInputError;
 
    private registeredOnChange: (_: any) => void;
 
@@ -34,16 +34,20 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
 
    ngOnInit(): void {
       this.type = this.schema.value.type == 'string' ? 'text' : this.schema.value.type;
-      this.formControl.validator = Validators.compose([Validators.required]);
-      this.errorMessages = {
-         generic: 'Error',
-         required: 'This field is required',
-         minLength: 'The field min length is ' + this.schema.value.minLength,
-         maxLength: 'The field max length is ' + this.schema.value.maxLength,
-         min: 'The number has to be higher than ' + this.schema.value.minimum,
-         max: 'The number has to be minor than ' + this.schema.value.maximum,
-         pattern: 'Invalid value'
-      };
+      if (this.required) {
+         this.formControl.validator = Validators.compose([Validators.required]);
+      }
+      if (!this.errorMessages) {
+         this.errorMessages = {
+            generic: 'Error',
+            required: 'This field is required',
+            minLength: 'The field min length is ' + this.schema.value.minLength,
+            maxLength: 'The field max length is ' + this.schema.value.maxLength,
+            min: 'The number has to be higher than ' + this.schema.value.minimum,
+            max: 'The number has to be minor than ' + this.schema.value.maximum,
+            pattern: 'Invalid value'
+         };
+      }
    }
 
    writeValue(value: any): void {
@@ -58,11 +62,11 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    getMin(): number {
-      return  this.schema.value.exclusiveMinimum ? this.schema.value.minimum: this.schema.value.minimum
+      return this.schema.value.exclusiveMinimum ? this.schema.value.minimum : this.schema.value.minimum
    }
 
    getMax(): number {
-      return  this.schema.value.exclusiveMaximum ? this.schema.value.maximum: this.schema.value.maximum
+      return this.schema.value.exclusiveMaximum ? this.schema.value.maximum : this.schema.value.maximum
    }
 
    onChange(value: any): void {
