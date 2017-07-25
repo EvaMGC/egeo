@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
    selector: 'st-breadcrumbs',
-   templateUrl: './st-breadcrumbs.html',
-   styleUrls: ['./st-breadcrumbs.scss']
+   templateUrl: './st-breadcrumbs.component.html',
+   styleUrls: ['./st-breadcrumbs.component.scss']
 })
-export class StBreadCrumbs implements OnInit {
-   @Input() options: string[];
+export class StBreadCrumbsComponent {
+   @Input() options: string[] = [];
    @Input() qaTag: string;
-   @Output() changeOption: EventEmitter<number> = new EventEmitter<number>();
+   @Output() select: EventEmitter<number> = new EventEmitter<number>();
 
-   ngOnInit(): void {
-      if (!this.qaTag) {
-         throw new Error('qaTag is a necesary field');
-      }
-   }
-
-   public generateCrumbs(): string[] {
+   generateCrumbs(): string[] {
       if (this.options.length <= 6) {
          return [...this.options];
       } else {
@@ -42,14 +36,14 @@ export class StBreadCrumbs implements OnInit {
       }
    }
 
-   public onSelect(index: number): void {
+   onSelect(index: number): void {
       if (index + 1 < this.options.length) {
          if (this.options.length <= 6 || index === 0) {
-            this.changeOption.emit(index);
+            this.select.emit(index);
          } else {
             let calculatedIndex: number;
             calculatedIndex = this.options.length - (6 - index);
-            this.changeOption.emit(calculatedIndex);
+            this.select.emit(index);
          }
       }
    }

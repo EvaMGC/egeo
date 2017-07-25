@@ -17,29 +17,37 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Http } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { StBreadCrumbs } from './st-breadcrumbs.component';
-
+import { StBreadCrumbsComponent } from './st-breadcrumbs.component';
 
 describe('[BreadCrumbsComponent]', () => {
-   let component: StBreadCrumbs;
-   let fixture: ComponentFixture<StBreadCrumbs>;
+   let component: StBreadCrumbsComponent;
+   let fixture: ComponentFixture<StBreadCrumbsComponent>;
 
    let windowRefServiceMock: any;
    let menuMock1 = ['section1', 'section2', 'section3', 'section4', 'section5'];
-   let menuMock2 = ['section6', 'section7', 'section8', 'section9', 'section10'];
+   let menuMock2 = [
+      'section6',
+      'section7',
+      'section8',
+      'section9',
+      'section10'
+   ];
 
-   beforeEach(async(() => {
-      TestBed.configureTestingModule({
-         declarations: [StBreadCrumbs]
+   beforeEach(
+      async(() => {
+         TestBed.configureTestingModule({
+            declarations: [StBreadCrumbsComponent],
+            schemas: [NO_ERRORS_SCHEMA]
+         }).compileComponents(); // compile template and css
       })
-         .compileComponents();  // compile template and css
-   }));
+   );
 
    beforeEach(() => {
       windowRefServiceMock = {};
       windowRefServiceMock.nativeWindow = window;
-      fixture = TestBed.createComponent(StBreadCrumbs);
+      fixture = TestBed.createComponent(StBreadCrumbsComponent);
       component = fixture.componentInstance;
    });
 
@@ -53,17 +61,16 @@ describe('[BreadCrumbsComponent]', () => {
       });
 
       it('And user clicks on an element, component emits the element position', () => {
-         spyOn(component.changeOption, 'emit');
+         spyOn(component.select, 'emit');
          component.onSelect(2);
-         expect(component.changeOption.emit).toHaveBeenCalledWith(2);
+         expect(component.select.emit).toHaveBeenCalledWith(2);
       });
 
       it('If user clicks on the active element, nothing happens', () => {
          component.onSelect(4);
-         spyOn(component.changeOption, 'emit');
-         expect(component.changeOption.emit).not.toHaveBeenCalled();
+         spyOn(component.select, 'emit');
+         expect(component.select.emit).not.toHaveBeenCalled();
       });
-
    });
 
    describe('if initialized when more 6 elements or less', () => {
@@ -74,13 +81,15 @@ describe('[BreadCrumbsComponent]', () => {
       it('the first element will be displayed followed by 3 dots and concatenated with the last 5 items', () => {
          expect(component.generateCrumbs()[0]).toEqual(menuMock1[0]);
          expect(component.generateCrumbs()[1]).toEqual('...');
-         expect(component.generateCrumbs().slice(-4)).toEqual(menuMock2.slice(-4));
+         expect(component.generateCrumbs().slice(-4)).toEqual(
+            menuMock2.slice(-4)
+         );
       });
 
       it('if user clicks on an element displayed after dots, component emits the real position of element', () => {
-         spyOn(component.changeOption, 'emit');
+         spyOn(component.select, 'emit');
          component.onSelect(3);
-         expect(component.changeOption.emit).toHaveBeenCalledWith(7);
+         expect(component.select.emit).toHaveBeenCalledWith(3);
       });
    });
 });

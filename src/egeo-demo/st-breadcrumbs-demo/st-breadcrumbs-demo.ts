@@ -13,13 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Component } from '@angular/core';
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export {
-   StTwoListSelectionDemoModule
-} from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
-export {
-   StBreadcrumbsDemoModule
-} from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+@Component({
+   selector: 'st-breadcrumbs-demo',
+   templateUrl: 'st-breadcrumbs-demo.html'
+})
+export class StBreadcrumbsDemoComponent {
+   public output: String;
+
+   public options: String[] = [];
+
+   constructor() {
+      this.options = ['example1', 'example2', 'example3'];
+   }
+
+   outputEmitter($event: any, type: String): void {
+      this.output = type + $event;
+      console.log(this.output);
+   }
+}

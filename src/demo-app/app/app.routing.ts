@@ -20,23 +20,59 @@ import { MainComponent } from './main/main';
 
 export const routes: Routes = [
    {
-      path: '', component: LayoutComponent, children: [
+      path: '',
+      component: LayoutComponent,
+      children: [
          // Main redirection
          { path: '', redirectTo: 'main', pathMatch: 'full' },
-         { path: 'alerts-demo', loadChildren: '@stratio/egeo-demo#StAlertsDemoModule' },
-         { path: 'dropdown-demo', loadChildren: '@stratio/egeo#StDropdownDemoModule' },
-         { path: 'dropdown-menu-demo', loadChildren: '@stratio/egeo#StDropdownMenuDemoModule' },
+         {
+            path: 'alerts-demo',
+            loadChildren: '@stratio/egeo-demo#StAlertsDemoModule'
+         },
+         {
+            path: 'dropdown-demo',
+            loadChildren: '@stratio/egeo#StDropdownDemoModule'
+         },
+         {
+            path: 'dropdown-menu-demo',
+            loadChildren: '@stratio/egeo#StDropdownMenuDemoModule'
+         },
          { path: 'help-demo', loadChildren: '@stratio/egeo#StHelpDemoModule' },
-         { path: 'info-box-demo', loadChildren: '@stratio/egeo#StInfoBoxDemoModule' },
-         { path: 'item-list-demo', loadChildren: '@stratio/egeo#StItemListDemoModule' },
+         {
+            path: 'info-box-demo',
+            loadChildren: '@stratio/egeo#StInfoBoxDemoModule'
+         },
+         {
+            path: 'item-list-demo',
+            loadChildren: '@stratio/egeo#StItemListDemoModule'
+         },
          { path: 'main', component: MainComponent },
-         { path: 'search-demo', loadChildren: '@stratio/egeo#StSearchDemoModule' },
-         { path: 'select-demo', loadChildren: '@stratio/egeo#StSelectDemoModule' },
-         { path: 'switch-demo', loadChildren: '@stratio/egeo-demo#StSwitchDemoModule' },
+         {
+            path: 'search-demo',
+            loadChildren: '@stratio/egeo#StSearchDemoModule'
+         },
+         {
+            path: 'select-demo',
+            loadChildren: '@stratio/egeo#StSelectDemoModule'
+         },
+         {
+            path: 'switch-demo',
+            loadChildren: '@stratio/egeo-demo#StSwitchDemoModule'
+         },
          { path: 'tip-demo', loadChildren: '@stratio/egeo#StTipDemoModule' },
-         { path: 'tooltip-demo', loadChildren: '@stratio/egeo-demo#StTooltipDemoModule'},
+         {
+            path: 'tooltip-demo',
+            loadChildren: '@stratio/egeo-demo#StTooltipDemoModule'
+         },
          { path: 'tree-demo', loadChildren: '@stratio/egeo#StTreeDemoModule' },
-         { path: 'two-list-selection-demo', loadChildren: '@stratio/egeo-demo#StTwoListSelectionDemoModule' }
+         {
+            path: 'two-list-selection-demo',
+            loadChildren: '@stratio/egeo-demo#StTwoListSelectionDemoModule'
+         },
+         {
+            path: 'breadcrumbs',
+            loadChildren: '@stratio/egeo-demo#StBreadcrumbsDemoModule'
+         }
       ]
    }
 ];

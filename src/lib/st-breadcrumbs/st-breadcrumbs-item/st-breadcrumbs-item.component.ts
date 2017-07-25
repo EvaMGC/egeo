@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export {
-   StTwoListSelectionDemoModule
-} from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
-export {
-   StBreadcrumbsDemoModule
-} from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+import { Component, Input } from '@angular/core';
+
+@Component({
+   selector: 'st-breadcrumbs-item',
+   templateUrl: './st-breadcrumbs-item.component.html',
+   styleUrls: ['./st-breadcrumbs-item.component.scss']
+})
+export class StBreadcrumbItemComponent {
+   @Input() qaTag: String;
+   @Input() active: Boolean;
+}

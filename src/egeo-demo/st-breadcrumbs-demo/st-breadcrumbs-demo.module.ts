@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export {
-   StTwoListSelectionDemoModule
-} from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
-export {
-   StBreadcrumbsDemoModule
-} from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { StBreadcrumbsModule, StDemoGeneratorModule } from '@stratio/egeo';
+
+import { StBreadcrumbsDemoComponent } from './st-breadcrumbs-demo';
+
+@NgModule({
+   imports: [
+      CommonModule,
+      StBreadcrumbsModule,
+      StDemoGeneratorModule.withComponents({
+         components: [StBreadcrumbsDemoComponent]
+      })
+   ],
+   declarations: [StBreadcrumbsDemoComponent],
+   providers: []
+})
+export class StBreadcrumbsDemoModule {}

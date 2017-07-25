@@ -16,8 +16,9 @@
 
 -->
 <ul class="st-breadcrumbs">
-   <li class="st-breadcrumbs__item sth-breadcrumbs__item" *ngFor="let el of generateCrumbs(); let last = last; let i = index;" [ngClass]="{'last': last}" >
-      <span class="st-breadcrumbs__item--text sth-breadcrumbs__item--text" (click)="onSelect(i)" [attr.id]="qaTag + '-' + i">{{el}}</span>
-      <span class="st-breadcrumbs__item--arrow sth-breadcrumbs__item--arrow" >></span>
-   </li>
+   <ng-content select="st-breadcrumbs-item"></ng-content>
+   <div *ngIf="options.length">
+      <st-breadcrumbs-item *ngFor="let item of generateCrumbs(); let last=last; let i = index" (click)="onSelect(i)" [active]="last"
+         [qaTag]="qaTag + '-' + i">{{item}}</st-breadcrumbs-item>
+   </div>
 </ul>
