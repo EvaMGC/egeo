@@ -16,11 +16,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { StBreadCrumbs } from './st-breadcrumbs.component';
+import { StBreadCrumbsComponent } from './st-breadcrumbs.component';
+import { StBreadcrumbItemComponent } from './st-breadcrumbs-item/st-breadcrumbs-item.component';
 
 @NgModule({
    imports: [CommonModule],
-   exports: [StBreadCrumbs],
-   declarations: [StBreadCrumbs]
+   exports: [StBreadCrumbsComponent, StBreadcrumbItemComponent],
+   declarations: [StBreadCrumbsComponent, StBreadcrumbItemComponent]
 })
 export class StBreadcrumbsModule {}

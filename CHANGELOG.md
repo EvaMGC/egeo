@@ -10,9 +10,11 @@
 
 * st-combobox: Renamed to st-select
 * st-search: Remove searchOnlyOnClick and hasClearButton parameters
+* st-breadcrumbs: Rename output event changeOption to select
 
 **New features:**
 * st-toggle-buttons: Add an optional id to the interface
+* st-breadcrumbs: Add component st-breadcrumbs item, add Ng-Content option
 
 ## 2.5.0 (July 13, 2017)
 
