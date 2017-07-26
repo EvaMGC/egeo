@@ -6,6 +6,7 @@
 
 * st-two-list-selection: Fix when list is empty, height not showing correctly
 * st-item-list: Add item list to egeo module
+* st-dropdown: Fix inputs immutable 
 
 **Breaking changes:**
 
