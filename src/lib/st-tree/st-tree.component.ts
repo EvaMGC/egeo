@@ -37,12 +37,24 @@ import { StNodeTree, StNodeTreeChange } from './st-tree.model';
 import { EgeoResolveService } from '../utils/egeo-resolver/egeo-resolve.service';
 
 /**
- * @description {Component} Tree
- * This component show a tree structure
+ * @description {Component} [Tree]
+ *
+ * The tree is a component for representing information in a hierarchical way.
+ * It allows navigating between the different nodes and visualizing the parent-child relationships between nodes.
+ * Up to 5 depth levels can be displayed at a time. To avoid a horizontal scroll,
+ * from the 5th level will be collapsing previous levels, starting with the first parent.
  *
  * @example
  *
- * <st-tree [tree]="tree"></st-tree>
+ * <st-tree
+ *    [tree]="treeA"
+ *    [maxLevel]="treeModel.max"
+ *    [isRoot]="true"
+ *    (toogleNode)="onToogleNode($event, treeA)"
+ *    (selectNode)="onSelectNode($event, treeA)"
+ *    (navigatePrevious)="onNavigatePrevious($event)"
+ *    [changeStreamNotification]="notificationChangeStream">
+ * </st-tree>
  */
 @StEgeo()
 @Component({
@@ -53,22 +65,30 @@ import { EgeoResolveService } from '../utils/egeo-resolver/egeo-resolve.service'
 })
 export class StTreeComponent implements OnInit, OnChanges {
 
-   /** @Input {string} qaTag value for set id and can test easily by QA team */
+   /** @Input {string} [qaTag=''] Id value for qa test */
    @Input() qaTag: string = '';
-   /** @Input {StNodeTree} tree Tree structure */
+   /** @Input {StNodeTree} [^tree] Tree root node */
    @Input() @StRequired() tree: StNodeTree;
-   /** @Input {number} maxLevel Maximum level of child nodes to display */
+   /** @Input {number} [maxLevel] Max level to show. From this level the tree does not expand more */
    @Input() maxLevel: number;
-   /** @Input {isRoot} isRoot Defines whether it is a partial or full tree  */
+   /** @Input {boolean} [isRoot=true] TRUE: the first node is root and not show dots, FALSE: the first node is not root and
+    * we put three dots to indicate that are more levels upper
+    */
    @Input() isRoot: boolean = true;
-
+   /** @Input {boolean} [expandFatherBranch=true] TRUE: Expand the path from the root to the expanded node if any node is not expanded.
+    * FALSE: Only expand the selected node
+    */
    @Input() expandFatherBranch: boolean = true;
+   /** @Input {boolean} [collapseChildsBranch=true] TRUE: Collapse all child nodes. FALSE: Only collapse the selected node */
    @Input() collapseChildsBranch: boolean = true;
-
+   /** @Input {Observable<StNodeTreeChange>} [changeStreamNotification] Stream for notificating changes in some node and not change all tree */
    @Input() changeStreamNotification: Observable<StNodeTreeChange>;
 
+   /** @Output {StNodeTreeChange} [toogleNode] Notify any node expansion or collapsed */
    @Output() toogleNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
+   /** @Output {StNodeTreeChange} [selectNode] Notify any node selection */
    @Output() selectNode: EventEmitter<StNodeTreeChange> = new EventEmitter<StNodeTreeChange>();
+   /** @Output {Event} [navigatePrevious] Notify click over three dots to indicate that user wants to go up in tree structrure */
    @Output() navigatePrevious: EventEmitter<Event> = new EventEmitter<Event>();
 
    public internalTree: StNodeTree;

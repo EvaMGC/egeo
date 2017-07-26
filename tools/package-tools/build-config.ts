@@ -11,6 +11,12 @@ export interface BuildConfig {
    outputDir: string;
    /** License banner that will be placed inside of every bundle. */
    licenseBanner: string;
+   /** Path where docs be puts in release (Inside release module path) */
+   docPath: string;
+   /** Html files path name inside docs path */
+   htmlPath: string;
+   /** markdown files path name inside docs path */
+   mdPath: string;
 }
 
 // Search for a build config by walking up the current working directory of the Node process.

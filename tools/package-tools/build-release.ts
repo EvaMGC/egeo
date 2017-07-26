@@ -1,5 +1,6 @@
 import { join } from 'path';
 import { copyFiles } from './copy-files';
+import { generateDocs } from './generate-docs';
 import { addPureAnnotationsToFile } from './pure-annotations';
 import { updatePackageVersion } from './package-versions';
 import { inlinePackageMetadataFiles } from './metadata-inlining';
@@ -33,6 +34,7 @@ export function composeRelease(packageName: string): void {
    copyFiles(sourcePath, 'package.json', releasePath);
    if (packageName === 'egeo') {
       copyFiles(projectDir, 'CHANGELOG.md', releasePath);
+      generateDocs(sourcePath, '**/README.md', releasePath);
    }
 
    updatePackageVersion(releasePath);
