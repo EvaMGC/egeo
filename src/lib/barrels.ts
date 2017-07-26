@@ -21,14 +21,16 @@ import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 import { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 import { StDropdownModule } from './st-dropdown/st-dropdown.module';
 import { StFooterModule } from './st-footer/st-footer.module';
-import { StFormModule } from './st-form/st-form.module';
+import { StFormDirectiveModule } from './directives/form/form-directives.module';
 import { StFormLabelModule } from './utils/egeo-form/st-form-label/st-form-label.module';
+import { StFormModule } from './st-form/st-form.module';
 import { StHeaderModule } from './st-header/st-header.module';
 import { StHelpModule } from './st-help/st-help.module';
 import { StHorizontalTabsModule } from './st-horizontal-tabs/st-horizontal-tabs.module';
 import { StInfoBoxModule } from './st-info-box/st-info-box.module';
 import { StInfoCardModule } from './st-info-card/st-info-card.module';
 import { StInputModule } from './st-input/st-input.module';
+import { StItemListModule } from './st-item-list/st-item-list.module';
 import { StModalModule } from './st-modal/st-modal.module';
 import { StPageTitleModule } from './st-page-title/st-page-title.module';
 import { StPaginationModule } from './st-pagination/st-pagination.module';
@@ -48,7 +50,6 @@ import { StTooltipModule } from './st-tooltip/st-tooltip.module';
 import { StTreeModule } from './st-tree/st-tree.module';
 import { StTwoListSelectionModule } from './st-two-list-selection/st-two-list-selection.module';
 import { StVerticalTabsModule } from './st-vertical-tabs/st-vertical-tabs.module';
-import { StFormDirectiveModule } from './directives/form/form-directives.module';
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -59,14 +60,16 @@ export const DECLARATIONS: any[] = [
    StDropdownMenuModule,
    StDropdownModule,
    StFooterModule,
-   StFormModule,
+   StFormDirectiveModule,
    StFormLabelModule,
+   StFormModule,
    StHeaderModule,
    StHelpModule,
    StHorizontalTabsModule,
    StInfoBoxModule,
    StInfoCardModule,
    StInputModule,
+   StItemListModule,
    StModalModule,
    StPageTitleModule,
    StPaginationModule,
@@ -85,6 +88,5 @@ export const DECLARATIONS: any[] = [
    StTooltipModule,
    StTreeModule,
    StTwoListSelectionModule,
-   StVerticalTabsModule,
-   StFormDirectiveModule
+   StVerticalTabsModule
 ];

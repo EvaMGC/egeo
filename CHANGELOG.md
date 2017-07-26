@@ -5,6 +5,7 @@
 **Fixed bugs:**
 
 * st-two-list-selection: Fix when list is empty, height not showing correctly
+* st-item-list: Add item list to egeo module
 
 **Breaking changes:**
 
