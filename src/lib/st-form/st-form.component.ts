@@ -14,17 +14,43 @@
  * limitations under the License.
  */
 
-import { Component, Input } from '@angular/core';
-import { StRequired } from '../decorators/require-decorators';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 @Component({
    selector: 'st-form',
-   templateUrl: './st-form.component.html'
+   templateUrl: './st-form.component.html',
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+export class StFormComponent implements OnInit {
+   @Input() schema: any;
+   @Input() form: FormGroup = new FormGroup({});
+   @Input() model: any = {};
 
-export class StFormComponent {
-   @Input() @StRequired() schema: any;
+   ngOnInit(): void {
+      for (let propertyName in this.schema.properties) {
+         if (this.schema.properties.hasOwnProperty(propertyName)) {
+            let property: any = this.schema.properties[propertyName];
+            let formControl: FormControl | FormArray;
+            if (property.default && this.model[propertyName] === undefined) {
+               this.model[propertyName] = property.default;
+            }
 
-   constructor() {}
+            if (property.type !== 'list') {
+               formControl = new FormControl(this.model[propertyName] || property.default);
+            } else {
+               formControl = new FormArray(this.model[propertyName] || property.default || []);
+            }
+            this.form.addControl(propertyName, formControl);
+         }
+      }
+   }
+
+   isRequired(propertyName: string): boolean {
+      if (!propertyName || !this.schema.required) {
+         return false;
+      }
+      return this.schema.required.indexOf(propertyName) !== -1;
+   }
 }

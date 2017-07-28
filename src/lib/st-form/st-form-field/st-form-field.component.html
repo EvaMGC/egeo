@@ -1,0 +1,15 @@
+<st-input *ngIf="type == 'text' || type == 'number'"
+          name="{{schema.key}}"
+          fieldType="{{type}}"
+          label="{{schema.value.title}}"
+          placeholder="{{schema.value.placeholder}}"
+          contextualHelp="{{schema.value.description}}"
+          [formControl]="formControl"
+          [errors]="errorMessages"
+          min="{{min}}"
+          max="{{max}}"
+          [minlength]="schema.value.minLength"
+          [maxlength]="schema.value.maxLength"
+          [required]="required"
+          [qaTag]="schema.key">
+</st-input>

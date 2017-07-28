@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export const schemaWithInputs: any = {
+export const jsonSchema: any = {
    '$schema': 'http://json-schema.org/schema#',
    'properties': {
       'genericNumberInput': {
@@ -25,7 +25,7 @@ export const schemaWithInputs: any = {
          'minimum': 6,
          'maximum': 10,
          'exclusiveMinimum': false,
-         'exclusiveMaximum': false
+         'exclusiveMaximum': true
       },
       'requiredNumber': {
          'title': 'Required number',
@@ -57,24 +57,14 @@ export const schemaWithInputs: any = {
          'exclusiveMinimum': true,
          'exclusiveMaximum': true
       },
-
-      'genericTextInput': {
-         'title': 'Required text',
-         'description': 'This is a generic text',
-         'type': 'string',
-         'default': 'Generic text',
-         'minLength': 2,
-         'maxLength': 6,
-         'pattern': '(a)+'
-      },
       'requiredText': {
          'title': 'Required text',
          'description': 'This is a required text',
          'type': 'string',
-         'default': '5'
+         'default': 'required text'
       },
       'minLengthText': {
-         'title': 'Text with a max length',
+         'title': 'Text with a min length',
          'description': 'You have to type a text with 10 characters at least',
          'type': 'string',
          'default': '',
@@ -85,7 +75,8 @@ export const schemaWithInputs: any = {
          'description': 'You have to type a text with less than 20 characters',
          'type': 'string',
          'default': '',
-         'maxLength': 20
+         'maxLength': 20,
+         'pattern': 'aa+'
       },
       'minAndMaxLengthText': {
          'title': 'Text with a min and max length',
@@ -93,7 +84,8 @@ export const schemaWithInputs: any = {
          'type': 'string',
          'default': '',
          'minLength': 10,
-         'maxLength': 20
+         'maxLength': 20,
+
       },
       'url': {
          'title': 'URL',
@@ -103,6 +95,6 @@ export const schemaWithInputs: any = {
       }
    },
    'required': [
-      'genericNumberInput', 'requiredNumber', 'requiredText'
+      'requiredNumber', 'requiredText'
    ]
 };

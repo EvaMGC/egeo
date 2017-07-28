@@ -15,8 +15,9 @@
     limitations under the License.
 
 -->
-<form [formGroup]="form" novalidate>
-   <st-form-field [schema]="property" *ngFor="let property of schema.properties | stObjectToArray" [formControl]="form.controls[property.key]" [required]="isRequired(property.key)" ngDefaultControl>
-   </st-form-field>
 
-</form>
+<st-form [schema]="jsonSchema" [form] = "form"></st-form>
+
+<br>
+<st-button subtypeClass="subtype3" text="SHOW FORM STATUS" (click)="showFormStatus()"></st-button>
+<br>

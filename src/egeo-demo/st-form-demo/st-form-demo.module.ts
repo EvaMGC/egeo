@@ -14,13 +14,27 @@
  * limitations under the License.
  */
 
-export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
-export { StFormDemoModule } from './st-form-demo/st-form-demo.module';
-export {
-   StTwoListSelectionDemoModule
-} from './st-two-list-selection-demo/st-two-list-selection-demo.module';
-export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
-export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
-export {
-   StBreadcrumbsDemoModule
-} from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+   StDemoGeneratorModule,
+   StButtonModule,
+   StFormModule, StInputModule
+} from '@stratio/egeo';
+
+import { StFormDemoComponent } from './st-form-demo';
+
+
+
+@NgModule({
+   imports: [
+      CommonModule,
+      StFormModule,
+      StButtonModule,
+      StInputModule,
+      StDemoGeneratorModule.withComponents({ components: [StFormDemoComponent] })
+   ],
+   declarations: [StFormDemoComponent]
+})
+export class StFormDemoModule { }
+
