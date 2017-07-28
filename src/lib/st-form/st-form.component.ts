@@ -14,36 +14,36 @@
  * limitations under the License.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
-import { StEgeo, StRequired } from '../decorators/require-decorators';
-import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 @Component({
    selector: 'st-form',
-   templateUrl: './st-form.component.html'
+   templateUrl: './st-form.component.html',
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-@StEgeo()
 export class StFormComponent implements OnInit {
-   @Input() @StRequired() schema: any;
+   @Input() schema: any;
    @Input() form: FormGroup = new FormGroup({});
    @Input() model: any = {};
 
-   constructor() {
-   }
-
-   ngOnInit() {
+   ngOnInit(): void {
       for (let propertyName in this.schema.properties) {
-         let property: any = this.schema.properties[propertyName];
-         let formControl: FormControl | FormArray;
-         if (property.type !== 'list') {
-            formControl = new FormControl({value: this.model[propertyName], required: this.isRequired(propertyName)});
-         }
-         else {
-            formControl = new FormArray([]);
-         }
+         if (this.schema.properties.hasOwnProperty(propertyName)) {
+            let property: any = this.schema.properties[propertyName];
+            let formControl: FormControl | FormArray;
+            if (property.default && this.model[propertyName] === undefined) {
+               this.model[propertyName] = property.default;
+            }
 
-         this.form.addControl(propertyName, formControl);
+            if (property.type !== 'list') {
+               formControl = new FormControl(this.model[propertyName] || property.default);
+            } else {
+               formControl = new FormArray(this.model[propertyName] || property.default || []);
+            }
+            this.form.addControl(propertyName, formControl);
+         }
       }
    }
 

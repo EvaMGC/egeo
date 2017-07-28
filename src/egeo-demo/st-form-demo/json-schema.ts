@@ -17,24 +17,38 @@
 export const jsonSchema: any = {
    '$schema': 'http://json-schema.org/schema#',
    'properties': {
+      'genericNumberInput': {
+         'title': 'Generic number',
+         'description': 'Generic input description',
+         'type': 'number',
+         'default': 5,
+         'minimum': 6,
+         'maximum': 10,
+         'exclusiveMinimum': false,
+         'exclusiveMaximum': true
+      },
       'requiredNumber': {
+         'title': 'Required number',
          'description': 'Required input description',
          'type': 'number',
          'default': 5
       },
       'minNumber': {
+         'title': 'Min number',
          'description': 'Min number input description',
          'type': 'number',
          'default': 28017,
          'minimum': 6
       },
       'maxNumber': {
+         'title': 'Max number',
          'description': 'Max number input description',
          'type': 'number',
          'default': 28017,
          'maximum': 5
       },
       'minAndMaxNumber': {
+         'title': 'Number in a range',
          'description': 'This number has to be between 7 and 19',
          'type': 'number',
          'default': 28017,
@@ -44,30 +58,37 @@ export const jsonSchema: any = {
          'exclusiveMaximum': true
       },
       'requiredText': {
+         'title': 'Required text',
          'description': 'This is a required text',
          'type': 'string',
-         'default': 5
+         'default': 'required text'
       },
       'minLengthText': {
+         'title': 'Text with a min length',
          'description': 'You have to type a text with 10 characters at least',
          'type': 'string',
          'default': '',
          'minLength': 10
       },
       'maxLengthText': {
+         'title': 'Text with a max length',
          'description': 'You have to type a text with less than 20 characters',
          'type': 'string',
          'default': '',
-         'maxLength': 20
+         'maxLength': 20,
+         'pattern': 'aa+'
       },
       'minAndMaxLengthText': {
+         'title': 'Text with a min and max length',
          'description': 'You have to type a text with less than 20 and 10 characters at least',
          'type': 'string',
          'default': '',
          'minLength': 10,
-         'maxLength': 20
+         'maxLength': 20,
+
       },
       'url': {
+         'title': 'URL',
          'description': 'You have to type a valid url',
          'type': 'string',
          'pattern': '(https?:\\/\\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})'

@@ -6,12 +6,10 @@
           contextualHelp="{{schema.value.description}}"
           [formControl]="formControl"
           [errors]="errorMessages"
-          min="{{getMin()}}"
-          max="{{getMax()}}"
+          min="{{min}}"
+          max="{{max}}"
           [minlength]="schema.value.minLength"
           [maxlength]="schema.value.maxLength"
           [required]="required"
           [qaTag]="schema.key">
 </st-input>
-
-
