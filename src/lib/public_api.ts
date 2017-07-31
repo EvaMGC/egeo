@@ -94,6 +94,9 @@ export { StHelpModule } from './st-help/st-help.module';
 // Dynamic form
 export { StFormModule } from './st-form/st-form.module';
 
+// Dynamic form
+export { StFormModule } from './st-form/st-form.module';
+
 // Horizontal Tabs
 export {
    StHorizontalTabsModule
