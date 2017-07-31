@@ -15,8 +15,18 @@
     limitations under the License.
 
 -->
-<form [formGroup]="form" novalidate>
-   <st-form-field [schema]="property" *ngFor="let property of schema.properties | stObjectToArray" [formControl]="form.controls[property.key]" [required]="isRequired(property.key)" ngDefaultControl>
-   </st-form-field>
-
-</form>
+<st-input *ngIf="type == 'text' || type == 'number'"
+          name="{{schema.key}}"
+          fieldType="{{type}}"
+          label="{{schema.value.title}}"
+          placeholder="{{schema.value.placeholder}}"
+          contextualHelp="{{schema.value.description}}"
+          [formControl]="formControl"
+          [errors]="errorMessages"
+          [min]="min"
+          [max]="max"
+          [minlength]="schema.value.minLength"
+          [maxlength]="schema.value.maxLength"
+          [required]="required"
+          [qaTag]="schema.key">
+</st-input>

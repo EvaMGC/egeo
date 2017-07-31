@@ -15,9 +15,12 @@
  */
 import {TranslateableElement} from '../utils/egeo-resolver/egeo-resolve-model';
 
-export interface StInputError {
+export interface StError {
    generic?: string;
    required?: string;
+}
+
+export interface StInputError extends StError {
    minLength?: string;
    maxLength?: string;
    min?: string;

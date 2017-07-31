@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Stratio (http://stratio.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,21 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { StFormComponent } from './st-form.component';
-
-let component: StFormComponent;
-let fixture: ComponentFixture<StFormComponent>;
-
-describe('StFormComponent', () => {
-
-   beforeEach(async(() => {
-      TestBed.configureTestingModule({
-         declarations: [ StFormComponent ]
-      })
-      .compileComponents();
-   }));
-
-});

@@ -15,14 +15,20 @@
  */
 
 import { CommonModule }  from '@angular/common';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { StFormComponent } from './st-form.component';
+import {StFormFieldComponent} from './st-form-field/st-form-field.component';
+import {PipesModule} from '../pipes/pipes.module';
+import {StInputModule} from '../st-input/st-input.module';
+import { StFormDirectiveModule } from '../directives/form/form-directives.module';
 
 @NgModule({
-   imports: [ CommonModule ],
-   declarations: [ StFormComponent ],
+   imports: [ CommonModule,  FormsModule, ReactiveFormsModule, StInputModule, PipesModule, StFormDirectiveModule ],
+   declarations: [ StFormComponent, StFormFieldComponent ],
    exports: [ StFormComponent ]
 })
 
-export class StFormModule { }
+export class StFormModule {
+}
