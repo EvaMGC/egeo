@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import { Component } from '@angular/core';
-import { jsonSchema } from "./json-schema";
-import { FormGroup } from "@angular/forms";
+import { jsonSchema } from './json-schema';
+import { FormGroup } from '@angular/forms';
 
 @Component({
    selector: 'st-form-demo',
