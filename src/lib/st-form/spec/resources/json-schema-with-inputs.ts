@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export const schemaWithInputs: any = {
+export const SCHEMA_WITH_INPUTS: any = {
    '$schema': 'http://json-schema.org/schema#',
    'properties': {
       'genericNumberInput': {

@@ -16,15 +16,13 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
    StDemoGeneratorModule,
    StButtonModule,
    StFormModule, StInputModule
 } from '@stratio/egeo';
-
 import { StFormDemoComponent } from './st-form-demo';
-
-
 
 @NgModule({
    imports: [

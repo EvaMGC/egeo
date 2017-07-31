@@ -15,13 +15,13 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { StFormFieldComponent } from './st-form-field.component';
-import { schemaWithInputs } from '../spec/resources/json-schema-with-inputs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StInputModule } from '../../st-input/st-input.module';
+
 import { PipesModule } from '../../pipes/pipes.module';
+import { SCHEMA_WITH_INPUTS } from '../spec/resources/json-schema-with-inputs';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
+import { StFormFieldComponent } from './st-form-field.component';
+import { StInputModule } from '../../st-input/st-input.module';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -50,7 +50,7 @@ describe('StFormFieldComponent', () => {
          let minValue: number;
          let maxValue: number;
          beforeEach(() => {
-            numberInputProperty = schemaWithInputs.properties.genericNumberInput;
+            numberInputProperty = SCHEMA_WITH_INPUTS.properties.genericNumberInput;
             minValue = numberInputProperty.minimum;
             maxValue = numberInputProperty.maximum;
             component.schema = {key: 'genericNumberInput', value: numberInputProperty};
@@ -81,7 +81,6 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('This field is required');
 
@@ -91,7 +90,6 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
@@ -105,7 +103,6 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than ' + minValue);
 
@@ -113,7 +110,6 @@ describe('StFormFieldComponent', () => {
             input.dispatchEvent(new Event('input'));
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
@@ -127,7 +123,7 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be minor than ' + maxValue);
 
@@ -135,7 +131,7 @@ describe('StFormFieldComponent', () => {
             input.dispatchEvent(new Event('input'));
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
@@ -146,7 +142,7 @@ describe('StFormFieldComponent', () => {
                numberInputProperty.exclusiveMinimum = true;
                fixture.detectChanges();
 
-               fixture.changeDetectorRef.markForCheck();
+
 
                input = fixture.nativeElement.querySelector('#genericNumberInput');
 
@@ -157,7 +153,7 @@ describe('StFormFieldComponent', () => {
                input.blur();
 
                fixture.detectChanges();
-               fixture.changeDetectorRef.markForCheck();
+
 
 
                expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than ' + (minValue + 1));
@@ -165,7 +161,7 @@ describe('StFormFieldComponent', () => {
                // equal to the minimum
                input.value = minValue.toString();
                input.dispatchEvent(new Event('input'));
-               fixture.changeDetectorRef.markForCheck();
+
                fixture.detectChanges();
 
                expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than ' + (minValue + 1));
@@ -186,7 +182,7 @@ describe('StFormFieldComponent', () => {
                input.blur();
 
                fixture.detectChanges();
-               fixture.changeDetectorRef.markForCheck();
+
 
                expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
             });
@@ -204,7 +200,6 @@ describe('StFormFieldComponent', () => {
                input.blur();
 
                fixture.detectChanges();
-               fixture.changeDetectorRef.markForCheck();
 
                expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be minor than ' + (maxValue - 1));
 
@@ -212,7 +207,7 @@ describe('StFormFieldComponent', () => {
                input.value = maxValue.toString();
                input.dispatchEvent(new Event('input'));
                fixture.detectChanges();
-               fixture.changeDetectorRef.markForCheck();
+
 
                expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be minor than ' + (maxValue - 1));
             });
@@ -231,7 +226,6 @@ describe('StFormFieldComponent', () => {
                input.blur();
 
                fixture.detectChanges();
-               fixture.changeDetectorRef.markForCheck();
 
                expect(fixture.nativeElement.querySelector('#genericNumberInput').parentNode.parentNode.querySelector('.st-input-error-layout span')).toBeNull();
             });
@@ -245,7 +239,7 @@ describe('StFormFieldComponent', () => {
          let maxLength: number;
 
          beforeEach(() => {
-            textInputProperty = schemaWithInputs.properties.genericTextInput;
+            textInputProperty = SCHEMA_WITH_INPUTS.properties.genericTextInput;
             minLength = textInputProperty.minLength;
             maxLength = textInputProperty.maxLength;
             component.schema = {key: 'genericTextInput', value: textInputProperty};
@@ -263,7 +257,6 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('This field is required');
 
@@ -272,7 +265,7 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
@@ -286,7 +279,7 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The field min length is ' + minLength);
 
@@ -294,7 +287,7 @@ describe('StFormFieldComponent', () => {
             input.dispatchEvent(new Event('input'));
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
@@ -308,7 +301,6 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The field max length is ' + maxLength);
 
@@ -318,7 +310,7 @@ describe('StFormFieldComponent', () => {
 
             input.blur();
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
@@ -330,7 +322,7 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
+
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('Invalid value');
 
             input.focus();
@@ -339,7 +331,6 @@ describe('StFormFieldComponent', () => {
             input.blur();
 
             fixture.detectChanges();
-            fixture.changeDetectorRef.markForCheck();
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 import { Component } from '@angular/core';
-import { jsonSchema } from './json-schema';
 import { FormGroup } from '@angular/forms';
+
+import { JSON_SCHEMA } from './json-schema';
 
 @Component({
    selector: 'st-form-demo',
@@ -26,7 +27,7 @@ export class StFormDemoComponent {
    public form: FormGroup;
 
    constructor() {
-      this.jsonSchema = jsonSchema;
+      this.jsonSchema = JSON_SCHEMA;
       this.form = new FormGroup({});
    }
 

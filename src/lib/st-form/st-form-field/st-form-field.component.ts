@@ -20,10 +20,10 @@ import {
    OnInit,
    Input
 } from '@angular/core';
-
 import {
    ControlValueAccessor, FormControl, Validators, ValidatorFn
 } from '@angular/forms';
+
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StInputError } from '../../st-input/st-input.error.model';
 

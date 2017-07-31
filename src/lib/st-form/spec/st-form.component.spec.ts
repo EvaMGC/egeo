@@ -17,7 +17,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StFormComponent } from '../st-form.component';
-import { schemaWithInputs } from './resources/json-schema-with-inputs';
+import { SCHEMA_WITH_INPUTS } from './resources/json-schema-with-inputs';
 import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -39,23 +39,23 @@ describe('StFormComponent', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(StFormComponent);
       component = fixture.componentInstance;
-      component.schema = Object.assign({}, schemaWithInputs);
+      component.schema = Object.assign({}, SCHEMA_WITH_INPUTS);
       fixture.detectChanges();
    });
 
    describe('should render a form according its json schema', () => {
       it('a control is created for each property with its ids', () => {
-         for (let propertyId in schemaWithInputs.properties) {
-            if (schemaWithInputs.hasOwnProperty(propertyId)) {
+         for (let propertyId in SCHEMA_WITH_INPUTS.properties) {
+            if (SCHEMA_WITH_INPUTS.hasOwnProperty(propertyId)) {
                expect(fixture.nativeElement.querySelector('#' + propertyId)).not.toBeNull();
             }
          }
       });
 
       it('tooltips are generated using their descriptions', () => {
-         for (let propertyId in schemaWithInputs.properties) {
-            if (schemaWithInputs.properties.hasOwnProperty(propertyId)) {
-               let property: any = schemaWithInputs.properties[propertyId];
+         for (let propertyId in SCHEMA_WITH_INPUTS.properties) {
+            if (SCHEMA_WITH_INPUTS.properties.hasOwnProperty(propertyId)) {
+               let property: any = SCHEMA_WITH_INPUTS.properties[propertyId];
                let tooltip: HTMLElement = fixture.nativeElement.querySelector('#' + propertyId + '-contextual-help');
 
                if (property.description) {
@@ -70,9 +70,9 @@ describe('StFormComponent', () => {
 
       it('inputs are displayed with their default value and label', () => {
 
-         for (let propertyId in schemaWithInputs.properties) {
-            if (schemaWithInputs.properties.hasOwnProperty(propertyId)) {
-               let property: any = schemaWithInputs.properties[propertyId];
+         for (let propertyId in SCHEMA_WITH_INPUTS.properties) {
+            if (SCHEMA_WITH_INPUTS.properties.hasOwnProperty(propertyId)) {
+               let property: any = SCHEMA_WITH_INPUTS.properties[propertyId];
                if (property.default) {
                   expect(fixture.nativeElement.querySelector('#' + propertyId).value).toBe(property.default.toString());
                }

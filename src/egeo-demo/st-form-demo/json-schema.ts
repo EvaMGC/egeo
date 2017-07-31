@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export const jsonSchema: any = {
+export const JSON_SCHEMA: any = {
    '$schema': 'http://json-schema.org/schema#',
    'properties': {
       'genericNumberInput': {
