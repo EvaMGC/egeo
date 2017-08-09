@@ -33,6 +33,6 @@ export class StFormDemoComponent {
 
 
    public showFormStatus(): void {
-      console.log(this.form);
+      console.log({valid: this.form.valid, model: this.form.value});
    }
 }

@@ -38,9 +38,9 @@ export class StFormComponent implements OnInit {
             }
 
             if (property.type !== 'list') {
-               formControl = new FormControl(this.model[propertyName] || property.default);
+               formControl = new FormControl(this.model[propertyName]  || '');
             } else {
-               formControl = new FormArray(this.model[propertyName] || property.default || []);
+               formControl = new FormArray(this.model[propertyName] || []);
             }
             this.form.addControl(propertyName, formControl);
          }

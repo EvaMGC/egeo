@@ -23,6 +23,7 @@
 * st-toggle-buttons: Add an optional id to the interface
 * st-breadcrumbs: Add component st-breadcrumbs item, add Ng-Content option
 * st-input: Add input value and output change
+* st-form: Create a dynamic form with inputs
 
 **Refactor:**
 
