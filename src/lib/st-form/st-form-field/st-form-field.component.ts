@@ -99,4 +99,39 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       return this.schema.value.exclusiveMaximum ? this.schema.value.maximum - 1 : this.schema.value.maximum;
    }
 
+   get name(): string {
+      return this.schema.key;
+   }
+
+   get label(): string {
+      return this.schema.value.title
+   }
+
+   get placeholder(): string {
+      return this.schema.value.placeholder || '';
+   }
+
+   get description(): string {
+      return this.schema.value.description;
+   }
+
+   get minLength(): number {
+     return this.schema.value.minLength;
+   }
+
+   get maxLength(): number {
+      return this.schema.value.maxLength;
+   }
+
+
+   hasType(type: string): boolean {
+      switch(type){
+         case 'input':
+            return this.type == 'text' || this.type == 'number';
+         default:
+            return false;
+
+      }
+   }
+
 }

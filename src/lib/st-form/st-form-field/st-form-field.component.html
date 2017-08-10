@@ -15,18 +15,18 @@
     limitations under the License.
 
 -->
-<st-input *ngIf="type == 'text' || type == 'number'"
-          name="{{schema.key}}"
-          fieldType="{{type}}"
-          label="{{schema.value.title}}"
-          placeholder="{{schema.value.placeholder}}"
-          contextualHelp="{{schema.value.description}}"
+<st-input *ngIf="hasType('input')"
+          [name]="name"
+          [fieldType]="type"
+          [label]="label"
+          [placeholder]="placeholder"
+          [contextualHelp]="description"
           [formControl]="formControl"
           [errors]="errorMessages"
           [min]="min"
           [max]="max"
-          [minlength]="schema.value.minLength"
-          [maxlength]="schema.value.maxLength"
+          [minlength]="minLength"
+          [maxlength]="maxLength"
           [required]="required"
           [value]="formControl.value"
           [qaTag]="schema.key">

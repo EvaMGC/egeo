@@ -29,28 +29,18 @@ export class StFormComponent implements OnInit {
    @Input() model: any = {};
 
    ngOnInit(): void {
-      for (let propertyName in this.schema.properties) {
-         if (this.schema.properties.hasOwnProperty(propertyName)) {
-            let property: any = this.schema.properties[propertyName];
-            let formControl: FormControl | FormArray;
-            if (property.default && this.model[propertyName] === undefined) {
-               this.model[propertyName] = property.default;
-            }
-
-            if (property.type !== 'list') {
-               formControl = new FormControl(this.model[propertyName]  || '');
-            } else {
-               formControl = new FormArray(this.model[propertyName] || []);
-            }
-            this.form.addControl(propertyName, formControl);
+      Object.keys(this.schema.properties).forEach(propertyName => {
+         let property: any = this.schema.properties[propertyName];
+         let formControl: FormControl | FormArray;
+         if (property.default && this.model[propertyName] === undefined) {
+            this.model[propertyName] = property.default;
          }
-      }
+         formControl = new FormControl(this.model[propertyName] || '');
+         this.form.addControl(propertyName, formControl);
+      });
    }
 
    isRequired(propertyName: string): boolean {
-      if (!propertyName || !this.schema.required) {
-         return false;
-      }
-      return this.schema.required.indexOf(propertyName) !== -1;
+      return propertyName && this.schema.required && this.schema.required.indexOf(propertyName) !== -1;
    }
 }

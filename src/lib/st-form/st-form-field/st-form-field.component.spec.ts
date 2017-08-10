@@ -15,7 +15,7 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { PipesModule } from '../../pipes/pipes.module';
 import { SCHEMA_WITH_INPUTS } from '../spec/resources/json-schema-with-inputs';
@@ -25,6 +25,7 @@ import { StInputModule } from '../../st-input/st-input.module';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
+let formControl: FormControl = new FormControl();
 
 describe('StFormFieldComponent', () => {
 
@@ -54,6 +55,7 @@ describe('StFormFieldComponent', () => {
             minValue = numberInputProperty.minimum;
             maxValue = numberInputProperty.maximum;
             component.schema = {key: 'genericNumberInput', value: numberInputProperty};
+            component.formControl = formControl;
          });
 
          it('if user tries to type text, input value is not updated', () => {
@@ -230,6 +232,16 @@ describe('StFormFieldComponent', () => {
                expect(fixture.nativeElement.querySelector('#genericNumberInput').parentNode.parentNode.querySelector('.st-input-error-layout span')).toBeNull();
             });
          });
+
+         it ('When form control is updated externally, it is updated', () => {
+            formControl.setValue(5);
+
+            fixture.detectChanges();
+
+            input = fixture.nativeElement.querySelector('#genericNumberInput');
+
+            expect(input.value).toBe('5');
+         });
       });
 
       describe('text input', () => {
@@ -243,7 +255,7 @@ describe('StFormFieldComponent', () => {
             minLength = textInputProperty.minLength;
             maxLength = textInputProperty.maxLength;
             component.schema = {key: 'genericTextInput', value: textInputProperty};
-
+            component.formControl = formControl;
             fixture.detectChanges();
             input = fixture.nativeElement.querySelector('#genericTextInput');
          });
@@ -334,7 +346,18 @@ describe('StFormFieldComponent', () => {
 
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
+
+         it ('When form control is updated externally, it is updated', () => {
+            formControl.setValue('aa');
+
+            fixture.detectChanges();
+
+            input = fixture.nativeElement.querySelector('#genericTextInput');
+
+            expect(input.value).toBe('aa');
+         });
       });
+
    });
 
 });
