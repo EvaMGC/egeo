@@ -104,7 +104,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    get label(): string {
-      return this.schema.value.title
+      return this.schema.value.title;
    }
 
    get placeholder(): string {
@@ -116,7 +116,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    get minLength(): number {
-     return this.schema.value.minLength;
+      return this.schema.value.minLength;
    }
 
    get maxLength(): number {
@@ -125,12 +125,11 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
 
 
    hasType(type: string): boolean {
-      switch(type){
+      switch (type) {
          case 'input':
-            return this.type == 'text' || this.type == 'number';
+            return this.type === 'text' || this.type === 'number';
          default:
             return false;
-
       }
    }
 
