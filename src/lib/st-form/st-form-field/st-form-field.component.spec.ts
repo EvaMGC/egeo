@@ -18,10 +18,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { PipesModule } from '../../pipes/pipes.module';
-import { SCHEMA_WITH_INPUTS } from '../spec/resources/json-schema-with-inputs';
+import { JSON_SCHEMA } from '../spec/resources/json-schema';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 import { StFormFieldComponent } from './st-form-field.component';
 import { StInputModule } from '../../st-input/st-input.module';
+import { StSwitchModule } from '../../st-switch/st-switch.module';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -31,7 +32,7 @@ describe('StFormFieldComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StInputModule, PipesModule, StFormDirectiveModule],
+         imports: [FormsModule, ReactiveFormsModule, StInputModule, StSwitchModule, PipesModule, StFormDirectiveModule],
          declarations: [StFormFieldComponent]
       })
          .compileComponents();  // compile template and css
@@ -51,7 +52,7 @@ describe('StFormFieldComponent', () => {
          let minValue: number;
          let maxValue: number;
          beforeEach(() => {
-            numberInputProperty = SCHEMA_WITH_INPUTS.properties.genericNumberInput;
+            numberInputProperty = JSON_SCHEMA.properties.genericNumberInput;
             minValue = numberInputProperty.minimum;
             maxValue = numberInputProperty.maximum;
             component.schema = {key: 'genericNumberInput', value: numberInputProperty};
@@ -145,7 +146,6 @@ describe('StFormFieldComponent', () => {
                fixture.detectChanges();
 
 
-
                input = fixture.nativeElement.querySelector('#genericNumberInput');
 
                input.focus();
@@ -155,7 +155,6 @@ describe('StFormFieldComponent', () => {
                input.blur();
 
                fixture.detectChanges();
-
 
 
                expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than ' + (minValue + 1));
@@ -233,7 +232,7 @@ describe('StFormFieldComponent', () => {
             });
          });
 
-         it ('When form control is updated externally, it is updated', () => {
+         it('When form control is updated externally, it is updated', () => {
             formControl.setValue(5);
 
             fixture.detectChanges();
@@ -251,7 +250,7 @@ describe('StFormFieldComponent', () => {
          let maxLength: number;
 
          beforeEach(() => {
-            textInputProperty = SCHEMA_WITH_INPUTS.properties.genericTextInput;
+            textInputProperty = JSON_SCHEMA.properties.genericTextInput;
             minLength = textInputProperty.minLength;
             maxLength = textInputProperty.maxLength;
             component.schema = {key: 'genericTextInput', value: textInputProperty};
@@ -347,7 +346,7 @@ describe('StFormFieldComponent', () => {
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
 
-         it ('When form control is updated externally, it is updated', () => {
+         it('When form control is updated externally, it is updated', () => {
             formControl.setValue('aa');
 
             fixture.detectChanges();
@@ -360,4 +359,64 @@ describe('StFormFieldComponent', () => {
 
    });
 
+   describe('should be able to render switches with their validations', () => {
+      let switchElement: HTMLInputElement;
+      let booleanProperty: any;
+
+      beforeEach(() => {
+         booleanProperty = JSON_SCHEMA.properties.boolean;
+         component.schema = {key: 'boolean', value: booleanProperty};
+         fixture.detectChanges();
+
+         switchElement = fixture.nativeElement.querySelector('#boolean-input');
+      });
+
+      it('label is displayed', () => {
+         expect(fixture.nativeElement.querySelector('.st-form-label__label span').innerHTML).toBe(booleanProperty.title);
+      });
+
+      it('tooltip is displayed if description exits', () => {
+         let tooltip: HTMLElement = fixture.nativeElement.querySelector('#boolean-contextual-help');
+         let tooltipText: Element = (<Element> tooltip.parentNode).querySelector('.sth-tooltip-content-text');
+
+         expect(tooltipText.innerHTML).toBe(booleanProperty.description);
+      });
+
+      it('icon for opening tooltip is not displayed if description does not exit', () => {
+         fixture = TestBed.createComponent(StFormFieldComponent);
+         component = fixture.componentInstance;
+
+         component.schema = {key: 'boolean', value: {type: 'boolean', description: undefined}};
+         component.formControl = formControl;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('#boolean-contextual-help')).toBeNull();
+      });
+
+      it('if schema contains a default value, switch has to be initialized with it', () => {
+         expect(switchElement.checked).toBe(booleanProperty.default);
+      });
+
+      it('if switch is disabled, when user clicks on it, it does not change', () => {
+         formControl.disable();
+         let previousValue: boolean = Boolean(fixture.nativeElement.querySelector('#boolean-input').checked);
+         fixture.detectChanges();
+
+         fixture.nativeElement.querySelector('#boolean-input').click();
+         fixture.detectChanges();
+
+         expect(Boolean(fixture.nativeElement.querySelector('#boolean-input').checked)).toBe(previousValue);
+      });
+
+      it('if switch is enabled, when user clicks on it, it has to change', () => {
+         formControl.enable();
+         fixture.detectChanges();
+
+         let previousValue: boolean = Boolean(switchElement.checked);
+         switchElement.click();
+
+         expect(Boolean(switchElement.checked)).not.toBe(previousValue);
+         expect(Boolean(switchElement.checked)).toBe(!previousValue);
+      });
+   });
 });

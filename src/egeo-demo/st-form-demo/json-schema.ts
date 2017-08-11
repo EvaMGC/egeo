@@ -92,6 +92,12 @@ export const JSON_SCHEMA: any = {
          'description': 'You have to type a valid url',
          'type': 'string',
          'pattern': '(https?:\\/\\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})'
+      },
+      'boolean': {
+         'title': 'Enable or disable this property',
+         'description': 'You can enable or disable this property',
+         'type': 'boolean',
+         'default': true
       }
    },
    'required': [

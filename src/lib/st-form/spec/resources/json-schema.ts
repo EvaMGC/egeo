@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export const SCHEMA_WITH_INPUTS: any = {
+export const JSON_SCHEMA: any = {
    '$schema': 'http://json-schema.org/schema#',
    'properties': {
       'genericNumberInput': {
@@ -100,6 +100,12 @@ export const SCHEMA_WITH_INPUTS: any = {
          'description': 'You have to type a valid url',
          'type': 'string',
          'pattern': '(https?:\\/\\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})'
+      },
+      'boolean': {
+         'title': 'Enable or disable this property',
+         'description': 'You can enable or disable this property',
+         'type': 'boolean',
+         'default': true
       }
    },
    'required': [
