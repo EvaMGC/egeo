@@ -254,6 +254,7 @@ describe('StFormFieldComponent', () => {
             minLength = textInputProperty.minLength;
             maxLength = textInputProperty.maxLength;
             component.schema = {key: 'genericTextInput', value: textInputProperty};
+            formControl = new FormControl('');
             component.formControl = formControl;
             fixture.detectChanges();
             input = fixture.nativeElement.querySelector('#genericTextInput');
@@ -366,6 +367,8 @@ describe('StFormFieldComponent', () => {
       beforeEach(() => {
          booleanProperty = JSON_SCHEMA.properties.boolean;
          component.schema = {key: 'boolean', value: booleanProperty};
+         formControl = new FormControl(true);
+         component.formControl = formControl;
          fixture.detectChanges();
 
          switchElement = fixture.nativeElement.querySelector('#boolean-input');
