@@ -18,7 +18,7 @@
 <div class="st-input sth-input">
    <div class="st-input-container sth-input-container" [ngClass]="{disabled: isDisabled, error: showError()}">
       <label class="st-input-title sth-input-title" [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
-         <st-tooltip *ngIf="contextualHelp" [text]="contextualHelp" [showOnClick]="true" [qaTag]="qaTag + '-contextual-help'">
+         <st-tooltip *ngIf="contextualHelp" [text]="contextualHelp" [showOnClick]="true" [qaTag]="qaTag + '-label-contextual-help'">
             <span>{{label}}</span>
             <span class="icon-help2"></span>
          </st-tooltip>

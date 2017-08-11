@@ -80,6 +80,10 @@ export class StSwitchComponent implements ControlValueAccessor {
       }
    }
 
+   get labelQaTag(): string {
+     return (this.qaTag || '') + '-label';
+   }
+
    // load external change
    writeValue(value: boolean): void {
       this._stModel = value;

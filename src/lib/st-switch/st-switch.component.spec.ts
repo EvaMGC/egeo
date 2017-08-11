@@ -67,6 +67,14 @@ describe('StSwitchComponent', () => {
       expect(clickableElement.click).toBeDefined();
    });
 
+   it('qa tag for the label is generated using the qa tag', () => {
+      let qaTag = 'fakeQATag';
+      component.qaTag = qaTag;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('#' + qaTag + '-label')).not.toBeNull();
+   });
+
    describe('Should update its class when disabled attribute changes', () => {
       beforeEach(() => {
          component.stModel = model;

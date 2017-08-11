@@ -57,7 +57,7 @@ describe('StFormComponent', () => {
          for (let propertyId in JSON_SCHEMA.properties) {
             if (JSON_SCHEMA.properties.hasOwnProperty(propertyId)) {
                let property: any = JSON_SCHEMA.properties[propertyId];
-               let tooltip: HTMLElement = fixture.nativeElement.querySelector('#' + propertyId + '-contextual-help');
+               let tooltip: HTMLElement = fixture.nativeElement.querySelector('#' + propertyId + '-label-contextual-help');
 
                if (property.description) {
                   let tooltipText: Element = (<Element> tooltip.parentNode).querySelector('.sth-tooltip-content-text');
