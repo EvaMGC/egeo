@@ -129,7 +129,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
          case 'input':
             return this.type === 'text' || this.type === 'number';
          default:
-            return false;
+            return this.type === type;
       }
    }
 

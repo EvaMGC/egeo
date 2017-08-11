@@ -17,12 +17,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StFormComponent } from '../st-form.component';
-import { SCHEMA_WITH_INPUTS } from './resources/json-schema-with-inputs';
+import { JSON_SCHEMA } from './resources/json-schema';
 import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../../pipes/pipes.module';
 import { StInputModule } from '../../st-input/st-input.module';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
+import { StSwitchModule } from '../../st-switch/st-switch.module';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
@@ -30,7 +31,7 @@ let fixture: ComponentFixture<StFormComponent>;
 describe('StFormComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StInputModule, PipesModule, StFormDirectiveModule],
+         imports: [FormsModule, ReactiveFormsModule, StInputModule, StSwitchModule, PipesModule, StFormDirectiveModule],
          declarations: [StFormComponent, StFormFieldComponent]
       })
          .compileComponents();  // compile template and css
@@ -39,23 +40,23 @@ describe('StFormComponent', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(StFormComponent);
       component = fixture.componentInstance;
-      component.schema = Object.assign({}, SCHEMA_WITH_INPUTS);
+      component.schema = Object.assign({}, JSON_SCHEMA);
       fixture.detectChanges();
    });
 
    describe('should render a form according its json schema', () => {
       it('a control is created for each property with its ids', () => {
-         for (let propertyId in SCHEMA_WITH_INPUTS.properties) {
-            if (SCHEMA_WITH_INPUTS.hasOwnProperty(propertyId)) {
+         for (let propertyId in JSON_SCHEMA.properties) {
+            if (JSON_SCHEMA.hasOwnProperty(propertyId)) {
                expect(fixture.nativeElement.querySelector('#' + propertyId)).not.toBeNull();
             }
          }
       });
 
       it('tooltips are generated using their descriptions', () => {
-         for (let propertyId in SCHEMA_WITH_INPUTS.properties) {
-            if (SCHEMA_WITH_INPUTS.properties.hasOwnProperty(propertyId)) {
-               let property: any = SCHEMA_WITH_INPUTS.properties[propertyId];
+         for (let propertyId in JSON_SCHEMA.properties) {
+            if (JSON_SCHEMA.properties.hasOwnProperty(propertyId)) {
+               let property: any = JSON_SCHEMA.properties[propertyId];
                let tooltip: HTMLElement = fixture.nativeElement.querySelector('#' + propertyId + '-contextual-help');
 
                if (property.description) {
@@ -68,15 +69,18 @@ describe('StFormComponent', () => {
          }
       });
 
-      it('inputs are displayed with their default value and label', () => {
-
-         for (let propertyId in SCHEMA_WITH_INPUTS.properties) {
-            if (SCHEMA_WITH_INPUTS.properties.hasOwnProperty(propertyId)) {
-               let property: any = SCHEMA_WITH_INPUTS.properties[propertyId];
+      it('controls are displayed with their default value and label', () => {
+         for (let propertyId in JSON_SCHEMA.properties) {
+            if (JSON_SCHEMA.properties.hasOwnProperty(propertyId)) {
+               let property: any = JSON_SCHEMA.properties[propertyId];
                if (property.default) {
-                  expect(fixture.nativeElement.querySelector('#' + propertyId).value).toBe(property.default.toString());
+                  if (property.type === 'boolean') {
+                     expect(fixture.nativeElement.querySelector('#' + propertyId + '-input').checked).toBe(property.default);
+                  } else {
+                     expect(fixture.nativeElement.querySelector('#' + propertyId).value).toBe(property.default.toString());
+                  }
                }
-               expect(fixture.nativeElement.querySelector('#' + propertyId + '-contextual-help span').innerHTML).toBe(property.title);
+               expect(fixture.nativeElement.innerHTML).toContain(property.title);
             }
          }
       });

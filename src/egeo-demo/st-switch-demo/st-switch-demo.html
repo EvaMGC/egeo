@@ -34,4 +34,8 @@
    <button class="button button-sq2" (click)="form.controls['switch'].disable()">
       <span>DISABLE SWITCH</span>
    </button>
+
+   <h1>Disabled switch without a form control</h1>
+   <st-switch [disabled]="true" label="Disabled switch" labelPosition="right" contextualHelp="This is an example of tooltip" [stModel]="model" qaTag="enabled-switch-3"></st-switch>
+   <br>
 </section>

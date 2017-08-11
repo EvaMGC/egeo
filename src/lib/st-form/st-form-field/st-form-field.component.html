@@ -28,6 +28,14 @@
           [minlength]="minLength"
           [maxlength]="maxLength"
           [required]="required"
-          [value]="formControl.value"
           [qaTag]="schema.key">
 </st-input>
+
+<st-switch *ngIf="hasType('boolean')"
+           [label]="schema.value.title"
+           [name]="schema.key"
+           [contextualHelp]="schema.value.description"
+           [formControl]="formControl"
+           [stModel]="formControl.value"
+           [qaTag]="schema.key">
+</st-switch>

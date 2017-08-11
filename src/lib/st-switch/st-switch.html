@@ -16,7 +16,7 @@
 
 -->
 <st-form-label class="st-switch__label sth-switch__label" labelPosition="{{labelPosition}}" [label]="label"
-               qaTag="{{qaTag}}-label"
+               qaTag="{{qaTag}}"
                [contextualHelp]="contextualHelp"
                [status]="getLabelStatus()">
    <div class="st-switch__toggle sth-switch__toggle" [attr.id]="qaTag"
@@ -30,6 +30,7 @@
              [checked]="stModel"
              (change)="onChange($event)"
              [attr.id]="name + '-input'"
+             [disabled]="disabled"
       />
    </div>
    <ng-content></ng-content>
