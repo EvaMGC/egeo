@@ -82,7 +82,6 @@ export class StSearchDemoComponent {
    }
 
    searchWithAutocompleteSearch(searchValue: string): void {
-      console.log('search');
       this.searchedAutocomplete = searchValue;
       this.filter(searchValue);
    }

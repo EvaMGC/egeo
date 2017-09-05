@@ -5,6 +5,7 @@
 **Fixed bugs:**
 
 * st-page-title: Fix bug when page is refreshed, the editable page title is displayed wrong
+* st-search: Send an empty search when the user presses the cross button
 
 **Breaking changes:**
 

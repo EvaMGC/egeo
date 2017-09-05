@@ -132,6 +132,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
    public clearInput(): void {
       this.searchBox.setValue('');
       this.closeElement();
+      this.emitValue(true);
    }
 
    private emitValue(force: boolean): void {
