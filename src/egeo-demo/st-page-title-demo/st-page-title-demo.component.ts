@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
    selector: 'st-page-title-demo-example',

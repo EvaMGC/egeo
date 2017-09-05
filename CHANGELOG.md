@@ -16,6 +16,14 @@
 
 * st-label: New component based on label native tag
 
+**Fixed bugs:**
+
+* st-page-title: Fix bug when page is refreshed, the editable page title is displayed wrong
+
+**Breaking changes:**
+
+* st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
+
 ## 3.0.1 (September 01, 2017)
 
 **Fixed bugs:**

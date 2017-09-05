@@ -23,7 +23,7 @@
          <span class="error_text sth-error-text" *ngIf="errorMessage">{{errorMessage}}</span>
 
          <span class="sth-page-title-title title" (click)="onClickEdit()" [ngClass]="{'sth-error': error}">
-          <input type="text" (keyup)="onEdit($event)" (focus)="onFocus($event)" (blur)="onBlur($event)" [(ngModel)]="title" #input StInputAdjustable placeholder="{{placeholder}}" [maxlength]="maxlength" [minlength]="minlength" [disabled]="disabled" [readOnly]="readOnly" />
+          <input type="text" (keyup)="onEdit($event)" (focus)="onFocus($event)" (blur)="onBlur($event)" [(ngModel)]="title" #input st-input-adjustable placeholder="{{placeholder}}" [maxlength]="maxlength" [minlength]="minlength" [disabled]="disabled" [readOnly]="readOnly" />
           <i *ngIf="!focus" class="button-edit sth-button-edit icon-edit"></i>
         </span>
 

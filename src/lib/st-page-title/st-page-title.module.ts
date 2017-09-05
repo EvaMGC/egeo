@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { StButtonModule } from '../st-button/st-button.module';
 import { StPageTitleComponent } from './st-page-title.component';
 
-import { StInputAdjustable } from '../directives/st-input-adjustable';
+import { StInputAdjustable } from '../directives/st-input-adjustable/st-input-adjustable';
 
 @NgModule({
    imports: [CommonModule, FormsModule, StButtonModule],
