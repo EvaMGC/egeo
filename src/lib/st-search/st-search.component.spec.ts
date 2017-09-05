@@ -256,7 +256,8 @@ describe('StSearchComponent', () => {
       expect(responseFunction).toHaveBeenCalledWith('test');
    });
 
-   it('should be able to clear on click', () => {
+   it('should be able to clean the search text when user clicks on the cross button and event is emitted with an empty search', () => {
+      spyOn(comp.search, 'emit');
       comp.debounce = 0;
       comp.minLength = 0;
 
@@ -273,7 +274,9 @@ describe('StSearchComponent', () => {
       expect(comp.searchBox.value).toEqual('test');
 
       clearButton.nativeElement.dispatchEvent(new Event('mousedown'));
+
       expect(comp.searchBox.value).toEqual('');
+      expect(comp.search.emit).toHaveBeenCalledWith('');
    });
 
    it('should be able to change initial Values', () => {
