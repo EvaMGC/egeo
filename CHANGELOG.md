@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.5.1 (upcoming)
+
+**Fixed bugs:**
+
+* st-page-title: Fix bug when page is refreshed, the editable page title is displayed wrong
+
+**Breaking changes:**
+
+* st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
+
 ## 2.5.0 (July 13, 2017)
 
 **Fixed bugs:**
