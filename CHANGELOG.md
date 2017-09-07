@@ -26,10 +26,15 @@
 * st-header: Change general behaivor and design
 * st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
 
+**Refactor**
+
+* st-radio: Apply new style according to UX specifications
+
 **Documentation:**
 
 * Update license
 * st-checkbox: added demo
+* st-radio: Added demo
 
 **Others**
 

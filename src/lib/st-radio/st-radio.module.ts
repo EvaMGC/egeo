@@ -12,10 +12,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { StRadioComponent, StRadioGroupComponent } from './st-radio.component';
+import { StLabelModule } from '../st-label/st-label.module';
 
 @NgModule({
    imports: [
-      CommonModule
+      CommonModule, StLabelModule
    ],
    exports: [
       StRadioComponent, StRadioGroupComponent

@@ -14,16 +14,13 @@ import {
    EventEmitter,
    Output,
    OnInit,
-   Optional,
-   ContentChildren,
-   Directive,
-   forwardRef,
-   QueryList
+   Optional, forwardRef, Directive, ContentChildren, QueryList
 } from '@angular/core';
+
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { SelectOneDispatcher } from '../utils/unique-dispatcher';
 import { RadioChange } from './st-radio.change';
+import { SelectOneDispatcher } from '../utils/unique-dispatcher';
 
 export const MD_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
    provide: NG_VALUE_ACCESSOR,
@@ -42,7 +39,7 @@ let _uniqueIdCounter = 0;
       role: 'radiogroup'
    }
 })
-export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
+export class StRadioGroupComponent implements ControlValueAccessor {
 
    @Output()
    change: EventEmitter<RadioChange> = new EventEmitter<RadioChange>();
@@ -60,7 +57,7 @@ export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
          this._value = newValue;
       }
 
-      this.updatedSelectRadiofromValue();
+      this.updatedSelectRadioFromValue();
       this.checkSelectRadio();
    }
 
@@ -106,8 +103,6 @@ export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
 
    onTouched: () => any = () => { };
 
-   ngOnInit(): void { }
-
    writeValue(value: any): void {
       this.value = value;
    }
@@ -120,7 +115,7 @@ export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
       this.onTouched = fn;
    }
 
-   _emitChangeEvent(): void {
+   emitChangeEvent(): void {
       let event = new RadioChange();
       event.source = this._selected;
       event.value = this._value;
@@ -133,7 +128,7 @@ export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
       }
    }
 
-   _touch(): void {
+   touch(): void {
       if (this.onTouched) {
          this.onTouched();
       }
@@ -151,7 +146,7 @@ export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
       }
    }
 
-   private updatedSelectRadiofromValue(): void {
+   private updatedSelectRadioFromValue(): void {
       let isAlreadySelected = this._selected != null && this._selected.value === this._value;
 
       if (this._radios != null && !isAlreadySelected) {
@@ -169,6 +164,24 @@ export class StRadioGroupComponent implements OnInit, ControlValueAccessor {
 
 let idUnique: number = 0;
 
+/**
+ * @description {Component} [Radio]
+ *
+ * The radio component is used normally in a form acting as the standard html radio input but also user can use it out of a form like a template driven form.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-radio-group class ="radio-inline">
+ *    <st-radio value="1">Enabled</st-radio>
+ *    <st-radio value="2" [disabled]="true">Disabled</st-radio>
+ *    <st-radio value="2" [checked]= "true" [disabled]="true">Disabled checked</st-radio>
+ * </st-radio-group>
+ * ```
+ *
+ */
 @Component({
    selector: 'st-radio',
    templateUrl: './st-radio.component.html',
@@ -181,11 +194,13 @@ let idUnique: number = 0;
 export class StRadioComponent implements OnInit {
 
    radioGroup: StRadioGroupComponent;
-
+   /** @Input {string} [id='st-radio-<unique id>'] Input Id value */
    @Input() id: string = `st-radio-${idUnique++}`;
+   /** @Input {string} [qaTag='st-radio-<unique id>'] Id value for qa test */
    @Input() qaTag: string = `st-radio-${idUnique++}`;
-
+   /** @Input {string} [name=''] Input name value */
    @Input() name: string;
+   /** @Input {boolean} [checked=''] Boolean to check the radio button */
    @Input()
    get checked(): boolean {
       return this._checked;
@@ -207,7 +222,7 @@ export class StRadioComponent implements OnInit {
          this._radioDispatcher.notify(this.id, this.name);
       }
    }
-
+   /** @Input {boolean} [disabled=''] Boolean to disable the radio button */
    @Input()
    get disabled(): boolean {
       return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
@@ -216,7 +231,7 @@ export class StRadioComponent implements OnInit {
    set disabled(value: boolean) {
       this._disabled = (value != null && value !== false) ? true : null;
    }
-
+   /** @Input {boolean} [value=''] Value of the radio button */
    @Input()
    get value(): any {
       return this._value;
@@ -236,6 +251,7 @@ export class StRadioComponent implements OnInit {
       }
    }
 
+   /** @Output {boolean} [change=''] Boolean emitted when radio button is changed */
    @Output() change: EventEmitter<RadioChange> = new EventEmitter<RadioChange>();
 
    get inputId(): string {
@@ -271,7 +287,7 @@ export class StRadioComponent implements OnInit {
 
    onInputBlur(): void {
       if (this.radioGroup) {
-         this.radioGroup._touch();
+         this.radioGroup.touch();
       }
    }
 
@@ -280,7 +296,6 @@ export class StRadioComponent implements OnInit {
    }
 
    toggleRadio(event: Event): void {
-
       event.stopPropagation();
       let groupValueChanged = this.radioGroup && this.value !== this.radioGroup.value;
 
@@ -293,10 +308,9 @@ export class StRadioComponent implements OnInit {
          this.radioGroup._controlValueAccessorChangeFn(this.value);
 
          if (groupValueChanged) {
-            this.radioGroup._emitChangeEvent();
+            this.radioGroup.emitChangeEvent();
          }
       }
-
    }
 
    private emitChangeEvent(): void {

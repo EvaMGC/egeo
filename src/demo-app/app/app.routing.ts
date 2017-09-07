@@ -37,6 +37,7 @@ export const routes: Routes = [
          { path: 'modal-demo', loadChildren: '@stratio/egeo-demo#StModalDemoModule' },
          { path: 'pagination-demo', loadChildren: '@stratio/egeo-demo#StPaginationDemoModule' },
          { path: 'page-title-demo', loadChildren: '@stratio/egeo-demo#StPageTitleDemoModule' },
+         { path: 'radio-demo', loadChildren: '@stratio/egeo-demo#StRadioDemoModule' },
          { path: 'search-demo', loadChildren: '@stratio/egeo-demo#StSearchDemoModule' },
          { path: 'select-demo', loadChildren: '@stratio/egeo-demo#StSelectDemoModule' },
          { path: 'switch-demo', loadChildren: '@stratio/egeo-demo#StSwitchDemoModule' },

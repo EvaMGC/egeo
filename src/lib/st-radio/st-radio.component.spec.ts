@@ -8,14 +8,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectOneDispatcher } from '../utils/unique-dispatcher';
-
-import { StRadioGroupComponent } from './st-radio.component';
 import { StRadioComponent } from './st-radio.component';
 
 describe('StRadioComponent', () => {
@@ -23,7 +19,6 @@ describe('StRadioComponent', () => {
    let component: StRadioComponent;
    let fixture: ComponentFixture<StRadioComponent>;
    let compiled: any;
-   let de: DebugElement;
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -90,12 +85,4 @@ describe('StRadioComponent', () => {
          expect(compiled.querySelector('input').checked).toBeFalsy();
       });
    });
-
-
-
 });
-
-
-
-
-

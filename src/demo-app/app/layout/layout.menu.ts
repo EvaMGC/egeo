@@ -31,6 +31,7 @@ export const OPTIONS: MenuOption[] = [
    { route: 'modal-demo', name: 'Modal' },
    { route: 'page-title-demo', name: 'Page Title' },
    { route: 'pagination-demo', name: 'Pagination' },
+   { route: 'radio-demo', name: 'Radio button' },
    { route: 'search-demo', name: 'Search' },
    { route: 'select-demo', name: 'Select' },
    { route: 'switch-demo', name: 'Switch' },

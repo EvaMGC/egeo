@@ -9,8 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, NgControl, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { SelectOneDispatcher } from '../utils/unique-dispatcher';
@@ -28,7 +28,6 @@ describe('StRadioGroup', () => {
       `
    })
    class RadioGroupWithModel {
-      modelValue: string;
       items: any[] = [
          { label: 'example1', value: '1' },
          { label: 'example2', value: '2' },
@@ -37,7 +36,6 @@ describe('StRadioGroup', () => {
    }
 
    let fixture: ComponentFixture<RadioGroupWithModel>;
-   let compiled: any;
    let groupDebugElement: DebugElement;
    let groupNativeElement: HTMLElement;
    let radioDebugElements: DebugElement[];
@@ -77,8 +75,6 @@ describe('StRadioGroup', () => {
       radioInputElements = radioDebugElements.map((debugEl) => debugEl.query(By.css('input')).nativeElement);
 
       groupNgControl = groupDebugElement.injector.get(NgControl);
-
-
    });
 
    it('should set individual radio names based on the group name', () => {
@@ -138,7 +134,6 @@ describe('StRadioGroup with FormControl', () => {
    let fixture: ComponentFixture<RadioGroup>;
 
    let compiled: any;
-   let de: DebugElement;
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
