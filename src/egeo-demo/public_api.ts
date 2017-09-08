@@ -26,6 +26,7 @@ export { StPageTitleDemoModule } from './st-page-title-demo/st-page-title-demo.m
 export { StPaginationDemoModule } from './st-pagination-demo/st-pagination-demo.module';
 export { StRadioDemoModule } from './st-radio-demo/st-radio-demo.module';
 export { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
+export { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 export { StSelectDemoModule } from './st-select-demo/select-demo.module';
 export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
 export { StTextareaDemoModule } from './st-textarea-demo/st-textarea-demo.module';

@@ -32,6 +32,7 @@ export const OPTIONS: MenuOption[] = [
    { route: 'page-title-demo', name: 'Page Title' },
    { route: 'pagination-demo', name: 'Pagination' },
    { route: 'radio-demo', name: 'Radio button' },
+   { route: 'radio-menu-demo', name: 'Radio Menu' },
    { route: 'search-demo', name: 'Search' },
    { route: 'select-demo', name: 'Select' },
    { route: 'switch-demo', name: 'Switch' },
