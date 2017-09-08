@@ -14,7 +14,6 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 @Component({
    selector: 'st-radio-demo',
    templateUrl: './st-radio-demo.html',
-   styleUrls: ['./st-radio-demo.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
