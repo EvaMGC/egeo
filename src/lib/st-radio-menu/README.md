@@ -4,13 +4,13 @@
 
 ## Inputs
 
-| Property      | Type                | Req   | Description                                                                                                                                                                    | Default |
-| ------------- | ------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| activeOption  | StRadioMenuOption   | False | Current active option                                                                                                                                                          | ''      |
-| options       | StRadioMenuOption[] | False | Array of string with options, option names must be translated                                                                                                                  | ''      |
-| qaTag         | String              | False | Identifier to generate a qa tag for each option                                                                                                                                | ''      |
+| Property      | Type                | Req   | Description                                                                                                                                                                   | Default |
+| ------------- | ------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| activeOption  | StRadioMenuOption   | False | Current active option                                                                                                                                                         | ''      |
+| options       | StRadioMenuOption[] | False | Array of string with options, option names must be translated                                                                                                                 | ''      |
+| qaTag         | String              | False | Identifier to generate a qa tag for each option                                                                                                                               | ''      |
 | theme         | String              | False | String representing the theme (css class) to be applied to the radio menu component. If you are using the Stratio theme, the possible values are theme-gray-1 and theme-gray-2 | ''      |
-| changedOption | StRadioMenuOption   | False |                                                                                                                                                                                | ''      |
+| changedOption | StRadioMenuOption   | False |                                                                                                                                                                               | ''      |
 
 ## Example
 

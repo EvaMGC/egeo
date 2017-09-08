@@ -51,7 +51,10 @@ export class StRadioMenuComponent {
    @Input() options: StRadioMenuOption[];
    /** @Input {string} [qaTag=''] Identifier to generate a qa tag for each option */
    @Input() qaTag: string;
-   /** @Input {string} [theme=''] String representing the theme (css class) to be applied to the radio menu component. If you are using the Stratio theme, the possible values are theme-gray-1 and theme-gray-2  */
+   /**
+    * @Input {string} [theme=''] String representing the theme (css class) to be applied to the radio menu component.
+    * If you are using the Stratio theme, the possible values are theme-gray-1 and theme-gray-2
+    */
    @Input() theme: string;
    /** @Input {StRadioMenuOption} [changedOption='']  */
    @Output() changedOption: EventEmitter<StRadioMenuOption> = new EventEmitter<StRadioMenuOption>();
