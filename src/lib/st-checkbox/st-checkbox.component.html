@@ -10,8 +10,8 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<label class="st-checkbox sth-checkbox" [ngClass]="{'disabled' : disabled}">
-   <div class="sth-checkbox-container">
+<label class="st-checkbox" [ngClass]="{'disabled' : disabled}">
+   <div class="st-checkbox-container">
       <input
          type="checkbox"
          [id]="qaTag"
@@ -26,7 +26,7 @@
          (change)="handleChange($event)" />
    </div>
 
-   <div class="custom-checkbox sth-checkbox-custom" [ngClass]="{'icon-check2' : checked}"></div>
+   <div class="custom-checkbox st-checkbox-custom" [ngClass]="{'icon-check2' : checked}"></div>
 
    <ng-content></ng-content>
 
