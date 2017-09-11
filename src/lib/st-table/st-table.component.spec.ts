@@ -19,8 +19,12 @@ import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
-let fakeFields: StTableHeader[] = [{ id: 'id', label: 'ID', sortable: true }, { id: 'name', label: 'Name', sortable: false },
-{ id: 'lastName', label: 'Last name' }, { id: 'phone', label: 'Phone', sortable: true }];
+let fakeFields: StTableHeader[] = [{id: 'id', label: 'ID', sortable: true}, {
+   id: 'name',
+   label: 'Name',
+   sortable: false
+},
+   {id: 'lastName', label: 'Last name'}, {id: 'phone', label: 'Phone', sortable: true}];
 
 describe('StTableComponent', () => {
 
@@ -212,13 +216,14 @@ describe('StTableComponent', () => {
             fixture.detectChanges();
          });
 
-         it ('checkbox is displayed at the header', () => {
+         it('checkbox is displayed at the header', () => {
             expect(fixture.nativeElement.querySelector('.st-table__header').querySelector('st-checkbox')).not.toBeNull();
          });
 
-         it ('When user clicks on the checkbox, an event is emitted with its current status', () => {
+         it('When user clicks on the checkbox, an event is emitted with its current status', () => {
             spyOn(component.selectAll, 'emit');
-            let selectedAllCheckbox: HTMLInputElement =   fixture.nativeElement.querySelector('.st-table__header').querySelector('st-checkbox').querySelector('input');
+            let selectedAllCheckbox: HTMLInputElement = fixture.nativeElement.querySelector('.st-table__header')
+               .querySelector('st-checkbox').querySelector('input');
 
             selectedAllCheckbox.click();
 
@@ -229,11 +234,12 @@ describe('StTableComponent', () => {
             expect(component.selectAll.emit).toHaveBeenCalledWith(false);
          });
 
-         it ('Checkbox is displayed checked or not according to the selectedAll input', () => {
+         it('Checkbox is displayed checked or not according to the selectedAll input', () => {
             component.selectedAll = true;
             fixture.detectChanges();
 
-            let selectedAllCheckbox: HTMLInputElement =   fixture.nativeElement.querySelector('.st-table__header').querySelector('st-checkbox').querySelector('input');
+            let selectedAllCheckbox: HTMLInputElement = fixture.nativeElement.querySelector('.st-table__header')
+               .querySelector('st-checkbox').querySelector('input');
 
             expect(selectedAllCheckbox.checked).toBeTruthy();
 

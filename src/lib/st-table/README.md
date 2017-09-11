@@ -9,7 +9,7 @@
 | fields        | StTableHeader[] | False | List of field displayed in the header                                                                                    | ''      |
 | qaTag         | String          | False | Prefix used to generate the id values for qa tests                                                                       | ''      |
 | header        | Boolean         | False | Boolean to show or hide the header                                                                                       | 'true'  |
-| sortable      | Boolean         | False | Boolean to make sortable the table, To enable sorting of columns use the new "sortable" field inside stTableHEader model | 'true'  |
+| sortable      | Boolean         | False | Boolean to make sortable the table, To enable sorting of columns use the new "sortable" field inside stTableHeader model | 'true'  |
 | selectableAll | Boolean         | False | Boolean to show or hide a checkbox in the header to select or deselect all rows                                          | 'false' |
 | currentOrder  | Order           | False | It specifies what is the current order applied to the table                                                              | ''      |
 | selectedAll   | Boolean         | False | It specifies if all rows are selected                                                                                    | 'false' |
