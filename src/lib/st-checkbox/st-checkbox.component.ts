@@ -18,6 +18,22 @@ export const CHECKBOX_CONTROL_ACCESSOR: any = {
    multi: true
 };
 
+/**
+ * @description {Component} [Checkbox]
+ *
+ * The checkbox component represents a custom input of the checkbox type.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-checkbox name="option" value="1">
+ *    Option 1
+ * </st-checkbox>
+ * ```
+ *
+ */
 @Component({
    selector: 'st-checkbox',
    templateUrl: './st-checkbox.component.html',
@@ -26,7 +42,7 @@ export const CHECKBOX_CONTROL_ACCESSOR: any = {
 })
 
 export class StCheckboxComponent implements ControlValueAccessor {
-
+   /** @Input {boolean} [checked='']  */
    @Input() get checked(): boolean {
       return this._checked;
    }
@@ -37,13 +53,19 @@ export class StCheckboxComponent implements ControlValueAccessor {
          this._changeDetectorRef.markForCheck();
       }
    }
-
+   /** @Input {boolean} [name=''] This parameter shows the final name of the input */
    @Input() name: string;
+   /** @Input {boolean} [qaTag=''] Id value for qa test */
    @Input() qaTag: string;
+   /** @Input {boolean} [disabled=''] It allows to disable the input component of the checkbox */
    @Input() disabled: boolean;
+   /** @Input {boolean} [required=''] It converts the component into a mandatory field in a form */
    @Input() required: boolean;
+   /** @Input {boolean} [readonly=''] This parameter disables the checkbox and it can not be modified by the user */
    @Input() readonly: boolean;
+   /** @Input {any} [value=''] The value of the checkbox */
    @Input() value: any;
+   /** @Output {{ checked: boolean, value: any }} [change=''] This is emitted when user clicks on the checkbox */
    @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
    private _checked: boolean = false;
