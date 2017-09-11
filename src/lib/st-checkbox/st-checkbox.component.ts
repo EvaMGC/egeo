@@ -46,8 +46,6 @@ export class StCheckboxComponent implements ControlValueAccessor {
    @Input() value: any;
    @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
-   private _value: string;
-   private _values: any;
    private _checked: boolean = false;
 
    constructor(

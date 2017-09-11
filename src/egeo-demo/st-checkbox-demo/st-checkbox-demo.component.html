@@ -25,14 +25,17 @@
       </div>
       <div class="col-md-6">
          <form>
-            <st-checkbox name="nameA" value="1">
+            <st-checkbox name="nameA" value="1" >
                Option A
             </st-checkbox>
             <st-checkbox name="nameA" value="2">
                Option B
             </st-checkbox>
-            <st-checkbox name="nameA" value="3">
-               Option C
+            <st-checkbox name="nameA" value="3" [disabled]="true">
+               Option C (disabled)
+            </st-checkbox>
+            <st-checkbox name="nameA" value="3" [disabled]="true" [checked]="true">
+               Option C (disabled and checked)
             </st-checkbox>
          </form>
       </div>
