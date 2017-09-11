@@ -18,14 +18,11 @@ import {
    styleUrls: ['./st-table-row.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    host: {
-      'class': 'sth-table-row',
-      '[class.sth-table-row--compacted]': 'compacted'
+      'class': 'st-table-row'
    }
 })
 
 export class StTableRowComponent {
-   @Input() compacted: boolean = false;
-
    public showHoverMenu: boolean = false;
 
    @HostListener('mouseover') onShowHoverMenu(): void {

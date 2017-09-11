@@ -36,6 +36,7 @@ export const OPTIONS: MenuOption[] = [
    { route: 'search-demo', name: 'Search' },
    { route: 'select-demo', name: 'Select' },
    { route: 'switch-demo', name: 'Switch' },
+   { route: 'table-demo', name: 'Table' },
    { route: 'tip-demo', name: 'Tip' },
    { route: 'tooltip-demo', name: 'Tooltip' },
    { route: 'tree-demo', name: 'Tree' },

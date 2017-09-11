@@ -10,15 +10,15 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<table class='sth-table' [attr.id]='qaTag'>
+<table class='st-table' [attr.id]='qaTag'>
    <thead>
-   <tr [ngClass]="{'sth-table__header--hidden': !header}" class='sth-table__header'>
+   <tr *ngIf = "header" class='st-table__header'>
       <th *ngFor='let field of fields'
-          class='sth-table__header-item'
-          [ngClass]="{'sth-table__header-item--selected': isSortedByField(field), sortable: isSortable(field)}"
+          class='st-table__header-item'
+          [ngClass]="{'st-table__header-item--selected': isSortedByField(field), sortable: isSortable(field)}"
           (click)="onChangeOrder(field)">
-         <label class='sth-table__header-text'>{{field.label}}
-            <i *ngIf="isSortable(field)" class='sth-table__order-arrow'
+         <label class='st-table__header-text'>{{field.label}}
+            <i *ngIf="isSortable(field)" class='st-table__order-arrow'
                [ngClass]="getHeaderItemClass(field)">
             </i>
          </label>

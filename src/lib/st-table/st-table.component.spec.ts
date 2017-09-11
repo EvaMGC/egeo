@@ -39,7 +39,7 @@ describe('StTableComponent', () => {
 
    });
 
-   describe('If developer does not specify some inputs, they will be set by default', () => {
+   describe('If some inputs are not specified, they will be set by default', () => {
       beforeEach(() => {
          fixture.detectChanges();
       });
@@ -52,31 +52,29 @@ describe('StTableComponent', () => {
       });
    });
 
-
    it('if table is sortable but there are fields not sortable, arrow is only displayed for sortable fields', () => {
       component.sortable = true;
       fixture.detectChanges();
-      let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.sth-table__header-item');
+      let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
 
 
-      expect(headerItems[0].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
-      expect(headerItems[1].querySelector('.sth-table__order-arrow')).toBeNull();
-      expect(headerItems[2].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
-      expect(headerItems[3].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
-
+      expect(headerItems[0].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
+      expect(headerItems[1].querySelector('.st-table__order-arrow')).toBeNull();
+      expect(headerItems[2].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
+      expect(headerItems[3].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
    });
 
    it('if table is not sortable but there are fields sortable, arrow is displayed for sortable fields', () => {
       component.sortable = false;
       fixture.detectChanges();
-      let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.sth-table__header-item');
+      let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
 
-      expect(headerItems[0].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
-      expect(headerItems[1].querySelector('.sth-table__order-arrow')).toBeNull();
-      expect(headerItems[2].querySelector('.sth-table__order-arrow')).toBeNull();
-      expect(headerItems[3].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
-
+      expect(headerItems[0].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
+      expect(headerItems[1].querySelector('.st-table__order-arrow')).toBeNull();
+      expect(headerItems[2].querySelector('.st-table__order-arrow')).toBeNull();
+      expect(headerItems[3].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
    });
+
 
    it('If fields input is not introduced, it throws an error', () => {
       component.fields = undefined;
@@ -88,16 +86,6 @@ describe('StTableComponent', () => {
       }
    });
 
-   it('If qa tag input is not introduced, it throws an error', () => {
-      component.qaTag = undefined;
-      try {
-         fixture.detectChanges();
-         expect(component.qaTag).toThrow();
-      } catch (error) {
-         expect(error.message).toContain('st-table-component: field qaTag is a required field');
-      }
-   });
-
    describe('Should return the class name for header items according to the current order and direction', () => {
       beforeEach(() => {
          fixture.detectChanges();
@@ -106,10 +94,10 @@ describe('StTableComponent', () => {
       it('if current order is not defined yet, the sortable fields will be displayed with a down arrow', () => {
          component.currentOrder = undefined;
          fixture.detectChanges();
-         let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.sth-table__header-item');
+         let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
 
-         expect(headerItems[0].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
-         expect(headerItems[headerItems.length - 1].querySelector('.sth-table__order-arrow').classList).toContain('icon-arrow2_down');
+         expect(headerItems[0].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
+         expect(headerItems[headerItems.length - 1].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
       });
 
       it('if table is sort by the field but not in ascending direction, it returns icon-arrow2_down', () => {
@@ -140,7 +128,7 @@ describe('StTableComponent', () => {
       it('if field is different to the current order`s one, current order is changed to the selected field and in direction ASC', () => {
          component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.ASC);
 
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[fakeFields.length - 1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[fakeFields.length - 1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
@@ -152,21 +140,21 @@ describe('StTableComponent', () => {
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
 
-         expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
+         expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
       });
 
       it('if field is the same to the current order`s one, only order direction is changed', () => {
          // ascent sorting
          component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.ASC);
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[0];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[0];
          headerItem.click();
          fixture.detectChanges();
 
          expect(component.currentOrder.orderBy).toBe(fakeFields[0].id);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.DESC);
          // also order arrow is updated
-         expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
+         expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_down');
 
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
 
@@ -178,7 +166,7 @@ describe('StTableComponent', () => {
          expect(component.currentOrder.orderBy).toBe(fakeFields[0].id);
          expect(component.currentOrder.type).toBe(ORDER_TYPE.ASC);
          // also order arrow is updated
-         expect(Array.from(headerItem.querySelector('.sth-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
+         expect(Array.from(headerItem.querySelector('.st-table__order-arrow').classList)[1]).toBe('icon-arrow2_up');
 
          expect(component.changeOrder.emit).toHaveBeenCalledWith(component.currentOrder);
       });
@@ -195,15 +183,14 @@ describe('StTableComponent', () => {
       });
 
       it('should stand up the field`s header which table is sorted by', () => {
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.sth-table__header-item')[fakeFields.length - 1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[fakeFields.length - 1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
 
-         expect(headerItem.classList).toContain('sth-table__header-item--selected');
+         expect(headerItem.classList).toContain('st-table__header-item--selected');
       });
 
    });
 
-})
-   ;
+});

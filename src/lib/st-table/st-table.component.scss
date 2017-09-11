@@ -8,34 +8,29 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-.sth-table {
+
+.st-table {
    width: 100%;
    height: 100%;
 }
 
-.sth-table__header--hidden {
-   visibility: hidden;
-}
-
-.sth-table__header-item {
-   padding: 0 20px;
+.st-table__header-item {
    text-transform: capitalize;
 }
+
 .sortable {
    cursor: pointer;
 }
 
-.sth-table__header-text {
+.st-table__header-text {
    display: flex;
    flex-direction: row;
    flex-wrap: nowrap;
    align-items: center;
-   margin-bottom: 6px;
    justify-content: flex-start;
-
    cursor: inherit;
 }
 
-.sth-table__order-arrow {
-   padding-left: 9px;
+.st-table__order-arrow {
+   padding-left: 5px;
 }

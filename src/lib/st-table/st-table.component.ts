@@ -24,7 +24,7 @@ import { StTableHeader } from './shared/table-header.interface';
 
 export class StTableComponent {
    @Input() @StRequired() fields: StTableHeader[];
-   @Input() @StRequired() qaTag: string;
+   @Input() qaTag: string;
    @Input() header: boolean = true;
    @Input() sortable: boolean = true;
    @Input() currentOrder: Order;

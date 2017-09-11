@@ -30,10 +30,6 @@ describe('StTableRowComponent', () => {
       component = fixture.componentInstance;
    });
 
-   it('theme class is added to the component root', () => {
-      expect(fixture.nativeElement.classList).toContain('sth-table-row');
-   });
-
    describe('should be able to listen when mouse is over it', () => {
       beforeEach(() => {
          fixture.nativeElement.dispatchEvent(new Event('mouseover'));
@@ -65,22 +61,6 @@ describe('StTableRowComponent', () => {
          let hoverMenu = fixture.nativeElement.children[cells.length - 1];
 
          expect(hoverMenu.classList).not.toContain('hover-menu--show');
-      });
-   });
-
-   describe('should displayed compacted or not', () => {
-      it('if compacted input is true, compacted class is added to it', () => {
-         component.compacted = true;
-         fixture.detectChanges();
-
-         expect(fixture.nativeElement.classList).toContain('sth-table-row--compacted');
-      });
-
-      it('if compacted input is false, compacted class is not added to it', () => {
-         component.compacted = false;
-         fixture.detectChanges();
-
-         expect(fixture.nativeElement.classList).not.toContain('sth-table-row--compacted');
       });
    });
 });

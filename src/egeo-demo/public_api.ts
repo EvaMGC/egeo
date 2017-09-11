@@ -29,6 +29,7 @@ export { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
 export { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 export { StSelectDemoModule } from './st-select-demo/select-demo.module';
 export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
+export { StTableDemoModule } from './st-table-demo/st-table-demo.module';
 export { StTextareaDemoModule } from './st-textarea-demo/st-textarea-demo.module';
 export { StTipDemoModule } from './st-tip-demo/st-tip-demo.module';
 export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';

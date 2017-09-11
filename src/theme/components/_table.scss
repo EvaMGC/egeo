@@ -8,57 +8,53 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-@import '../../../node_modules/@stratio/egeo-ui-base/utils/typography';
+@import '../constants/fonts';
 @import '../constants/colors';
 
-.sth-table__header {
-   border-bottom: 1px solid $neutral-06;
+.st-table__header {
+   background-color: $neutral-03;
+   height: 50px;
 }
 
-.sth-table__header-item {
-   font-family: egeo-get-font(body);
-   font-size: 13px;
-   font-weight: bold;
-   line-height: 2.77;
+.st-table__header-text {
+   font-family: $egeo-nunito-sans-bold;
+   font-size: $egeo-font-size-xxsmall;
+   line-height: $egeo-line-height-xxsmall;
+   color: $neutral-10;
+   padding: 0 20px;
+}
+
+.st-table__header-item--selected {
+    & > .st-table__header-text {
+      color: $neutral-13;
+       & .st-table__order-arrow {
+          color: $neutral-13;
+       }
+    }
+}
+
+.st-table__order-arrow {
+   font-family: $egeo-nunito-sans-bold;
+   font-size: $egeo-font-size-xxxsmall;
+   line-height: $egeo-line-height-xxxsmall;
+   color: $neutral-10;
+}
+
+// row theme
+.st-table-row {
+   font-family: $egeo-nunito-sans;
+   font-size: $egeo-font-size-xsmall;
+   line-height: $egeo-line-height-xsmall;
    text-align: left;
    color: $neutral-10;
 }
 
-.sth-table__header-text {
-   margin-bottom: 6px;
-   line-height: 18px;
+.st-table-row--selected {
+   color: $action-secondary-07;
+   font-weight: 600;
 }
 
-.sth-table__header-item--selected {
-   font-weight: 800;
-   .sth-table__order-arrow {
-      font-weight: 800;
-      color: $neutral-12 !important;
-   }
+.st-table-row--selected,
+.st-table-row:hover {
+   background-color: rgba(18, 139, 221, 0.05);
 }
-
-.sth-table__order-arrow {
-   font-family: egeo-get-font(icon);
-   font-size: 13px;
-   line-height: 2.08;
-   text-align: left;
-   color: $neutral-06;
-}
-
-.sth-table__order-arrow:hover {
-   color: $neutral-12;
-}
-
-// row theme
-.sth-table-row {
-   border-bottom: 1px solid $neutral-04;
-   font-family: egeo-get-font(body);
-   font-size: 13px;
-   line-height: 2.77;
-   color: $neutral-08;
-}
-
-.sth-table-row:hover {
-   background-color: rgba($brand, 0.1);
-}
-
