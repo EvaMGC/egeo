@@ -72,4 +72,10 @@ export class StTableDemoComponent {
          completedProfile: '80%'
       }
    ];
+
+   public selected: boolean[] = [];
+
+   public onSelectRow(event: any, rowIndex: number) {
+      this.selected[rowIndex] = event.checked;
+   }
 }
