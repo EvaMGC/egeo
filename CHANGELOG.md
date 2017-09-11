@@ -23,18 +23,20 @@
 * st-header: Removed company name input
 * st-header: Remove disable parameter of menu and submenu model
 * st-header: Models change of name
-* st-header: Change general behaivor and design
+* st-header: Change general behaviour and design
 * st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
 
 **Refactor**
 
 * st-radio: Apply new style according to UX specifications
+* st-table: Apply new style according to UX specifications
 
 **Documentation:**
 
 * Update license
-* st-checkbox: added demo
+* st-checkbox: Added demo
 * st-radio: Added demo
+* st-table: Added demo
 
 **Others**
 
