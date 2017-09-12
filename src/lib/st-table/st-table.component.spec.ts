@@ -15,17 +15,22 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
 import { StTableHeader } from './shared/table-header.interface';
+import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
-let fakeFields: StTableHeader[] = [{ id: 'id', label: 'ID', sortable: true }, { id: 'name', label: 'Name', sortable: false },
-{ id: 'lastName', label: 'Last name' }, { id: 'phone', label: 'Phone', sortable: true }];
+let fakeFields: StTableHeader[] = [{id: 'id', label: 'ID', sortable: true}, {
+   id: 'name',
+   label: 'Name',
+   sortable: false
+},
+   {id: 'lastName', label: 'Last name'}, {id: 'phone', label: 'Phone', sortable: true}];
 
 describe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [CommonModule, RouterTestingModule],
+         imports: [CommonModule, RouterTestingModule, StCheckboxModule],
          declarations: [StTableComponent]
       })
          .compileComponents();  // compile template and css
@@ -36,7 +41,6 @@ describe('StTableComponent', () => {
       component = fixture.componentInstance;
       component.fields = fakeFields;
       component.qaTag = 'fake qa tag';
-
    });
 
    describe('If some inputs are not specified, they will be set by default', () => {
@@ -74,7 +78,6 @@ describe('StTableComponent', () => {
       expect(headerItems[2].querySelector('.st-table__order-arrow')).toBeNull();
       expect(headerItems[3].querySelector('.st-table__order-arrow').classList).toContain('icon-arrow2_down');
    });
-
 
    it('If fields input is not introduced, it throws an error', () => {
       component.fields = undefined;
@@ -193,4 +196,59 @@ describe('StTableComponent', () => {
 
    });
 
+   describe('Should be able to enable or disable the selection of all its rows', () => {
+
+      it('By default, if "selectableAll" input is not specified, table is created without being able to select all its rows', () => {
+         expect(fixture.nativeElement.querySelector('st-checkbox')).toBeNull();
+      });
+
+      it('If table does not allow to select all its rows, header will be displayed without a checkbox', () => {
+         component.selectableAll = false;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('st-checkbox')).toBeNull();
+      });
+
+      describe('If table allows to select all its rows', () => {
+         beforeEach(() => {
+            component.selectableAll = true;
+            fixture.detectChanges();
+         });
+
+         it('checkbox is displayed at the header', () => {
+            expect(fixture.nativeElement.querySelector('.st-table__header').querySelector('st-checkbox')).not.toBeNull();
+         });
+
+         it('When user clicks on the checkbox, an event is emitted with its current status', () => {
+            spyOn(component.selectAll, 'emit');
+            let selectedAllCheckbox: HTMLInputElement = fixture.nativeElement.querySelector('.st-table__header')
+               .querySelector('st-checkbox').querySelector('input');
+
+            selectedAllCheckbox.click();
+
+            expect(component.selectAll.emit).toHaveBeenCalledWith(true);
+
+            selectedAllCheckbox.click();
+
+            expect(component.selectAll.emit).toHaveBeenCalledWith(false);
+         });
+
+         it('Checkbox is displayed checked or not according to the selectedAll input', () => {
+            component.selectedAll = true;
+            fixture.detectChanges();
+
+            let selectedAllCheckbox: HTMLInputElement = fixture.nativeElement.querySelector('.st-table__header')
+               .querySelector('st-checkbox').querySelector('input');
+
+            expect(selectedAllCheckbox.checked).toBeTruthy();
+
+            component.selectedAll = false;
+            fixture.detectChanges();
+
+            expect(selectedAllCheckbox.checked).toBeFalsy();
+         });
+
+      });
+   });
 });

@@ -14,6 +14,7 @@
 
 * st-label: New component based on label native tag
 * st-header: Menu notifies navigation
+* st-table: Add functionality to select rows optionally
 
 **Breaking changes:**
 

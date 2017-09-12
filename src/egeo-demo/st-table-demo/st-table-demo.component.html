@@ -38,6 +38,36 @@
       </tr>
    </st-table>
 
+   <h1>Selectable table</h1>
+   <st-table [fields]="fields" [sortable]="true" [selectableAll]="true" qaTag="table-qa-tag">
+      <tr st-table-row *ngFor="let userData of data; let i = index" [selected]="selected[i]">
+         <td st-table-cell st-table-row-content>
+            <st-checkbox (change)="onSelectRow($event, i)"></st-checkbox>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.id}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.name}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.lastName}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.phone}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.company}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.completedProfile}}</label>
+         </td>
+         <td st-table-row-hover>
+            <i class="icon icon-arrow2_right"></i>
+         </td>
+      </tr>
+   </st-table>
+
    <h1>Simple table without header </h1>
    <st-table [fields]="fields" [sortable]="true" [header]="false" qaTag="table-qa-tag">
       <tr st-table-row *ngFor="let userData of data">

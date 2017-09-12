@@ -8,12 +8,50 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableHeader } from './shared/table-header.interface';
 
+/**
+ * @description {Component} [Table]
+ *
+ * The table component has been designed to display any content like images, text, graphs, etc.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-table [fields]="fields" [sortable]="true" (changeOrder)="yourFunctionToOrder($event)" qaTag="table-qa-tag">
+ * <tr st-table-row *ngFor="let userData of data">
+ * <td st-table-cell st-table-row-content>
+ *    <label >{{userData.id}}</label>
+ * </td>
+ * <td st-table-cell st-table-row-content>
+ *    <label >{{userData.name}}</label>
+ * </td>
+ * <td st-table-cell st-table-row-content>
+ *    <label >{{userData.lastName}}</label>
+ * </td>
+ * <td st-table-cell st-table-row-content>
+ *    <label >{{userData.phone}}</label>
+ * </td>
+ * <td st-table-cell st-table-row-content>
+ *    <label >{{userData.company}}</label>
+ * </td>
+ * <td st-table-cell st-table-row-content>
+ *    <label >{{userData.completedProfile}}</label>
+ * </td>
+ * <td st-table-row-hover>
+ *    <i class="icon icon-arrow2_right"></i>
+ * </td>
+ * </tr>
+ * </st-table>
+ * ```
+ *
+ */
 @StEgeo()
 @Component({
    selector: 'st-table',
@@ -23,17 +61,50 @@ import { StTableHeader } from './shared/table-header.interface';
 })
 
 export class StTableComponent {
+   /** @Input {StTableHeader[]} [fields=''] List of field displayed in the header */
    @Input() @StRequired() fields: StTableHeader[];
+   /** @Input {string} [qaTag=''] Prefix used to generate the id values for qa tests */
    @Input() qaTag: string;
+   /** @Input {boolean} [header='true'] Boolean to show or hide the header */
    @Input() header: boolean = true;
+   /**
+    * @Input {boolean} [sortable='true'] Boolean to make sortable the table, To enable sorting of columns use
+    * the new "sortable" field inside stTableHeader model
+    */
    @Input() sortable: boolean = true;
+   /**
+    * @Input {boolean} [selectableAll='false'] Boolean to show or hide a checkbox in the header to select or
+    *  deselect all rows
+    */
+   @Input() selectableAll: boolean = false;
+   /** @Input {Order} [currentOrder=''] It specifies what is the current order applied to the table */
    @Input() currentOrder: Order;
+   /** @Input {boolean} [selectedAll='false'] It specifies if all rows are selected */
+   @Input()
+   get selectedAll(): boolean {
+      return this._selectedAll;
+   }
+
+   set selectedAll(newValue: boolean) {
+      this._selectedAll = newValue;
+      this.cd.markForCheck();
+   }
+
+   /** @Output {Order} [changeOrder=''] Event emitted with the new order which has to be applied to the table rows */
    @Output() changeOrder: EventEmitter<Order> = new EventEmitter();
+   /** @Output {boolean} [selectAll=''] Event emitted  when user interacts with the checkbox to select or deselect
+    * all rows
+    */
+   @Output() selectAll: EventEmitter<boolean> = new EventEmitter();
 
    public orderTypes: any = ORDER_TYPE;
 
-   public onChangeOrder(field: StTableHeader): void {
+   private _selectedAll: boolean;
 
+   constructor(private cd: ChangeDetectorRef) {
+   }
+
+   public onChangeOrder(field: StTableHeader): void {
       if (field && this.isSortable(field)) {
          if (this.currentOrder && this.currentOrder.orderBy === field.id) {
             this.changeOrderDirection();
@@ -42,11 +113,14 @@ export class StTableComponent {
          }
          this.changeOrder.emit(this.currentOrder);
       }
-
    }
 
    public isSortable(field: StTableHeader): boolean {
       return field && field.sortable !== undefined ? field.sortable : this.sortable;
+   }
+
+   public onSelectAll(event: any): void {
+      this.selectAll.emit(event.checked);
    }
 
    public getHeaderItemClass(field: StTableHeader): string {

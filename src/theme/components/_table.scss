@@ -49,12 +49,12 @@
    color: $neutral-10;
 }
 
-.st-table-row--selected {
+.st-table-row.selected {
    color: $action-secondary-07;
    font-weight: 600;
 }
 
-.st-table-row--selected,
+.st-table-row.selected,
 .st-table-row:hover {
    background-color: rgba(18, 139, 221, 0.05);
 }

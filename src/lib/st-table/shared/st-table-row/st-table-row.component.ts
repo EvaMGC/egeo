@@ -18,11 +18,15 @@ import {
    styleUrls: ['./st-table-row.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    host: {
-      'class': 'st-table-row'
+      'class': 'st-table-row',
+      '[class.selected]' : 'selected'
    }
 })
 
 export class StTableRowComponent {
+   /** @Input {boolean} [selected=''] It indicates if row is selected or not */
+   @Input() selected: boolean;
+
    public showHoverMenu: boolean = false;
 
    @HostListener('mouseover') onShowHoverMenu(): void {

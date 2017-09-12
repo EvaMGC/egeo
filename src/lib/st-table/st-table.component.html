@@ -13,6 +13,10 @@
 <table class='st-table' [attr.id]='qaTag'>
    <thead>
    <tr *ngIf = "header" class='st-table__header'>
+      <th *ngIf ="selectableAll">
+         <st-checkbox qaTag="select-all-checkbox" name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
+         </st-checkbox>
+      </th>
       <th *ngFor='let field of fields'
           class='st-table__header-item'
           [ngClass]="{'st-table__header-item--selected': isSortedByField(field), sortable: isSortable(field)}"
