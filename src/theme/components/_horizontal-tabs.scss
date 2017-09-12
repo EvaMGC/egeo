@@ -8,35 +8,29 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-@import '../../../node_modules/@stratio/egeo-ui-base/utils/typography';
+@import '../constants/fonts';
 @import '../constants/colors';
 
-.sth-horizontal-tabs__option--disabled {
+.option--disabled {
    opacity: .5;
 }
 
-.sth-horizontal-tabs__option--disabled>a {
+.option--disabled > a {
    cursor: default;
 }
 
-.sth-horizontal-tabs__option:hover:not(.sth-horizontal-tabs__option--disabled)>a {
-   color: $neutral-13;
-}
-
-.sth-horizontal-tabs__list {
-   border-bottom: 1px solid $neutral-04;
-}
-
-.sth-horizontal-tabs__option__text {
-   color: $neutral-08;
+.option__text {
+   color: $action-primary-default;
    text-decoration: none;
-   font-family: egeo-get-font(heading);
-   font-size: 15px;
-   text-transform: uppercase;
+   font-family: $egeo-nunito-sans;
+   font-size: $egeo-font-size-xsmall;
+   text-transform: capitalize;
+   font-weight: 600;
+   line-height: $egeo-line-height-xsmall;
+   text-align: center;
 
    &:hover {
       text-decoration: none;
-      color: $neutral-13;
    }
    &:focus {
       text-decoration: none;
@@ -44,16 +38,17 @@
    }
 }
 
-.sth-horizontal-tabs__option--active {
-   background-color: $neutral-00;
-   border: 1px solid $neutral-04;
-   border-bottom-color: $neutral-00;
-   text-decoration: none;
+.option--active {
+
    &:focus {
       text-decoration: none;
       outline: none;
    }
-   >.sth-horizontal-tabs__option__text {
+   > .option__text {
       color: $neutral-13 !important;
    }
+}
+
+.line {
+   border-top: solid 2px $neutral-13;
 }

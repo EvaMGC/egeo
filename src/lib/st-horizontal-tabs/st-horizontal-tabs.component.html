@@ -11,13 +11,16 @@
 
 -->
 <section class="st-horizontal-tabs">
-  <ul class="st-horizontal-tabs__list sth-horizontal-tabs__list">
-    <li *ngFor="let option of options; let i = index;"
-         class="st-horizontal-tabs__option sth-horizontal-tabs__option"
-         [ngClass]="{'sth-horizontal-tabs__option--active': isActive(option), 'sth-horizontal-tabs__option--disabled': option.isDisabled}">
-      <a class="st-horizontal-tabs__option__text sth-horizontal-tabs__option__text"
-         (click)="activateOption(option)"
-         [attr.id]="qaTag + '-tab-' + i" href="javascript:void(0)">{{option.text}}</a>
-    </li>
-  </ul>
+   <ul class="list">
+      <li *ngFor="let option of options; let i = index;"
+          class="option"
+          [style.width]="tabWidth"
+          [ngClass]="{'option--active': isActive(option)}">
+         <a class="option__text"
+            (click)="activateOption(option, i)"
+            [attr.id]="qaTag + '-tab-' + i" href="javascript:void(0)">{{option.text}}</a>
+      </li>
+
+   </ul>
+   <span class="line" [style.width]="tabWidth" [style.margin-left]="linePosition"></span>
 </section>
