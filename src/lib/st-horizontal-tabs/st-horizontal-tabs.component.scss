@@ -14,8 +14,7 @@
    display: block;
    overflow: hidden;
    width: 100%;
-   list-style: none;
-   position: relative;
+   list-style: none;;
    line-height: 0;
 }
 
@@ -26,11 +25,11 @@
    box-sizing: border-box;
    overflow: hidden;
    padding: 0 34px;
-   margin-bottom: 2px;
+   margin-bottom: 4px;
    cursor: pointer;
 }
 
 .line {
    display: block;
-   transition: .5s ease-in-out 0s;
+   transition: .4s ease-in-out 0s;
 }
