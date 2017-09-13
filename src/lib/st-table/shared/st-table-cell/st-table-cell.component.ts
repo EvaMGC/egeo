@@ -9,6 +9,22 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+/**
+ * @description {Component} [Table Cell]
+ *
+ * This component is designed to be added to the table row component
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ *  <td st-table-cell st-table-row-content>
+ *      <!-- CELL CONTENT WILL BE HERE -->
+ *  </td>
+ * ```
+ *
+ */
 
 @Component({
    selector: '[st-table-cell]',

@@ -63,4 +63,29 @@ describe('StTableRowComponent', () => {
          expect(hoverMenu.classList).not.toContain('hover-menu--show');
       });
    });
+
+   describe('user can define if row will be stood up when it is selected or not', () => {
+      beforeEach(() => {
+         component.selected = true;
+         fixture.detectChanges();
+      });
+
+      it('by default, row is stood up', () => {
+         expect(fixture.nativeElement.classList).toContain('selected');
+      });
+
+      it('if user puts the input standUpSelected to false, row is not stood up', () => {
+         component.standUpSelected = false;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.classList).not.toContain('selected');
+      });
+
+      it('if user puts the input standUpSelected to true, row is stood up', () => {
+         component.standUpSelected = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.classList).toContain('selected');
+      });
+   });
 });
