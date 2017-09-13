@@ -8,13 +8,39 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input,
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input,
    OnChanges, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
 import { StTextareaError } from './st-textarea.error.model';
 
+/**
+ * @description {Component} [Textare]
+ *
+ * The textarea component is for use normally inside a form, you can use too outside a form like a template driven form.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-textarea
+ *    label="Components"
+ *    placeholder="Number of components"
+ *    [forceValidations]="forceValidations"
+ *    [errors]="errorsTextarea"
+ *    name="components-template"
+ *    fieldType="number"
+ *    qaTag="components-textarea-template"
+ *    required
+ *    [(ngModel)]="model.components"
+ *    contextualHelp="This is the contextual help of the components"
+ *    [cols]="50" [rows]="10">
+ * </st-textarea>
+ * ```
+ *
+ */
 @Component({
    selector: 'st-textarea',
    templateUrl: './st-textarea.component.html',
@@ -27,18 +53,40 @@ import { StTextareaError } from './st-textarea.error.model';
 })
 
 export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnInit, OnDestroy {
-
+   /** @Input {string} [placeholder=''] The text that appears as placeholder of the textarea. It is empty by default */
    @Input() placeholder: string = '';
+
+   /** @Input {string} [name=''] Name of the textarea */
    @Input() name: string = '';
+
+   /** @Input {string} [label=''] Label to show over the textarea. It is empty by default */
    @Input() label: string = '';
+
+   /** @Input {StTextareaError} [errors=''] Error to show for each error case, if you don\'t provide this parameter, the default behaviour is only to change color without message */
    @Input() errors: StTextareaError;
+
+   /** @Input {string} [qaTag=''] Id for QA test */
    @Input() qaTag: string;
+
+   /** @Input {boolean} [forceValidations=false] If you specify it to 'true', the textarea checks the errors before being modified by user */
    @Input() forceValidations: boolean = false;
+
+   /** @Input {string} [contextualHelp=''] It will be displayed when user clicks on the info button */
    @Input() contextualHelp: string;
+
+   /** @Input {string} [maxLength=''] Define a max-length for textarea field */
    @Input() maxLength: number;
+
+   /** @Input {boolean} [isFocused=false] If true, the textarea will be focused on view init. */
    @Input() isFocused: boolean = false;
+
+   /** @Input {number} [cols=''] Define textarea number of cols */
    @Input() cols: number;
+
+   /** @Input {number} [rows=''] Define textarea number of rows */
    @Input() rows: number;
+
+   /** @Input {string} [wrap='soft'] Define type of wrap as html standard */
    @Input() wrap: string = 'soft';
 
    @ViewChildren('textarea') vc: any;

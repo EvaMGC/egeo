@@ -13,14 +13,22 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
    selector: 'st-textarea-demo',
-   templateUrl: 'st-textarea-demo.html'
+   templateUrl: 'st-textarea-demo.html',
+   styleUrls: ['./st-textarea-demo.scss'],
+
 })
 export class StTextareaDemoComponent {
    public myForm: FormGroup;
 
    constructor(private fb: FormBuilder) {
+      let disabledField: FormControl = new  FormControl('', []);
+      disabledField.disable();
+      let enabledField: FormControl = new  FormControl('', []);
+      let requiredField: FormControl = new  FormControl('', [Validators.required, Validators.minLength(2)]);
       this.myForm = fb.group({
-         name: new FormControl('', [])
+         disabledField: disabledField,
+         enabledField: enabledField,
+         requiredField: requiredField
       });
 
       this.myForm.valueChanges.subscribe(res => console.log(res));

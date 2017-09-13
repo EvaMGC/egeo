@@ -10,22 +10,19 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div class="st-textarea sth-textarea">
-   <div class="st-textarea-container sth-textarea-container" [ngClass]="{disabled: isDisabled, error: showError()}">
-      <label class="st-textarea-title sth-textarea-title" [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
-         <st-tooltip *ngIf="contextualHelp" [text]="contextualHelp" [showOnClick]="true" [qaTag]="qaTag + '-contextual-help'">
-            <span>{{label}}</span>
-            <span class="icon-help2"></span>
-         </st-tooltip>
-         <span *ngIf="!contextualHelp">{{label}}</span>
+<div class="st-textarea">
+   <div class="st-textarea-container" [ngClass]="{disabled: isDisabled, error: showError()}">
+      <label st-label [tooltip]="contextualHelp" class="st-textarea-title" [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
+         {{label}}
       </label>
       <textarea #textarea (focus)="onFocus($event)" (focusout)="onFocusOut($event)" (blur)="onFocusOut($event)" [formControl]="internalControl"
          class="st-textarea-remove-default st-form-control" [ngClass]="{disabled: isDisabled}"
-         [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows" [wrap]="wrap" [attr.maxlength]="maxLength" [attr.id]="qaTag"></textarea>
+         [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows" [wrap]="wrap" [attr.maxlength]="maxLength" [attr.id]="qaTag">
+      </textarea>
    </div>
    <div class="st-textarea-error-layout">
       <div *ngIf="showError()">
-         <span class="st-textarea-error-message sth-textarea-error-message">{{errorMessage}}</span>
+         <span class="st-textarea-error-message">{{errorMessage}}</span>
       </div>
    </div>
 </div>

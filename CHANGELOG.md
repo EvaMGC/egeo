@@ -40,6 +40,7 @@
 * st-breadcrumb: Apply new style according to UX specifications
 * st-horizontal-tabs: Apply new style according to UX specifications
 * st-select: Apply new style according to UX specifications
+* st-textarea: Apply new style according to UX specifications
 
 **Documentation:**
 
@@ -49,6 +50,7 @@
 * st-table: Added demo
 * st-horizontal-tabs: Added demo
 * st-select: Added demo
+* st-textarea: Added demo
 
 **Others**
 

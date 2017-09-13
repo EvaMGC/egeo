@@ -11,38 +11,38 @@
 @import '../constants/colors';
 @import '../constants/fonts';
 
-.sth-textarea-container {
+.st-textarea-container {
    font-family: $egeo-nunito-sans;
 }
 
-.sth-textarea-container.error {
+.st-textarea-container.error {
    border-color: $status-warning-default;
 }
 
-.sth-textarea-container .sth-textarea-title.active {
-   color: $brand;
+.st-textarea-container .st-textarea-title.active {
+   color: $action-primary-default;
 }
 
-.sth-textarea-container .sth-textarea-title.disabled {
-   color: $neutral-07;
+.st-textarea-container .st-textarea-title.disabled {
+   color: $neutral-06;
 }
 
-.sth-textarea-container .sth-textarea-title.error {
-   color: $status-warning-default;
+.st-textarea-container .st-textarea-title.error {
+   color: $status-critical-default;
 }
 
-.sth-textarea-container .sth-textarea-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: $neutral-08;
-    line-height: 1.43;
+.st-textarea-container .st-textarea-title {
+   font-size: $egeo-font-size-xxsmall;
+   font-family: $egeo-nunito-sans-bold;
+   color: $neutral-08;
+   line-height: $egeo-line-height-xxsmall;
 
-    &.disabled{
-        color: $neutral-06;
-    }
+   &.disabled {
+      color: $neutral-06;
+   }
 }
 
-.sth-textarea-error-message {
-   font-size: 13px;
+.st-textarea-error-message {
+   font-size: $egeo-font-size-xxxsmall;
    color: $status-critical-default;
 }

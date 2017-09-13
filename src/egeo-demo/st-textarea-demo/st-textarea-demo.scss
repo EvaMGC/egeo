@@ -9,29 +9,16 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-.st-textarea-container .st-textarea-title {
-   padding: 0;
-   position: relative;
-   margin-bottom: 4px;
-   display: block;
-   float: left;
+.example {
+   display: table;
    width: 100%;
 }
 
-.st-textarea {
-   min-width: 100%;
-   min-height: 100%;
-   display: inline-block;
+.example-title {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+   width: 280px;
 }
 
-.st-textarea-error-layout {
-   height: 15px;
-   position: absolute;
-   bottom: 0;
-}
 
-:host {
-   position: relative;
-   display: inline-block;
-   padding-bottom: 20px;
-}
