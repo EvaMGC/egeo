@@ -30,6 +30,7 @@
 * st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
 * st-switch: Remove labelPosition input, label always are dispayed at the left.
 * st-horizontal-tabs: Event emitted when active tabs changes, now sends the option of type StHorizontalTab 
+* st-horizontal-tabs: Removed functionality to display disabled tabs
 
 **Refactor**
 
