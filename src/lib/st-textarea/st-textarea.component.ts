@@ -62,7 +62,9 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    /** @Input {string} [label=''] Label to show over the textarea. It is empty by default */
    @Input() label: string = '';
 
-   /** @Input {StTextareaError} [errors=''] Error to show for each error case, if you don\'t provide this parameter, the default behaviour is only to change color without message */
+   /** @Input {StTextareaError} [errors=''] Error to show for each error case, if you don\'t provide this parameter,
+    * the default behaviour is only to change color without message
+    */
    @Input() errors: StTextareaError;
 
    /** @Input {string} [qaTag=''] Id for QA test */
