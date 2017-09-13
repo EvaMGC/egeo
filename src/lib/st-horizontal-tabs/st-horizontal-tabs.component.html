@@ -10,17 +10,15 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="st-horizontal-tabs">
-   <ul class="list">
-      <li *ngFor="let option of options; let i = index;"
-          class="option"
-          [style.width]="tabWidth"
-          [ngClass]="{'option--active': isActive(option)}">
-         <a class="option__text"
-            (click)="activateOption(option, i)"
-            [attr.id]="qaTag + '-tab-' + i" href="javascript:void(0)">{{option.text}}</a>
-      </li>
-
-   </ul>
+<nav class="st-horizontal-tabs">
+   <a *ngFor="let option of options; let i = index;"
+      class="tab"
+      [style.width]="tabWidth"
+      (click)="activateOption(option, i)"
+      href="javascript:void(0)"
+      [ngClass]="{'tab--active': isActive(option)}"
+      [attr.id]="qaTag + '-tab-' + i">
+      {{option.text}}
+   </a>
    <span class="line" [style.width]="tabWidth" [style.margin-left]="linePosition"></span>
-</section>
+</nav>

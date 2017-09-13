@@ -11,15 +11,7 @@
 @import '../constants/fonts';
 @import '../constants/colors';
 
-.option--disabled {
-   opacity: .5;
-}
-
-.option--disabled > a {
-   cursor: default;
-}
-
-.option__text {
+.tab {
    color: $action-primary-default;
    text-decoration: none;
    font-family: $egeo-nunito-sans;
@@ -38,15 +30,13 @@
    }
 }
 
-.option--active {
+.tab--active {
 
    &:focus {
       text-decoration: none;
       outline: none;
    }
-   > .option__text {
-      color: $neutral-13 !important;
-   }
+   color: $neutral-13 !important;
 }
 
 .line {

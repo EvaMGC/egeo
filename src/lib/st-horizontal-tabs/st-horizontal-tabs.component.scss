@@ -14,24 +14,17 @@
    display: block;
    overflow: hidden;
    width: 100%;
-}
-
-.list {
    list-style: none;
    position: relative;
    line-height: 0;
 }
 
-.option {
+.tab {
    display: inline-block;
    text-align: center;
    text-overflow: ellipsis;
    box-sizing: border-box;
    overflow: hidden;
-}
-
-.option__text {
-   display: inline-block;
    padding: 0 34px;
    margin-bottom: 2px;
    cursor: pointer;
