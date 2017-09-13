@@ -8,32 +8,28 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
 .st-horizontal-tabs {
-   margin: 10px 0 30px;
+   position: relative;
+   display: block;
    overflow: hidden;
-   width: 100%
+   width: 100%;
+   list-style: none;;
+   line-height: 0;
 }
 
-.st-horizontal-tabs__list {
-   list-style: none;
-}
-
-.st-horizontal-tabs__option {
+.tab {
    display: inline-block;
-   width: 150px;
-   height: 35px;
-   line-height: 33px;
+   text-align: center;
+   text-overflow: ellipsis;
    box-sizing: border-box;
-   margin-bottom: -5px;
-}
-
-.st-horizontal-tabs__option__text {
+   overflow: hidden;
+   padding: 0 34px;
+   margin-bottom: 4px;
    cursor: pointer;
-   display: block;
-   margin-top: 2px;
-   margin-left: 15px;
 }
 
-:host {
+.line {
    display: block;
+   transition: .4s ease-in-out 0s;
 }

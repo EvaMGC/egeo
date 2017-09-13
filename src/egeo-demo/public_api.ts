@@ -21,6 +21,7 @@ export { StDropdownMenuDemoModule } from './st-dropdown-menu-demo/st-dropdown-me
 export { StFormDemoModule } from './st-form-demo/st-form-demo.module';
 export { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
 export { StHelpDemoModule } from './st-help-demo/st-help-demo.module';
+import { StHorizontalTabsDemoModule } from './st-horizontal-tabs-demo/st-horizontal-tabs-demo.module';
 export { StInfoBoxDemoModule } from './st-info-box-demo/st-info-box-demo.module';
 export { StInputDemoModule } from './st-input-demo/st-input-demo.module';
 export { StItemListDemoModule } from './st-item-list-demo/st-item-list-demo.module';
@@ -39,3 +40,4 @@ export { StTipDemoModule } from './st-tip-demo/st-tip-demo.module';
 export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
 export { StTreeDemoModule } from './st-tree-demo/st-tree-demo.module';
 export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
+export { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';

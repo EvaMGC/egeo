@@ -12,18 +12,17 @@ import { Component } from '@angular/core';
 import { StHorizontalTab } from '@stratio/egeo';
 
 @Component({
-   selector: 'st-button-demo',
-   templateUrl: './st-button-demo.component.html',
-   styleUrls: ['./st-button-demo.component.scss']
+   selector: 'st-horizontal-tabs-demo',
+   templateUrl: './st-horizontal-tabs-demo.component.html',
+   styleUrls: ['./st-horizontal-tabs-demo.component.scss']
 })
 
-export class StButtonDemoComponent {
+export class StHorizontalTabsDemoComponent {
 
-   public test1(): void {
-      console.log('You clicked the button 1!');
-   }
-
-   public test2(): void {
-      console.log('You clicked the button 2!');
-   }
+   public options: StHorizontalTab[] = [
+      {id: 'overview', text: 'Overview'},
+      {id: 'activity', text: 'Activity'},
+      {id: 'dashboard', text: 'Dashboard'},
+      {id: 'nodes', text: 'Nodes'}
+   ];
 }
