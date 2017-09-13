@@ -13,7 +13,7 @@
 
 .sth-breadcrumbs {
    &__item {
-      font-family: $egeo-nunito-sans;
+      font-family: $egeo-nunito-sans-semiBold;
       color: $action-primary-default;
       font-size: $egeo-font-size-xsmall;
       text-transform: capitalize;
@@ -22,7 +22,7 @@
         font-family: $egeo-stratio-icons;
         content: "\E605";
         font-size: $egeo-font-size-xxxsmall;
-        color: $neutral-09;
+        color: $neutral-10;
       }
 
       &--text {

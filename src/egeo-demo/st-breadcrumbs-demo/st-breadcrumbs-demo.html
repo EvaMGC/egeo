@@ -10,11 +10,24 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
+<h1>With ng-content</h1>
 <st-breadcrumbs qaTag="breadcrumb">
    <st-breadcrumbs-item qaTag="Example 1">Example 1</st-breadcrumbs-item>
    <st-breadcrumbs-item [active]="true" qaTag="Example 2">Example 2</st-breadcrumbs-item>
 </st-breadcrumbs>
 
-
-<st-breadcrumbs [options]="options" (select)="outputEmitter($event, 'Change event')" qaTag="breadcrumbs2">
+<br>
+<br>
+<h1>Without ng-content and 5 elements max</h1>
+<st-breadcrumbs [options]="options" (select)="outputEmitter($event)" qaTag="breadcrumbs2">
 </st-breadcrumbs>
+
+<br>
+<h1>Without ng-content and 10 elements max</h1>
+<st-breadcrumbs [options]="options" (select)="outputEmitter($event)" qaTag="breadcrumbs3" [elementsToShow]="10">
+</st-breadcrumbs>
+
+<br>
+<br>
+<br>
+<button class="button button-primary" (click)="reset()">Reset</button>

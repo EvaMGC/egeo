@@ -1,4 +1,4 @@
-/*
+/**
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -8,14 +8,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
 
-export interface StHorizontalTab {
-   id: string;
-   text: string;
-}
 
-export interface StHorizontalTabSchema {
-   id: string;
-   text: TranslateableElement;
+.horizontal-tabs {
+   width: 590px;
+   display: block;
+   margin: 0 auto;
 }

@@ -9,22 +9,30 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+import { clone as _clone } from 'lodash';
 
 @Component({
    selector: 'st-breadcrumbs-demo',
    templateUrl: 'st-breadcrumbs-demo.html'
 })
 export class StBreadcrumbsDemoComponent {
-   public output: String;
+   public output: string;
+   public options: string[] = [];
 
-   public options: String[] = [];
+   private originalOptions: string[] = ['Home'];
 
    constructor() {
-      this.options = ['example1', 'example2', 'example3'];
+      for (let i = 1; i < 15; i++) {
+         this.originalOptions.push('level' + i);
+      }
+      this.reset();
    }
 
-   outputEmitter($event: any, type: String): void {
-      this.output = type + $event;
-      console.log(this.output);
+   outputEmitter(pos: number): void {
+      this.options = this.options.slice(0, pos + 1);
+   }
+
+   reset(): void {
+      this.options = _clone(this.originalOptions);
    }
 }

@@ -8,14 +8,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
 
-export interface StHorizontalTab {
-   id: string;
-   text: string;
-}
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-export interface StHorizontalTabSchema {
-   id: string;
-   text: TranslateableElement;
-}
+import { StWidgetComponent } from './st-widget.component';
+
+@NgModule({
+   imports: [CommonModule],
+   exports: [StWidgetComponent],
+   declarations: [StWidgetComponent]
+})
+export class StWidgetModule { }
