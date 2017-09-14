@@ -9,14 +9,14 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, DebugElement, OnInit } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { StTooltipModule } from '../st-tooltip/st-tooltip.module';
 import { StTextareaComponent } from './st-textarea.component';
 import { StTextareaError } from './st-textarea.error.model';
 import { StTextareaModule } from './st-textarea.module';
+import { StLabelModule } from '../st-label/st-label.module';
 
 let component: StTextareaComponent;
 let fixture: ComponentFixture<StTextareaComponent>;
@@ -25,7 +25,7 @@ let textarea: HTMLInputElement;
 describe('StTextareaComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StTooltipModule],
+         imports: [FormsModule, ReactiveFormsModule, StLabelModule],
          declarations: [StTextareaComponent]
       })
          .compileComponents();  // compile template and css
