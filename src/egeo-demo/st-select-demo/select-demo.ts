@@ -32,13 +32,15 @@ export class SelectDemoComponent {
    public reactiveForm: FormGroup; // our model driven form
 
    constructor(private _fb: FormBuilder) {
+      this.options.push({label: 'Select an option', value: undefined});
       for (let i: number = 0; i < 10; i++) {
          this.options.push({
             label: `option-${i}`,
             value: i
          });
       }
-      this.model.option2 = this.options[2];
+      this.model.option1 = 3;
+      this.model.option2 = 2;
 
       this.reactiveForm = this._fb.group({
          'option1': [this.model.option1, [Validators.required]],

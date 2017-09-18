@@ -13,13 +13,10 @@ import {
    ChangeDetectorRef,
    Component,
    ElementRef,
-   EventEmitter,
    forwardRef,
    Input,
    OnChanges,
-   Output,
    Renderer,
-   SimpleChange,
    SimpleChanges,
    ViewChild,
    OnDestroy
@@ -29,7 +26,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { EventWindowManager } from '../utils/event-window-manager';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { StEgeo, StRequired } from '../decorators/require-decorators';
+import { StEgeo } from '../decorators/require-decorators';
+import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-label-status.enum';
 
 @StEgeo()
 @Component({
@@ -86,7 +84,7 @@ export class StSelectComponent extends EventWindowManager implements ControlValu
 
    // Write a new value to the element.
    writeValue(newValue: any): void {
-      this.selectedValue = newValue;
+      this.selectedValue = this.options.find(option => option.value === newValue);
    }
 
    // Set the function to be called when the control receives a change event.
@@ -118,7 +116,7 @@ export class StSelectComponent extends EventWindowManager implements ControlValu
 
    changeOption(selection: StDropDownMenuItem): void {
       this.selectedValue = selection;
-      this.onChange(selection);
+      this.onChange(selection.value);
       this.onTouched();
       this.pristine = false;
       this.closeElement();
@@ -135,11 +133,6 @@ export class StSelectComponent extends EventWindowManager implements ControlValu
       return this.errorMessage !== undefined && (!this.pristine || this.forceValidations) && !this.isFocused && !this.disabled;
    }
 
-   /** Style functions */
-   getBarType(): string {
-      return this.showError() ? 'st-input-error-bar sth-input-error-bar' : 'st-input-normal-bar sth-input-normal-bar';
-   }
-
    onFocus(event: Event): void {
       this.isFocused = true;
    }
@@ -148,35 +141,10 @@ export class StSelectComponent extends EventWindowManager implements ControlValu
       this.isFocused = false;
    }
 
-   private getErrorObject(control: FormControl): { [key: string]: any } {
-      let errors: { [key: string]: any };
-      if (control.errors) {
-         errors = this.checkValidations(control) ? Object.assign({}, control.errors, { 'OptionRequired': true }) : control.errors;
-      } else {
-         errors = this.checkValidations(control) ? { 'OptionRequired': true } : undefined;
-      }
-      return errors;
-   }
-
-   private checkValidations(control: FormControl): boolean {
-      if (!control || !this.isDefined(control.value) || control.value === {}) {
-         return true;
-      }
-      if (typeof control.value !== 'object' || !this.isDefined(control.value.value) || !this.isDefined(control.value.label)) {
-         return true;
-      }
-      return false;
-   }
-
-   private isDefined(field: any): boolean {
-      return field !== undefined && field !== null;
-   }
-
    // When status change call this function to check if have errors
    private checkErrors(control: FormControl): void {
       this.pristine = control.pristine;
-      let errors: { [key: string]: any } = this.getErrorObject(control);
-      this.errorMessage = this.getErrorMessage(errors);
+      this.errorMessage = this.getErrorMessage(control.errors);
       this.cd.markForCheck();
    }
 
@@ -191,10 +159,6 @@ export class StSelectComponent extends EventWindowManager implements ControlValu
       }
 
       if (errors.hasOwnProperty('required')) {
-         return this.errorRequiredMessage;
-      }
-
-      if (errors.hasOwnProperty('OptionRequired')) {
          return this.errorRequiredMessage;
       }
 

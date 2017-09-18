@@ -29,10 +29,11 @@
 * st-header: Models change of name
 * st-header: Change general behaviour and design
 * st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
-* st-switch: Remove labelPosition input, label always are dispayed at the left.
+* st-switch: Remove labelPosition input, label always are dispayed at the left
 * st-horizontal-tabs: Event emitted when active tabs changes, now sends the option of type StHorizontalTab 
 * st-horizontal-tabs: Removed functionality to display disabled tabs
 * st-button: Removed component now use native tag and classes
+* st-select: Output emitted when select is changed is now the value of the option instead of the entire option
 
 **Refactor**
 
