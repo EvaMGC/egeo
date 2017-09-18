@@ -26,10 +26,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { EventWindowManager } from '../utils/event-window-manager';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { StEgeo } from '../decorators/require-decorators';
-import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-label-status.enum';
 
-@StEgeo()
 @Component({
    selector: 'st-select',
    templateUrl: './st-select.component.html',
