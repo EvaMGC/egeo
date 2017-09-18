@@ -342,13 +342,13 @@ describe('Selects in a form', () => {
    });
 
    it('if it is disabled, label is also displayed as disabled', () => {
-      component.form.controls['modelField'].disable();
+      component.form.controls.modelField.disable();
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('label').classList).toContain('disabled');
       expect(fixture.nativeElement.querySelector('.st-input-container').classList).toContain('disabled');
 
-      component.form.controls['modelField'].enable();
+      component.form.controls.modelField.enable();
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('label').classList).not.toContain('disabled');
