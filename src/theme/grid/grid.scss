@@ -132,6 +132,7 @@
       display: flex;
       margin-right: auto;
       margin-left: auto;
+      flex-direction: column;
    }
 
    .container {
@@ -139,9 +140,8 @@
       max-width: $egeo-grid---max;
       padding-right: $egeo-grid---outer-margin;
       padding-left: $egeo-grid---outer-margin;
-      width: 100%,
+      width: 100%;
    }
-
    .row {
       display: flex;
       flex: 0 1 auto;
