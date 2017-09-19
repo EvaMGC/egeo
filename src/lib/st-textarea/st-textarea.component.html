@@ -10,19 +10,20 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div class="st-textarea">
-   <div class="st-textarea-container" [ngClass]="{disabled: isDisabled, error: showError()}">
-      <label st-label [tooltip]="contextualHelp" class="st-textarea-title" [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
-         {{label}}
-      </label>
-      <textarea #textarea (focus)="onFocus($event)" (focusout)="onFocusOut($event)" (blur)="onFocusOut($event)" [formControl]="internalControl"
-         class="st-textarea-remove-default st-form-control" [ngClass]="{disabled: isDisabled}"
-         [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows" [wrap]="wrap" [attr.maxlength]="maxLength" [attr.id]="qaTag">
-      </textarea>
-   </div>
-   <div class="st-textarea-error-layout">
-      <div *ngIf="showError()">
-         <span class="st-textarea-error-message">{{errorMessage}}</span>
-      </div>
+
+<label st-label [tooltip]="contextualHelp" class="st-textarea-title"
+       [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
+   {{label}}
+</label>
+<textarea class="st-textarea" #textarea (focus)="onFocus($event)" (focusout)="onFocusOut($event)"
+          (blur)="onFocusOut($event)" [formControl]="internalControl"
+          [ngClass]="{error: showError(), disabled: isDisabled}"
+          [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows" [wrap]="wrap"
+          [attr.maxlength]="maxLength" [attr.id]="qaTag">
+</textarea>
+
+<div class="st-textarea-error-layout">
+   <div *ngIf="showError()">
+      <span class="st-textarea-error-message">{{errorMessage}}</span>
    </div>
 </div>

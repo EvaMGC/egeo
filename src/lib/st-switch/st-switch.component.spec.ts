@@ -41,6 +41,10 @@ describe('StSwitchComponent', () => {
       component.qaTag = 'qa tag';
    });
 
+   it ('should be added the class st-switch to the root', () => {
+      expect(fixture.nativeElement.classList).toContain('st-switch');
+   });
+
    it('if model is not introduced as input, it throws an error', () => {
       component.stModel = undefined;
       try {

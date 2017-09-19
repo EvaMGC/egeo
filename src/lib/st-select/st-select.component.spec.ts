@@ -337,7 +337,7 @@ describe('Selects in a form', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('label').classList).toContain('error');
-      expect(fixture.nativeElement.querySelector('.st-input-container').classList).toContain('error');
+      expect(fixture.nativeElement.querySelector('.st-input').classList).toContain('error');
       expect(fixture.nativeElement.querySelector('.st-input-error-message').innerHTML).toBe(component.errorMessage);
    });
 
@@ -346,12 +346,12 @@ describe('Selects in a form', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('label').classList).toContain('disabled');
-      expect(fixture.nativeElement.querySelector('.st-input-container').classList).toContain('disabled');
+      expect(fixture.nativeElement.querySelector('.st-input').classList).toContain('disabled');
 
       component.form.controls.modelField.enable();
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('label').classList).not.toContain('disabled');
-      expect(fixture.nativeElement.querySelector('.st-input-container').classList).not.toContain('disabled');
+      expect(fixture.nativeElement.querySelector('.st-input').classList).not.toContain('disabled');
    });
 });

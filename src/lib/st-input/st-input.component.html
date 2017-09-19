@@ -10,18 +10,18 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div class="st-input">
-   <div class="st-input-container" [ngClass]="{disabled: disabled, error: showError()}">
-      <label st-label [ngClass]="{error: showError(), active: focus, disabled: disabled}" name="name" [attr.id]="labelQaTag" [tooltip]="contextualHelp">
-         {{label}}
-      </label>
 
-      <input #input (focus)="onFocus($event)" (focusout)="onFocusOut($event)" (blur)="onFocusOut($event)" [formControl]="internalControl"
-         class="st-input-remove-default st-form-control" [placeholder]="placeholder"
-         [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min" [attr.max]="max"
-         [value]="value" [readonly]="readonly">
-   </div>
-   <div class="st-input-error-layout" *ngIf="showError()">
-      <span class="st-input-error-message">{{errorMessage}}</span>
-   </div>
+<label st-label class="st-input__label" [ngClass]="{error: showError(), active: focus, disabled: disabled}" name="name"
+       [attr.id]="labelQaTag" [tooltip]="contextualHelp">
+   {{label}}
+</label>
+
+<input #input class="st-input" (focus)="onFocus($event)" (focusout)="onFocusOut($event)" (blur)="onFocusOut($event)"
+       [formControl]="internalControl"
+       [placeholder]="placeholder"
+       [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min"
+       [attr.max]="max"
+       [value]="value" [readonly]="readonly" [ngClass]="{error: showError()}">
+<div class="st-input-error-layout" *ngIf="showError()">
+   <span class="st-input-error-message">{{errorMessage}}</span>
 </div>

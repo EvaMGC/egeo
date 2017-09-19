@@ -9,7 +9,13 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-.st-textarea-container .st-textarea-title {
+:host {
+   position: relative;
+   display: inline-block;
+   padding-bottom: 20px;
+}
+
+.st-textarea-title {
    padding: 0;
    position: relative;
    margin-bottom: 4px;
@@ -30,8 +36,3 @@
    bottom: 0;
 }
 
-:host {
-   position: relative;
-   display: inline-block;
-   padding-bottom: 20px;
-}

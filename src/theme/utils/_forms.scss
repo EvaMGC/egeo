@@ -11,45 +11,40 @@
 @import '../constants/colors';
 @import '../constants/fonts';
 
-.st-form-control {
-    color: $action-secondary-07;
-    background-color: $neutral-00;
-    border: 1px solid $neutral-07;
-    padding: 10px 17px 10px 15px;
-    border-radius: 4px;
-    font-size: 15px;
-    vertical-align: bottom;
-    outline: none;
-    font-family: $egeo-nunito-sans;
+%st-form-control {
+   font-family: $egeo-nunito-sans;
+   font-size: 15px;
+   color: $action-secondary-07;
+   background-color: $neutral-00;
+   border: 1px solid $neutral-07;
+   padding: 10px 17px 10px 15px;
+   border-radius: 4px;
+   vertical-align: bottom;
+   outline: none;
+   width: 100%;
 
-    &::placeholder {
-        color: $neutral-07;
-    }
+   &::placeholder {
+      color: $neutral-07;
+   }
 
-    &:focus {
-        border-color: $input-field-onfocus;
-        &::placeholder {
-            color: transparent;
-        }
+   &:focus {
+      border-color: $input-field-onfocus;
+      &::placeholder {
+         color: transparent;
+      }
+   }
 
-    }
+   &:disabled {
+      border-color: $neutral-05;
 
-    &:disabled {
-        border-color: $neutral-05;
-
-        &::placeholder {
-            color: $neutral-05;
-        }
-    }
+      &::placeholder {
+         color: $neutral-05;
+      }
+   }
 }
 
-input.st-form-control {
-    height: 40px;
-    width: 100%;
-}
-
-.error .st-form-control{
-     border-color: $input-field-error;
+%st-form-control.error {
+   border-color: $input-field-error;
 }
 
 %form-label-default {

@@ -34,7 +34,6 @@ import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interfa
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StSelectComponent), multi: true },
       { provide: NG_VALIDATORS, useExisting: forwardRef(() => StSelectComponent), multi: true }
    ],
-   styleUrls: ['./st-select.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StSelectComponent extends EventWindowManager implements ControlValueAccessor, OnDestroy, OnChanges {

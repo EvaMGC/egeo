@@ -45,6 +45,7 @@
 * st-select: Apply new style according to UX specifications
 * st-textarea: Apply new style according to UX specifications
 * st-input: Apply new style according to UX specifications
+* st-input: Refactor styles to can be applied to a native input
 
 **Documentation:**
 

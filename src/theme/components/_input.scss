@@ -13,38 +13,31 @@
 @import '../utils/forms';
 
 .st-input {
-   .st-label {
-      @extend %form-label-default;
-      display: flex;
-   }
+   @extend %st-form-control;
 }
 
-.st-input-container {
-   font-family: $egeo-nunito-sans;
+.st-input__label {
+   @extend %form-label-default;
+   display: flex;
 }
 
-.st-input-container ::placeholder {
+.st-input::placeholder {
    color: $neutral-07;
 }
 
-.st-input-container :focus::placeholder {
+.st-input:focus::placeholder {
    color: transparent;
 }
 
-.st-input-container.disabled {
-   border-style: dashed;
-   border-color: $neutral-07;
-}
-
-.st-input-container .st-input-title.active {
+.st-input .st-input-title.active {
    color: $input-field-onfocus;
 }
 
-.st-input-container .st-input-title.error {
+.st-input .st-input-title.error {
    color: $status-warning-default;
 }
 
-.st-input-container .st-input-title {
+.st-input .st-input-title {
    font-size: 14px;
    font-family: $egeo-nunito-sans-bold;
    color: $neutral-08;
@@ -57,7 +50,7 @@
 
 .st-input.st-input {
 
-   .st-input-container.error {
+   .st-input.error {
       .st-input-title {
          color: #e73851;
       }

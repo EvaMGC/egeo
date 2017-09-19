@@ -25,6 +25,7 @@ import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-labe
 
 @Component({
    selector: 'st-switch',
+   host: {class: 'st-switch'},
    templateUrl: './st-switch.html',
    styleUrls: ['./st-switch.scss'],
    providers: [

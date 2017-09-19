@@ -13,7 +13,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
    selector: 'st-input-demo',
-   templateUrl: 'st-input-demo.html'
+   templateUrl: 'st-input-demo.html',
+   styleUrls: ['./st-input-demo.component.scss']
 })
 export class StInputDemoComponent {
    public myForm: FormGroup;
