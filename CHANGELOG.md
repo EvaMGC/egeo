@@ -44,6 +44,7 @@
 * st-horizontal-tabs: Apply new style according to UX specifications
 * st-select: Apply new style according to UX specifications
 * st-textarea: Apply new style according to UX specifications
+* st-input: Apply new style according to UX specifications
 
 **Documentation:**
 

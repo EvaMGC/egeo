@@ -369,12 +369,12 @@ describe('StFormFieldComponent', () => {
       });
 
       it('label is displayed', () => {
-         expect(fixture.nativeElement.querySelector('#boolean-text').textContent).toContain(booleanProperty.title);
+         expect(fixture.nativeElement.querySelector('#boolean-label-text').textContent).toContain(booleanProperty.title);
       });
 
       it('tooltip is displayed if description exits', () => {
-         let tooltip: HTMLElement = fixture.nativeElement.querySelector('#boolean-tooltip');
-         let tooltipText: Element = (<Element> tooltip.parentNode).querySelector('.sth-tooltip-content-text');
+         let tooltip: HTMLElement = fixture.nativeElement.querySelector('#boolean-label-tooltip');
+         let tooltipText: Element = (<Element> tooltip.parentNode).querySelector('.st-tooltip-content-text');
 
          expect(tooltipText.innerHTML).toBe(booleanProperty.description);
       });
@@ -387,7 +387,7 @@ describe('StFormFieldComponent', () => {
          component.formControl = formControl;
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('#boolean-label-contextual-help')).toBeNull();
+         expect(fixture.nativeElement.querySelector('#boolean-label-tooltip')).toBeNull();
       });
 
       it('if schema contains a default value, switch has to be initialized with it', () => {

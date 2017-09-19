@@ -20,9 +20,11 @@ export class StInputDemoComponent {
 
    constructor(private fb: FormBuilder) {
       this.myForm = fb.group({
-         name: new FormControl('', [])
+         name: new FormControl('', []),
+         disabledField: new FormControl('', []),
+         requiredField: new FormControl('', [Validators.required])
       });
-
+      this.myForm.controls.disabledField.disable();
       this.myForm.valueChanges.subscribe(res => console.log(res));
    }
 }

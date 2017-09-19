@@ -13,10 +13,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { StTooltipModule } from '../st-tooltip/st-tooltip.module';
 import { StInputComponent } from './st-input.component';
 import { StInputError } from './st-input.error.model';
 import { StInputModule } from './st-input.module';
+import { StLabelModule } from '../st-label/st-label.module';
 
 
 let component: StInputComponent;
@@ -26,7 +26,7 @@ let input: HTMLInputElement;
 describe('StInputComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StTooltipModule],
+         imports: [FormsModule, ReactiveFormsModule, StLabelModule],
          declarations: [StInputComponent]
       })
          .compileComponents();  // compile template and css
@@ -354,13 +354,13 @@ describe('StInputComponent in reactive form', () => {
       reactiveFixture.detectChanges();
       htmlInput = reactiveFixture.debugElement.query(By.css('input')).nativeElement;
       expect(htmlInput).toBeDefined();
-      expect(htmlInput.classList).toContain('disabled');
+      expect(htmlInput.disabled).toBeTruthy();
 
       reactiveComp.enableInput();
       reactiveFixture.detectChanges();
       htmlInput = reactiveFixture.debugElement.query(By.css('input')).nativeElement;
       expect(htmlInput).toBeDefined();
-      expect(htmlInput.classList).not.toContain('disabled');
+      expect(htmlInput.disabled).toBeFalsy();
    });
 
    it('should notify empty error with undefined errors object', () => {

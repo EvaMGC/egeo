@@ -58,6 +58,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    @Input() max: number;
    @Input() isFocused: boolean = false;
    @Input() readonly: boolean = false;
+
    @Input()
    get value(): any {
       return this._value;
@@ -71,7 +72,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
 
    @ViewChildren('input') vc: any;
 
-   public isDisabled: boolean = false; // To check disable
+   public disabled: boolean = false; // To check disable
    public focus: boolean = false;
    public internalControl: FormControl;
    public errorMessage: string = undefined;
@@ -140,17 +141,21 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    }
 
    setDisabledState(disable: boolean): void {
-      this.isDisabled = disable;
-      if (this.isDisabled && this.internalControl && this.internalControl.enabled) {
+      this.disabled = disable;
+      if (this.disabled && this.internalControl && this.internalControl.enabled) {
          this.internalControl.disable();
-      } else if (!this.isDisabled && this.internalControl && this.internalControl.disabled) {
+      } else if (!this.disabled && this.internalControl && this.internalControl.disabled) {
          this.internalControl.enable();
       }
       this._cd.markForCheck();
    }
 
    showError(): boolean {
-      return this.errorMessage !== undefined && (!this.internalControl.pristine || this.forceValidations) && !this.focus && !this.isDisabled;
+      return this.errorMessage !== undefined && (!this.internalControl.pristine || this.forceValidations) && !this.focus && !this.disabled;
+   }
+
+   get labelQaTag(): string {
+      return (this.qaTag || this.name) + '-label';
    }
 
    /** Style functions */

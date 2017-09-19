@@ -10,35 +10,8 @@
  */
 
 /// tipography EXTENDS (@extend %button-label-regular;):
-%select-input-default {
-   color: $action-secondary-07;
-   font-family: $egeo-nunito-sans;
-   font-size: $egeo-font-size-xsmall;
-   line-height: $egeo-line-height-xsmall;
 
-   &[disabled] {
-      color: $neutral-05;
-   }
-}
-
-%select-label-default {
-   color: $neutral-08;
-   font-family: $egeo-nunito-sans-bold;
-   font-size: $egeo-font-size-xxsmall;
-   line-height: $egeo-line-height-xsmall;
-
-   &.error {
-      color: $status-critical-default;
-   }
-
-   &.active {
-      color: $action-primary-default;
-   }
-
-   &.disabled {
-      color: $neutral-06;
-   }
-}
+@import '../utils/forms';
 
 %select-dropdown-default {
    color: $action-secondary-07;
@@ -51,9 +24,8 @@
 .st-select {
 
    .st-label {
-      @extend %select-label-default;
+      @extend %form-label-default;
       display: flex;
-
    }
 
    .combo-menu {
@@ -88,7 +60,7 @@
          }
 
          .st-input-remove-default {
-            @extend %select-input-default;
+            @extend %form-label-default;
             padding: 8px 40px 8px 15px;
             width: 100%;
          }

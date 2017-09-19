@@ -10,54 +10,59 @@
  */
 @import '../constants/colors';
 @import '../constants/fonts';
+@import '../utils/forms';
 
-.sth-input-container {
+.st-input {
+   .st-label {
+      @extend %form-label-default;
+      display: flex;
+   }
+}
+
+.st-input-container {
    font-family: $egeo-nunito-sans;
 }
 
-.sth-input-container ::placeholder {
+.st-input-container ::placeholder {
    color: $neutral-07;
 }
 
-.sth-input-container :focus::placeholder {
+.st-input-container :focus::placeholder {
    color: transparent;
 }
 
-.sth-input-container.disabled {
+.st-input-container.disabled {
    border-style: dashed;
    border-color: $neutral-07;
 }
 
-.sth-input-container .sth-input-title.active {
-   color: $brand;
+.st-input-container .st-input-title.active {
+   color: $input-field-onfocus;
 }
 
-
-.sth-input-container .sth-input-title.error {
+.st-input-container .st-input-title.error {
    color: $status-warning-default;
 }
 
-.sth-input-container .sth-input-title {
-    font-size: 14px;
-    font-family: $egeo-nunito-sans-bold;
-    color: $neutral-08;
-    line-height: 1.43;
+.st-input-container .st-input-title {
+   font-size: 14px;
+   font-family: $egeo-nunito-sans-bold;
+   color: $neutral-08;
+   line-height: 1.43;
 
-    &.disabled{
-        color: $neutral-06;
-    }
+   &.disabled {
+      color: $neutral-06;
+   }
 }
 
+.st-input.st-input {
 
-.st-input.sth-input{
-
-    .sth-input-container.error {
-        .sth-input-title{
-            color: #e73851;
-        }
-    }
+   .st-input-container.error {
+      .st-input-title {
+         color: #e73851;
+      }
+   }
 }
-
 
 .st-input-error-message {
    font-size: 13px;

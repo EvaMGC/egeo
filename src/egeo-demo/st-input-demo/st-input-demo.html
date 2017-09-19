@@ -10,9 +10,11 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-input type="text" name="Name" placeholder="Enter your name" value="Peter"></st-input>
+<st-input type="text" name="Name" placeholder="Enter your name" value="Peter"  label="Name"></st-input>
 
 
 <form [formGroup]="myForm" novalidate>
-   <st-input type="text" formControlName="name" placeholder="Enter your name"></st-input>
+   <st-input type="text" formControlName="name" placeholder="Enter your name" label="Field" contextualHelp="This is a normal field"></st-input>
+   <st-input type="text" formControlName="disabledField" placeholder="This field is disabled" label="Disabled field"></st-input>
+   <st-input type="text" formControlName="requiredField" placeholder="This field is required" label="Required field" contextualHelp="This is a required field"></st-input>
 </form>

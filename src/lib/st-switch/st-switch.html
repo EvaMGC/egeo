@@ -10,7 +10,7 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<label st-label [attr.for]="relatedInput" [tooltip]="contextualHelp" [attr.id]="name">
+<label st-label [attr.for]="relatedInput" [tooltip]="contextualHelp"  [attr.id]="labelQaTag" >
    {{label}}
 </label>
 <div class="st-switch__toggle sth-switch__toggle" (click)="writeValue(!stModel)" [attr.id]="labelQaTag" [ngClass]="{ 'st-switch--disabled': disabled, 'st-switch--on': stModel, 'st-switch--off': !stModel}">
