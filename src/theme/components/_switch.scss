@@ -21,7 +21,6 @@
    }
 }
 
-
 .st-switch__circle {
    background-color: $neutral-00;
 }
@@ -30,19 +29,12 @@
    .st-switch__box {
       background-color: $action-primary-default;
    }
-   .st-switch__circle {
-      border: solid 1px $action-primary-default;
-   }
 }
 
 .st-switch--off {
    .st-switch__box {
-      background-color: $neutral-02;
-      border: solid 1px $neutral-07;
-   }
-
-   .st-switch__circle {
-      border: solid 1px $neutral-07;
+      background-color: $neutral-05;
+      border: solid 1px $neutral-05;
    }
 }
 

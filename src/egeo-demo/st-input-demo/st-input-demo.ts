@@ -10,6 +10,7 @@
  */
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { StInputError } from '@stratio/egeo';
 
 @Component({
    selector: 'st-input-demo',
@@ -18,6 +19,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class StInputDemoComponent {
    public myForm: FormGroup;
+   public requiredError: StInputError = {required: 'This field is required'};
 
    constructor(private fb: FormBuilder) {
       this.myForm = fb.group({

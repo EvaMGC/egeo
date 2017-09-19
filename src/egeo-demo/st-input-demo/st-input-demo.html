@@ -16,7 +16,7 @@
 <form [formGroup]="myForm" novalidate>
    <st-input type="text" formControlName="name" placeholder="Enter your name" label="Field" contextualHelp="This is a normal field"></st-input>
    <st-input type="text" formControlName="disabledField" placeholder="This field is disabled" label="Disabled field"></st-input>
-   <st-input type="text" formControlName="requiredField" placeholder="This field is required" label="Required field" contextualHelp="This is a required field"></st-input>
+   <st-input type="text" formControlName="requiredField" placeholder="This field is required" [errors]="requiredError" label="Required field" contextualHelp="This is a required field"></st-input>
    <label class ="st-label">Native Input with st-input class</label>
    <input class ="st-input"  formControlName="requiredField"  placeholder="This field is created with st-input class"/>
    <label class ="st-label">Native disabled Input with class</label>

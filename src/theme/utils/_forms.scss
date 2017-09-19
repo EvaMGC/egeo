@@ -13,7 +13,8 @@
 
 %st-form-control {
    font-family: $egeo-nunito-sans;
-   font-size: 15px;
+   font-size: $egeo-font-size-xsmall;
+   line-height: $egeo-line-height-xsmall;
    color: $action-secondary-07;
    background-color: $neutral-00;
    border: 1px solid $neutral-07;
@@ -22,7 +23,9 @@
    vertical-align: bottom;
    outline: none;
    width: 100%;
-
+   input {
+      min-height: $egeo-line-height-xsmall;
+   }
    &::placeholder {
       color: $neutral-07;
    }
@@ -52,7 +55,7 @@
    font-family: $egeo-nunito-sans-bold;
    font-size: $egeo-font-size-xxsmall;
    line-height: $egeo-line-height-xxsmall;
-   padding-bottom: 2px;
+   margin-bottom: 1px;
 
    &.error {
       color: $status-critical-default;
