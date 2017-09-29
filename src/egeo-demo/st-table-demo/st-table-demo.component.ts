@@ -73,9 +73,10 @@ export class StTableDemoComponent {
       }
    ];
 
-   public selected: boolean[] = [];
+   public selectedTable1: boolean[] = [];
+   public selectedTable2: boolean[] = [];
 
-   public onSelectRow(event: any, rowIndex: number) {
-      this.selected[rowIndex] = event.checked;
+   public onSelectRow(event: any, rowIndex: number, selected: Array<boolean>) {
+      selected[rowIndex] = event.checked;
    }
 }

@@ -13,6 +13,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StTableRowComponent } from './st-table-row.component';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 let fixture: ComponentFixture<StTableRowComponent>;
 let component: StTableRowComponent;
@@ -22,6 +23,10 @@ describe('StTableRowComponent', () => {
       TestBed.configureTestingModule({
          imports: [CommonModule, RouterTestingModule],
          declarations: [StTableRowComponent]
+      })
+         // remove this block when the issue #12313 of Angular is fixed
+         .overrideComponent(StTableRowComponent, {
+         set: {changeDetection: ChangeDetectionStrategy.Default}
       })
          .compileComponents();  // compile template and css
    }));

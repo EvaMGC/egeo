@@ -38,11 +38,38 @@
       </tr>
    </st-table>
 
-   <h1>Selectable table without hover menu</h1>
-   <st-table [fields]="fields" [sortable]="true" [selectableAll]="true" [hasHoverMenu]="false" qaTag="table-qa-tag">
-      <tr st-table-row *ngFor="let userData of data; let i = index" [selected]="selected[i]">
+   <h1>Selectable table without hover menu and configured to not stand up rows when selected</h1>
+   <st-table [fields]="fields" [sortable]="true"  [selectableAll]="true" [hasHoverMenu]="false" qaTag="table-qa-tag">
+      <tr st-table-row *ngFor="let userData of data; let i = index" [selected]="selectedTable1[i]" [standUpSelected] = "false">
          <td st-table-cell st-table-row-content>
-            <st-checkbox (change)="onSelectRow($event, i)"></st-checkbox>
+            <st-checkbox (change)="onSelectRow($event, i, selectedTable1)"></st-checkbox>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.id}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.name}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.lastName}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.phone}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.company}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.completedProfile}}</label>
+         </td>
+      </tr>
+   </st-table>
+
+   <h1>Selectable table without hover menu and configured to stand up rows when selected</h1>
+   <st-table [fields]="fields" [sortable]="true"  [selectableAll]="true" [hasHoverMenu]="false" qaTag="table-qa-tag">
+      <tr st-table-row *ngFor="let userData of data; let i = index" [selected]="selectedTable2[i]" [standUpSelected] = "true">
+         <td st-table-cell st-table-row-content>
+            <st-checkbox (change)="onSelectRow($event, i, selectedTable2)"></st-checkbox>
          </td>
          <td st-table-cell st-table-row-content>
             <label>{{userData.id}}</label>

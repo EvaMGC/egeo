@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   ChangeDetectionStrategy, Component, HostListener, Input, OnInit, ContentChild, ViewChild, ChangeDetectorRef
+   ChangeDetectionStrategy, Component, HostListener, Input, OnInit, ViewChild, HostBinding
 } from '@angular/core';
 
 /**
@@ -35,8 +35,7 @@ import {
    styleUrls: ['./st-table-row.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    host: {
-      'class': 'st-table-row',
-      '[class.selected]': 'selected && standUpSelected'
+      'class': 'st-table-row'
    }
 })
 
@@ -48,15 +47,18 @@ export class StTableRowComponent implements OnInit {
 
    @ViewChild('hoverMenu') hoverMenu: any;
 
-   public showHoverMenu: boolean = false;
-   public hasHoverMenu: boolean = true;
 
-   constructor(private cd: ChangeDetectorRef) {
-   }
+   public showHoverMenu: boolean = false;
+   public hasHoverMenu: boolean;
+
 
    ngOnInit(): void {
       this.hasHoverMenu = this.hoverMenu.nativeElement.children.length > 0;
-      this.cd.markForCheck();
+   }
+
+   @HostBinding('class.selected')
+   get hasSelectedClass(): boolean {
+      return this.selected && this.standUpSelected;
    }
 
    @HostListener('mouseover') onShowHoverMenu(): void {
