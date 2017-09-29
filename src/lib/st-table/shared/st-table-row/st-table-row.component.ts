@@ -52,12 +52,12 @@ export class StTableRowComponent implements OnInit {
    public hasHoverMenu: boolean = true;
 
    constructor(private cd: ChangeDetectorRef) {
-   };
+   }
 
    ngOnInit(): void {
       this.hasHoverMenu = this.hoverMenu.nativeElement.children.length > 0;
       this.cd.markForCheck();
-   };
+   }
 
    @HostListener('mouseover') onShowHoverMenu(): void {
       this.showHoverMenu = true;
