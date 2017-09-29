@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   ChangeDetectionStrategy, Component, HostListener, Input
+   ChangeDetectionStrategy, Component, HostListener, Input, OnInit, ContentChild, ViewChild, ChangeDetectorRef
 } from '@angular/core';
 
 /**
@@ -36,17 +36,28 @@ import {
    changeDetection: ChangeDetectionStrategy.OnPush,
    host: {
       'class': 'st-table-row',
-      '[class.selected]' : 'selected && standUpSelected'
+      '[class.selected]': 'selected && standUpSelected'
    }
 })
 
-export class StTableRowComponent {
+export class StTableRowComponent implements OnInit {
    /** @Input {boolean} [selected=''] It indicates if row is selected or not */
    @Input() selected: boolean;
    /** @Input {boolean} [standUpSelected='true'] It indicates if when row is selected, it has to be displayed stood up */
    @Input() standUpSelected: boolean = true;
 
+   @ViewChild('hoverMenu') hoverMenu: any;
+
    public showHoverMenu: boolean = false;
+   public hasHoverMenu: boolean = true;
+
+   constructor(private cd: ChangeDetectorRef) {
+   };
+
+   ngOnInit(): void {
+      this.hasHoverMenu = this.hoverMenu.nativeElement.children.length > 0;
+      this.cd.markForCheck();
+   };
 
    @HostListener('mouseover') onShowHoverMenu(): void {
       this.showHoverMenu = true;

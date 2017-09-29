@@ -53,6 +53,7 @@
 * st-input: Apply new style according to UX specifications
 * st-input: Refactor styles to can be applied to a native input
 * All: Removed all references old fonts in all components
+* st-table: Remove unneeded cell when there is not a hover menu
 
 **Documentation:**
 

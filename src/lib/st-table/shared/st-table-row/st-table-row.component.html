@@ -13,6 +13,6 @@
 <ng-content
    select='[st-table-row-content]'>
 </ng-content>
-<td class='hover-menu' [ngClass]="{'hover-menu--show': showHoverMenu}">
+<td class='hover-menu' [hidden]="!hasHoverMenu" #hoverMenu [ngClass]="{'hover-menu--show': showHoverMenu}">
    <ng-content select='[st-table-row-hover]'></ng-content>
 </td>

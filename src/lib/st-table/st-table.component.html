@@ -11,6 +11,7 @@
 
 -->
 <table class='st-table' [attr.id]='qaTag'>
+
    <thead>
    <tr *ngIf = "header" class='st-table__header'>
       <th *ngIf ="selectableAll">
@@ -27,7 +28,8 @@
             </i>
          </label>
       </th>
-      <th></th> <!-- For hover cell -->
+
+      <th *ngIf ="hasHoverMenu"></th> <!-- For hover cell -->
    </tr>
    </thead>
    <ng-content></ng-content>

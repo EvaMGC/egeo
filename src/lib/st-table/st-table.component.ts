@@ -79,6 +79,7 @@ export class StTableComponent {
    @Input() selectableAll: boolean = false;
    /** @Input {Order} [currentOrder=''] It specifies what is the current order applied to the table */
    @Input() currentOrder: Order;
+
    /** @Input {boolean} [selectedAll='false'] It specifies if all rows are selected */
    @Input()
    get selectedAll(): boolean {
@@ -90,6 +91,18 @@ export class StTableComponent {
       this.cd.markForCheck();
    }
 
+   /** @Input {boolean} [hasHoverMenu='true'] It specifies if a menu has to be displayed when user puts the mouse over
+    * the rows. Remember to add a cell with the selector st-table-row-hover for adding content to the menu
+    */
+   @Input()
+   get hasHoverMenu(): boolean {
+      return this._hasHoverMenu;
+   }
+
+   set hasHoverMenu(newValue: boolean) {
+      this._hasHoverMenu = newValue;
+      this.cd.markForCheck();
+   }
    /** @Output {Order} [changeOrder=''] Event emitted with the new order which has to be applied to the table rows */
    @Output() changeOrder: EventEmitter<Order> = new EventEmitter();
    /** @Output {boolean} [selectAll=''] Event emitted  when user interacts with the checkbox to select or deselect
@@ -100,6 +113,7 @@ export class StTableComponent {
    public orderTypes: any = ORDER_TYPE;
 
    private _selectedAll: boolean;
+   private _hasHoverMenu: boolean = true;
 
    constructor(private cd: ChangeDetectorRef) {
    }

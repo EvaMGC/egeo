@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StTableRowComponent } from './st-table-row.component';
+import { By } from '@angular/platform-browser';
 
 let fixture: ComponentFixture<StTableRowComponent>;
 let component: StTableRowComponent;
@@ -87,5 +88,22 @@ describe('StTableRowComponent', () => {
 
          expect(fixture.nativeElement.classList).toContain('selected');
       });
+   });
+
+   it('hover menu has to be hidden if developer does not add any content to it', () => {
+      let hoverMenu: Element = fixture.nativeElement.querySelector('.hover-menu');
+      let contentElement: HTMLSpanElement = document.createElement('span');
+
+      hoverMenu.appendChild(contentElement);
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('.hover-menu')).properties.hidden).toBe(false);
+
+      hoverMenu.removeChild(contentElement);
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('.hover-menu')).properties.hidden).toBe(true);
    });
 });

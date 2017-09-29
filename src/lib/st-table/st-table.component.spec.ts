@@ -54,6 +54,10 @@ describe('StTableComponent', () => {
       it('table is sortable by default', () => {
          expect(component.sortable).toBeTruthy();
       });
+
+      it('hover menu is displayed by default', () => {
+         expect(component.hasHoverMenu).toBeTruthy();
+      });
    });
 
    it('if table is sortable but there are fields not sortable, arrow is only displayed for sortable fields', () => {
@@ -250,5 +254,23 @@ describe('StTableComponent', () => {
          });
 
       });
+   });
+
+   it ('only if hasHoverMenu is true, an empty cell is created after the header cells', () => {
+      component.hasHoverMenu = true;
+      component.fields = fakeFields;
+
+      fixture.detectChanges();
+      let headerCells: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('th');
+
+      expect(headerCells.length).toBe(fakeFields.length + 1);
+      expect(headerCells[headerCells.length - 1].innerHTML).toEqual('');
+
+      component.hasHoverMenu = false;
+
+      fixture.detectChanges();
+      fixture.changeDetectorRef.markForCheck();
+
+      expect(fixture.nativeElement.querySelectorAll('th').length).toBe(fakeFields.length);
    });
 });
