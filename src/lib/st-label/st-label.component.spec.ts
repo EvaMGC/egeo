@@ -8,10 +8,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// Component
 import { StLabelComponent } from './st-label.component';
 import { StTooltipModule } from '../st-tooltip';
 
@@ -20,10 +19,11 @@ import { StTooltipModule } from '../st-tooltip';
 })
 class TestStLabelComponent { }
 
-let component: TestStLabelComponent;
+const labelContent: string = 'label content';
+const tooltipContent: string = 'tooltip content';
+
 let fixture: ComponentFixture<TestStLabelComponent>;
-let labelContent: string = 'label content';
-let nativeElement: any;
+let nativeElement: Element;
 let template: string = '';
 
 function createTestComponent(customTemplate?: string): Promise<ComponentFixture<TestStLabelComponent>> {
@@ -59,14 +59,25 @@ describe('StLabel', () => {
       });
    }));
 
-   it('Label tag has st-label and st-tooltip classes', async(() => {
+   it('Label tag has st-label class', async(() => {
       template = '<label st-label>' + labelContent + '</label>';
       createTestComponent(template).then(() => {
          fixture = TestBed.createComponent(TestStLabelComponent);
          fixture.detectChanges();
          nativeElement = fixture.nativeElement;
          expect(nativeElement.querySelector('label').classList.contains('st-label')).toBeTruthy();
+         expect(nativeElement.querySelector('label').classList.contains('st-tooltip')).toBeFalsy();
+      });
+   }));
+
+   it('Label tag has st-tooltip class if it has a title', async(() => {
+      template = '<label st-label title="' + tooltipContent + '">' + labelContent + '</label>';
+      createTestComponent(template).then(() => {
+         fixture = TestBed.createComponent(TestStLabelComponent);
+         fixture.detectChanges();
+         nativeElement = fixture.nativeElement;
          expect(nativeElement.querySelector('label').classList.contains('st-tooltip')).toBeTruthy();
       });
    }));
+
 });

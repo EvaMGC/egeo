@@ -2,7 +2,9 @@
 
 ## 4.1.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
+* st-tooltip: fix empty title bug
 
 ## 4.0.0 (September 21, 2017)
 

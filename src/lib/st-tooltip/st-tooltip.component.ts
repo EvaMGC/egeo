@@ -21,23 +21,39 @@ export class StTooltipComponent {
    @HostBinding('class.st-tooltip-on') classTooltipOn: boolean;
 
    private _showOnClick: boolean;
+   @Input()
+   set showOnClick(value: boolean) {
+      this._showOnClick = value;
+      this.classTooltip = this.title && !value;
+   }
    get showOnClick(): boolean {
       return this._showOnClick;
    }
 
-   @Input('showOnClick')
-   set showOnClick(value: boolean) {
-      this._showOnClick = value;
-      this.classTooltip = !value;
+   private _title: string;
+   @Input('attr.title')
+   set title(value: string) {
+      this._title = value;
+      if (value) {
+         this.el.nativeElement.setAttribute('title', value);
+         this.classTooltip = !this.showOnClick;
+      } else {
+         this.el.nativeElement.removeAttribute('title');
+         this.classTooltip = false;
+      }
+   }
+   get title(): string {
+      return this._title;
    }
 
    @HostListener('document:click', ['$event']) onClick(event: Event): void {
-      this.classTooltipOn = this.showOnClick && this.el.nativeElement.contains(event.target);
+      this.classTooltipOn = this.showOnClick && this.title && this.el.nativeElement.contains(event.target);
    }
 
    constructor(private el: ElementRef) {
-      this.classTooltip = true;
+      this.classTooltip = false;
       this.classTooltipOn = false;
       this.showOnClick = false;
+      this.title = this.el.nativeElement.title;
    }
 }

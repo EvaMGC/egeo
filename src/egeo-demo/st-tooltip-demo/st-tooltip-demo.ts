@@ -8,16 +8,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 
 @Component({
    selector: 'st-tooltip-demo',
-   templateUrl: './st-tooltip-demo.html',
-   styleUrls: ['./st-tooltip-demo.scss'],
-   changeDetection: ChangeDetectionStrategy.OnPush
+   templateUrl: './st-tooltip-demo.html'
 })
-
-export class StTooltipDemoComponent {
-   public qaTag: string = 'example';
-}
+export class StTooltipDemoComponent { }
