@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
@@ -88,7 +88,6 @@ export class StTableComponent {
 
    set selectedAll(newValue: boolean) {
       this._selectedAll = newValue;
-      this.cd.markForCheck();
    }
 
    /** @Input {boolean} [hasHoverMenu='true'] It specifies if a menu has to be displayed when user puts the mouse over
@@ -101,7 +100,6 @@ export class StTableComponent {
 
    set hasHoverMenu(newValue: boolean) {
       this._hasHoverMenu = newValue;
-      this.cd.markForCheck();
    }
    /** @Output {Order} [changeOrder=''] Event emitted with the new order which has to be applied to the table rows */
    @Output() changeOrder: EventEmitter<Order> = new EventEmitter();
@@ -114,9 +112,6 @@ export class StTableComponent {
 
    private _selectedAll: boolean;
    private _hasHoverMenu: boolean = true;
-
-   constructor(private cd: ChangeDetectorRef) {
-   }
 
    public onChangeOrder(field: StTableHeader): void {
       if (field && this.isSortable(field)) {

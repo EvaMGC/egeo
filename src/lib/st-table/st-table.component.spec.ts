@@ -11,11 +11,11 @@
 import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
 import { StTableHeader } from './shared/table-header.interface';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
@@ -33,6 +33,10 @@ describe('StTableComponent', () => {
          imports: [CommonModule, RouterTestingModule, StCheckboxModule],
          declarations: [StTableComponent]
       })
+      // remove this block when the issue #12313 of Angular is fixed
+         .overrideComponent(StTableComponent, {
+            set: {changeDetection: ChangeDetectionStrategy.Default}
+         })
          .compileComponents();  // compile template and css
    }));
 
@@ -256,7 +260,7 @@ describe('StTableComponent', () => {
       });
    });
 
-   it ('only if hasHoverMenu is true, an empty cell is created after the header cells', () => {
+   it('only if hasHoverMenu is true, an empty cell is created after the header cells', () => {
       component.hasHoverMenu = true;
       component.fields = fakeFields;
 

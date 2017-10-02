@@ -33,10 +33,7 @@ import {
    selector: '[st-table-row]',
    templateUrl: './st-table-row.component.html',
    styleUrls: ['./st-table-row.component.scss'],
-   changeDetection: ChangeDetectionStrategy.OnPush,
-   host: {
-      'class': 'st-table-row'
-   }
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class StTableRowComponent implements OnInit {
@@ -47,6 +44,12 @@ export class StTableRowComponent implements OnInit {
 
    @ViewChild('hoverMenu') hoverMenu: any;
 
+   @HostBinding('class.st-table-row') rootClass: boolean = true;
+
+   @HostBinding('class.selected')
+   get hasSelectedClass(): boolean {
+      return this.selected && this.standUpSelected;
+   }
 
    public showHoverMenu: boolean = false;
    public hasHoverMenu: boolean;
@@ -54,11 +57,6 @@ export class StTableRowComponent implements OnInit {
 
    ngOnInit(): void {
       this.hasHoverMenu = this.hoverMenu.nativeElement.children.length > 0;
-   }
-
-   @HostBinding('class.selected')
-   get hasSelectedClass(): boolean {
-      return this.selected && this.standUpSelected;
    }
 
    @HostListener('mouseover') onShowHoverMenu(): void {
