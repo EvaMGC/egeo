@@ -78,6 +78,7 @@
       "gulp-remove-html-comments": "1.0.1",
       "gulp-sass": "3.1.0",
       "gulp-sourcemaps": "2.6.0",
+      "intl": "1.2.5",
       "jasmine-core": "2.6.4",
       "js-beautify": "1.6.14",
       "json": "9.0.6",
