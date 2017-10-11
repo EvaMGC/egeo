@@ -10,27 +10,26 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<table class='st-table' [attr.id]='qaTag'>
-
+<table class='st-table' [ngClass]="{' st-table--fixed-header': fixedHeader}" [attr.id]='qaTag'>
    <thead>
-   <tr *ngIf = "header" class='st-table__header'>
-      <th *ngIf ="selectableAll">
-         <st-checkbox qaTag="select-all-checkbox" name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
-         </st-checkbox>
-      </th>
-      <th *ngFor='let field of fields'
-          class='st-table__header-item'
-          [ngClass]="{'st-table__header-item--selected': isSortedByField(field), sortable: isSortable(field)}"
-          (click)="onChangeOrder(field)">
-         <label class='st-table__header-text'>{{field.label}}
-            <i *ngIf="isSortable(field)" class='st-table__order-arrow'
-               [ngClass]="getHeaderItemClass(field)">
-            </i>
-         </label>
-      </th>
+      <tr *ngIf="header" class='st-table__header'>
+         <th *ngIf="selectableAll">
+            <st-checkbox qaTag="select-all-checkbox" name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
+            </st-checkbox>
+         </th>
+         <th *ngFor='let field of fields'
+             class='st-table__header-item'
+             [ngClass]="{'st-table__header-item--selected': isSortedByField(field), sortable: isSortable(field)}"
+             (click)="onChangeOrder(field)">
+            <label class='st-table__header-text'>{{field.label}}
+               <i *ngIf="isSortable(field)" class='st-table__order-arrow'
+                  [ngClass]="getHeaderItemClass(field)">
+               </i>
+            </label>
+         </th>
 
-      <th *ngIf ="hasHoverMenu"></th> <!-- For hover cell -->
-   </tr>
+         <th *ngIf ="hasHoverMenu"></th> <!-- For hover cell -->
+      </tr>
    </thead>
    <ng-content></ng-content>
 </table>

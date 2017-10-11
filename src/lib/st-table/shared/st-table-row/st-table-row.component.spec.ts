@@ -12,103 +12,143 @@ import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StTableRowComponent } from './st-table-row.component';
-import { By } from '@angular/platform-browser';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 
-let fixture: ComponentFixture<StTableRowComponent>;
-let component: StTableRowComponent;
+let fixture: ComponentFixture<TestStTableRowComponent>;
+let component: TestStTableRowComponent;
+
+@Component({
+   template: ` 
+      <tr #rowWithHoverMenu st-table-row id="row-with-hover-menu">
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.id}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.name}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.lastName}}</label>
+         </td>
+         <td st-table-row-hover>
+            <i class="icon icon-arrow2_right"></i>
+         </td>
+      </tr>
+       <tr #row st-table-row id="row">
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.id}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.name}}</label>
+         </td>
+         <td st-table-cell st-table-row-content>
+            <label>{{userData.lastName}}</label>
+         </td>
+          
+      </tr>
+`
+})
+
+class TestStTableRowComponent {
+   @ViewChild('row') row: StTableRowComponent;
+   @ViewChild('rowWithHoverMenu') rowWithHoverMenu: StTableRowComponent;
+
+   userData: {} = {
+      id: '4545-df56-s345',
+      name: 'Antonio',
+      lastName: 'López'
+   };
+}
+
+let rowElement: HTMLTableRowElement;
+let rowWithHoverMenuElement: HTMLTableRowElement;
 
 describe('StTableRowComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [CommonModule, RouterTestingModule],
-         declarations: [StTableRowComponent]
+         declarations: [TestStTableRowComponent, StTableRowComponent]
       })
-         // remove this block when the issue #12313 of Angular is fixed
-         .overrideComponent(StTableRowComponent, {
-         set: {changeDetection: ChangeDetectionStrategy.Default}
-      })
+      // remove this block when the issue #12313 of Angular is fixed
+         .overrideComponent(TestStTableRowComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
-      fixture = TestBed.createComponent(StTableRowComponent);
+      fixture = TestBed.createComponent(TestStTableRowComponent);
       component = fixture.componentInstance;
+      fixture.detectChanges();
+      rowElement  = fixture.nativeElement.querySelector('#row');
+      rowWithHoverMenuElement = fixture.nativeElement.querySelector('#row-with-hover-menu');
    });
 
-   describe('should be able to listen when mouse is over it', () => {
+   describe('it can be configured to be stood up when it is selected or not', () => {
       beforeEach(() => {
-         fixture.nativeElement.dispatchEvent(new Event('mouseover'));
-         fixture.detectChanges();
-      });
-      it('boolean variable is updated', () => {
-         expect(component.showHoverMenu).toBeTruthy();
-      });
-
-      it('hover menu is displayed at the end of row', () => {
-         let cells = fixture.nativeElement.children;
-         let hoverMenu = fixture.nativeElement.children[cells.length - 1];
-
-         expect(hoverMenu.classList).toContain('hover-menu--show');
-      });
-   });
-
-   describe('should be able to listen when mouse goes out from it', () => {
-      beforeEach(() => {
-         fixture.nativeElement.dispatchEvent(new Event('mouseout'));
-         fixture.detectChanges();
-      });
-      it('boolean variable is updated', () => {
-         expect(component.showHoverMenu).toBeFalsy();
-      });
-
-      it('hover menu is hidden', () => {
-         let cells = fixture.nativeElement.children;
-         let hoverMenu = fixture.nativeElement.children[cells.length - 1];
-
-         expect(hoverMenu.classList).not.toContain('hover-menu--show');
-      });
-   });
-
-   describe('user can define if row will be stood up when it is selected or not', () => {
-      beforeEach(() => {
-         component.selected = true;
+         component.row.selected = true;
          fixture.detectChanges();
       });
 
       it('by default, row is stood up', () => {
-         expect(fixture.nativeElement.classList).toContain('selected');
+         expect(rowElement.classList).toContain('selected');
       });
 
       it('if user puts the input standUpSelected to false, row is not stood up', () => {
-         component.standUpSelected = false;
+         component.row.standUpSelected = false;
          fixture.detectChanges();
 
          expect(fixture.nativeElement.classList).not.toContain('selected');
       });
 
       it('if user puts the input standUpSelected to true, row is stood up', () => {
-         component.standUpSelected = true;
+         component.row.standUpSelected = true;
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.classList).toContain('selected');
+         expect(rowElement.classList).toContain('selected');
       });
    });
 
-   it('hover menu has to be hidden if developer does not add any content to it', () => {
-      let hoverMenu: Element = fixture.nativeElement.querySelector('.hover-menu');
-      let contentElement: HTMLSpanElement = document.createElement('span');
+   it('if row does not have a hover menu, reserved column is removed', () => {
+      expect(rowElement.querySelector('td.hover-menu')).toBeNull();
+   });
 
-      hoverMenu.appendChild(contentElement);
-      component.ngOnInit();
-      fixture.detectChanges();
+   describe('if row has a hover menu', () => {
 
-      expect(fixture.debugElement.query(By.css('.hover-menu')).properties.hidden).toBe(false);
+      describe('should be able to listen when mouse is over it', () => {
+         beforeEach(() => {
+            rowWithHoverMenuElement.dispatchEvent(new Event('mouseover'));
+            fixture.detectChanges();
+         });
 
-      hoverMenu.removeChild(contentElement);
-      component.ngOnInit();
-      fixture.detectChanges();
+         it('boolean variable is updated', () => {
+            expect(component.rowWithHoverMenu.showHoverMenu).toBeTruthy();
+         });
 
-      expect(fixture.debugElement.query(By.css('.hover-menu')).properties.hidden).toBe(true);
+         it('hover menu is displayed at the end of row', () => {
+            let cells = rowWithHoverMenuElement.children;
+            let hoverMenu = cells[cells.length - 1];
+
+            expect(hoverMenu.classList).toContain('hover-menu--show');
+         });
+      });
+
+      describe('should be able to listen when mouse goes out from it', () => {
+         beforeEach(() => {
+            rowWithHoverMenuElement.dispatchEvent(new Event('mouseout'));
+            fixture.detectChanges();
+         });
+
+         it('boolean variable is updated', () => {
+            expect(component.rowWithHoverMenu.showHoverMenu).toBeFalsy();
+         });
+
+         it('hover menu is hidden', () => {
+            let cells = rowWithHoverMenuElement.children;
+            let hoverMenu = cells[cells.length - 1];
+
+            expect(hoverMenu.classList).not.toContain('hover-menu--show');
+         });
+      });
    });
 });
+

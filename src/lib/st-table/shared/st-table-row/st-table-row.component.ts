@@ -9,7 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   ChangeDetectionStrategy, Component, HostListener, Input, OnInit, ViewChild, HostBinding
+   ChangeDetectionStrategy, Component, HostListener, Input, OnInit, ViewChild, HostBinding,
+   ElementRef
 } from '@angular/core';
 
 /**
@@ -51,12 +52,19 @@ export class StTableRowComponent implements OnInit {
       return this.selected && this.standUpSelected;
    }
 
-   public showHoverMenu: boolean = false;
-   public hasHoverMenu: boolean;
 
+   constructor(private elementRef: ElementRef) {
+
+   }
+
+   public showHoverMenu: boolean = false;
 
    ngOnInit(): void {
-      this.hasHoverMenu = this.hoverMenu.nativeElement.children.length > 0;
+      // remove hover menu column if it does not any content
+      if (this.hoverMenu.nativeElement.children.length === 0) {
+         // this.hoverMenu.nativeElement.remove();
+         this.elementRef.nativeElement.removeChild( this.hoverMenu.nativeElement);
+      }
    }
 
    @HostListener('mouseover') onShowHoverMenu(): void {

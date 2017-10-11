@@ -65,22 +65,26 @@ export class StTableComponent {
    @Input() @StRequired() fields: StTableHeader[];
    /** @Input {string} [qaTag=''] Prefix used to generate the id values for qa tests */
    @Input() qaTag: string;
-   /** @Input {boolean} [header='true'] Boolean to show or hide the header */
+   /** @Input {boolean} [header=true] Boolean to show or hide the header */
    @Input() header: boolean = true;
+
+   /** @Input {boolean} [fixedHeader=false] Boolean to fix the table header */
+   @Input() fixedHeader: boolean = false;
+
    /**
-    * @Input {boolean} [sortable='true'] Boolean to make sortable the table, To enable sorting of columns use
+    * @Input {boolean} [sortable=true] Boolean to make sortable the table, To enable sorting of columns use
     * the new "sortable" field inside stTableHeader model
     */
    @Input() sortable: boolean = true;
    /**
-    * @Input {boolean} [selectableAll='false'] Boolean to show or hide a checkbox in the header to select or
+    * @Input {boolean} [selectableAll'false] Boolean to show or hide a checkbox in the header to select or
     *  deselect all rows
     */
    @Input() selectableAll: boolean = false;
    /** @Input {Order} [currentOrder=''] It specifies what is the current order applied to the table */
    @Input() currentOrder: Order;
 
-   /** @Input {boolean} [selectedAll='false'] It specifies if all rows are selected */
+   /** @Input {boolean} [selectedAll=false] It specifies if all rows are selected */
    @Input()
    get selectedAll(): boolean {
       return this._selectedAll;
@@ -90,7 +94,7 @@ export class StTableComponent {
       this._selectedAll = newValue;
    }
 
-   /** @Input {boolean} [hasHoverMenu='true'] It specifies if a menu has to be displayed when user puts the mouse over
+   /** @Input {boolean} [hasHoverMenu=true] It specifies if a menu has to be displayed when user puts the mouse over
     * the rows. Remember to add a cell with the selector st-table-row-hover for adding content to the menu
     */
    @Input()

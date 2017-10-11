@@ -20,6 +20,7 @@
    font-family: $egeo-nunito-sans-bold;
    font-size: $egeo-font-size-xxsmall;
    line-height: $egeo-line-height-xxsmall;
+   text-align: left;
    color: $neutral-10;
    padding: 0 20px;
 }
@@ -46,15 +47,34 @@
    font-size: $egeo-font-size-xsmall;
    line-height: $egeo-line-height-xsmall;
    text-align: left;
-   color: $neutral-10;
+   color: $neutral-11;
 }
 
 .st-table-row.selected {
-   color: $action-secondary-07;
    font-family: $egeo-nunito-sans-semiBold;
 }
 
 .st-table-row.selected,
 .st-table-row:hover {
    background-color: rgba(18, 139, 221, 0.05);
+   color: $action-secondary-07;
+}
+
+.st-table--fixed-header tbody {
+   display: block;
+   width: 100%;
+   max-height: 100vh;
+   border-spacing: 0;
+   overflow-y: auto;
+   overflow-y: overlay;
+
+   > tr {
+      display: flex;
+      flex-wrap: nowrap;
+      > td {
+         flex: 1;
+         display: flex;
+         justify-content: flex-start;
+      }
+   }
 }
