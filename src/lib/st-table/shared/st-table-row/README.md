@@ -7,13 +7,15 @@
 | Property        | Type    | Req   | Description                                                           | Default |
 | --------------- | ------- | ----- | --------------------------------------------------------------------- | ------- |
 | selected        | Boolean | False | It indicates if row is selected or not                                | ''      |
-| standUpSelected | Boolean | False | It indicates if when row is selected, it has to be displayed stood up | 'true'  |
+| standUpSelected | Boolean | False | It indicates if when row is selected, it has to be displayed stood up | true    |
 
 ## Example
 
 
 ```html
-<tr st-table-row [selected]="true" [standUpSelected]="false">
+<tr st-table-row
+      [selected]="true"
+      [standUpSelected]="false">
     <!-- CELL LIST WILL BE HERE -->
 </tr>
 ```

@@ -40,7 +40,7 @@ import {
 export class StTableRowComponent implements OnInit {
    /** @Input {boolean} [selected=''] It indicates if row is selected or not */
    @Input() selected: boolean;
-   /** @Input {boolean} [standUpSelected='true'] It indicates if when row is selected, it has to be displayed stood up */
+   /** @Input {boolean} [standUpSelected=true] It indicates if when row is selected, it has to be displayed stood up */
    @Input() standUpSelected: boolean = true;
 
    @ViewChild('hoverMenu') hoverMenu: any;
@@ -60,9 +60,7 @@ export class StTableRowComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      // remove hover menu column if it does not any content
       if (this.hoverMenu.nativeElement.children.length === 0) {
-         // this.hoverMenu.nativeElement.remove();
          this.elementRef.nativeElement.removeChild(this.hoverMenu.nativeElement);
       }
    }

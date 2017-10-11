@@ -77,7 +77,7 @@ export class StTableComponent {
     */
    @Input() sortable: boolean = true;
    /**
-    * @Input {boolean} [selectableAll'false] Boolean to show or hide a checkbox in the header to select or
+    * @Input {boolean} [selectableAll=false] Boolean to show or hide a checkbox in the header to select or
     *  deselect all rows
     */
    @Input() selectableAll: boolean = false;
