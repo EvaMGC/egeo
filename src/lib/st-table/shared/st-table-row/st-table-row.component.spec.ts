@@ -18,8 +18,8 @@ let fixture: ComponentFixture<TestStTableRowComponent>;
 let component: TestStTableRowComponent;
 
 @Component({
-   template: ` 
-      <tr #rowWithHoverMenu st-table-row id="row-with-hover-menu">
+
+   template: `<tr #rowWithHoverMenu st-table-row id="row-with-hover-menu">
          <td st-table-cell st-table-row-content>
             <label>{{userData.id}}</label>
          </td>
@@ -43,9 +43,7 @@ let component: TestStTableRowComponent;
          <td st-table-cell st-table-row-content>
             <label>{{userData.lastName}}</label>
          </td>
-          
-      </tr>
-`
+      </tr>`
 })
 
 class TestStTableRowComponent {

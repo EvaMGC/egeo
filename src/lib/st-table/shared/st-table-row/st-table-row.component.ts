@@ -53,17 +53,17 @@ export class StTableRowComponent implements OnInit {
    }
 
 
+   public showHoverMenu: boolean = false;
+
    constructor(private elementRef: ElementRef) {
 
    }
-
-   public showHoverMenu: boolean = false;
 
    ngOnInit(): void {
       // remove hover menu column if it does not any content
       if (this.hoverMenu.nativeElement.children.length === 0) {
          // this.hoverMenu.nativeElement.remove();
-         this.elementRef.nativeElement.removeChild( this.hoverMenu.nativeElement);
+         this.elementRef.nativeElement.removeChild(this.hoverMenu.nativeElement);
       }
    }
 
