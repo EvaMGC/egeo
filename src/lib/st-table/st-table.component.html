@@ -14,7 +14,7 @@
    <thead>
       <tr *ngIf="header" class='st-table__header'>
          <th *ngIf="selectableAll">
-            <st-checkbox qaTag="select-all-checkbox" name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
+            <st-checkbox qaTag="select-all-checkbox" class='st-table__header-text' name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
             </st-checkbox>
          </th>
          <th *ngFor='let field of fields'
