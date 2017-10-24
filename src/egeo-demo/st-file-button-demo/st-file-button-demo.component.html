@@ -12,21 +12,17 @@
 -->
 
 <section class="container-liquid">
-   <div class="row">
-      <h1 class="row"> Default file button </h1>
-      <st-file-button text="IMPORT" class="row"
-                      accepted='json'
+   <div class="example">
+      <h1 class="example-title"> Default file button </h1>
+      <st-file-button text="IMPORT" accepted='json'
                       (selected)="onUploadValidFile($event)" (error)="onUploadInvalidFile()">
       </st-file-button>
    </div>
-</section>
-<section class="container-liquid">
-   <div class="row">
-      <h1 class="row"> Secondary link button </h1>
+   <div class="example">
+      <h1 class="example-title"> Secondary link button </h1>
       <div class="col-md-3">
 
-         <st-file-button text="Upload Json" class="row"
-                         accepted='json' buttonClass="button button-link-secondary"
+         <st-file-button text="Upload Json" accepted='json' buttonClass="button button-link-secondary"
                          (selected)="onUploadValidFile($event)" (error)="onUploadInvalidFile()">
          </st-file-button>
       </div>
