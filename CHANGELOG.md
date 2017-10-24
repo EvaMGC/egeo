@@ -6,6 +6,10 @@
 
 * st-tooltip: fix empty title bug
 
+**New features:**
+
+* st-file-button: Create component to upload files
+
 ## 4.0.0 (September 21, 2017)
 
 **Fixed bugs:**

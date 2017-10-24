@@ -14,6 +14,7 @@ import { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 import { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 import { StDropdownModule } from './st-dropdown/st-dropdown.module';
+import { StFileButtonModule } from './st-file-button/st-file-button.module';
 import { StFooterModule } from './st-footer/st-footer.module';
 import { StFormDirectiveModule } from './directives/form/form-directives.module';
 import { StFormModule } from './st-form/st-form.module';
@@ -53,6 +54,7 @@ export const DECLARATIONS: any[] = [
    StCheckboxModule,
    StDropdownMenuModule,
    StDropdownModule,
+   StFileButtonModule,
    StFooterModule,
    StFormDirectiveModule,
    StFormModule,

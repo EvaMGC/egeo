@@ -65,6 +65,9 @@ export {
 } from './st-dropdown-menu/st-dropdown-menu.interface';
 export { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 
+// File button
+export { StFileButtonModule } from './st-file-button/st-file-button.module';
+
 // Footers
 export { StFooterModule } from './st-footer/st-footer.module';
 export { StFooterLink } from './st-footer/st-footer.model';
