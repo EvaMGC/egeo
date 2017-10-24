@@ -17,11 +17,11 @@ import { Component } from '@angular/core';
 })
 
 export class StFileButtonDemoComponent {
-   onUploadValidFile( file: File ): void {
-      console.log('uploaded a valid file:', file);
+   onUploadValidFile( files: any ): void {
+      console.log('uploaded a valid file:', files);
    }
 
-   onUploadInvalidFile( error: Error ): void {
-      console.log('uploaded an invalid file:', error);
+   onUploadInvalidFile(): void {
+      console.log('uploaded an invalid file:');
    }
 }
