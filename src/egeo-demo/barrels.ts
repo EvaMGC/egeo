@@ -15,10 +15,8 @@ import { StCheckboxDemoModule } from './st-checkbox-demo/st-checkbox-demo.module
 import { StDropdownDemoModule } from './st-dropdown-demo/st-dropdown-demo.module';
 import { StDropdownMenuDemoModule } from './st-dropdown-menu-demo/st-dropdown-menu-demo.module';
 import { StFileButtonDemoModule } from './st-file-button-demo/st-file-button-demo.module';
-
 import { StFooterDemoModule } from './st-footer-demo/st-footer-demo.module';
 import { StFormDemoModule } from './st-form-demo/st-form-demo.module';
-import { StGridDemoModule } from './st-grid-demo/st-grid-demo.module';
 import { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
 import { StHelpDemoModule } from './st-help-demo/st-help-demo.module';
 import { StHorizontalTabsDemoModule } from './st-horizontal-tabs-demo/st-horizontal-tabs-demo.module';
@@ -34,6 +32,7 @@ import { StRadioDemoModule } from './st-radio-demo/st-radio-demo.module';
 import { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 import { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
 import { StSelectDemoModule } from './st-select-demo/select-demo.module';
+import { StSidebarDemoModule } from './st-sidebar-demo/st-sidebar-demo.module';
 import { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
 import { StTabBoxDemoModule } from './st-tab-box-demo/st-tab-box-demo.module';
 import { StTableDemoModule } from './st-table-demo/st-table-demo.module';
@@ -75,6 +74,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StRadioMenuDemoModule,
    StSearchDemoModule,
    StSelectDemoModule,
+   StSidebarDemoModule,
    StSwitchDemoModule,
    StTabBoxDemoModule,
    StTableDemoModule,

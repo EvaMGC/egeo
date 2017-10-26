@@ -11,6 +11,7 @@
 * st-modal: New parameter closeOnClick in StModalButton, for close modal when click this button
 * st-modal: New parameter leftIcon and rightIcon in StModalButton to add icons to buttons
 * st-modal: New parameter response in StModalButton to pass a callback function to one button
+* st-sidebar: Create component to navigate through different sections 
 
 **Fixed bugs:**
 

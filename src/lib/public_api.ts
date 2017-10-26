@@ -153,6 +153,10 @@ export { StSearchModule } from './st-search/st-search.module';
 // Select
 export { StSelectModule } from './st-select/st-select.module';
 
+// Sidebar
+export { StSidebarModule } from './st-sidebar/st-sidebar.module';
+export { StSidebarItem } from './st-sidebar/st-sidebar-item.interface';
+
 // Spinner
 export { StSpinnerModule } from './st-spinner/st-spinner.module';
 
