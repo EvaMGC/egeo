@@ -39,7 +39,6 @@ export class StCheckValidationsDirective implements OnInit, OnDestroy {
 
    // TODO implement error check and notify correct error
    private notifyErrorsIfExists(): void {
-      console.log(this.control.errors);
       if (this.control.valid && this.onChange) {
          this.onChange(null);
       } else if (this.onChange) {

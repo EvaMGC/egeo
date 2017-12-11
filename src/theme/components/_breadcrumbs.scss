@@ -19,10 +19,10 @@
       text-transform: capitalize;
 
       &:after {
-        font-family: $egeo-stratio-icons;
-        content: "\E605";
-        font-size: $egeo-font-size-xxxsmall;
-        color: $neutral-10;
+         font-family: $egeo-stratio-icons;
+         content: "\E605";
+         font-size: $egeo-font-size-xxxsmall;
+         color: $neutral-10;
       }
 
       &--text {
@@ -36,11 +36,21 @@
       .last & {
          &--text {
             color: $neutral-13;
+            padding-right: 0;
          }
       }
 
       &.last:after {
-        content: "";
+         content: "";
       }
    }
+
+   &__item-container:first-child {
+      .sth-breadcrumbs__item--text {
+         padding-left: 0;
+      }
+   }
+
 }
+
+

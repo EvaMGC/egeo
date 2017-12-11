@@ -6,6 +6,7 @@
 
 * st-modal: Removed space when modal does not have buttons
 * st-modal: Reorder buttons in delete confirmation modal
+* st-breadcrumbs: Remove left padding from the first item and right padding to the last one
 
 **New features:**
 

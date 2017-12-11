@@ -33,7 +33,7 @@ describe('StAlertsComponent', () => {
          component = fixture.componentInstance;
       });
 
-      it('Should be init correctly', fakeAsync(() => {
+      it('Should be initialized correctly', fakeAsync(() => {
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, undefined);
          component.showInConsole = false;
          fixture.detectChanges();
@@ -44,7 +44,7 @@ describe('StAlertsComponent', () => {
          discardPeriodicTasks();
       }));
 
-      it('Should be return correct icon', () => {
+      it('Should return correct icon', () => {
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, undefined);
          component.showInConsole = false;
          fixture.detectChanges();
@@ -61,7 +61,7 @@ describe('StAlertsComponent', () => {
          expect(component.getIcon()).toEqual('');
       });
 
-      it('Should be return correct color by severity', () => {
+      it('Should return correct color by severity', () => {
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, undefined);
          component.showInConsole = false;
          fixture.detectChanges();
@@ -78,7 +78,7 @@ describe('StAlertsComponent', () => {
          expect(component.getSeverityColor()).toEqual('');
       });
 
-      it('Should be go to link', () => {
+      it('Should go to link', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          component.showInConsole = false;
@@ -92,7 +92,7 @@ describe('StAlertsComponent', () => {
          expect(window.open).toHaveBeenCalledWith(link.link);
       });
 
-      it('Should be notify in console error', () => {
+      it('Should notify in console error', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          component.showInConsole = true;
@@ -107,7 +107,7 @@ describe('StAlertsComponent', () => {
          expect(console.error).toHaveBeenCalledWith(`ERROR-${component.alert.title}: ${component.alert.message}`);
       });
 
-      it('Should be notify in console warning', () => {
+      it('Should notify in console warning', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.WARNING, 1000, 500, link);
          component.showInConsole = true;
@@ -122,7 +122,7 @@ describe('StAlertsComponent', () => {
          expect(console.warn).toHaveBeenCalledWith(`WARNING-${component.alert.title}: ${component.alert.message}`);
       });
 
-      it('Should be notify in console info', () => {
+      it('Should notify in console info', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.SUCCESS, 1000, 500, link);
          component.showInConsole = true;
@@ -137,7 +137,7 @@ describe('StAlertsComponent', () => {
          expect(console.log).toHaveBeenCalledWith(`SUCCESS-${component.alert.title}: ${component.alert.message}`);
       });
 
-      it('Should be notify in console error by default if not found severity', () => {
+      it('Should notify in console error by default if not found severity', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', undefined, 1000, 500, link);
          component.showInConsole = true;
@@ -152,7 +152,7 @@ describe('StAlertsComponent', () => {
          expect(console.error).toHaveBeenCalledWith(`ERROR: severity not found for ${component.alert.title}: ${component.alert.message}`);
       });
 
-      it('Should be notify pause alert', fakeAsync(() => {
+      it('Should notify pause alert', fakeAsync(() => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          spyOn(component.alert, 'pauseNotify').and.callThrough();
@@ -172,7 +172,7 @@ describe('StAlertsComponent', () => {
          discardPeriodicTasks();
       }));
 
-      it('Should be notify continue alert after pause', fakeAsync(() => {
+      it('Should notify continue alert after pause', fakeAsync(() => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          spyOn(component.alert, 'pauseNotify').and.callThrough();
@@ -200,7 +200,7 @@ describe('StAlertsComponent', () => {
          discardPeriodicTasks();
       }));
 
-      it('Should be notify close alert', fakeAsync(() => {
+      it('Should notify close alert', fakeAsync(() => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          spyOn(component.alert, 'cancel').and.callThrough();
@@ -222,7 +222,7 @@ describe('StAlertsComponent', () => {
          discardPeriodicTasks();
       }));
 
-      it('Should be fade out alert after life time', fakeAsync(() => {
+      it('Should fade out alert after life time', fakeAsync(() => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          fixture.detectChanges();
