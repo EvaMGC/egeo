@@ -10,8 +10,9 @@
  */
 .st-fullscreen-layout {
    width: 100%;
-   height: 100vh;
-   position: fixed;
+   min-height: 100vh;
+   position: absolute;
+   overflow: auto;
    left: 0;
    top: 0;
    z-index: 999999;
@@ -23,6 +24,8 @@
       flex-direction: row;
       width: 100%;
       height: 70px;
+      position: fixed;
+      z-index: 999999;
 
       .container {
          align-items: center;
@@ -30,6 +33,10 @@
       .buttons {
          margin-left: auto;
       }
+   }
+
+   .st-fullscreen-layout-container {
+      padding-top: 100px;
    }
 
 }

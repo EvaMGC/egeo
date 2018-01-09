@@ -5,6 +5,7 @@
 **Fixed bugs:**
 
 * st-select: Fix duplicate event "select" when user selected text inside input
+* st-fullscreen-layout: Fix scroll
 
 **New features:**
 
