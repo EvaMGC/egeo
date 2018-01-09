@@ -15,13 +15,10 @@ import {
    Component,
    forwardRef,
    Input,
-   Output,
    OnInit,
    OnChanges,
-   EventEmitter,
    ViewChild,
    ElementRef,
-   Renderer,
    SimpleChanges,
    HostBinding,
    HostListener
@@ -34,10 +31,7 @@ import {
    Validator
 } from '@angular/forms';
 
-import { Subscription } from 'rxjs/Subscription';
-
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { EventWindowManager } from '../utils/event-window-manager';
 
 /**
  * @description {Component} Tag Input
@@ -121,7 +115,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    onTouched = () => { };
 
    constructor(
-      private _render: Renderer,
       private _selectElement: ElementRef,
       private _cd: ChangeDetectorRef) {
    }
