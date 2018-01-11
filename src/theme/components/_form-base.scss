@@ -21,10 +21,10 @@
 .st-form-field {
    .st-label {
       color: $neutral-08;
-      &:focus {
+      &.active {
          color: $action-primary-default;
       }
-      &[disabled] {
+      &.disabled {
          color: $neutral-06;
       }
    }
