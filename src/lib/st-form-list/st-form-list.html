@@ -1,0 +1,27 @@
+<form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="st-form-list__wrapper">
+   <div *ngIf="!field.value.gui.hideTitle" class="st-form-list__label">{{field.value.title}}</div>
+   <div class="st-form-list__container">
+
+      <div *ngFor="let item of newItemList; let i = index;">
+
+         <st-input *ngIf="newItemList[i] != undefined && (isRequired || !isRequired)"
+                   [(ngModel)]="stModel"
+                   [disabled]="disabled">
+         </st-input>
+
+      </div>
+
+      <button [isDisabled]="disabled || (stModel && maxItems && stModel.length >= maxItems)"
+                 class="st-form-list__button"
+                 text="{{ ('ADD' | translate | uppercase)}} {{field.value.title | uppercase}}"
+                 leftIcon="icon-circle-plus"
+                 typeClass="btnLink"
+                 (onClick)="addItem(stModel.length)"
+                 qaTag="add-{{name}}-button">
+      </button>
+
+      <button class="button button-link-primary">
+         <i class="icon-circle-plus"></i><span>Add {{}}</span>
+      </button>
+   </div>
+</form>

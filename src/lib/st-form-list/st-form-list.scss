@@ -1,0 +1,56 @@
+@import './../../../../node_modules/@stratio/egeo-ui-base/utils/_typography.scss';
+@import './../../../../node_modules/@stratio/egeo-ui-base/utils/_colors.scss';
+
+
+
+$st-print---form-list: true !default;
+
+
+@mixin st-form-list() {
+  &__wrapper {
+    width: 100%;
+    margin: 10px 0 10px;
+  }
+
+  &__label {
+    font-family: egeo-get-font(heading);
+    font-size: egeo-get-font-size(head_large);
+    color: egeo-get-color(n6);
+    text-transform: uppercase;
+  }
+  &__field {
+    float: left;
+  }
+
+  &__button {
+    margin-left: 23px;
+    margin-top: 22px;
+    cursor: pointer;
+    -webkit-transition: height 500ms, top 500ms;
+    transition: height 500ms, top 500ms;
+    vertical-align: baseline;
+    float: left;
+    border: 1px dashed egeo-get-color(n4);
+    &:hover {
+      border: 1px dashed egeo-get-color(n9);
+    }
+  }
+
+  &__container {
+     margin: 10px 0 0 0;
+    background-color: egeo-get-color(n0);
+    padding: 6px 0 24px 0;
+    width: 100%;
+    display: inline-block;
+  }
+}
+
+@if ($st-print---form-list) {
+  :host {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .st-form-list {
+    @include st-form-list;
+  }
+}
