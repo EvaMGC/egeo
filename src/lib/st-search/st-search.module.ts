@@ -14,9 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
 import { StSearchComponent } from './st-search.component';
+import { StSelectModule } from '../st-select/st-select.module';
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StDropdownMenuModule],
+   imports: [CommonModule, FormsModule, ReactiveFormsModule, StDropdownMenuModule, StSelectModule],
    declarations: [StSearchComponent],
    exports: [StSearchComponent]
 })

@@ -13,8 +13,6 @@ import {
    Component,
    Input,
    OnDestroy,
-   Renderer,
-   ChangeDetectorRef,
    ElementRef,
    Output,
    EventEmitter,
@@ -24,7 +22,7 @@ import {
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { StHeaderMenuOption, StHeaderSubMenuOption, StHeaderSelection, StHeaderMenuItem } from '../st-header.model';
+import { StHeaderMenuOption, StHeaderSelection, StHeaderMenuItem } from '../st-header.model';
 
 @Component({
    selector: 'st-header-menu-option',

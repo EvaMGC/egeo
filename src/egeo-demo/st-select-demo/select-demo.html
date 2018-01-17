@@ -41,6 +41,25 @@
          </st-select>
          <div class="separator"></div>
 
+
+         Disabled select
+
+         <st-select
+            stCheckValidations
+            label="Option 1"
+            tooltip="Prueba"
+            placeholder="Select option"
+            [options]="options"
+            [(ngModel)]="model.option1"
+            name="option1"
+            required
+            [disabled]="true"
+            id="disabled-test"
+            (select)="onSelect($event)"
+            class="st-form-field"
+         >
+         </st-select>
+
          <button class="button button-primary"><span>Submit</span></button>
 
          <div class="separator"></div>

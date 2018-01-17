@@ -8,21 +8,22 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { DebugElement, SimpleChanges, SimpleChange } from '@angular/core';
+import { DebugElement, SimpleChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
-// Component
 import { StSearchComponent } from './st-search.component';
-
-// Modules
 import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { StSelectModule } from '../st-select/st-select.module';
+import { StInputModule } from '../st-input/st-input.module';
 
-let comp: StSearchComponent;
+// Component
+
+// Modules
+
+let component: StSearchComponent;
 let fixture: ComponentFixture<StSearchComponent>;
-let de: DebugElement;
 
 let id: string = 'search-123';
 let placeholder: string = 'search a text';
@@ -31,239 +32,230 @@ describe('StSearchComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StDropdownMenuModule],
+         imports: [FormsModule, ReactiveFormsModule, StDropdownMenuModule, StSelectModule, StInputModule],
          declarations: [StSearchComponent]
       })
+      // remove this block when the issue #12313 of Angular is fixed
+         .overrideComponent(StSearchComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
       fixture = TestBed.createComponent(StSearchComponent);
-      comp = fixture.componentInstance;
+      component = fixture.componentInstance;
 
-      comp.qaTag = id;
-      comp.placeholder = placeholder;
+      component.qaTag = id;
+      component.placeholder = placeholder;
+      spyOn(component.search, 'emit').and.callThrough();
    });
 
-   it('should be initialized correctly', () => {
-      fixture.detectChanges();
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+   describe('When it is initialized', () => {
+      it('id and placeholder are added to input', () => {
+         fixture.detectChanges();
 
-      expect(input.id).toEqual(id);  // qaTag
-      expect(input.placeholder).toEqual(placeholder); // placeholder value
+         let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
+
+         expect(input.id).toEqual(id);  // qaTag
+         expect(input.placeholder).toEqual(placeholder); // placeholder value
+      });
+
+      it('if value is introduced, it is added to input', () => {
+         component.value = 'Initial value';
+
+         fixture.detectChanges();
+         let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
+
+         expect((<HTMLInputElement>input.nativeElement).value).toEqual('Initial value');
+      });
    });
 
-   it('init with value', () => {
-      comp.debounce = 0;
-      comp.minLength = 0;
-      comp.value = 'Initial value';
-      fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
-
-      expect((<HTMLInputElement>input.nativeElement).value).toEqual('Initial value');
-   });
-
-   it('should be search (async)', fakeAsync(() => {
-      comp.debounce = 10;
+   it('should be able to search the text introduced by the user', fakeAsync(() => {
+      component.debounce = 10;
       fixture.detectChanges();
       let result: string = 'test';
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
 
-      let outputSearch: string;
-      comp.search.subscribe((search: string) => outputSearch = search);
       input.value = result;
       input.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(11);
-      expect(outputSearch).toEqual(result);
+      expect(component.search.emit).toHaveBeenCalledWith({text: result});
    }));
 
-   it('should be searched with delay', fakeAsync(() => {
-      comp.debounce = 1000;
+   it('should be able to search with the delay introduced as input', fakeAsync(() => {
+      component.debounce = 1000;
       fixture.detectChanges();
 
       let result: string = 'test';
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
 
-      let outputSearch: string = '';
-      comp.search.subscribe((search: string) => outputSearch = search);
       input.value = result;
       input.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(500);
-      expect(outputSearch).not.toEqual(result);
+      expect(component.search.emit).not.toHaveBeenCalled();
       tick(501);
-      expect(outputSearch).toEqual(result);
+      expect(component.search.emit).toHaveBeenCalledWith({text: result});
    }));
 
-   it('should be searched with new delay', fakeAsync(() => {
-      comp.debounce = 1000;
+   it('should be able to search with an updated delay', fakeAsync(() => {
+      component.debounce = 1000;
       fixture.detectChanges();
 
       let result: string = 'test';
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
 
-      let outputSearch: string = '';
-      comp.search.subscribe((search: string) => outputSearch = search);
       input.value = result;
       input.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(500);
-      expect(outputSearch).not.toEqual(result);
+      expect(component.search.emit).not.toHaveBeenCalled();
       tick(501);
-      expect(outputSearch).toEqual(result);
+      expect(component.search.emit).toHaveBeenCalledWith({text: result});
 
       let changes: SimpleChanges = { debounce: new SimpleChange(1000, 250, true) };
-      comp.debounce = 250;
-      comp.ngOnChanges(changes);
+      component.debounce = 250;
+      component.ngOnChanges(changes);
       fixture.detectChanges();
 
-      outputSearch = '';
+      (<jasmine.Spy> component.search.emit).calls.reset();
       result = 'test2';
       input.value = result;
       input.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(200);
-      expect(outputSearch).not.toEqual(result);
+      expect(component.search.emit).not.toHaveBeenCalled();
       tick(55);
-      expect(outputSearch).toEqual(result);
+      expect(component.search.emit).toHaveBeenCalledWith({text: result});
    }));
 
-   it('should be searched with min length', fakeAsync(() => {
-      comp.minLength = 3;
-      let responseFunction = jasmine.createSpy('response');
-      comp.search.subscribe(responseFunction);
+   it('should search when user types a text with the min length introduced as input', fakeAsync(() => {
+      component.minLength = 3;
       fixture.detectChanges();
 
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
 
       input.value = 'te';
       input.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(1);
-      expect(responseFunction).not.toHaveBeenCalled();
+      expect(component.search.emit).not.toHaveBeenCalled();
 
       input.value = 'test';
       input.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(1);
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledWith('test');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'test'});
    }));
 
-   it('should be searched when press enter', () => {
-      comp.debounce = 0;
-      comp.minLength = 0;
-      let responseFunction = jasmine.createSpy('response');
-      comp.search.subscribe(responseFunction);
+   it('should search when user presses the enter key', () => {
+      component.debounce = 0;
+      component.minLength = 0;
 
       fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       input.nativeElement.value = 'te';
       input.nativeElement.dispatchEvent(new Event('input'));
       input.triggerEventHandler('keypress', { keyCode: 13 });
       fixture.detectChanges();
 
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(1);
-      expect(responseFunction).toHaveBeenCalledWith('te');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(1);
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'te'});
 
       input.nativeElement.value = 'test';
       input.nativeElement.dispatchEvent(new Event('input'));
       input.triggerEventHandler('keypress', { which: 10 });
       fixture.detectChanges();
 
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(1); // Not again
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(1); // Not again
 
       input.nativeElement.value = 'test';
       input.nativeElement.dispatchEvent(new Event('input'));
       input.triggerEventHandler('keypress', { which: 13 });
       fixture.detectChanges();
 
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(2);
-      expect(responseFunction).toHaveBeenCalledWith('test');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(2);
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'test'});
 
       input.triggerEventHandler('keypress', { which: 13 });
       fixture.detectChanges();
 
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(3);
-      expect(responseFunction).toHaveBeenCalledWith('test');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(3);
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'test'});
    });
 
-   it('should be searched twice', fakeAsync(() => {
-      let responseFunction = jasmine.createSpy('response');
-      comp.search.subscribe(responseFunction);
-
+   it('should be able to search twice', fakeAsync(() => {
       fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       input.nativeElement.value = 'te';
       input.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(1);
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(1);
-      expect(responseFunction).toHaveBeenCalledWith('te');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(1);
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'te'});
 
       input.nativeElement.value = 'te';
       input.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(1);
-      expect(responseFunction).toHaveBeenCalledTimes(1);
+      expect(component.search.emit).toHaveBeenCalledTimes(1);
 
       input.nativeElement.value = 'test';
       input.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
       tick(1);
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(2);
-      expect(responseFunction).toHaveBeenCalledWith('test');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(2);
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'test'});
    }));
 
-   it('should be searched when press enter without liveSearch', () => {
-      comp.liveSearch = false;
-      let responseFunction = jasmine.createSpy('response');
-      comp.search.subscribe(responseFunction);
+   it('should search when user presses the enter key without liveSearch', () => {
+      component.liveSearch = false;
 
       fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       input.nativeElement.value = 'te';
       input.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
-      expect(responseFunction).not.toHaveBeenCalled();
+      expect(component.search.emit).not.toHaveBeenCalled();
 
       input.nativeElement.value = 'test';
       input.nativeElement.dispatchEvent(new Event('input'));
       input.triggerEventHandler('keypress', { which: 13 });
       fixture.detectChanges();
 
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledWith('test');
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledWith({text: 'test'});
    });
 
    it('should be able to clean the search text when user clicks on the cross button and event is emitted with an empty search', () => {
-      spyOn(comp.search, 'emit');
-      comp.debounce = 0;
-      comp.minLength = 0;
+      component.debounce = 0;
+      component.minLength = 0;
 
       fixture.detectChanges();
 
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       input.nativeElement.value = 'test';
       input.nativeElement.dispatchEvent(new Event('input'));
@@ -271,101 +263,97 @@ describe('StSearchComponent', () => {
       fixture.detectChanges();
 
       let clearButton: DebugElement = fixture.debugElement.query(By.css('.icon-cross'));
-      expect(comp.searchBox.value).toEqual('test');
+      expect(component.searchBox.value).toEqual('test');
 
       clearButton.nativeElement.dispatchEvent(new Event('mousedown'));
 
-      expect(comp.searchBox.value).toEqual('');
-      expect(comp.search.emit).toHaveBeenCalledWith('');
+      expect(component.searchBox.value).toEqual('');
+      expect(component.search.emit).toHaveBeenCalledWith({text: ''});
    });
 
-   it('should be able to change initial Values', () => {
-      comp.debounce = 0;
-      comp.minLength = 0;
-      comp.value = 'Initial value';
+   it('should be able to change initial value of search', () => {
+      component.debounce = 0;
+      component.minLength = 0;
+      component.value = 'Initial value';
       fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       expect((<HTMLInputElement>input.nativeElement).value).toEqual('Initial value');
 
       let changes: SimpleChanges = {
-         value: new SimpleChange('Initial value', 'new value', true),
+         value: new SimpleChange('Initial value',  'new value', true),
          liveSearch: new SimpleChange(true, false, true)
       };
 
-      comp.value = 'new value';
-      comp.liveSearch = false;
+      component.value = 'new value';
+      component.liveSearch = false;
 
-      comp.ngOnChanges(changes);
+      component.ngOnChanges(changes);
       fixture.detectChanges();
 
       expect((<HTMLInputElement>input.nativeElement).value).toEqual('new value');
 
-
       changes = {
          liveSearch: { currentValue: true, previousValue: false, firstChange: false, isFirstChange: () => false }
       };
-      comp.ngOnChanges(changes);
+      component.ngOnChanges(changes);
       fixture.detectChanges();
 
       expect((<HTMLInputElement>input.nativeElement).value).toEqual('new value');
    });
 
    it('should be able to change to disabled state', () => {
-      comp.disabled = true;
+      component.disabled = true;
       fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       let disabledState: string = input.nativeElement.getAttribute('disabled');
       expect(disabledState).not.toBeNull();
    });
 
    it('should be able to change to disabled state twice', () => {
-      comp.disabled = true;
+      component.disabled = true;
       fixture.detectChanges();
-      let input: DebugElement = fixture.debugElement.query(By.css('input'));
+      let input: DebugElement = fixture.debugElement.query(By.css('.st-search-input'));
 
       let disabledState: string = input.nativeElement.getAttribute('disabled');
       expect(disabledState).not.toBeNull();
 
       let changes: SimpleChanges = { disabled: new SimpleChange(true, false, true) };
-      comp.ngOnChanges(changes);
+      component.ngOnChanges(changes);
       disabledState = input.nativeElement.getAttribute('disabled');
       expect(disabledState).toEqual('');
    });
 
    it('should destroy correctly', () => {
-      comp.isActive = true;
-      expect(comp.isActive).toBeTruthy();
-      comp.ngOnDestroy();
-      expect(comp.isActive).toBeFalsy();
+      component.isActive = true;
+      expect(component.isActive).toBeTruthy();
+      component.ngOnDestroy();
+      expect(component.isActive).toBeFalsy();
    });
 
-   it('should be search with autocomplete', () => {
-
-      comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
-      comp.withAutocomplete = true;
-      let responseFunction = jasmine.createSpy('response');
-      comp.search.subscribe(responseFunction);
+   it('should be able to search with autocomplete', () => {
+      component.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
+      component.withAutocomplete = true;
 
       fixture.detectChanges();
-      expect(responseFunction).not.toHaveBeenCalled();
+      expect(component.search.emit).not.toHaveBeenCalled();
 
-      comp.changeOption(undefined);
-      expect(responseFunction).not.toHaveBeenCalled();
+      component.changeOption(undefined);
+      expect(component.search.emit).not.toHaveBeenCalled();
 
-      comp.changeOption(comp.autocompleteList[0]);
-      expect(responseFunction).toHaveBeenCalled();
-      expect(responseFunction).toHaveBeenCalledTimes(1);
-      expect(responseFunction).toHaveBeenCalledWith(comp.autocompleteList[0].label);
+      component.changeOption(component.autocompleteList[0]);
+      expect(component.search.emit).toHaveBeenCalled();
+      expect(component.search.emit).toHaveBeenCalledTimes(1);
+      expect(component.search.emit).toHaveBeenCalledWith({text: component.autocompleteList[0].label});
    });
 
-   it('should be search with autocomplete', fakeAsync(() => {
-      comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
-      comp.withAutocomplete = true;
+   it('should be able to search with autocomplete', fakeAsync(() => {
+      component.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
+      component.withAutocomplete = true;
       fixture.detectChanges();
 
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
       let dropdownItems: DebugElement[] = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item'));
 
       expect(input).toBeDefined();
@@ -391,14 +379,17 @@ describe('StSearchComponent', () => {
       expect(dropdownItems.length).toEqual(0);
    }));
 
-   it('should be change autocomplete list', fakeAsync(() => {
+   it('should be able to change autocomplete list', fakeAsync(() => {
       let initialList: StDropDownMenuItem[] = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
-      let finalList: StDropDownMenuItem[] = [{ value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }];
-      comp.autocompleteList = initialList;
-      comp.withAutocomplete = true;
+      let finalList: StDropDownMenuItem[] = [{ value: '1', label: '1' }, { value: '2', label: '2' }, {
+         value: '3',
+         label: '3'
+      }];
+      component.autocompleteList = initialList;
+      component.withAutocomplete = true;
       fixture.detectChanges();
 
-      let input: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      let input: HTMLInputElement = fixture.debugElement.query(By.css('.st-search-input')).nativeElement;
       let dropdownItems: DebugElement[] = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item'));
 
       expect(input).toBeDefined();
@@ -415,11 +406,54 @@ describe('StSearchComponent', () => {
       expect(dropdownItems.length).toEqual(initialList.length);
 
 
-      comp.autocompleteList = finalList;
+      component.autocompleteList = finalList;
       let changes: SimpleChanges = { autocompleteList: new SimpleChange(initialList, finalList, true) };
-      comp.ngOnChanges(changes);
+      component.ngOnChanges(changes);
       fixture.detectChanges();
       dropdownItems = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item'));
       expect(dropdownItems.length).toEqual(finalList.length);
    }));
+
+   describe('Should be able to allow a filtered search', () => {
+      beforeEach(() => {
+         component.filterOptions = [
+            { label: 'example 1', value: 1 },
+            { label: 'example 2', value: 2 },
+            { label: 'example 3', value: 3 }
+         ] as StDropDownMenuItem[];
+
+         fixture.detectChanges();
+      });
+
+      it('only if filter options are introduced as param, a select will be displayed before the search box', () => {
+         expect(fixture.nativeElement.querySelector('.st-search-filter')).not.toBeNull();
+
+         component.filterOptions = undefined;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-search-filter')).toBeNull();
+      });
+
+      it('if search is disabled, filter select has to be disabled as well', () => {
+         component.disabled = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('input[name="search-filter"]').disabled).toBeTruthy();
+      });
+
+      it('by default, first filter is selected', () => {
+         fixture.detectChanges();
+
+         expect(component.filter).toBe(component.filterOptions[0].value);
+      });
+
+      it('When user changes the filter, it sends an event with the selected filter value', () => {
+         fixture.nativeElement.querySelector('input[name="search-filter"]').click();
+         fixture.detectChanges();
+
+         fixture.nativeElement.querySelectorAll('.st-dropdown-menu-item')[1].click();
+
+         expect(component.search.emit).toHaveBeenCalledWith({text: '', filter: component.filterOptions[1].value});
+      });
+   });
 });

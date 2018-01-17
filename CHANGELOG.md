@@ -2,7 +2,13 @@
 
 ## 8.0.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-search: Add filter to search
+
+**Breaking changes:**
+
+* st-search: The output 'search' now emits and object with properties text and filter
 
 ## 7.0.0 (January 12, 2018)
 

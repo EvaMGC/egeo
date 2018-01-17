@@ -49,16 +49,16 @@ export class StSearchDemoComponent {
 
    public filteredMenu: StDropDownMenuItem[] = [];
 
-   onSearchResult(value: string): void {
-      this.searched = value;
+   onSearchResult(value: {filter: string, text: string}): void {
+      this.searched = value.text;
    }
 
-   filter(filterValue: string): void {
-      this.filteredMenu = _cloneDeep(this.menu.filter(country => country.label.toLowerCase().search(filterValue.toLowerCase()) > -1));
+   filter(filterValue: {text: string, filter: string}): void {
+      this.filteredMenu = _cloneDeep(this.menu.filter(country => country.label.toLowerCase().search(filterValue.text.toLowerCase()) > -1));
    }
 
-   searchWithAutocompleteSearch(searchValue: string): void {
-      this.searchedAutocomplete = searchValue;
+   searchWithAutocompleteSearch(searchValue: {text: string, filter: string}): void {
+      this.searchedAutocomplete = searchValue.text;
       this.filter(searchValue);
    }
 }

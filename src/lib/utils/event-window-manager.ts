@@ -8,14 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectorRef, ElementRef, Renderer } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 
 export abstract class EventWindowManager {
    public isActive: boolean;
    private globalListener: Function;
    private forceClose: Function;
 
-   constructor(private _renderer: Renderer, private _cd: ChangeDetectorRef, private _elementRef: ElementRef) { }
+   constructor(private _renderer: Renderer2, private _cd: ChangeDetectorRef, private _elementRef: ElementRef) { }
 
    abstract ngOnDestroy(): void;
 
@@ -25,8 +25,8 @@ export abstract class EventWindowManager {
       } else {
          this.isActive = !this.isActive;
          setTimeout(() => {
-            this.globalListener = this._renderer.listenGlobal('document', 'click', this.onClickOutside.bind(this));
-            this.forceClose = this._renderer.listenGlobal('document', 'stForceClose', this.onForceClose.bind(this));
+            this.globalListener = this._renderer.listen('document', 'click', this.onClickOutside.bind(this));
+            this.forceClose = this._renderer.listen('document', 'stForceClose', this.onForceClose.bind(this));
          });
       }
    }
@@ -41,12 +41,6 @@ export abstract class EventWindowManager {
          }
       }
    }
-
-   protected forceCloseOther(): void {
-      let event: Event = new Event('stForceClose', { bubbles: true });
-      this._renderer.invokeElementMethod(this._elementRef.nativeElement, 'dispatchEvent', [event]);
-   }
-
 
    private onClickOutside(event: MouseEvent): void {
       if (!this._elementRef.nativeElement.contains(event.target)) {

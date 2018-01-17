@@ -10,12 +10,27 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-dropdown-menu [items]="autocompleteList" [attr.id]="menuId" (change)="changeOption($event)" [active]="isActive"
-    [placement]="'bottom-start'" [emptyListMessage]="emptyAutocompleteListMessage">
-   <div class="st-search sth-search" #buttonId>
-      <input [attr.id]="qaTag" [formControl]="searchBox" [placeholder]="placeholder" (keypress)="onKeyPress($event)"
-          class="st-search-input sth-search-input" />
-      <i class="st-search-icon sth-search-icon icon-search" tabindex="0" *ngIf="!showClear"></i>
-      <i class="st-search-icon sth-search-icon icon-cross" tabindex="0" *ngIf="showClear" (mousedown)="clearInput()" (keyup.enter)="clearInput()"></i>
-   </div>
-</st-dropdown-menu>
+<div class="st-search sth-search">
+   <st-select
+      *ngIf="filterOptions && filterOptions.length > 0"
+      [options]="filterOptions"
+      [(ngModel)]="filter"
+      [disabled]="disabled"
+      name="search-filter"
+      (select)="onChangeFilter()"
+      class="sth-search-filter st-search-filter"
+   ></st-select>
+
+   <st-dropdown-menu [items]="autocompleteList" [attr.id]="menuId" class="st-search-box" (change)="changeOption($event)"
+                     [active]="isActive"
+                     [placement]="'bottom-start'" [emptyListMessage]="emptyAutocompleteListMessage">
+      <div #buttonId>
+         <input [attr.id]="qaTag" [formControl]="searchBox" [placeholder]="placeholder" (keypress)="onKeyPress($event)"
+                class="st-search-input sth-search-input"/>
+         <i class="st-search-icon sth-search-icon icon-search" tabindex="0" *ngIf="!showClear"></i>
+         <i class="st-search-icon sth-search-icon icon-cross" tabindex="0" *ngIf="showClear" (mousedown)="clearInput()"
+            (keyup.enter)="clearInput()"></i>
+      </div>
+   </st-dropdown-menu>
+
+</div>

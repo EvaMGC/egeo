@@ -8,36 +8,55 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
- @import '../constants/fonts';
+@import '../constants/fonts';
 @import '../constants/colors';
+@import '../utils/forms';
 
 .sth-search ::placeholder {
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;
-   color: $neutral-08;
+   color: $neutral-07;
 }
 
 .sth-search .sth-search-input {
+   @extend %st-form-control;
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;
    background-color: $neutral-00;
-   color: $neutral-09;
-   border: 1px solid $neutral-04;
+   color: $action-secondary-07;
+   border: 1px solid $neutral-07;
+   border-radius: 4px;
 }
 
 .sth-search .sth-search-input:focus {
-   border: 1px solid $neutral-08;
+   border: solid 1px $input-field-onfocus;
+}
+
+.sth-search .st-dropdown-menu {
+   border-top-left-radius: 0;
+   border-top-right-radius: 0;
+}
+
+.st-search-box > st-pop > div > div > .st-dropdown-menu.active {
+   margin-top: -3px;
 }
 
 .sth-search-icon {
-   font-size: $egeo-font-size-small;
-   color: $neutral-08;
+   font-size: $egeo-font-size-xxsmall;
+   color: $neutral-10;
 }
 
-.sth-search .sth-search-input:focus+.sth-search-icon {
-   color: $neutral-09;
+.sth-search .sth-search-input:focus + .sth-search-icon {
+   color: $action-primary-default !important;
 }
 
-.sth-search-input:disabled {
-   background: none;
+.sth-search-filter {
+   margin-right: -3px;
+   input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+   }
+   .button-container {
+      z-index: 1;
+   }
 }

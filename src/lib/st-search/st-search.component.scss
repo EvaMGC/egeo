@@ -11,6 +11,8 @@
 input {
    outline: none;
    border: none;
+   padding: 0;
+   height: 40px;
 }
 
 .st-search {
@@ -22,21 +24,32 @@ input {
       box-shadow: none;
    }
 
-   & :disabled, & :disabled+i {
-      opacity: 0.5;
+   &-box {
+      flex: 2 0;
    }
 
    &-input {
-      height: 35px;
       padding-left: 12px;
       padding-right: 40px;
       width: 100%;
    }
 
+   &-filter {
+      flex: auto 1;
+      height: 40px;
+      padding: 0;
+      max-width: 37%;
+   }
+
+
   &-icon {
       position: absolute;
       right: 10px;
-      top: 10px;
+      top: 13px;
       cursor: pointer;
+
+     &:focus {
+        outline: none;
+     }
    }
 }

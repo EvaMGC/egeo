@@ -19,12 +19,10 @@ import {
    AfterViewInit,
    Output,
    ViewChild,
-   ViewContainerRef,
-   Renderer2
+   ViewContainerRef
 } from '@angular/core';
 
-import { StEgeo, StRequired } from '../decorators/require-decorators';
-import { StModalButton, StModalConfig, StModalResponse, StModalButtonResponse } from './st-modal.model';
+import { StModalButton, StModalConfig, StModalButtonResponse } from './st-modal.model';
 import { StWindowRefService } from '../utils/window-service';
 
 @Component({

@@ -12,6 +12,7 @@
 @import '../utils/forms';
 .st-select {
 
+
    .st-label {
       display: flex;
       width: 100%;
@@ -25,10 +26,11 @@
       color: $neutral-07;
    }
 
+   .st-input:disabled {
+      color: $neutral-05;
+   }
+
    &.st-select-opened {
-      .st-input {
-         border-bottom: none;
-      }
       .st-label {
          color: $action-primary-default;
       }
@@ -36,10 +38,13 @@
          color: $action-primary-default;
       }
       .st-input {
-         border-radius: 4px 4px 0 0;
+         border-bottom-left-radius: 0;
+         border-bottom-right-radius: 0;
       }
       .st-dropdown-menu {
-         border-radius: 0 0 4px 4px;
+         border-top-left-radius: 0;
+         border-top-right-radius: 0;
+         margin-top: -1px;
       }
    }
 }
