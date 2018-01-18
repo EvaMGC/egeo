@@ -13,6 +13,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StLabelComponent } from './st-label.component';
 import { StTooltipModule } from '../st-tooltip';
+import { TestUtils } from '../tests/utils';
 
 @Component({
    template: `<label st-label></label>`
@@ -25,17 +26,6 @@ const tooltipContent: string = 'tooltip content';
 let fixture: ComponentFixture<TestStLabelComponent>;
 let nativeElement: Element;
 let template: string = '';
-
-function createTestComponent(customTemplate?: string): Promise<ComponentFixture<TestStLabelComponent>> {
-   if (customTemplate) {
-      TestBed.overrideComponent(TestStLabelComponent, {
-         set: {
-            template: customTemplate
-         }
-      });
-   }
-   return TestBed.compileComponents();
-}
 
 describe('StLabel', () => {
 
@@ -51,7 +41,7 @@ describe('StLabel', () => {
 
    it('Exist an span element that contains label content', async(() => {
       template = '<label st-label>' + labelContent + '</label>';
-      createTestComponent(template).then(() => {
+      TestUtils.overrideComponentTemplate(TestStLabelComponent, template).then(() => {
          fixture = TestBed.createComponent(TestStLabelComponent);
          fixture.detectChanges();
          nativeElement = fixture.nativeElement;
@@ -61,7 +51,7 @@ describe('StLabel', () => {
 
    it('Label tag has st-label class', async(() => {
       template = '<label st-label>' + labelContent + '</label>';
-      createTestComponent(template).then(() => {
+      TestUtils.overrideComponentTemplate(TestStLabelComponent, template).then(() => {
          fixture = TestBed.createComponent(TestStLabelComponent);
          fixture.detectChanges();
          nativeElement = fixture.nativeElement;
@@ -72,7 +62,7 @@ describe('StLabel', () => {
 
    it('Label tag has st-tooltip class if it has a title', async(() => {
       template = '<label st-label title="' + tooltipContent + '">' + labelContent + '</label>';
-      createTestComponent(template).then(() => {
+      TestUtils.overrideComponentTemplate(TestStLabelComponent, template).then(() => {
          fixture = TestBed.createComponent(TestStLabelComponent);
          fixture.detectChanges();
          nativeElement = fixture.nativeElement;

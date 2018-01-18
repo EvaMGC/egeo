@@ -5,6 +5,7 @@
 **New features:**
 
 * st-search: Add filter to search
+* st-widget: Add settings button and draggable action as optional
 
 **Breaking changes:**
 

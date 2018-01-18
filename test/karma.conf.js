@@ -77,7 +77,7 @@ module.exports = function(config) {
                'subdirectory': '.'
             },
             'text-summary': null,
-            'json': './target/coverage',
+            'json': './target/coverage'
          }
       },
 

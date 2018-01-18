@@ -9,162 +9,171 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { StProgressBarModule } from '../st-progress-bar/st-progress-bar.module';
 import { StWidgetComponent } from './st-widget.component';
 
-@Component({
-   template: `<st-widget></st-widget>`
-})
-class TestStWidgetComponent { }
-
-let comp: TestStWidgetComponent;
-let fixture: ComponentFixture<TestStWidgetComponent>;
+let component: StWidgetComponent;
+let fixture: ComponentFixture<StWidgetComponent>;
 let nativeElement: any;
 let title: string = 'Widget';
 let elementId = 'test-id';
-
-function createTestComponent(customTemplate?: string): Promise<ComponentFixture<TestStWidgetComponent>> {
-   if (customTemplate) {
-      TestBed.overrideComponent(TestStWidgetComponent, {
-         set: {
-            template: customTemplate
-         }
-      });
-   }
-   return TestBed.compileComponents();
-}
-
 
 describe('StWidgetComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [StProgressBarModule],
-         declarations: [StWidgetComponent, TestStWidgetComponent]
-
-      });
+         declarations: [StWidgetComponent]
+      }).compileComponents();
    }));
 
+   beforeEach(() => {
+      fixture = TestBed.createComponent(StWidgetComponent);
+      component = fixture.componentInstance;
+   });
 
-   it('Should init correctly and title are displayed correct', async(() => {
-      let template = '<st-widget title="' + title + '"></st-widget>';
 
-      createTestComponent(template).then(() => {
-         fixture = TestBed.createComponent(TestStWidgetComponent);
-         nativeElement = fixture.nativeElement;
+   it('If host element has defined id, Element Id should be the same plus "-widget" suffix', () => {
+      fixture.nativeElement.id = elementId;
+      fixture.detectChanges();
+
+      nativeElement = fixture.nativeElement;
+
+      expect(fixture.nativeElement.querySelector('.st-widget').id).toEqual(elementId + '-widget');
+   });
+
+
+   it('If host element does not have defined id, Element Id should be undefined', () => {
+      fixture.nativeElement.id = null;
+
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.st-widget').id).toEqual('');
+   });
+
+
+   it('Should be initialized correctly and title are displayed correctly', () => {
+      component.title = title;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.st-widget__title').textContent).toContain(title);
+   });
+
+   describe('while data is being loaded', () => {
+      beforeEach(() => {
+         component.loading = true;
+         fixture.detectChanges();
+      });
+
+      it('loading status elements with default text should be displayed', () => {
+         expect(fixture.nativeElement.querySelector('.loading-status')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.loading-status-text').textContent).toContain('Loading data');
+         expect(fixture.nativeElement.querySelector('.st-widget__content')).toBeNull();
+      });
+
+      it('if overwriteLoadingData is introduced as input, text "Loading data" should be overwritten', async(() => {
+         let fakeText: string = 'this is an fake text';
+
+         component.overwriteLoadingData = fakeText;
          fixture.detectChanges();
 
-         expect(nativeElement.querySelector('.st-widget__title').textContent).toContain(title);
-      });
-   }));
-   describe('while loading data', () => {
-
-      it('loading status elements with default test should be displayed', async(() => {
-         let template = '<st-widget [loading]="true" ></st-widget>';
-
-         createTestComponent(template).then(() => {
-            fixture = TestBed.createComponent(TestStWidgetComponent);
-            nativeElement = fixture.nativeElement;
-            fixture.detectChanges();
-
-            expect(nativeElement.querySelector('.loading-status')).not.toBeNull();
-            expect(nativeElement.querySelector('.loading-status-text').textContent).toContain('Loading data');
-
-            expect(nativeElement.querySelector('.st-widget__content')).toBeNull();
-         });
+         expect(fixture.nativeElement.querySelector('.loading-status')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.loading-status-text').textContent).toBe(fakeText);
+         expect(fixture.nativeElement.querySelector('.st-widget__content')).toBeNull();
       }));
+   });
 
-      it('if overwriteLoadingData is defined, text "Loading data" should be overwritten', async(() => {
-         let template = '<st-widget [loading]="true" overwriteLoadingData="fake" ></st-widget>';
+   it('when content has been loaded, it should be displayed', () => {
+      component.loading = false;
+      fixture.detectChanges();
 
-         createTestComponent(template).then(() => {
-            fixture = TestBed.createComponent(TestStWidgetComponent);
-            nativeElement = fixture.nativeElement;
-            fixture.detectChanges();
-
-            expect(nativeElement.querySelector('.loading-status')).not.toBeNull();
-            expect(nativeElement.querySelector('.loading-status-text').textContent).toContain('fake');
-
-            expect(nativeElement.querySelector('.st-widget__content')).toBeNull();
-         });
-      }));
-
-
+      expect(fixture.nativeElement.querySelector('.loading-status')).toBeNull();
+      expect(fixture.nativeElement.querySelector('.st-widget__content')).not.toBeNull();
 
    });
 
-   it('when loaded, content widget should be displayed', async(() => {
-      let template = '<st-widget [loading]="false" ></st-widget>';
+   it('when element is initialized, both draggable and dragging variables are false', () => {
+      expect(fixture.nativeElement.draggable).toBeFalsy();
+      expect(fixture.nativeElement.dragging).toBeFalsy();
+   });
 
-      createTestComponent(template).then(() => {
-         fixture = TestBed.createComponent(TestStWidgetComponent);
-         nativeElement = fixture.nativeElement;
+   describe('it can be customized to be draggable or not', () => {
+      it('only if input draggable is true, a button will be displayed to drag widget', () => {
+         component.draggable = false;
          fixture.detectChanges();
 
-         expect(nativeElement.querySelector('.loading-status')).toBeNull();
-         expect(nativeElement.querySelector('.st-widget__content')).not.toBeNull();
-      });
-   }));
+         let dragButton = fixture.debugElement.query(By.css('span.drag-drop-action'));
 
-   it('If host element has defined id, Element Id should be the same plus "-widget" sufix', async(() => {
-      let template = '<st-widget id="' + elementId + '" ></st-widget>';
+         expect(dragButton).toBeNull();
 
-      createTestComponent(template).then(() => {
-         fixture = TestBed.createComponent(TestStWidgetComponent);
-         nativeElement = fixture.nativeElement;
+         component.draggable = true;
          fixture.detectChanges();
 
-         expect(nativeElement.querySelector('.st-widget').id).toEqual((elementId + '-widget'));
+         dragButton = fixture.debugElement.query(By.css('span.drag-drop-action'));
+
+         expect(dragButton).not.toBeNull();
       });
-   }));
 
-   it('when element is initilialized, both draggable and dragging variable are false', async(() => {
-      let template = '<st-widget id="' + elementId + '"></st-widget>';
+      it('if user tries to drag a widget without clicking on the drag button, widget is not dragged', () => {
+         fixture.detectChanges();
+         let widget = fixture.debugElement.query(By.css('.st-widget'));
 
-      createTestComponent(template).then(() => {
-         fixture = TestBed.createComponent(TestStWidgetComponent);
-         nativeElement = fixture.nativeElement;
+         widget.triggerEventHandler('dragstart', {});
          fixture.detectChanges();
 
-         expect(nativeElement.draggable).toBeFalsy();
-         expect(nativeElement.dragging).toBeFalsy();
+         expect(component.dragging).toBeFalsy();
       });
-   }));
 
-   it('when we interact with mouse event , draggable variable should change its value', async(() => {
-      let template = '<st-widget id="' + elementId + '"></st-widget>';
-
-      createTestComponent(template).then(() => {
-         fixture = TestBed.createComponent(TestStWidgetComponent);
-         nativeElement = fixture.nativeElement;
+      it('when user clicks on the drag button, and starts to drag the widget, dragging status is updated', () => {
          fixture.detectChanges();
-         let el = fixture.debugElement.query(By.css('.st-widget'));
+         let dragButton = fixture.debugElement.query(By.css('span.drag-drop-action'));
+         let widget = fixture.debugElement.query(By.css('.st-widget'));
 
-         el.triggerEventHandler('mousedown', nativeElement.draggable = true);
-         expect(nativeElement.draggable).toBeTruthy();
+         dragButton.triggerEventHandler('mousedown', {});
+         widget.triggerEventHandler('dragstart', {});
 
-         el.triggerEventHandler('mousedup', nativeElement.draggable = false);
-         expect(nativeElement.draggable).toBeFalsy();
-      });
-   }));
-
-   it('when we interact with drag event, dragging variable should change its value', async(() => {
-      let template = '<st-widget id="' + elementId + '"></st-widget>';
-
-      createTestComponent(template).then(() => {
-         fixture = TestBed.createComponent(TestStWidgetComponent);
-         nativeElement = fixture.nativeElement;
          fixture.detectChanges();
-         let el = fixture.debugElement.query(By.css('.st-widget'));
+         expect(component.dragging).toBeTruthy();
 
-         el.triggerEventHandler('dragstart', nativeElement.dragging = true);
-         expect(nativeElement.dragging).toBeTruthy();
+         widget.triggerEventHandler('dragend', {});
+         fixture.detectChanges();
 
-         el.triggerEventHandler('dragend', nativeElement.dragging = false);
-         expect(nativeElement.dragging).toBeFalsy();
+         expect(component.dragging).toBeFalsy();
       });
-   }));
+
+      it('if user releases the drag button before dragging widget, widget should not been dragged', () => {
+         fixture.detectChanges();
+         let dragButton = fixture.debugElement.query(By.css('span.drag-drop-action'));
+         let widget = fixture.debugElement.query(By.css('.st-widget'));
+
+         dragButton.triggerEventHandler('mousedown', {}); // press button
+         fixture.detectChanges();
+
+         dragButton.triggerEventHandler('mouseup', {}); // release button
+         fixture.detectChanges();
+
+         dragButton.triggerEventHandler('dragstart', {}); // try to drag widget
+         fixture.detectChanges();
+
+         expect(component.dragging).toBeFalsy();
+         expect(widget.nativeElement.draggable).toBeFalsy();
+      });
+   });
+
+   describe('widget can be configured to display or not its settings button', () => {
+      it('settings button is displayed by default', () => {
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('span.setting-action')).not.toBeNull();
+      });
+
+      it('if the input displaySettingsButton is false, settings button is not displayed', () => {
+         component.displaySettingsButton = false;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('span.setting-action')).toBeNull();
+      });
+   });
 });

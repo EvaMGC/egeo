@@ -11,14 +11,14 @@
 
 -->
 
-<div class="st-widget" [attr.id]="widgetId" [ngClass]="{'dragging': dragging}" [draggable]="draggable" (dragend)="dragging = false" >
+<div class="st-widget" [attr.id]="widgetId" [ngClass]="{'dragging': dragging}" [draggable]="draggable && dragging" (dragend)="updateDragging(false)" >
    <div class="st-widget__header" >
-      <span class="drag-drop-action" (mousedown)="draggable = true" (mouseup)="draggable = false">
+      <span *ngIf="draggable" class="drag-drop-action" (mousedown)="updateDragging(true)" (mouseup)="updateDragging(false)">
          <i class="icon-actions"></i>
          <i class="icon-actions"></i>
       </span>
       <span class="st-widget__title">{{title}}</span>
-      <span class="setting-action">
+      <span *ngIf="displaySettingsButton" class="setting-action">
          <i class="icon-settings2"></i>
       </span>
    </div>

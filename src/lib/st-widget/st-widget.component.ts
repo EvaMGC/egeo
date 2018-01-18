@@ -41,31 +41,35 @@ export class StWidgetComponent {
    @Input() loading: boolean = false;
    /** @Input {string} [title] text "loading data" will be overwritten with this parameter */
    @Input() overwriteLoadingData: string = 'Loading data';
+   /** @Input {boolean} [displaySettingsButton] Boolean to display or hide the settings button */
+   @Input() displaySettingsButton: boolean = true;
 
-   public widgetId: string;
-
-   private _draggable: boolean = false;
+   private _draggable: boolean = true;
    private _dragging: boolean = false;
 
    constructor(private el: ElementRef) {
-      this.widgetId = this.el.nativeElement.id ? this.el.nativeElement.id + '-widget' : undefined;
+   }
 
+   get widgetId(): string | null {
+      return this.el.nativeElement.id ? this.el.nativeElement.id + '-widget' : undefined;
+   }
+
+   /** @Input {boolean} [draggable=true] Boolean to enable or disable dragging of widget */
+   @Input()
+   public get draggable(): boolean {
+      return this._draggable;
+   }
+   public set draggable(draggable: boolean) {
+      this._draggable = draggable;
    }
 
    public get dragging(): boolean {
       return this._dragging;
    }
 
-   public set dragging(value: boolean) {
+   public updateDragging(value: boolean): void {
       this._dragging = value;
    }
 
-   public get draggable(): boolean {
-      return this._draggable;
-   }
 
-   public set draggable(value: boolean) {
-      this.dragging = value;
-      this._draggable = value;
-   }
 }
