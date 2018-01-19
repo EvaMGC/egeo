@@ -21,8 +21,11 @@
       [label]="'Tag Input'"
       [id]="'tag-input-reactive-demo'"
       [placeholder]="'Add tags separated by commas'"
-      [tooltip]="'This is a Tag Input component tooltip'">
+      [tooltip]="'This is a Tag Input component tooltip'"
+      [forbiddenValues]="['test']">
    </st-tag-input>
+
+   Forbidden values: test
 
    <div class="separator"></div>
 
@@ -115,7 +118,7 @@
       [placeholder]="'Add tags separated by commas'"
       [tooltip]="'This is a Tag Input component tooltip'">
    </st-tag-input>
-    
+
    <div class="separator"></div>
 
    <st-tag-input

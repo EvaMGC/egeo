@@ -527,6 +527,7 @@ describe('StTagInputComponent', () => {
          fixture = TestBed.createComponent(StTagInputTestReactiveComponent);
          comp = fixture.componentInstance;
          compTagInput = comp.tagInput;
+         fixture.detectChanges();
       });
 
       afterEach(() => {
@@ -680,5 +681,41 @@ describe('StTagInputComponent', () => {
             expect(comp.templateDrivenForm.valid).toBeTruthy();
          });
       }));
+
+      describe('should be able to not allow user types a forbidden value if there are', () => {
+         it('if a forbidden value list is not introduced as input, user can introduce whatever he wants', () => {
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => { // Form generation it's asynchronous
+               comp.templateDrivenForm.form.get('tags').setValue(['New Tag']);
+               fixture.detectChanges();
+
+               expect(comp.templateDrivenForm.valid).toBeTruthy();
+
+               comp.templateDrivenForm.form.get('tags').setValue(['New value 2']);
+               fixture.detectChanges();
+
+               expect(comp.templateDrivenForm.valid).toBeTruthy();
+            });
+         });
+
+         it('if a forbidden value list is introduced as input and user introduces a forbidden value, form control will be invalid', () => {
+            compTagInput.forbiddenValues = ['forbidden value'];
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => { // Form generation it's asynchronous
+               comp.templateDrivenForm.form.get('tags').setValue(['New Tag']);
+               fixture.detectChanges();
+
+               expect(comp.templateDrivenForm.valid).toBeTruthy();
+
+               comp.templateDrivenForm.form.get('tags').setValue(['forbidden value']);
+               fixture.detectChanges();
+
+               expect(comp.templateDrivenForm.valid).toBeFalsy();
+            });
+         });
+      });
+
    });
 });

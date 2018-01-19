@@ -54,6 +54,7 @@ import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interfa
  *    [id]="'tag-input-reactive'"
  *    [placeholder]="'Add tags separated by commas'"
  *    [tooltip]="'This is a Tag Input component tooltip'"
+ *    [forbiddenValues]="['test']"
  *    (input)="onFilterList($event)">
  * </st-tag-input>
  * <st-tag-input
@@ -96,8 +97,13 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    /** @input {boolean} [withAutocomplete=false] Enable autocomplete feature. It is false by default */
    @Input() withAutocomplete: boolean = false;
-   /** @input {StDropDownMenuItem} [autocompleteList=[]] List to be used for autocomplete feature. It is empty by default */
+   /** @input {StDropDownMenuItem} [autocompleteList=Array()] List to be used for autocomplete feature. It is empty by default */
    @Input() autocompleteList: StDropDownMenuItem[] = [];
+
+   /** @input {string[]} [forbiddenValues=Array()] A list of values that user can not type and if he types one of them,
+    * tag input will be invalid. It is empty by default
+    */
+   @Input() forbiddenValues: string[] = [];
 
    @ViewChild('newElement') newElementInput: ElementRef;
    @ViewChild('inputElement') inputElement: ElementRef;
@@ -108,7 +114,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    private _focus: boolean = false;
    private _isDisabled: boolean = false;
-   private _newElementInput: HTMLElement | null = null;
+   private _newElementInput: HTMLInputElement | null = null;
    private _selected: number | null = null;
 
    onChange = (_: any) => { };
@@ -151,7 +157,9 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    }
 
    get isValidInput(): boolean {
-      return this.innerInputContent.length ? this.items.indexOf(this.innerInputContent) === -1 : true;
+      const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
+      const isDuplicated = this.items.indexOf(this.innerInputContent) !== -1;
+      return this.innerInputContent.length ? !isForbidden && !isDuplicated : true;
    }
 
    get tagSelected(): number | null {
