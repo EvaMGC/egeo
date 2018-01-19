@@ -21,6 +21,7 @@
    width: 100%;
    height: 60px;
    background-color: $action-secondary-07;
+   z-index: $header-z-index;
 
    .title {
       color: white;

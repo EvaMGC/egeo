@@ -10,6 +10,11 @@
  */
 @import '../constants/fonts';
 @import '../constants/colors';
+@import '../constants/settings';
+
+.sth-alerts {
+   z-index: $alert-z-index;
+}
 
 .sth-alert-box {
    width: 100%;

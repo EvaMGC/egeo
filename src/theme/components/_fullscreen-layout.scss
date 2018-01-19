@@ -11,14 +11,17 @@
 
  @import '../constants/fonts';
  @import '../constants/colors';
+ @import '../constants/settings';
 
 
  .st-fullscreen-layout {
    border-radius: 0;
    background-color: $neutral-02;
+    z-index: $fullscreen-z-index;
    .st-fullscreen-layout-header {
       border-radius: 0;
       background-color: $neutral-00;
+      z-index: $fullscreen-z-index + 1;
 
       .title {
          text-align: left;

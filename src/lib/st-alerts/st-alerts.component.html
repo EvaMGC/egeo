@@ -10,6 +10,6 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div [attr.id]='qaTag' class="st-alerts">
+<div [attr.id]='qaTag' class="st-alerts sth-alerts">
    <st-alert-box class="st-alert-box" *ngFor="let alert of (alertService.alertList | async)" [alert]="alert" [showInConsole]="showInConsole"></st-alert-box>
 </div>

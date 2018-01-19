@@ -5,6 +5,7 @@
 **Fixed bugs:**
 
 * st-pagination: Update per page value when it is updated from outside
+* st-alert: Fix alerts displayed behind the page title 
 
 **New features:**
 

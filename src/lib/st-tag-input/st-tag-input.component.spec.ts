@@ -206,7 +206,7 @@ describe('StTagInputComponent', () => {
 
       const tag: DebugElement = fixture.debugElement.query(By.css('.tag-item'));
       tag.nativeElement.focus();
-      tag.triggerEventHandler('keydown', { keyCode: 46 });
+      tag.triggerEventHandler('keydown', { keyCode: 46, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.hasFocus).toBeTruthy();
@@ -215,7 +215,7 @@ describe('StTagInputComponent', () => {
 
       const newTag: DebugElement = fixture.debugElement.query(By.css('.tag-item'));
       newTag.nativeElement.focus();
-      newTag.triggerEventHandler('keydown', { keyCode: 8 });
+      newTag.triggerEventHandler('keydown', { keyCode: 8, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.hasFocus).toBeTruthy();
@@ -235,7 +235,7 @@ describe('StTagInputComponent', () => {
       expect(comp.isValidInput).toBeTruthy();
 
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 188 });
+      input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(1);
@@ -243,7 +243,7 @@ describe('StTagInputComponent', () => {
       expect(comp.innerInputContent).toEqual('');
 
       comp.innerInputContent = 'New Tag 2';
-      input.triggerEventHandler('keydown', { keyCode: 13 });
+      input.triggerEventHandler('keydown', { keyCode: 13, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(2);
@@ -251,7 +251,7 @@ describe('StTagInputComponent', () => {
       expect(comp.innerInputContent).toEqual('');
 
       comp.innerInputContent = 'New Tag 3';
-      input.triggerEventHandler('keydown', { keyCode: 9 });
+      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(3);
@@ -271,21 +271,21 @@ describe('StTagInputComponent', () => {
 
       comp.innerInputContent = simpleTags[0];
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 188 });
+      input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(simpleTags.length);
       expect(comp.isValidInput).toBeFalsy();
 
       comp.innerInputContent = simpleTags[1];
-      input.triggerEventHandler('keydown', { keyCode: 13 });
+      input.triggerEventHandler('keydown', { keyCode: 13, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(simpleTags.length);
       expect(comp.isValidInput).toBeFalsy();
 
       comp.innerInputContent = simpleTags[2];
-      input.triggerEventHandler('keydown', { keyCode: 9 });
+      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(simpleTags.length);
@@ -326,7 +326,7 @@ describe('StTagInputComponent', () => {
       expect(comp.innerInputContent).not.toEqual('');
 
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 46 });
+      input.triggerEventHandler('keydown', { keyCode: 46, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.innerInputContent).toEqual('');
@@ -345,14 +345,14 @@ describe('StTagInputComponent', () => {
       const container: HTMLLabelElement = fixture.debugElement.query(By.css('.st-input')).nativeElement;
       container.click();
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 9 });
+      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.hasFocus).toBeTruthy();
       expect(comp.innerInputContent).toEqual('');
       comp.innerInputContent = 'New Tag';
 
-      input.triggerEventHandler('keydown', { keyCode: 9 });
+      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
       fixture.detectChanges();
 
       expect(comp.innerInputContent).toBe('');
@@ -555,7 +555,7 @@ describe('StTagInputComponent', () => {
          fixture.detectChanges();
 
          const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-         input.triggerEventHandler('keydown', { keyCode: 188 });
+         input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
          fixture.detectChanges();
 
          expect(compTagInput.items.length).toEqual(1);
@@ -655,7 +655,7 @@ describe('StTagInputComponent', () => {
             fixture.detectChanges();
 
             const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-            input.triggerEventHandler('keydown', { keyCode: 188 });
+            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
             fixture.detectChanges();
 
             expect(compTagInput.items.length).toEqual(1);

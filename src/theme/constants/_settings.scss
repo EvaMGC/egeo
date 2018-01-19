@@ -8,14 +8,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-.st-alert-box {
-   margin-top: 15px;
-   display: block;
-}
 
-.st-alerts {
-   width: 288px;
-   position: fixed;
-   right: 15px;
-   top: 0;
-}
+// z-index
+
+// This positions have to be sorted in a descendant order. When you add a new position, make sure they are sorted correctly.
+$modal-z-index: 10000 !default;
+$alert-z-index: 9000 !default;
+$fullscreen-z-index: 8000 !default;
+$header-z-index: 7000 !default;
