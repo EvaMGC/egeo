@@ -9,7 +9,6 @@
 **New features:**
 
 * st-search: Add filter to search
-* st-tag-input: Add functionality to not allow user to type forbidden values
 * st-widget: Add settings button and draggable action as optional
 * st-tag-input: Add functionality to not allow user to type forbidden values
 
