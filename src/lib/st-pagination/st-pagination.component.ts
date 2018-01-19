@@ -24,6 +24,26 @@ import {
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { Paginate, PaginateOptions, PaginateTexts } from './st-pagination.interface';
 
+/**
+ * @description {Component} [Table]
+ *
+ * The pagination component has been designed to allow content to be displayed per pages. This informs user about the
+ * number of the current page, the items displayed per page and the total of items. Moreover, when there are a lot of
+ * items, it allows user to customize the number of items displayed per page.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <div class="pagination">
+ *     <st-pagination [total]="items.length" [perPage]="perPage" [currentPage]="page" [id]="'pagination-demo'"
+ *     (change)="onChangePage($event)">
+ *     </st-pagination>
+ *     </div>
+ * ```
+ *
+ */
 @Component({
    selector: 'st-pagination',
    templateUrl: './st-pagination.component.html',
@@ -31,18 +51,31 @@ import { Paginate, PaginateOptions, PaginateTexts } from './st-pagination.interf
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StPaginationComponent implements OnInit, OnChanges {
+   /** @Input {number} [currentPage=1] Number of the current page */
    @Input() currentPage: number = 1;
+
+   /** @Input {number} [perPage=20] The maximum number of items displayed per page */
    @Input() perPage: number = 20;
+
+   /** @Input {number} [total=''] Total of items */
    @Input() total: number;
 
-   @Input() label: PaginateTexts =  {
+   /** @Input {PaginateTexts} [label={element: 'Rows', perPage: 'per page', of: 'of'}] Translated texts displayed at the pagination */
+   @Input() label: PaginateTexts = {
       element: 'Rows', perPage: 'per page', of: 'of'
    };
 
+   /** @Input {PaginateOptions[]}
+    * [perPageOptions=Array( Object( value: 20, showFrom: 0 ),Object( value: 50, showFrom: 50 ), Object( value: 200, showFrom: 200 ))]
+    *  List of options displayed at a selector where user can change the number of items displayed per page
+    */
    @Input() perPageOptions: PaginateOptions[] = [
       { value: 20, showFrom: 0 }, { value: 50, showFrom: 50 }, { value: 200, showFrom: 200 }
    ];
 
+   /** @Output {Paginate} [change=''] Event emitted when user interacts with some of the elements in the pagination.
+    *  This sends the new pagination status (current page and items per page)
+    */
    @Output() change: EventEmitter<Paginate> = new EventEmitter<Paginate>();
 
    public disableNextButton: boolean = false;
@@ -89,9 +122,12 @@ export class StPaginationComponent implements OnInit, OnChanges {
          this.generateItems();
          this.updatePages(false);
       }
-
-      if (changes.currentPage || changes.perPage) {
+      if (changes.currentPage) {
+         this.currentPage = changes.currentPage.currentValue;
          this.updatePages(false);
+      }
+      if (changes.perPage) {
+         this.onChangePerPage(changes.perPage.currentValue);
       }
    }
 
@@ -116,7 +152,23 @@ export class StPaginationComponent implements OnInit, OnChanges {
       this.updatePages();
    }
 
-   updatePages(emit: boolean = true): void {
+   onChangePerPage(perPage: number): void {
+      this.currentPage = 1;
+      this.perPage = perPage;
+      this.updatePages();
+      this.selectedItem = this.items.find(item => item.value === this.perPage);
+   }
+
+   private addPageOption(option: PaginateOptions): void {
+      if (this.total && (!option.showFrom || option.showFrom <= this.total)) {
+         this.items.push({
+            label: `${option.value}`,
+            value: option.value
+         });
+      }
+   }
+
+   private updatePages(emit: boolean = true): void {
       this.lastItem = this.perPage * this.currentPage;
 
       if (this.currentPage === 1) {
@@ -138,22 +190,6 @@ export class StPaginationComponent implements OnInit, OnChanges {
          this.change.emit({
             currentPage: this.currentPage,
             perPage: this.perPage
-         });
-      }
-   }
-
-   onChangePerPage(perPage: number): void {
-      this.currentPage = 1;
-      this.perPage = perPage;
-      this.updatePages();
-      this.selectedItem = this.items.find(item => item.value === this.perPage);
-   }
-
-   private addPageOption(option: PaginateOptions): void {
-      if (this.total && (!option.showFrom || option.showFrom <= this.total)) {
-         this.items.push({
-            label: `${option.value}`,
-            value: option.value
          });
       }
    }

@@ -2,6 +2,10 @@
 
 ## 8.0.0 (upcoming)
 
+**Fixed bugs:**
+
+* st-pagination: Update per page value when it is updated from outside
+
 **New features:**
 
 * st-search: Add filter to search
