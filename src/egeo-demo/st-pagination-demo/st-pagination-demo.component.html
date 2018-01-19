@@ -12,6 +12,12 @@
 -->
 <h1>Pagination with pipe</h1>
 
+<div class="pagination">
+   <st-pagination [total]="items.length" [perPage]="perPage" [currentPage]="page" [id]="'pagination-demo'"
+                  (change)="onChangePage($event)">
+   </st-pagination>
+</div>
+
 <ul class="list-items">
    <li *ngFor="let item of items | paginate: { perPage: perPage, currentPage: page }">
       {{ item.label }}

@@ -125,9 +125,9 @@ describe('StPaginationComponent', () => {
       });
    });
 
-   describe('When update the pagination', () => {
+   describe('When user interacts with the pagination', () => {
 
-      it('should be the next page', () => {
+      it('should display the next page', () => {
          component.perPage = 20;
          component.total = 100;
          component.currentPage = 2;
@@ -138,7 +138,7 @@ describe('StPaginationComponent', () => {
          expect(component.currentPage).toBe(3);
       });
 
-      it('should be the prev page', () => {
+      it('should display the prev page', () => {
          component.perPage = 20;
          component.total = 100;
          component.currentPage = 2;
@@ -149,7 +149,7 @@ describe('StPaginationComponent', () => {
          expect(component.currentPage).toBe(1);
       });
 
-      it('should be disable the next button', () => {
+      it('should display a button to navigate to the next page', () => {
          component.perPage = 20;
          component.total = 40;
          component.currentPage = 1;
@@ -160,7 +160,7 @@ describe('StPaginationComponent', () => {
          expect(component.disableNextButton).toBeTruthy();
       });
 
-      it('should be disable the prev button', () => {
+      it('should be able to disable the prev button', () => {
          component.perPage = 20;
          component.total = 40;
          component.currentPage = 2;
@@ -173,7 +173,7 @@ describe('StPaginationComponent', () => {
 
    });
 
-   describe('when component is update', () => {
+   describe('when component is updated', () => {
 
       it('should generate new item for dropdown', () => {
          component.perPage = 20;
@@ -188,7 +188,7 @@ describe('StPaginationComponent', () => {
          expect(component.items.length).toBe(3);
       });
 
-      it('should change page attributes for page change', () => {
+      it('should change page attributes when the total of pages changes', () => {
          component.perPage = 20;
          component.total = 45;
          fixture.detectChanges();
@@ -203,11 +203,43 @@ describe('StPaginationComponent', () => {
          expect(component.firstItem).toEqual(41);
          expect(component.lastItem).toEqual(45);
       });
+
+      it('should change page attributes when the items per pages changes', () => {
+         component.perPage = 20;
+         component.total = 100;
+         component.currentPage = 3;
+
+         component.ngOnChanges({ perPage: new SimpleChange(20, 50, false) });
+         fixture.detectChanges();
+
+         expect(component.disableNextButton).toBeFalsy();
+         expect(component.disablePrevButton).toBeTruthy();
+         expect(component.firstItem).toEqual(1);
+         expect(component.lastItem).toEqual(50);
+         expect(component.selectedItem.value).toEqual(50);
+         expect(component.currentPage).toEqual(1);
+      });
+
+      it('should change page attributes when the current page changes', () => {
+         component.perPage = 20;
+         component.total = 100;
+         component.currentPage = 3;
+
+         component.ngOnChanges({ currentPage: new SimpleChange(3, 2, false) });
+         fixture.detectChanges();
+
+         expect(component.currentPage).toEqual(2);
+         expect(component.firstItem).toEqual(21);
+         expect(component.lastItem).toEqual(40);
+         expect(component.disableNextButton).toBeFalsy();
+         expect(component.disablePrevButton).toBeFalsy();
+         expect(component.selectedItem.value).toEqual(20);
+      });
    });
 
-   describe('when component select a new perpage', () => {
+   describe('when user selects a new number of items per page', () => {
 
-      it('should update to first page', () => {
+      it('should update to the first page status', () => {
          component.perPage = 20;
          component.total = 500;
          component.currentPage = 3;

@@ -61,7 +61,7 @@ export class StPaginationComponent implements OnInit, OnChanges {
    @Input() total: number;
 
    /** @Input {PaginateTexts} [label={element: 'Rows', perPage: 'per page', of: 'of'}] Translated texts displayed at the pagination */
-   @Input() label: PaginateTexts =  {
+   @Input() label: PaginateTexts = {
       element: 'Rows', perPage: 'per page', of: 'of'
    };
 
@@ -122,9 +122,12 @@ export class StPaginationComponent implements OnInit, OnChanges {
          this.generateItems();
          this.updatePages(false);
       }
-
-      if (changes.currentPage || changes.perPage) {
+      if (changes.currentPage) {
+         this.currentPage = changes.currentPage.currentValue;
          this.updatePages(false);
+      }
+      if (changes.perPage) {
+         this.onChangePerPage(changes.perPage.currentValue);
       }
    }
 
@@ -149,7 +152,23 @@ export class StPaginationComponent implements OnInit, OnChanges {
       this.updatePages();
    }
 
-   updatePages(emit: boolean = true): void {
+   onChangePerPage(perPage: number): void {
+      this.currentPage = 1;
+      this.perPage = perPage;
+      this.updatePages();
+      this.selectedItem = this.items.find(item => item.value === this.perPage);
+   }
+
+   private addPageOption(option: PaginateOptions): void {
+      if (this.total && (!option.showFrom || option.showFrom <= this.total)) {
+         this.items.push({
+            label: `${option.value}`,
+            value: option.value
+         });
+      }
+   }
+
+   private updatePages(emit: boolean = true): void {
       this.lastItem = this.perPage * this.currentPage;
 
       if (this.currentPage === 1) {
@@ -171,22 +190,6 @@ export class StPaginationComponent implements OnInit, OnChanges {
          this.change.emit({
             currentPage: this.currentPage,
             perPage: this.perPage
-         });
-      }
-   }
-
-   onChangePerPage(perPage: number): void {
-      this.currentPage = 1;
-      this.perPage = perPage;
-      this.updatePages();
-      this.selectedItem = this.items.find(item => item.value === this.perPage);
-   }
-
-   private addPageOption(option: PaginateOptions): void {
-      if (this.total && (!option.showFrom || option.showFrom <= this.total)) {
-         this.items.push({
-            label: `${option.value}`,
-            value: option.value
          });
       }
    }
