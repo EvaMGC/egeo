@@ -10,9 +10,21 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-form-list [schema]="jsonSchema" [formArray]="formArray"></st-form-list>
+INPUT:
+{{model2 | json}}
+<br>
+OUTPUT:
+{{model2 | json}}
+<st-form-list [schema]="jsonSchema" [(ngModel)]="model2"></st-form-list>
 
 <br>
 <button class="button button-secondary-gray" (click)="showFormStatus()">
    <span>Show form status</span>
 </button>
+
+
+<button class="button button-primary" (click)="changeModelFromOutside()">
+   <span>Change model from outside</span>
+</button>
+
+

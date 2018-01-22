@@ -21,7 +21,7 @@
        [placeholder]="placeholder"
        [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min"
        [attr.max]="max"
-       [value]="value" [readonly]="readonly" [ngClass]="{error: showError()}">
+       [value]="value || null" [readonly]="readonly" [ngClass]="{error: showError()}">
 <div class="st-input-error-layout" *ngIf="showError()">
    <span class="st-input-error-message">{{errorMessage}}</span>
 </div>

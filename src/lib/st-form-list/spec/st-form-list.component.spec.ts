@@ -1,15 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { StFormListComponent } from '../st-form-list.component';
 import { TWO_INPUTS_JSON_SCHEMA } from './resources/two-inputs-json-schema';
-import { StFormFieldModule } from '../../st-form/st-form-field/st-form-field.module';
-import { StTooltipComponent } from '../../st-tooltip/st-tooltip.component';
-import { StTooltipModule } from '../../st-tooltip/st-tooltip.module';
 import { StInputModule } from '../../st-input/st-input.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { StLabelModule } from '../../st-label/st-label.module';
 import { StFormFieldComponent } from '../../st-form/st-form-field/st-form-field.component';
 import { PipesModule } from '../../pipes/pipes.module';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
@@ -46,11 +40,9 @@ fdescribe('[StFormList]', () => {
          fixture.detectChanges();
 
          expect(fixture.nativeElement.querySelector('.button.button-link-primary').innerText).toContain(buttonLabel);
-
       });
 
    });
-
 
    describe('should be able to create an array of items', () => {
       beforeEach(() => {
@@ -58,43 +50,46 @@ fdescribe('[StFormList]', () => {
          fixture.detectChanges();
       });
 
-      fit('items are loaded according to a json schema', () => {
+      it('items are loaded according to a json schema', () => {
+         fixture.nativeElement.querySelector('.button.button-link-primary').click();
+         fixture.detectChanges();
+
          let controls = fixture.nativeElement.querySelectorAll('input');
 
-         expect(controls.length).toBe(TWO_INPUTS_JSON_SCHEMA.properties.length);
+         expect(controls.length).toBe(Object.keys(TWO_INPUTS_JSON_SCHEMA.properties).length);
          for (let i = 0; i < Object.keys(TWO_INPUTS_JSON_SCHEMA.properties).length; ++i) {
             expect(controls[i].name).toBe(Object.keys(TWO_INPUTS_JSON_SCHEMA.properties)[i]);
          }
       });
 
-      it('array is loaded according to the model introduced as input', () => {
+      fit('array is loaded according to the model introduced as input', () => {
          let fakeModel: Array<any> = [
             { genericNumberInput: 8, genericTextInput: 'fake text 1' },
             { genericNumberInput: 20, genericTextInput: 'fake text 2' }
          ];
          component.model = fakeModel;
-
+         component.ngOnInit();
          fixture.detectChanges();
 
-         let htmlControls = fixture.nativeElement.querySelectorAll('input');
+         let rows = fixture.nativeElement.querySelectorAll('.st-form-list__row');
          let formArrayControls = component.formArray.controls;
 
-         expect(htmlControls.length).toBe(TWO_INPUTS_JSON_SCHEMA.properties.length);
-         expect(formArrayControls.length).toBe(TWO_INPUTS_JSON_SCHEMA.properties.length);
+         expect(rows.length).toBe(fakeModel.length);
+         expect(formArrayControls.length).toBe(fakeModel.length);
 
-         for (let i = 0; i < Object.keys(TWO_INPUTS_JSON_SCHEMA.properties).length; ++i) {
-            expect(htmlControls[i].name).toBe(Object.keys(TWO_INPUTS_JSON_SCHEMA.properties)[i]);
-            expect(htmlControls[i].value).toBe(fakeModel[htmlControls[i].name]);
-            expect(formArrayControls[htmlControls[i].name].value).toBe(fakeModel[htmlControls[i].name]);
+         let itemProperties = Object.keys(TWO_INPUTS_JSON_SCHEMA.properties);
+         for (let i = 0; i <rows.length; ++i) {
+            let inputs: HTMLInputElement[] = rows[i].querySelectorAll('input');
+            expect(inputs[0].name).toBe(itemProperties[0]);
+            expect(inputs[0].value).toEqual(String(fakeModel[i][itemProperties[0]]));
+            expect(component.formArray.controls[i].controls[itemProperties[0]].value).toEqual(fakeModel[i][itemProperties[0]]);
+
+            expect(inputs[1].name).toBe(itemProperties[1]);
+            expect(inputs[1].value).toEqual(String(fakeModel[i][itemProperties[1]]));
+            expect(component.formArray.controls[i].controls[itemProperties[1]].value).toEqual(fakeModel[i][itemProperties[1]]);
          }
       });
    });
-
-
-
-
-
-
 
 
    // describe('should be able to control if items can be repeated or not', () => {

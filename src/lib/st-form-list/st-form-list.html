@@ -1,23 +1,25 @@
-<!--<form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="st-form-list">-->
-   <div *ngFor="let formArrayControl of formArray.controls; let i = index;" [formGroup]="formArrayControl" class ="st-form-list__row">
-      <st-form-field *ngFor="let property of schema.properties | stObjectToArray"
-                     [schema]="property"
-                     [formControl]="formArrayControl.controls[property.key]"
-                     ngDefaultControl
-      >
+<!--<form  #form="ngForm" novalidate autocomplete="off" class="st-form-list">-->
+   <div class="st-form-list__row" *ngFor="let arrayFormGroup of formArray.controls; let i = index;">
+      <st-form-field [schema]="property" *ngFor="let property of schema.properties | stObjectToArray"
+                     [(ngModel)]="value[i][property.key]"
+                     [required]="isRequired(property.key)"
+                     ngDefaultControl>
       </st-form-field>
+
    </div>
 
-   <!--&lt;!&ndash;<button [isDisabled]="disabled || (stModel && maxItems && stModel.length >= maxItems)"&ndash;&gt;-->
-   <!--&lt;!&ndash;class="st-form-list__button"&ndash;&gt;-->
-   <!--&lt;!&ndash;text="{{ ('ADD' | translate | uppercase)}} {{field.value.title | uppercase}}"&ndash;&gt;-->
-   <!--&lt;!&ndash;leftIcon="icon-circle-plus"&ndash;&gt;-->
-   <!--&lt;!&ndash;typeClass="btnLink"&ndash;&gt;-->
-   <!--&lt;!&ndash;(onClick)="addItem(stModel.length)"&ndash;&gt;-->
-   <!--&lt;!&ndash;qaTag="add-{{name}}-button">&ndash;&gt;-->
-   <!--&lt;!&ndash;</button>&ndash;&gt;-->
 
-   <button class="button button-link-primary" (click)="addItem(model.length)">
+   <button class="button button-link-primary" (click)="addItem()">
       <i class="icon-circle-plus"></i><span>{{buttonLabel}}</span>
    </button>
 <!--</form>-->
+
+
+<!--&lt;!&ndash;<button [isDisabled]="disabled || (stModel && maxItems && stModel.length >= maxItems)"&ndash;&gt;-->
+<!--&lt;!&ndash;class="st-form-list__button"&ndash;&gt;-->
+<!--&lt;!&ndash;text="{{ ('ADD' | translate | uppercase)}} {{field.value.title | uppercase}}"&ndash;&gt;-->
+<!--&lt;!&ndash;leftIcon="icon-circle-plus"&ndash;&gt;-->
+<!--&lt;!&ndash;typeClass="btnLink"&ndash;&gt;-->
+<!--&lt;!&ndash;(onClick)="addItem(stModel.length)"&ndash;&gt;-->
+<!--&lt;!&ndash;qaTag="add-{{name}}-button">&ndash;&gt;-->
+<!--&lt;!&ndash;</button>&ndash;&gt;-->

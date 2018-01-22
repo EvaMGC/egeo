@@ -42,13 +42,30 @@ export class StFormListDemoComponent {
          'genericNumberInput'
       ]
    };
-   public formArray: FormArray;
 
+   public model: any[];
+   public outputModel: any[];
+   public formArray: FormArray;
+public model2: Array<any> = [
+   { genericNumberInput: 8, genericTextInput: 'este es el ngmodel ' },
+   { genericNumberInput: 20, genericTextInput: 'fake text 2' }
+]; ;
    constructor() {
       this.formArray = new FormArray([]);
    }
 
    public showFormStatus(): void {
       console.log({ valid: this.formArray.valid, model: this.formArray.value, controls: this.formArray.controls });
+   }
+
+   public onModelChange(model: Array<any>): void {
+      this.outputModel = model;
+   }
+
+   public changeModelFromOutside(): void {
+      this.model = [
+         { genericNumberInput: 8, genericTextInput: 'fake text 1' },
+         { genericNumberInput: 20, genericTextInput: 'fake text 2' }
+      ];
    }
 }

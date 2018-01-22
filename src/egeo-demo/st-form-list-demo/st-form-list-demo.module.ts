@@ -13,10 +13,12 @@ import { CommonModule } from '@angular/common';
 import { StDemoGeneratorModule } from '@stratio/egeo';
 import { StFormListDemoComponent } from './st-form-list-demo';
 import { StFormListModule } from '../../lib/st-form-list/st-form-list.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
    imports: [
       CommonModule,
+      FormsModule,
       StFormListModule,
       StDemoGeneratorModule.withComponents({ components: [StFormListDemoComponent] })
    ],
