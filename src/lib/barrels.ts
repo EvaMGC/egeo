@@ -17,6 +17,7 @@ import { StFileButtonModule } from './st-file-button/st-file-button.module';
 import { StFooterModule } from './st-footer/st-footer.module';
 import { StFormDirectiveModule } from './directives/form/form-directives.module';
 import { StFormModule } from './st-form/st-form.module';
+import { StFormListModule } from './st-form-list/st-form-list.module';
 import { StFullscreenLayoutModule } from './st-fullscreen-layout/st-fullscreen-layout.module';
 import { StHeaderModule } from './st-header/st-header.module';
 import { StHelpModule } from './st-help/st-help.module';
@@ -62,6 +63,7 @@ export const DECLARATIONS: any[] = [
    StFooterModule,
    StFormDirectiveModule,
    StFormModule,
+   StFormListModule,
    StFullscreenLayoutModule,
    StHeaderModule,
    StHelpModule,

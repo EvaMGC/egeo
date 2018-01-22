@@ -41,6 +41,7 @@
       "reflect-metadata": "0.1.10",
       "tslib": "1.7.1"
    },
+
    "devDependencies": {
       "@angular/animations": "4.4.3",
       "@angular/cli": "1.6.0",

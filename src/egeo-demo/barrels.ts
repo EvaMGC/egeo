@@ -16,6 +16,7 @@ import { StDropdownMenuDemoModule } from './st-dropdown-menu-demo/st-dropdown-me
 import { StFileButtonDemoModule } from './st-file-button-demo/st-file-button-demo.module';
 import { StFooterDemoModule } from './st-footer-demo/st-footer-demo.module';
 import { StFormDemoModule } from './st-form-demo/st-form-demo.module';
+import { StFormListDemoModule } from './st-form-list-demo/st-form-list-demo.module';
 import { StFullscreenLayoutDemoModule } from './st-fullscreen-layout-demo/st-fullscreen-layout-demo.module';
 import { StHeaderDemoModule } from './st-header-demo/st-header-demo.module';
 import { StHelpDemoModule } from './st-help-demo/st-help-demo.module';
@@ -60,6 +61,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StFileButtonDemoModule,
    StFooterDemoModule,
    StFormDemoModule,
+   StFormListDemoModule,
    StFullscreenLayoutDemoModule,
    StHeaderDemoModule,
    StHelpDemoModule,
