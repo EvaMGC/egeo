@@ -10,17 +10,11 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-INPUT:
-{{model2 | json}}
-<br>
-OUTPUT:
-{{model2 | json}}
-<st-form-list [schema]="jsonSchema" [(ngModel)]="model2"></st-form-list>
 
+<form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-6">
+   <st-form-list [schema]="jsonSchema" [(ngModel)]="model2"  name="list"></st-form-list>
+</form>
 <br>
-<button class="button button-secondary-gray" (click)="showFormStatus()">
-   <span>Show form status</span>
-</button>
 
 
 <button class="button button-primary" (click)="changeModelFromOutside()">
@@ -28,3 +22,7 @@ OUTPUT:
 </button>
 
 
+
+<p>Form value: {{ templateDrivenForm.value | json }}</p>
+<p>Form status: {{ templateDrivenForm.disabled ? 'DISABLED' : templateDrivenForm.valid ? 'VALID' : 'INVALID' }}</p>
+<p *ngIf="templateDrivenForm.controls['list']">Form list valid: {{ templateDrivenForm.controls['list'].valid }}</p>

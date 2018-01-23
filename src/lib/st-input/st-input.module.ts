@@ -14,9 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StInputComponent } from './st-input.component';
 import { StLabelModule } from '../st-label/st-label.module';
+import { StFormDirectiveModule } from '../directives/form/form-directives.module';
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StLabelModule],
+   imports: [CommonModule, FormsModule, ReactiveFormsModule, StLabelModule, StFormDirectiveModule],
    declarations: [StInputComponent],
    exports: [StInputComponent]
 })

@@ -14,9 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StFormFieldComponent } from './st-form-field.component';
 import { StInputModule } from '../../st-input/st-input.module';
 import { StSwitchModule } from '../../st-switch/st-switch.module';
+import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StInputModule, StSwitchModule],
+   imports: [CommonModule, FormsModule, ReactiveFormsModule, StInputModule, StSwitchModule, StFormDirectiveModule],
    declarations: [StFormFieldComponent],
    exports: [StFormFieldComponent]
 })

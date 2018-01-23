@@ -13,7 +13,7 @@
 <section class="container-liquid">
     <form [formGroup]="form" novalidate autocomplete="off">
       <h1>Switch with label at left</h1>
-      <st-switch class="swicth-demo" contextualHelp="this is a contextual help" name="switch-1" label="Enabled switch" [stModel]="model" formControlName="switch" qaTag="enabled-switch-1" ></st-switch>
+      <st-switch class="swicth-demo" contextualHelp="this is a contextual help" name="switch-1" label="Enabled switch" formControlName="switch" qaTag="enabled-switch-1" ></st-switch>
    </form>
 
    <button class="button button-primary" (click)="form.controls['switch'].enable()">
@@ -26,6 +26,6 @@
    <br>
    <br>
    <h1>Disabled switch without a form control</h1>
-   <st-switch class="swicth-demo" name="switch-2" [disabled]="true" label="Disabled switch" [stModel]="model" ></st-switch>
+   <st-switch class="swicth-demo" name="switch-2" [disabled]="true" label="Disabled switch" [(ngModel)]="model" ></st-switch>
    <br>
 </section>

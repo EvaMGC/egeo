@@ -37,7 +37,7 @@ describe('StSwitchComponent', () => {
 
       fixture = TestBed.createComponent(StSwitchComponent);
       component = fixture.componentInstance;
-      component.stModel = false;
+      component.value = false;
       component.qaTag = 'qa tag';
    });
 
@@ -46,12 +46,12 @@ describe('StSwitchComponent', () => {
    });
 
    it('if model is not introduced as input, it throws an error', () => {
-      component.stModel = undefined;
+      component.value = undefined;
       try {
          fixture.detectChanges();
-         expect(component.stModel).toThrow();
+         expect(component.value).toThrow();
       } catch (error) {
-         expect(error.message).toContain('st-switch-component: field stModel is a required field');
+         expect(error.message).toContain('st-switch-component: field value is a required field');
       }
    });
 
@@ -85,7 +85,7 @@ describe('StSwitchComponent', () => {
 
    describe('Should update its class when disabled attribute changes', () => {
       beforeEach(() => {
-         component.stModel = model;
+         component.value = model;
       });
 
       it('if it is disabled, class "st-switch--disabled" has to be added to toggle', () => {
@@ -110,19 +110,19 @@ describe('StSwitchComponent', () => {
       });
 
       it('model is updated with new value', () => {
-         expect(component.stModel).toBe(newValue);
+         expect(component.value).toBe(newValue);
       });
    });
 
    describe('when user clicks on toggle', () => {
       beforeEach(() => {
          spyOn(component.change, 'emit');
-         component.stModel = false;
+         component.value = false;
       });
       it('if switch is not disabled, model has to change', () => {
          component.disabled = false;
          // put switch to off
-         component.stModel = false;
+         component.value = false;
          fixture.detectChanges();
 
          let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
@@ -130,14 +130,14 @@ describe('StSwitchComponent', () => {
          switchBox.click();
          fixture.detectChanges();
 
-         expect(component.stModel).toBeTruthy();
+         expect(component.value).toBeTruthy();
          expect(component.change.emit).toHaveBeenCalledWith(true);
          expect(switchBox.classList).toContain('st-switch--on');
 
          switchBox.click();
          fixture.detectChanges();
 
-         expect(component.stModel).toBeFalsy();
+         expect(component.value).toBeFalsy();
          expect(component.change.emit).toHaveBeenCalledWith(false);
          expect(switchBox.classList).toContain('st-switch--off');
       });
@@ -145,21 +145,21 @@ describe('StSwitchComponent', () => {
       it('if switch is disabled, no changes are executed', () => {
          component.disabled = true;
          // put switch to off
-         component.stModel = false;
+         component.value = false;
          fixture.detectChanges();
 
          let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
          switchBox.click();
          fixture.detectChanges();
 
-         expect(component.stModel).toBeFalsy();
+         expect(component.value).toBeFalsy();
          expect(component.change.emit).not.toHaveBeenCalled();
          expect(switchBox.classList).toContain('st-switch--off');
 
          switchBox.click();
          fixture.detectChanges();
 
-         expect(component.stModel).toBeFalsy();
+         expect(component.value).toBeFalsy();
          expect(component.change.emit).not.toHaveBeenCalled();
          expect(switchBox.classList).toContain('st-switch--off');
       });
@@ -168,7 +168,7 @@ describe('StSwitchComponent', () => {
    it('Callback function is initialized on registerOnChange function in order to be called when there is a change', () => {
       let callbackFunction = jasmine.createSpy('callbackFunction');
       component.registerOnChange(callbackFunction);
-      component.stModel = false;
+      component.value = false;
       fixture.detectChanges();
 
       let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
@@ -180,23 +180,23 @@ describe('StSwitchComponent', () => {
    it('If model is changed from outside, switch is updated', () => {
       spyOn(component.change, 'emit').and.callThrough();
       model = true;
-      component.stModel = model;
+      component.value = model;
       fixture.detectChanges();
       fixture.changeDetectorRef.markForCheck();
 
       let switchBox: HTMLDivElement = fixture.nativeElement.querySelector('.st-switch__toggle');
 
-      expect(component.stModel).toBeTruthy();
+      expect(component.value).toBeTruthy();
       expect(switchBox.classList).toContain('st-switch--on');
 
       model = false;
-      component.stModel = model;
+      component.value = model;
       fixture.detectChanges();
       fixture.changeDetectorRef.markForCheck();
 
       switchBox = fixture.nativeElement.querySelector('.st-switch__toggle');
 
-      expect(component.stModel).toBeFalsy();
+      expect(component.value).toBeFalsy();
       expect(switchBox.classList).toContain('st-switch--off');
    });
 

@@ -10,9 +10,34 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-form [schema]="jsonSchema" [form]="form"></st-form>
+
+<form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-4">
+   <st-select
+      stCheckValidations
+      label="Option 1"
+      tooltip="Prueba"
+      placeholder="Select option"
+      [options]="options"
+      [(ngModel)]="model['a']"
+      name="option1"
+      required
+      id="test"
+      class="st-form-field"
+   >
+   </st-select>
+   <st-form stcheckvalidations [schema]="jsonSchema" [(ngModel)]="model"
+            name="b"></st-form>
+
+</form>
+
 
 <br>
 <button class="button button-secondary-gray" (click)="showFormStatus()">
    <span>Show form status</span>
 </button>
+
+
+<!--<p>Form value: {{ templateDrivenForm.value | json }}</p>-->
+<p>Form valid: {{ templateDrivenForm.valid | json }}</p>
+
+<!--<p *ngIf="templateDrivenForm.controls['b']">Form valid: {{ templateDrivenForm.controls['formModel'].valid }}</p>-->

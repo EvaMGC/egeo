@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { CommonModule }  from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -16,9 +16,18 @@ import { PipesModule } from '../pipes/pipes.module';
 import { StFormDirectiveModule } from '../directives/form/form-directives.module';
 import { StFormListComponent } from './st-form-list.component';
 import { StFormFieldModule } from '../st-form/st-form-field/st-form-field.module';
+import { StInputModule } from '../st-input/st-input.module';
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StFormFieldModule, PipesModule, StFormDirectiveModule],
+   imports: [
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      StFormFieldModule,
+      StInputModule,
+      PipesModule,
+      StFormDirectiveModule
+   ],
    declarations: [StFormListComponent],
    exports: [StFormListComponent]
 })

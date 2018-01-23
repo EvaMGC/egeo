@@ -8,16 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import {
-   Component,
-   ChangeDetectionStrategy,
-   OnInit,
-   Input
-} from '@angular/core';
-import {
-   ControlValueAccessor, FormControl, Validators, ValidatorFn
-} from '@angular/forms';
-
+import { Component, ChangeDetectionStrategy, OnInit, Input, ChangeDetectorRef, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StInputError } from '../../st-input/st-input.error.model';
 
@@ -25,36 +17,33 @@ import { StInputError } from '../../st-input/st-input.error.model';
    selector: 'st-form-field',
    templateUrl: './st-form-field.component.html',
    styleUrls: ['./st-form-field.component.scss'],
-   changeDetection: ChangeDetectionStrategy.OnPush
+   changeDetection: ChangeDetectionStrategy.OnPush,
+   providers: [
+      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true }
+   ]
 })
 
 @StEgeo()
 export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() @StRequired() schema: any;
    @Input() required: boolean = false;
-   @Input() formControl: FormControl = new FormControl();
    @Input() errorMessages: StInputError;
 
    public type: string;
 
-   private registeredOnChange: (_: any) => void;
+   private _value: Array<any>;
+   private internalInputModel: any = '';
+
+   onChange = (_: any) => {
+   };
+   onTouched = () => {
+   };
 
    constructor() {
    }
 
    ngOnInit(): void {
-      let validationList: ValidatorFn[] = [];
-
       this.type = this.schema.value.type === 'string' ? 'text' : this.schema.value.type;
-      if (this.required) {
-         validationList.push(Validators.required);
-      }
-      if (this.schema.value.pattern) {
-         validationList.push(Validators.pattern(this.schema.value.pattern));
-      }
-
-      this.formControl.validator = Validators.compose(validationList);
-
       if (!this.errorMessages) {
          this.errorMessages = {
             generic: 'Error',
@@ -65,23 +54,6 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
             max: 'The number has to be minor than ' + this.max,
             pattern: 'Invalid value'
          };
-      }
-   }
-
-   writeValue(value: any): void {
-      this.onChange(value);
-   }
-
-   registerOnChange(fn: (_: any) => void): void {
-      this.registeredOnChange = fn;
-   }
-
-   registerOnTouched(fn: () => void): void {
-   }
-
-   onChange(value: any): void {
-      if (this.registeredOnChange) {
-         this.registeredOnChange(value);
       }
    }
 
@@ -125,6 +97,38 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
          default:
             return this.type === type;
       }
+   }
+
+   @Input()
+   get value(): any {
+      return this._value;
+   }
+
+   set value(value: any) {
+      if (value !== this._value) {
+         this.onChange(value);
+      }
+   }
+
+
+   // When value is received from outside
+   writeValue(value: any): void {
+      this.internalInputModel = value;
+      this._value = value;
+   }
+
+   // Registry the change function to propagate internal model changes
+   registerOnChange(fn: (_: any) => void): void {
+      this.onChange = fn;
+   }
+
+   // Registry the touch function to propagate internal touch events TODO: make this function.
+   registerOnTouched(fn: () => void): void {
+      this.onTouched = fn;
+   }
+
+   // Allows Angular to disable the list.
+   setDisabledState(isDisabled: boolean): void {
    }
 
 }

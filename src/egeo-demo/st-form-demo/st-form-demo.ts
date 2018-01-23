@@ -8,9 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { JSON_SCHEMA } from './json-schema';
 
 @Component({
@@ -19,15 +18,26 @@ import { JSON_SCHEMA } from './json-schema';
 })
 export class StFormDemoComponent {
    public jsonSchema: any;
-   public form: FormGroup;
+   public model: any = {};
 
-   constructor() {
+   public options = [
+      {label: 'Select an option', value: undefined},
+      {
+      label: 'a',
+      value: 1
+   }, {
+      label: 'b',
+      value: 2
+   }];
+
+   @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
+
+   constructor(private _cd: ChangeDetectorRef) {
       this.jsonSchema = JSON_SCHEMA;
-      this.form = new FormGroup({});
    }
 
-
-   public showFormStatus(): void {
-      console.log({valid: this.form.valid, model: this.form.value});
+   showFormStatus(): void {
+      this._cd.markForCheck();
+      console.log(this.templateDrivenForm);
    }
 }

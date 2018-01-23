@@ -3,12 +3,10 @@ import {
    Input,
    ChangeDetectionStrategy,
    OnInit,
-   Output,
-   EventEmitter,
    ChangeDetectorRef,
-   forwardRef
+   forwardRef, OnChanges, SimpleChanges
 } from '@angular/core';
-import { FormControl, FormArray, ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
    selector: 'st-form-list',
@@ -16,16 +14,11 @@ import { FormControl, FormArray, ControlValueAccessor, FormGroup, NG_VALUE_ACCES
    styleUrls: ['./st-form-list.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
-      {
-         provide: NG_VALUE_ACCESSOR,
-         useExisting: forwardRef(() => StFormListComponent),
-         multi: true
-      }
+      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormListComponent), multi: true }
    ]
 })
-export class StFormListComponent implements ControlValueAccessor, OnInit {
+export class StFormListComponent implements ControlValueAccessor, OnInit, OnChanges {
    @Input() schema: any;
-   @Input() formArray: FormArray;
    @Input() buttonLabel: string = 'Add';
    @Input() disabled = false;
    // @Output() modelChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
@@ -52,14 +45,23 @@ export class StFormListComponent implements ControlValueAccessor, OnInit {
 
    set value(value: any) {
       this._value = value;
+
+      if (value !== this._value) {
+         this._value = value;
+         this.onChange(value);
+      }
+      this._cd.markForCheck();
    }
-   // Function to call when the rating changes.
    // onChange = (value: Array[]) => {
    // };
 
    // Function to call when the input is touched (when a star is clicked).
    onTouched = () => {
    };
+
+   ngOnChanges(changes: SimpleChanges): void {
+      this.updateFormArray();
+   }
 
    // @Input()
    // get model(): Array<any> {
@@ -75,15 +77,13 @@ export class StFormListComponent implements ControlValueAccessor, OnInit {
    // }
 
    constructor(private _cd: ChangeDetectorRef) {
-      this.formArray = new FormArray([]);
    }
 
    ngOnInit(): void {
-      this.updateFormArray();
+      // this.updateFormArray();
    }
 
    addItem(): void {
-      this.formArray.push(this.generateItemFormGroup());
       this.value.push({});
       this.onChange(this.value);
    };
@@ -92,27 +92,42 @@ export class StFormListComponent implements ControlValueAccessor, OnInit {
       return propertyName && this.schema.required && this.schema.required.indexOf(propertyName) !== -1;
    }
 
-   // Allows Angular to update the model (rating).
+   // Allows Angular to update the model (list).
    // Update the model and changes needed for the view here.
    writeValue(value: Array<any>): void {
-      this.onChange(value)
+      if (value !== this._value) {
+         this._value = value;
+      }
+      this._cd.markForCheck();
    }
 
-   // Allows Angular to register a function to call when the model (rating) changes.
+
+
+   // Allows Angular to register a function to call when the model (list) changes.
    // Save the function as a property to call later here.
    registerOnChange(fn: (value: Array<any>) => void): void {
       this.onChange = fn;
    }
 
-   // Allows Angular to register a function to call when the input has been touched.
+   // Allows Angular to register a function to call when the list has been touched.
    // Save the function as a property to call later here.
    registerOnTouched(fn: () => void): void {
       this.onTouched = fn;
    }
 
-   // Allows Angular to disable the input.
+   // Allows Angular to disable the list.
    setDisabledState(isDisabled: boolean): void {
       this.disabled = isDisabled;
+   }
+
+   // Function to call when the value changes.
+   onChange(value: Array<any>): void {
+      value = value || [];
+      this.value = value;
+      if (this.registeredOnChange) {
+         this.registeredOnChange(value);
+      }
+      this._cd.markForCheck();
    }
 
    // ngOnInit(): void {
@@ -131,18 +146,14 @@ export class StFormListComponent implements ControlValueAccessor, OnInit {
    //    this.checkValidations();
    // }
    //
-   ngAfterViewChecked(): void {
-      // this.checkValidations();
-   }
 
 
-
-   validate(control: FormControl): any {
-      // if (this.sub) {
-      //    this.sub.unsubscribe();
-      // }
-      // this.sub = control.statusChanges.subscribe(() => this.checkErrors(control));
-   }
+   // validate(control: FormControl): any {
+   //    // if (this.sub) {
+   //    //    this.sub.unsubscribe();
+   //    // }
+   //    // this.sub = control.statusChanges.subscribe(() => this.checkErrors(control));
+   // }
 
    // ngOnChanges(change: any): void {
    //    // if (this.forceValidations) {
@@ -162,34 +173,29 @@ export class StFormListComponent implements ControlValueAccessor, OnInit {
    // registerOnTouched(fn: () => void): void {
    // }
 
-   onChange(value: Array<any>): void {
-      value = value || [];
-      this.value = value;
-      // this.modelChange.emit(value);
-      if (this.registeredOnChange) {
-         this.registeredOnChange(value);
-      }
-   }
 
-   private generateItemFormGroup(rowValue?: any): FormGroup {
-      let formGroup = new FormGroup({});
-      let propertyNames: string[] = Object.keys(this.schema.properties);
-      for (let j = 0; j < propertyNames.length; ++j) {
-         const value: any = rowValue ? rowValue[propertyNames[j]] : '';
-         let formControl: FormControl = new FormControl(value);
-         formGroup.addControl(propertyNames[j], formControl);
-      }
-      return formGroup;
-   }
+
+   // private generateItemFormGroup(rowValue?: any): FormGroup {
+   //    // let formGroup = new FormGroup({});
+   //    // let propertyNames: string[] = Object.keys(this.schema.properties);
+   //    // for (let j = 0; j < propertyNames.length; ++j) {
+   //    //    const value: any = rowValue ? rowValue[propertyNames[j]] : '';
+   //    //    let formControl: FormControl = new FormControl(value);
+   //    //    formGroup.addControl(propertyNames[j], formControl);
+   //    // }
+   //    // return formGroup;
+   // }
 
    private updateFormArray(): void {
-      this.formArray.controls = [];
-      if (this.value) {
-         for (let i = 0; i < this.value.length; ++i) {
-            this.formArray.push(this.generateItemFormGroup(this.value[i]));
-         }
-      }
-      this._cd.markForCheck();
+      // this.formArray.controls = [];
+      // console.log(this.value);
+      // if (this.value) {
+      //    for (let i = 0; i < this.value.length; ++i) {
+      //       this.formArray.push(this.generateItemFormGroup(this.value[i]));
+      //    }
+      // }
+      // console.log(this.formArray.controls);
+      // this._cd.markForCheck();
    }
 
    //

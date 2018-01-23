@@ -10,13 +10,15 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
+
 <st-input *ngIf="hasType('input')"
+          stCheckValidations
           [name]="name"
           [fieldType]="type"
           [label]="label"
           [placeholder]="placeholder"
+          [(ngModel)]="value"
           [contextualHelp]="description"
-          [formControl]="formControl"
           [errors]="errorMessages"
           [min]="min"
           [max]="max"
@@ -27,10 +29,10 @@
 </st-input>
 
 <st-switch *ngIf="hasType('boolean')"
+           stCheckValidations
            [label]="schema.value.title"
            [name]="schema.key"
            [contextualHelp]="schema.value.description"
-           [formControl]="formControl"
-           [stModel]="formControl.value"
+           [(ngModel)]="value"
            [qaTag]="schema.key">
 </st-switch>
