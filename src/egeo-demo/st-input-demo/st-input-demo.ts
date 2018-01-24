@@ -19,7 +19,8 @@ import { StInputError } from '@stratio/egeo';
 })
 export class StInputDemoComponent {
    public myForm: FormGroup;
-   public requiredError: StInputError = {required: 'This field is required'};
+   public requiredError: StInputError = { required: 'This field is required' };
+   public disabled: boolean = false;
 
    constructor(private fb: FormBuilder) {
       this.myForm = fb.group({
@@ -29,5 +30,20 @@ export class StInputDemoComponent {
       });
       this.myForm.controls.disabledField.disable();
       this.myForm.valueChanges.subscribe(res => console.log(res));
+   }
+
+
+   disableInput(): void {
+      this.disabled = !this.disabled;
+      if (this.disabled) {
+         this.myForm.controls.name.disable();
+         this.myForm.controls.disabledField.disable();
+         this.myForm.controls.requiredField.disable();
+      } else {
+         this.myForm.controls.name.enable();
+         this.myForm.controls.disabledField.enable();
+         this.myForm.controls.requiredField.enable();
+
+      }
    }
 }

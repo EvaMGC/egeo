@@ -10,8 +10,14 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
+
+
+<h1>Without form control</h1>
 <st-input type="text" name="Name" placeholder="Enter your name" value="Peter"  label="Name"></st-input>
 
+<br>
+
+<h1>Inside form</h1>
 
 <form [formGroup]="myForm" novalidate>
    <st-input type="text" formControlName="name" placeholder="Enter your name" label="Field" contextualHelp="This is a normal field"></st-input>
@@ -22,5 +28,7 @@
    <label class ="st-label">Native disabled Input with class</label>
    <input class ="st-input"  formControlName="disabledField"  placeholder="This field is disabled"/>
 </form>
+
+<button  class="button button-primary" (click)="disableInput()">DISABLE/ENABLE INPUTS</button>
 
 
