@@ -68,8 +68,6 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
       this._value = value;
    }
 
-   @Output() change: EventEmitter<any> = new EventEmitter<any>();
-
    @ViewChildren('input') vc: any;
 
    public disabled: boolean = false; // To check disable
@@ -165,13 +163,6 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
 
    onFocusOut(event: Event): void {
       this.focus = false;
-   }
-
-   onChangeEvent(event: Event): void {
-      this._value = this.vc.first.nativeElement.value;
-      this.change.emit(this.value);
-      event.stopPropagation();
-      event.preventDefault();
    }
 
    // When status change call this function to check if have errors

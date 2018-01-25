@@ -20,7 +20,7 @@ export class StFormListDemoComponent {
       '$schema': 'http://json-schema.org/schema#',
       'properties': {
          'genericNumberInput': {
-            'title': 'Generic number',
+            'title': 'Required number between 6-10',
             'description': 'Generic input description',
             'type': 'number',
             'default': 5,
@@ -30,7 +30,7 @@ export class StFormListDemoComponent {
             'exclusiveMaximum': false
          },
          'genericTextInput': {
-            'title': 'Required text',
+            'title': 'Required text with a text of 2-6 characters',
             'description': 'This is a generic text',
             'type': 'string',
             'default': 'Generic text',
@@ -52,8 +52,6 @@ export class StFormListDemoComponent {
    ];
 
    constructor() {
-      // this.form = new FormGroup({});
-      // this.form.addControl('list', new FormArray([]));
    }
 
    public showFormStatus(): void {
@@ -61,7 +59,7 @@ export class StFormListDemoComponent {
    }
 
    public onModelChange(model: Array<any>): void {
-      this.outputModel = model;
+      this.model2 = model;
    }
 
    public changeModelFromOutside(): void {

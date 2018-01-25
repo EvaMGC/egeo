@@ -20,16 +20,6 @@ export class StFormDemoComponent {
    public jsonSchema: any;
    public model: any = {};
 
-   public options = [
-      {label: 'Select an option', value: undefined},
-      {
-      label: 'a',
-      value: 1
-   }, {
-      label: 'b',
-      value: 2
-   }];
-
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
 
    constructor(private _cd: ChangeDetectorRef) {

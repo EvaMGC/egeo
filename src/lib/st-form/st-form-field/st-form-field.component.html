@@ -12,12 +12,13 @@
 -->
 
 <st-input *ngIf="hasType('input')"
-          stCheckValidations
-          [name]="name"
+          #templateModel="ngModel"
           [fieldType]="type"
           [label]="label"
+          [name]="name"
           [placeholder]="placeholder"
-          [(ngModel)]="value"
+          [ngModel]="value"
+          (ngModelChange)="onChange($event)"
           [contextualHelp]="description"
           [errors]="errorMessages"
           [min]="min"
@@ -25,14 +26,14 @@
           [minlength]="minLength"
           [maxlength]="maxLength"
           [required]="required"
-          [qaTag]="schema.key">
+          [qaTag]="qaTag">
 </st-input>
 
 <st-switch *ngIf="hasType('boolean')"
-           stCheckValidations
            [label]="schema.value.title"
+           #templateModel="ngModel"
+           [(ngModel)]="value"
            [name]="schema.key"
            [contextualHelp]="schema.value.description"
-           [(ngModel)]="value"
-           [qaTag]="schema.key">
+           [qaTag]="qaTag">
 </st-switch>

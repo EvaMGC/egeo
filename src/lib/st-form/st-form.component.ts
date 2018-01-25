@@ -8,8 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, Input, OnInit, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+   Component, Input, OnInit, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef,
+   AfterContentChecked
+} from '@angular/core';
+import {
+   ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, ControlContainer, NG_VALIDATORS,
+   FormControl
+} from '@angular/forms';
 
 @Component({
    selector: 'st-form',
@@ -18,18 +24,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormComponent), multi: true }
    ]
+   // viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 
 export class StFormComponent implements ControlValueAccessor, OnInit {
    @Input() schema: any;
 
    private _value: any = {};
-
-   onChange: (_: any) => void;
-   onTouched: () => void;
+   private registeredOnChange: (_: any) => void;
 
 
-   constructor() {
+   onTouched = () => { };
+
+   constructor(private _cd: ChangeDetectorRef) {
 
    }
 
@@ -52,41 +59,40 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
    }
 
    set value(value: any) {
-      this._value = value;
+      if (value !== this._value) {
+         this._value = value;
+      }
+      this._cd.markForCheck();
    }
-
-
-   // Allows Angular to update the model (list).
-   // Update the model and changes needed for the view here.
-   // writeValue(value: any): void {
-   //    if (value !== this._value) {
-   //       console.log('entro a writeValue del form', value);
-   //
-   //       this.onChange(value);
-   //    }
-   // }
 
    // When value is received from outside
    writeValue(value: any): void {
+      console.log('write value', value);
       this._value = value;
+      this._cd.markForCheck();
+      this.onChange(value);
    }
-   /*
-    ****** Control value accessor && validate methods ******
-    */
 
-   // Set the function to be called when the control receives a change event.
+   // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
-      this.onChange = fn;
+      this.registeredOnChange = fn;
    }
 
-   // Set the function to be called when the control receives a touch event.
+   // Registry the touch function to propagate internal touch events TODO: make this function.
    registerOnTouched(fn: () => void): void {
       this.onTouched = fn;
    }
 
-   setDisabledState(disabled: boolean): void {
-      // this._isDisabled = disabled;
-      // this._cd.markForCheck();
+   // Allows Angular to disable the list.
+   setDisabledState(isDisabled: boolean): void {
    }
 
+   // Function to call when the value changes.
+   onChange(value: any): void {
+      this._value = value;
+      if (this.registeredOnChange) {
+         this.registeredOnChange(value);
+      }
+this._cd.markForCheck();
+   }
 }

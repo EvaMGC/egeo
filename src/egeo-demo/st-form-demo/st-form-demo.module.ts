@@ -20,7 +20,6 @@ import { StFormFieldModule } from '../../lib/st-form/st-form-field/st-form-field
    imports: [
       CommonModule,
       FormsModule,
-      ReactiveFormsModule,
       StFormModule,
       StInputModule,
       StFormFieldModule,

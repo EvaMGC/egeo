@@ -18,17 +18,18 @@ import { StInputModule } from '../st-input/st-input.module';
 import { StFormDirectiveModule } from '../directives/form/form-directives.module';
 import { StFormFieldModule } from './st-form-field/st-form-field.module';
 import { StSelectModule } from '../st-select/st-select.module';
+import { StSwitchModule } from '../st-switch/st-switch.module';
 
 @NgModule({
    imports: [
       CommonModule,
       FormsModule,
-      ReactiveFormsModule,
       StFormFieldModule,
       StInputModule,
       PipesModule,
       StSelectModule,
-      StFormDirectiveModule
+      StFormDirectiveModule,
+      StSwitchModule
    ],
    declarations: [StFormComponent],
    exports: [StFormComponent]

@@ -12,7 +12,6 @@
 -->
 
 <st-form-field *ngFor="let property of schema.properties | stObjectToArray"
-               stCheckValidations
                [schema]="property"
                [name]="property.key"
                [(ngModel)]="value[property.key]"

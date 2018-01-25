@@ -12,7 +12,7 @@
 -->
 
 <form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-6">
-   <st-form-list [schema]="jsonSchema" [(ngModel)]="model2"  name="list"></st-form-list>
+   <st-form-list [schema]="jsonSchema" [(ngModel)]="model2" (ngModelChange)="onModelChange($event)" name="list"></st-form-list>
 </form>
 <br>
 
@@ -22,7 +22,8 @@
 </button>
 
 
-
 <p>Form value: {{ templateDrivenForm.value | json }}</p>
 <p>Form status: {{ templateDrivenForm.disabled ? 'DISABLED' : templateDrivenForm.valid ? 'VALID' : 'INVALID' }}</p>
-<p *ngIf="templateDrivenForm.controls['list']">Form list valid: {{ templateDrivenForm.controls['list'].valid }}</p>
+
+
+Model:  {{model2 | json}}

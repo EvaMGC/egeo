@@ -8,41 +8,71 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ChangeDetectionStrategy, OnInit, Input, ChangeDetectorRef, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { StEgeo, StRequired } from '../../decorators/require-decorators';
+import {
+   Component,
+   ChangeDetectionStrategy,
+   OnInit,
+   Input,
+   forwardRef,
+   OnDestroy
+} from '@angular/core';
+import {
+   ControlValueAccessor,
+   NG_VALUE_ACCESSOR,
+   FormControl,
+   ControlContainer,
+   NgForm,
+} from '@angular/forms';
+import { StRequired } from '../../decorators/require-decorators';
 import { StInputError } from '../../st-input/st-input.error.model';
+import { Subscription } from 'rxjs';
 
 @Component({
    selector: 'st-form-field',
    templateUrl: './st-form-field.component.html',
    styleUrls: ['./st-form-field.component.scss'],
-   changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true }
-   ]
+   ],
+   viewProviders: [{ provide: ControlContainer, useExisting: forwardRef(() => NgForm) }],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-@StEgeo()
-export class StFormFieldComponent implements ControlValueAccessor, OnInit {
+export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnDestroy {
    @Input() @StRequired() schema: any;
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
+   @Input() qaTag: string;
+   @Input() name: string;
 
+   @Input()
+   get value(): any {
+      return this._value;
+   }
+
+   set value(value: any) {
+      this._value = value;
+   }
+
+   public disabled: boolean = false; // To check disable
+   public focus: boolean = false;
+   public internalControl: FormControl;
+   public errorMessage: string = undefined;
    public type: string;
 
-   private _value: Array<any>;
-   private internalInputModel: any = '';
-
+   private sub: Subscription;
+   private _value: any;
+   private valueChangeSub: Subscription;
+private registeredOnChange: (_: any) => void;
    onChange = (_: any) => {
+      console.log('cambioooo')
    };
    onTouched = () => {
    };
 
-   constructor() {
-   }
-
    ngOnInit(): void {
+      this.internalControl = new FormControl(this._value);
+      this.valueChangeSub = this.internalControl.valueChanges.subscribe((value) => this.onChange(value));
       this.type = this.schema.value.type === 'string' ? 'text' : this.schema.value.type;
       if (!this.errorMessages) {
          this.errorMessages = {
@@ -57,16 +87,22 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       }
    }
 
+
+   ngOnDestroy(): void {
+      if (this.valueChangeSub) {
+         this.valueChangeSub.unsubscribe();
+      }
+      if (this.sub) {
+         this.sub.unsubscribe();
+      }
+   }
+
    get min(): number {
       return this.schema.value.exclusiveMinimum ? this.schema.value.minimum + 1 : this.schema.value.minimum;
    }
 
    get max(): number {
       return this.schema.value.exclusiveMaximum ? this.schema.value.maximum - 1 : this.schema.value.maximum;
-   }
-
-   get name(): string {
-      return this.schema.key;
    }
 
    get label(): string {
@@ -89,7 +125,6 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       return this.schema.value.maxLength;
    }
 
-
    hasType(type: string): boolean {
       switch (type) {
          case 'input':
@@ -99,27 +134,15 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       }
    }
 
-   @Input()
-   get value(): any {
-      return this._value;
-   }
-
-   set value(value: any) {
-      if (value !== this._value) {
-         this.onChange(value);
-      }
-   }
-
-
    // When value is received from outside
    writeValue(value: any): void {
-      this.internalInputModel = value;
       this._value = value;
+      this.internalControl.setValue(value);
    }
 
    // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
-      this.onChange = fn;
+      this.registeredOnChange = fn;
    }
 
    // Registry the touch function to propagate internal touch events TODO: make this function.
@@ -127,8 +150,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       this.onTouched = fn;
    }
 
-   // Allows Angular to disable the list.
-   setDisabledState(isDisabled: boolean): void {
+   setDisabledState(disable: boolean): void {
    }
-
 }
+
