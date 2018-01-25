@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, Input, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 
 @Component({
    selector: 'st-form-list',
@@ -19,6 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormListComponent), multi: true }
    ]
+   // viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 
 export class StFormListComponent implements ControlValueAccessor {
@@ -33,8 +34,11 @@ export class StFormListComponent implements ControlValueAccessor {
 
    }
 
+
    onTouched = () => {
-   };
+   }
+
+   onChange: any = () => { };
 
    @Input()
    get value(): any[] {
@@ -42,14 +46,12 @@ export class StFormListComponent implements ControlValueAccessor {
    }
 
    set value(value: any[]) {
-      if (value !== this._value) {
-         this._value = value;
-      }
+      this._value = value;
       this._cd.markForCheck();
    }
 
    addItem(): void {
-      this.value.push({});
+      this._value.push({});
       this.onChange(this.value);
    };
 
@@ -57,42 +59,23 @@ export class StFormListComponent implements ControlValueAccessor {
       return propertyName && this.schema.required && this.schema.required.indexOf(propertyName) !== -1;
    }
 
+
    // When value is received from outside
-   writeValue(value: any[]): void {
-      console.log('write value', value);
+   writeValue(value: any): void {
       this._value = value;
-      this._cd.markForCheck();
-      this.onChange(value);
+      console.log(value)
+      this.onChange(this.value);
    }
 
-   // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
-      this.registeredOnChange = fn;
+      this.onChange = (obj: any) => fn(obj);
    }
 
-   // Registry the touch function to propagate internal touch events TODO: make this function.
+// Registry the touch function to propagate internal touch events TODO: make this function.
    registerOnTouched(fn: () => void): void {
       this.onTouched = fn;
    }
 
-   // Allows Angular to disable the list.
-   setDisabledState(isDisabled: boolean): void {
-   }
-
-   // Function to call when the value changes.
-   onChange(value: any[]): void {
-      console.log('onChange', value);
-      this._value = value;
-      if (this.registeredOnChange) {
-         this.registeredOnChange(value);
-      }
-      this._cd.markForCheck();
-   }
-
-   onChangeItem(value: any, rowIndex: number, key: string): void {
-      console.log('onChangeItem', value);
-      this._value[rowIndex][key] = value;
-      this._cd.markForCheck();
-
+   setDisabledState(disable: boolean): void {
    }
 }

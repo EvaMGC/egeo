@@ -44,7 +44,6 @@ export class StFormListDemoComponent {
    };
 
    public model: any[];
-   public outputModel: any[];
    public form: FormGroup;
    public model2: Array<any> = [
       { genericNumberInput: 8, genericTextInput: 'este es el ngmodel ' },
@@ -56,10 +55,6 @@ export class StFormListDemoComponent {
 
    public showFormStatus(): void {
       console.log({ valid: this.form.valid, model: this.form.value, controls: this.form.controls });
-   }
-
-   public onModelChange(model: Array<any>): void {
-      this.model2 = model;
    }
 
    public changeModelFromOutside(): void {

@@ -14,7 +14,7 @@ import {
    OnInit,
    Input,
    forwardRef,
-   OnDestroy
+   OnDestroy, ChangeDetectorRef
 } from '@angular/core';
 import {
    ControlValueAccessor,
@@ -34,11 +34,11 @@ import { Subscription } from 'rxjs';
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true }
    ],
-   viewProviders: [{ provide: ControlContainer, useExisting: forwardRef(() => NgForm) }],
+   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() @StRequired() schema: any;
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
@@ -52,27 +52,29 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnDes
 
    set value(value: any) {
       this._value = value;
+      this._cd.markForCheck();
    }
 
    public disabled: boolean = false; // To check disable
    public focus: boolean = false;
-   public internalControl: FormControl;
    public errorMessage: string = undefined;
    public type: string;
 
-   private sub: Subscription;
    private _value: any;
-   private valueChangeSub: Subscription;
-private registeredOnChange: (_: any) => void;
-   onChange = (_: any) => {
-      console.log('cambioooo')
-   };
+   private registeredOnChange: (_: any) => void;
+
+
+   constructor (private _cd: ChangeDetectorRef) {
+
+   }
+
+
    onTouched = () => {
-   };
+   }
+
+   onChange: any = () => { };
 
    ngOnInit(): void {
-      this.internalControl = new FormControl(this._value);
-      this.valueChangeSub = this.internalControl.valueChanges.subscribe((value) => this.onChange(value));
       this.type = this.schema.value.type === 'string' ? 'text' : this.schema.value.type;
       if (!this.errorMessages) {
          this.errorMessages = {
@@ -84,16 +86,6 @@ private registeredOnChange: (_: any) => void;
             max: 'The number has to be minor than ' + this.max,
             pattern: 'Invalid value'
          };
-      }
-   }
-
-
-   ngOnDestroy(): void {
-      if (this.valueChangeSub) {
-         this.valueChangeSub.unsubscribe();
-      }
-      if (this.sub) {
-         this.sub.unsubscribe();
       }
    }
 
@@ -137,15 +129,14 @@ private registeredOnChange: (_: any) => void;
    // When value is received from outside
    writeValue(value: any): void {
       this._value = value;
-      this.internalControl.setValue(value);
+      this.onChange(this.value);
    }
 
-   // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
-      this.registeredOnChange = fn;
+      this.onChange = (obj: any) => fn(obj);
    }
 
-   // Registry the touch function to propagate internal touch events TODO: make this function.
+// Registry the touch function to propagate internal touch events TODO: make this function.
    registerOnTouched(fn: () => void): void {
       this.onTouched = fn;
    }

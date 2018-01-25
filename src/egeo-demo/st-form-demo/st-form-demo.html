@@ -36,6 +36,7 @@ TEST FORM FIELD
 <!--<form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-4">-->
    <!--<st-form-field-->
       <!--[schema]="{key: 'genericNumberInput', value: jsonSchema.properties['genericNumberInput']}"-->
+      <!--[ngModelOptions]="{ standalone: true }" [value]="model['genericNumberInput']"-->
       <!--name="genericNumberInput" [(ngModel)]="model['genericNumberInput']"-->
    <!--&gt;</st-form-field>-->
 
