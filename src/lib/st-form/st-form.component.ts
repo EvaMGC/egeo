@@ -9,13 +9,14 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   Component, Input, OnInit, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef,
-   AfterContentChecked
+   Component,
+   Input,
+   OnInit,
+   ChangeDetectionStrategy,
+   forwardRef,
+   ChangeDetectorRef
 } from '@angular/core';
-import {
-   ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, ControlContainer, NG_VALIDATORS,
-   FormControl
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, ControlContainer } from '@angular/forms';
 
 @Component({
    selector: 'st-form',
@@ -23,18 +24,20 @@ import {
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormComponent), multi: true }
-   ]
-   // viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
+   ],
+   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
 })
 
 export class StFormComponent implements ControlValueAccessor, OnInit {
    @Input() schema: any;
-
    private _value: any = {};
-   private registeredOnChange: (_: any) => void;
 
+   // Function to call when the value changes.
+   onChange(_: any): void {
+   }
 
-   onTouched = () => { };
+   onTouched = () => {
+   };
 
    constructor(private _cd: ChangeDetectorRef) {
 
@@ -67,15 +70,14 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
 
    // When value is received from outside
    writeValue(value: any): void {
-      console.log('write value', value);
       this._value = value;
-      this._cd.markForCheck();
       this.onChange(value);
+      this._cd.markForCheck();
    }
 
    // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
-      this.registeredOnChange = fn;
+      this.onChange = (obj: any) => fn(obj);
    }
 
    // Registry the touch function to propagate internal touch events TODO: make this function.
@@ -87,12 +89,5 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
    setDisabledState(isDisabled: boolean): void {
    }
 
-   // Function to call when the value changes.
-   onChange(value: any): void {
-      this._value = value;
-      if (this.registeredOnChange) {
-         this.registeredOnChange(value);
-      }
-this._cd.markForCheck();
-   }
+
 }

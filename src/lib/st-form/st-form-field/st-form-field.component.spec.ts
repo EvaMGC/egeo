@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, NgForm, ControlContainer } from '@angular/forms';
 
 import { PipesModule } from '../../pipes/pipes.module';
 import { JSON_SCHEMA } from '../spec/resources/json-schema';
@@ -22,12 +22,13 @@ let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
 let formControl: FormControl = new FormControl();
 
-describe('StFormFieldComponent', () => {
+fdescribe('StFormFieldComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, ReactiveFormsModule, StInputModule, StSwitchModule, PipesModule, StFormDirectiveModule],
-         declarations: [StFormFieldComponent]
+         declarations: [StFormFieldComponent],
+         viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
       })
          .compileComponents();  // compile template and css
    }));
@@ -50,7 +51,6 @@ describe('StFormFieldComponent', () => {
             minValue = numberInputProperty.minimum;
             maxValue = numberInputProperty.maximum;
             component.schema = {key: 'genericNumberInput', value: numberInputProperty};
-            component.formControl = formControl;
          });
 
          it('if user tries to type text, input value is not updated', () => {
@@ -248,8 +248,6 @@ describe('StFormFieldComponent', () => {
             minLength = textInputProperty.minLength;
             maxLength = textInputProperty.maxLength;
             component.schema = {key: 'genericTextInput', value: textInputProperty};
-            formControl = new FormControl('');
-            component.formControl = formControl;
             fixture.detectChanges();
             input = fixture.nativeElement.querySelector('#genericTextInput');
          });
@@ -341,7 +339,7 @@ describe('StFormFieldComponent', () => {
             expect(fixture.nativeElement.querySelector('.st-input-error-layout span')).toBeNull();
          });
 
-         it('When form control is updated externally, it is updated', () => {
+         it('When model is updated externally, it is updated', () => {
             formControl.setValue('aa');
 
             fixture.detectChanges();
@@ -361,8 +359,6 @@ describe('StFormFieldComponent', () => {
       beforeEach(() => {
          booleanProperty = JSON_SCHEMA.properties.boolean;
          component.schema = {key: 'boolean', value: booleanProperty};
-         formControl = new FormControl(true);
-         component.formControl = formControl;
          fixture.detectChanges();
 
          switchElement = fixture.nativeElement.querySelector('#boolean-input');
@@ -383,7 +379,6 @@ describe('StFormFieldComponent', () => {
          component = fixture.componentInstance;
 
          component.schema = {key: 'boolean', value: {type: 'boolean', description: undefined}};
-         component.formControl = formControl;
          fixture.detectChanges();
 
          expect(fixture.nativeElement.querySelector('#boolean-label-tooltip')).toBeNull();

@@ -12,7 +12,7 @@
 -->
 
 <form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-4">
-   <st-form [schema]="jsonSchema" [(ngModel)]="model" name="generatedForm">
+   <st-form [schema]="jsonSchema" [(value)]="model">
    </st-form>
 </form>
 
@@ -22,22 +22,16 @@
 </button>
 
 
-<p>Form value: {{ templateDrivenForm.value | json }}</p>
-<p>Form valid: {{ templateDrivenForm.valid | json }}</p>
+<button class="button button-secondary-gray" (click)="updateModel()">
+   <span>Update model from outside</span>
+</button>
 
+<br>
+<h1>VALID: {{ templateDrivenForm.valid | json }} </h1>
+<br>
+<h1>FORM VALUE</h1>
+<p>{{ templateDrivenForm.value | json }}</p>
+<br>
 
-MODEL:
+<h1>MODEL</h1>
 {{model | json}}
-
-
-TEST FORM FIELD
-
-
-<!--<form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-4">-->
-   <!--<st-form-field-->
-      <!--[schema]="{key: 'genericNumberInput', value: jsonSchema.properties['genericNumberInput']}"-->
-      <!--[ngModelOptions]="{ standalone: true }" [value]="model['genericNumberInput']"-->
-      <!--name="genericNumberInput" [(ngModel)]="model['genericNumberInput']"-->
-   <!--&gt;</st-form-field>-->
-
-<!--</form>-->

@@ -1,22 +1,16 @@
-<div class="st-form-list__row" *ngFor="let row of value; let i = index;">
-   <st-form-field [schema]="property" *ngFor="let property of schema.properties | stObjectToArray"
-                  [(ngModel)]="value[i][property.key]"
-                  [name]="property.key  + '-' + i"
-                  id="{{property.key  + '-' + i}}"
-                  [qaTag]="property.key  + '-' + i"
-                  [required]="isRequired(property.key)">
-   </st-form-field>
+<div *ngFor="let row of value; let i = index;trackBy:i" class="st-form-list__row">
+   <div *ngIf="row" >
+      <st-form-field class="st-form-list__row-item"
+                     [schema]="property" *ngFor="let property of schema.properties | stObjectToArray"
+                     [(ngModel)]="value[i][property.key]"
+                     name="{{property.key  + '-' + i}}"
+                     id="{{property.key  + '-' + i}}"
+                     qaTag="{{property.key  + '-' + i}}"
+                     [required]="isRequired(property.key)">
+      </st-form-field>
+      <i class="icon-cross remove-button" (click)="removeItem(i)"></i>
+   </div>
 </div>
-
 <button class="button button-link-primary" (click)="addItem()">
-   <i class="icon-circle-plus"></i><span>{{buttonLabel}}</span>
+   <i class="icon-circle-cross"></i><span>{{buttonLabel}}</span>
 </button>
-
-<!--&lt;!&ndash;<button [isDisabled]="disabled || (stModel && maxItems && stModel.length >= maxItems)"&ndash;&gt;-->
-<!--&lt;!&ndash;class="st-form-list__button"&ndash;&gt;-->
-<!--&lt;!&ndash;text="{{ ('ADD' | translate | uppercase)}} {{field.value.title | uppercase}}"&ndash;&gt;-->
-<!--&lt;!&ndash;leftIcon="icon-circle-plus"&ndash;&gt;-->
-<!--&lt;!&ndash;typeClass="btnLink"&ndash;&gt;-->
-<!--&lt;!&ndash;(onClick)="addItem(stModel.length)"&ndash;&gt;-->
-<!--&lt;!&ndash;qaTag="add-{{name}}-button">&ndash;&gt;-->
-<!--&lt;!&ndash;</button>&ndash;&gt;-->

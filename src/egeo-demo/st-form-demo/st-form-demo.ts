@@ -27,7 +27,13 @@ export class StFormDemoComponent {
    }
 
    showFormStatus(): void {
-      this._cd.markForCheck();
       console.log(this.templateDrivenForm);
+   }
+
+   updateModel(): void {
+      this.templateDrivenForm.controls['genericNumberInput'].setValue(1);
+      this.templateDrivenForm.controls['requiredNumber'].setValue(2);
+
+      this._cd.markForCheck();
    }
 }

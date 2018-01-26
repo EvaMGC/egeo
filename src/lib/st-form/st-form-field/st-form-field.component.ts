@@ -10,22 +10,19 @@
  */
 import {
    Component,
-   ChangeDetectionStrategy,
    OnInit,
    Input,
-   forwardRef,
-   OnDestroy, ChangeDetectorRef
+   forwardRef, ChangeDetectionStrategy
 } from '@angular/core';
 import {
    ControlValueAccessor,
    NG_VALUE_ACCESSOR,
-   FormControl,
    ControlContainer,
-   NgForm,
+   NgForm
 } from '@angular/forms';
+
 import { StRequired } from '../../decorators/require-decorators';
 import { StInputError } from '../../st-input/st-input.error.model';
-import { Subscription } from 'rxjs';
 
 @Component({
    selector: 'st-form-field',
@@ -52,7 +49,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
 
    set value(value: any) {
       this._value = value;
-      this._cd.markForCheck();
+      this.onChange(this._value);
    }
 
    public disabled: boolean = false; // To check disable
@@ -61,18 +58,12 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    public type: string;
 
    private _value: any;
-   private registeredOnChange: (_: any) => void;
-
-
-   constructor (private _cd: ChangeDetectorRef) {
-
-   }
-
 
    onTouched = () => {
-   }
+   };
 
-   onChange: any = () => { };
+   onChange: any = () => {
+   };
 
    ngOnInit(): void {
       this.type = this.schema.value.type === 'string' ? 'text' : this.schema.value.type;
@@ -126,7 +117,6 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       }
    }
 
-   // When value is received from outside
    writeValue(value: any): void {
       this._value = value;
       this.onChange(this.value);
@@ -136,7 +126,6 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       this.onChange = (obj: any) => fn(obj);
    }
 
-// Registry the touch function to propagate internal touch events TODO: make this function.
    registerOnTouched(fn: () => void): void {
       this.onTouched = fn;
    }
