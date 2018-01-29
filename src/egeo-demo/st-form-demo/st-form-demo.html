@@ -12,16 +12,14 @@
 -->
 
 <form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-4">
-   <st-form [schema]="jsonSchema" [(value)]="model">
+   <st-form [schema]="jsonSchema" [(ngModel)]="model" name="generated">
    </st-form>
 </form>
 
 <!--<form [formGroup]="reactiveForm" novalidate>-->
-   <!--<st-form-field #formField-->
-                  <!--[schema]="{key: 'genericNumberInput', value: jsonSchema.properties['genericNumberInput']}"-->
+   <!--<st-form-field [schema]="{key: 'genericNumberInput', value: jsonSchema.properties['genericNumberInput']}"-->
                   <!--formControlName="genericNumberInput"-->
-                  <!--[(value)]="model['genericNumberInput']"-->
-                  <!--[qaTag]="name"-->
+                  <!--[(ngModel)]="model['genericNumberInput']"-->
                   <!--[required]="true">-->
    <!--</st-form-field>-->
 <!--</form>-->

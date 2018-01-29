@@ -10,7 +10,7 @@
  */
 import { CommonModule }  from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, NgModelGroup, ReactiveFormsModule} from '@angular/forms';
 
 import { StFormComponent } from './st-form.component';
 import { PipesModule } from '../pipes/pipes.module';
@@ -31,6 +31,7 @@ import { StSwitchModule } from '../st-switch/st-switch.module';
       StSelectModule,
       StFormDirectiveModule,
       StSwitchModule
+
    ],
    declarations: [StFormComponent],
    exports: [StFormComponent, StFormFieldModule]

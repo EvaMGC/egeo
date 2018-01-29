@@ -11,6 +11,7 @@
 
 -->
 {{value | json}}
+<fieldset ngModelGroup="address">
 <st-form-field *ngFor="let property of schema.properties | stObjectToArray"
                [schema]="property"
                [name]="property.key"
@@ -18,3 +19,4 @@
                [required]="isRequired(property.key)"
                [qaTag]="property.key">
 </st-form-field>
+</fieldset>

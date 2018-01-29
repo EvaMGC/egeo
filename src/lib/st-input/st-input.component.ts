@@ -46,7 +46,7 @@ import { StInputError } from './st-input.error.model';
 export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit, OnDestroy {
 
    @Input() placeholder: string = '';
-   @Input() name: string = '';
+   @Input() inputName: string = '';
    @Input() label: string = '';
    @Input() fieldType: 'text' | 'number' | 'password' = 'text';
    @Input() errors: StInputError;
@@ -153,7 +153,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    }
 
    get labelQaTag(): string {
-      return (this.qaTag || this.name) + '-label';
+      return (this.qaTag || this.inputName) + '-label';
    }
 
    /** Style functions */

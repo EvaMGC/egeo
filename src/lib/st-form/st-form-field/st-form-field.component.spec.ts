@@ -11,7 +11,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
    FormsModule, NgForm, NG_VALUE_ACCESSOR, ControlContainer, FormGroup, FormControl,
-   ReactiveFormsModule
+   ReactiveFormsModule, NgModelGroup
 } from '@angular/forms';
 import { JSON_SCHEMA } from '../spec/resources/json-schema';
 import { Component, ViewChild, Input, forwardRef, ChangeDetectionStrategy } from '@angular/core';
@@ -23,16 +23,18 @@ let isRequired: boolean = false;
 
 @Component({
    template: `
-     <form [formGroup]="formGroup" novalidate autocomplete="off" class="col-md-6">
+      <fieldset ngModelGroup="address">     
          <st-form-field #formField
                         [schema]="schema"
-                         formControlName="input"
+                         [formControl]="formGroup.controls['input']"
                          [(value)]="model"
+                        [name]="name"
                         [qaTag]="name"
                         [required]="isRequired" ngDefaultControl>
          </st-form-field>
-   </form>
-`
+      </fieldset>
+`,
+
 })
 
 
@@ -45,7 +47,6 @@ class FormFieldTestComponent {
    @Input() model: any = '';
    @Input() qaTag: string;
    @Input() isRequired: boolean;
-
 }
 
 let fixture: ComponentFixture<FormFieldTestComponent>;
@@ -55,13 +56,11 @@ fdescribe('StFormField', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, StFormFieldModule, ReactiveFormsModule],
-         providers: [NgForm],
          declarations: [FormFieldTestComponent]
       })
          .overrideComponent(StFormFieldComponent, {
             set:
             { changeDetection: ChangeDetectionStrategy.Default }
-//  viewProviders: [ { provide: ControlContainer, useClass: NgForm } ],
          })
          .compileComponents();  // compile template and css
 
@@ -105,7 +104,7 @@ fdescribe('StFormField', () => {
          fit('required input', () => {
             fixture.whenStable().then(() => {
 
-               isRequired = true;
+               component.isRequired = true;
 
             fixture.detectChanges();
             input = fixture.nativeElement.querySelector('#genericNumberInput');

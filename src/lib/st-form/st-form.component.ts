@@ -16,7 +16,7 @@ import {
    forwardRef,
    ChangeDetectorRef
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, NgModelGroup, ControlContainer, NgForm} from '@angular/forms';
 
 @Component({
    selector: 'st-form',
@@ -24,7 +24,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/for
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormComponent), multi: true }
-   ]
+   ],
+   viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
+
 })
 
 export class StFormComponent implements ControlValueAccessor, OnInit {
@@ -45,6 +47,8 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
 
    // Function to call when the value changes.
    onChange(_: any): void {
+      this._cd.markForCheck();
+
    }
 
    onTouched = () => {
@@ -61,7 +65,6 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
             this._value[propertyName] = property.default;
          }
       });
-      console.log('entro', this._value)
    }
 
    isRequired(propertyName: string): boolean {
@@ -78,7 +81,7 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
 
    // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
-      this.onChange = (obj: any) => fn(obj);
+      this.onChange = fn;
    }
 
    // Registry the touch function to propagate internal touch events TODO: make this function.
