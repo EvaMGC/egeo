@@ -107,6 +107,6 @@ export const JSON_SCHEMA: any = {
       }
    },
    'required': [
-      'genericNumberInput', 'requiredNumber', 'requiredText'
+      'url', 'genericNumberInput', 'requiredNumber', 'requiredText'
    ]
 };

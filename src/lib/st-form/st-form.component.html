@@ -10,11 +10,11 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-
+{{value | json}}
 <st-form-field *ngFor="let property of schema.properties | stObjectToArray"
                [schema]="property"
                [name]="property.key"
                [(ngModel)]="value[property.key]"
-               [required]="isRequired(property.key)">
+               [required]="isRequired(property.key)"
+               [qaTag]="property.key">
 </st-form-field>
-

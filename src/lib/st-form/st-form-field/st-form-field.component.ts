@@ -8,19 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import {
-   Component,
-   OnInit,
-   Input,
-   forwardRef, ChangeDetectionStrategy
-} from '@angular/core';
-import {
-   ControlValueAccessor,
-   NG_VALUE_ACCESSOR,
-   ControlContainer,
-   NgForm
-} from '@angular/forms';
-
+import { Component, OnInit, Input, forwardRef, ChangeDetectionStrategy } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgModel, NgForm, ControlContainer } from '@angular/forms';
 import { StRequired } from '../../decorators/require-decorators';
 import { StInputError } from '../../st-input/st-input.error.model';
 
@@ -32,7 +21,7 @@ import { StInputError } from '../../st-input/st-input.error.model';
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true }
    ],
    viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
-   changeDetection: ChangeDetectionStrategy.OnPush
+   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit {
@@ -63,6 +52,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    };
 
    onChange: any = () => {
+
    };
 
    ngOnInit(): void {

@@ -22,7 +22,6 @@ import { StInputModule } from '../st-input/st-input.module';
    imports: [
       CommonModule,
       FormsModule,
-      ReactiveFormsModule,
       StFormFieldModule,
       StInputModule,
       PipesModule,

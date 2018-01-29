@@ -25,6 +25,7 @@ import { StSwitchModule } from '../st-switch/st-switch.module';
       CommonModule,
       FormsModule,
       StFormFieldModule,
+      ReactiveFormsModule,
       StInputModule,
       PipesModule,
       StSelectModule,
@@ -32,7 +33,7 @@ import { StSwitchModule } from '../st-switch/st-switch.module';
       StSwitchModule
    ],
    declarations: [StFormComponent],
-   exports: [StFormComponent]
+   exports: [StFormComponent, StFormFieldModule]
 })
 
 export class StFormModule {

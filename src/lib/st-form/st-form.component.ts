@@ -16,7 +16,7 @@ import {
    forwardRef,
    ChangeDetectorRef
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, ControlContainer } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 
 @Component({
    selector: 'st-form',
@@ -24,13 +24,24 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, ControlContainer } fro
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormComponent), multi: true }
-   ],
-   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
+   ]
 })
 
 export class StFormComponent implements ControlValueAccessor, OnInit {
    @Input() schema: any;
    private _value: any = {};
+
+   @Input()
+   get value(): any {
+      return this._value;
+   }
+
+   set value(value: any) {
+      if (value !== this._value) {
+         this._value = value;
+      }
+      this._cd.markForCheck();
+   }
 
    // Function to call when the value changes.
    onChange(_: any): void {
@@ -50,23 +61,13 @@ export class StFormComponent implements ControlValueAccessor, OnInit {
             this._value[propertyName] = property.default;
          }
       });
+      console.log('entro', this._value)
    }
 
    isRequired(propertyName: string): boolean {
       return propertyName && this.schema.required && this.schema.required.indexOf(propertyName) !== -1;
    }
 
-   @Input()
-   get value(): any {
-      return this._value;
-   }
-
-   set value(value: any) {
-      if (value !== this._value) {
-         this._value = value;
-      }
-      this._cd.markForCheck();
-   }
 
    // When value is received from outside
    writeValue(value: any): void {

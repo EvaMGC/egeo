@@ -12,6 +12,27 @@ import { Component, Input, ChangeDetectionStrategy, forwardRef } from '@angular/
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
+/**
+ * @description {Component} [Form list]
+ *
+ * The form list component allows to create dynamically list of any item.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ *  <st-form-list [schema]="jsonSchema" [(value)]="model" >
+ *  </st-form-list>
+ * ```
+ *
+ * In a form
+ *
+ * <form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-6">
+ *     <st-form-list [schema]="jsonSchema" [(value)]="model" ></st-form-list>
+ * </form>
+ *
+ */
 @Component({
    selector: 'st-form-list',
    templateUrl: './st-form-list.html',
@@ -24,8 +45,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 
 export class StFormListComponent implements ControlValueAccessor {
+   /** @Input {any} [schema=''] JSON schema of items */
    @Input() schema: any;
+   /** @Input {string} [buttonLabel='Add'] String displayed in the button to add more items */
    @Input() buttonLabel: string = 'Add';
+   /** @Input {boolean} [disabled='false'] Boolean to enable or disable form list */
    @Input() disabled = false;
 
    public _value: any[] = [];
@@ -36,6 +60,7 @@ export class StFormListComponent implements ControlValueAccessor {
    onChange: any = () => {
    };
 
+   /** @Input {any[]} [value=''] Current list value */
    @Input()
    get value(): any[] {
       return this._value;
@@ -52,10 +77,7 @@ export class StFormListComponent implements ControlValueAccessor {
    };
 
    removeItem(position: number): void {
-      delete   this._value[position];
-      // this.onChange(this._value);
-      // this._value.splice(position, 1);
-      console.log(this._value);
+      delete  this._value[position];
    }
 
    isRequired(propertyName: string): boolean {

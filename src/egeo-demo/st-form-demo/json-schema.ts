@@ -95,6 +95,6 @@ export const JSON_SCHEMA: any = {
       }
    },
    'required': [
-      'requiredNumber', 'requiredText'
+      'requiredNumber', 'requiredText', 'url'
    ]
 };
