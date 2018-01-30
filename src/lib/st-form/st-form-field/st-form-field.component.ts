@@ -23,7 +23,7 @@ import {StInputError} from '../../st-input/st-input.error.model';
    providers: [
       {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true}
    ],
-   viewProviders: [{provide: ControlContainer, useExisting: forwardRef(() => NgModelGroup)}],
+   viewProviders: [{provide: ControlContainer, useExisting: forwardRef(() => NgForm)}],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 

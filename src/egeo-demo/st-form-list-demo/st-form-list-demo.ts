@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
    selector: 'st-form-list-demo',
@@ -44,13 +44,15 @@ export class StFormListDemoComponent {
    };
 
    public model: any[];
-   public form: FormGroup;
+   public form: FormGroup = new FormGroup({});
    public model2: Array<any> = [
       { genericNumberInput: 8, genericTextInput: 'este es el ngmodel ' },
       { genericNumberInput: 20, genericTextInput: 'fake text 2' }
    ];
 
    constructor() {
+      this.form.addControl('genericNumberInput', new FormControl());
+      this.form.addControl('genericTextInput', new FormControl());
    }
 
    public showFormStatus(): void {

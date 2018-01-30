@@ -24,9 +24,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, NgModelGroup, Contro
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormComponent), multi: true }
-   ],
-   viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
-
+   ]
 })
 
 export class StFormComponent implements ControlValueAccessor, OnInit {
