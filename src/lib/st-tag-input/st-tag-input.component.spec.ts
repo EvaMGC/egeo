@@ -20,6 +20,9 @@ import { StLabelModule } from '../st-label/st-label.module';
 
 const simpleTags: string[] = ['Example 1', 'Example 2', 'Example 3'];
 
+// tslint:disable-next-line:max-line-length
+const ipFormat: any =  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
 describe('StTagInputComponent', () => {
    let comp: StTagInputComponent;
    let fixture: ComponentFixture<StTagInputComponent>;
@@ -406,7 +409,7 @@ describe('StTagInputComponent', () => {
       expect(comp.tagSelected).toBeNull();
    });
 
-   it('Should be display autocomplete list with autocomplete', () => {
+   it('Should display autocomplete list with autocomplete', () => {
       const id: string = 'test-id';
       (fixture.elementRef.nativeElement as HTMLElement).id = id;
       comp.label = 'Test';
@@ -431,7 +434,7 @@ describe('StTagInputComponent', () => {
       expect(comp.hasAutocomplete).toBeFalsy();
    });
 
-   it('Should be add tag from autocomplete list ', () => {
+   it('Should add tag from autocomplete list ', () => {
       const id: string = 'test-id';
       (fixture.elementRef.nativeElement as HTMLElement).id = id;
       comp.label = 'Test';
@@ -449,7 +452,7 @@ describe('StTagInputComponent', () => {
       expect(comp.items[comp.items.length - 1]).toEqual('1');
    });
 
-   it('Should be add tag when click outsied with autocomplete list ', () => {
+   it('Should add tag when click outside with autocomplete list ', () => {
       const id: string = 'test-id';
       (fixture.elementRef.nativeElement as HTMLElement).id = id;
       comp.label = 'Test';
@@ -577,6 +580,29 @@ describe('StTagInputComponent', () => {
          fixture.detectChanges();
          expect(comp.reactiveForm.valid).toBeTruthy();
       });
+
+
+      it ('if regular expression is introduced as input, only values that match it will be valid', () => {
+         compTagInput.regularExpression = ipFormat;
+         fixture.detectChanges();
+
+         compTagInput.innerInputContent = 'New Tag';
+         fixture.detectChanges();
+
+         const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+         input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+         fixture.detectChanges();
+
+         expect(compTagInput.items.length).toEqual(0);
+
+         compTagInput.innerInputContent = '192.168.1.1';
+         fixture.detectChanges();
+
+         input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+         fixture.detectChanges();
+
+         expect(compTagInput.items.length).toEqual(1);
+      });
    });
 });
 
@@ -683,39 +709,85 @@ describe('StTagInputComponent', () => {
       }));
 
       describe('should be able to not allow user types a forbidden value if there are', () => {
-         it('if a forbidden value list is not introduced as input, user can introduce whatever he wants', () => {
+         it('if a forbidden value list is not introduced as input, user can introduce whatever he wants', async(() => {
             fixture.detectChanges();
 
             fixture.whenStable().then(() => { // Form generation it's asynchronous
-               comp.templateDrivenForm.form.get('tags').setValue(['New Tag']);
+               compTagInput.innerInputContent = 'New Tag';
                fixture.detectChanges();
 
-               expect(comp.templateDrivenForm.valid).toBeTruthy();
+               const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+               expect(compTagInput.items.length).toEqual(1);
 
-               comp.templateDrivenForm.form.get('tags').setValue(['New value 2']);
+               compTagInput.innerInputContent = 'new tag 2';
                fixture.detectChanges();
 
-               expect(comp.templateDrivenForm.valid).toBeTruthy();
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+
+               expect(compTagInput.items.length).toEqual(2);
             });
-         });
+         }));
 
-         it('if a forbidden value list is introduced as input and user introduces a forbidden value, form control will be invalid', () => {
+         it('if a forbidden value list is introduced as input and user introduces a forbidden value, tag is not added to model', async(() => {
             compTagInput.forbiddenValues = ['forbidden value'];
             fixture.detectChanges();
 
             fixture.whenStable().then(() => { // Form generation it's asynchronous
-               comp.templateDrivenForm.form.get('tags').setValue(['New Tag']);
+               compTagInput.innerInputContent = 'New Tag';
                fixture.detectChanges();
 
-               expect(comp.templateDrivenForm.valid).toBeTruthy();
+               const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+               expect(compTagInput.items.length).toEqual(1);
 
-               comp.templateDrivenForm.form.get('tags').setValue(['forbidden value']);
+               compTagInput.innerInputContent = 'forbidden value';
                fixture.detectChanges();
 
-               expect(comp.templateDrivenForm.valid).toBeFalsy();
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+
+               expect(compTagInput.items.length).toEqual(1); // is not added the forbidden value
+            });
+         }));
+      });
+
+
+      it ('if regular expression is introduced as input, only values that match it will be valid', async(() => {
+         compTagInput.regularExpression = ipFormat;
+         fixture.detectChanges();
+
+         fixture.whenStable().then(() => { // Form generation it's asynchronous
+            fixture.whenStable().then(() => { // Form generation it's asynchronous
+               compTagInput.innerInputContent = '1.1.1.1';
+               fixture.detectChanges();
+
+               const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+               expect(compTagInput.items.length).toEqual(1);
+
+               compTagInput.innerInputContent = 'invalid ip';
+               fixture.detectChanges();
+
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+
+               expect(compTagInput.items.length).toEqual(1);
+
+               compTagInput.innerInputContent = '192.168.1.1';
+               fixture.detectChanges();
+
+               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               fixture.detectChanges();
+
+               expect(compTagInput.items.length).toEqual(2);
             });
          });
-      });
+      }));
 
    });
 });

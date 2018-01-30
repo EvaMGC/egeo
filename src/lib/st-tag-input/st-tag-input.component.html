@@ -29,7 +29,11 @@
          (focusin)="onInputFocusIn($event)" (focusout)="onInputFocusOut($event)" (blur)="onInputFocusOut($event)"
          (input)="onInputText($event.target.textContent)" (keydown)="onInputKeyDown($event)"></div>
    </div>
- </div>
+
+   items {{items | json}}
+  model  {{model | json}}
+
+</div>
 
 </st-dropdown-menu>
 
