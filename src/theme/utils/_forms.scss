@@ -40,6 +40,7 @@
 
    &:disabled {
       border-color: $neutral-05;
+      color: $neutral-05;
 
       &::placeholder {
          color: $neutral-05;
