@@ -57,6 +57,7 @@ export class StTagInputDemoComponent implements OnInit {
    public errorTemplateDriveMessage: string | null = null;
    public disabledReactive: boolean = true;
    public disabledTemplateDrive: boolean = true;
+   public pattern: any =  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
    constructor(private _fb: FormBuilder) {
       this.reactiveForm = _fb.group({
@@ -82,7 +83,7 @@ export class StTagInputDemoComponent implements OnInit {
       this.errorTemplateDriveMessage = this.templateDrivenForm.valid ? null : 'Error';
    }
 
-   changetReactiveFormDisabled(): void {
+   changeReactiveFormDisabled(): void {
       this.disabledReactive = !this.disabledReactive;
       if (this.disabledReactive) {
          this.reactiveForm.get('tag-input-reactive-disabled').disable();

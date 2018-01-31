@@ -68,6 +68,7 @@ import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interfa
  *    [id]="'tag-input-template-driven'"
  *    [placeholder]="'Add tags separated by commas'"
  *    [tooltip]="'This is a Tag Input component tooltip'"
+ *    [regularExpression]="pattern"
  *    (input)="onFilterList($event)">
  * </st-tag-input>
  * ```
@@ -104,6 +105,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
     * tag input will be invalid. It is empty by default
     */
    @Input() forbiddenValues: string[] = [];
+   /** @input {string} [regularExpression=] Regular expression to validate values. It is null by default */
+   @Input() regularExpression: any | null = null;
 
    @ViewChild('newElement') newElementInput: ElementRef;
    @ViewChild('inputElement') inputElement: ElementRef;
@@ -159,7 +162,9 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    get isValidInput(): boolean {
       const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
       const isDuplicated = this.items.indexOf(this.innerInputContent) !== -1;
-      return this.innerInputContent.length ? !isForbidden && !isDuplicated : true;
+      let regularExp = new RegExp(this.regularExpression);
+      const matchedPattern = this.regularExpression ? regularExp.test(this.innerInputContent) : true;
+      return this.innerInputContent.length ? !isForbidden && !isDuplicated && matchedPattern : true;
    }
 
    get tagSelected(): number | null {

@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.1.0 (upcoming)
+
+**New features:**
+
+* st-tag-input: Add functionality to not allow user to type values with invalid format
+
+
 ## 8.0.0 (January 24, 2018)
 
 **Fixed bugs:**

@@ -14,6 +14,7 @@
 <h1>MODEL DRIVEN / REACTIVE EXAMPLE</h1>
 <form [formGroup]="reactiveForm" novalidate (ngSubmit)="onSubmitReactiveForm()">
 
+   <h1> With forbidden values </h1>
    <st-tag-input
       class="st-form-field"
       name="tag-input-reactive"
@@ -29,10 +30,13 @@
 
    <div class="separator"></div>
 
+   <h1> With value pattern </h1>
+
    <st-tag-input
       class="st-form-field"
       name="tag-input-reactive-required"
       formControlName="tag-input-reactive-required"
+      [regularExpression]="pattern"
       [errorMessage]="errorReactiveMessage"
       [label]="'Tag Input with require'"
       [id]="'tag-input-reactive-required-demo'"
@@ -71,7 +75,7 @@
    <div class="separator"></div>
 
    <button type="submit" class="button button-primary"><span>Validate</span></button>
-   <button type="button" class="button button-secondary-gray" (click)="changetReactiveFormDisabled()"><span>Disable</span></button>
+   <button type="button" class="button button-secondary-gray" (click)="changeReactiveFormDisabled()"><span>Disable</span></button>
 
 </form>
 
