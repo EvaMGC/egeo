@@ -26,9 +26,12 @@ export class StInputDemoComponent {
       this.myForm = fb.group({
          name: new FormControl('', []),
          disabledField: new FormControl('', []),
+         disabledFieldWithValue:  new FormControl('Disabled value', []),
          requiredField: new FormControl('', [Validators.required])
       });
       this.myForm.controls.disabledField.disable();
+      this.myForm.controls.disabledFieldWithValue.disable();
+
       this.myForm.valueChanges.subscribe(res => console.log(res));
    }
 
@@ -38,10 +41,12 @@ export class StInputDemoComponent {
       if (this.disabled) {
          this.myForm.controls.name.disable();
          this.myForm.controls.disabledField.disable();
+         this.myForm.controls.disabledFieldWithValue.disable();
          this.myForm.controls.requiredField.disable();
       } else {
          this.myForm.controls.name.enable();
          this.myForm.controls.disabledField.enable();
+         this.myForm.controls.disabledFieldWithValue.enable();
          this.myForm.controls.requiredField.enable();
 
       }
