@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.0.1 (upcoming)
+
+**Fixed bugs:**
+
+* st-pagination: Fix error when a change is listened from outside because. This causes that some inputs are changed after checked
+
 ## 8.0.0 (January 24, 2018)
 
 **Fixed bugs:**
