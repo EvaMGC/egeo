@@ -261,4 +261,46 @@ describe('StPaginationComponent', () => {
          expect(component.selectedItem.value).toEqual(50);
       });
    });
+
+
+   it('When it listens any change, it only force to update the changed input if it is not its first change', () => {
+      spyOn(component, 'generateItems').and.callThrough();
+      spyOn(component, 'onChangePerPage').and.callThrough();
+
+      component.currentPage = 3;
+      component.total = 3;
+      component.perPage = 3;
+
+      component.ngOnChanges({
+         currentPage: new SimpleChange(3, 2, true),
+         total: new SimpleChange(3, 2, true),
+         perPage: new SimpleChange(3, 2, true)
+      });
+
+
+      expect(component.generateItems).not.toHaveBeenCalled();
+      expect(component.onChangePerPage).not.toHaveBeenCalled();
+      expect(component.currentPage).toBe(3);
+      expect(component.total).toBe(3);
+      expect(component.perPage).toBe(3);
+
+      component.ngOnChanges({
+         currentPage: new SimpleChange(3, 2, false)
+      });
+
+      expect(component.currentPage).toBe(2);
+
+      component.ngOnChanges({
+         total: new SimpleChange(3, 2, false)
+      });
+
+      expect(component.generateItems).toHaveBeenCalled();
+
+      component.ngOnChanges({
+         perPage: new SimpleChange(3, 2, false)
+      });
+
+      expect(component.onChangePerPage).toHaveBeenCalled();
+      expect(component.perPage).toBe(2);
+   });
 });
