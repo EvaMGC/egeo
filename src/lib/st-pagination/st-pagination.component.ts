@@ -128,11 +128,11 @@ export class StPaginationComponent implements OnInit, OnChanges {
          this.generateItems();
          this.updatePages(false);
       }
-      if (changes.currentPage && changes.currentPage.previousValue !== changes.currentPage.currentValue) {
+      if (changes.currentPage && changes.currentPage.previousValue !== changes.currentPage.currentValue && !changes.currentPage.firstChange) {
          this._currentPage = changes.currentPage.currentValue;
          this.updatePages(false);
       }
-      if (changes.perPage && changes.perPage.previousValue !== changes.perPage.currentValue) {
+      if (changes.perPage && changes.perPage.previousValue !== changes.perPage.currentValue && !changes.perPage.firstChange) {
          this.onChangePerPage(changes.perPage.currentValue);
       }
    }

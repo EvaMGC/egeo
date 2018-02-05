@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.0.2 (upcoming)
+
+**Fixed bugs:**
+
+* st-pagination: Do not perform any action when changes are listened when pagination is being created
+
 ## 8.0.1 (February 02, 2018)
 
 **Fixed bugs:**
