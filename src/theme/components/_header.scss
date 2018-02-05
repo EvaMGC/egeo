@@ -23,7 +23,7 @@
    flex-direction: row;
    flex-wrap: nowrap;
    background-color: $action-secondary-07;
-   z-index: 999999;
+   z-index: $header-z-index;
 
    .sth-header-container {
       display: flex;
