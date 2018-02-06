@@ -5,21 +5,7 @@
 * Pending changelog
 
 
-## 8.0.2 (February 05, 2018)
-
-**Fixed bugs:**
-
-* st-pagination: Do not perform any action when changes are listened when pagination is being created
-
-
 ## 8.1.1 (February 02, 2018)
-
-**Fixed bugs:**
-
-* st-pagination: Fix error when a change is listened from outside because. This causes that some inputs are changed after checked
-
-
-## 8.0.1 (February 02, 2018)
 
 **Fixed bugs:**
 
@@ -35,6 +21,21 @@
 **Fixed bugs:**
 
 * st-input: Add a gray color to text when it is disabled and it has value
+
+
+## 8.0.2 (February 05, 2018)
+
+**Fixed bugs:**
+
+* st-pagination: Do not perform any action when changes are listened when pagination is being created
+
+
+## 8.0.1 (February 02, 2018)
+
+**Fixed bugs:**
+
+* st-pagination: Fix error when a change is listened from outside because. This causes that some inputs are changed after checked
+
 
 ## 8.0.0 (January 24, 2018)
 
