@@ -20,7 +20,6 @@ import {
    SimpleChanges,
    ElementRef
 } from '@angular/core';
-
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { Paginate, PaginateOptions, PaginateTexts } from './st-pagination.interface';
 
@@ -51,9 +50,6 @@ import { Paginate, PaginateOptions, PaginateTexts } from './st-pagination.interf
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StPaginationComponent implements OnInit, OnChanges {
-   /** @Input {number} [currentPage=1] Number of the current page */
-   @Input() currentPage: number = 1;
-
    /** @Input {number} [perPage=20] The maximum number of items displayed per page */
    @Input() perPage: number = 20;
 
@@ -78,6 +74,16 @@ export class StPaginationComponent implements OnInit, OnChanges {
     */
    @Output() change: EventEmitter<Paginate> = new EventEmitter<Paginate>();
 
+   /** @Input {number} [currentPage=1] Number of the current page */
+   @Input()
+   get currentPage(): number {
+      return this._currentPage;
+   }
+
+   set currentPage(currentPage: number) {
+      this._currentPage = currentPage;
+   }
+
    public disableNextButton: boolean = false;
    public disablePrevButton: boolean = true;
    public firstItem: number;
@@ -85,10 +91,10 @@ export class StPaginationComponent implements OnInit, OnChanges {
    public items: StDropDownMenuItem[] = [];
    public selectedItem: StDropDownMenuItem;
 
-   constructor(
-      private _cd: ChangeDetectorRef,
-      private _paginationElement: ElementRef
-   ) {
+   private _currentPage: number = 1;
+
+   constructor(private _cd: ChangeDetectorRef,
+               private _paginationElement: ElementRef) {
    }
 
    get hasOptions(): boolean {
@@ -118,15 +124,15 @@ export class StPaginationComponent implements OnInit, OnChanges {
    }
 
    ngOnChanges(changes: SimpleChanges): void {
-      if (changes.total && !changes.total.firstChange) {
+      if (changes.total && changes.total.previousValue !== changes.total.currentValue && !changes.total.firstChange) {
          this.generateItems();
          this.updatePages(false);
       }
-      if (changes.currentPage) {
-         this.currentPage = changes.currentPage.currentValue;
+      if (changes.currentPage && changes.currentPage.previousValue !== changes.currentPage.currentValue && !changes.currentPage.firstChange) {
+         this._currentPage = changes.currentPage.currentValue;
          this.updatePages(false);
       }
-      if (changes.perPage) {
+      if (changes.perPage && changes.perPage.previousValue !== changes.perPage.currentValue && !changes.perPage.firstChange) {
          this.onChangePerPage(changes.perPage.currentValue);
       }
    }
@@ -169,13 +175,13 @@ export class StPaginationComponent implements OnInit, OnChanges {
    }
 
    private updatePages(emit: boolean = true): void {
-      this.lastItem = this.perPage * this.currentPage;
+      this.lastItem = this.perPage * this._currentPage;
 
       if (this.currentPage === 1) {
-         this.firstItem = this.currentPage;
+         this.firstItem = this._currentPage;
          this.disablePrevButton = true;
       } else {
-         this.firstItem = this.perPage * (this.currentPage - 1) + 1;
+         this.firstItem = this.perPage * (this._currentPage - 1) + 1;
          this.disablePrevButton = false;
       }
 
@@ -188,7 +194,7 @@ export class StPaginationComponent implements OnInit, OnChanges {
 
       if (emit) {
          this.change.emit({
-            currentPage: this.currentPage,
+            currentPage: this._currentPage,
             perPage: this.perPage
          });
       }
