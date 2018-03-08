@@ -10,7 +10,22 @@
  */
 import { Component, Input, Output, forwardRef, ViewChild, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormControl } from '@angular/forms';
-
+/**
+ * @description {Component} [Dynamic form]
+ *
+ * The form component allows to generate forms dynamically using a JSON schema.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-form [schema]="jsonSchema" [(ngModel)]="model" #formModel="ngModel">
+ * </st-form>
+ *
+ * ```
+ *
+ */
 @Component({
    selector: 'st-form',
    templateUrl: './st-form.component.html',
@@ -24,9 +39,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormCon
 })
 
 export class StFormComponent implements ControlValueAccessor {
+   /** @Input {any} [schema=] JSON schema needed to generate the form */
    @Input() schema: any;
-   @Input() name: string;
 
+   /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
    @ViewChild('form') form: NgForm;
