@@ -2,7 +2,10 @@
 
 ## 8.6.0 (upcoming)
 
+**Others**
+
 * st-form: Allow to render read only fields
+*  st-tooltip: Apply new style
 
 
 ## 8.5.0 (March 07, 2018)
