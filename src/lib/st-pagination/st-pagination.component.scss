@@ -23,6 +23,15 @@
       }
    }
 
+   .current-page-info {
+      flex: 1;
+      justify-content: flex-end;
+   }
+
+   .st-pagination__selector {
+      max-width: 93px;
+   }
+
    button:first-child {
       margin: 0 5px;
    }

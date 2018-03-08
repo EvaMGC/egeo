@@ -11,12 +11,12 @@
 
 -->
 <div class="st-pagination pagination">
-   <div *ngIf="hasOptions" class="label st-pagination__selector">
+   <div *ngIf="hasOptions" class="label st-pagination__per-page">
       <p class="st-pagination__label">{{label.element}} {{label.perPage}}</p>
-      <st-select [options]="items" [selected]="selectedItem" (select)="onChangePerPage($event)" [attr.id]="selectId"></st-select>
+      <st-select class="st-pagination__selector" [options]="items" [selected]="selectedItem" (select)="onChangePerPage($event)" [attr.id]="selectId"></st-select>
    </div>
 
-   <div class="label">
+   <div class="label current-page-info">
       <p class="st-pagination__label">{{firstItem}}-{{lastItem}} {{label.of || 'of'}} {{total}}</p>
 
       <div class="buttons">

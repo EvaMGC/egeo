@@ -4,7 +4,10 @@
 
 * Pending changelog
 
-## 8.5.0 (March 07, 2018)
+**Others**
+
+*  st-pagination: Apply new style
+
 
 **New features:**
 
