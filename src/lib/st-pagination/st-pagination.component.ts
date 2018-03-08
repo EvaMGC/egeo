@@ -31,8 +31,8 @@ import { Paginate, PaginateOptions, PaginateTexts } from './st-pagination.interf
  * items, it allows user to customize the number of items displayed per page.
  *
  * It is made by two sub-components:
- * - A range selector, that allows the user provides a dropdown to set how many items she wants to be displayed per page.
- * - A page navigation control, in order to let the user where she is and where she can go to.
+ * - A range selector, that allows the user provides a dropdown to set how many items he wants to be displayed per page.
+ * - A page navigation control, in order to let the user where he is and where he can go to.
  *
  * @example
  *

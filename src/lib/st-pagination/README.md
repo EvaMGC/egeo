@@ -1,6 +1,6 @@
 # Table (Component)
 
-   The pagination component has been designed to allow content to be displayed per pages. This informs user about thenumber of the current page, the items displayed per page and the total of items. Moreover, when there are a lot ofitems, it allows user to customize the number of items displayed per page.It is made by two sub-components:- A range selector, that allows the user provides a dropdown to set how many items she wants to be displayed per page.- A page navigation control, in order to let the user where she is and where she can go to.
+   The pagination component has been designed to allow content to be displayed per pages. This informs user about the number of the current page, the items displayed per page and the total of  items. Moreover, when there are a lot ofitems, it allows user to customize the number of items displayed per page.It is made by two sub-components:- A range selector, that allows the user provides a dropdown to set how many items he wants to be displayed per page.- A page navigation control, in order to let the user where he is and where he can go to.
 
 ## Inputs
 
