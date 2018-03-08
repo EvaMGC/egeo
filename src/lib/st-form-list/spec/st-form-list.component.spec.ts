@@ -124,7 +124,7 @@ describe('[StFormList]', () => {
          fixture.nativeElement.querySelector('.button.button-link-primary').click();
          fixture.detectChanges();
 
-         expect(component.add.emit).toHaveBeenCalledWith({position: fakeModel.length, model: component.value});
+         expect(component.add.emit).toHaveBeenCalledWith({ position: fakeModel.length, model: component.value });
       });
 
    });
@@ -156,29 +156,25 @@ describe('[StFormList]', () => {
          removeButtons[1].click();
          fixture.detectChanges();
 
-         expect(component.remove.emit).toHaveBeenCalledWith({position: 1, model: component.value});
+         expect(component.remove.emit).toHaveBeenCalledWith({ position: 1, model: component.value });
 
          removeButtons[0].click();
          fixture.detectChanges();
 
-         expect(component.remove.emit).toHaveBeenCalledWith({position: 0, model: component.value});
+         expect(component.remove.emit).toHaveBeenCalledWith({ position: 0, model: component.value });
       });
    });
 
    describe('when value is changed, it should emit an event', () => {
       beforeEach(() => {
-         component.value = fakeModel;
-         fixture.detectChanges();
-
          spyOn(component.valueChange, 'emit');
+         component.value = fakeModel;
       });
 
       it('if user removes a row, event is emitted', () => {
-         fixture.whenStable().then(() => {
-            component.removeItem(0);
+         component.removeItem(0);
 
-            expect(component.valueChange.emit).toHaveBeenCalledWith(component.value);
-         });
+         expect(component.valueChange.emit).toHaveBeenCalledWith(component.value);
       });
 
       it('if user adds a row, event is emitted', () => {
@@ -188,6 +184,8 @@ describe('[StFormList]', () => {
       });
 
       it('if user modifies a value in a row, event is emitted', () => {
+         fixture.detectChanges();
+
          let input: HTMLInputElement = fixture.nativeElement.querySelector('#genericTextInput-1');
 
          input.value = 'edited text';

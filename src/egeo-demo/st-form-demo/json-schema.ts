@@ -24,7 +24,8 @@ export const JSON_SCHEMA: any = {
                'type': 'string',
                'default': 'crossdata-1',
                'maxLength': 40,
-               'minLength': 5
+               'minLength': 5,
+               'readOnly': true
             },
             'cores': {
                'title': 'CPUs',

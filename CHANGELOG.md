@@ -2,7 +2,8 @@
 
 ## 8.6.0 (upcoming)
 
-* Pending changelog
+* st-form: Allow to render read only fields
+
 
 ## 8.5.0 (March 07, 2018)
 
