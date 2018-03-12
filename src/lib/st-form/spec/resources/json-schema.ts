@@ -19,7 +19,8 @@ export const JSON_SCHEMA: any = {
          'minimum': 6,
          'maximum': 10,
          'exclusiveMinimum': false,
-         'exclusiveMaximum': false
+         'exclusiveMaximum': false,
+         'examples': [5]
       },
       'genericNumberInput': {
          'title': 'Generic number',
@@ -29,20 +30,25 @@ export const JSON_SCHEMA: any = {
          'minimum': 0.5,
          'maximum': 10,
          'exclusiveMinimum': false,
-         'exclusiveMaximum': false
+         'exclusiveMaximum': false,
+         'examples': [2.5]
       },
       'requiredNumber': {
          'title': 'Required number',
          'description': 'Required input description',
          'type': 'integer',
-         'default': 5
+         'default': 5,
+         'examples': [6]
+
       },
       'minNumber': {
          'title': 'Min number',
          'description': 'Min number input description',
          'type': 'number',
          'default': 8.6,
-         'minimum': 6
+         'minimum': 6,
+         'examples': [9.2]
+
       },
       'maxNumber': {
          'title': 'Max number',

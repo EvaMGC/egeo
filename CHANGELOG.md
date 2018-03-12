@@ -36,7 +36,7 @@
 **Breaking changes:**
 
 * st-form-list: Now, it emits the events: add, remove, valueChange and blur
-
+* st-form: Placeholder now is in 'examples' attribute of json schema
 
 ## 8.3.2 (February 23, 2018)
 

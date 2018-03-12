@@ -22,10 +22,10 @@ export const JSON_SCHEMA: any = {
                'description': 'The name of the Crossdata instance.',
                'info': 'More additional information',
                'type': 'string',
-               'default': 'crossdata-1',
                'maxLength': 40,
                'minLength': 5,
-               'readOnly': true
+               'readOnly': true,
+               'examples': ['crossdata-65']
             },
             'cores': {
                'title': 'CPUs',

@@ -127,7 +127,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    get placeholder(): string {
-      return this.schema.value.placeholder || '';
+      return this.schema.value.examples ? this.schema.value.examples[0] : '';
    }
 
    get description(): string {

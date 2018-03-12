@@ -282,6 +282,16 @@ describe('StFormFieldComponent', () => {
 
             expect(component.blur.emit).toHaveBeenCalledTimes(1);
          });
+
+         it('if model is empty, default value is not defined and placeholder is defined in schema, this placeholder is displayed', () => {
+            let fakePlaceholder: string = 'fake placeholder';
+            component.value = undefined;
+            component.schema = { key: 'log_level', value: { type: 'number', examples: [fakePlaceholder] } };
+            fixture.detectChanges();
+
+            const input: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
+            expect(input.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
+         });
       });
 
       describe('number input', () => {
@@ -728,11 +738,11 @@ describe('StFormFieldComponent', () => {
       it('if model is empty, default value is not defined and placeholder is defined in schema, this placeholder is displayed', () => {
          let fakePlaceholder: string = 'fake placeholder';
          component.value = undefined;
-         component.schema = { key: 'log_level', value: { type: 'string', enum: [], placeholder: fakePlaceholder } };
+         component.schema = { key: 'log_level', value: { type: 'string', enum: [], examples: [fakePlaceholder] } };
          fixture.detectChanges();
 
          const input: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
-         expect(input.getAttribute('placeholder')).toContain(fakePlaceholder);
+         expect(input.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
       });
 
    });
