@@ -737,6 +737,18 @@ describe('StFormFieldComponent', () => {
 
    });
 
+   it('if a field has the property readOnly in its schema, it can`t be edited', () => {
+      let schema: any = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
+      component.schema = { key: 'genericNumberInput', value: schema };
+      schema.readOnly = true;
+
+      fixture.detectChanges();
+      component.ngOnInit();
+
+      fixture.whenStable ().then(() => {
+            expect(fixture.nativeElement.querySelector('input').disabled).toBeTruthy();
+      });
+   });
 });
 
 

@@ -11,7 +11,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-
 import { JSON_SCHEMA } from './json-schema';
 
 @Component({
@@ -20,7 +19,7 @@ import { JSON_SCHEMA } from './json-schema';
 })
 export class StFormDemoComponent {
    public jsonSchema: any;
-   public model: any = {};
+   public model: any = {  };
 
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
    @ViewChild('formModel') public formModel: NgForm;
@@ -33,7 +32,7 @@ export class StFormDemoComponent {
       console.log(this.formModel.valid);
    }
 
-      onChange(model: any): void {
+   onChange(model: any): void {
       this.model = model;
    }
 

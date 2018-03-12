@@ -14,19 +14,20 @@
 .st-tooltip-on {
 
    &:before {
-      border: 1px solid $neutral-06;
+      border: 1px solid $neutral-04;
       border-radius: 3px;
       bottom: 125%;
-      box-shadow: 0 3px 2px 0 rgba($neutral-13, 0.07);
-      color: $neutral-09;
-      font-size: $egeo-font-size-xxxsmall;
-      padding: 4px 8px;
+      box-shadow: 0 0 10px 2px $neutral-04;
+      color: $neutral-12;
+      font-size: $egeo-font-size-xxsmall;
+      padding: 10px 20px;
+      font-family: $egeo-nunito-sans;
    }
 
    &:after {
       bottom: calc(125% - 3px);
-      border-bottom: 1px solid $neutral-06;
-      border-right: 1px solid $neutral-06;
+      border-bottom: 1px solid $neutral-05;
+      border-right: 1px solid $neutral-05;
       height: 6px;
       left: 10px;
       transform: rotate(45deg);

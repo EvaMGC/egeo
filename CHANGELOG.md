@@ -2,7 +2,11 @@
 
 ## 8.6.0 (upcoming)
 
-* Pending changelog
+**Others**
+
+* st-form: Allow to render read only fields
+*  st-tooltip: Apply new style
+
 
 **Others**
 

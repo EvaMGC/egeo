@@ -77,8 +77,10 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
             this.innerValue = this.schema.value.default;
             this.onChange(this.innerValue);
          }
+         if (this.schema.value.readOnly) {
+            this.setDisabledState(true);
+         }
       });
-
    }
 
    get errors(): any {

@@ -15,8 +15,8 @@ import { FormArray, NgForm, FormGroup, FormControl } from '@angular/forms';
    selector: 'st-form-list-demo',
    templateUrl: 'st-form-list-demo.html',
    styleUrls: ['./st-form-list-demo.scss'],
-
 })
+
 export class StFormListDemoComponent {
    @ViewChild('formModel') public formModel: NgForm;
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
