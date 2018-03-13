@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angul
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { cloneDeep as _cloneDeep } from 'lodash';
-
 import { PipesModule } from '../../pipes/pipes.module';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 import { JSON_SCHEMA } from '../spec/resources/json-schema';
@@ -25,6 +24,9 @@ import { StSelectModule } from '../../st-select/st-select.module';
 import { StTooltipModule } from '../../st-tooltip/st-tooltip.module';
 import { StDropdownMenuModule } from '../../st-dropdown-menu/st-dropdown-menu.module';
 import { By } from '@angular/platform-browser';
+import { StSwitchModule } from '../../st-switch/st-switch.module';
+import { StSelectComponent } from '../../st-select/st-select';
+import { StInputComponent } from '../../st-input/st-input.component';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -35,9 +37,15 @@ describe('StFormFieldComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, ReactiveFormsModule, StInputModule, StCheckboxModule, StSelectModule, PipesModule,
-            StTooltipModule, StFormDirectiveModule, StDropdownMenuModule],
+            StTooltipModule, StFormDirectiveModule, StDropdownMenuModule, StSwitchModule],
          declarations: [StFormFieldComponent]
       })
+         .overrideComponent(StSelectComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StInputComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .overrideComponent(StFormFieldComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
@@ -668,6 +676,9 @@ describe('StFormFieldComponent', () => {
       let selectProperty: any;
 
       beforeEach(() => {
+         spyOn(window, 'setTimeout').and.callFake((func) => {
+            func();
+         });
          selectProperty = JSON_SCHEMA.properties.log_level;
          component.schema = { key: 'log_level', value: selectProperty };
          component.qaTag = 'log_level';
@@ -705,7 +716,7 @@ describe('StFormFieldComponent', () => {
          fixture.whenStable().then(() => {
             fixture.detectChanges();
 
-            expect(selectElement.value).toBe(selectProperty.default);
+            expect(fixture.nativeElement.querySelector('#log_level-input').value).toBe(selectProperty.default);
          });
       });
 
@@ -755,8 +766,81 @@ describe('StFormFieldComponent', () => {
       fixture.detectChanges();
       component.ngOnInit();
 
-      fixture.whenStable ().then(() => {
-            expect(fixture.nativeElement.querySelector('input').disabled).toBeTruthy();
+      fixture.whenStable().then(() => {
+         expect(fixture.nativeElement.querySelector('input').disabled).toBeTruthy();
+      });
+   });
+
+   describe('should be able to render switches with their validations', () => {
+      let switchElement: HTMLInputElement;
+      let booleanProperty: any;
+
+      beforeEach(() => {
+         booleanProperty = {
+            'title': 'Enable security',
+            'description': 'Enable or disable the security',
+            'type': 'boolean',
+            'default': true
+         };
+         component.hasDependencies = true;
+         component.schema = { key: 'security', value: booleanProperty };
+         component.qaTag = 'security';
+
+         fixture.detectChanges();
+
+         switchElement = fixture.nativeElement.querySelector('#security');
+      });
+
+      it('field is displayed with a switch when it has boolean type and it enables another fields', () => {
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-switch__toggle')).not.toBeNull();
+      });
+
+      it('label is displayed', () => {
+         let label: HTMLElement = fixture.nativeElement.querySelector('.st-label');
+         expect(label.innerHTML).toContain(booleanProperty.title);
+      });
+
+      it('tooltip is displayed if description exits', () => {
+         let tooltip: HTMLElement = fixture.nativeElement.querySelector('.st-tooltip');
+         expect(tooltip.getAttribute('title')).toBe(booleanProperty.description);
+      });
+
+      it('icon for opening tooltip is not displayed if description does not exit', () => {
+         fixture = TestBed.createComponent(StFormFieldComponent);
+         component = fixture.componentInstance;
+
+         component.schema = { key: 'security', value: { type: 'boolean', description: undefined } };
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('#boolean-label-tooltip')).toBeNull();
+      });
+
+      it('if schema contains a default value, switch has to be initialized with it', () => {
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#security-input').checked).toBe(booleanProperty.default);
+         });
+      });
+
+      it('if user disables switch, its value is not added to model', () => {
+         spyOn(component, 'onChange');
+         spyOn(component.valueChange, 'emit');
+
+         fixture.nativeElement.querySelector('#security-input').click();
+
+         fixture.detectChanges();
+
+         expect(component.onChange).toHaveBeenCalledWith(true);
+         expect(component.valueChange.emit).toHaveBeenCalledWith(true);
+
+         fixture.nativeElement.querySelector('#security-input').click();
+
+         expect(component.onChange).toHaveBeenCalledWith(undefined);
+         expect(component.valueChange.emit).toHaveBeenCalledWith(undefined);
       });
    });
 });
@@ -839,6 +923,47 @@ describe('StFormFieldComponent in reactive form', () => {
             reactiveComp.reactiveForm.enable();
             reactiveFixture.detectChanges();
             let checkBoxElement: HTMLInputElement = reactiveFixture.nativeElement.querySelector('#boolean');
+            let previousValue: boolean = Boolean(checkBoxElement.checked);
+
+            checkBoxElement.click();
+
+            reactiveFixture.detectChanges();
+
+            expect(Boolean(checkBoxElement.checked)).not.toBe(previousValue);
+            expect(Boolean(checkBoxElement.checked)).toBe(!previousValue);
+         });
+      });
+   });
+
+   describe('switch can be disabled', () => {
+      beforeEach(() => {
+         reactiveComp.schema = { key: 'security', value: { 'title': 'Enable security',
+            'description': 'Enable or disable the security',
+            'type': 'boolean'} };
+         reactiveComp.qaTag = 'security';
+         reactiveFixture.detectChanges();
+      });
+
+      it('if switch is disabled, when user clicks on it, it does not change', () => {
+         reactiveFixture.whenStable().then(() => {
+            reactiveComp.reactiveForm.disable();
+            reactiveFixture.detectChanges();
+
+            let previousValue: boolean = Boolean(reactiveFixture.nativeElement.querySelector('#security').checked);
+
+            reactiveFixture.nativeElement.querySelector('#security').click();
+            reactiveFixture.detectChanges();
+
+            expect(Boolean(reactiveFixture.nativeElement.querySelector('#security').checked)).toBe(previousValue);
+         });
+      });
+
+      it('if switch is enabled, when user clicks on it, it has to change', () => {
+         reactiveFixture.detectChanges();
+         reactiveFixture.whenStable().then(() => {
+            reactiveComp.reactiveForm.enable();
+            reactiveFixture.detectChanges();
+            let checkBoxElement: HTMLInputElement = reactiveFixture.nativeElement.querySelector('#security');
             let previousValue: boolean = Boolean(checkBoxElement.checked);
 
             checkBoxElement.click();

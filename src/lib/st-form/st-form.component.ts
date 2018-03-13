@@ -30,7 +30,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormCon
    selector: 'st-form',
    templateUrl: './st-form.component.html',
    styleUrls: ['./st-form.component.scss'],
-   host: {class: 'st-form'},
+   host: { class: 'st-form' },
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormComponent), multi: true },
@@ -89,6 +89,10 @@ export class StFormComponent implements ControlValueAccessor {
       return false;
    }
 
+   hasDependencies(propertyName: string): boolean {
+      return this.schema.dependencies && this.schema.dependencies[propertyName] && this.schema.dependencies[propertyName].length > 0;
+   }
+
    getOptionalButtonLabel(): string {
       if (!this.showOptionalFields) {
          return 'Show more';
@@ -104,6 +108,15 @@ export class StFormComponent implements ControlValueAccessor {
       this.showOptionalFields = !this.showOptionalFields;
    }
 
+   displayField(propertyName: string): boolean {
+      let displayField: boolean = true;
+      let parentField: string = this.getParentField(propertyName);
+      if (parentField && !this._value[parentField]) {
+         displayField = false;
+      }
+      return displayField;
+   }
+
    // When value is received from oustside
    writeValue(value: any): void {
       if (value) {
@@ -114,9 +127,11 @@ export class StFormComponent implements ControlValueAccessor {
 
    onChangeProperty(value: any, property: string): void {
       setTimeout(() => {
-         this._value[property] = value;
-         this.valueChange.emit(this._value);
-         this.onChange(this._value);
+         if (this._value[property] !== value) {
+            this._value[property] = value;
+            this.valueChange.emit(this._value);
+            this.onChange(this._value);
+         }
       });
    }
 
@@ -137,6 +152,19 @@ export class StFormComponent implements ControlValueAccessor {
       } else {
          this.form.control.enable();
       }
+   }
+
+
+   private getParentField(propertyName: string): string {
+      let parentField: string = undefined;
+      if (this.schema.dependencies) {
+         Object.keys(this.schema.dependencies).forEach((key: string) => {
+            if (this.schema.dependencies[key].indexOf(propertyName) !== -1 ) {
+               parentField =  key;
+            }
+         });
+      }
+      return parentField;
    }
 
 }

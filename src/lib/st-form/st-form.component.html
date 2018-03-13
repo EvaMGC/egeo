@@ -13,28 +13,31 @@
 <form #form="ngForm" *ngIf="innerValue" novalidate>
    <h1 *ngIf="schema.title" class="section-title">{{schema.title}}</h1>
 
-   <div  *ngFor="let property of schema.properties | stObjectToArray" >
-      <st-form-field *ngIf="property.value.type !== 'object'" class="form-field"
+   <div *ngFor="let property of schema.properties | stObjectToArray">
+      <st-form-field *ngIf="property.value.type !== 'object' && displayField(property.key)" class="form-field"
                      [schema]="property"
                      [name]="property.key"
                      [ngModel]="innerValue[property.key]"
                      (ngModelChange)="onChangeProperty($event, property.key)"
                      [required]="isRequired(property.key)"
+                     [hasDependencies]="hasDependencies(property.key)"
                      [ngClass]="{hidden: isOptionalField(property.key) && !showOptionalFields}"
                      [qaTag]="property.key">
       </st-form-field>
 
       <div *ngIf="property.value.type === 'object'">
          <st-form
-               [schema]="property.value"
-               [name]="property.key"
-               [ngModel]="innerValue[property.key]"
-               (ngModelChange)="onChangeProperty($event, property.key)">
-      </st-form>
+            [schema]="property.value"
+            [name]="property.key"
+            [ngModel]="innerValue[property.key]"
+            (ngModelChange)="onChangeProperty($event, property.key)">
+         </st-form>
       </div>
    </div>
 
-   <button class="button button-link-primary optional-fields-button" *ngIf="hasOptionalFields()" (click)="onChangeOptionalFieldsVisibility()">
-      <span>{{getOptionalButtonLabel()}} <i [ngClass]="{'icon-arrow2_up': showOptionalFields, 'icon-arrow2_down': !showOptionalFields}"></i></span>
+   <button class="button button-link-primary optional-fields-button" *ngIf="hasOptionalFields()"
+           (click)="onChangeOptionalFieldsVisibility()">
+      <span>{{getOptionalButtonLabel()}} <i
+         [ngClass]="{'icon-arrow2_up': showOptionalFields, 'icon-arrow2_down': !showOptionalFields}"></i></span>
    </button>
 </form>

@@ -12,7 +12,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { cloneDeep as _cloneDeep } from 'lodash';
-
 import { StFormComponent } from '../st-form.component';
 import { JSON_SCHEMA } from './resources/json-schema';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -24,6 +23,8 @@ import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 import { StFormFieldModule } from '../st-form-field/st-form-field.module';
 import { CommonModule } from '@angular/common';
 import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
+import { StSwitchComponent } from '../../st-switch/st-switch.component';
+import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
@@ -204,7 +205,7 @@ describe('StFormComponent', () => {
       });
    });
 
-   describe('if there are some optional fields', () => {
+   describe('If there are some optional fields', () => {
       beforeEach(() => {
          component.schema = _cloneDeep(JSON_SCHEMA);
          component.schema.properties.genericNumberInput.optional = true;
@@ -240,6 +241,33 @@ describe('StFormComponent', () => {
 
          expect(fixture.nativeElement.querySelector('#genericNumberInput').parentElement.parentElement.classList).toContain('hidden');
          expect(fixture.nativeElement.querySelector('#log_level').parentElement.classList).toContain('hidden');
+      });
+   });
+
+   describe('If there are some dependant fields', () => {
+      beforeEach(() => {
+         component.schema = {
+            'properties': {
+            'security': {
+               'title': 'Enable security',
+                  'description': 'Enable or disable the security',
+                  'type': 'boolean'
+            },
+            'dns': {
+               'title': 'DNS',
+                  'description': 'DNS',
+                  'type': 'string'
+            }
+         },
+         'dependencies': {
+            'security': ['dns']
+         }
+      };
+         fixture.changeDetectorRef.detectChanges();
+      });
+
+      it('if a field has type boolean and has dependant fields, it will be displayed as a switch', () => {
+         expect(fixture.nativeElement.querySelector('#security.st-switch')).not.toBeNull();
       });
    });
 });

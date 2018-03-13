@@ -18,11 +18,10 @@ import {
    EventEmitter,
    ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, NgModel} from '@angular/forms';
-
-import {StInputError} from '../../st-input/st-input.error.model';
-import {StEgeo, StRequired} from '../../decorators/require-decorators';
-import {StDropDownMenuItem} from '../../st-dropdown-menu/st-dropdown-menu.interface';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, NgModel } from '@angular/forms';
+import { StInputError } from '../../st-input/st-input.error.model';
+import { StEgeo, StRequired } from '../../decorators/require-decorators';
+import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
 
 @StEgeo()
 @Component({
@@ -30,11 +29,11 @@ import {StDropDownMenuItem} from '../../st-dropdown-menu/st-dropdown-menu.interf
    templateUrl: './st-form-field.component.html',
    styleUrls: ['./st-form-field.component.scss'],
    providers: [
-      {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true},
-      {provide: NG_VALIDATORS, useExisting: forwardRef(() => StFormFieldComponent), multi: true}
+      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StFormFieldComponent), multi: true },
+      { provide: NG_VALIDATORS, useExisting: forwardRef(() => StFormFieldComponent), multi: true }
    ],
    changeDetection: ChangeDetectionStrategy.OnPush,
-   host: {class: 'st-form-field'}
+   host: { class: 'st-form-field' }
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit {
@@ -43,11 +42,12 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() errorMessages: StInputError;
    @Input() qaTag: string;
    @Input() name: string;
-   @ViewChild('templateModel') templateModel: NgModel;
-
    @Input() value: any;
+   @Input() hasDependencies: boolean;
+
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
+   @ViewChild('templateModel') templateModel: NgModel;
 
    public disabled: boolean = false; // To check disable
    public focus: boolean = false;
@@ -63,6 +63,11 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    setValue(value: any): void {
       this.onChange(value);
       this.valueChange.emit(value);
+   }
+
+   setSwitchValue(enabled: boolean): void {
+      this.onChange(enabled || undefined);
+      this.valueChange.emit(enabled || undefined);
    }
 
    validate(control: FormControl): any {
@@ -150,6 +155,10 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       switch (type) {
          case 'input':
             return this.type === 'text' || this.type === 'number' || this.type === 'integer';
+         case 'switch':
+            return this.type === 'boolean' && this.hasDependencies;
+         case 'checkbox':
+            return this.type === 'boolean' && !this.hasDependencies;
          default:
             return this.type === type;
       }
@@ -192,10 +201,10 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    getSelectOption(): StDropDownMenuItem[] {
       let options: StDropDownMenuItem[] = [];
       if (this.schema.value.enum) {
-         options.push(<StDropDownMenuItem> {label: 'Select one option', value: undefined});
+         options.push(<StDropDownMenuItem> { label: 'Select one option', value: undefined });
          let enumValues: string[] = this.schema.value.enum;
          enumValues.forEach((value) => {
-            options.push(<StDropDownMenuItem> {label: value, value: value});
+            options.push(<StDropDownMenuItem> { label: value, value: value });
          });
       }
       return options;
@@ -205,4 +214,3 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       this.blur.emit();
    }
 }
-

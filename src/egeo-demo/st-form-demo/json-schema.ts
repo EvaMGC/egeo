@@ -620,6 +620,19 @@ export const JSON_SCHEMA: any = {
             }
          },
          'required': [ 'enabled', 'prefix' ]
+      },
+      'security-switch': {
+         'title': 'Enable security',
+         'description': 'Enable or disable the security',
+         'type': 'boolean'
+      },
+      'dns': {
+         'title': 'DNS',
+         'description': 'DNS',
+         'type': 'string'
       }
+   },
+   "dependencies": {
+      "security-switch": ["dns"]
    }
 };

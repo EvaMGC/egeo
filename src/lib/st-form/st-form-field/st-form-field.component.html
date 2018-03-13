@@ -31,7 +31,7 @@
           (blur)="onBlur()">
 </st-input>
 
-<st-checkbox *ngIf="hasType('boolean')"
+<st-checkbox *ngIf="hasType('checkbox')"
              #templateModel="ngModel"
              [ngModel]="innerValue"
              (ngModelChange)="setValue($event)"
@@ -56,3 +56,13 @@
            [id]="qaTag">
 </st-select>
 
+<st-switch *ngIf="hasType('switch')"
+           #templateModel="ngModel"
+           [label]="schema.value.title"
+           [name]="schema.key"
+           [contextualHelp]="schema.value.description"
+           [ngModel]="innerValue"
+           (ngModelChange)="setSwitchValue($event)"
+           [qaTag]="schema.key"
+           [id]="qaTag">
+</st-switch>

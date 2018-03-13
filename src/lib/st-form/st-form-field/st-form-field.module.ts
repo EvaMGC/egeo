@@ -8,19 +8,26 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { CommonModule }  from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StFormFieldComponent } from './st-form-field.component';
 import { StInputModule } from '../../st-input/st-input.module';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 import { StSelectModule } from '../../st-select/st-select.module';
+import { StSwitchModule } from '../../st-switch/st-switch.module';
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StInputModule, StCheckboxModule, StSelectModule,
-       StFormDirectiveModule],
+   imports: [CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      StInputModule,
+      StCheckboxModule,
+      StSelectModule,
+      StSwitchModule,
+      StFormDirectiveModule],
    declarations: [StFormFieldComponent],
    exports: [StFormFieldComponent]
 })
