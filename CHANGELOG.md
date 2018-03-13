@@ -9,6 +9,7 @@
 **New features:**
 
 * st-form: Allow to render read only fields
+* st-form: Allow to add dependant fields
 
 **Fixed bugs:**
 
