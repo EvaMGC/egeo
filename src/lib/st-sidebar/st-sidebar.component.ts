@@ -74,15 +74,15 @@ export class StSidebarComponent implements OnInit {
       return classes;
    }
 
-   isActive(itemId: string): boolean {
-      return this.active === itemId;
-   }
-
    onSelectItem(itemId: string): void {
       if (itemId !== this._active) {
          this.active = itemId;
          this.change.emit(itemId);
       }
+   }
+
+   private isActive(itemId: string): boolean {
+      return this.active === itemId;
    }
 
 }
