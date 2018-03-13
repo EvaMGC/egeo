@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { ChangeDetectionStrategy, Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
-
 import { StSidebarItem } from './st-sidebar-item.interface';
 
 /**
@@ -66,8 +65,13 @@ export class StSidebarComponent implements OnInit {
       }
    }
 
-   isActive(itemId: string): boolean {
-      return this.active === itemId;
+   getItemClasses(item: StSidebarItem): any {
+      let classes: any = {};
+      if (item.class) {
+         classes[item.class] = true;
+      }
+      classes.item__active = this.isActive(item.id);
+      return classes;
    }
 
    onSelectItem(itemId: string): void {
@@ -75,6 +79,10 @@ export class StSidebarComponent implements OnInit {
          this.active = itemId;
          this.change.emit(itemId);
       }
+   }
+
+   private isActive(itemId: string): boolean {
+      return this.active === itemId;
    }
 
 }
