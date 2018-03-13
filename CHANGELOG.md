@@ -10,6 +10,10 @@
 
 * st-form: Allow to render read only fields
 
+**Fixed bugs:**
+
+* st-sidebar: Fix bug when there are an active item and another with an added class
+
 **Others:**
 
 * st-tooltip: Apply new style
