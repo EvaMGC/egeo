@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.5.2 (upcoming)
+
+**Fixed bugs:**
+
+* st-sidebar: Fix bug when there are an active item and another with an added class
+
+
 ## 8.5.1 (March 12, 2018)
 
 **Fixed bugs:**
