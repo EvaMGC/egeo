@@ -20,7 +20,7 @@
                      [ngModel]="innerValue[property.key]"
                      (ngModelChange)="onChangeProperty($event, property.key)"
                      [required]="isRequired(property.key)"
-                     [hasDependencies]="hasDependencies(property.key)"
+                     [hasDependencies]="isAParentField(property.key)"
                      [ngClass]="{hidden: isOptionalField(property.key) && !showOptionalFields}"
                      [qaTag]="property.key">
       </st-form-field>

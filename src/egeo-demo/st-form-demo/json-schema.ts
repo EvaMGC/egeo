@@ -629,7 +629,8 @@ export const JSON_SCHEMA: any = {
       'dns': {
          'title': 'DNS',
          'description': 'DNS',
-         'type': 'string'
+         'type': 'string',
+         'default': 'default DNS'
       }
    },
    "dependencies": {

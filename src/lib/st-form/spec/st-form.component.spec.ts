@@ -23,8 +23,6 @@ import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 import { StFormFieldModule } from '../st-form-field/st-form-field.module';
 import { CommonModule } from '@angular/common';
 import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
-import { StSwitchComponent } from '../../st-switch/st-switch.component';
-import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
@@ -248,21 +246,21 @@ describe('StFormComponent', () => {
       beforeEach(() => {
          component.schema = {
             'properties': {
-            'security': {
-               'title': 'Enable security',
+               'security': {
+                  'title': 'Enable security',
                   'description': 'Enable or disable the security',
                   'type': 'boolean'
-            },
-            'dns': {
-               'title': 'DNS',
+               },
+               'dns': {
+                  'title': 'DNS',
                   'description': 'DNS',
                   'type': 'string'
+               }
+            },
+            'dependencies': {
+               'security': ['dns']
             }
-         },
-         'dependencies': {
-            'security': ['dns']
-         }
-      };
+         };
          fixture.changeDetectorRef.detectChanges();
       });
 
@@ -285,6 +283,23 @@ class FormInTemplateDrivenFormComponent {
    public schema: any = _cloneDeep(JSON_SCHEMA);
    public model: any = {};
    @ViewChild('formModel') public formModel: NgForm;
+
+   constructor() {
+      this.schema.properties.security = {
+         'title': 'Enable security',
+         'description': 'Enable or disable the security',
+         'type': 'boolean'
+      };
+      this.schema.properties.dns = {
+         'title': 'DNS',
+         'description': 'DNS',
+         'type': 'string'
+      };
+
+      this.schema.dependencies = {
+         'security': ['dns']
+      };
+   }
 }
 
 
@@ -330,6 +345,31 @@ describe('StFormComponent in templateDriven form', () => {
                expect(templateDrivenFixture.nativeElement.querySelector('#' + propertyId).disabled).toBeFalsy();
             }
          }
+      });
+   });
+
+   it('fields which have a parent field wont be sent when parent is undefined', (done) => {
+      templateDrivenFixture.detectChanges();
+
+      templateDrivenFixture.whenStable().then(() => {
+
+         expect(templateDrivenFixture.nativeElement.querySelector('#security-input')).not.toBeNull();
+         expect(templateDrivenFixture.nativeElement.querySelector('input[name="dns"]')).toBeNull();
+
+         expect(templateDrivenComp.model.dns).toBeUndefined();
+
+         templateDrivenFixture.detectChanges();
+         templateDrivenFixture.nativeElement.querySelector('#security-input').click();
+         templateDrivenFixture.detectChanges();
+
+         expect(templateDrivenComp.model.dns).toEqual(templateDrivenComp.schema.properties.dns.default);
+
+
+         templateDrivenFixture.nativeElement.querySelector('#security-input').click();
+         templateDrivenFixture.detectChanges();
+
+         expect(templateDrivenComp.model.dns).toBeUndefined();
+         done();
       });
    });
 });

@@ -8,8 +8,20 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, Input, Output, forwardRef, ViewChild, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+   Component,
+   Input,
+   Output,
+   forwardRef,
+   ViewChild,
+   EventEmitter,
+   ChangeDetectionStrategy,
+   AfterViewChecked,
+   OnInit,
+   OnDestroy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 /**
  * @description {Component} [Dynamic form]
  *
@@ -38,7 +50,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormCon
    ]
 })
 
-export class StFormComponent implements ControlValueAccessor {
+export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewChecked, OnDestroy {
    /** @Input {any} [schema=] JSON schema needed to generate the form */
    @Input() schema: any;
 
@@ -50,6 +62,35 @@ export class StFormComponent implements ControlValueAccessor {
    public showOptionalFields: boolean = false;
    public innerValue: any = {};
    private _value: any = {};
+   private _parentFieldSubscription: Subscription[] = [];
+   private _parentFields: string[];
+
+   ngOnInit(): void {
+      if (this.schema.dependencies) {
+         this._parentFields = Object.keys(this.schema.dependencies);
+      }
+   }
+
+   ngAfterViewChecked(): void {
+      if (this._parentFields  && this.form.control && this.form.control.controls) {
+         for (let i = 0; i < this._parentFields.length; ++i) {
+            let parentField: string = this._parentFields[i];
+            if (!this._parentFieldSubscription[i] && this.form.control.controls[parentField]) {
+
+               this._parentFieldSubscription[i] = this.form.control.controls[this._parentFields[i]].valueChanges.subscribe((value) => {
+                  if (!value) {
+                     let childrenFields: string[] = this.schema.dependencies[parentField];
+                     for (let j = 0; j < childrenFields.length; ++j) {
+                        if (this.form.controls[childrenFields[j]]) {
+                           this._value[childrenFields[j]] = undefined;
+                        }
+                     }
+                  }
+               });
+            }
+         }
+      }
+   }
 
    // Function to call when the value changes.
    onChange(_: any): void {
@@ -89,7 +130,7 @@ export class StFormComponent implements ControlValueAccessor {
       return false;
    }
 
-   hasDependencies(propertyName: string): boolean {
+   isAParentField(propertyName: string): boolean {
       return this.schema.dependencies && this.schema.dependencies[propertyName] && this.schema.dependencies[propertyName].length > 0;
    }
 
@@ -151,6 +192,14 @@ export class StFormComponent implements ControlValueAccessor {
          this.form.control.disable();
       } else {
          this.form.control.enable();
+      }
+   }
+
+   ngOnDestroy(): void {
+      if (this._parentFieldSubscription) {
+         for (let i = 0; i < this._parentFieldSubscription.length; ++i) {
+            this._parentFieldSubscription[i].unsubscribe();
+         }
       }
    }
 
