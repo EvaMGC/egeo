@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.6.1 (upcoming)
+
+**Fixed bugs:**
+
+* st-form: Remove dependant fields when parent field does not have any value
+
+
 ## 8.6.0 (March 14, 2018)
 
 **Breaking changes:**
