@@ -18,6 +18,8 @@
 **Fixed bugs:**
 
 * st-sidebar: Fix bug when there are an active item and another with an added class
+* st-form: Remove dependant fields when parent field does not have any value
+
 
 **Others:**
 
