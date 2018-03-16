@@ -135,8 +135,8 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       let label: string = 'Additional options';
 
       if (this.parentName || this.schema.title) {
-         label+= ' of ';
-         label+= this.parentName || this.schema.title;
+         label += ' of ';
+         label += this.parentName || this.schema.title;
       }
 
       return label;
