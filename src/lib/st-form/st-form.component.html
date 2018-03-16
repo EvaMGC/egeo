@@ -12,7 +12,11 @@
 -->
 <form #form="ngForm" *ngIf="innerValue" novalidate>
    <h1 *ngIf="schema.title" class="section-title">{{schema.title}}</h1>
-
+   <button class="button button-link-primary optional-fields-button" *ngIf="isCollapsedSection()"
+           (click)="onChangeOptionalFieldsVisibility()">
+      <span> <i
+         [ngClass]="{'icon-arrow2_down': showCollapsedSectionFields, 'icon-arrow2_right': !showCollapsedSectionFields}"></i> {{getOptionalButtonLabel()}}</span>
+   </button>
    <div *ngFor="let property of schema.properties | stObjectToArray">
       <st-form-field *ngIf="property.value.type !== 'object' && displayField(property.key)" class="form-field"
                      [schema]="property"
@@ -21,23 +25,22 @@
                      (ngModelChange)="onChangeProperty($event, property.key)"
                      [required]="isRequired(property.key)"
                      [hasDependencies]="isAParentField(property.key)"
-                     [ngClass]="{hidden: isOptionalField(property.key) && !showOptionalFields}"
+                     [ngClass]="{hidden: isCollapsedSection() && !showCollapsedSectionFields}"
                      [qaTag]="property.key">
       </st-form-field>
 
       <div *ngIf="property.value.type === 'object'">
          <st-form
+            [hidden]="isCollapsedSection() && !showCollapsedSectionFields"
             [schema]="property.value"
+            [parentName] = "schema.title"
             [name]="property.key"
             [ngModel]="innerValue[property.key]"
-            (ngModelChange)="onChangeProperty($event, property.key)">
+            (ngModelChange)="onChangeProperty($event, property.key)"
+            [id]="property.key + '-section'">
          </st-form>
       </div>
    </div>
 
-   <button class="button button-link-primary optional-fields-button" *ngIf="hasOptionalFields()"
-           (click)="onChangeOptionalFieldsVisibility()">
-      <span>{{getOptionalButtonLabel()}} <i
-         [ngClass]="{'icon-arrow2_up': showOptionalFields, 'icon-arrow2_down': !showOptionalFields}"></i></span>
-   </button>
+
 </form>

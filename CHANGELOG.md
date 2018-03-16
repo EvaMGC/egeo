@@ -2,8 +2,11 @@
 
 ## 8.7.0 (upcoming)
 
-* Pending changelog
+**New features:**
 
+* st-form: Allow to show and hide entire sections clicking a link button and using the ui attribute 'component'
+
+   
 ## 8.6.0 (March 14, 2018)
 
 **Breaking changes:**

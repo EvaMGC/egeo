@@ -4,9 +4,10 @@
 
 ## Inputs
 
-| Property | Type | Req   | Description                             | Default |
-| -------- | ---- | ----- | --------------------------------------- | ------- |
-| schema   | Any  | False | JSON schema needed to generate the form |         |
+| Property   | Type   | Req   | Description                                             | Default |
+| ---------- | ------ | ----- | ------------------------------------------------------- | ------- |
+| schema     | Any    | False | JSON schema needed to generate the form                 |         |
+| parentName | String | False | Name of the parent section. By default, it is undefined |         |
 
 ## Outputs
 

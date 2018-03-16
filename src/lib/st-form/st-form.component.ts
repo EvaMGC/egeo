@@ -22,6 +22,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
 /**
  * @description {Component} [Dynamic form]
  *
@@ -53,13 +54,15 @@ import { Subscription } from 'rxjs';
 export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewChecked, OnDestroy {
    /** @Input {any} [schema=] JSON schema needed to generate the form */
    @Input() schema: any;
+   /** @Input {string} [parentName=] Name of the parent section. By default, it is undefined */
+   @Input() parentName: string;
 
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
    @ViewChild('form') form: NgForm;
 
-   public showOptionalFields: boolean = false;
+   public showCollapsedSectionFields: boolean = false;
    public innerValue: any = {};
    private _value: any = {};
    private _parentFieldSubscription: Subscription[] = [];
@@ -72,7 +75,7 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    }
 
    ngAfterViewChecked(): void {
-      if (this._parentFields  && this.form.control && this.form.control.controls) {
+      if (this._parentFields && this.form.control && this.form.control.controls) {
          for (let i = 0; i < this._parentFields.length; ++i) {
             let parentField: string = this._parentFields[i];
             if (!this._parentFieldSubscription[i] && this.form.control.controls[parentField]) {
@@ -114,20 +117,14 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
          this.form.control.setErrors(errors);
       }
       return errors;
-
    }
 
    isRequired(propertyName: string): boolean {
       return propertyName && this.schema.required && this.schema.required.indexOf(propertyName) !== -1;
    }
 
-   hasOptionalFields(): boolean {
-      for (let propertyName in this.schema.properties) {
-         if (this.schema.properties[propertyName].optional) {
-            return true;
-         }
-      }
-      return false;
+   isCollapsedSection(): boolean {
+      return this.schema.type === 'object' && this.schema.ui && this.schema.ui.component === FORM_UI_COMPONENT.SHOW_MORE;
    }
 
    isAParentField(propertyName: string): boolean {
@@ -135,18 +132,18 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    }
 
    getOptionalButtonLabel(): string {
-      if (!this.showOptionalFields) {
-         return 'Show more';
-      }
-      return 'Show less';
-   }
+      let label: string = 'Additional options';
 
-   isOptionalField(propertyName: string): boolean {
-      return this.schema.properties[propertyName].optional;
+      if (this.parentName || this.schema.title) {
+         label+= ' of ';
+         label+= this.parentName || this.schema.title;
+      }
+
+      return label;
    }
 
    onChangeOptionalFieldsVisibility(): void {
-      this.showOptionalFields = !this.showOptionalFields;
+      this.showCollapsedSectionFields = !this.showCollapsedSectionFields;
    }
 
    displayField(propertyName: string): boolean {
@@ -208,8 +205,8 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       let parentField: string = undefined;
       if (this.schema.dependencies) {
          Object.keys(this.schema.dependencies).forEach((key: string) => {
-            if (this.schema.dependencies[key].indexOf(propertyName) !== -1 ) {
-               parentField =  key;
+            if (this.schema.dependencies[key].indexOf(propertyName) !== -1) {
+               parentField = key;
             }
          });
       }
