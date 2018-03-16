@@ -37,7 +37,7 @@
             [name]="property.key"
             [ngModel]="innerValue[property.key]"
             (ngModelChange)="onChangeProperty($event, property.key)"
-            [id]="property.key + '-section'">
+            [attr.id]="property.key + '-section'">
          </st-form>
       </div>
    </div>
