@@ -153,9 +153,6 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       let parentField: string = this.getParentField(propertyName);
       if ((parentField && !this._value[parentField]) || ( this.isInADisabledSection() && !this.isTheFirstField(propertyName))) {
          createField = false;
-      }
-
-      if (!createField ) {
          this._value[propertyName] = undefined;
       }
       return createField;
