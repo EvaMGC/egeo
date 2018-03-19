@@ -21,7 +21,6 @@ export class StFormDemoComponent {
    public jsonSchema: any;
    public model: any = {  };
 
-   @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
    @ViewChild('formModel') public formModel: NgForm;
 
    constructor() {

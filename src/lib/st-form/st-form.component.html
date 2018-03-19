@@ -10,37 +10,41 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<form #form="ngForm" *ngIf="innerValue" novalidate>
-   <h1 *ngIf="schema.title" class="section-title">{{schema.title}}</h1>
+<form #form="ngForm" *ngIf="innerValue"
+      [ngClass]="{'category': nestingLevel === 0, 'section': nestingLevel === 1, 'subsection': nestingLevel > 1}"
+      novalidate>
+   <h1 *ngIf="schema.title && !isASwitchSection()" class="title">{{schema.title}}</h1>
    <button class="button button-link-primary optional-fields-button" *ngIf="isCollapsedSection()"
            (click)="onChangeOptionalFieldsVisibility()">
       <span> <i
          [ngClass]="{'icon-arrow2_down': showCollapsedSectionFields, 'icon-arrow2_right': !showCollapsedSectionFields}"></i> {{getOptionalButtonLabel()}}</span>
    </button>
    <div *ngFor="let property of schema.properties | stObjectToArray">
-      <st-form-field *ngIf="property.value.type !== 'object' && displayField(property.key)" class="form-field"
+      <st-form-field *ngIf="property.value.type !== 'object' && fieldHasToBeCreated(property.key)" class="form-field"
                      [schema]="property"
                      [name]="property.key"
                      [ngModel]="innerValue[property.key]"
                      (ngModelChange)="onChangeProperty($event, property.key)"
                      [required]="isRequired(property.key)"
-                     [hasDependencies]="isAParentField(property.key)"
-                     [ngClass]="{hidden: isCollapsedSection() && !showCollapsedSectionFields}"
+                     [hasDependencies]="isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))"
+                     [ngClass]="{hidden: isCollapsedSection() && !showCollapsedSectionFields,
+                     'parent-field': isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))}"
                      [qaTag]="property.key">
       </st-form-field>
 
-      <div *ngIf="property.value.type === 'object'">
+      <div *ngIf="property.value.type === 'object' && fieldHasToBeCreated(property.key)">
          <st-form
             [hidden]="isCollapsedSection() && !showCollapsedSectionFields"
             [schema]="property.value"
-            [parentName] = "schema.title"
+            [parentName]="schema.title"
             [name]="property.key"
             [ngModel]="innerValue[property.key]"
             (ngModelChange)="onChangeProperty($event, property.key)"
-            [attr.id]="property.key + '-section'">
+            [attr.id]="property.key + '-section'"
+            [nestingLevel]="nestingLevel + 1">
          </st-form>
       </div>
    </div>
 
-
+<p *ngIf="isInADisabledSection()" class="disabled-section-info"> {{schema.title}} for this instance is disabled.</p>
 </form>

@@ -5,6 +5,7 @@
 **New features:**
 
 * st-form: Allow to show and hide entire sections clicking a link button and using the ui attribute 'component'
+* st-form: Add the possibility of enable or disable sections using the ui attribute 'component' as 'switch'
 
    
 ## 8.6.0 (March 14, 2018)

@@ -17,6 +17,6 @@
    <div class="st-switch__box sth-switch__box">
       <span class="st-switch__circle sth-switch__circle"></span>
    </div>
-   <input class="st-switch__input" [name]="name" [attr.type]="'checkbox'" [checked]="value" (change)="onChange($event)" [attr.id]="relatedInput"
+   <input class="st-switch__input" [name]="name" [attr.type]="'checkbox'" [checked]="value" (click)="onChange($event)" [attr.id]="relatedInput"
    [disabled]="disabled" />
 </div>

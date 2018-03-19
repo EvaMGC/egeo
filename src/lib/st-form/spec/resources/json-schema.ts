@@ -10,6 +10,7 @@
  */
 export const JSON_SCHEMA: any = {
    '$schema': 'http://json-schema.org/schema#',
+   'title': 'General',
    'properties': {
       'genericIntegerInput': {
          'title': 'Generic number',
@@ -153,6 +154,21 @@ export const JSON_SCHEMA: any = {
                'description': 'Set the directory in which Spark is installed on the executors in Mesos.',
                'type': 'string',
                'default': '/opt/spark/dist'
+            },
+            'subexecutor': {
+               'title': 'Sub executor',
+               'type': 'object',
+               'description': 'Spark executor properties',
+               'properties': {
+                  'subcores': {
+                     'title': 'Sub cores',
+                     'type': 'integer'
+                  },
+                  'submemory': {
+                     'title': 'Sub memory',
+                     'type': 'integer'
+                  }
+               }
             }
          }
       }

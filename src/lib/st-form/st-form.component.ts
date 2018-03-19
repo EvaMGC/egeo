@@ -56,6 +56,8 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    @Input() schema: any;
    /** @Input {string} [parentName=] Name of the parent section. By default, it is undefined */
    @Input() parentName: string;
+   /** @Input {string} [nestingLevel=0] This informs about the nesting level of the form. This input is only used for design purposes */
+   @Input() nestingLevel: number = 0;
 
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
@@ -146,16 +148,20 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       this.showCollapsedSectionFields = !this.showCollapsedSectionFields;
    }
 
-   displayField(propertyName: string): boolean {
-      let displayField: boolean = true;
+   fieldHasToBeCreated(propertyName: string): boolean {
+      let createField: boolean = true;
       let parentField: string = this.getParentField(propertyName);
-      if (parentField && !this._value[parentField]) {
-         displayField = false;
+      if ((parentField && !this._value[parentField]) || ( this.isInADisabledSection() && !this.isTheFirstField(propertyName))) {
+         createField = false;
       }
-      return displayField;
+
+      if (!createField ) {
+         this._value[propertyName] = undefined;
+      }
+      return createField;
    }
 
-   // When value is received from oustside
+   // When value is received from outside
    writeValue(value: any): void {
       if (value) {
          this.onChange(value);
@@ -200,6 +206,17 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       }
    }
 
+   isInADisabledSection(): boolean {
+      if (this.isASwitchSection()) {
+         let sectionEnabler: string = Object.keys(this.schema.properties)[0];
+         if (this.form && this.form.controls[sectionEnabler] && this.form.controls[sectionEnabler].value) {
+            return false;
+         } else {
+            return true;
+         }
+      }
+      return false;
+   }
 
    private getParentField(propertyName: string): string {
       let parentField: string = undefined;
@@ -213,4 +230,11 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       return parentField;
    }
 
+   private isASwitchSection(): boolean {
+      return this.schema.ui && this.schema.ui.component === FORM_UI_COMPONENT.SWITCH;
+   }
+
+   private isTheFirstField(propertyName: string): boolean {
+      return propertyName === Object.keys(this.schema.properties)[0];
+   }
 }

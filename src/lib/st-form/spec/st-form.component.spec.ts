@@ -23,6 +23,8 @@ import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 import { StFormFieldModule } from '../st-form-field/st-form-field.module';
 import { CommonModule } from '@angular/common';
 import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
+import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
+import { StSwitchComponent } from '../../st-switch/st-switch.component';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
@@ -38,6 +40,12 @@ describe('StFormComponent', () => {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .overrideComponent(StFormComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StFormFieldComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StSwitchComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .compileComponents();  // compile template and css
@@ -63,13 +71,12 @@ describe('StFormComponent', () => {
       });
 
       it('tooltips are generated using their descriptions', () => {
-         fixture.whenStable().then(() => {
-            fixture.detectChanges();
-            for (let propertyId in JSON_SCHEMA.properties) {
-               if (JSON_SCHEMA.properties.hasOwnProperty(propertyId)) {
-                  let property: any = JSON_SCHEMA.properties[propertyId];
+         let checkSectionFieldTooltips = (schema: any) => {
+            for (let sectionPropertyId in schema.properties) {
+               if (schema.properties.hasOwnProperty(sectionPropertyId)) {
+                  let property: any = schema.properties[sectionPropertyId];
                   if (property.type !== 'object') {
-                     let label: HTMLElement = fixture.nativeElement.querySelector('#' + propertyId + '-label');
+                     let label: HTMLElement = fixture.nativeElement.querySelector('#' + sectionPropertyId + '-label');
                      if (property.description) {
                         expect(label.title).toBe(property.description);
                      } else {
@@ -77,22 +84,16 @@ describe('StFormComponent', () => {
                      }
                   } else {
                      // properties of a section
-                     for (let sectionPropertyId in property.properties) {
-                        if (property.properties.hasOwnProperty(sectionPropertyId)) {
-                           let sectionProperty: any = property.properties[sectionPropertyId];
-                           let label: HTMLElement = fixture.nativeElement.querySelector('#' + sectionPropertyId + '-label');
-
-                           if (sectionProperty.description) {
-                              expect(label.title).toBe(sectionProperty.description);
-                           } else {
-                              expect(label.title).toBe('');
-                           }
-
-                        }
-                     }
+                     checkSectionFieldTooltips(property);
                   }
                }
             }
+         };
+
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            checkSectionFieldTooltips(JSON_SCHEMA);
          });
       });
 
@@ -127,10 +128,6 @@ describe('StFormComponent', () => {
          nestedProperty = JSON_SCHEMA.properties.executor;
       });
 
-      it('A title has to be displayed for nested property', () => {
-         expect(fixture.nativeElement.querySelector('h1.section-title').innerHTML).toContain(nestedProperty.title);
-      });
-
       it('properties of the nested property are rendered', () => {
          let element: any;
          fixture.whenStable().then(() => {
@@ -152,6 +149,18 @@ describe('StFormComponent', () => {
                   expect(fixture.nativeElement.innerHTML).toContain(property.title);
                }
             }
+         });
+      });
+
+      it('form should add a nesting level to its nested sections in order to display section titles taking it into account', () => {
+         fixture.whenStable().then(() => {
+            expect(fixture.nativeElement.querySelector('.category .title').innerHTML).toContain(component.schema.title);
+
+            let sectionTitles: HTMLLabelElement[] = fixture.nativeElement.querySelectorAll('.section .title');
+
+            expect(sectionTitles.length).toBe(2);
+            expect(sectionTitles[0].innerHTML).toContain(nestedProperty.title);
+            expect(sectionTitles[1].innerHTML).toContain(nestedProperty.properties.subexecutor.title);
          });
       });
    });
@@ -183,142 +192,237 @@ describe('StFormComponent', () => {
       });
    });
 
-
-describe('Should be able to improve the visualization of its sections according to the ui attribute', () => {
-   describe('section can be hidden if it has defined as show-more component', () => {
-      beforeEach(() => {
-         component.schema = {
-            'title': 'Section name',
-            'type': 'object',
-            'ui': {
-               'component': 'show-more'
-            },
-            'properties': {
-               'name': {
-                  'title': 'Name',
-                  'type': 'string'
+   describe('Should be able to improve the visualization of its sections according to the ui attribute', () => {
+      describe('section can be hidden if it has defined as show-more component', () => {
+         beforeEach(() => {
+            component.schema = {
+               'title': 'Section name',
+               'type': 'object',
+               'ui': {
+                  'component': 'show-more'
                },
-               'age': {
-                  'title': 'Age',
-                  'type': 'integer'
-               },
-               'subsection': {
-                  'title': 'Subsection',
-                  'type': 'object',
-                  'properties': {
-                     'subName': {
-                        'title': 'Subname',
-                        'type': 'string'
-                     },
-                     'subAge': {
-                        'title': 'Subage',
-                        'type': 'integer'
+               'properties': {
+                  'name': {
+                     'title': 'Name',
+                     'type': 'string'
+                  },
+                  'age': {
+                     'title': 'Age',
+                     'type': 'integer'
+                  },
+                  'subsection': {
+                     'title': 'Subsection',
+                     'type': 'object',
+                     'properties': {
+                        'subName': {
+                           'title': 'Subname',
+                           'type': 'string'
+                        },
+                        'subAge': {
+                           'title': 'Subage',
+                           'type': 'integer'
+                        }
                      }
                   }
                }
-            }
-         };
+            };
 
-         component.parentName = undefined;
-         fixture.detectChanges();
+            component.parentName = undefined;
+            fixture.detectChanges();
+         });
+
+         describe('link button should display a label ', () => {
+            let fakeParentName = 'fake parent name';
+            let fakeSectionName = 'Personal information';
+
+            beforeEach(() => {
+               component.schema = _cloneDeep(component.schema);
+               component.parentName = fakeParentName;
+               component.schema.title = fakeSectionName;
+               fixture.detectChanges();
+            });
+
+            it('with the title of the parent section if it is introduced', () => {
+               let button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+
+               expect(button.innerHTML).toContain('Additional options of ' + fakeParentName);
+               expect(button.querySelector('span i').classList).toContain('icon-arrow2_right');
+
+               button.click();
+               fixture.detectChanges();
+
+               expect(button.innerHTML).toContain('Additional options of ' + fakeParentName);
+               expect(button.querySelector('span i').classList).toContain('icon-arrow2_down');
+            });
+
+            it('with the section name if parent name is not introduced', () => {
+               component.parentName = undefined;
+               component.schema.title = fakeSectionName;
+               fixture.detectChanges();
+
+               let button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+
+               expect(button.innerHTML).toContain('Additional options of ' + fakeSectionName);
+               expect(button.querySelector('span i').classList).toContain('icon-arrow2_right');
+
+               button.click();
+               fixture.detectChanges();
+
+               expect(button.innerHTML).toContain('Additional options of ' + fakeSectionName);
+               expect(button.querySelector('span i').classList).toContain('icon-arrow2_down');
+            });
+
+            it('without any section name if parent section and section name are not introduced', () => {
+               component.parentName = undefined;
+               component.schema.title = undefined;
+               fixture.detectChanges();
+
+               let button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+
+               expect(button.innerHTML).toContain('Additional options');
+               expect(button.querySelector('span i').classList).toContain('icon-arrow2_right');
+
+               button.click();
+               fixture.detectChanges();
+
+               expect(button.innerHTML).toContain('Additional options');
+               expect(button.querySelector('span i').classList).toContain('icon-arrow2_down');
+            });
+         });
+
+         it('link button is displayed and all its properties are hidden', () => {
+            expect(fixture.nativeElement.querySelector('button.button-link-primary')).not.toBeNull();
+            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
+         });
+
+         it('fields will be hidden until user clicks on link button', () => {
+            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
+
+            fixture.nativeElement.querySelector('button').click();
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).not.toContain('hidden');
+            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).not.toContain('hidden');
+            expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeFalsy();
+         });
+
+         it('When user clicks on the button, it changes its text to hide again these fields', () => {
+            fixture.nativeElement.querySelector('button').click();
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('button').innerHTML).toContain('Additional options of ' + component.schema.title);
+
+            fixture.nativeElement.querySelector('button').click();
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
+         });
       });
 
-      describe('link button should display a label ', () => {
-         let fakeParentName = 'fake parent name';
-         let fakeSectionName = 'Personal information';
-
+      describe('section is displayed with a switch if it is defined as switch component', () => {
          beforeEach(() => {
-            component.schema = _cloneDeep(component.schema);
-            component.parentName = fakeParentName;
-            component.schema.title = fakeSectionName;
+            component.schema = {
+               'title': 'Section name',
+               'type': 'object',
+               'ui': {
+                  'component': 'switch'
+               },
+               'properties': {
+                  'enable': {
+                     'title': 'Security',
+                     'type': 'boolean',
+                     'default': false
+                  },
+                  'name': {
+                     'title': 'Name',
+                     'type': 'string'
+                  },
+                  'age': {
+                     'title': 'Age',
+                     'type': 'integer'
+                  },
+                  'subsection': {
+                     'title': 'Subsection',
+                     'type': 'object',
+                     'properties': {
+                        'subName': {
+                           'title': 'Subname',
+                           'type': 'string'
+                        },
+                        'subAge': {
+                           'title': 'Subage',
+                           'type': 'integer'
+                        }
+                     }
+                  }
+
+               }
+            };
             fixture.detectChanges();
          });
 
-         it ('with the title of the parent section if it is introduced', () => {
-            let button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
-
-            expect(button.innerHTML).toContain('Additional options of ' + fakeParentName);
-            expect(button.querySelector('span i').classList).toContain('icon-arrow2_right');
-
-            button.click();
-            fixture.detectChanges();
-
-            expect(button.innerHTML).toContain('Additional options of ' + fakeParentName);
-            expect(button.querySelector('span i').classList).toContain('icon-arrow2_down');
+         it('if first field is a boolean, it is displayed as a switch', () => {
+            expect(fixture.nativeElement.querySelector('#enable.st-switch')).not.toBeNull();
          });
 
-         it ('with the section name if parent name is not introduced', () => {
-            component.parentName = undefined;
-            component.schema.title = fakeSectionName;
-            fixture.detectChanges();
+         it('section fields are hidden while first field does not have value', (done) => {
+            fixture.whenStable().then(() => {
+               expect(fixture.nativeElement.querySelector('#name')).toBeNull();
+               expect(fixture.nativeElement.querySelector('#age')).toBeNull();
+               expect(fixture.nativeElement.querySelector('#subName')).toBeNull();
+               expect(fixture.nativeElement.querySelector('#subAge')).toBeNull();
 
-            let button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+               fixture.nativeElement.querySelector('#enable-label').click((event) => {
+                  event.stopPropagation();
+               });
+               fixture.detectChanges();
 
-            expect(button.innerHTML).toContain('Additional options of ' + fakeSectionName);
-            expect(button.querySelector('span i').classList).toContain('icon-arrow2_right');
-
-            button.click();
-            fixture.detectChanges();
-
-            expect(button.innerHTML).toContain('Additional options of ' + fakeSectionName);
-            expect(button.querySelector('span i').classList).toContain('icon-arrow2_down');
+               expect(fixture.nativeElement.querySelector('#name')).not.toBeNull();
+               expect(fixture.nativeElement.querySelector('#age')).not.toBeNull();
+               expect(fixture.nativeElement.querySelector('#subName')).not.toBeNull();
+               expect(fixture.nativeElement.querySelector('#subAge')).not.toBeNull();
+               done();
+            });
          });
 
-         it ('without any section name if parent section and section name are not introduced', () => {
-            component.parentName = undefined;
-            component.schema.title = undefined;
+         it('when first field does not have any value, rest of fields have to be cleaned', () => {
+            component.innerValue.name = 'fake name';
+            component.innerValue.age = 12;
+            component.innerValue.subsection = {};
+
+            component.innerValue.enable = undefined;
             fixture.detectChanges();
 
-            let button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+            component.innerValue.name = undefined;
+            component.innerValue.age = undefined;
+            component.innerValue.subsection = undefined;
+         });
 
-            expect(button.innerHTML).toContain('Additional options');
-            expect(button.querySelector('span i').classList).toContain('icon-arrow2_right');
+         it('when section is disabled, an info text should be displayed to inform user', (done) => {
+            fixture.whenStable().then(() => {
 
-            button.click();
-            fixture.detectChanges();
+               expect(fixture.nativeElement.querySelector('.disabled-section-info')).not.toBeNull();
+               expect(fixture.nativeElement.querySelector('.disabled-section-info').innerHTML)
+                  .toContain(component.schema.title + ' for this instance is disabled.');
 
-            expect(button.innerHTML).toContain('Additional options');
-            expect(button.querySelector('span i').classList).toContain('icon-arrow2_down');
+               fixture.nativeElement.querySelector('#enable-label').click((event) => {
+                  event.stopPropagation();
+               });
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('.disabled-section-info')).toBeNull();
+               done();
+            });
          });
       });
 
-      it('link button is displayed and all its properties are hidden', () => {
-         expect(fixture.nativeElement.querySelector('button.button-link-primary')).not.toBeNull();
-         expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden'); // form field element
-         expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden'); // form field element
-         expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
-      });
-
-      it('fields will be hidden until user clicks on link button', () => {
-         expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden'); // form field element
-         expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden'); // form field element
-         expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
-
-         fixture.nativeElement.querySelector('button').click();
-         fixture.detectChanges();
-
-         expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).not.toContain('hidden');
-         expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).not.toContain('hidden');
-         expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeFalsy();
-      });
-
-      it('When user clicks on the button, it changes its text to hide again these fields', () => {
-         fixture.nativeElement.querySelector('button').click();
-         fixture.detectChanges();
-
-         expect(fixture.nativeElement.querySelector('button').innerHTML).toContain('Additional options of ' + component.schema.title);
-
-         fixture.nativeElement.querySelector('button').click();
-         fixture.detectChanges();
-
-         expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden'); // form field element
-         expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden'); // form field element
-         expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
-      });
    });
-});
-
-
 });
 
 

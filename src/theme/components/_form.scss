@@ -15,17 +15,83 @@
    .optional-fields-button {
       margin: 10px 0 20px;
       text-transform: lowercase;
-
       i {
          font-size: $egeo-font-size-xxxsmall;
          padding-right: 5px;
       }
    }
 
-   .section-title {
-      font-size: $egeo-font-size-xlarge;
-      line-height: $egeo-line-height-xlarge;
+   .title {
       color: $neutral-13;
+      padding-bottom: 30px;
+      font-family: $egeo-nunito-sans-bold;
+      padding-top: 10px;
+   }
+
+   .category {
+      .title {
+         font-size: $egeo-font-size-xxlarge;
+         line-height: $egeo-line-height-xxlarge;
+      }
+      .form-field.parent-field {
+         .st-switch {
+            label {
+               font-size: $egeo-font-size-xxlarge;
+               line-height: $egeo-line-height-xxlarge;
+            }
+         }
+      }
+   }
+
+   .section {
+      .title {
+         font-size: $egeo-font-size-large;
+         line-height: $egeo-line-height-large;
+      }
+
+      .form-field.parent-field {
+         .st-switch {
+            label {
+               font-size: $egeo-font-size-large;
+               line-height: $egeo-line-height-large;
+            }
+         }
+      }
+   }
+
+   .subsection {
+      .title {
+         font-size: $egeo-font-size-xsmall;
+         line-height: $egeo-line-height-xsmall;
+      }
+
+      .form-field.parent-field {
+         .st-switch {
+            label {
+               font-size: $egeo-font-size-xsmall;
+               line-height: $egeo-line-height-xsmall;
+            }
+         }
+      }
+   }
+
+   .form-field.parent-field {
+      .st-switch {
+         label {
+            color: $neutral-13;
+            vertical-align: middle;
+            padding-bottom: 30px;
+         }
+      }
+   }
+
+   .disabled-section-info {
+      font-family: $egeo-nunito-sans-bold;
+      font-size: $egeo-font-size-small;
+      color: $neutral-06;
+      &::first-letter {
+         text-transform: uppercase;
+      }
    }
 
 }

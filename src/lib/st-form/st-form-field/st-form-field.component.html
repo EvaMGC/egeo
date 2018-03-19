@@ -62,7 +62,9 @@
            [name]="schema.key"
            [contextualHelp]="schema.value.description"
            [ngModel]="innerValue"
-           (ngModelChange)="setSwitchValue($event)"
+           (ngModelChange)="setValue($event)"
+           [value]="innerValue"
            [qaTag]="schema.key"
            [id]="qaTag">
 </st-switch>
+

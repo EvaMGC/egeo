@@ -665,7 +665,6 @@ describe('StFormFieldComponent', () => {
       it('if schema contains a default value, checkbox has to be initialized with it', () => {
          fixture.whenStable().then(() => {
             fixture.detectChanges();
-
             expect(fixture.nativeElement.querySelector('#boolean-input').checked).toBe(booleanProperty.default);
          });
       });
@@ -824,23 +823,6 @@ describe('StFormFieldComponent', () => {
 
             expect(fixture.nativeElement.querySelector('#security-input').checked).toBe(booleanProperty.default);
          });
-      });
-
-      it('if user disables switch, its value is not added to model', () => {
-         spyOn(component, 'onChange');
-         spyOn(component.valueChange, 'emit');
-
-         fixture.nativeElement.querySelector('#security-input').click();
-
-         fixture.detectChanges();
-
-         expect(component.onChange).toHaveBeenCalledWith(true);
-         expect(component.valueChange.emit).toHaveBeenCalledWith(true);
-
-         fixture.nativeElement.querySelector('#security-input').click();
-
-         expect(component.onChange).toHaveBeenCalledWith(undefined);
-         expect(component.valueChange.emit).toHaveBeenCalledWith(undefined);
       });
    });
 });
