@@ -501,6 +501,18 @@ describe('StFormComponent', () => {
          });
       });
    });
+
+   it ('form can be configured to be validated its fields without any user interaction', () => {
+      component.forceValidations = true;
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('#url').parentElement.innerHTML).toContain('This field is required');
+
+      component.forceValidations = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('#url').parentElement.innerHTML).not.toContain('This field is required');
+   });
+
 })
 ;
 

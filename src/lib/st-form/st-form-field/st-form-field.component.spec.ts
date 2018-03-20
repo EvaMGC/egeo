@@ -297,8 +297,14 @@ describe('StFormFieldComponent', () => {
             component.schema = { key: 'log_level', value: { type: 'number', examples: [fakePlaceholder] } };
             fixture.detectChanges();
 
-            const cssInput: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
+            let cssInput: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
             expect(cssInput.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
+
+            component.schema = { key: 'log_level', value: { type: 'number', examples: [] } };
+            fixture.detectChanges();
+
+            cssInput = fixture.debugElement.query(By.css('input')).nativeElement;
+            expect(cssInput.getAttribute('placeholder')).toEqual('');
          });
       });
 
