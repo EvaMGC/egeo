@@ -8,7 +8,11 @@
 * st-form: Add the possibility of enabling and disabling sections using the ui attribute 'component' as 'switch'
 * st-form: Add the possibility of displaying sections as accordion
 
-   
+**Fixed bugs:**
+ 
+* st-tooltip: It is not displayed when compiling to AOT
+
+ 
 ## 8.6.0 (March 14, 2018)
 
 **Breaking changes:**

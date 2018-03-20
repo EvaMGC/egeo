@@ -24,7 +24,7 @@ export class StTooltipComponent {
    @Input()
    set showOnClick(value: boolean) {
       this._showOnClick = value;
-      this.classTooltip = this.title && !value;
+      this.classTooltip = this._title && !value;
    }
    get showOnClick(): boolean {
       return this._showOnClick;
@@ -36,7 +36,7 @@ export class StTooltipComponent {
       this._title = value;
       if (value) {
          this.el.nativeElement.setAttribute('title', value);
-         this.classTooltip = !this.showOnClick;
+         this.classTooltip = !this._showOnClick;
       } else {
          this.el.nativeElement.removeAttribute('title');
          this.classTooltip = false;
