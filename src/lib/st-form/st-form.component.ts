@@ -58,6 +58,8 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    @Input() parentName: string;
    /** @Input {string} [nestingLevel=0] This informs about the nesting level of the form. This input is only used for design purposes */
    @Input() nestingLevel: number = 0;
+   /** @Input {boolean} [forceValidations=] Boolean to force the field validations */
+   @Input() forceValidations: boolean;
 
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
