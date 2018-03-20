@@ -75,6 +75,43 @@
       }
    }
 
+   .accordion > .title {
+      padding-top: 0;
+      padding-bottom: 15px;
+      border-bottom: 1px solid $neutral-05;
+      width: 100%;
+      position: relative;
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &:after {
+         content: '\E605';
+         font-family: $egeo-stratio-icons;
+         font-size: $egeo-font-size-small;
+         right: 0;
+         position: absolute;
+      }
+   }
+
+   .accordion--open {
+      & > .title {
+         border-bottom: none;
+         margin-bottom: 10px;
+         &:after {
+            content: '\E63F';
+         }
+      }
+
+      &::after {
+         content: '';
+         padding-top: 15px;
+         margin-bottom: 10px;
+         border-bottom: 1px solid $neutral-06;
+         width: 100%;
+         display: inline-block;
+      }
+   }
+
    .form-field.parent-field {
       .st-switch {
          label {
@@ -86,9 +123,9 @@
    }
 
    .disabled-section-info {
-      font-family: $egeo-nunito-sans-bold;
       font-size: $egeo-font-size-small;
-      color: $neutral-06;
+      color: $neutral-07;
+      padding-bottom: 30px;
       &::first-letter {
          text-transform: uppercase;
       }

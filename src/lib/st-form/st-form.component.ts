@@ -126,6 +126,11 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    }
 
    isCollapsedSection(): boolean {
+      return this.schema.type === 'object' && this.schema.ui &&
+         (this.schema.ui.component === FORM_UI_COMPONENT.SHOW_MORE || this.schema.ui.component === FORM_UI_COMPONENT.ACCORDION);
+   }
+
+   iShowMoreSection(): boolean {
       return this.schema.type === 'object' && this.schema.ui && this.schema.ui.component === FORM_UI_COMPONENT.SHOW_MORE;
    }
 
@@ -206,13 +211,23 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    isInADisabledSection(): boolean {
       if (this.isASwitchSection()) {
          let sectionEnabler: string = Object.keys(this.schema.properties)[0];
-         if (this.form && this.form.controls[sectionEnabler] && this.form.controls[sectionEnabler].value) {
-            return false;
-         } else {
-            return true;
-         }
+         return !(this.form && this.form.controls[sectionEnabler] && this.form.controls[sectionEnabler].value);
       }
       return false;
+   }
+
+   isASwitchSection(): boolean {
+      return this.schema.ui && (this.schema.ui.component === FORM_UI_COMPONENT.SWITCH);
+   }
+
+   isAnAccordion(): boolean {
+      return this.schema.ui && this.schema.ui.component === FORM_UI_COMPONENT.ACCORDION;
+   }
+
+   onClickTitle(): void {
+      if (this.isAnAccordion()) {
+         this.onChangeOptionalFieldsVisibility();
+      }
    }
 
    private getParentField(propertyName: string): string {
@@ -227,9 +242,6 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       return parentField;
    }
 
-   private isASwitchSection(): boolean {
-      return this.schema.ui && this.schema.ui.component === FORM_UI_COMPONENT.SWITCH;
-   }
 
    private isTheFirstField(propertyName: string): boolean {
       return propertyName === Object.keys(this.schema.properties)[0];

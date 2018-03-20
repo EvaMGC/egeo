@@ -6,6 +6,7 @@
 
 * st-form: Allow to show and hide entire sections clicking a link button and using the ui attribute 'component'
 * st-form: Add the possibility of enabling and disabling sections using the ui attribute 'component' as 'switch'
+* st-form: Add the possibility of displaying sections as accordion
 
    
 ## 8.6.0 (March 14, 2018)

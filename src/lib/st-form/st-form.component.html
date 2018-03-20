@@ -11,10 +11,14 @@
 
 -->
 <form #form="ngForm" *ngIf="innerValue"
-      [ngClass]="{'category': nestingLevel === 0, 'section': nestingLevel === 1, 'subsection': nestingLevel > 1}"
+      [ngClass]="{'category': nestingLevel === 0,
+                  'section': nestingLevel === 1,
+                  'subsection': nestingLevel > 1,
+                  'accordion': isAnAccordion(),
+                   'accordion--open': isAnAccordion() && showCollapsedSectionFields}"
       novalidate>
-   <h1 *ngIf="schema.title && !isASwitchSection()" class="title">{{schema.title}}</h1>
-   <button class="button button-link-primary optional-fields-button" *ngIf="isCollapsedSection()"
+   <h1 *ngIf="schema.title && !isASwitchSection()" class="title" (click)="onClickTitle()">{{schema.title}}</h1>
+   <button class="button button-link-primary optional-fields-button" *ngIf="iShowMoreSection()"
            (click)="onChangeOptionalFieldsVisibility()">
       <span> <i
          [ngClass]="{'icon-arrow2_down': showCollapsedSectionFields, 'icon-arrow2_right': !showCollapsedSectionFields}"></i> {{getOptionalButtonLabel()}}</span>
@@ -46,5 +50,5 @@
       </div>
    </div>
 
-<p *ngIf="isInADisabledSection()" class="disabled-section-info"> {{schema.title}} for this instance is disabled.</p>
+   <p *ngIf="isInADisabledSection()" class="disabled-section-info"> {{schema.title}} for this instance is disabled.</p>
 </form>
