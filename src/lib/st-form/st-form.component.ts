@@ -217,7 +217,7 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    }
 
    isASwitchSection(): boolean {
-      return this.schema.ui && (this.schema.ui.component === FORM_UI_COMPONENT.SWITCH);
+      return this.schema.ui && this.schema.ui.component === FORM_UI_COMPONENT.SWITCH;
    }
 
    isAnAccordion(): boolean {
