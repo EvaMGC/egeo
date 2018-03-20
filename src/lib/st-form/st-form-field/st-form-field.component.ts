@@ -44,6 +44,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() name: string;
    @Input() value: any;
    @Input() hasDependencies: boolean;
+   @Input() forceValidations: boolean;
 
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
@@ -132,7 +133,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    get placeholder(): string {
-      return this.schema.value.examples ? this.schema.value.examples[0] : '';
+      return this.schema.value.examples && this.schema.value.examples[0] ? 'e.g. ' + this.schema.value.examples[0] : '';
    }
 
    get description(): string {

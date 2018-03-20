@@ -28,6 +28,7 @@
                      [schema]="property"
                      [name]="property.key"
                      [ngModel]="innerValue[property.key]"
+                     [forceValidations]="forceValidations"
                      (ngModelChange)="onChangeProperty($event, property.key)"
                      [required]="isRequired(property.key)"
                      [hasDependencies]="isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))"
