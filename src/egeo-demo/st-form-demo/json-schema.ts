@@ -9,90 +9,157 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 export const JSON_SCHEMA: any = {
-   'type': 'object',
-   'title': 'Security',
-   'ui': {
-      'component': 'switch'
-   },
-   'properties': {
-      'enable': {
-         'title': 'Security',
-         'type': 'boolean'
+      'type': 'object',
+      'title': 'Security',
+      'ui': {
+         'component': 'switch'
       },
-      "serviceId": {
-         "default": "crossdata",
-         "type": "string",
-         "description": "Name of the service",
-         "title": "Service name",
-         "optional": false,
-         "readonly": false,
-         "pattern": "^[a-zA-Z]+$",
-         "example": "crossdata",
-         "internal_name": "SERVICE_ID"
-      },
-      'name': {
-         'title': 'Name',
-         'type': 'string'
-      },
-      'more': {
-         'type': 'object',
-         'description': 'Crossdata general configuration properties',
-         'additionalProperties': false,
-         'ui': {
-            'component': 'show-more'
+      'properties': {
+         'enable': {
+            'title': 'Security',
+            'type': 'boolean'
          },
-         'properties': {
-            'instances': {
-               'title': 'Instances',
-               'description': 'Number of Crossdata instances to run.',
-               'type': 'integer',
-               'default': 1,
-               'minimum': 1
+         "serviceId": {
+            "default": "crossdata",
+            "type": "string",
+            "description": "Name of the service",
+            "title": "Service name",
+            "optional": false,
+            "readonly": false,
+            "pattern": "^[a-zA-Z]+$",
+            "example": "crossdata",
+            "internal_name": "SERVICE_ID"
+         },
+         'name': {
+            'title': 'Name',
+            'type': 'string'
+         },
+         'more': {
+            'type': 'object',
+            'description': 'Crossdata general configuration properties',
+            'additionalProperties': false,
+            'ui': {
+               'component': 'show-more'
             },
-            'port': {
-               'title': 'Port',
-               'description': 'Port in which Crossdata will be exposed',
-               'type': 'integer',
-               'default': 10075
+            'properties': {
+               'instances': {
+                  'title': 'Instances',
+                  'description': 'Number of Crossdata instances to run.',
+                  'type': 'integer',
+                  'default': 1,
+                  'minimum': 1
+               },
+               'port': {
+                  'title': 'Port',
+                  'description': 'Port in which Crossdata will be exposed',
+                  'type': 'integer',
+                  'default': 10075
+               }
+            },
+            'required': [
+               'name',
+               'cores',
+               'memory'
+            ]
+         },
+         'age': {
+            'title': 'Age',
+            'type': 'integer'
+         },
+         'log_level': {
+            'title': 'Log Level',
+            'description': 'Set the log level: TRACE,DEBUG,INFO,WARN,ERROR and FATAL',
+            'type': 'string',
+            'default': 'INFO',
+            'enum': ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL']
+         },
+         'subsection': {
+            'title': 'Subsection',
+            'type': 'object',
+            'ui': {
+               'component': 'switch'
+            },
+            'properties': {
+               'enable-subsection': {
+                  'title': 'Subsection',
+                  'type': 'boolean'
+               },
+               'subName': {
+                  'title': 'Subname',
+                  'type': 'string'
+               },
+               'subAge': {
+                  'title': 'Subage',
+                  'type': 'integer'
+               }
             }
          },
-         'required': [
-            'name',
-            'cores',
-            'memory'
-         ]
-      },
-      'age': {
-         'title': 'Age',
-         'type': 'integer'
-      },
-      'log_level': {
-         'title': 'Log Level',
-         'description': 'Set the log level: TRACE,DEBUG,INFO,WARN,ERROR and FATAL',
-         'type': 'string',
-         'default': 'INFO',
-         'enum': ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL']
-      },
-      'subsection': {
-         'type': 'object',
-         'ui': {
-            'component': 'switch'
+         'accordion': {
+            'title': 'Centralized Configuration',
+            'type': 'object',
+            'ui': {
+               'component': 'accordion'
+            },
+            'properties': {
+               'name': {
+                  'title': 'Name',
+                  'type': 'string'
+               },
+               'age': {
+                  'title': 'Age',
+                  'type': 'integer'
+               },
+               'subsection': {
+                  'title': 'Subsection',
+                  'type': 'object',
+                  'properties': {
+                     'subName': {
+                        'title': 'Subname',
+                        'type': 'string'
+                     },
+                     'subAge': {
+                        'title': 'Subage',
+                        'type': 'integer'
+                     }
+                  }
+               }
+
+
+            }
          },
-         'properties': {
-            'enable-subsection': {
-               'title': 'Subsection',
-               'type': 'boolean'
+         'accordion2': {
+            'title': 'Optimization',
+            'type': 'object',
+            'ui': {
+               'component': 'accordion'
             },
-            'subName': {
-               'title': 'Subname',
-               'type': 'string'
-            },
-            'subAge': {
-               'title': 'Subage',
-               'type': 'integer'
+            'properties': {
+               'name': {
+                  'title': 'Name',
+                  'type': 'string'
+               },
+               'age': {
+                  'title': 'Age',
+                  'type': 'integer'
+               },
+               'subsection': {
+                  'title': 'Subsection',
+                  'type': 'object',
+                  'properties': {
+                     'subName': {
+                        'title': 'Subname',
+                        'type': 'string'
+                     },
+                     'subAge': {
+                        'title': 'Subage',
+                        'type': 'integer'
+                     }
+                  }
+               }
+
+
             }
          }
       }
-
    }
-};
+   ;

@@ -12,16 +12,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { cloneDeep as _cloneDeep } from 'lodash';
+
 import { StFormComponent } from '../st-form.component';
 import { JSON_SCHEMA } from './resources/json-schema';
 import { PipesModule } from '../../pipes/pipes.module';
 import { StInputModule } from '../../st-input/st-input.module';
-import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 import { StFormModule } from '../st-form.module';
+import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 import { StTooltipModule } from '../../st-tooltip/st-tooltip.module';
 import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 import { StFormFieldModule } from '../st-form-field/st-form-field.module';
-import { CommonModule } from '@angular/common';
 import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
 import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 import { StSwitchComponent } from '../../st-switch/st-switch.component';
@@ -190,6 +190,22 @@ describe('StFormComponent', () => {
       it('if a field has type boolean and has dependant fields, it will be displayed as a switch', () => {
          expect(fixture.nativeElement.querySelector('#security.st-switch')).not.toBeNull();
       });
+
+      it('these fields are not rendered if switch is off', (done) => {
+         fixture.whenStable().then(() => {
+            expect(fixture.nativeElement.querySelector('#dns')).toBeNull();
+
+            fixture.nativeElement.querySelector('#security-label').click((event) => {
+               event.stopPropagation();
+            });
+
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#dns')).not.toBeNull();
+            done();
+         });
+      });
+
    });
 
    describe('Should be able to improve the visualization of its sections according to the ui attribute', () => {
@@ -422,8 +438,71 @@ describe('StFormComponent', () => {
          });
       });
 
+      describe('section can be displayed as an accordion', () => {
+         beforeEach(() => {
+            component.schema = {
+               'title': 'Section name',
+               'type': 'object',
+               'ui': {
+                  'component': 'accordion'
+               },
+               'properties': {
+                  'name': {
+                     'title': 'Name',
+                     'type': 'string'
+                  },
+                  'age': {
+                     'title': 'Age',
+                     'type': 'integer'
+                  },
+                  'subsection': {
+                     'title': 'Subsection',
+                     'type': 'object',
+                     'properties': {
+                        'subName': {
+                           'title': 'Subname',
+                           'type': 'string'
+                        },
+                        'subAge': {
+                           'title': 'Subage',
+                           'type': 'integer'
+                        }
+                     }
+                  }
+
+               }
+            };
+            fixture.detectChanges();
+         });
+
+         it('section fields are hidden by default until user clicks on the title', (done) => {
+            fixture.whenStable().then(() => {
+               expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden');
+               expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden');
+               expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
+
+               fixture.nativeElement.querySelector('.accordion .title').click(); // click to show fields
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).not.toContain('hidden');
+               expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).not.toContain('hidden');
+               expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeFalsy();
+
+
+               fixture.nativeElement.querySelector('.accordion .title').click(); // click to hide fields again
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.classList).toContain('hidden');
+               expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).toContain('hidden');
+               expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
+
+               done();
+            });
+         });
+      });
    });
-});
+})
+;
 
 
 @Component({
@@ -464,7 +543,7 @@ describe('StFormComponent in templateDriven form', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, CommonModule, ReactiveFormsModule, StFormModule, StFormFieldModule, StInputModule, StCheckboxModule],
+         imports: [FormsModule, ReactiveFormsModule, StFormModule, StFormFieldModule, StInputModule, StCheckboxModule],
          declarations: [FormInTemplateDrivenFormComponent]
       })
          .compileComponents();  // compile template and css

@@ -10,20 +10,21 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-form [schema]="jsonSchema" [(ngModel)]="model" #formModel="ngModel"></st-form>
+<section class="container-liquid">
+   <div class="col-md-5">
+      <st-form [schema]="jsonSchema" [(ngModel)]="model" #formModel="ngModel"></st-form>
+   </div>
+   <br>
 
-<br>
+   <button class="button button-primary" (click)="showFormStatus()">
+      <span>Show form status</span>
+   </button>
 
-<button class="button button-primary" (click)="showFormStatus()">
-   <span>Show form status</span>
-</button>
+   <button class="button button-secondary-gray" (click)="changeFormStatus()">
+      <span>Disable/Enable form</span>
+   </button>
 
-
-<button class="button button-secondary-gray" (click)="changeFormStatus()">
-   <span>Disable/Enable form</span>
-</button>
-
-
+</section>
 <h1>MODEL</h1>
 {{model | json}}
 <br><br><br>
