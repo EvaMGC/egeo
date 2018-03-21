@@ -1,6 +1,6 @@
 {
   "name": "@stratio/egeo",
-  "version": "8.7.0-RC1",
+  "version": "8.7.0",
   "description": "Egeo is an angular common components library",
   "author": "Stratio",
   "scripts": {
