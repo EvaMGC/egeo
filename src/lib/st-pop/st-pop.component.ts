@@ -16,14 +16,10 @@ import {
    ChangeDetectionStrategy,
    OnChanges,
    SimpleChanges,
-   ChangeDetectorRef,
-   HostListener,
-   OnDestroy,
-   NgZone
+   HostListener
 } from '@angular/core';
-import { StPopOffset, StPopPlacement } from './st-pop.model';
-import { StWindowRefService } from '../utils/window-service';
 
+import { StPopOffset, StPopPlacement } from './st-pop.model';
 
 // Internal type
 type StCoords = { x: number, y: number, z: number };
@@ -51,7 +47,7 @@ type StCoords = { x: number, y: number, z: number };
    templateUrl: './st-pop.component.html',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StPopComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class StPopComponent implements AfterViewInit, OnChanges {
 
    /** @Input {StPopPlacement} [placement=StPopPlacement.BOTOM_START] Define position of content relative to button */
    @Input() placement: StPopPlacement = StPopPlacement.BOTTOM_START;
@@ -66,18 +62,8 @@ export class StPopComponent implements AfterViewInit, OnChanges, OnDestroy {
 
    private button: ClientRect;
    private content: ElementRef;
-   private scrollListener: (event: any) => void;
 
-   constructor(private el: ElementRef, private _windowRefService: StWindowRefService, private _cd: ChangeDetectorRef, private ngZone: NgZone) {
-      this.scrollListener = (event: any) => {
-         this.offset.x = -(event.target.scrollLeft);
-         this.offset.y = -(event.target.scrollTop);
-         this.calculatePosition();
-         this._cd.markForCheck();
-      };
-      this.ngZone.runOutsideAngular(() => {
-         _windowRefService.nativeWindow.addEventListener('scroll', this.scrollListener, true);
-      });
+   constructor(private el: ElementRef) {
    }
 
    ngAfterViewInit(): void {
@@ -86,10 +72,6 @@ export class StPopComponent implements AfterViewInit, OnChanges, OnDestroy {
 
    ngOnChanges(changes: SimpleChanges): void {
       this.calculatePosition();
-   }
-
-   ngOnDestroy(): void {
-      this._windowRefService.nativeWindow.removeEventListener('scroll', this.scrollListener, true);
    }
 
    private getContentElement(): HTMLElement {

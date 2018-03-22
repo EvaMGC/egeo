@@ -10,8 +10,9 @@
  */
 import { Component, Input, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { StPopComponent } from './st-pop.component';
-import { StPopPlacement, StPopOffset } from './st-pop.model';
+import { StPopPlacement } from './st-pop.model';
 import { StWindowRefService } from '../utils/window-service';
 
 class WindowRefMock {
@@ -112,61 +113,5 @@ describe('StPopComponent', () => {
       fixture.detectChanges();
       let content: HTMLElement = fixture.debugElement.nativeElement.querySelector('#content');
       expect(content.style.transform).toBeUndefined();
-   });
-
-   describe('should be able to listen window scroll and update the item position', () => {
-      let previousPos: StPopOffset;
-      let scrollEvent: Event;
-      let parentDiv: HTMLDivElement;
-
-      beforeEach(() => {
-         component.popComponent.hidden = false;
-         previousPos = component.popComponent.offset;
-         scrollEvent = new CustomEvent('scroll');
-         parentDiv = fixture.nativeElement.querySelector('div');
-      });
-
-      it('if user scrolls page vertically, item position is updated', () => {
-         parentDiv.scrollTop = 5;
-
-         fixture.detectChanges();
-         parentDiv.dispatchEvent(scrollEvent);
-
-         fixture.detectChanges();
-
-         expect(component.popComponent.offset.y).toBe(-5);
-         expect(component.popComponent.offset.x).toBe(previousPos.x);
-
-         parentDiv.scrollTop = 80;
-         fixture.detectChanges();
-         parentDiv.dispatchEvent(scrollEvent);
-
-         fixture.detectChanges();
-
-         expect(component.popComponent.offset.y).toBe(-80);
-         expect(component.popComponent.offset.x).toBe(previousPos.x);
-      });
-
-      it('if user scrolls page horizontally, item position is updated', () => {
-         parentDiv.scrollLeft = 10;
-
-         fixture.detectChanges();
-         parentDiv.dispatchEvent(scrollEvent);
-
-         fixture.detectChanges();
-
-         expect(component.popComponent.offset.y).toBe(previousPos.y);
-         expect(component.popComponent.offset.x).toBe(-10);
-
-         parentDiv.scrollLeft = 100;
-
-         fixture.detectChanges();
-         parentDiv.dispatchEvent(scrollEvent);
-
-         fixture.detectChanges();
-
-         expect(component.popComponent.offset.y).toBe(previousPos.y);
-         expect(component.popComponent.offset.x).toBe(-100);
-      });
    });
 });

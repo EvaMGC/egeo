@@ -2,7 +2,10 @@
 
 ## 8.8.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
+* st-select: When select is opened after scrolling, its dropdown is not displayed
+
 
 ## 8.7.0 (March 21, 2018)
 
