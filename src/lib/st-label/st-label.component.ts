@@ -8,19 +8,16 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ElementRef } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
-import { StTooltipComponent } from '../st-tooltip';
+import { StTooltipComponent } from '../st-tooltip/st-tooltip.component';
 
 @Component({
-   host: {class: 'st-label'},
    selector: '[st-label]',
    styleUrls: ['../st-tooltip/st-tooltip.component.scss'],
    templateUrl: './st-label.component.html'
 })
 
 export class StLabelComponent extends StTooltipComponent {
-   constructor(private _el: ElementRef) {
-      super(_el);
-   }
- }
+   @HostBinding('class.st-label') classStLabel: boolean = true;
+}

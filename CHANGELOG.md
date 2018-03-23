@@ -5,6 +5,7 @@
 **Fixed bugs:**
 
 * st-select: When select is opened after scrolling, its dropdown is not displayed
+* st-tooltip: It is not displayed yet when compiling to AOT
 
 
 ## 8.7.0 (March 21, 2018)
