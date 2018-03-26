@@ -8,6 +8,7 @@
 * st-tooltip: It is not displayed yet when compiling to AOT
 * st-input: Allow to reset value to default
 * st-select: Allow to reset value to default
+* st-checkbox: Fix margins
 
 
 ## 8.7.0 (March 21, 2018)
