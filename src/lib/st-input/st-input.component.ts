@@ -161,8 +161,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    }
 
    createResetButton(): boolean {
-      return this.default !== undefined && this.internalControl.value !== null
-         &&  this.internalControl.value !== '' && this.internalControl.value !== this.default;
+      return this.default !== undefined && this.internalControl.dirty && this.internalControl.value !== this.default;
    }
 
    resetToDefault(): void {

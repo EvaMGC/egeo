@@ -127,7 +127,7 @@ describe('StInputComponent', () => {
       });
 
 
-      it('reset icon is only displayed when input is focused and it has a value and is different to default', () => {
+      it('reset icon is only displayed when input is focused and user has typed something and it is different to default', () => {
          let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
          htmlInput.dispatchEvent(new Event('focus'));
