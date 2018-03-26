@@ -52,6 +52,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    @Input() isFocused: boolean = false;
    @Input() readonly: boolean = false;
    @Input() step: string;
+   @Input() default: any;
 
    @Input()
    get value(): any {
@@ -157,6 +158,16 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
 
    get labelQaTag(): string {
       return (this.qaTag || this.name) + '-label';
+   }
+
+   createResetButton(): boolean {
+      return this.default !== undefined && this.internalControl.value !== null
+         &&  this.internalControl.value !== '' && this.internalControl.value !== this.default;
+   }
+
+   resetToDefault(): void {
+      this.writeValue(this.default);
+      this._cd.markForCheck();
    }
 
    /** Style functions */

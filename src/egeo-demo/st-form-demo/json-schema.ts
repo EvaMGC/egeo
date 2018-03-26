@@ -16,25 +16,16 @@ export const JSON_SCHEMA: any = {
       "component": "standard"
    },
    "properties": {
+
+
       "general": {
          "type": "object",
-         "title": "",
+         "title": "General",
          "description": "",
          "ui": {
-            "component": "standard"
+            "component": "show-more"
          },
          "properties": {
-            "serviceConfiguration": {
-               "title": "Type of Discovery",
-               "required": true,
-               "readOnly": false,
-               "type": "string",
-               "default": "/discovery-null",
-               "level": 1,
-               "exclusiveMinimum": false,
-               "exclusiveMaximum": false,
-               "internalName": "SERVICE_CONFIGURATION"
-            },
             "serviceId": {
                "title": "Name",
                "required": true,
@@ -46,51 +37,72 @@ export const JSON_SCHEMA: any = {
                "exclusiveMaximum": false,
                "internalName": "SERVICE_ID"
             },
-            "TENANT_NAME": {
-               "title": "Tenant name",
+            "serviceConfiguration": {
+               "title": "Type of Sparta",
+               "required": true,
+               "readOnly": false,
+               "type": "string",
+               "default": "/sparta/sparta-server/sparta-server-null",
+               "level": 1,
+               "exclusiveMinimum": false,
+               "exclusiveMaximum": false,
+               "internalName": "SERVICE_CONFIGURATION"
+            },
+            "runMode": {
+               "title": "Run mode",
                "required": false,
                "readOnly": false,
                "type": "string",
-               "default": "crossdata-1",
+               "default": "production",
                "level": 1,
                "minLength": 3,
                "maxLength": 100,
                "exclusiveMinimum": false,
                "exclusiveMaximum": false,
-               "internalName": "TENANT_NAME"
+               "internalName": "RUN_MODE"
             },
             "resources": {
                "type": "object",
-               "title": "Resources",
+               "title": "Scheduler resources",
                "description": "",
                "ui": {
-                  "component": "standard"
+                  "component": "accordion"
                },
                "properties": {
+                  "Sparta_Docker_Image": {
+                     "title": "Docker image",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "qa.stratio.com/stratio/sparta:2.0.0-RC3",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 100,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SPARTA_DOCKER_IMAGE"
+                  },
+                  "Sparta_Marathon_Force_Pull_Image": {
+                     "title": "Is downloaded scheduler image each time?",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "boolean",
+                     "default": true,
+                     "level": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SPARTA_MARATHON_FORCE_PULL_IMAGE"
+                  },
                   "mem": {
                      "title": "Memory",
                      "required": true,
                      "readOnly": false,
                      "type": "integer",
                      "default": 1024,
-                     "examples": [
-                        "1"
-                     ],
                      "level": 1,
                      "exclusiveMinimum": false,
                      "exclusiveMaximum": false,
                      "internalName": "MEM"
-                  },
-                  "disk": {
-                     "title": "Disk",
-                     "required": true,
-                     "readOnly": false,
-                     "type": "integer",
-                     "default": 0,
-                     "level": 1,
-                     "exclusiveMinimum": false,
-                     "exclusiveMaximum": false,
-                     "internalName": "DISK"
                   },
                   "instances": {
                      "title": "Instances",
@@ -104,7 +116,7 @@ export const JSON_SCHEMA: any = {
                      "internalName": "INSTANCES"
                   },
                   "cpus": {
-                     "title": "CPUs",
+                     "title": "CPU",
                      "required": true,
                      "readOnly": false,
                      "type": "integer",
@@ -115,121 +127,363 @@ export const JSON_SCHEMA: any = {
                      "internalName": "CPUs"
                   }
                },
-               "required": [
-                  "mem",
-                  "disk",
-                  "instances",
-                  "cpus"
-               ]
+               "required": ["mem", "instances", "cpus"]
             },
-            "export": {
+            "zookeeper": {
                "type": "object",
-               "title": "Export",
+               "title": "Zookeeper",
                "description": "",
                "ui": {
                   "component": "accordion"
                },
                "properties": {
-                  "hostname": {
-                     "title": "Hostname",
+                  "Sparta_Zookeeper_Connection_String": {
+                     "title": "Zookeeper connection String",
                      "required": false,
                      "readOnly": false,
                      "type": "string",
-                     "default": "",
+                     "default": "zk-0001.zkuserland.mesos:2181,zk-0002.zkuserland.mesos:2181,zk-0003.zkuserland.mesos:2181",
                      "level": 1,
+                     "minLength": 3,
+                     "maxLength": 256,
                      "exclusiveMinimum": false,
                      "exclusiveMaximum": false,
-                     "internalName": "ENDPOINT_HOSTNAME"
+                     "internalName": "SPARTA_ZOOKEEPER_CONNECTION_STRING"
                   },
-                  "path": {
+                  "SpartaPluginZkConnect": {
+                     "title": "Plugin Zookeeper connection",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "gosec1.node.paas.labs.stratio.com:2181,gosec2.node.paas.labs.stratio.com:2181,gosec3.node.paas.labs.stratio.com:2181",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 256,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SPARTA_PLUGIN_ZK_CONNECT"
+                  },
+                  "Sparta_Zookeeper_Path": {
                      "title": "Path",
                      "required": false,
                      "readOnly": false,
                      "type": "string",
-                     "default": "",
-                     "level": 1,
-                     "exclusiveMinimum": false,
-                     "exclusiveMaximum": false,
-                     "internalName": "ENDPOINT_PATH"
-                  }
-               }
-            },
-            "vault": {
-               "type": "object",
-               "title": "Vault",
-               "description": "",
-               "ui": {
-                  "component": "accordion"
-               },
-               "properties": {
-                  "VAULT_HOST": {
-                     "title": "Host",
-                     "required": false,
-                     "readOnly": false,
-                     "type": "string",
-                     "default": "vault.service.paas.labs.stratio.com",
+                     "default": "/stratio/sparta",
                      "level": 1,
                      "minLength": 3,
                      "maxLength": 100,
                      "exclusiveMinimum": false,
                      "exclusiveMaximum": false,
-                     "internalName": "VAULT_HOST"
+                     "internalName": "SPARTA_ZOOKEEPER_PATH"
                   },
-                  "VAULT_PORT": {
-                     "title": "Port",
+                  "Sparta_Plugin_Zookeeper_Watchers": {
+                     "title": "Watchers",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "boolean",
+                     "default": true,
+                     "level": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SPARTA_PLUGIN_ZOOKEEPER_WATCHERS"
+                  },
+                  "Sparta_Zookeeper_Retry_Interval": {
+                     "title": "Retry interval",
                      "required": false,
                      "readOnly": false,
                      "type": "integer",
-                     "default": 8200,
+                     "default": 10000,
                      "level": 1,
                      "minimum": 1,
                      "exclusiveMinimum": false,
                      "exclusiveMaximum": false,
-                     "internalName": "VAULT_PORT"
-                  }
-               }
-            },
-            "Datio header": {
-               "type": "object",
-               "title": "Datio header",
-               "description": "",
-               "ui": {
-                  "component": "accordion"
-               },
-               "properties": {
-                  "MB-USER-HEADER": {
-                     "title": "User",
-                     "required": false,
-                     "readOnly": false,
-                     "type": "string",
-                     "default": "vnd.bbva.user-id",
-                     "level": 1,
-                     "minLength": 3,
-                     "maxLength": 100,
-                     "exclusiveMinimum": false,
-                     "exclusiveMaximum": false,
-                     "internalName": "MB-USER-HEADER"
+                     "internalName": "SPARTA_ZOOKEEPER_RETRY_INTERVAL"
                   },
-                  "MB-GROUP-HEADER": {
-                     "title": "Group",
+                  "Sparta_Zookeeper_Retry_Atempts": {
+                     "title": "Retry atempts",
                      "required": false,
                      "readOnly": false,
-                     "type": "string",
-                     "default": "vnd.bbva.user-groups",
+                     "type": "integer",
+                     "default": 5,
                      "level": 1,
-                     "minLength": 3,
-                     "maxLength": 100,
+                     "minimum": 1,
+                     "maximum": 100,
                      "exclusiveMinimum": false,
                      "exclusiveMaximum": false,
-                     "internalName": "MB-GROUP-HEADER"
+                     "internalName": "SPARTA_ZOOKEEPER_RETRY_ATEMPTS"
+                  },
+                  "Sparta_Zookeeper_Connection_Timeout": {
+                     "title": "Connection TimeOut",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "integer",
+                     "default": 15000,
+                     "level": 1,
+                     "minimum": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SPARTA_ZOOKEEPER_CONNECTION_TIMEOUT"
+                  },
+                  "Sparta_Zookeeper_Session_Timeout": {
+                     "title": "Session TimeOut",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "integer",
+                     "default": 60000,
+                     "level": 1,
+                     "minimum": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SPARTA_ZOOKEEPER_SESSION_TIMEOUT"
                   }
                }
             }
+         }
+      },
+      "security": {
+         "type": "object",
+         "title": "Security",
+         "description": "",
+         "ui": {
+            "component": "standard"
          },
-         "required": [
-            "serviceConfiguration",
-            "serviceId"
-         ]
+         "properties": {
+            "Security_Mesos_Enable": {
+               "title": "Security Mesos",
+               "required": false,
+               "readOnly": false,
+               "type": "boolean",
+               "default": true,
+               "level": 1,
+               "exclusiveMinimum": false,
+               "exclusiveMaximum": false,
+               "internalName": "SECURITY_MESOS_ENABLE"
+            },
+            "Security_Tls_Enable": {
+               "title": "Security TLS",
+               "required": false,
+               "readOnly": false,
+               "type": "boolean",
+               "default": true,
+               "level": 1,
+               "exclusiveMinimum": false,
+               "exclusiveMaximum": false,
+               "internalName": "SECURITY_TLS_ENABLE"
+            },
+            "Security_Truststore_Enable": {
+               "title": "Security truststore",
+               "required": false,
+               "readOnly": false,
+               "type": "boolean",
+               "default": true,
+               "level": 1,
+               "exclusiveMinimum": false,
+               "exclusiveMaximum": false,
+               "internalName": "SECURITY_TRUSTSTORE_ENABLE"
+            },
+            "Security_Krb_Enable": {
+               "title": "Security Kerberos",
+               "required": false,
+               "readOnly": false,
+               "type": "boolean",
+               "default": true,
+               "level": 1,
+               "exclusiveMinimum": false,
+               "exclusiveMaximum": false,
+               "internalName": "SECURITY_KRB_ENABLE"
+            },
+            "Security_Marathon_Enabled": {
+               "title": "Security Marathon",
+               "required": false,
+               "readOnly": false,
+               "type": "boolean",
+               "default": true,
+               "level": 1,
+               "exclusiveMinimum": false,
+               "exclusiveMaximum": false,
+               "internalName": "SECURITY_MARATHON_ENABLED"
+            },
+            "calico": {
+               "type": "object",
+               "title": "Calico",
+               "description": "",
+               "ui": {
+                  "component": "switch"
+               },
+               "properties": {
+                  "Calico_Enabled": {
+                     "title": "Calico",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "boolean",
+                     "default": true,
+                     "level": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "CALICO_ENABLED"
+                  },
+                  "Calico_Network": {
+                     "title": "Calico network",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "stratio",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 100,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "CALICO_NETWORK"
+                  }
+               }
+            },
+            "authentication": {
+               "type": "object",
+               "title": "Authentication",
+               "description": "",
+               "ui": {
+                  "component": "switch"
+               },
+               "properties": {
+                  "Use_Dynamic_Authentication": {
+                     "title": "Dynamic authentication",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "boolean",
+                     "default": true,
+                     "level": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "USE_DYNAMIC_AUTHENTICATION"
+                  },
+                  "Approlename": {
+                     "title": "App role name",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "open",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 100,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "APPROLENAME"
+                  }
+               }
+            },
+            "Oauth2": {
+               "type": "object",
+               "title": "OAuth2",
+               "description": "",
+               "ui": {
+                  "component": "switch"
+               },
+               "properties": {
+                  "Security_Oauth2_Enable": {
+                     "title": "Security oauth2",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "boolean",
+                     "default": true,
+                     "level": 1,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "SECURITY_OAUTH2_ENABLE"
+                  },
+                  "Oauth2_Ssl_Authorize": {
+                     "title": "SSL authorize",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "https://megadev.labs.stratio.com:9005/sso/oauth2.0/authorize",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 256,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_SSL_AUTHORIZE"
+                  },
+                  "Oauth2_Url_Profile": {
+                     "title": "URL profile",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "https://megadev.labs.stratio.com:9005/sso/oauth2.0/profile",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 256,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_URL_PROFILE"
+                  },
+                  "Oauth2_Url_Callback": {
+                     "title": "Callback",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "https://sparta.megadev.labs.stratio.com/sparta-server/login",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 256,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_URL_CALLBACK"
+                  },
+                  "Oauth2_Cookie_Name": {
+                     "title": "Cookie name",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "user",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 100,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_COOKIE_NAME"
+                  },
+                  "Oauth2_Url_Access_Token": {
+                     "title": "URL access token",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "https://megadev.labs.stratio.com:9005/sso/oauth2.0/accessToken",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 256,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_URL_ACCESS_TOKEN"
+                  },
+                  "Oauth2_Url_On_Login_Go_To": {
+                     "title": "URL login",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "/sparta-server",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 100,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_URL_ON_LOGIN_GO_TO"
+                  },
+                  "Oauth2_Url_Logout": {
+                     "title": "URL logout",
+                     "required": false,
+                     "readOnly": false,
+                     "type": "string",
+                     "default": "https://megadev.labs.stratio.com:9005/sso/logout",
+                     "level": 1,
+                     "minLength": 3,
+                     "maxLength": 100,
+                     "exclusiveMinimum": false,
+                     "exclusiveMaximum": false,
+                     "internalName": "OAUTH2_URL_LOGOUT"
+                  }
+               }
+            }
+         }
       },
       "postgresConfiguration": {
          "type": "object",

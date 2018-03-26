@@ -15,13 +15,20 @@
        [attr.id]="labelQaTag" [attr.title]="contextualHelp">
    {{label}}
 </label>
-<input #input class="st-input" (focus)="onFocus($event)" (focusout)="onFocusOut($event, false)" (blur)="onFocusOut($event, true)"
-       [formControl]="internalControl"
-       [placeholder]="placeholder"
-       [step]="step"
-       [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min"
-       [attr.max]="max"
-       [value]="value || null" [readonly]="readonly" [ngClass]="{error: showError()}">
+<div class="input-container">
+   <input #input class="st-input" (focus)="onFocus($event)" (focusout)="onFocusOut($event, false)"
+          (blur)="onFocusOut($event, true)"
+          [formControl]="internalControl"
+          [placeholder]="placeholder"
+          [step]="step"
+          [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min"
+          [attr.max]="max"
+          [value]="value || null" [readonly]="readonly" [ngClass]="{error: showError()}">
+   <span *ngIf="createResetButton()" class="st-input-reset-button" (click)="resetToDefault()"
+         [style.opacity] = "focus ? 1 : 0">
+      <i class="icon-refresh-ccw"></i>
+   </span>
+</div>
 <div class="st-input-error-layout" *ngIf="showError()">
    <span class="st-input-error-message">{{errorMessage}}</span>
 </div>

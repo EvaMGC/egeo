@@ -6,6 +6,7 @@
 
 * st-select: When select is opened after scrolling, its dropdown is not displayed
 * st-tooltip: It is not displayed yet when compiling to AOT
+* st-input: Allow to reset value to default
 
 
 ## 8.7.0 (March 21, 2018)

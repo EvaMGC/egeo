@@ -104,6 +104,87 @@ describe('StInputComponent', () => {
 
       expect(component.blur.emit).toHaveBeenCalledTimes(1);
    });
+
+   describe('When a default value is introduced, user will be able to reset the input', () => {
+      let fakeDefault: string = 'default value';
+
+      beforeEach(() => {
+         component.default = fakeDefault;
+      });
+
+      it('reset icon is only created if default input is introduced and current input value is different to it', () => {
+         let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).toBeNull();
+
+         htmlInput.value = 'test';
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).not.toBeNull();
+      });
+
+
+      it('reset icon is only displayed when input is focused and it has a value and is different to default', () => {
+         let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).toBeNull();
+
+         htmlInput.value = 'test';
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-input-reset-button')).styles.opacity).toEqual('1');
+
+         htmlInput.dispatchEvent(new Event('blur'));
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-input-reset-button')).styles.opacity).toEqual('0');
+
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-input-reset-button')).styles.opacity).toEqual('1');
+
+         htmlInput.value = fakeDefault;
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).toBeNull();
+      });
+
+
+      it('when user clicks on the reset button, value of input will turn to the default value', () => {
+         let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         htmlInput.value = 'a';
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         fixture.nativeElement.querySelector('.st-input-reset-button').click();
+         fixture.detectChanges();
+
+         expect(htmlInput.value).toBe(fakeDefault);
+      });
+
+   });
+
+   it('if default value is not introduced, reset button is not displayed', () => {
+      expect(fixture.nativeElement.querySelector('.reset-button')).toBeNull();
+
+      let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+      htmlInput.dispatchEvent(new Event('focus'));
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.reset-button')).toBeNull();
+   });
 });
 
 @Component({
@@ -158,7 +239,8 @@ class FormReactiveComponent implements OnInit {
 
    @ViewChild('input') input: StInputComponent;
 
-   constructor(private _fb: FormBuilder) { }
+   constructor(private _fb: FormBuilder) {
+   }
 
    ngOnInit(): void {
       this.reactiveForm = this._fb.group({
@@ -184,7 +266,8 @@ class FormReactiveComponent implements OnInit {
    }
 
 
-   onSubmitReactiveForm(): void { }
+   onSubmitReactiveForm(): void {
+   }
 }
 
 let reactiveFixture: ComponentFixture<FormReactiveComponent>;

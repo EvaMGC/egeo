@@ -28,35 +28,17 @@
    color: transparent;
 }
 
-.st-input .st-input-title.active {
-   color: $input-field-onfocus;
-}
-
-.st-input .st-input-title.error {
-   color: $status-warning-default;
-}
-
-.st-input .st-input-title {
-   font-size: 14px;
-   font-family: $egeo-nunito-sans-bold;
-   color: $neutral-08;
-   line-height: 1.43;
-
-   &.disabled {
-      color: $neutral-06;
-   }
-}
-
-.st-input.st-input {
-
-   .st-input.error {
-      .st-input-title {
-         color: #e73851;
-      }
-   }
-}
-
 .st-input-error-message {
    font-size: 13px;
    color: $status-critical-default;
+}
+
+.st-input-reset-button {
+   font-size: $egeo-font-size-medium;
+   line-height: $egeo-line-height-medium;
+   color: $neutral-07;
+
+   &:hover {
+      color: $neutral-10;
+   }
 }

@@ -17,15 +17,21 @@
    box-shadow: none;
 }
 
-.st-input-container .st-input-title {
-   display: block;
-   float: left;
-   padding: 0;
-   position: relative;
-   width: 100%;
-}
-
 .st-input {
    width: 100%;
    padding-bottom: 6px;
+}
+
+.input-container {
+   position: relative;
+}
+
+.st-input-reset-button {
+   position: absolute;
+   top: 0;
+   display: inline-block;
+   right: -33px;
+   line-height: 45px;
+   height: 100%;
+   cursor: pointer;
 }
