@@ -10,6 +10,7 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
+
 <st-input *ngIf="hasType('input')"
           #templateModel="ngModel"
           [forceValidations]="forceValidations"
@@ -21,6 +22,7 @@
           (ngModelChange)="setValue($event)"
           [contextualHelp]="description"
           [errors]="errors"
+          [default]="default"
           [max]="max"
           [min]="min"
           [minlength]="minLength"
@@ -50,6 +52,7 @@
            [tooltip]="description"
            [name]="schema.key"
            [placeholder]="placeholder"
+           [default]="default"
            [options]="getSelectOption()"
            [ngModel]="innerValue"
            (ngModelChange)="setValue($event)"

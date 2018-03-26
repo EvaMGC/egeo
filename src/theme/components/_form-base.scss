@@ -53,3 +53,19 @@
       }
    }
 }
+
+.st-form-control-reset-button {
+   position: absolute;
+   top: 0;
+   display: inline-block;
+   right: -33px;
+   line-height: 45px;
+   height: 100%;
+   cursor: pointer;
+   font-size: $egeo-font-size-medium;
+   color: $neutral-07;
+
+   &:hover {
+      color: $neutral-10;
+   }
+}

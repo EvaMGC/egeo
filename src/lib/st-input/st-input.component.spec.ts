@@ -117,13 +117,13 @@ describe('StInputComponent', () => {
          htmlInput.dispatchEvent(new Event('focus'));
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
 
          htmlInput.value = 'test';
          htmlInput.dispatchEvent(new Event('input'));
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
       });
 
 
@@ -133,29 +133,29 @@ describe('StInputComponent', () => {
          htmlInput.dispatchEvent(new Event('focus'));
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
 
          htmlInput.value = 'test';
          htmlInput.dispatchEvent(new Event('input'));
          fixture.detectChanges();
 
-         expect(fixture.debugElement.query(By.css('.st-input-reset-button')).styles.opacity).toEqual('1');
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
 
          htmlInput.dispatchEvent(new Event('blur'));
          fixture.detectChanges();
 
-         expect(fixture.debugElement.query(By.css('.st-input-reset-button')).styles.opacity).toEqual('0');
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('0');
 
          htmlInput.dispatchEvent(new Event('focus'));
          fixture.detectChanges();
 
-         expect(fixture.debugElement.query(By.css('.st-input-reset-button')).styles.opacity).toEqual('1');
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
 
          htmlInput.value = fakeDefault;
          htmlInput.dispatchEvent(new Event('input'));
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-input-reset-button')).toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
       });
 
 
@@ -168,7 +168,7 @@ describe('StInputComponent', () => {
          htmlInput.dispatchEvent(new Event('input'));
          fixture.detectChanges();
 
-         fixture.nativeElement.querySelector('.st-input-reset-button').click();
+         fixture.nativeElement.querySelector('.st-form-control-reset-button').click();
          fixture.detectChanges();
 
          expect(htmlInput.value).toBe(fakeDefault);

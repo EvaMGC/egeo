@@ -23,12 +23,8 @@ import {
    HostBinding,
    Injector
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
-import {
-   has as _has,
-   flatten as _flatten,
-   cloneDeep as _cloneDeep
-} from 'lodash';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { has as _has, flatten as _flatten, cloneDeep as _cloneDeep } from 'lodash';
 
 import { StCheckValidationsDirective } from './st-check-validations';
 import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
@@ -52,6 +48,7 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    @Input() tooltip: string | null = null;
    @Input() errorMessage: string | undefined = undefined;
    @Input() selected: StDropDownMenuItem = undefined;
+   @Input() default: any;
 
    @Output() expand: EventEmitter<boolean> = new EventEmitter<boolean>();
    @Output() select: EventEmitter<any> = new EventEmitter<any>();
@@ -69,11 +66,10 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    private _isDisabled: boolean = false;
    private _options: StDropDownMenuItem[] | StDropDownMenuGroup[] = [];
 
-   constructor(
-      private _selectElement: ElementRef,
-      private _injector: Injector,
-      private _cd: ChangeDetectorRef
-   ) { }
+   constructor(private _selectElement: ElementRef,
+               private _injector: Injector,
+               private _cd: ChangeDetectorRef) {
+   }
 
    // TODO: MOVE THIS TO FORM-BASE
    notifyError(errorMessage: string): void {
@@ -81,8 +77,8 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    }
 
    /*
-   ****** getters && setters ******
-   */
+    ****** getters && setters ******
+    */
    @Input()
    set disabled(value: boolean) {
       this._isDisabled = value;
@@ -144,8 +140,8 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    }
 
    /*
-   ****** Control value accessor && validate methods ******
-   */
+    ****** Control value accessor && validate methods ******
+    */
 
    // Set the function to be called when the control receives a change event.
    registerOnChange(fn: (_: any) => void): void {
@@ -171,8 +167,8 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    }
 
    /*
-   ****** Component methods ******
-   */
+    ****** Component methods ******
+    */
 
    ngAfterViewInit(): void {
       this._inputHTMLElement = this.inputElement.nativeElement;
@@ -187,11 +183,22 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
          this.toggleButton();
       }
    }
+
    onButtonClick(): void {
       if (!this._isDisabled) {
          this.toggleButton();
          this.expandedMenu ? this._inputHTMLElement.focus() : this._inputHTMLElement.blur();
       }
+   }
+
+   createResetButton(): boolean {
+      return this.default !== undefined && this.selected !== undefined
+         && this.selected.value !== this.default;
+   }
+
+   resetToDefault(): void {
+      this.writeValue(this.default);
+      this._cd.markForCheck();
    }
 
    @HostListener('document:click', ['$event'])
@@ -217,8 +224,8 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    }
 
    /*
-   ****** Util component methods ******
-   */
+    ****** Util component methods ******
+    */
 
    // Search element by property in option list
    private findByProperty(propName: 'value' | 'selected', propValue: any): StDropDownMenuItem | undefined {

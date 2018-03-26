@@ -33,12 +33,8 @@
    color: $status-critical-default;
 }
 
-.st-input-reset-button {
-   font-size: $egeo-font-size-medium;
-   line-height: $egeo-line-height-medium;
-   color: $neutral-07;
-
-   &:hover {
-      color: $neutral-10;
+.input-container {
+   .st-form-control-reset-button {
+      line-height: 45px;
    }
 }

@@ -17,6 +17,8 @@ import { cloneDeep as _cloneDeep } from 'lodash';
 import { StDropDownMenuItem, StDropDownMenuGroup } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { StSelectComponent } from './st-select';
 import { StSelectModule } from './st-select.module';
+import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
+import { StDropdownMenuComponent } from '../st-dropdown-menu/st-dropdown-menu.component';
 
 
 const simpleItems: StDropDownMenuItem[] = [
@@ -53,9 +55,18 @@ describe('StSelectComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
+         imports: [StDropdownMenuModule],
          declarations: [StSelectComponent],
          schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();  // compile template and css
+      })
+      // remove this block when the issue #12313 of Angular is fixed
+         .overrideComponent(StSelectComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StDropdownMenuComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
@@ -355,7 +366,7 @@ describe('StSelectComponent', () => {
       expect(comp.select.emit).toHaveBeenCalledWith(undefined);
    });
 
-   it ('should display a tooltip if it has a label and tooltip input is introduced', () => {
+   it('should display a tooltip if it has a label and tooltip input is introduced', () => {
       comp.tooltip = 'fake tooltip text';
       comp.label = 'Test';
       fixture.detectChanges();
@@ -369,7 +380,7 @@ describe('StSelectComponent', () => {
       expect((label.nativeElement as HTMLLabelElement).title).toEqual(comp.tooltip);
    });
 
-   it ('should not display a tooltip if it has a label but tooltip input is not introduced', () => {
+   it('should not display a tooltip if it has a label but tooltip input is not introduced', () => {
       comp.label = 'Test';
       fixture.detectChanges();
 
@@ -381,6 +392,93 @@ describe('StSelectComponent', () => {
       expect((label.nativeElement as HTMLLabelElement).textContent).toEqual(comp.label);
       expect((label.nativeElement as HTMLLabelElement).title).toBe('');
    });
+
+   describe('When a default value is introduced, user will be able to reset the select', () => {
+      let fakeDefault: string;
+      let input: HTMLInputElement;
+      let items: DebugElement[];
+
+      beforeEach(() => {
+         comp.label = 'Test';
+         comp.options = simpleItems;
+         fakeDefault = simpleItems[2].value;
+         comp.default = fakeDefault;
+         fixture.detectChanges();
+         input = fixture.debugElement.query(By.css('input')).nativeElement;
+      });
+
+      it('reset icon is only created if default input is introduced and current select value is different to it', () => {
+         input.click();
+         fixture.detectChanges();
+
+         items = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item>li'));
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+         (items[0].nativeElement as HTMLElement).click();
+         fixture.detectChanges();
+
+         input.click();
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
+      });
+
+      it('reset icon is only displayed when select is open and it has a value and is different to default', () => {
+         input.click();
+         fixture.detectChanges();
+
+         items = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item>li'));
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+         (items[0].nativeElement as HTMLElement).click();
+         fixture.detectChanges();
+
+         input.click();
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
+
+         input.click();
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('0');
+
+         input.click();
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
+
+         items = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item>li'));
+
+         (items[2].nativeElement as HTMLElement).click();  // select the default option
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+      });
+
+
+      it('when user clicks on the reset button, value of input will turn to the default value', () => {
+         const label: HTMLLabelElement = fixture.debugElement.query(By.css('label')).nativeElement;
+         label.click();
+         fixture.detectChanges();
+         items = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item>li'));
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+
+         label.click();
+         (items[0].nativeElement as HTMLElement).click();
+         fixture.detectChanges();
+
+         label.click();
+         fixture.nativeElement.querySelector('.st-form-control-reset-button').click();
+         fixture.detectChanges();
+
+         expect(comp.selected.value).toEqual(fakeDefault);
+      });
+
+   });
+
 });
 
 @Component({
@@ -531,7 +629,9 @@ class StSelectTestTemplateComponent {
    @ViewChild('select') select: StSelectComponent;
    @ViewChild('templateDrivenForm') templateDrivenForm: NgForm;
 
-   onSelect(element: StDropDownMenuItem): void { this.selected = element; }
+   onSelect(element: StDropDownMenuItem): void {
+      this.selected = element;
+   }
 }
 
 describe('StSelectComponent', () => {

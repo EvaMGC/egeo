@@ -24,7 +24,7 @@
           [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min"
           [attr.max]="max"
           [value]="value || null" [readonly]="readonly" [ngClass]="{error: showError()}">
-   <span *ngIf="createResetButton()" class="st-input-reset-button" (click)="resetToDefault()"
+   <span *ngIf="createResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"
          [style.opacity] = "focus ? 1 : 0">
       <i class="icon-refresh-ccw"></i>
    </span>

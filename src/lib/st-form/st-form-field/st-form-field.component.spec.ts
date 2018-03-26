@@ -632,6 +632,36 @@ describe('StFormFieldComponent', () => {
          });
       });
 
+      it('if input has a default value and user interacts with input, he will be able to reset to the default value', () => {
+         let fakeDefault: string = 'test default';
+         component.schema = { key: 'genericTextInput', value: JSON_SCHEMA.properties.genericTextInput };
+         component.qaTag = 'genericTextInput';
+         component.schema.value.default = fakeDefault;
+
+         fixture.detectChanges();
+
+         let input: HTMLInputElement = fixture.nativeElement.querySelector('#genericTextInput');
+
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            input.focus();
+            input.dispatchEvent(new Event('focus'));
+            fixture.detectChanges();
+
+            input.value = 'bbb';
+            input.dispatchEvent(new Event('input'));
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.st-input-reset-button')).not.toBeNull();
+
+            fixture.nativeElement.querySelector('.st-input-reset-button').click();
+            fixture.detectChanges();
+
+            expect(component.value).toEqual(fakeDefault);
+
+         });
+      });
    });
 
    describe('should be able to render checkboxes with their validations', () => {
@@ -761,6 +791,34 @@ describe('StFormFieldComponent', () => {
          expect(input.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
       });
 
+      it('if select has a default value and user interacts with input, he will be able to reset to the default value', () => {
+         let fakeDefault: string = 'test default';
+         component.schema.value.default = fakeDefault;
+
+         fixture.detectChanges();
+
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            fixture.nativeElement.querySelector('#log_level-input').click();
+            fixture.detectChanges();
+
+            let options: NodeListOf<Element> = fixture.nativeElement.querySelectorAll('.st-dropdown-menu-item');
+            (<HTMLLIElement> options[0]).click();
+            fixture.detectChanges();
+
+            fixture.nativeElement.querySelector('#log_level-input').click();
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.st-input-reset-button')).not.toBeNull();
+
+            fixture.nativeElement.querySelector('.st-input-reset-button').click();
+            fixture.detectChanges();
+
+            expect(component.value).toEqual(fakeDefault);
+
+         });
+      });
    });
 
    it('if a field has the property readOnly in its schema, it can`t be edited', () => {
@@ -925,9 +983,13 @@ describe('StFormFieldComponent in reactive form', () => {
 
    describe('switch can be disabled', () => {
       beforeEach(() => {
-         reactiveComp.schema = { key: 'security', value: { 'title': 'Enable security',
-            'description': 'Enable or disable the security',
-            'type': 'boolean'} };
+         reactiveComp.schema = {
+            key: 'security', value: {
+               'title': 'Enable security',
+               'description': 'Enable or disable the security',
+               'type': 'boolean'
+            }
+         };
          reactiveComp.qaTag = 'security';
          reactiveFixture.detectChanges();
       });
