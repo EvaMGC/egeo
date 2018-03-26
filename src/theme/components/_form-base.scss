@@ -20,25 +20,23 @@
 
 .st-form-field {
    .st-label {
-      color: $neutral-08;
+      color: $neutral-09;
       &.active {
          color: $action-primary-default;
-      }
-      &.disabled {
-         color: $neutral-06;
       }
    }
 
    input,
-   text-area {
+   textarea {
       &:focus {
-         border-color: $action-primary-default;
+         border-color: $input-field-onfocus;
       }
       &:disabled {
          border-color: $neutral-06;
+         background-color: $neutral-01;
       }
       &:disabled:placeholder {
-         color: $neutral-05;
+         color: $neutral-08;
       }
    }
 
@@ -47,9 +45,8 @@
          color: $status-critical-default;
       }
       input,
-      text-area {
+      textarea {
          border-color: $status-critical-default;
-
       }
    }
 }
