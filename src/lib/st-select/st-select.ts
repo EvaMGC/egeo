@@ -61,14 +61,14 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
 
    onChange: (_: any) => void;
 
-   onTouched(): void {
-      this._touched = true;
-   };
-
    private _inputHTMLElement: HTMLInputElement | undefined = undefined;
    private _isDisabled: boolean = false;
    private _options: StDropDownMenuItem[] | StDropDownMenuGroup[] = [];
    private _touched: boolean = false;
+
+   onTouched(): void {
+      this._touched = true;
+   }
 
    constructor(private _selectElement: ElementRef,
                private _injector: Injector,
@@ -201,6 +201,10 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
 
    resetToDefault(): void {
       this.writeValue(this.default);
+      this.select.emit(this.default);
+      if (this.onChange) {
+         this.onChange(this.default);
+      }
       this._cd.markForCheck();
    }
 

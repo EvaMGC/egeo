@@ -11,7 +11,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, DebugElement } from '@angular/core';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { PipesModule } from '../../pipes/pipes.module';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
@@ -27,6 +27,7 @@ import { By } from '@angular/platform-browser';
 import { StSwitchModule } from '../../st-switch/st-switch.module';
 import { StSelectComponent } from '../../st-select/st-select';
 import { StInputComponent } from '../../st-input/st-input.component';
+import { StDropdownMenuComponent } from '../../st-dropdown-menu/st-dropdown-menu.component';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -41,6 +42,9 @@ describe('StFormFieldComponent', () => {
          declarations: [StFormFieldComponent]
       })
          .overrideComponent(StSelectComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StDropdownMenuComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .overrideComponent(StInputComponent, {
@@ -791,32 +795,28 @@ describe('StFormFieldComponent', () => {
          expect(input.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
       });
 
-      it('if select has a default value and user interacts with input, he will be able to reset to the default value', () => {
-         let fakeDefault: string = 'test default';
+      it('if select has a default value and user interacts with it, he will be able to reset to the default value', (done) => {
+         let fakeDefault: string = component.schema.value.enum[2];
          component.schema.value.default = fakeDefault;
 
+         const input: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
+         input.click();
+         fixture.detectChanges();
+         let options: DebugElement[] = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item>li'));
+         (options[1].nativeElement as HTMLElement).click();
+
+         input.click();
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
+
+         fixture.nativeElement.querySelector('.st-form-control-reset-button').click();
          fixture.detectChanges();
 
          fixture.whenStable().then(() => {
             fixture.detectChanges();
-
-            fixture.nativeElement.querySelector('#log_level-input').click();
-            fixture.detectChanges();
-
-            let options: NodeListOf<Element> = fixture.nativeElement.querySelectorAll('.st-dropdown-menu-item');
-            (<HTMLLIElement> options[0]).click();
-            fixture.detectChanges();
-
-            fixture.nativeElement.querySelector('#log_level-input').click();
-            fixture.detectChanges();
-
-            expect(fixture.nativeElement.querySelector('.st-input-reset-button')).not.toBeNull();
-
-            fixture.nativeElement.querySelector('.st-input-reset-button').click();
-            fixture.detectChanges();
-
-            expect(component.value).toEqual(fakeDefault);
-
+            expect(fixture.nativeElement.querySelector('#log_level-input').value).toBe(fakeDefault);
+            done();
          });
       });
    });
@@ -889,7 +889,8 @@ describe('StFormFieldComponent', () => {
          });
       });
    });
-});
+})
+;
 
 
 @Component({

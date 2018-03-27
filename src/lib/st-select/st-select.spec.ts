@@ -22,7 +22,6 @@ import { StDropdownMenuComponent } from '../st-dropdown-menu/st-dropdown-menu.co
 
 
 const simpleItems: StDropDownMenuItem[] = [
-   { label: 'example 1', value: undefined },
    { label: 'example 1', value: 1 },
    { label: 'example 2', value: 2 },
    { label: 'example 3', value: 3 },
@@ -401,8 +400,8 @@ describe('StSelectComponent', () => {
 
       beforeEach(() => {
          comp.label = 'Test';
-         comp.options = simpleItems;
-         fakeDefault = simpleItems[4].value;
+         comp.options = [<StDropDownMenuItem>{ label: 'select one', value: undefined }, ...simpleItems];
+         fakeDefault = comp.options[4].value;
          comp.default = fakeDefault;
          fixture.detectChanges();
          input = fixture.debugElement.query(By.css('input')).nativeElement;
@@ -487,7 +486,7 @@ describe('StSelectComponent', () => {
          expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
 
          label.click();
-         (items[0].nativeElement as HTMLElement).click(); //empty option
+         (items[0].nativeElement as HTMLElement).click(); // empty option
          fixture.detectChanges();
 
          label.click();

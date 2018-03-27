@@ -53,7 +53,7 @@
            [name]="schema.key"
            [placeholder]="placeholder"
            [default]="default"
-           [options]="getSelectOption()"
+           [options]="getSelectOptions()"
            [ngModel]="innerValue"
            (ngModelChange)="setValue($event)"
            [required]="required"
@@ -71,4 +71,3 @@
            [qaTag]="schema.key"
            [id]="qaTag">
 </st-switch>
-

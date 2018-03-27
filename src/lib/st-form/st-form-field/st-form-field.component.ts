@@ -203,7 +203,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
       }
    }
 
-   getSelectOption(): StDropDownMenuItem[] {
+   getSelectOptions(): StDropDownMenuItem[] {
       let options: StDropDownMenuItem[] = [];
       if (this.schema.value.enum) {
          options.push(<StDropDownMenuItem> { label: 'Select one option', value: undefined });
