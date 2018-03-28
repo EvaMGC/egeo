@@ -165,6 +165,10 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       return createField;
    }
 
+   isRelatedField(propertyName: string): boolean {
+      return this.schema.properties[propertyName].ui && this.schema.properties[propertyName].ui.relatedTo;
+   }
+
    // When value is received from outside
    writeValue(value: any): void {
       if (value) {

@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angul
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, DebugElement } from '@angular/core';
 import { cloneDeep as _cloneDeep } from 'lodash';
+import { By } from '@angular/platform-browser';
+
 import { PipesModule } from '../../pipes/pipes.module';
 import { StFormDirectiveModule } from '../../directives/form/form-directives.module';
 import { JSON_SCHEMA } from '../spec/resources/json-schema';
@@ -23,7 +25,6 @@ import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 import { StSelectModule } from '../../st-select/st-select.module';
 import { StTooltipModule } from '../../st-tooltip/st-tooltip.module';
 import { StDropdownMenuModule } from '../../st-dropdown-menu/st-dropdown-menu.module';
-import { By } from '@angular/platform-browser';
 import { StSwitchModule } from '../../st-switch/st-switch.module';
 import { StSelectComponent } from '../../st-select/st-select';
 import { StInputComponent } from '../../st-input/st-input.component';
@@ -702,10 +703,11 @@ describe('StFormFieldComponent', () => {
          expect(fixture.nativeElement.querySelector('#boolean-label-tooltip')).toBeNull();
       });
 
-      it('if schema contains a default value, checkbox has to be initialized with it', () => {
+      it('if schema contains a default value, checkbox has to be initialized with it', (done) => {
          fixture.whenStable().then(() => {
             fixture.detectChanges();
             expect(fixture.nativeElement.querySelector('#boolean-input').checked).toBe(booleanProperty.default);
+            done();
          });
       });
    });

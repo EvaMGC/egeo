@@ -9,7 +9,7 @@
 * st-input: Allow to reset value to default
 * st-select: Allow to reset value to default
 * st-checkbox: Fix margins
-
+* st-form: Allow to display related fields in the same row
 
 ## 8.7.0 (March 21, 2018)
 

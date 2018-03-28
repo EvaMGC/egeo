@@ -28,8 +28,19 @@ import { StSwitchComponent } from '../../st-switch/st-switch.component';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
+let getParentElement = (element: HTMLElement, level: number): any => {
+   let i: number = 0;
+   let parent: HTMLElement = element;
+   while (i < level && level > 0) {
+      parent = parent.parentElement;
+      ++i;
+   }
+   return parent;
+};
+
 
 describe('StFormComponent', () => {
+
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, ReactiveFormsModule, StInputModule, StCheckboxModule, StFormFieldModule, StTooltipModule, PipesModule, StFormDirectiveModule],
@@ -308,21 +319,21 @@ describe('StFormComponent', () => {
 
          it('link button is displayed and all its properties are hidden', () => {
             expect(fixture.nativeElement.querySelector('button.button-link-primary')).not.toBeNull();
-            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).toContain('hidden'); // form field element
-            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).toContain('hidden'); // form field element
+            expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).toContain('hidden'); // form field element
             expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
          });
 
          it('fields will be hidden until user clicks on link button', () => {
-            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).toContain('hidden'); // form field element
-            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).toContain('hidden'); // form field element
+            expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).toContain('hidden'); // form field element
             expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
 
             fixture.nativeElement.querySelector('button').click();
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).not.toContain('hidden');
-            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.parentElement.classList).not.toContain('hidden');
+            expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).not.toContain('hidden');
+            expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).not.toContain('hidden');
             expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeFalsy();
          });
 
@@ -335,8 +346,8 @@ describe('StFormComponent', () => {
             fixture.nativeElement.querySelector('button').click();
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).toContain('hidden'); // form field element
-            expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.parentElement.classList).toContain('hidden'); // form field element
+            expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).toContain('hidden'); // form field element
+            expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).toContain('hidden'); // form field element
             expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
          });
       });
@@ -477,40 +488,100 @@ describe('StFormComponent', () => {
 
          it('section fields are hidden by default until user clicks on the title', (done) => {
             fixture.whenStable().then(() => {
-               expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).toContain('hidden');
-               expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.parentElement.classList).toContain('hidden');
+               expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).toContain('hidden');
+               expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).toContain('hidden');
                expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
 
                fixture.nativeElement.querySelector('.accordion .title').click(); // click to show fields
                fixture.detectChanges();
 
-               expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).not.toContain('hidden');
-               expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.classList).not.toContain('hidden');
+               expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).not.toContain('hidden');
+               expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).not.toContain('hidden');
                expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeFalsy();
 
 
                fixture.nativeElement.querySelector('.accordion .title').click(); // click to hide fields again
                fixture.detectChanges();
 
-               expect(fixture.nativeElement.querySelector('#name').parentElement.parentElement.parentElement.classList).toContain('hidden');
-               expect(fixture.nativeElement.querySelector('#age').parentElement.parentElement.parentElement.classList).toContain('hidden');
+               expect(getParentElement(fixture.nativeElement.querySelector('#name'), 3).classList).toContain('hidden');
+               expect(getParentElement(fixture.nativeElement.querySelector('#age'), 3).classList).toContain('hidden');
                expect(fixture.nativeElement.querySelector('#subsection-section').hidden).toBeTruthy();
 
                done();
             });
          });
       });
+
+      describe('should be able to display fields in the same row if these are related', () => {
+         beforeEach(() => {
+            component.schema = {
+               'title': 'Section name',
+               'type': 'object',
+               'properties': {
+                  'a': {
+                     'title': 'a',
+                     'type': 'string',
+                     'ui': { 'relatedTo': 'b' }
+                  },
+                  'b': {
+                     'title': 'b',
+                     'type': 'string'
+                  },
+                  'c': {
+                     'title': 'c',
+                     'type': 'string',
+                     'ui': { 'relatedTo': 'd' }
+                  },
+                  'd': {
+                     'title': 'd',
+                     'type': 'string',
+                     'ui': { 'relatedTo': 'e' }
+                  },
+                  'e': {
+                     'title': 'e',
+                     'type': 'string'
+                  },
+                  'f': {
+                     'title': 'f',
+                     'type': 'string',
+                     'ui': { 'relatedTo': 'g' }
+                  },
+                  'g': {
+                     'title': 'fg',
+                     'type': 'number'
+                  }
+               }
+            };
+            fixture.detectChanges();
+         });
+
+         it('all adjacent fields with the property relatedTo are displayed at the same row', () => {
+            expect(getParentElement(fixture.nativeElement.querySelector('#a'), 4).nextElementSibling)
+               .toBe(getParentElement(fixture.nativeElement.querySelector('#b'), 4));
+            expect(getParentElement(fixture.nativeElement.querySelector('#c'), 4).nextElementSibling)
+               .toBe(getParentElement(fixture.nativeElement.querySelector('#d'), 4));
+            expect(getParentElement(fixture.nativeElement.querySelector('#d'), 4).nextElementSibling)
+               .toBe(getParentElement(fixture.nativeElement.querySelector('#e'), 4));
+            expect(getParentElement(fixture.nativeElement.querySelector('#f'), 4).nextElementSibling)
+               .toBe(getParentElement(fixture.nativeElement.querySelector('#g'), 4));
+         });
+
+         it('When a field is not related with its adjacent fields, a line break is displayed after it', () => {
+            expect(getParentElement(fixture.nativeElement.querySelector('#b'), 4).nextElementSibling.classList).toContain('line-break');
+            expect(getParentElement(fixture.nativeElement.querySelector('#e'), 4).nextElementSibling.classList).toContain('line-break');
+         });
+      });
    });
 
-   it ('form can be configured to be validated its fields without any user interaction', () => {
+   it('form can be configured to be validated its fields without any user interaction', () => {
       component.forceValidations = true;
       fixture.detectChanges();
-      expect(fixture.nativeElement.querySelector('#url').parentElement.parentElement.innerHTML).toContain('This field is required');
+      expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).toContain('This field is required');
 
       component.forceValidations = false;
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('#url').parentElement.parentElement.innerHTML).not.toContain('This field is required');
+      expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).not.toContain('This field is required');
    });
 
 })

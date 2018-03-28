@@ -16,8 +16,92 @@ export const JSON_SCHEMA: any = {
       "component": "standard"
    },
    "properties": {
-
-
+      "a": {
+         "title": "a",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "default": "",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_ID",
+         'ui': { 'relatedTo': 'b' }
+      },
+      "b": {
+         "title": "b",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "enum": ['a', '/sparta/sparta-server/null', 'c'],
+         "default": "/sparta/sparta-server/null",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_CONFIGURATION",
+      },
+      "c": {
+         "title": "c",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "default": "",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_ID",
+         'ui': { 'relatedTo': 'd' }
+      },
+      "d": {
+         "title": "d",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "enum": ['a', '/sparta/sparta-server/null', 'c'],
+         "default": "/sparta/sparta-server/null",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_CONFIGURATION",
+         'ui': { 'relatedTo': 'e' }
+      },
+      "e": {
+         "title": "e",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "enum": ['a', '/sparta/sparta-server/null', 'c'],
+         "default": "/sparta/sparta-server/null",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_CONFIGURATION"
+      },
+      "f": {
+         "title": "f",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "enum": ['a', '/sparta/sparta-server/null', 'c'],
+         "default": "/sparta/sparta-server/null",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_CONFIGURATION",
+         'ui': { 'relatedTo': 'g' }
+      },
+      "g": {
+         "title": "fg",
+         "required": true,
+         "readOnly": false,
+         "type": "string",
+         "enum": ['a', '/sparta/sparta-server/null', 'c'],
+         "default": "/sparta/sparta-server/null",
+         "level": 1,
+         "exclusiveMinimum": false,
+         "exclusiveMaximum": false,
+         "internalName": "SERVICE_CONFIGURATION"
+      },
       "general": {
          "type": "object",
          "title": "General",
@@ -47,7 +131,8 @@ export const JSON_SCHEMA: any = {
                "level": 1,
                "exclusiveMinimum": false,
                "exclusiveMaximum": false,
-               "internalName": "SERVICE_CONFIGURATION"
+               "internalName": "SERVICE_CONFIGURATION",
+               'ui': { 'relatedTo': 'serviceId' }
             },
             "runMode": {
                "title": "Run mode",

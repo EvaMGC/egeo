@@ -12,7 +12,9 @@
 @import '../constants/colors';
 
 .st-form {
+
    .optional-fields-button {
+      width: 100%;
       margin: 10px 0 20px;
       text-transform: lowercase;
       i {
@@ -22,6 +24,7 @@
    }
 
    .title {
+      width: 100%;
       color: $neutral-13;
       padding-bottom: 30px;
       font-family: $egeo-nunito-sans-bold;
@@ -129,6 +132,28 @@
       &::first-letter {
          text-transform: uppercase;
       }
+   }
+
+   & > form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: flex-start;
+   }
+
+   .form-field-container {
+      flex: 1 1 auto;
+      align-self: auto;
+      flex-basis: auto !important;
+   }
+
+   .line-break {
+      flex-basis: 100%;
+      width: 0;
+      height: 0;
+      overflow: hidden;
    }
 
 }
