@@ -15,7 +15,7 @@
 
    .optional-fields-button {
       width: 100%;
-      margin: 10px 0 20px;
+      margin: 0 0 20px;
       text-transform: lowercase;
       i {
          font-size: $egeo-font-size-xxxsmall;
@@ -26,9 +26,9 @@
    .title {
       width: 100%;
       color: $neutral-13;
+      padding-top: 20px;
       padding-bottom: 30px;
       font-family: $egeo-nunito-sans-bold;
-      padding-top: 10px;
    }
 
    .category {
@@ -117,10 +117,11 @@
 
    .form-field.parent-field {
       .st-switch {
+         padding-top: 20px;
+         display: inline-block;
          label {
             color: $neutral-13;
             vertical-align: middle;
-            padding-bottom: 30px;
          }
       }
    }
@@ -128,7 +129,7 @@
    .disabled-section-info {
       font-size: $egeo-font-size-small;
       color: $neutral-07;
-      padding-bottom: 30px;
+      padding-bottom: 20px;
       &::first-letter {
          text-transform: uppercase;
       }
@@ -156,4 +157,8 @@
       overflow: hidden;
    }
 
+
+   .form-field-container + .form-field-container {
+      margin-left: 25px;
+   }
 }
