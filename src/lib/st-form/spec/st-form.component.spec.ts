@@ -613,12 +613,12 @@ describe('StFormComponent', () => {
          it('a field is displayed if it has the property visible empty or it does not have it', () => {
             expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
 
-            component.schema.properties['a'].ui = { visible: undefined };
+            component.schema.properties.a.ui = { visible: undefined };
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
 
-            component.schema.properties['a'].ui = {};
+            component.schema.properties.a.ui = {};
             fixture.detectChanges();
 
             expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
