@@ -2,14 +2,18 @@
 
 ## 8.8.0 (upcoming)
 
+**New features:**
+
+* st-form: Allow to display related fields in the same row
+* st-input: Allow to reset value to default
+* st-select: Allow to reset value to default
+
 **Fixed bugs:**
 
 * st-select: When select is opened after scrolling, its dropdown is not displayed
 * st-tooltip: It is not displayed yet when compiling to AOT
-* st-input: Allow to reset value to default
-* st-select: Allow to reset value to default
 * st-checkbox: Fix margins
-* st-form: Allow to display related fields in the same row
+
 
 ## 8.7.0 (March 21, 2018)
 
