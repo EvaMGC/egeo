@@ -2,7 +2,8 @@
 
 ## 9.0.0 (upcoming)
 
-* Pending changelog
+* st-form: Allow to display and hide fields according to the value of another fields
+
 
 ## 8.8.0 (upcoming)
 

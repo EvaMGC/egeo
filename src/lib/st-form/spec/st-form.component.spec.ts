@@ -12,7 +12,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { cloneDeep as _cloneDeep } from 'lodash';
-
 import { StFormComponent } from '../st-form.component';
 import { JSON_SCHEMA } from './resources/json-schema';
 import { PipesModule } from '../../pipes/pipes.module';
@@ -25,6 +24,7 @@ import { StFormFieldModule } from '../st-form-field/st-form-field.module';
 import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
 import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 import { StSwitchComponent } from '../../st-switch/st-switch.component';
+import { StInputComponent } from '../../st-input/st-input.component';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
@@ -38,6 +38,7 @@ let getParentElement = (element: HTMLElement, level: number): any => {
    return parent;
 };
 
+let realSetTimeout: any = window.setTimeout;
 
 describe('StFormComponent', () => {
 
@@ -57,6 +58,9 @@ describe('StFormComponent', () => {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .overrideComponent(StSwitchComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StInputComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .compileComponents();  // compile template and css
@@ -571,6 +575,106 @@ describe('StFormComponent', () => {
             expect(getParentElement(fixture.nativeElement.querySelector('#e'), 4).nextElementSibling.classList).toContain('line-break');
          });
       });
+
+      describe('should be able to display or hide a field according to the value of another one', () => {
+         beforeEach(() => {
+            component.schema = {
+               'title': 'Section name',
+               'type': 'object',
+               'properties': {
+                  'a': {
+                     'title': 'a',
+                     'type': 'string',
+                     'visible': {}
+                  },
+                  'b': {
+                     'title': 'b',
+                     'type': 'string',
+                     'ui': {
+                        'visible': {
+                           'a': 'active b'
+                        }
+                     }
+                  },
+                  'c': {
+                     'title': 'c',
+                     'type': 'string',
+                     'ui': {
+                        'visible': {
+                           'b': 'active c'
+                        }
+                     }
+                  }
+               }
+            };
+            fixture.detectChanges();
+         });
+
+         it('a field is displayed if it has the property visible empty or it does not have it', () => {
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+
+            component.schema.properties['a'].ui = { visible: undefined };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+
+            component.schema.properties['a'].ui = {};
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+         });
+
+         it('a field is displayed if all the conditions specified in the property visible are fulfilled', () => {
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+            expect(fixture.nativeElement.querySelector('#b')).toBeNull();
+            expect(fixture.nativeElement.querySelector('#c')).toBeNull();
+
+            component.onChangeProperty('active b', 'a');
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#b')).not.toBeNull();
+
+            component.onChangeProperty('test', 'a');
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#b')).toBeNull();
+
+            component.onChangeProperty('active c', 'a');
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#c')).toBeNull();
+
+            component.onChangeProperty('active b', 'a');
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#c')).toBeNull();
+
+            component.onChangeProperty('active c', 'b');
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#c')).not.toBeNull();
+         });
+
+         it('when a field is not visible, it is removed from the model', () => {
+            spyOn(component.valueChange, 'emit');
+
+            component.onChangeProperty('active b', 'a');
+            component.onChangeProperty('this is activated', 'b');
+            fixture.detectChanges();
+
+            let model: any = (<any> component.valueChange.emit).calls.mostRecent().args[0];
+
+            expect(component.valueChange.emit).toHaveBeenCalled();
+            expect(model.b).toBe('this is activated');
+
+            component.onChangeProperty('disable b', 'a');
+            fixture.detectChanges();
+
+            model = (<any> component.valueChange.emit).calls.mostRecent().args[0];
+
+            expect(model.b).toBe(undefined);
+         });
+      });
    });
 
    it('form can be configured to be validated its fields without any user interaction', () => {
@@ -584,8 +688,7 @@ describe('StFormComponent', () => {
       expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).not.toContain('This field is required');
    });
 
-})
-;
+});
 
 
 @Component({

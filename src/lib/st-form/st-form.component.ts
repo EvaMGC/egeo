@@ -22,6 +22,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+
 import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
 /**
  * @description {Component} [Dynamic form]
@@ -158,9 +159,10 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    fieldHasToBeCreated(propertyName: string): boolean {
       let createField: boolean = true;
       let parentField: string = this.getParentField(propertyName);
-      if ((parentField && !this._value[parentField]) || ( this.isInADisabledSection() && !this.isTheFirstField(propertyName))) {
+      let isVisible: boolean = this.fulfillDependencyVisibility(propertyName);
+      if (!isVisible || (((parentField && !this._value[parentField]) || ( this.isInADisabledSection() && !this.isTheFirstField(propertyName))))) {
          createField = false;
-         this._value[propertyName] = undefined;
+         this.onChangeProperty(undefined, propertyName);
       }
       return createField;
    }
@@ -251,5 +253,18 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
 
    private isTheFirstField(propertyName: string): boolean {
       return propertyName === Object.keys(this.schema.properties)[0];
+   }
+
+   private fulfillDependencyVisibility(propertyName: string): boolean {
+      let fulfill: boolean = true;
+      let propertySchema: any = this.schema.properties[propertyName];
+      if (propertySchema.ui && propertySchema.ui.visible) {
+            Object.keys(propertySchema.ui.visible).forEach((property) => {
+               if (this._value[property] !== propertySchema.ui.visible[property]) {
+                  fulfill = false;
+               }
+            });
+      }
+      return fulfill;
    }
 }

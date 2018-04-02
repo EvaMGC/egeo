@@ -26,7 +26,7 @@ export const JSON_SCHEMA: any = {
          "exclusiveMinimum": false,
          "exclusiveMaximum": false,
          "internalName": "SERVICE_ID",
-         'ui': { 'relatedTo': 'b' }
+         'ui': { 'relatedTo': 'b'},
       },
       "b": {
          "title": "b",
@@ -50,7 +50,9 @@ export const JSON_SCHEMA: any = {
          "exclusiveMinimum": false,
          "exclusiveMaximum": false,
          "internalName": "SERVICE_ID",
-         'ui': { 'relatedTo': 'd' }
+         'ui': {
+            'relatedTo': 'd'
+         }
       },
       "d": {
          "title": "d",
@@ -350,7 +352,7 @@ export const JSON_SCHEMA: any = {
                "required": false,
                "readOnly": false,
                "type": "boolean",
-               "default": true,
+               "default": false,
                "level": 1,
                "exclusiveMinimum": false,
                "exclusiveMaximum": false,
@@ -361,7 +363,7 @@ export const JSON_SCHEMA: any = {
                "required": false,
                "readOnly": false,
                "type": "boolean",
-               "default": true,
+               "default": false,
                "level": 1,
                "exclusiveMinimum": false,
                "exclusiveMaximum": false,
@@ -372,29 +374,36 @@ export const JSON_SCHEMA: any = {
                "required": false,
                "readOnly": false,
                "type": "boolean",
-               "default": true,
+               "default": false,
                "level": 1,
                "exclusiveMinimum": false,
                "exclusiveMaximum": false,
-               "internalName": "SECURITY_KRB_ENABLE"
+               "internalName": "SECURITY_KRB_ENABLE",
+               "ui": {
+                  'visible': {'Security_Truststore_Enable': true}
+               },
             },
             "Security_Marathon_Enabled": {
                "title": "Security Marathon",
                "required": false,
                "readOnly": false,
                "type": "boolean",
-               "default": true,
+               "default": false,
                "level": 1,
                "exclusiveMinimum": false,
                "exclusiveMaximum": false,
-               "internalName": "SECURITY_MARATHON_ENABLED"
+               "internalName": "SECURITY_MARATHON_ENABLED",
+               "ui": {
+                  'visible': {'Security_Krb_Enable': true}
+               },
             },
             "calico": {
                "type": "object",
                "title": "Calico",
                "description": "",
                "ui": {
-                  "component": "switch"
+                  "component": "switch",
+                  'visible': {'Security_Marathon_Enabled': true}
                },
                "properties": {
                   "Calico_Enabled": {

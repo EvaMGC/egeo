@@ -36,8 +36,9 @@
                         (ngModelChange)="onChangeProperty($event, property.key)"
                         [required]="isRequired(property.key)"
                         [hasDependencies]="isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))"
-                        [ngClass]="{hidden: isCollapsedSection() && !showCollapsedSectionFields,
-                     'parent-field': isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))}"
+                        [ngClass]="{
+                        'hidden': isCollapsedSection() && !showCollapsedSectionFields,
+                        'parent-field': isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))}"
                         [qaTag]="property.key">
          </st-form-field>
 
