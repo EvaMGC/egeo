@@ -20,15 +20,11 @@
    }
 
    .arrow[disabled] {
-      color: $neutral-05;
+      color: $neutral-07;
    }
 
    .st-input:focus::placeholder {
       color: $neutral-07;
-   }
-
-   .st-input:disabled {
-      color: $neutral-05;
    }
 
    &.st-select-opened {

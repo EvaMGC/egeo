@@ -61,6 +61,10 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    @Input() nestingLevel: number = 0;
    /** @Input {boolean} [forceValidations=] Boolean to force the field validations */
    @Input() forceValidations: boolean;
+   /** @Input {string} [disabledSectionMessage='for this instance is disabled.']
+    *  Message displayed when a section is disabled. This is always displayed after the section name
+    */
+   @Input() disabledSectionMessage: string = 'for this instance is disabled.';
 
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
@@ -154,6 +158,12 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
 
    onChangeOptionalFieldsVisibility(): void {
       this.showCollapsedSectionFields = !this.showCollapsedSectionFields;
+   }
+
+   getFieldClasses(propertyName: string): any {
+      return {
+         'hidden': this.isCollapsedSection() && !this.showCollapsedSectionFields,
+         'parent-field': this.isAParentField(propertyName) || (this.isASwitchSection() && this.isTheFirstField(propertyName))};
    }
 
    fieldHasToBeCreated(propertyName: string): boolean {

@@ -12,10 +12,10 @@
 @import '../constants/colors';
 @import '../utils/forms';
 
-.sth-search ::placeholder {
+.sth-search::placeholder {
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;
-   color: $neutral-07;
+   color: $neutral-09;
 }
 
 .sth-search .sth-search-input {
@@ -23,8 +23,6 @@
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;
    background-color: $neutral-00;
-   color: $action-secondary-07;
-   border: 1px solid $neutral-07;
    border-radius: 4px;
 }
 

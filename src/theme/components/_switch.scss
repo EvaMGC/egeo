@@ -14,8 +14,11 @@
 .st-switch {
    font-family: $egeo-nunito-sans;
 
-   label {
-      line-height: 1.9rem !important;
+   & > label {
+      line-height: $egeo-line-height-xsmall;
+      color: $action-secondary-07;
+      font-size: $egeo-font-size-xsmall;
+      font-family: $egeo-nunito-sans;
    }
 }
 
@@ -31,8 +34,8 @@
 
 .st-switch--off {
    .st-switch__box {
-      background-color: $neutral-05;
-      border: solid 1px $neutral-05;
+      background-color: $neutral-06;
+      border: solid 1px $neutral-06;
    }
 }
 

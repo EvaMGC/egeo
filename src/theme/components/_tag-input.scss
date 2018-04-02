@@ -18,7 +18,7 @@
       }
 
       &.active {
-         color: $input-field-onfocus;
+         color: $action-primary-default;
       }
    }
 
@@ -37,7 +37,8 @@
 
       &[disabled] {
          pointer-events: none;
-         border-color: $neutral-05;
+         border-color: $neutral-06;
+         background-color: $neutral-01;
       }
    }
 
@@ -45,7 +46,7 @@
       background-color: $action-secondary-02;
       border-radius: 4px;
       padding: 5px 10px;
-
+      color: $action-secondary-07;
       &:focus {
          background-color: $input-field-onfocus;
       }
@@ -63,10 +64,10 @@
    }
 
    &__placeholder {
-      color: $neutral-07;
+      color: $neutral-09;
 
       &[disabled] {
-         color: $neutral-05;
+         color: $neutral-08;
       }
    }
 

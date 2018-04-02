@@ -56,26 +56,31 @@
          left: -.0625rem;
       }
    }
-}
 
-.st-checkbox.st-label {
-   font-size: $egeo-font-size-xsmall !important;
-   line-height: $egeo-line-height-xsmall !important;
-   font-family: $egeo-nunito-sans !important;
-}
+   &.st-label {
+      font-size: $egeo-font-size-xsmall;
+      line-height: $egeo-line-height-xsmall;
+      font-family: $egeo-nunito-sans;
+   }
 
-.st-checkbox:not(.disabled).st-label {
-   color: $action-secondary-07 !important;
-}
+   &:not(.disabled).st-label {
+      color: $action-secondary-07;
+   }
 
-.st-checkbox.disabled {
-   color: $neutral-05;
-   .custom-checkbox {
-      border-color: $neutral-05;
-      &.icon-check2 {
-         background-color: $neutral-05;
+   &.disabled {
+      color: $neutral-08;
+
+      .custom-checkbox {
+         border-color: $neutral-06;
+         background-color: $neutral-01;
+         &.icon-check2 {
+            background-color: $neutral-08;
+            border-color: $neutral-08
+         }
       }
    }
 }
+
+
 
 

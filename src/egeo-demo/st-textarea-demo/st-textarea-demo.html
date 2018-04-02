@@ -12,6 +12,7 @@
 -->
 
 <form [formGroup]="myForm" novalidate>
+   <h1>In a form</h1>
    <div class="example">
       <span class="example-title">Disabled</span>
 
@@ -21,6 +22,7 @@
                    label="Description"
                    contextualHelp="This is the contextual help of the components"
                    formControlName="disabledField"
+                   class="st-form-field"
                    [cols]="50"
                    [rows]="3">
       </st-textarea>
@@ -35,6 +37,7 @@
                    label="Enabled"
                    contextualHelp="This is the contextual help of the components"
                    formControlName="enabledField"
+                   class="st-form-field"
                    [cols]="50"
                    [rows]="3">
       </st-textarea>
@@ -50,9 +53,23 @@
                    [required]="true"
                    contextualHelp="This is the contextual help of the components"
                    formControlName="requiredField"
+                   class="st-form-field"
                    [cols]="50"
                    [rows]="3">
       </st-textarea>
    </div>
-
+   <h1>Out a form</h1>
+   <div class="example">
+      <span class="example-title"></span>
+      <st-textarea
+         placeholder="Enter description"
+         value="This is a description"
+         label="Description"
+         contextualHelp="This is the contextual help of the components"
+         [cols]="50"
+         [rows]="3">
+      </st-textarea>
+   </div>
 </form>
+
+

@@ -28,7 +28,7 @@
       min-height: $egeo-line-height-xsmall;
    }
    &::placeholder {
-      color: $neutral-07;
+      color: $neutral-09;
    }
 
    &:focus {
@@ -39,11 +39,11 @@
    }
 
    &:disabled {
-      border-color: $neutral-05;
-      color: $neutral-05;
+      border-color: $neutral-06;
+      color: $neutral-01;
 
       &::placeholder {
-         color: $neutral-05;
+         color: $neutral-08;
       }
    }
 }

@@ -30,15 +30,13 @@
 
    <div class="separator"></div>
 
-   <h1> With value pattern </h1>
-
    <st-tag-input
       class="st-form-field"
       name="tag-input-reactive-required"
       formControlName="tag-input-reactive-required"
       [regularExpression]="pattern"
       [errorMessage]="errorReactiveMessage"
-      [label]="'Tag Input with require'"
+      [label]="'Tag Input with pattern of a valid IP'"
       [id]="'tag-input-reactive-required-demo'"
       [placeholder]="'Add tags separated by commas'"
       [tooltip]="'This is a Tag Input component tooltip'">

@@ -19,7 +19,7 @@
 }
 
 .st-radio.disabled {
-   color: $neutral-05;
+   color: $neutral-08;
 }
 
 .radio-flex > * {
@@ -53,13 +53,13 @@
       }
    }
 
-   &.disabled.checked {
-      background-color: $neutral-05;
-   }
-
    &.disabled {
-      border-color: $neutral-05;
+      border-color: $neutral-06;
       color: $neutral-05;
+      background-color: $neutral-01;
+      &.checked {
+         background-color: $neutral-06;
+      }
    }
 
 }

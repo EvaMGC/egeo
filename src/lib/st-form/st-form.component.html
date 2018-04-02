@@ -36,9 +36,7 @@
                         (ngModelChange)="onChangeProperty($event, property.key)"
                         [required]="isRequired(property.key)"
                         [hasDependencies]="isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))"
-                        [ngClass]="{
-                        'hidden': isCollapsedSection() && !showCollapsedSectionFields,
-                        'parent-field': isAParentField(property.key) || (isASwitchSection() && isTheFirstField(property.key))}"
+                        [ngClass]="getFieldClasses(property.key)"
                         [qaTag]="property.key">
          </st-form-field>
 
@@ -58,5 +56,5 @@
       <span class="line-break" *ngIf="!isRelatedField(property.key)"></span>
    </ng-container>
 
-   <p *ngIf="isInADisabledSection()" class="disabled-section-info"> {{schema.title}} for this instance is disabled.</p>
+   <p *ngIf="isInADisabledSection()" class="disabled-section-info"> {{schema.title}} {{disabledSectionMessage}}</p>
 </form>
