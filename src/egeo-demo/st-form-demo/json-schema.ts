@@ -26,7 +26,7 @@ export const JSON_SCHEMA: any = {
          "exclusiveMinimum": false,
          "exclusiveMaximum": false,
          "internalName": "SERVICE_ID",
-         'ui': { 'relatedTo': 'b'},
+         'ui': { 'relatedTo': 'b'}
       },
       "b": {
          "title": "b",
@@ -38,7 +38,7 @@ export const JSON_SCHEMA: any = {
          "level": 1,
          "exclusiveMinimum": false,
          "exclusiveMaximum": false,
-         "internalName": "SERVICE_CONFIGURATION",
+         "internalName": "SERVICE_CONFIGURATION"
       },
       "c": {
          "title": "c",
@@ -93,7 +93,7 @@ export const JSON_SCHEMA: any = {
          'ui': { 'relatedTo': 'g' }
       },
       "g": {
-         "title": "fg",
+         "title": "g",
          "required": true,
          "readOnly": false,
          "type": "string",
@@ -381,7 +381,7 @@ export const JSON_SCHEMA: any = {
                "internalName": "SECURITY_KRB_ENABLE",
                "ui": {
                   'visible': {'Security_Truststore_Enable': true}
-               },
+               }
             },
             "Security_Marathon_Enabled": {
                "title": "Security Marathon",
@@ -395,7 +395,7 @@ export const JSON_SCHEMA: any = {
                "internalName": "SECURITY_MARATHON_ENABLED",
                "ui": {
                   'visible': {'Security_Krb_Enable': true}
-               },
+               }
             },
             "calico": {
                "type": "object",
