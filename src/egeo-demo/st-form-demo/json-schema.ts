@@ -94,7 +94,7 @@ export const JSON_SCHEMA: any = {
                   "Sparta_Docker_Image": {
                      "title": "Docker image",
                      "required": false,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "string",
                      "default": "qa.stratio.com/stratio/sparta:2.0.0-RC3",
                      "level": 1,
@@ -107,7 +107,7 @@ export const JSON_SCHEMA: any = {
                   "Sparta_Marathon_Force_Pull_Image": {
                      "title": "Is downloaded scheduler image each time?",
                      "required": false,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "boolean",
                      "default": true,
                      "level": 1,
@@ -118,7 +118,7 @@ export const JSON_SCHEMA: any = {
                   "mem": {
                      "title": "Memory",
                      "required": true,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "integer",
                      "default": 1024,
                      "level": 1,
@@ -140,7 +140,7 @@ export const JSON_SCHEMA: any = {
                   "cpus": {
                      "title": "CPU",
                      "required": true,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "integer",
                      "default": 1,
                      "level": 1,
@@ -162,7 +162,7 @@ export const JSON_SCHEMA: any = {
                   "Sparta_Zookeeper_Connection_String": {
                      "title": "Zookeeper connection String",
                      "required": false,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "string",
                      "default": "zk-0001.zkuserland.mesos:2181,zk-0002.zkuserland.mesos:2181,zk-0003.zkuserland.mesos:2181",
                      "level": 1,
@@ -175,7 +175,7 @@ export const JSON_SCHEMA: any = {
                   "SpartaPluginZkConnect": {
                      "title": "Plugin Zookeeper connection",
                      "required": false,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "string",
                      "default": "gosec1.node.paas.labs.stratio.com:2181,gosec2.node.paas.labs.stratio.com:2181,gosec3.node.paas.labs.stratio.com:2181",
                      "level": 1,
@@ -187,8 +187,7 @@ export const JSON_SCHEMA: any = {
                   },
                   "Sparta_Zookeeper_Path": {
                      "title": "Path",
-                     "required": false,
-                     "readOnly": false,
+                     "readOnly": true,
                      "type": "string",
                      "default": "/stratio/sparta",
                      "level": 1,

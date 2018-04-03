@@ -32,7 +32,7 @@
    }
 
    &:focus {
-      border-color: $input-field-onfocus;
+      border-color: $action-primary-default;
       &::placeholder {
          color: transparent;
       }

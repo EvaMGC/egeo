@@ -16,9 +16,10 @@ import {
    forwardRef,
    ChangeDetectionStrategy,
    EventEmitter,
-   ViewChild
+   ViewChild, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, NgModel } from '@angular/forms';
+
 import { StInputError } from '../../st-input/st-input.error.model';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
@@ -33,7 +34,9 @@ import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.inte
       { provide: NG_VALIDATORS, useExisting: forwardRef(() => StFormFieldComponent), multi: true }
    ],
    changeDetection: ChangeDetectionStrategy.OnPush,
-   host: { class: 'st-form-field' }
+   host: {
+      class: 'st-form-field'
+   }
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit {
@@ -54,6 +57,11 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    public focus: boolean = false;
    public errorMessage: string = undefined;
    private innerValue: any;
+
+   @HostBinding('class.read-only')
+   get readOnly(): boolean {
+      return this.schema && this.schema.value && this.schema.value.readOnly === true;
+   }
 
    onChange = (_: any) => {
    }

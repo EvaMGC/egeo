@@ -115,13 +115,31 @@
       }
    }
 
-   .form-field.parent-field {
-      .st-switch {
-         padding-top: 20px;
-         display: inline-block;
-         label {
-            color: $neutral-13;
-            vertical-align: middle;
+   .form-field {
+      &.parent-field {
+         .st-switch {
+            padding-top: 20px;
+            display: inline-block;
+            label {
+               color: $neutral-13;
+               vertical-align: middle;
+            }
+         }
+      }
+
+      &.read-only {
+         input {
+            background-color: transparent;
+            border: none;
+            color: $action-secondary-07;
+            padding-left: 0;
+            height: 0;
+         }
+
+         .st-select {
+           .arrow {
+              display: none;
+           }
          }
       }
    }
@@ -157,8 +175,8 @@
       overflow: hidden;
    }
 
-
    .form-field-container + .form-field-container {
-      margin-left: 25px;
+      margin-left: 15px;
+      padding-left: 28px;
    }
 }

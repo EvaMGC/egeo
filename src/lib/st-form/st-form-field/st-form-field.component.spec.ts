@@ -823,18 +823,39 @@ describe('StFormFieldComponent', () => {
       });
    });
 
-   it('if a field has the property readOnly in its schema, it can`t be edited', () => {
-      let schema: any = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
-      component.schema = { key: 'genericNumberInput', value: schema };
-      schema.readOnly = true;
 
-      fixture.detectChanges();
-      component.ngOnInit();
+   describe('readOnly property', () => {
+      it('if it is true, field can`t be edited and it is displayed as normal text', (done) => {
+         let schema: any = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
+         component.schema = { key: 'genericNumberInput', value: schema };
+         schema.readOnly = true;
 
-      fixture.whenStable().then(() => {
-         expect(fixture.nativeElement.querySelector('input').disabled).toBeTruthy();
+         fixture.detectChanges();
+         component.ngOnInit();
+
+         fixture.whenStable().then(() => {
+            expect(fixture.nativeElement.querySelector('input').disabled).toBeTruthy();
+            expect(fixture.nativeElement.querySelector('input').parentElement.parentElement.parentElement.classList).toContain('read-only');
+            done();
+         });
+      });
+
+      it('if it is false, field can be edited and it is displayed as a form field', (done) => {
+         let schema: any = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
+         component.schema = { key: 'genericNumberInput', value: schema };
+         schema.readOnly = false;
+
+         fixture.detectChanges();
+         component.ngOnInit();
+
+         fixture.whenStable().then(() => {
+            expect(fixture.nativeElement.querySelector('input').disabled).toBeFalsy();
+            expect(fixture.nativeElement.querySelector('input').parentElement.parentElement.parentElement.classList).not.toContain('read-only');
+            done();
+         });
       });
    });
+
 
    describe('should be able to render switches with their validations', () => {
       let switchElement: HTMLInputElement;

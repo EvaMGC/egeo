@@ -12,17 +12,14 @@
    position: relative;
 }
 
-input {
-   padding-right: 40px;
-}
-
 .arrow {
    position: absolute;
-   top: 13px;
-   right: 13px;
+   right: 8px;
+   top: 29px;
+   padding: 5px 5px 5px 9px;
 
    &.with-label {
-      top: 33px;
+      top: 30px;
    }
 }
 

@@ -19,8 +19,13 @@
       width: 100%;
    }
 
+   .arrow {
+      background-color: $neutral-00;
+   }
+
    .arrow[disabled] {
       color: $neutral-07;
+      background-color: $neutral-01;
    }
 
    .st-input:focus::placeholder {

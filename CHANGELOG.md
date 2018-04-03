@@ -5,6 +5,7 @@
 **New features:**
 
 * st-form: Allow to display and hide fields according to the value of another fields
+* st-form: Display readonly fields as text
 
 **Others**
 
