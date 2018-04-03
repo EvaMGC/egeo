@@ -19,6 +19,7 @@
       name="search-filter"
       (select)="onChangeFilter()"
       class="sth-search-filter st-search-filter"
+      [ngClass]="{'disabled': disabled}"
    ></st-select>
 
    <st-dropdown-menu [items]="autocompleteList" [attr.id]="menuId" class="st-search-box" (change)="changeOption($event)"

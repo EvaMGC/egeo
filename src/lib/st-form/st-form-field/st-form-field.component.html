@@ -42,8 +42,7 @@
              [value]="innerValue"
              [name]="schema.key"
              [contextualHelp]="description"
-             [qaTag]="qaTag">
-   {{schema.value.title}}
+             [qaTag]="qaTag"><span>{{schema.value.title}}</span>
 </st-checkbox>
 
 <st-select *ngIf="hasType('select')"

@@ -12,6 +12,14 @@
 @import '../constants/colors';
 @import '../utils/forms';
 
+.sth-search {
+   .st-search-filter.disabled  {
+      .arrow {
+         background-color: $neutral-00;
+      }
+   }
+}
+
 .sth-search::placeholder {
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;

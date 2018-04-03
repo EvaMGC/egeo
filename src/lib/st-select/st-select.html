@@ -48,8 +48,9 @@
                [style.opacity]="expandedMenu ? 1 : 0">
       <i class="icon-reload2"></i>
       </span>
+         <i class="icon-arrow2_down arrow" [attr.disabled]="disableValue"></i>
       </div>
-      <i class="icon-arrow2_down arrow" [ngClass]="{'with-label': hasLabel}" [attr.disabled]="disableValue"></i>
+
    </div>
 </st-dropdown-menu>
 <div *ngIf="hasError">

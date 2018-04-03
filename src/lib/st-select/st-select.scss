@@ -15,12 +15,9 @@
 .arrow {
    position: absolute;
    right: 8px;
-   top: 29px;
+   top: 8px;
    padding: 5px 5px 5px 9px;
-
-   &.with-label {
-      top: 30px;
-   }
+   cursor: pointer;
 }
 
 .st-select-menu {
