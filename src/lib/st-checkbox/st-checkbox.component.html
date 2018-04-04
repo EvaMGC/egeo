@@ -10,7 +10,7 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<label  class="st-checkbox" [ngClass]="{'disabled' : disabled}" [attr.id]="labelQaTag" >
+<label st-label class="st-checkbox" [ngClass]="{'disabled' : disabled}" [attr.id]="labelQaTag" [attr.title]="contextualHelp">
    <div class="st-checkbox-container">
       <input
          type="checkbox"

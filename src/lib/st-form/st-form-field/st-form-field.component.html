@@ -63,7 +63,7 @@
            #templateModel="ngModel"
            [label]="schema.value.title"
            [name]="schema.key"
-           [contextualHelp]="schema.value.description"
+           [contextualHelp]="description"
            [ngModel]="innerValue"
            (ngModelChange)="setValue($event)"
            [value]="innerValue"
