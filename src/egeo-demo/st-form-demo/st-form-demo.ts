@@ -15,7 +15,8 @@ import { JSON_SCHEMA } from './json-schema';
 
 @Component({
    selector: 'st-form-demo',
-   templateUrl: 'st-form-demo.html'
+   templateUrl: 'st-form-demo.html',
+   styleUrls: ['./st-form-demo.scss']
 })
 export class StFormDemoComponent {
    public jsonSchema: any;
@@ -41,5 +42,9 @@ export class StFormDemoComponent {
       } else {
          this.formModel.control.enable();
       }
+   }
+
+   onChangeSchema(jsonSchema: any): void {
+      console.log(jsonSchema);
    }
 }
