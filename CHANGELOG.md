@@ -9,7 +9,7 @@
 
 **Others**
 
-* Apply visual changes to several components for contrast improvements
+* Apply visual changes to several components for contrast improvements 
 
 
 ## 8.8.0 (upcoming)
