@@ -1,6 +1,6 @@
 # Changelog
 
-## 9.0.0 (upcoming)
+## 8.9.0 (upcoming)
 
 **New features:**
 
