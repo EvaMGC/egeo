@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 
 @Component({
    templateUrl: './st-draggable-card-demo.component.html',
@@ -17,23 +17,23 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class StDraggableCardDemoComponent {
 
-   allowDrop(event: DragEvent) {
+    constructor(private _el: ElementRef) { }
+
+   allowDrop(event: DragEvent): void {
       event.preventDefault();
-      event.stopPropagation();
    }
 
    drag(event: any): void {
-      event.dataTransfer.setData("dragged-item-id", event.currentTarget.id);
+      event.dataTransfer.setData('dragged-item-id', event.currentTarget.id);
       event.stopPropagation();
    }
 
    drop(event: any): void {
       let dataTransfer = event.dataTransfer.getData('dragged-item-id');
-      let item = document.getElementById(dataTransfer);
+      const item = this._el.nativeElement.querySelector(`#${dataTransfer}`);
       if (item) {
          event.currentTarget.appendChild(item);
       }
-
    }
 }
 

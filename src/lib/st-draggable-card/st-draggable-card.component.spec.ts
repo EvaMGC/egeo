@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 
 import { StDraggableCardComponent } from './st-draggable-card.component';
 
@@ -53,15 +53,15 @@ describe('StDraggableCardComponent', () => {
          expect(fixture.nativeElement.querySelector('.st-draggable-card').classList).not.toContain('shadow');
       });
 
-      it ('shadow is displayed in the gap of the card', () => {
-         let event: any = new Event('drag');
+      it ('shadow is displayed in the gap of the card', fakeAsync(() => {
+         let event: any = new Event('dragstart');
          event.dataTransfer = <DataTransfer>{};
 
          fixture.nativeElement.dispatchEvent(event);
          fixture.detectChanges();
-
+         tick();
          expect(fixture.nativeElement.querySelector('.st-draggable-card').classList).toContain('shadow');
-      });
+      }));
    });
 
    describe('When user drops the card', () => {

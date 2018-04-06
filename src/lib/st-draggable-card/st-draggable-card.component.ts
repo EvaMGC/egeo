@@ -63,15 +63,10 @@ export class StDraggableCardComponent {
       return this._dragging;
    }
 
-   @HostListener('drag', ['$event'])
-   public dragHandle(event: any): void {
-      this.card.nativeElement.classList.add('shadow');
-   }
-
    @HostListener('dragstart', ['$event'])
    public dragStartHandle(event: any): void {
       this._dragging = true;
-      this.card.nativeElement.classList.remove('shadow');
+      setTimeout(() => this.card.nativeElement.classList.add('shadow'));
       event.dataTransfer.effectAllowed = 'all';
       event.dataTransfer.dropEffect = 'move';
       this.onDragStart.emit(event);
