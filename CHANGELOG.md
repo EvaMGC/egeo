@@ -6,6 +6,11 @@
 
 * st-tree: Completely refactored
 
+**Others**
+
+* st-form: Remove e.g. from placeholders
+
+
 ## 8.9.0 (April 06, 2018)
 
 **New features:**
