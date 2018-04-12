@@ -10,18 +10,17 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
+
 <section class="container-liquid col-sm-12 col-md-12 col-xs-12 row">
-   <div class="form-container col-sm-6 col-md-6 col-xs-12">
+   <div class="form-container col-sm-7 col-md-7 col-xs-12">
       <st-form [schema]="jsonSchema" [(ngModel)]="model" #formModel="ngModel"></st-form>
    </div>
 
-   <div class="editor-container col-sm-6 col-md-6 col-xs-12">
-      <textarea class="st-textarea" (change)="onChangeSchema($event)">
+   <div class="editor-container col-sm-5 col-md-5 col-xs-12">
+      <textarea st-jon-editor [(ngModel)]="jsonSchema" class="st-textarea" (change)="onChangeSchema($event)">
             {{ jsonSchema | json }}
       </textarea>
-      <pre contenteditable="true" (change)="onChangeSchema($event)">{{jsonSchema | json}}</pre>
    </div>
-
    <br>
 
    <button class="button button-primary" (click)="showFormStatus()">

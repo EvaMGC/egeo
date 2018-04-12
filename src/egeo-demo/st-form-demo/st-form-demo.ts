@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 
 import { JSON_SCHEMA } from './json-schema';
 
@@ -21,6 +21,7 @@ import { JSON_SCHEMA } from './json-schema';
 export class StFormDemoComponent {
    public jsonSchema: any;
    public model: any = {  };
+   public editorForm: FormControl = new FormControl(this.model);
 
    @ViewChild('formModel') public formModel: NgForm;
 

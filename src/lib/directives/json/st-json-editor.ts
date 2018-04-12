@@ -1,4 +1,4 @@
-/**
+/*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -8,13 +8,20 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+import {
+   Directive,
+   ElementRef,
+   Input
+} from '@angular/core';
+import { NgModel } from '@angular/forms';
 
+@Directive({
+   selector: '[st-json-editor]'
+})
+export class StJsonEditor {
 
-.editor-container {
-   height: 100%;
-
-   & > .st-textarea {
-      height: 100%;
-      min-height: 85vh;
+   constructor(private el: ElementRef,
+               private ngModel: NgModel) {
    }
+
 }
