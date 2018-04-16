@@ -195,11 +195,9 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
 
    onChangeProperty(value: any, property: string): void {
       setTimeout(() => {
-         if (this._value[property] !== value) {
-            this._value[property] = value;
-            this.valueChange.emit(this._value);
-            this.onChange(this._value);
-         }
+         this._value[property] = value;
+         this.valueChange.emit(this._value);
+         this.onChange(this._value);
       });
    }
 

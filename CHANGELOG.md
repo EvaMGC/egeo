@@ -6,6 +6,10 @@
 
 * st-form: Allow to display sections descriptions
 
+**Fixed bugs:**
+
+* st-form: Fix validations of nested properties
+
 
 ## 9.0.0 (April 12, 2018)
 
