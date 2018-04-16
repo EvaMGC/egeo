@@ -19,7 +19,7 @@ export const JSON_SCHEMA: any = {
       "general": {
          "type": "object",
          "title": "General",
-         "description": "",
+         "description": "The only point for dealing with administrative operations is through the configuration files.",
          "ui": {
             "component": "show-more"
          },

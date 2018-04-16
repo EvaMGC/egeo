@@ -688,6 +688,31 @@ describe('StFormComponent', () => {
       expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).not.toContain('This field is required');
    });
 
+   describe('Section descriptions can be displayed using the input "sectionDescriptionLevel"', () => {
+
+      it ('if sectionDescriptionLevel is not introduced, section descriptions are not displayed', () => {
+         expect(fixture.nativeElement.querySelector('#executor-section .description')).toBeNull();
+      });
+
+      it ('if sectionDescriptionLevel is introduced, section descriptions are only displayed if section level' +
+         ' is minor than sectionDescriptionLevel', () => {
+         component.sectionDescriptionLevel = 1;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('#executor-section .description').innerHTML)
+            .toContain(component.schema.properties.executor.description);
+         expect(fixture.nativeElement.querySelector('#subexecutor-section .description')).toBeNull();
+
+         component.sectionDescriptionLevel = 2;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('#subexecutor-section .description').innerHTML)
+            .toContain(component.schema.properties.executor.properties.subexecutor.description);
+      });
+
+   });
+
 });
 
 

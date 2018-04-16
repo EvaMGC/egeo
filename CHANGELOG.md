@@ -2,7 +2,10 @@
 
 ## 9.1.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-form: Allow to display sections descriptions
+
 
 ## 9.0.0 (April 12, 2018)
 

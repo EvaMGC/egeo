@@ -66,6 +66,10 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
     */
    @Input() disabledSectionMessage: string = 'for this instance is disabled.';
 
+   /** @Input {number} [sectionDescriptionLevel=-1] Level of the section to which description is displayed.
+    * By default, section descriptions are not displayed.
+    */
+   @Input() sectionDescriptionLevel: number = -1;
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 

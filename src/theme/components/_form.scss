@@ -31,6 +31,14 @@
       font-family: $egeo-nunito-sans-bold;
    }
 
+   .description {
+      font-size: $egeo-font-size-small;
+      line-height: $egeo-line-height-small;
+      color: $neutral-11;
+      padding-bottom: 20px;
+      width: 100%;
+   }
+
    .category {
       .title {
          font-size: $egeo-font-size-xxlarge;
