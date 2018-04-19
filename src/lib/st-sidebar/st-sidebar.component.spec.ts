@@ -10,7 +10,6 @@
  */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
-
 import { StSidebarComponent } from './st-sidebar.component';
 
 describe('StSidebar', () => {
@@ -72,35 +71,40 @@ describe('StSidebar', () => {
 
    describe('When user clicks on a tab', () => {
 
-      it('When user clicks on a tab, event is emitted if it was not already activated', () => {
+      it('When user clicks on a tab, event is emitted if it was not already activated', (done) => {
          spyOn(component.change, 'emit');
          itemList[2].click();
 
          fixture.detectChanges();
          fixture.changeDetectorRef.markForCheck();
+         fixture.whenStable().then(() => {
+            expect(component.change.emit).toHaveBeenCalledWith(component.items[2].id);
 
-         expect(component.change.emit).toHaveBeenCalledWith(component.items[2].id);
+            (<jasmine.Spy> component.change.emit).calls.reset();
+            itemList[2].click();
 
-         (<jasmine.Spy> component.change.emit).calls.reset();
-         itemList[2].click();
+            fixture.detectChanges();
 
-         fixture.detectChanges();
+            expect(component.change.emit).not.toHaveBeenCalled();
 
-         expect(component.change.emit).not.toHaveBeenCalled();
+            itemList[3].click();
 
-         itemList[3].click();
+            fixture.detectChanges();
 
-         fixture.detectChanges();
-
-         expect(component.change.emit).toHaveBeenCalledWith(component.items[3].id);
+            expect(component.change.emit).toHaveBeenCalledWith(component.items[3].id);
+            done();
+         });
       });
 
-      it('this tab is displayed as active one', () => {
+      it('this tab is displayed as active one', (done) => {
          itemList[2].click();
 
          fixture.detectChanges();
 
-         expect(itemList[2].classList).toContain('item__active');
+         fixture.whenStable().then(() => {
+            expect(itemList[2].classList).toContain('item__active');
+            done();
+         });
       });
    });
 

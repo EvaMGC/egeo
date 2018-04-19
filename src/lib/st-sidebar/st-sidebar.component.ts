@@ -54,8 +54,8 @@ export class StSidebarComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      if (!this.active && this.items) {
-         this.active = this.items[0].id;
+      if (!this._active && this.items) {
+         this._active = this.items[0].id;
       }
    }
 
@@ -76,13 +76,13 @@ export class StSidebarComponent implements OnInit {
 
    onSelectItem(itemId: string): void {
       if (itemId !== this._active) {
-         this.active = itemId;
+         this._active = itemId;
          this.change.emit(itemId);
       }
    }
 
    private isActive(itemId: string): boolean {
-      return this.active === itemId;
+      return this._active === itemId;
    }
 
 }

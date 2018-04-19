@@ -2,8 +2,11 @@
 
 ## 9.2.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
 * st-form: Fields should not be displayed with error at the beginning
+* st-sidebar: Remove modification of active item from the component
+
 
 ## 9.1.0 (April 19, 2018)
 
