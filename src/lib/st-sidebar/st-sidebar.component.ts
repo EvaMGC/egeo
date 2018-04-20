@@ -76,7 +76,6 @@ export class StSidebarComponent implements OnInit {
 
    onSelectItem(itemId: string): void {
       if (itemId !== this._active) {
-         this._active = itemId;
          this.change.emit(itemId);
       }
    }

@@ -71,40 +71,33 @@ describe('StSidebar', () => {
 
    describe('When user clicks on a tab', () => {
 
-      it('When user clicks on a tab, event is emitted if it was not already activated', (done) => {
+      it('When user clicks on a tab, event is emitted if it was not already activated', () => {
          spyOn(component.change, 'emit');
          itemList[2].click();
 
-         fixture.detectChanges();
-         fixture.changeDetectorRef.markForCheck();
-         fixture.whenStable().then(() => {
-            expect(component.change.emit).toHaveBeenCalledWith(component.items[2].id);
+         expect(component.change.emit).toHaveBeenCalledWith(component.items[2].id);
 
-            (<jasmine.Spy> component.change.emit).calls.reset();
-            itemList[2].click();
+         (<jasmine.Spy> component.change.emit).calls.reset();
+         component.active = component.items[2].id;
 
-            fixture.detectChanges();
-
-            expect(component.change.emit).not.toHaveBeenCalled();
-
-            itemList[3].click();
-
-            fixture.detectChanges();
-
-            expect(component.change.emit).toHaveBeenCalledWith(component.items[3].id);
-            done();
-         });
-      });
-
-      it('this tab is displayed as active one', (done) => {
          itemList[2].click();
 
          fixture.detectChanges();
+         expect(component.change.emit).not.toHaveBeenCalled();
 
-         fixture.whenStable().then(() => {
-            expect(itemList[2].classList).toContain('item__active');
-            done();
-         });
+         itemList[3].click();
+
+         fixture.detectChanges();
+         fixture.changeDetectorRef.markForCheck();
+
+         expect(component.change.emit).toHaveBeenCalledWith(component.items[3].id);
+      });
+
+      it('this tab is displayed as active one', () => {
+         component.active = component.items[2].id;
+         fixture.detectChanges();
+
+         expect(itemList[2].classList).toContain('item__active');
       });
    });
 

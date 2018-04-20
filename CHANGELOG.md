@@ -1,11 +1,14 @@
 # Changelog
 
-## 9.2.0 (upcoming)
+## 10.0.0 (upcoming)
 
 **Fixed bugs:**
 
 * st-form: Fields should not be displayed with error at the beginning
-* st-sidebar: Remove modification of active item from the component
+
+**Breaking changes:**
+
+* st-sidebar: Active item is now changed from outside in order to convert it to stateless
 
 
 ## 9.1.0 (April 19, 2018)
