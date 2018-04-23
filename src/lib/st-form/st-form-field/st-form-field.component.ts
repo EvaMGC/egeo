@@ -178,11 +178,9 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    writeValue(value: any): void {
-      if (value !== undefined) {
          this.innerValue = value;
          this.valueChange.emit(value);
          this.onChange(value);
-      }
    }
 
    registerOnChange(fn: (_: any) => void): void {

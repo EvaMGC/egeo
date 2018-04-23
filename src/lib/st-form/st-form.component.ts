@@ -181,10 +181,10 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    fieldHasToBeCreated(propertyName: string): boolean {
       let createField: boolean = true;
       let parentField: string = this.getParentField(propertyName);
-      let isVisible: boolean = this.fulfillDependencyVisibility(propertyName);
-      if (!isVisible || (((parentField && !this._value[parentField]) || (this.isInADisabledSection() && !this.isTheFirstField(propertyName))))) {
+      if (((parentField && !this._value[parentField]) || (this.isInADisabledSection() && !this.isTheFirstField(propertyName)))
+         || !this.fulfillDependencyVisibility(propertyName)) {
          createField = false;
-         this.onChangeProperty(undefined, propertyName);
+         this._value[propertyName] = undefined;
       }
       return createField;
    }
@@ -202,9 +202,9 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    }
 
    onChangeProperty(value: any, property: string): void {
+      this._value[property] = value;
+      this.valueChange.emit(this._value);
       setTimeout(() => {
-         this._value[property] = value;
-         this.valueChange.emit(this._value);
          this.onChange(this._value);
       });
    }
@@ -279,11 +279,14 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
       let fulfill: boolean = true;
       let propertySchema: any = this.schema.properties[propertyName];
       if (propertySchema.ui && propertySchema.ui.visible) {
-         Object.keys(propertySchema.ui.visible).forEach((property) => {
-            if (this._value[property] !== propertySchema.ui.visible[property]) {
+         const keys: string[] = Object.keys(propertySchema.ui.visible);
+         let i = 0;
+         while(fulfill && i < keys.length &&  propertySchema.ui.visible.hasOwnProperty(keys[i])) {
+            if (this._value[keys[i]] !== propertySchema.ui.visible[keys[i]]) {
                fulfill = false;
             }
-         });
+            ++i;
+         }
       }
       return fulfill;
    }

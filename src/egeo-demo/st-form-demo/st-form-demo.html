@@ -12,6 +12,10 @@
 -->
 <section class="container-liquid">
    <div style="width: 100%; position: relative;">
+      <h1>VALIDATION</h1>
+      {{formModel.valid}}
+      <br><br><br>
+
       <st-form [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel"></st-form>
    </div>
    <br>
@@ -27,6 +31,3 @@
 </section>
 <h1>MODEL</h1>
 {{model | json}}
-<br><br><br>
-<h1>VALIDATION</h1>
-{{formModel.valid}}

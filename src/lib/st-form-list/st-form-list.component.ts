@@ -105,6 +105,7 @@ export class StFormListComponent implements ControlValueAccessor {
       this.formArray.push(this.generateItemFormGroup());
       this.valueChange.emit(this._value);
       this.add.emit({ position: this._value.length - 1, model: this._value });
+      this.onChange(this._value);
    }
 
    removeItem(position: number): void {
@@ -112,6 +113,7 @@ export class StFormListComponent implements ControlValueAccessor {
       this._value.splice(position, 1);
       this.valueChange.emit(this._value);
       this.remove.emit({ position: position, model: this._value });
+      this.onChange(this._value);
    }
 
    isRequired(propertyName: string): boolean {
@@ -159,11 +161,11 @@ export class StFormListComponent implements ControlValueAccessor {
       this._value[rowPosition][property] = value;
       this.valueChange.emit(this._value);
 
-      if (previousValue !== value) {
+      // if (previousValue !== value) {
          setTimeout(() => {
             this.onChange(this._value);
          });
-      }
+      // }
    }
 
    onBlur(): void {
