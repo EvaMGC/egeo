@@ -106,6 +106,10 @@
 * st-two-list-selection: Fix search functionality
 
 
+**Others:**
+
+* Update to angular 6 (angular, angular-cli, rxjs, typescript)
+
 ## 11.1.0 (June 04, 2018)
 
 **New features:**
