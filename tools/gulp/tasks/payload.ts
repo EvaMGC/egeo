@@ -8,7 +8,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { spawnSync } from 'child_process';
 import { task } from 'gulp';
 import { join } from 'path';
 import { statSync } from 'fs';

@@ -14,7 +14,7 @@ import { readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 
-import {composeRelease, buildConfig, sequenceTask} from 'build-tools';
+import { buildConfig } from 'build-tools';
 
 const { outputDir } = buildConfig;
 
@@ -29,7 +29,7 @@ task('demo-app:replace:assets', (done) => {
    cssFiles.map(file => {
       const filePath: string = join(distPath, file);
       const content = readFileSync(filePath, 'utf-8').replace(/\/assets/g, 'assets');
-      writeFileSync(filePath, content, 'utf-8');
+      writeFileSync(filePath, content, { encoding: 'utf-8' });
    });
    done();
 });

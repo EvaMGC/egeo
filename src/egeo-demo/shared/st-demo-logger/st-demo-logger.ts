@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { StDemoLogger, StDemoLoggerSeverity } from './st-demo-loger.model';
 import { StDemoLoggerService } from './st-demo-logger.service';

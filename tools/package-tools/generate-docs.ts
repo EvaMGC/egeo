@@ -38,7 +38,7 @@ function generateIndex(outDir: string): void {
    const mdFullPath: string = join(outDir, mdPath);
 
    const indexContent: string = `# Table of Contents\n${buildIndex(outDir)}`;
-   writeFileSync(join(mdFullPath, 'index.md'), indexContent);
+   writeFileSync(join(mdFullPath, 'index.md'), indexContent, { encoding: 'utf-8' });
 }
 
 function buildIndex(outDir: string): string {

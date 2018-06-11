@@ -9,8 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ColorsService } from './colors.service';
 import { Color } from './colors.model';
@@ -33,10 +33,12 @@ export class ColorsDemoComponent {
    private animationInterval: number;
 
    constructor(
-      private service: ColorsService,
+      private _service: ColorsService,
       private _cd: ChangeDetectorRef
    ) {
-      this.colorsList = service.getColorsList().map(list => this.getGroupedList(list));
+      this.colorsList = this._service.getColorsList().pipe(
+         map(list => this.getGroupedList(list))
+      );
    }
 
    onSearchResult(search: string): void {

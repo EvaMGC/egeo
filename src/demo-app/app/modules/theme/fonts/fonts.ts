@@ -9,8 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
 
 import { Font, FONTS, CATEGORY } from './fonts.model';
 

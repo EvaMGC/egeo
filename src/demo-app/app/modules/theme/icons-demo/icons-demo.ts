@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { IconsDemoService } from './icons-demo.service';
 import { IconDemoModel } from './icons-demo.model';
@@ -32,10 +32,10 @@ export class IconsDemoComponent {
    private animationInterval: number;
 
    constructor(
-      private service: IconsDemoService,
+      private _service: IconsDemoService,
       private _cd: ChangeDetectorRef
    ) {
-      this.iconList = service.getIconList();
+      this.iconList = this._service.getIconList();
    }
 
    onSearchResult(search: {text: string}): void {

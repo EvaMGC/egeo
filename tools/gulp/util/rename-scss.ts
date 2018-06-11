@@ -23,7 +23,7 @@ export function renameResources(filePath: string): void {
    let fileContent = readFileSync(filePath, 'utf-8');
 
    fileContent = renameScssForCss(fileContent);
-   writeFileSync(filePath, fileContent, 'utf-8');
+   writeFileSync(filePath, fileContent, { encoding: 'utf-8' });
 }
 
 /** Inlines the external styles of Angular components for a specified source file. */

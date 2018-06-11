@@ -10,17 +10,18 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ChangelogService {
 
-   constructor(private http: Http) { }
+   constructor(private http: HttpClient) { }
 
    getChangelog(): Observable<string> {
-      return this.http.get(location.pathname + 'assets/CHANGELOG.md')
-         .map(response => response.text().trim().replace(/^# Changelog/, ''));
+      return this.http.get(location.pathname + 'assets/CHANGELOG.md', {responseType: 'text'}).pipe(
+         map(response => (<any>response).trim().replace(/^# Changelog/, ''))
+      );
    }
 }

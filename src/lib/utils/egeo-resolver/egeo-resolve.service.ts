@@ -1,3 +1,5 @@
+
+
 /*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
@@ -19,10 +21,9 @@ import {
    values as _values,
    omit as _omit
 } from 'lodash';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import 'rxjs/add/operator/map';
 
 import { EgeoResolverKeys, TranslateServiceType } from './egeo-resolve-model';
 
@@ -42,8 +43,8 @@ export class EgeoResolveService {
       // If not found translateable elements, return the same because if not, translate service broke on try to translate an empty array.
       if (keys && keys.length > 0) {
          let toTranslate: string[] = this.extractTranslationKeys(keys); // Extract keys for translate service
-         return translateService.get(toTranslate) // return object translation
-            .map((translation) => this.remapObjectWithTranslations(translation, keys, object));
+         return translateService.get(toTranslate).pipe( // return object translation
+            map((translation) => this.remapObjectWithTranslations(translation, keys, object)));
       } else {
          return Observable.create((observer: Observer<any>) => {
             observer.next(object);
@@ -53,8 +54,8 @@ export class EgeoResolveService {
    }
 
    translateArrayOfKeys(keys: string[], translateService: TranslateServiceType): Observable<string[]> {
-      return translateService.get(keys)
-         .map((translation) => this.remapArrayWithTranslations(translation, keys));
+      return translateService.get(keys).pipe(
+         map((translation) => this.remapArrayWithTranslations(translation, keys)));
    }
 
    private remapArrayWithTranslations(translations: { [key: string]: string }, originalArray: string[]): string[] {
@@ -64,7 +65,7 @@ export class EgeoResolveService {
    private remapObjectWithTranslations(translations: { [key: string]: string }, resolverKeys: EgeoResolverKeys[], object: any): any {
       let newObj = _cloneDeep(object);
       if (translations || _keys(translations).length > 0) {
-         _forEach(resolverKeys, (resolvKey, key) => {
+         _forEach(resolverKeys, (resolvKey) => {
             _set(newObj, resolvKey.path, this.getTranslationFromTranslatedKey(translations, resolvKey));
          });
       }

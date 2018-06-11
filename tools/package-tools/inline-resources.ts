@@ -27,7 +27,7 @@ export function inlineResources(filePath: string): void {
    fileContent = inlineStyles(fileContent, filePath);
    fileContent = removeModuleId(fileContent);
 
-   writeFileSync(filePath, fileContent, 'utf-8');
+   writeFileSync(filePath, fileContent, { encoding: 'utf-8' } );
 }
 
 /** Inlines the templates of Angular components for a specified source file. */

@@ -18,7 +18,6 @@ const gulpCleanCss = require('gulp-clean-css');
 const gulpIf = require('gulp-if');
 const gulpSass = require('gulp-sass');
 const gulpPostCss = require('gulp-postcss');
-const gulpSassBundle = require('scss-bundle');
 
 const postCssPlugins = [
    autoprefixer({ browsers: ['IE 11'] }),

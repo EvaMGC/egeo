@@ -39,5 +39,5 @@ export function addPureAnnotationsToFile(inputFile: string): void {
    const originalContent = readFileSync(inputFile, 'utf-8');
    const annotatedContent = addPureAnnotations(originalContent);
 
-   writeFileSync(inputFile, annotatedContent, 'utf-8');
+   writeFileSync(inputFile, annotatedContent, { encoding: 'utf-8' });
 }

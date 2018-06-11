@@ -9,8 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { StAlert, STALERT_SEVERITY, StAlertLink } from './st-alerts.model';
 

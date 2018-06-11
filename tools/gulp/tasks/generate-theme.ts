@@ -41,7 +41,7 @@ task('styles:constans', () => {
    const allScssGlob = join(themeSourceFolder, '**/*.scss');
    return new Bundler().Bundle(constantsSourceFile, [allScssGlob]).then(result => {
       mkdirpSync(packageOut);
-      writeFileSync(join(packageOut, constantsOutputFile), result.bundledContent);
+      writeFileSync(join(packageOut, constantsOutputFile), result.bundledContent, { encoding: 'utf-8' });
    });
 });
 
@@ -49,7 +49,7 @@ task('styles:theme:scss', () => {
    const allScssGlob = join(themeSourceFolder, '**/*.scss');
    return new Bundler().Bundle(themeSourceFile, [allScssGlob]).then(result => {
       mkdirpSync(packageOut);
-      writeFileSync(join(packageOut, themeScssOutputFile), result.bundledContent);
+      writeFileSync(join(packageOut, themeScssOutputFile), result.bundledContent, { encoding: 'utf-8' });
    });
 });
 

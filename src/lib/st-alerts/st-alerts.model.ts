@@ -8,9 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { Subject } from 'rxjs/Subject';
+import { Observable ,  Observer ,  Subject } from 'rxjs';
 
 // tslint:disable:max-classes-per-file
 export enum STALERT_SEVERITY { SUCCESS, WARNING, ERROR }

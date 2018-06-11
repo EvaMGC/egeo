@@ -1,3 +1,5 @@
+
+
 /*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
@@ -24,10 +26,11 @@ import {
    ElementRef
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/debounceTime';
+import { Subscription } from 'rxjs';
+
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { EventWindowManager } from '../utils/event-window-manager';
+import { debounceTime } from 'rxjs/operators';
 
 /**
  * @description {Component} [Search]
@@ -269,8 +272,8 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
       }
       if (this.liveSearch) {
          this.subscriptionSearch = this.searchBox
-            .valueChanges
-            .debounceTime(this.debounce)
+            .valueChanges.pipe(
+            debounceTime(this.debounce))
             .subscribe((event) => this.launchSearch(false));
       }
    }

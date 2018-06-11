@@ -9,11 +9,10 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { task } from 'gulp';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync } from 'fs';
 import { join } from 'path';
 import { green, red } from 'chalk';
 import { releasePackages } from './egeo-publish';
-import { sync as glob } from 'glob';
 import { buildConfig, sequenceTask } from 'build-tools';
 
 /** Path to the directory where all releases are created. */

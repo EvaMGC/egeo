@@ -11,7 +11,7 @@
 
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 
 @Directive({ selector: '[stCheckValidations]' })
