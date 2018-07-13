@@ -493,8 +493,7 @@ describe('StInputComponent in reactive form', () => {
       expect(errorMessage).toBeNull();
    });
 
-
-   it('should notify no notify error with focus', () => {
+   it('should only notify error with focus', () => {
       reactiveComp.forceValidations = false;
       reactiveComp.errors = { generic: 'error' };
       reactiveFixture.detectChanges();

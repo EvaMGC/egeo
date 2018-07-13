@@ -137,7 +137,7 @@
       }
 
       &.read-only {
-         input {
+         input, textarea {
             background-color: transparent;
             border: none;
             color: $action-secondary-07;

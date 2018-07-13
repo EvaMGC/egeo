@@ -36,6 +36,8 @@
          border-color: $neutral-06;
          background-color: $neutral-01;
          color: $neutral-08;
+         overflow: auto;
+         resize: none;
       }
       &:disabled:placeholder {
          color: $neutral-08;

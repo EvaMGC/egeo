@@ -2,6 +2,10 @@
 
 ## 11.4.0 (upcoming)
 
+**New features:**
+
+* st-form: Allow to render textareas when text fields are longer than the specified maximum width
+
 **Fixed bugs:**
 
 * st-form: Form is marked as pristine only if forceValidation input is false
