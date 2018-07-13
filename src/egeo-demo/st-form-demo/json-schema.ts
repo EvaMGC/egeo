@@ -39,12 +39,12 @@ export const JSON_SCHEMA: any = {
                'maxLength': 200,
                'default': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a imperdiet ipsum. Integer malesuada, mi semper maximus tempus, lacus lacus dapibus sem, ac accumsan ipsum mi quis eros. Duis tempus diam id nisi aliquam, at blandit mi blandit. Pellentesque hendrerit sem at pellentesque aliquam. '
             },
-            'disabledSserviceId': {
+            'disabledServiceId': {
                'title': 'Disabled Id',
                'type': 'string',
                'readOnly': true,
                'maxLength': 200,
-               'pattern': 'aaa',
+               'pattern': 'Lorem',
                'default': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
             },
             'serviceName': {
