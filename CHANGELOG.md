@@ -10,6 +10,7 @@
 
 * st-form: Form is marked as pristine only if forceValidation input is false
 * st-tag-input: Put needed position relative in order to display autocompleted menu correctly
+* st-widget: Removed resize button
 
 
 ## 11.3.0 (June 27, 2018)
