@@ -11,6 +11,10 @@
 * st-form: Form is marked as pristine only if forceValidation input is false
 * st-tag-input: Put needed position relative in order to display autocompleted menu correctly
 
+**Others:**
+
+* egeo-theme: Improve margins between fields and sections in dynamic form
+
 
 ## 11.3.0 (June 27, 2018)
 
