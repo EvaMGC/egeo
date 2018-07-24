@@ -19,7 +19,7 @@ export class StFilterList implements PipeTransform {
       if (!search) {
          return list;
       }
-      if (list && list.length > 0) {
+      if (list && list.length > 0 && field) {
          return list.filter((element) => this.contains(element, field, search));
       } else {
          return [];

@@ -33,7 +33,7 @@ export {
 
 /**************************** PIPES ***************************************************/
 export { PipesModule } from './pipes/pipes.module';
-export { StFilterList } from './pipes/search-filter.pipe';
+export { StFilterList } from './pipes/search-filter/search-filter.pipe';
 
 /**************************** DIRECTIVES ***************************************************/
 export { StInputAdjustable } from './directives/st-input-adjustable/st-input-adjustable';
