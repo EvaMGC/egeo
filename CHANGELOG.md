@@ -2,7 +2,10 @@
 
 ## 11.5.0 (upcoming)
 
-* Pending changelog
+**Others**
+
+* Update version of the Stratio Icon Font
+
 
 ## 11.4.0 (July 23, 2018)
 
