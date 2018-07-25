@@ -4,6 +4,14 @@
 
 * Pending changelog
 
+
+## 11.5.1 (July 25, 2018)
+
+**Fixed bugs:**
+
+* Fix styles to Stratio Icon Font
+
+
 ## 11.5.0 (July 25, 2018)
 
 **Others**
