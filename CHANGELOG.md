@@ -2,7 +2,9 @@
 
 ## 11.6.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-bubble: Create component
 
 
 ## 11.5.1 (July 25, 2018)

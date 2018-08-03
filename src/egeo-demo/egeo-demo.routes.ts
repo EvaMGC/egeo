@@ -21,6 +21,7 @@ export class EgeoDemoMenu {
 export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-alerts', name: 'Alerts', path: 'alerts-demo', moduleLazyLoad: 'StAlertsDemoModule' },
    { id: 'st-breadcrumbs', name: 'Breadcrumbs', path: 'breadcrumbs', moduleLazyLoad: 'StBreadcrumbsDemoModule' },
+   { id: 'st-bubble', name: 'Bubble', path: 'bubble-demo', moduleLazyLoad: 'StBubbleDemoModule' },
    { id: 'st-button', name: 'Button', path: 'button-demo', moduleLazyLoad: 'StButtonDemoModule' },
    { id: 'st-checkbox', name: 'Checkbox', path: 'checkbox-demo', moduleLazyLoad: 'StCheckboxDemoModule' },
    { id: 'st-draggable-card', name: 'Draggable card', path: 'draggable-card-demo', moduleLazyLoad: 'StDraggableCardDemoModule' },
@@ -69,6 +70,7 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
 const routes: Routes = [
    { path: 'alerts-demo', loadChildren: './st-alert-demo/st-alerts-demo.module#StAlertsDemoModule' },
    { path: 'breadcrumbs', loadChildren: './st-breadcrumbs-demo/st-breadcrumbs-demo.module#StBreadcrumbsDemoModule' },
+   { path: 'bubble-demo', loadChildren: './st-bubble-demo/st-bubble-demo.module#StBubbleDemoModule' },
    { path: 'button-demo', loadChildren: './st-button-demo/st-button-demo.module#StButtonDemoModule' },
    { path: 'checkbox-demo', loadChildren: './st-checkbox-demo/st-checkbox-demo.module#StCheckboxDemoModule' },
    { path: 'draggable-card-demo', loadChildren: './st-draggable-card-demo/st-draggable-card-demo.module#StDraggableCardDemoModule' },

@@ -10,6 +10,7 @@
  */
 import { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
 import { StBreadcrumbsDemoModule } from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+import { StBubbleDemoModule } from './st-bubble-demo/st-bubble-demo.module';
 import { StButtonDemoModule } from './st-button-demo/st-button-demo.module';
 import { StCheckboxDemoModule } from './st-checkbox-demo/st-checkbox-demo.module';
 import { StDropdownMenuDemoModule } from './st-dropdown-menu-demo/st-dropdown-menu-demo.module';
@@ -59,6 +60,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    // Demos
    StAlertsDemoModule,
    StBreadcrumbsDemoModule,
+   StBubbleDemoModule,
    StButtonDemoModule,
    StCheckboxDemoModule,
    StDraggableCardDemoModule,

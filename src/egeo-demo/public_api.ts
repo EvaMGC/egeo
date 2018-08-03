@@ -14,6 +14,8 @@ export { EgeoDemoModule } from './egeo-demo.module';
 
 export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
 export { StBreadcrumbsDemoModule } from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+export { StBubbleDemoModule } from './st-bubble-demo/st-bubble-demo.module';
+
 export { StButtonDemoModule } from './st-button-demo/st-button-demo.module';
 export { StCheckboxDemoModule } from './st-checkbox-demo/st-checkbox-demo.module';
 export { StDraggableCardDemoModule } from './st-draggable-card-demo/st-draggable-card-demo.module';

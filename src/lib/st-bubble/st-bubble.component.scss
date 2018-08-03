@@ -8,7 +8,25 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
 .content {
-   height: 0;
+   display: inline-block;
 }
 
+.arrow {
+   position: relative;
+   width: 13px;
+   height: 13px;
+   bottom: 47px;
+   transform: rotate(-45deg);
+   float: right;
+   margin-right: 15px;
+   border-radius: 2px;
+}
+
+.text {
+   display: flex;
+   flex-wrap: nowrap;
+   align-items: center;
+   white-space: nowrap
+}
