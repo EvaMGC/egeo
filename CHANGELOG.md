@@ -6,6 +6,10 @@
 
 * st-bubble: Create component
 
+**Others**
+
+* Update version of the Stratio Icon Font
+
 
 ## 11.5.1 (July 25, 2018)
 
