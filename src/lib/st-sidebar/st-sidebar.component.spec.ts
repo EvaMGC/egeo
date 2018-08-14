@@ -293,8 +293,8 @@ class StSidebarComponentTestComponent {
    ];
 }
 
-let fixture: ComponentFixture<StSidebarComponentTestComponent>;
-let component: StSidebarComponentTestComponent;
+let usageFixture: ComponentFixture<StSidebarComponentTestComponent>;
+let usageComponent: StSidebarComponentTestComponent;
 
 describe('StSidebarComponentComponent in usage', () => {
    beforeEach(async(() => {
@@ -309,19 +309,19 @@ describe('StSidebarComponentComponent in usage', () => {
    }));
 
    beforeEach(() => {
-      fixture = TestBed.createComponent(StSidebarComponentTestComponent);
-      component = fixture.componentInstance;
+      usageFixture = TestBed.createComponent(StSidebarComponentTestComponent);
+      usageComponent = usageFixture.componentInstance;
    });
 
    afterEach(() => {
-      fixture.destroy();
+      usageFixture.destroy();
    });
 
    it('It should be able to add some content before and after the menu', () => {
-      expect(fixture.nativeElement.querySelector('[sidebar-header]')).not.toBeNull();
-      expect(fixture.nativeElement.querySelector('span[sidebar-header]').innerText).toContain('TEST HEADER');
-      expect(fixture.nativeElement.querySelector('[sidebar-footer]')).not.toBeNull();
-      expect(fixture.nativeElement.querySelector('span[sidebar-footer]').innerText).toContain('TEST FOOTER');
+      expect(usageFixture.nativeElement.querySelector('[sidebar-header]')).not.toBeNull();
+      expect(usageFixture.nativeElement.querySelector('span[sidebar-header]').innerText).toContain('TEST HEADER');
+      expect(usageFixture.nativeElement.querySelector('[sidebar-footer]')).not.toBeNull();
+      expect(usageFixture.nativeElement.querySelector('span[sidebar-footer]').innerText).toContain('TEST FOOTER');
    });
 
 });
