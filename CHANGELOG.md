@@ -1,6 +1,6 @@
 # Changelog
 
-## 11.6.0 (upcoming)
+## 12.0.0 (upcoming)
 
 **New features:**
 
