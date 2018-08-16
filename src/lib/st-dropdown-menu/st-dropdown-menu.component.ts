@@ -30,6 +30,11 @@ import { StDropDownMenuGroup, StDropDownMenuItem, StDropDownVisualMode } from '.
  * @description {Component} [Dropdown Menu]
  * This directive show a dropdown menu list in element that you attach
  *
+ *
+ * @model
+ *
+ *   [Menu items] {./st-dropdown-menu.interface.ts#StDropDownMenuItem}
+ *
  * @example
  *
  * {html}
@@ -67,7 +72,8 @@ export class StDropdownMenuComponent implements AfterViewInit, OnChanges {
    /** @Input {StPopOffset} [offset={x: 0 , y: 0}] For position with offset in x o y axis */
    @Input() offset: StPopOffset = { x: 0, y: 0 };
    /** @Input {StDropdownVisualMode} [visualMode=StDropDownVisualMode.OPTION_LIST] It is needed to specify the styles applied to the list.
-    *  By default is displayed as a normal option list */
+    *  By default is displayed as a normal option list
+    */
    @Input() visualMode: StDropDownVisualMode = StDropDownVisualMode.OPTION_LIST;
    /** @output {StDropDownMenuItem} [change] Event emitted when user select an item */
    @Output() change: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
@@ -99,7 +105,7 @@ export class StDropdownMenuComponent implements AfterViewInit, OnChanges {
    }
 
    get listClasses(): any {
-      return {'st-dropdown-menu': true, 'active': this.active, 'menu-list': this.displayAsMenuList()}
+      return {'st-dropdown-menu': true, 'active': this.active, 'menu-list': this.displayAsMenuList()};
    }
 
    getItemId(value: any | undefined): string | null {
