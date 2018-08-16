@@ -69,6 +69,7 @@ export {
    StDropDownMenuGroup,
    StDropDownMenuGroupSchema,
    StDropDownMenuItem,
+   StDropDownVisualMode,
    StDropDownMenuItemSchema
 } from './st-dropdown-menu/st-dropdown-menu.interface';
 export { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';

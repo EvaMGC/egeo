@@ -233,7 +233,7 @@ describe('StSidebar', () => {
 @Component({
    template: `
     <st-sidebar [items]="items">
-       <span sidebar-header><span>TEST HEADER</span></span>
+       <span sidebar-header>TEST HEADER</span>
        <span sidebar-footer>TEST FOOTER</span>
     </st-sidebar>
       `

@@ -9,6 +9,7 @@
 * st-input, st-textarea, st-select, st-radio-button, st-checkbox, st-tag-input: Change disabled style
 * st-modal: Set default max and min width
 * st-sidebar: Allow to add any content from outside to header and footer
+* st-dropdown-menu: Allow to add a visual mode in order to display it as option or menu list
 
 **Breaking changes:**
 
