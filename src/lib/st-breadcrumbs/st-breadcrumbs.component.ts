@@ -29,7 +29,7 @@ import { StBreadCrumbItem } from './st-breadcrumbs.interface';
  *
  * @model
  *
- *   [Id, optional label and icon of an option] {./st-breadcrumbs.interface.ts#StBreadcrumbs}
+ *   [Id, optional label and icon of an option] {./st-breadcrumbs.interface.ts#StBreadCrumbItem}
  *
  * @example
  *
