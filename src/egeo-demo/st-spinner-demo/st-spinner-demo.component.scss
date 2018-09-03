@@ -9,11 +9,16 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-:host {
-   width: 100%;
-   height: 100%;
+@import '../../theme/constants/index';
+
+.spinner {
+   display: block;
+   margin: auto;
 }
 
-.st-spinner {
-   display: inline;
+.secondary-theme-container {
+   width: 100%;
+   background-color: $action-secondary-02;
 }
+
+

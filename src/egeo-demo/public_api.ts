@@ -41,6 +41,7 @@ export { StRadioDemoModule } from './st-radio-demo/st-radio-demo.module';
 export { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
 export { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 export { StSelectDemoModule } from './st-select-demo/select-demo.module';
+export { StSpinnerDemoModule } from './st-spinner-demo/st-spinner-demo.module';
 export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
 export { StTabBoxDemoModule } from './st-tab-box-demo/st-tab-box-demo.module';
 export { StTableDemoModule } from './st-table-demo/st-table-demo.module';

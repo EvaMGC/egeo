@@ -2,7 +2,10 @@
 
 ## 13.0.0 (upcoming)
 
-* Pending changelog
+**Breaking changes:**
+
+* st-spinner: Apply new style and behaviour according to UX specifications
+
 
 ## 12.0.0 (August 17, 2018)
 
