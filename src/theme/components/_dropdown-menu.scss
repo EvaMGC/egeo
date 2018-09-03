@@ -50,6 +50,7 @@
        font-family: $egeo-nunito-sans;
        font-size: $egeo-font-size-xsmall;
        line-height: $egeo-line-height-xsmall;
+       cursor: pointer;
 
        &:hover {
           background-color: $action-primary-light;

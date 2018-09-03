@@ -6,6 +6,10 @@
 
 * st-spinner: Apply new style and behaviour according to UX specifications
 
+**Others**
+
+* st-dropdown-menu: Put cursor pointer to items
+
 
 ## 12.0.0 (August 17, 2018)
 
