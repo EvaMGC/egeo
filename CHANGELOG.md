@@ -9,6 +9,7 @@
 **Others**
 
 * st-dropdown-menu: Put cursor pointer to items
+* st-input: Label is only generated if it is not empty
 
 
 ## 12.0.0 (August 17, 2018)
