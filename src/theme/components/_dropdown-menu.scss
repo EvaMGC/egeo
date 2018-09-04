@@ -51,6 +51,7 @@
        font-size: $egeo-font-size-xsmall;
        line-height: $egeo-line-height-xsmall;
        cursor: pointer;
+       display: flex;
 
        &:hover {
           background-color: $action-primary-light;

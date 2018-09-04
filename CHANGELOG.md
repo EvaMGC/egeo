@@ -9,6 +9,7 @@
 **Fixed bugs:**
 
 * st-bubble: Fix visible style
+* st-dropdown-menu: Fix wrong visualization on small screens
 
 **Others**
 
