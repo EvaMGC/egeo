@@ -53,6 +53,10 @@
        cursor: pointer;
        display: flex;
 
+       &:active {
+          outline: none;
+       }
+
        &:hover {
           background-color: $action-primary-light;
        }
@@ -63,7 +67,7 @@
 
        i {
           display: inline-flex;
-          margin-right: 4px;
+          margin-right: 10px;
        }
 
        span {

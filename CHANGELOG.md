@@ -17,7 +17,7 @@
 
 **Others**
 
-* st-dropdown-menu: Put cursor pointer to items
+* st-dropdown-menu: Put cursor pointer to items and improve design
 * st-input: Label is only generated if it is not empty
 
 
