@@ -76,7 +76,7 @@ $hover: '&:not([disabled]):hover';
 }
 %button-toolbar-ico-default {
    color:         $neutral-10;
-   font-family:   $egeo-stratio-icons; 
+   font-family:   $egeo-stratio-icons;
    font-size:     $egeo-font-size-medium;
    line-height:   $egeo-line-height-medium;
    &[disabled] {
@@ -199,7 +199,7 @@ $hover: '&:not([disabled]):hover';
          padding: .875rem 2.4375rem;
       }
       &.small {
-         color: $action-primary-default; 
+         color: $action-primary-default;
          padding: 0.2rem 1rem;
       }
    }
@@ -239,7 +239,7 @@ $hover: '&:not([disabled]):hover';
    &.button-toolbar {
       @extend %button-toolbar-ico-default;
       border-radius: 4px;
-      border:solid 1px $neutral-09;
+      border:solid 1px $neutral-03;
       background-color: white;
 
       &[disabled] {

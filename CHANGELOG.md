@@ -14,11 +14,13 @@
 
 * st-bubble: Fix visible style
 * st-dropdown-menu: Fix wrong visualization on small screens
+* st-input: Do not hide placeholder when user clicks on it
 
 **Others**
 
 * st-dropdown-menu: Put cursor pointer to items and improve design
 * st-input: Label is only generated if it is not empty
+* st-button: Minor style changes
 
 
 ## 12.0.0 (August 17, 2018)
