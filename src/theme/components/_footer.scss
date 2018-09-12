@@ -11,21 +11,39 @@
 @import '../constants/fonts';
 @import '../constants/colors';
 
-.sth-footer {
-   background-color: $brand;
-   background: linear-gradient($neutral-07, $neutral-08);
-}
-
-.sth-footer-text {
-   color: $neutral-00;
-   font-family: $egeo-nunito-sans;
+.st-footer {
+   background-color: $neutral-00;
+   background: $action-secondary-07;
+   font-family: $egeo-nunito-sans-light;
    font-size: $egeo-font-size-xxsmall;
+   color: $neutral-00;
 
+   .st-footer-container {
+      margin: 0 auto;
+      max-width: 1278px;
+      min-width: 768px;
+   }
+
+   .logo {
+      height: 30px;
+   }
 }
 
-.sth-footer-links {
+.st-footer-links {
    cursor: pointer;
    color: $neutral-00;
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xxsmall;
+
+   span {
+      width: 25px;
+      font-size: $egeo-font-size-xlarge;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: $neutral-00;
+      margin-left: 15px;
+   }
 }

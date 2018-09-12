@@ -125,11 +125,13 @@ export class StDropdownMenuComponent implements AfterViewInit, OnChanges {
          // Only can do this functionality with timeout because we need to wait for angular to load new DOM
          // with items before move scroll
          setTimeout(() => {
-            const parent: HTMLElement = this.itemListElement.nativeElement;
-            const listOfElements: NodeListOf<Element> = parent.getElementsByClassName('selected');
-            if (listOfElements && listOfElements.length > 0) {
-               const target: HTMLElement = (listOfElements.item(0) as HTMLElement);
-               parent.scrollTop = target.offsetTop - parent.offsetTop;
+            if (this.itemListElement) {
+               const parent: HTMLElement = this.itemListElement.nativeElement;
+               const listOfElements: NodeListOf<Element> = parent.getElementsByClassName('selected');
+               if (listOfElements && listOfElements.length > 0) {
+                  const target: HTMLElement = (listOfElements.item(0) as HTMLElement);
+                  parent.scrollTop = target.offsetTop - parent.offsetTop;
+               }
             }
          }, 0);
       }

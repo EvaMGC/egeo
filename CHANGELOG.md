@@ -5,6 +5,7 @@
 **Others:**
 
 * Update to angular 6 (angular, angular-cli, rxjs, typescript)
+* st-footer: Apply new design according to UX specifications
 
 
 ## 13.0.0 (September 06, 2018)
