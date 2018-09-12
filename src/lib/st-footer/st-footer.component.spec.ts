@@ -31,7 +31,7 @@ let items: StFooterLink[] = [
       title: 'Icon button',
       router: 'link',
       icon: 'icon-plus'
-   },
+   }
 ];
 
 describe('StFooterComponent', () => {
