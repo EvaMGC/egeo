@@ -10,8 +10,8 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<ul>
-   <li *ngFor="let option of options" (click)="navigate(option.url)" [ngClass]="{active: isActive(option.url)}">
+<ul  class="side-menu">
+   <li *ngFor="let option of options; let index = index" (click)="navigate(option.url, index)" [ngClass]="{active: isActive(option.url)}">
       {{option.label}}
    </li>
 </ul>

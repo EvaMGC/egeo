@@ -28,7 +28,7 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-dropdown-menu', name: 'Dropdown menu', path: 'dropdown-menu-demo', moduleLazyLoad: 'StDropdownMenuDemoModule' },
    { id: 'st-file-button', name: 'File button', path: 'file-button-demo', moduleLazyLoad: 'StFileButtonDemoModule' },
    { id: 'st-footer', name: 'Footer', path: 'footer-demo', moduleLazyLoad: 'StFoterDemoModule' },
-   { id: 'st-foreground-notifications', name: 'Foreground-notifications',
+   { id: 'st-foreground-notifications', name: 'Foreground Notifications',
       path: 'foreground-notifications-demo', moduleLazyLoad: '@StForegroundNotificationsModule' },
    { id: 'st-form', name: 'Form', path: 'form-demo', moduleLazyLoad: 'StFormDemoModule' },
    { id: 'st-form-list', name: 'Form List', path: 'form-list-demo', moduleLazyLoad: 'StFormListDemoModule' },

@@ -34,7 +34,6 @@ import { StDemoGeneratorModule } from './demo-generator.module';
          height: 100%;
          width: 100%;
          display: block;
-         padding: 30px;
       }
    `],
    changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,7 +80,7 @@ export class StDemoGenerator implements OnDestroy, AfterViewInit {
 
    // tslint:disable:
    private bindDemoInputsAndOutputs(): void {
-      // Inputs its not necesary to be defined
+      // Inputs its not necessary to be defined
       if (this.inputs) {
          Object.keys(this.inputs).map(key => this.componentRef.instance[key] = (<any>this.inputs)[key]);
       }

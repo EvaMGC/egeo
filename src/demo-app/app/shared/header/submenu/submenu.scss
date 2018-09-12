@@ -44,7 +44,6 @@ li {
    }
 
    &.active {
-      color: $action-primary-light;
-      background-color: rgba($brand, 0.1);
+      color: $brand;
    }
 }

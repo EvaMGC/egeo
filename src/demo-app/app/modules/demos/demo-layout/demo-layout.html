@@ -11,8 +11,11 @@
 
 -->
 <div class="content">
-   <demo-menu class="side-menu" [options]="demoMenu"></demo-menu>
+   <demo-menu [options]="demoMenu" (selected)="updateDemoTitle($event)"></demo-menu>
    <div class="main-content">
+      <egeo-title [title]="title"></egeo-title>
+
       <router-outlet></router-outlet>
    </div>
 </div>
+

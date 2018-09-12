@@ -41,8 +41,8 @@ export class ColorsDemoComponent {
       );
    }
 
-   onSearchResult(search: string): void {
-      this.searchValue = search;
+   onSearchResult(searchData: any): void {
+      this.searchValue = searchData.text;
    }
 
    onCopyColorName(name: string): void {
