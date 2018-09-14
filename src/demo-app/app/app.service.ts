@@ -9,17 +9,16 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 
 @Injectable()
 export class AppService {
 
-   constructor(private http: Http) { }
+   constructor(private http: HttpClient) { }
 
    getLastUpdateDate(): Observable<Date> {
       if (!environment.production) {
@@ -28,7 +27,8 @@ export class AppService {
             observer.complete();
          });
       }
-      return this.http.get('https://api.github.com/repos/stratio/egeo')
-         .map(response => new Date(response.json().pushed_at));
+      return this.http.get('https://api.github.com/repos/stratio/egeo').pipe(
+         map(response => new Date((<any>response).pushed_at))
+      );
    }
 }

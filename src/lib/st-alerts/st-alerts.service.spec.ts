@@ -10,7 +10,7 @@
  */
 // import { async, ComponentFixture, TestBed, fakeAsync, tick, discardPeriodicTasks } from '@angular/core/testing';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { StAlertsService } from './st-alerts.service';
 import { StAlert, STALERT_SEVERITY } from './st-alerts.model';

@@ -14,6 +14,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DemoLayoutComponent } from './demo-layout/demo-layout';
 import { SharedModule } from '../../shared/shared.module';
+import { StFooterModule } from '@stratio/egeo';
 
 export const routes: Routes = [
    { path: '', redirectTo: 'demo/alerts-demo' },
@@ -28,6 +29,7 @@ export const routes: Routes = [
    imports: [
       CommonModule,
       SharedModule,
+      StFooterModule,
       RouterModule.forChild(routes)
    ],
    declarations: [DemoLayoutComponent]

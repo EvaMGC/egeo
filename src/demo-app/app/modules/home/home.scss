@@ -1,71 +1,107 @@
 @import '../../../../theme/constants/index';
 
-.background {
-   min-height: calc(100vh - 70px);
-   padding-bottom: 60px;
-   width: 100vw;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-}
+.home {
+   padding-bottom: 100px;
 
-
-h1 {
-   font-family: $egeo-nunito-sans-semiBold;
-   font-size: 75px;
-   letter-spacing: -2.1px;
-   text-align: left;
-   color: #2c3b4b;
-   margin-top: 100px;
-}
-
-h5 {
-   font-family: $egeo-nunito-sans;
-   font-size: 30px;
-   letter-spacing: -0.8px;
-   text-align: left;
-   color: #2c3b4b;
-   margin-top: 19px;
-}
-
-.separator {
-   width: 338px;
-   border: solid 1px $brand;
-   margin-top: 16px;
-}
-
-.main-text {
-   margin-top: 62px;
-   display: flex;
-   flex-direction: column;
-   max-width: 892px;
-
-
-   font-family: $egeo-nunito-sans-light;
-   font-size: $egeo-font-size-xxlarge;
-   letter-spacing: -1.7px;
-   text-align: left;
-   color: #283440;
-
-   p {
-      margin-bottom: 25px;
+   .background {
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: url('assets/images/background-mask.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-bottom: 105px;
    }
 
-}
+   h1 {
+      font-family: $egeo-nunito-sans-light;
+      font-size: 72px;
+      text-align: left;
+      color: $neutral-00;
+      margin-top: 192px;
+      margin-bottom: 52px;
+      font-weight: 100;
+   }
 
-.footer {
-   margin-top: 14px;
-   font-family: $egeo-nunito-sans-italic;
-   font-size: 23px;
-   letter-spacing: -1.5px;
-   text-align: left;
-   color: $neutral-09;
+   h5 {
+      font-family: $egeo-nunito-sans-light;
+      text-align: left;
+      font-weight: 100;
+      font-size: $egeo-font-size-medium;
+      color: $neutral-00;
+      margin-bottom: 58px;
+   }
 
-   a {
-      color: $brand;
-      &:hover {
-         text-decoration: underline;
+   .separator {
+      width: 80px;
+      margin: auto;
+
+      &--blue {
+         border: solid 1px #029ee3;
+      }
+
+      &--white {
+         border: solid 1px #e6e6e6;
       }
    }
-}
 
+   .main-text {
+      margin: 77px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      max-width: 892px;
+      font-weight: 100;
+      font-family: $egeo-nunito-sans-light;
+      font-size: $egeo-font-size-large;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.5;
+      letter-spacing: normal;
+      text-align: center;
+      color: #4b4b4b;
+
+      p {
+         margin-bottom: 25px;
+      }
+
+   }
+
+   .footer-text {
+      margin-top: 14px;
+      font-family: $egeo-nunito-sans-bold;
+      font-size: $egeo-font-size-small;
+      color: $action-secondary-07;
+      padding: 40px 0 35px;
+   }
+
+   .github-button {
+      background-color: #029ee3;
+      font-family: $egeo-nunito-sans;
+      font-size: $egeo-font-size-medium;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $neutral-00;
+      cursor: pointer;
+      font-weight: 100;
+      padding: 11px 26px;
+      border-radius: 4px;
+      margin: auto;
+      &:hover {
+         background-color: darken(#029ee3, 5%);
+      }
+      i {
+         padding-right: 18px;
+         font-size: $egeo-line-height-xxxlarge;
+         vertical-align: bottom;
+      }
+      span {
+         display: inline-block;
+         line-height: 1.8em;
+      }
+
+   }
+
+}

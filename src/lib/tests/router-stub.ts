@@ -12,8 +12,8 @@ import {
    Directive,
    Input
 } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export class RouterStub {
    readonly events: Observable<Event>;

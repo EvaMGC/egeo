@@ -9,8 +9,11 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
+@import '../../theme/constants/index';
+
+
 h1 {
-   font-family: 'Nunito Sans Bold';
+   font-family: $egeo-nunito-sans-bold;
    font-size: 20px;
    margin-bottom: 20px;
    padding: 0;
@@ -26,7 +29,7 @@ h1 {
    li {
       border-bottom: 1px solid #dedede;
       font-size: 14px;
-      font-family: open-sans;
+      font-family: $egeo-nunito-sans;
       padding: 5px;
    }
 }

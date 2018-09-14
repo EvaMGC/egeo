@@ -20,7 +20,7 @@ import {
    ViewChild
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { StHeaderMenuOption, StHeaderSelection, StHeaderMenuItem } from '../st-header.model';
 

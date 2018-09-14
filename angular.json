@@ -1,0 +1,114 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "demo-app": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/demo-app",
+            "index": "src/demo-app/index.html",
+            "main": "src/demo-app/main.ts",
+            "tsConfig": "src/demo-app/tsconfig-build.json",
+            "polyfills": "src/demo-app/polyfills.ts",
+            "assets": [
+              {
+                "glob": "**/*.*",
+                "input": "assets/fonts",
+                "output": "/assets/fonts"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "src/demo-app/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "_stratio_fonticon.scss",
+                "input": "src/theme/vendors/fonts",
+                "output": "/assets"
+              },
+              {
+                "glob": "_colors.scss",
+                "input": "src/theme/constants",
+                "output": "/assets"
+              },
+              {
+                "glob": "CHANGELOG.md",
+                "input": "",
+                "output": "/assets"
+              }
+            ],
+            "styles": [
+              "src/demo-app/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/demo-app/environments/environment.ts",
+                  "with": "src/demo-app/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demo-app:build",
+            "port": 9501
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "demo-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demo-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [],
+            "exclude": []
+          }
+        }
+      }
+    },
+    "demo-app-e2e": {
+      "root": "",
+      "sourceRoot": "",
+      "projectType": "application"
+    }
+  },
+  "defaultProject": "demo-app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": ""
+    }
+  }
+}

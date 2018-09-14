@@ -17,7 +17,7 @@ import {
    Output
 } from '@angular/core';
 
-import {copyToClipboard} from '../../utils';
+import { copyToClipboard } from '../../utils';
 import { Color } from '../colors.model';
 
 @Component({

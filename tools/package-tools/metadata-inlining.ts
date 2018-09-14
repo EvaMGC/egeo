@@ -63,6 +63,6 @@ export function inlinePackageMetadataFiles(packagePath: string): void {
    glob(join(packagePath, '**/*.metadata.json')).forEach(path => {
       const metadata = JSON.parse(readFileSync(path, 'utf-8'));
       inlineMetadataResources(metadata, componentResources);
-      writeFileSync(path, JSON.stringify(metadata), 'utf-8');
+      writeFileSync(path, JSON.stringify(metadata), { encoding: 'utf-8' } );
    });
 }

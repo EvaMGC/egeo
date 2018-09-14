@@ -19,5 +19,5 @@ export function createMetadataReexportFile(packageDir: string, packageName: stri
     "exports":[{"from":"./typings/index"}],
     "flatModuleIndexRedirect": true
   }`;
-   writeFileSync(join(packageDir, `${packageName}.metadata.json`), metadataReExport, 'utf-8');
+   writeFileSync(join(packageDir, `${packageName}.metadata.json`), metadataReExport );
 }

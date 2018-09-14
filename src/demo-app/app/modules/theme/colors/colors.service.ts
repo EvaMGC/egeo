@@ -9,21 +9,21 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Color, RGB } from './colors.model';
 
 @Injectable()
 export class ColorsService {
 
-   constructor(private http: Http) { }
+   constructor(private http: HttpClient) { }
 
    getColorsList(): Observable<Color[]> {
-      return this.http.get(location.pathname + 'assets/colors.scss')
-         .map(response => response.text())
-         .map(text => this.getColors(text));
+      return this.http.get(location.pathname + 'assets/_colors.scss', {responseType: 'text'}).pipe(
+         map(text => this.getColors(text))
+      );
    }
 
    private getColors(text: string): Color[] {

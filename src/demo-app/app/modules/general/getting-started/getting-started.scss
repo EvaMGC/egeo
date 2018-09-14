@@ -10,13 +10,15 @@
  */
  @import '../../../../../theme/constants/index';
 
+
 :host {
    display: flex;
    flex-direction: column;
    height: 100%;
-   font-family: $egeo-nunito-sans;
    color: $neutral-10;
    padding-left: 20px;
+   font-family: $egeo-nunito-sans-light;
+   font-size: $egeo-font-size-large;
 }
 
 li {
@@ -39,6 +41,5 @@ ul {
 }
 
 p {
-   font-size: $egeo-font-size-xsmall;
    padding: 0 0 15px;
 }

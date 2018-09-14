@@ -16,8 +16,7 @@ import {
    set as _set
 } from 'lodash';
 import { StTreeNode, StTreeEvent, StInputError } from '@stratio/egeo';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
    selector: 'st-tree-demo',
@@ -112,7 +111,7 @@ export class StTreeDemoComponent implements OnInit {
 
    private generateTree(levels: number, levelNodes: number, nodeName: string, startNode: number): StTreeNode {
       let node: StTreeNode;
-      let childNodes: StTreeNode[];
+      let childNodes: StTreeNode[] = [];
       if (levels > 0) {
          childNodes = [];
          for (let i: number = 0; i < levelNodes; i++) {

@@ -35,7 +35,7 @@ function formatDiagnostics(diagnostics: ts.Diagnostic[], baseDir: string = ''): 
       let res = `• ${chalk.red(`TS${diagnostic.code}`)} - `;
 
       if (diagnostic.file) {
-         const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+         const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(<number>diagnostic.start);
          const filePath = path.relative(baseDir, diagnostic.file.fileName);
 
          res += `${filePath}(${line + 1},${character + 1}): `;

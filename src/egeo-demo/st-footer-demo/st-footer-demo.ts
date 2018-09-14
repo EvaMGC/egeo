@@ -21,23 +21,29 @@ export class StFooterDemoComponent {
    public links: Array<StFooterLink> = new Array<StFooterLink>();
 
    constructor() {
-      this.rightsText = '© Stratio Big Data Inc. All Rights Reserved';
+      this.rightsText = 'Copyright © 2018 Stratio';
       this.links.push({
-         title: 'Legal Terms',
-         url: 'http://www.google.es'
-      });
-      this.links.push({
-         title: 'Help',
-         url: 'http://www.google.es'
-      });
-      this.links.push({
-         title: 'Internal Content',
-         router: 'info-box'
-      });
-      this.links.push({
-         title: 'Modal Open'
-      });
+            title: 'Github',
+            url: 'http://www.github.com/stratio',
+            icon: 'icon-github2'
+         },
+         {
+            title: 'Twitter',
+            url: 'http://twitter.es/Stratio',
+            icon: 'icon-twitter'
+         },
+         {
+            title: 'Youtube',
+            url: 'http://www.yotube.com/stratio',
+            icon: 'icon-youtube'
+         },
+         {
+            title: 'Linkedin',
+            url: 'http://www.linkedin.es/Stratio',
+            icon: 'icon-linkedin'
+         });
    }
 
-   onLinkChange(event: MouseEvent): void { }
+   onLinkChange(event: MouseEvent): void {
+   }
 }

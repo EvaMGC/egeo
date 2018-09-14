@@ -15,6 +15,38 @@
    display: flex;
 }
 
+.side-menu {
+   width: 280px;
+   height: calc(100vh - 60px);
+   overflow-y: hidden;
+   position: fixed;
+   top: 60px;
+   left: 0;
+   background-color: $neutral-02;
+
+   &:hover {
+      overflow-y: auto;
+   }
+
+   &::-webkit-scrollbar-track
+   {
+      border-radius: 10px;
+      background-color: $neutral-00;
+   }
+
+   &::-webkit-scrollbar
+   {
+      width: 6px;
+      background-color: $neutral-00;
+   }
+
+   &::-webkit-scrollbar-thumb
+   {
+      border-radius: 8px;
+      background-color: $neutral-06;
+   }
+}
+
 ul {
    display: flex;
    flex-direction: column;
@@ -22,7 +54,7 @@ ul {
    height: 100%;
    width: 100%;
    padding: 30px 0;
-   border-right: 1px solid $neutral-04;
+   background-color: $neutral-02;
 }
 
 li {
@@ -35,12 +67,9 @@ li {
    color: $action-secondary-06;
    white-space: nowrap;
    position: relative;
-   padding-bottom: 6px;
+   margin-bottom: 6px;
+   cursor: pointer;
 
-   &:hover {
-      background-color:  rgba($action-primary-default, 0.2);
-      color: $action-secondary-07;
-   }
    &.active {
       color: $action-secondary-07;
       &:before {

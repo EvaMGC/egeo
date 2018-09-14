@@ -16,7 +16,6 @@ $egeo-fontface-src: '/assets/fonts';
 @import '../theme/grid/grid';
 @import '../theme/theme';
 
-
 body {
    color: $neutral-08;
    font-family: $egeo-nunito-sans;
@@ -52,23 +51,38 @@ main {
 }
 
 .changelog {
-   font-family: $egeo-nunito-sans;
-   color: $neutral-10;
-   ul {
-      list-style: none;
-      padding: 0 0 15px 25px;
+   h2 {
+      font-family: $egeo-nunito-sans-extraBold;
+      font-weight: 100;
+      font-size: $egeo-font-size-xlarge;
+      line-height: 44px;
    }
-   li {
-      &:before {
-         content: '-';
-         margin-right: .5em;
+
+   p {
+      font-family: $egeo-nunito-sans-light;
+      line-height: 28px;
+
+      strong {
+         font-family: $egeo-nunito-sans-semiBold;
+         font-weight: 100;
+         line-height: 34px;
       }
    }
-   p {
-      font-size: $egeo-font-size-xsmall;
-      padding: 0 0 10px;
-   }
-   h2 {
-      margin-bottom: 15px;
+
+   ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
    }
 }
+
+.main-content {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   margin-left: 330px;
+   margin-top: 20px;
+   margin-bottom: 100px;
+}
+

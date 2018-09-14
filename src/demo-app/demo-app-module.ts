@@ -18,6 +18,7 @@ import { SharedModule } from './app/shared/shared.module';
 import { AppComponent } from './app/app.component';
 import { AppRoutingModule } from './app/app-routing.module';
 import { AppService } from './app/app.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
    imports: [
@@ -25,6 +26,7 @@ import { AppService } from './app/app.service';
       AppRoutingModule,
       RouterModule,
       HttpModule,
+      HttpClientModule,
       EgeoModule.forRoot(),
       SharedModule
    ],

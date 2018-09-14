@@ -9,21 +9,22 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 import { IconDemoModel } from './icons-demo.model';
 
 @Injectable()
 export class IconsDemoService {
 
-   constructor(private http: Http) { }
+   constructor(private _http: HttpClient) { }
 
    getIconList(): Observable<IconDemoModel[]> {
-      return this.http.get(location.pathname + 'assets/icons.scss')
-         .map(response => response.text())
-         .map(text => this.getIconClasses(text));
+      return this._http.get(location.pathname + 'assets/_stratio_fonticon.scss', {responseType: 'text'}).pipe(
+         map(text => this.getIconClasses(text))
+      );
    }
 
    private getIconClasses(text: string): IconDemoModel[] {

@@ -10,18 +10,20 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<footer class="footer sth-footer">
-  <div class="content">
-    <p class="text sth-footer-text" *ngIf="rightsText">{{ rightsText }}</p>
+<footer class="footer st-footer">
+   <div class="st-footer-container">
+      <div class="logo st-footer-logo" *ngIf="image">
+         <img [src]="image">
+      </div>
+      <div class="st-footer-content">
+         <span class="text st-footer-text" *ngIf="rightsText">{{ rightsText }}</span>
 
-    <ul class="sth-footer-links links" *ngIf="links.length">
-       <li *ngFor="let link of links; let index = index">
-          <span class="separator">|</span>
-          <span class="link" (click)="goToLink(link)" [attr.id]="qaTag + '-link-' + index">{{ link.title }}</span>
-       </li>
-    </ul>
-  </div>
-  <div class="logo sth-footer-logo" *ngIf="image">
-    <img [src]="image">
-  </div>
+         <ul class="st-footer-links links" *ngIf="links.length">
+            <li *ngFor="let link of links; let index = index">
+               <span *ngIf="link.icon" class="icon" [ngClass]="link.icon" [title]="link.title" (click)="goToLink(link)"></span>
+               <span  *ngIf="!link.icon" class="link" (click)="goToLink(link)" [attr.id]="qaTag + '-link-' + index">{{ link.title }}</span>
+            </li>
+         </ul>
+      </div>
+   </div>
 </footer>

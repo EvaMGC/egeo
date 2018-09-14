@@ -11,7 +11,19 @@
 @import '../../../../theme/constants/index';
 
 
-:host {
-   width: 100%;
-}
+.title {
+   font-family: $egeo-nunito-sans-light;
+   font-size: $egeo-line-height-xxxlarge;
+   color: $action-secondary-07;
+   font-weight: 100;
+   margin: 40px 0 50px;
 
+   &:after {
+      content: '';
+      display: block;
+      width: 74px;
+      height: 1px;
+      background-color: $brand;
+      margin-top: 10px;
+   }
+}

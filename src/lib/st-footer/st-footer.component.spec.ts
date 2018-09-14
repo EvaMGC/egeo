@@ -26,6 +26,11 @@ let items: StFooterLink[] = [
    },
    {
       title: 'Output Action'
+   },
+   {
+      title: 'Icon button',
+      router: 'link',
+      icon: 'icon-plus'
    }
 ];
 
@@ -46,14 +51,13 @@ describe('StFooterComponent', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(StFooterComponent);
       component = fixture.componentInstance;
-
    });
 
    describe('When check component Input', () => {
-      it('Should have 3 links the menu', () => {
+      it('Should have 4 links the menu', () => {
          component.links = items;
          fixture.detectChanges();
-         expect(fixture.componentInstance.links.length).toBe(3);
+         expect(fixture.componentInstance.links.length).toBe(4);
       });
 
       it('Should have a right menu text', () => {
@@ -102,5 +106,24 @@ describe('StFooterComponent', () => {
 
    });
 
+   describe('Should display a list of links', () => {
+      beforeEach(() => {
+         component.links = items;
+         fixture.detectChanges();
+      });
+
+      it ('if a link has an icon, it is displayed as an button', () => {
+         expect(fixture.nativeElement.querySelector('span.icon-plus[title="Icon button"]')).not.toBeNull();
+      });
+
+      it ('if links does not have an icon, it is displayed as a link', () => {
+         const links = fixture.nativeElement.querySelectorAll('span.link');
+
+         expect(links.length).toBe(3);
+         expect(links[0].innerText).toEqual('External Router');
+         expect(links[1].innerText).toEqual('Internal Router');
+         expect(links[2].innerText).toEqual('Output Action');
+      });
+   });
 
 });

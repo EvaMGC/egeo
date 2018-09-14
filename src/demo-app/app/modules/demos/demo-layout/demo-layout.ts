@@ -20,8 +20,13 @@ import { DemoSideMenu } from '../../../shared/menu/menu.model';
 })
 export class DemoLayoutComponent {
    public menu: EgeoDemoMenu[] = EGEO_DEMO_MENU || [];
+   public title: string;
 
    public get demoMenu(): DemoSideMenu[] {
       return EGEO_DEMO_MENU.map(_ => ({ label: _.name, url: `/components/demo/${_.path}` }));
+   }
+
+   public updateDemoTitle(demoPosition: number): void {
+      this.title = EGEO_DEMO_MENU[demoPosition] ? EGEO_DEMO_MENU[demoPosition].name: '';
    }
 }

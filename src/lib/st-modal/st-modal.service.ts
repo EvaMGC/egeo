@@ -16,8 +16,7 @@ import {
    Type,
    ViewContainerRef
 } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable ,  Subject } from 'rxjs';
 
 /* local dependencies */
 import { StModalComponent } from './st-modal.component';
