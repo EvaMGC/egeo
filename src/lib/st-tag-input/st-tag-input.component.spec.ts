@@ -481,6 +481,98 @@ describe('StTagInputComponent', () => {
       expect(comp.expandedMenu).toBeFalsy();
       expect(comp.hasAutocomplete).toBeFalsy();
    });
+
+   describe('It should be able to configure the type of its items', () => {
+      let input: DebugElement;
+      let enterKeyDownEventObj: any;
+
+      beforeEach(() => {
+         fixture.detectChanges();
+         input = fixture.debugElement.query(By.css('.st-tag-input__text.inner-input'));
+         enterKeyDownEventObj = {keyCode: 13, preventDefault: () => {}};
+      });
+
+      it('by default type of items is text', () => {
+         comp.onInputText('New Tag');
+
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toEqual('New Tag');
+      });
+
+      it('if type is number, model will be an array of numbers', () => {
+         comp.type = 'number';
+
+         comp.onInputText('56');
+
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toEqual(56);
+
+         comp.onInputText('100.54');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toEqual(100.54);
+      });
+
+      it('if type is integer, model will be an array of integers', () => {
+         comp.type = 'integer';
+         comp.onInputText('567');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toEqual(567);
+      });
+
+      it('When type is integer and user types and invalid integer, it wont be added', () => {
+         comp.items = [];
+         comp.type = 'integer';
+         comp.onInputText('invalid integer');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items.length).toBe(0);
+
+         comp.onInputText('58.2');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toBe(58);
+
+         comp.onInputText('62');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toBe(62);
+      });
+
+      it('When type is number and user types and invalid number, it wont be added', () => {
+         comp.items = [];
+         comp.type = 'integer';
+         comp.onInputText('invalid integer');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items.length).toBe(0);
+
+         comp.onInputText('56&notANumber');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items.length).toBe(1);
+         expect(comp.items[comp.items.length - 1]).toEqual(56);
+
+         comp.onInputText('&notANumber56');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items.length).toBe(1);
+
+         comp.onInputText('58');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items.length).toBe(2);
+         expect(comp.items[comp.items.length - 1]).toEqual(58);
+
+         comp.onInputText('74.2');
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toEqual(74);
+      });
+   });
 });
 
 @Component({
@@ -581,9 +673,10 @@ describe('StTagInputComponent', () => {
          expect(comp.reactiveForm.valid).toBeTruthy();
       });
 
-
       it ('if regular expression is introduced as input, only values that match it will be valid', () => {
+         compTagInput.type = 'text';
          compTagInput.regularExpression = ipFormat;
+         compTagInput.ngOnInit();
          fixture.detectChanges();
 
          compTagInput.innerInputContent = 'New Tag';
@@ -602,6 +695,114 @@ describe('StTagInputComponent', () => {
          fixture.detectChanges();
 
          expect(compTagInput.items.length).toEqual(1);
+      });
+
+      describe('When type is number', () => {
+         beforeEach(() => {
+            compTagInput.type = 'number';
+            compTagInput.ngOnInit();
+            fixture.detectChanges();
+         });
+
+         it('and user types a text with letters and other symbols different to a dot, it wont be added', () => {
+            compTagInput.innerInputContent = 'New Tag';
+            fixture.detectChanges();
+
+            const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(0);
+
+            compTagInput.innerInputContent = '34.56fg';
+            fixture.detectChanges();
+
+            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(0);
+
+            compTagInput.innerInputContent = '34.56';
+            fixture.detectChanges();
+
+            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(1);
+            expect(compTagInput.items[0]).toEqual(34.56);
+         });
+
+         it ('if form control has invalid values, only will be added the valid numbers', () => {
+            (<any> comp.reactiveForm.controls).tags.setValue(['text', 2, 6.67]);
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(2);
+            expect(compTagInput.items).toEqual([2, 6.67]);
+         });
+      });
+
+      describe('When type is integer', () => {
+         beforeEach(() => {
+            compTagInput.type = 'integer';
+            compTagInput.ngOnInit();
+            fixture.detectChanges();
+         });
+
+         it('and user types a text with characters different to numbers, it wont be added', () => {
+            compTagInput.innerInputContent = 'New Tag';
+            fixture.detectChanges();
+
+            const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(0);
+
+            compTagInput.innerInputContent = '34.56fg';
+            fixture.detectChanges();
+
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(0);
+
+            compTagInput.innerInputContent = '34.56';
+            fixture.detectChanges();
+
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(0);
+
+            compTagInput.innerInputContent = '56';
+            fixture.detectChanges();
+
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(1);
+            expect(compTagInput.items[0]).toEqual(56);
+         });
+
+         it ('if form control has invalid values, only will be added the valid integers', () => {
+            (<any> comp.reactiveForm.controls).tags.setValue(['text', 78, 6]);
+            fixture.detectChanges();
+
+            expect(compTagInput.items.length).toEqual(2);
+            expect(compTagInput.items).toEqual([78, 6]);
+         });
       });
    });
 });
@@ -756,7 +957,7 @@ describe('StTagInputComponent', () => {
       });
 
 
-      it ('if regular expression is introduced as input, only values that match it will be valid', async(() => {
+      it('if regular expression is introduced as input, only values that match it will be valid', (done) => {
          compTagInput.regularExpression = ipFormat;
          fixture.detectChanges();
 
@@ -785,9 +986,9 @@ describe('StTagInputComponent', () => {
                fixture.detectChanges();
 
                expect(compTagInput.items.length).toEqual(2);
+               done();
             });
          });
-      }));
-
+      });
    });
 });

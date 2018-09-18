@@ -5,6 +5,7 @@
 **New features:**
 
 * st-button: Add small toolbar button style
+* st-tag-input: Allow user to generate arrays of integers or numbers
 
 **Others:**
 
