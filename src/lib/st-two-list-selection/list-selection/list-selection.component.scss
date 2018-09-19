@@ -26,6 +26,8 @@
 
    &__rectangle.bottom {
       border-bottom-width: 0px;
+      border-top-width: 1px;
+      border-top-color: $neutral-05;
    }
 }
 

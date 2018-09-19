@@ -23,7 +23,7 @@ export class StTagInputDemoComponent implements OnInit {
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
 
    public tags: any = {
-      reactive: ['Tag Reactive', 'Tag Reactive 2', 'Tag Reactive 3'],
+      reactive: [],
       reactiveRequired: [],
       reactiveDisabled: [],
       reactiveAutocomplete: [],
@@ -62,6 +62,8 @@ export class StTagInputDemoComponent implements OnInit {
    constructor(private _fb: FormBuilder) {
       this.reactiveForm = _fb.group({
          'tag-input-reactive': [this.tags.reactive],
+         'tag-input-number': [],
+         'tag-input-integer': [],
          'tag-input-reactive-required': [this.tags.reactiveRequired, Validators.required],
          'tag-input-reactive-disabled': [this.tags.reactiveDisabled],
          'tag-input-reactive-autocomplete': [this.tags.reactiveDisabled]

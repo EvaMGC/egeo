@@ -23,14 +23,7 @@ import {
    HostBinding,
    HostListener
 } from '@angular/core';
-import {
-   ControlValueAccessor,
-   FormControl,
-   NG_VALIDATORS,
-   NG_VALUE_ACCESSOR,
-   Validator
-} from '@angular/forms';
-
+import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 
 /**
@@ -95,6 +88,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    @Input() placeholder: string | null = null; // TODO
    /** @input {string | null} [errorMessage=null] Error message to show. It is empty by default */
    @Input() errorMessage: string | null = null;
+   /** @input {string | null} [type=null] Type of the items */
+   @Input() type: string | null = 'text';
 
    /** @input {boolean} [withAutocomplete=false] Enable autocomplete feature. It is false by default */
    @Input() withAutocomplete: boolean = false;
@@ -112,20 +107,22 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    @ViewChild('inputElement') inputElement: ElementRef;
 
    public expandedMenu: boolean = false;
-   public items: string[] = [];
+   public items: any[] = [];
    public innerInputContent: string = '';
 
    private _focus: boolean = false;
    private _isDisabled: boolean = false;
    private _newElementInput: HTMLInputElement | null = null;
    private _selected: number | null = null;
+   private _regularExp: RegExp;
 
-   onChange = (_: any) => { };
-   onTouched = () => { };
+   onChange = (_: any) => {
+   }
+   onTouched = () => {
+   }
 
-   constructor(
-      private _selectElement: ElementRef,
-      private _cd: ChangeDetectorRef) {
+   constructor(private _selectElement: ElementRef,
+               private _cd: ChangeDetectorRef) {
    }
 
    /** @input {boolean} [disabled=false] Disable the component. It is false by default */
@@ -162,8 +159,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    get isValidInput(): boolean {
       const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
       const isDuplicated = this.items.indexOf(this.innerInputContent) !== -1;
-      let regularExp = new RegExp(this.regularExpression);
-      const matchedPattern = this.regularExpression ? regularExp.test(this.innerInputContent) : true;
+      const matchedPattern = this.regularExpression ? this._regularExp.test(this.innerInputContent) : true;
       return this.innerInputContent.length ? !isForbidden && !isDuplicated && matchedPattern : true;
    }
 
@@ -194,6 +190,21 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    ngOnInit(): void {
       this._newElementInput = this.newElementInput.nativeElement;
+      switch (this.type) {
+         case 'number': {
+            this.regularExpression = '^\\d+(\\.\\d+)?$';
+            break;
+         }
+         case 'integer': {
+            this.regularExpression = '^\\d+$';
+            break;
+         }
+         default: {
+            break;
+         }
+      }
+
+      this._regularExp = new RegExp(this.regularExpression);
    }
 
    ngOnChanges(changes: SimpleChanges): void {
@@ -204,7 +215,10 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       if (data && Array.isArray(data) && data.length) {
          this.items = [];
          for (const value of data) {
-            this.items.push(value);
+            const parsedValue = this._getParsedTag(value);
+            if (parsedValue || !isNaN(parsedValue)) {
+               this.items.push(parsedValue);
+            }
          }
          this.onChange(this.items);
          this._cd.markForCheck();
@@ -216,7 +230,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       this._cd.markForCheck();
    }
 
-   validate(control: FormControl): any {}
+   validate(control: FormControl): any {
+   }
 
    // Registry the change function to propagate internal model changes
    registerOnChange(fn: (_: any) => void): void {
@@ -347,9 +362,12 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    }
 
    private addTag(tag: string): void {
-      this.items.push(tag);
-      this.clearInput();
-      this.onChange(this.items);
+      const parsedValue = this._getParsedTag(tag);
+      if (parsedValue || !isNaN(parsedValue)) {
+         this.items.push(parsedValue);
+         this.clearInput();
+         this.onChange(this.items);
+      }
    }
 
    private addCurrentTag(): void {
@@ -386,6 +404,19 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    private checkAutocompleteMenuChange(changes: SimpleChanges): void {
       if (changes && changes.autocompleteList) {
          this._cd.markForCheck();
+      }
+   }
+
+   private _getParsedTag(tag: string): any {
+      switch (this.type) {
+         case 'number': {
+            return parseFloat(tag);
+         }
+         case 'integer': {
+            return parseInt(tag, 0);
+         }
+         default:
+            return tag;
       }
    }
 }

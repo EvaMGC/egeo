@@ -14,22 +14,48 @@
 <h1>MODEL DRIVEN / REACTIVE EXAMPLE</h1>
 <form [formGroup]="reactiveForm" novalidate (ngSubmit)="onSubmitReactiveForm()">
 
-   <h1> With forbidden values </h1>
    <st-tag-input
       class="st-form-field"
       name="tag-input-reactive"
       formControlName="tag-input-reactive"
-      [label]="'Tag Input'"
+      [label]="'Tag Input with fordidden value: test'"
       [id]="'tag-input-reactive-demo'"
       [placeholder]="'Add tags separated by commas'"
       [tooltip]="'This is a Tag Input component tooltip'"
       [forbiddenValues]="['test']">
    </st-tag-input>
-
-   Forbidden values: test
+   <span>Generated model: {{reactiveForm.controls['tag-input-reactive'].value | json}}</span>
 
    <div class="separator"></div>
 
+   <st-tag-input
+      class="st-form-field"
+      name="number-tag-input"
+      formControlName="tag-input-number"
+      [label]="'Tag Input of numbers'"
+      [id]="'tag-input-reactive-demo'"
+      [placeholder]="'Add tags separated by commas'"
+      [tooltip]="'This is a Tag Input component tooltip'"
+      type="number">
+   </st-tag-input>
+   <span>Generated model: {{reactiveForm.controls['tag-input-number'].value | json}}</span>
+
+   <div class="separator"></div>
+
+   <st-tag-input
+      class="st-form-field"
+      name="number-tag-input-integer"
+      formControlName="tag-input-integer"
+      [label]="'Tag Input of integers'"
+      [id]="'tag-input-reactive-demo'"
+      [placeholder]="'Add tags separated by commas'"
+      [tooltip]="'This is a Tag Input component tooltip'"
+      type="integer">
+   </st-tag-input>
+   <span>Generated model: {{reactiveForm.controls['tag-input-integer'].value | json}}</span>
+
+
+   <div class="separator"></div>
    <st-tag-input
       class="st-form-field"
       name="tag-input-reactive-required"
@@ -41,6 +67,7 @@
       [placeholder]="'Add tags separated by commas'"
       [tooltip]="'This is a Tag Input component tooltip'">
    </st-tag-input>
+   <span>Generated model: {{reactiveForm.controls['tag-input-reactive-required'].value | json}}</span>
 
    <div class="separator"></div>
 
@@ -69,6 +96,7 @@
       [tooltip]="'This is a Tag Input component tooltip'"
       (input)="onFilterList($event)">
    </st-tag-input>
+   <span>Generated model: {{reactiveForm.controls['tag-input-reactive-autocomplete'].value | json}}</span>
 
    <div class="separator"></div>
 

@@ -25,7 +25,7 @@
       <div class="st-tag-input__item tag-item" *ngFor="let item of items; let i = index;" [tabindex]="0" [attr.id]="tagId + i"
          (focusin)="onTagFocusIn($event, i)" (focusout)="onTagFocusOut($event, i)" (blur)="onTagFocusOut($event, i)"
          (click)="onTagClick($event, i)" (keydown)="onTagKeyDown($event, i)">{{item}}
-      </div><div #newElement [attr.contenteditable]="(disableValue === null)" class="st-tag-input__text inner-input" [attr.id]="inputId" [ngClass]="{ 'error': !isValidInput }"
+      </div><div #newElement [attr.contenteditable]="(disableValue === null)" type="type" class="st-tag-input__text inner-input" [attr.id]="inputId" [ngClass]="{ 'error': !isValidInput }"
          (focusin)="onInputFocusIn($event)" (focusout)="onInputFocusOut($event)" (blur)="onInputFocusOut($event)"
          (input)="onInputText($event.target.textContent)" (keydown)="onInputKeyDown($event)"></div>
    </div>
@@ -36,3 +36,4 @@
 <div *ngIf="errorMessage">
    <span class="st-input-error-message">{{errorMessage}}</span>
 </div>
+<span>Items: {{items | json}}</span>

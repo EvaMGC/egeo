@@ -18,6 +18,12 @@
    min-height: 10px;
 }
 
+.list-scroll {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+}
+
 virtual-scroll {
    width: 100%;
    &__list-item-all{

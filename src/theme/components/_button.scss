@@ -247,6 +247,12 @@ $hover: '&:not([disabled]):hover';
          background-color: $neutral-03;
       }
 
+      &.small {
+         & i {
+            padding: 0.22rem 0.22rem;
+         }
+      }
+
       #{$hover} {
          border:solid 1px $neutral-07;
       }
