@@ -15,7 +15,8 @@ import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.ser
 
 @Component({
    selector: 'st-dropdown-menu-demo',
-   templateUrl: 'st-dropdown-menu-demo.html'
+   templateUrl: 'st-dropdown-menu-demo.html',
+   styleUrls: ['./st-dropdown-menu-demo.component.scss']
 })
 export class StDropdownMenuDemoComponent {
 
