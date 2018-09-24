@@ -16,15 +16,17 @@ import {
    ElementRef,
    EventEmitter,
    forwardRef,
-   HostListener,
-   Input,
-   Output,
-   ViewChild,
    HostBinding,
-   Injector
+   HostListener,
+   Injector,
+   Input,
+   OnDestroy,
+   Output,
+   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { has as _has, flatten as _flatten, cloneDeep as _cloneDeep } from 'lodash';
+import { Subscription } from 'rxjs';
 
 import { StCheckValidationsDirective } from './st-check-validations';
 import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
@@ -41,7 +43,8 @@ import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StSelectComponent), multi: true }
    ]
 })
-export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
+export class StSelectComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
+
    @Input() placeholder: string = '';
    @Input() name: string = '';
    @Input() label: string = '';
@@ -50,6 +53,7 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    @Input() selected: StDropDownMenuItem = undefined;
    @Input() default: any;
    @Input() itemsBeforeScroll: number = 8;
+   @Input() search: boolean;
 
    @Output() expand: EventEmitter<boolean> = new EventEmitter<boolean>();
    @Output() select: EventEmitter<any> = new EventEmitter<any>();
@@ -59,6 +63,9 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
 
    @HostBinding('class.st-select-opened')
    expandedMenu: boolean = false;
+   searchInput: FormControl = new FormControl();
+   filteredOptions: StDropDownMenuItem[] | StDropDownMenuGroup[];
+   searchMode: boolean = false;
 
    onChange: (_: any) => void;
 
@@ -66,14 +73,15 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    private _isDisabled: boolean = false;
    private _options: StDropDownMenuItem[] | StDropDownMenuGroup[] = [];
    private _touched: boolean = false;
+   private _searchInputSubscription: Subscription;
 
    onTouched(): void {
       this._touched = true;
    }
 
    constructor(private _selectElement: ElementRef,
-               private _injector: Injector,
-               private _cd: ChangeDetectorRef) {
+      private _injector: Injector,
+      private _cd: ChangeDetectorRef) {
    }
 
    // TODO: MOVE THIS TO FORM-BASE
@@ -148,6 +156,26 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
     ****** Control value accessor && validate methods ******
     */
 
+   clickSearch(event: Event): void {
+      event.stopPropagation();
+      this.expandedMenu = true;
+      this.expand.emit(this.expandedMenu); // Notify expand change
+   }
+
+   getOptions(): void {
+      if (this.selected) {
+         this.onSearch(this.selected.label);
+         this.expandedMenu = true;
+      }
+   }
+
+   onSearch(value: string): void {
+      this.filteredOptions = value && value.length ? (this.options as any).filter((option: StDropDownMenuItem) =>
+         option.label.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1
+      ) : this.options;
+      this._cd.markForCheck();
+   }
+
    // Set the function to be called when the control receives a change event.
    registerOnChange(fn: (_: any) => void): void {
       this.onChange = fn;
@@ -158,17 +186,17 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
       this.onTouched = fn;
    }
 
+   setDisabledState(disabled: boolean): void {
+      this._isDisabled = disabled;
+      this._cd.markForCheck();
+   }
+
    // Write a new value to the element.
    writeValue(newValue: any): void {
       if (!this.selected || this.selected.value !== newValue) {
          this.selected = this.findByProperty('value', newValue);
          this._cd.markForCheck();
       }
-   }
-
-   setDisabledState(disabled: boolean): void {
-      this._isDisabled = disabled;
-      this._cd.markForCheck();
    }
 
    /*
@@ -180,6 +208,16 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
       const directive: StCheckValidationsDirective = this._injector.get(StCheckValidationsDirective, null);
       if (directive) {
          directive.registerOnChange(this.notifyError.bind(this));
+      }
+   }
+
+   ngOnInit(): void {
+      this._searchInputSubscription = this.searchInput.valueChanges.subscribe(this.onSearch.bind(this));
+   }
+
+   ngOnDestroy(): void {
+      if (this._searchInputSubscription) {
+         this._searchInputSubscription.unsubscribe();
       }
    }
 
@@ -197,7 +235,7 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    }
 
    createResetButton(): boolean {
-      return this.default !== undefined && ((!this.selected  && this._touched) || (this.selected && this.selected.value !== this.default));
+      return this.default !== undefined && ((!this.selected && this._touched) || (this.selected && this.selected.value !== this.default));
    }
 
    resetToDefault(): void {
@@ -215,6 +253,10 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
       if (expandNewValue !== this.expandedMenu) {
          this.expandedMenu = expandNewValue;
          this.expand.emit(this.expandedMenu); // Notify expand change
+      }
+
+      if (this.search && !this.expandedMenu) {
+         this.searchInput.setValue(this.selected ? this.selected.label : '');
       }
    }
 

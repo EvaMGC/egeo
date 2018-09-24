@@ -97,8 +97,20 @@
       <p>Form status: {{ reactiveForm.status | json }}</p>
    </form>
 
+
+   <h1>TEMPLATE DRIVEN EXAMPLE</h1>
    <br>
    <br>
    <button class="button button-primary" (click)="changeDisabled()">Change disable</button>
+
+   <div class="separator"></div>
+   <div class="separator"></div>
+   <div class="separator"></div>
+   <h1>SEARCH OPTION EXAMPLE</h1>
+   <st-select [search]="true" placeholder="Select option" [options]="options" [disabled]="disabled" [default]="options[2].value">
+   </st-select>
+
+   <div class="separator"></div>
+
 
 </section>

@@ -514,6 +514,7 @@ describe('StSelectComponent', () => {
             [errorMessage]="errorMessage"
             [selected]="selected"
             [itemsBeforeScroll]="itemsBeforeScroll"
+            [search]="search"
             class="st-form-field">
          </st-select>
       </form>
@@ -524,7 +525,7 @@ class StSelectTestReactiveComponent {
    errorMessage: string | undefined = null;
    selected: StDropDownMenuItem = null;
    options: StDropDownMenuItem[];
-
+   search: boolean = false;
    reactiveForm: FormGroup;
    model: any = { option: undefined };
    @ViewChild('select') select: StSelectComponent;
@@ -541,7 +542,7 @@ describe('StSelectComponent', () => {
       let fixture: ComponentFixture<StSelectTestReactiveComponent>;
       let comp: StSelectTestReactiveComponent;
       let compSelect: StSelectComponent;
-
+      let input: HTMLInputElement;
       beforeEach(async(() => {
          TestBed.configureTestingModule({
             imports: [FormsModule, ReactiveFormsModule, StSelectModule],
@@ -553,10 +554,38 @@ describe('StSelectComponent', () => {
          fixture = TestBed.createComponent(StSelectTestReactiveComponent);
          comp = fixture.componentInstance;
          compSelect = comp.select;
+         input = fixture.debugElement.query(By.css('input')).nativeElement;
       });
 
       afterEach(() => {
          fixture.destroy();
+      });
+
+
+      it('Should filter list on search', () => {
+         comp.search = true;
+         compSelect.expandedMenu = false;
+         fixture.detectChanges();
+         comp.options = [<StDropDownMenuItem>{ label: 'select one', value: undefined }, ...simpleItems];
+         comp.selected = comp.options[4];
+         fixture.detectChanges();
+         input.click();
+         input.focus();
+
+         expect(comp.selected).toEqual(<StDropDownMenuItem>compSelect.filteredOptions[0]);
+
+         const label: DebugElement = fixture.debugElement.query(By.css('label'));
+         comp.search = true;
+         (label.nativeElement as HTMLLabelElement).click();
+         fixture.detectChanges();
+         expect(compSelect.searchInput.value).toEqual('example 4');
+
+         comp.selected = undefined;
+         fixture.detectChanges();
+         input.click();
+         (label.nativeElement as HTMLLabelElement).click();
+         fixture.detectChanges();
+         expect(compSelect.searchInput.value).toEqual('');
       });
 
       it('Should be possible to set disabled', () => {
@@ -607,6 +636,10 @@ describe('StSelectComponent', () => {
          expect(comp.reactiveForm.get('option').value).toEqual(simpleItems[itemToClick].value);
          expect(responseFunction).toHaveBeenCalled();
          expect(responseFunction).toHaveBeenCalledWith(simpleItems[itemToClick].value);
+
+         (items[itemToClick].nativeElement as HTMLElement).dispatchEvent(new CustomEvent('click', {
+            bubbles: true
+         }));
       });
 
       it('Should validate required status', () => {

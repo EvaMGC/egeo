@@ -12,7 +12,7 @@
 -->
 <st-dropdown-menu
    class="st-select-menu"
-   [items]="options"
+   [items]="filteredOptions ? filteredOptions : options"
    [attr.id]="optionsId"
    [active]="expandedMenu"
    [placement]="'bottom-start'"
@@ -20,7 +20,6 @@
    (change)="onChangeOption($event)"
    [itemsBeforeScroll]="itemsBeforeScroll"
 >
-
    <div (click)="onButtonClick()" (keypress)="onButtonKeyPress($event)" #button class="button-container">
       <label *ngIf="hasLabel" [ngClass]="{disabled: disabled}"
              st-label
@@ -35,14 +34,17 @@
             #input
             aria-haspopup="true"
             class="st-input"
-            readonly
             type="text"
+            [readonly]="!search"
             [attr.aria-expanded]="expandedMenu"
             [attr.disabled]="disableValue"
             [attr.id]="inputId"
             [attr.name]="inputName"
             [placeholder]="placeholder"
+            [formControl]="searchInput"
             [value]="selectedValue"
+            (focus)="search && getOptions()"
+            (click)="search && clickSearch($event)"
             (select)="$event.stopPropagation()"
          />
          <span *ngIf="createResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"
