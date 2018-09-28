@@ -59,15 +59,15 @@ ul {
 
 li {
    list-style: none;
-   padding-left: 10px;
+   padding-left: 20px;
    margin-left: 30px;
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;
    line-height: $egeo-line-height-large;
    color: $action-secondary-06;
+   margin-bottom: 15px;
    white-space: nowrap;
    position: relative;
-   margin-bottom: 6px;
    cursor: pointer;
 
    &.active {
