@@ -439,7 +439,7 @@ describe('StSelectComponent', () => {
          expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
          expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
 
-         input.click();
+         fixture.nativeElement.click();
          fixture.detectChanges();
 
          expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('0');
@@ -454,6 +454,8 @@ describe('StSelectComponent', () => {
          (items[4].nativeElement as HTMLElement).click();  // select the default option
          fixture.detectChanges();
 
+         input.click();
+         fixture.detectChanges();
          expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
       });
 

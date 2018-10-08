@@ -1,11 +1,17 @@
 # Changelog
 
-## 14.0.0 (upcoming)
+## 13.2.0 (upcoming)
 
-* Pending changelog
+**Others:**
+
+* st-form: Add id to form fields
+
+**Fixed bugs:**
+
+* st-select: When select is in a form, user has to click two times to select an option
 
 
-## 13.1.1 (upcoming)
+## 13.1.1  (September 28, 2018)
 
 **Fixed bugs:**
  * st-two-list: fix bad behavior with virtual scroll and checkbox all, when an item is added to selected list

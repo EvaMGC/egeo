@@ -44,7 +44,7 @@
             [formControl]="searchInput"
             [value]="selectedValue"
             (focus)="search && getOptions()"
-            (click)="search && clickSearch($event)"
+            (click)="clickInput($event)"
             (select)="$event.stopPropagation()"
          />
          <span *ngIf="createResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"

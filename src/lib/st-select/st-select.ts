@@ -80,8 +80,8 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
    }
 
    constructor(private _selectElement: ElementRef,
-      private _injector: Injector,
-      private _cd: ChangeDetectorRef) {
+               private _injector: Injector,
+               private _cd: ChangeDetectorRef) {
    }
 
    // TODO: MOVE THIS TO FORM-BASE
@@ -156,7 +156,7 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
     ****** Control value accessor && validate methods ******
     */
 
-   clickSearch(event: Event): void {
+   clickInput(event: Event): void {
       event.stopPropagation();
       this.expandedMenu = true;
       this.expand.emit(this.expandedMenu); // Notify expand change
@@ -212,7 +212,9 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
    }
 
    ngOnInit(): void {
-      this._searchInputSubscription = this.searchInput.valueChanges.subscribe(this.onSearch.bind(this));
+      if (this.search) {
+         this._searchInputSubscription = this.searchInput.valueChanges.subscribe(this.onSearch.bind(this));
+      }
    }
 
    ngOnDestroy(): void {
