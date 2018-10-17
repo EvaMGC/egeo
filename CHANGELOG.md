@@ -4,6 +4,14 @@
 
 * Pending changelog
 
+
+## 13.2.1 (October 17, 2018)
+
+**Others:**
+
+* st-tag-input: Remove array value as string from view
+
+
 ## 13.2.0 (October 16, 2018)
 
 **Others:**
