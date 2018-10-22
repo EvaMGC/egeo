@@ -6,6 +6,9 @@
 
 * st-select: When select is in a form, user still has to click two times to select an option
 
+**Others:**
+
+* st-horizontal-tabs: Apply new design according to UX specifications
 
 
 ## 13.2.1 (October 17, 2018)

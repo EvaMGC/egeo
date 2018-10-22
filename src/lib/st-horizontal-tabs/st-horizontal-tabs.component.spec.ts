@@ -80,30 +80,6 @@ describe('StHorizontalTabsComponent', () => {
 
          expect(component.isActive(fakeOptions[1])).toBeTruthy();
       });
-
-      it('the width of the tabs is calculated to distribute them along the container width', () => {
-         expect(component.tabWidth).toBe(100 / fakeOptions.length + '%');
-      });
-
-      it ('line is positioned below the active tab', () => {
-         component.activateOption(fakeOptions[1]);
-
-         fixture.detectChanges();
-
-         expect(component.linePosition).toBe(100 / fakeOptions.length + '%');
-
-         component.activateOption(fakeOptions[2]);
-
-         fixture.detectChanges();
-
-         expect(component.linePosition).toBe(2 * 100 / fakeOptions.length + '%');
-
-         component.activateOption(fakeOptions[0]);
-
-         fixture.detectChanges();
-
-         expect(component.linePosition).toBe(0 + '%');
-      });
    });
 
    it('should be able to return if an option is active', () => {
@@ -131,26 +107,5 @@ describe('StHorizontalTabsComponent', () => {
 
          expect(component.changedOption.emit).toHaveBeenCalledWith(fakeOptions[0]);
       });
-
-      it ('line is positioned below the active option', () => {
-         component.activateOption(fakeOptions[1]);
-
-         fixture.detectChanges();
-
-         expect(component.linePosition).toBe(100 / fakeOptions.length + '%');
-
-         component.activateOption(fakeOptions[2]);
-
-         fixture.detectChanges();
-
-         expect(component.linePosition).toBe(2 * 100 / fakeOptions.length + '%');
-
-         component.activateOption(fakeOptions[0]);
-
-         fixture.detectChanges();
-
-         expect(component.linePosition).toBe(0 + '%');
-      });
-
    });
 });

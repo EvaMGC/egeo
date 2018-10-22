@@ -56,23 +56,12 @@ export class StHorizontalTabsComponent implements OnInit {
     */
    @Output() changedOption: EventEmitter<StHorizontalTab> = new EventEmitter<StHorizontalTab>();
 
-   private _tabWidth: string;
 
    ngOnInit(): void {
       if (this.options && this.options.length > 0) {
          this.activeOption = this.activeOption || this.options[0];
          this.activateOption(this.activeOption);
       }
-
-      this._tabWidth = Number(100 / this.options.length) + '%';
-   }
-
-   get tabWidth(): string {
-      return this._tabWidth;
-   }
-
-   get linePosition(): string {
-      return Number(this.optionPosition(this.activeOption) * 100 / this.options.length) + '%';
    }
 
    isActive(option: StHorizontalTab): boolean {

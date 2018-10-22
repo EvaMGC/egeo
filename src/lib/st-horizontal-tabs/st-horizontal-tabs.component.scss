@@ -11,22 +11,25 @@
 
 .st-horizontal-tabs {
    position: relative;
-   display: block;
+   display: flex;
    overflow: hidden;
    width: 100%;
-   list-style: none;;
-   line-height: 0;
+   list-style: none;
 }
 
 .tab {
    display: inline-block;
    text-align: center;
-   text-overflow: ellipsis;
    box-sizing: border-box;
-   overflow: hidden;
-   padding: 0 34px;
-   margin-bottom: 4px;
+   line-height: 1;
+   padding: 0 30px 7px 30px;
+   margin-top: auto;
    cursor: pointer;
+
+   &--active {
+      padding-bottom: 5px;
+
+   }
 }
 
 .line {

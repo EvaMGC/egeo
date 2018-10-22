@@ -11,6 +11,9 @@
 @import '../constants/fonts';
 @import '../constants/colors';
 
+.st-horizontal-tabs {
+   border-bottom: solid 1px $neutral-06;
+}
 .tab {
    color: $action-primary-default;
    text-decoration: none;
@@ -30,6 +33,7 @@
 }
 
 .tab--active {
+   border-bottom: solid 2px $neutral-13;
 
    &:focus {
       text-decoration: none;
