@@ -53,7 +53,7 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
    @Input() selected: StDropDownMenuItem = undefined;
    @Input() default: any;
    @Input() itemsBeforeScroll: number = 8;
-   @Input() search: boolean;
+   @Input() search: boolean = false;
 
    @Output() expand: EventEmitter<boolean> = new EventEmitter<boolean>();
    @Output() select: EventEmitter<any> = new EventEmitter<any>();
@@ -65,7 +65,6 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
    expandedMenu: boolean = false;
    searchInput: FormControl = new FormControl();
    filteredOptions: StDropDownMenuItem[] | StDropDownMenuGroup[];
-   searchMode: boolean = false;
 
    onChange: (_: any) => void;
 

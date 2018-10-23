@@ -2,7 +2,10 @@
 
 ## 13.3.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
+* st-select: When select is in a form, user still has to click two times to select an option
+
 
 
 ## 13.2.1 (October 17, 2018)
