@@ -8,9 +8,68 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-
+@import '../../theme/constants/colors';
+@import '../../theme/constants/fonts';
 
 .horizontal-tabs {
    width: 100%;
    display: block;
 }
+
+.introduction {
+   font-family: $egeo-nunito-sans;
+   font-size: 25px;
+   font-weight: 300;
+   font-style: normal;
+   font-stretch: normal;
+   line-height: $egeo-line-height-xsmall;
+   letter-spacing: normal;
+   color: $neutral-13;
+   height: 100px;
+}
+
+.title {
+   font-family: $egeo-nunito-sans-bold;
+   font-size: $egeo-font-size-xlarge;
+   font-style: normal;
+   font-stretch: normal;
+   line-height: $egeo-line-height-xlarge;
+   letter-spacing: normal;
+   color: $neutral-13;
+   padding-bottom: 26px;
+}
+
+.paragraph {
+   font-family: $egeo-nunito-sans;
+   font-size: $egeo-font-size-medium;
+   font-weight: 300;
+   font-style: normal;
+   font-stretch: normal;
+   line-height: $egeo-line-height-medium;
+   letter-spacing: normal;
+   color: $neutral-13;
+}
+
+.separator {
+   display: block;
+   width: 75px;
+   height: 1px;
+   background-color: $brand;
+   margin-bottom: 30px;
+}
+
+.demo {
+   display: block;
+   padding: 60px 0;
+}
+
+
+.list {
+   font-family: $egeo-nunito-sans;
+   font-size: $egeo-font-size-small;
+   line-height: $egeo-line-height-large;
+   color: $neutral-11;
+   padding-left: 25px;
+}
+
+
