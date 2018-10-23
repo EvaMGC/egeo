@@ -17,7 +17,8 @@
    <section *ngIf="!emptyModal" class="st-modal" [ngClass]="{'st-modal-fullscreen': isFullscreen}" [ngStyle]="modalStyles" [hidden]="!emptyModal">
       <div class="st-modal-header">
          <div class="container">
-            <p class="title">{{title}}</p>
+            <p class="title">{{title}}</p> <span class="icon-cross close-button" *ngIf="showCloseBtn" (click)="onClose()"></span>
+
             <st-modal-buttons *ngIf="isFullscreen" [buttonConfig]="buttons" [fullscreen]="isFullscreen" (click)="click.emit($event)"></st-modal-buttons>
          </div>
       </div>

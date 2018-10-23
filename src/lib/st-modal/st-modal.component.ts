@@ -22,7 +22,7 @@ import {
    ViewContainerRef
 } from '@angular/core';
 
-import { StModalButton, StModalConfig, StModalButtonResponse } from './st-modal.model';
+import { StModalButton, StModalButtonResponse, StModalConfig, StModalResponse } from './st-modal.model';
 import { StWindowRefService } from '../utils/window-service';
 
 @Component({
@@ -91,6 +91,17 @@ export class StModalComponent implements OnDestroy, AfterViewInit {
 
    get emptyModal(): boolean {
       return this.modalConfig && this.modalConfig.empty;
+   }
+
+   get showCloseBtn(): boolean {
+      return this.modalConfig.showCloseBtn;
+   }
+
+   onClose(): void {
+      this.click.emit({
+         response: StModalResponse.CLOSE,
+         close: true
+      });
    }
 
    /** DYNAMIC MODAL BODY COMPONENT LOAD */

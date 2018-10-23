@@ -37,6 +37,7 @@ export class StModalConfig {
    maxWidth?: number;
    minWidth?: number;
    empty?: boolean;
+   showCloseBtn?: boolean;
 }
 
 export class StModalButtonResponse {

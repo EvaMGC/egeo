@@ -55,7 +55,8 @@ export class StModalDemoComponent implements AfterViewInit {
          messageTitle: 'Copy',
          message: message,
          maxWidth: 600,
-         minWidth: 400
+         minWidth: 400,
+         showCloseBtn: true
       }).subscribe((response) => this._logger.notifyAlert(StDemoLoggerSeverity.INFO, this.evaluateResponse(response)));
    }
 
