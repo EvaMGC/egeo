@@ -20,7 +20,7 @@
    (change)="onChangeOption($event)"
    [itemsBeforeScroll]="itemsBeforeScroll"
 >
-   <div (click)="onButtonClick()" (keypress)="onButtonKeyPress($event)" #button class="button-container">
+   <div (click)="onButtonClick()" (keypress)="onButtonKeyPress($event)" #button class="button-container" (clickOutside)="onClickOutside()">
       <label *ngIf="hasLabel" [ngClass]="{disabled: disabled}"
              st-label
              for="inputId"
@@ -44,8 +44,6 @@
             [formControl]="searchInput"
             [value]="selectedValue"
             (focus)="search && getOptions()"
-            (click)="clickInput($event)"
-            (select)="$event.stopPropagation()"
          />
          <span *ngIf="createResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"
                [style.opacity]="expandedMenu ? 1 : 0">
