@@ -12,7 +12,7 @@ import { Directive, EventEmitter, ElementRef, HostListener, Output } from '@angu
 
 @Directive({ selector: '[clickOutside]' })
 export class StClickOutside {
-  @Output() clickOutside = new EventEmitter<MouseEvent>();
+  @Output() clickOutside: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   constructor(private elementRef: ElementRef) {}
 

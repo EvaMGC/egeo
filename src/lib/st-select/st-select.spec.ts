@@ -551,12 +551,6 @@ describe('StSelectComponent', () => {
             imports: [FormsModule, ReactiveFormsModule, StSelectModule],
             declarations: [StSelectTestReactiveComponent]
          })
-            .overrideComponent(StSelectComponent, {
-               set: { changeDetection: ChangeDetectionStrategy.Default }
-            })
-            .overrideComponent(StDropdownMenuComponent, {
-               set: { changeDetection: ChangeDetectionStrategy.Default }
-            })
             .compileComponents();  // compile template and css
       }));
 
