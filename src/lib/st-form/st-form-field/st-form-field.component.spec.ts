@@ -933,6 +933,7 @@ describe('StFormFieldComponent', () => {
          fixture.detectChanges();
 
          selectElement = fixture.nativeElement.querySelector('#log_level');
+         spyOn(component.valueChange, 'emit').and.callThrough();
       });
 
       it('properties of type string and with the attribute enum are rendered as selects', () => {
@@ -990,7 +991,21 @@ describe('StFormFieldComponent', () => {
          (<HTMLLIElement> options[0]).click();
          fixture.detectChanges();
 
-         expect(component.value).toBeUndefined();
+         expect(fixture.nativeElement.querySelector('#log_level-input').value).toEqual('');
+         expect(component.valueChange.emit).toHaveBeenCalledWith(undefined);
+      });
+
+      it('if user clicks on an option, model is updated with te value of this option', (done) => {
+         fixture.nativeElement.querySelector('#log_level-input').click();
+         fixture.detectChanges();
+         let options: DebugElement[] = fixture.debugElement.queryAll(By.css('st-dropdown-menu-item>li'));
+         (options[1].nativeElement as HTMLElement).click();
+         fixture.detectChanges();
+         setTimeout(() => {
+            expect(fixture.nativeElement.querySelector('#log_level-input').value).toEqual('TRACE');
+            expect(component.valueChange.emit).toHaveBeenCalledWith('TRACE');
+            done();
+         });
       });
 
       it('if model is empty, default value is not defined and placeholder is defined in schema, this placeholder is displayed', () => {
@@ -1285,6 +1300,7 @@ describe('StFormFieldComponent in reactive form', () => {
             reactiveComp.schema = { key: 'log_level', value: _cloneDeep(JSON_SCHEMA.properties.log_level) };
             reactiveComp.qaTag = 'log_level';
             reactiveComp.required = true;
+
             reactiveFixture.detectChanges();
          });
 

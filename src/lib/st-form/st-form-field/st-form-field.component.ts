@@ -17,7 +17,7 @@ import {
    ChangeDetectionStrategy,
    EventEmitter,
    ViewChild,
-   HostBinding
+   HostBinding, OnChanges, SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, NgModel } from '@angular/forms';
 import { StInputError } from '../../st-input/st-input.error.model';
@@ -39,7 +39,7 @@ import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.inte
    }
 })
 
-export class StFormFieldComponent implements ControlValueAccessor, OnInit {
+export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
    @Input() @StRequired() schema: any;
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
@@ -57,6 +57,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    public disabled: boolean = false; // To check disable
    public focus: boolean = false;
    public errorMessage: string = undefined;
+   public selectOptions: StDropDownMenuItem[];
    private innerValue: any;
 
    @HostBinding('class.read-only')
@@ -87,6 +88,9 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    }
 
    ngOnInit(): void {
+      if (this.schema.value && this.schema.value.enum) {
+         this.selectOptions = this.getSelectOptions();
+      }
       setTimeout(() => {
          if (this.default !== undefined && (this.innerValue === undefined || this.innerValue === null)) {
             this.innerValue = this.default;
@@ -96,6 +100,12 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
             this.setDisabledState(true);
          }
       });
+   }
+
+   public ngOnChanges(changes: SimpleChanges): void {
+      if (changes.schema) {
+        this.selectOptions = this.getSelectOptions();
+      }
    }
 
    get errors(): any {
