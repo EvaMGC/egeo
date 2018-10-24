@@ -17,7 +17,6 @@ import {
    EventEmitter,
    forwardRef,
    HostBinding,
-   HostListener,
    Injector,
    Input,
    OnDestroy,
@@ -155,16 +154,9 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
     ****** Control value accessor && validate methods ******
     */
 
-   clickInput(event: Event): void {
-      event.stopPropagation();
-      this.expandedMenu = true;
-      this.expand.emit(this.expandedMenu); // Notify expand change
-   }
-
    getOptions(): void {
       if (this.selected) {
          this.onSearch(this.selected.label);
-         this.expandedMenu = true;
       }
    }
 
@@ -248,17 +240,9 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
       this._cd.markForCheck();
    }
 
-   @HostListener('document:click', ['$event'])
-   onClickOutside(event: Event): void {
-      const expandNewValue: boolean = this.expandedMenu && this.buttonElement.nativeElement.contains(event.target);
-      if (expandNewValue !== this.expandedMenu) {
-         this.expandedMenu = expandNewValue;
-         this.expand.emit(this.expandedMenu); // Notify expand change
-      }
-
-      if (this.search && !this.expandedMenu) {
-         this.searchInput.setValue(this.selected ? this.selected.label : '');
-      }
+   onClickOutside(): void {
+      this.expandedMenu = false;
+      this.expand.emit(this.expandedMenu); // Notify expand change
    }
 
    onChangeOption(option: StDropDownMenuItem): void {

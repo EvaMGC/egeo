@@ -39,6 +39,7 @@ export { StFilterList } from './pipes/search-filter/search-filter.pipe';
 export { StInputAdjustable } from './directives/st-input-adjustable/st-input-adjustable';
 export { StMinValidator } from './directives/form/st-min-validator/st-min-validator';
 export { StMaxValidator } from './directives/form/st-max-validator/st-max-validator';
+export { StClickOutside } from './directives/st-click-outside/st-click-outside.directive';
 
 /**************************** MODULES *************************************************/
 
