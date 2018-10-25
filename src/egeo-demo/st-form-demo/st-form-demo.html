@@ -10,23 +10,74 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div style="width: 100%; position: relative;">
-      <st-form [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel" [textFieldMaxWidth]="70"></st-form>
+<section class="container-liquid demo-layout">
+   <p class="introduction">Dynamic forms are designed to generate forms using a json schema as input where fields are
+      defined</p>
+   <h1 class="title">Test it yourself</h1>
+   <span class="separator"></span>
+
+   <div class="row form-layout">
+      <p class="col-sm-12 col-lg-12 col-xs-12 schema-error">{{schemaError}}</p>
+      <div class="col-sm-6 col-lg-6 col-xs-12">
+         <st-form [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel"
+                  [textFieldMaxWidth]="70">
+         </st-form>
+         <div class="button-toolbar">
+            <button class="button button-primary" (click)="changeFormStatus()">
+               <span>Disable/Enable form</span>
+            </button>
+         </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-6 col-xs-12">
+         <textarea class="form-editor" spellcheck="false" [ngClass]="{error: schemaError}" [ngModel]="jsonSchema | json"
+                   (ngModelChange)="onChangeSchema($event)">
+         </textarea>
+      </div>
    </div>
-   <br>
 
-   <button class="button button-primary" (click)="showFormStatus()">
-      <span>Show form status</span>
-   </button>
+   <h2 class="subtitle">Form Output</h2>
+   <span class="separator"></span>
+   {{model | json}}
+   <h2 class="subtitle">Form Validation</h2>
+   <span class="separator"></span>
+   <p *ngIf="formModel.valid">Valid</p>
+   <p *ngIf="formModel.invalid">Invalid</p>
 
-   <button class="button button-secondary-gray" (click)="changeFormStatus()">
-      <span>Disable/Enable form</span>
-   </button>
 
+   <h1 class="title">Visual improvements</h1>
+   <span class="separator"></span>
+
+   <h2 class="subtitle">Section Switch</h2>
+   <span class="separator"></span>
+   <p class="code-demo">
+     {{ {
+      ui: {
+      component: 'switch'
+      }
+      } | json }}
+   </p>
+
+   <h2 class="subtitle">Section Accordion</h2>
+   <span class="separator"></span>
+
+   <p class="code-demo">
+      {{ {
+      ui: {
+      component: 'accordion'
+      }
+      } | json }}
+   </p>
+
+   <h2 class="subtitle">Optional Section</h2>
+   <span class="separator"></span>
+
+   <p class="code-demo">
+      {{ {
+      ui: {
+      component: 'show-more'
+      }
+      } | json }}
+   </p>
 </section>
-<h1>MODEL</h1>
-{{model | json}}
-<br><br><br>
-<h1>VALIDATION</h1>
-{{formModel.valid}}
+

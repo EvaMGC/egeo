@@ -9,274 +9,424 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 export const JSON_SCHEMA: any = {
-   'type': 'object',
-   'title': '',
-   'description': '',
-   'ui': {
-      'component': 'standard'
-   },
-   'properties': {
-      'general': {
-         'type': 'object',
-         'title': 'General',
-         'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-         'ui': {
-            'component': 'show-more'
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+      "general": {
+         "type": "object",
+         "additionalProperties": false,
+         "ui": {
+            "component": "standard"
          },
-         'properties': {
-            'serviceConfiguration': {
-               'title': 'Type of Sparta',
-               'type': 'string',
-               'enum': ['a', '/sparta/sparta-server/null', 'c'],
-               'examples': ['/sparta/sparta-server/null'],
-               'default': '/sparta/sparta-server/null',
-               'ui': { 'relatedTo': 'serviceId' }
+         "name": "general",
+         "title": "General",
+         "description": "",
+         "properties": {
+            "serviceId": {
+               "description": "Service ID of the Service",
+               "type": "string",
+               "required": true,
+               "readOnly": false,
+               "pattern": "(.*)",
+               "title": "Service ID",
+               "default": "/discovery/discovery"
             },
-            'serviceId': {
-               'title': 'Id',
-               'type': 'string',
-               'readOnly': false,
-               'maxLength': 200,
-               'default': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a imperdiet ipsum. Integer malesuada, mi semper maximus tempus, lacus lacus dapibus sem, ac accumsan ipsum mi quis eros. Duis tempus diam id nisi aliquam, at blandit mi blandit. Pellentesque hendrerit sem at pellentesque aliquam. '
-            },
-            'disabledServiceId': {
-               'title': 'Disabled Id',
-               'type': 'string',
-               'readOnly': true,
-               'maxLength': 200,
-               'pattern': 'Lorem',
-               'default': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            },
-            'serviceName': {
-               'title': 'Name',
-               'type': 'string',
-               'readOnly': false,
-               'default': '/sparta/sparta-server/null',
-               'maxLength': 8
-            },
-            'a': {
-               'title': 'a',
-               'type': 'string',
-               'ui': { 'relatedTo': 'b'}
-            },
-            'b': {
-               'title': 'b',
-               'type': 'string',
-               'enum': ['a', '/sparta/sparta-server/null', 'c'],
-               'default': '/sparta/sparta-server/null'
-            },
-            'c': {
-               'title': 'c',
-               'type': 'string',
-               'default': '',
-               'ui': {
-                  'relatedTo': 'd'
-               }
-            },
-            'd': {
-               'title': 'd',
-               'type': 'string',
-               'enum': ['a', '/sparta/sparta-server/null', 'c'],
-               'default': '/sparta/sparta-server/null',
-               'ui': { 'relatedTo': 'e' }
-            },
-            'e': {
-               'title': 'e',
-               'type': 'string',
-               'enum': ['a', '/sparta/sparta-server/null', 'c'],
-               'default': '/sparta/sparta-server/null'
-            },
-            'runMode': {
-               'title': 'Run mode',
-               'required': false,
-               'readOnly': false,
-               'type': 'string',
-               'default': 'production',
-               'level': 1,
-               'minLength': 3,
-               'maxLength': 100,
-               'exclusiveMinimum': false,
-               'exclusiveMaximum': false,
-               'internalName': 'RUN_MODE'
-            },
-            'resources': {
-               'type': 'object',
-               'title': 'Scheduler resources',
-               'description': '',
-               'ui': {
-                  'component': 'accordion'
+            "marathonlb": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "standard"
                },
-               'properties': {
-                  'Sparta_Docker_Image': {
-                     'title': 'Docker image',
-                     'required': false,
-                     'readOnly': true,
-                     'type': 'string',
-                     'default': 'qa.stratio.com/stratio/sparta:2.0.0-RC3',
-                     'level': 1,
-                     'minLength': 3,
-                     'maxLength': 100,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_DOCKER_IMAGE'
+               "name": "marathonlb",
+               "title": "Marathon LB",
+               "description": "Host & Path to connect to our Discovery service.",
+               "properties": {
+                  "haproxyhost": {
+                     "description": "HA Proxy host",
+                     "type": "string",
+                     "required": true,
+                     "title": "HA Proxy host",
+                     "default": "discovery.labs.demo.com"
                   },
-                  'Sparta_Marathon_Force_Pull_Image': {
-                     'title': 'Is downloaded scheduler image each time?',
-                     'required': false,
-                     'readOnly': true,
-                     'type': 'boolean',
-                     'default': true,
-                     'level': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_MARATHON_FORCE_PULL_IMAGE'
-                  },
-                  'mem': {
-                     'title': 'Memory',
-                     'required': true,
-                     'readOnly': true,
-                     'type': 'integer',
-                     'default': 1024,
-                     'level': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'MEM'
-                  },
-                  'instances': {
-                     'title': 'Instances',
-                     'required': true,
-                     'readOnly': false,
-                     'type': 'integer',
-                     'default': 0,
-                     'level': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'INSTANCES'
-                  },
-                  'cpus': {
-                     'title': 'CPU',
-                     'required': true,
-                     'readOnly': true,
-                     'type': 'integer',
-                     'default': 1,
-                     'level': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'CPUs'
+                  "haproxypath": {
+                     "description": "HA Proxy path to expose",
+                     "type": "string",
+                     "required": true,
+                     "title": "Path HA Proxy",
+                     "default": "/discovery"
                   }
                },
-               'required': ['mem', 'instances', 'cpus']
+               "required": [
+                  "haproxyhost",
+                  "haproxypath"
+               ]
             },
-            'zookeeper': {
-               'type': 'object',
-               'title': 'Zookeeper',
-               'description': '',
-               'ui': {
-                  'component': 'accordion'
+            "datastore": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "standard"
                },
-               'properties': {
-                  'Sparta_Zookeeper_Connection_String': {
-                     'title': 'Zookeeper connection String',
-                     'required': false,
-                     'readOnly': true,
-                     'type': 'string',
-                     'default': 'zk-0001.zkuserland.mesos:2181,zk-0002.zkuserland.mesos:2181,zk-0003.zkuserland.mesos:2181',
-                     'level': 1,
-                     'minLength': 3,
-                     'maxLength': 256,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_ZOOKEEPER_CONNECTION_STRING'
+               "name": "datastore",
+               "title": "PostgreSQL",
+               "description": "Datastore where Discovery will place the configuration settings.",
+               "properties": {
+                  "dbSslEnabled": {
+                     "description": "TLS secured connection with PostgreSQL",
+                     "type": "boolean",
+                     "required": false,
+                     "readOnly": true,
+                     "title": "Connection with SSL",
+                     "default": true
                   },
-                  'SpartaPluginZkConnect': {
-                     'title': 'Plugin Zookeeper connection',
-                     'required': false,
-                     'readOnly': true,
-                     'type': 'string',
-                     'default': 'gosec1.node.paas.labs.stratio.com:2181,gosec2.node.paas.labs.stratio.com:2181,gosec3.node.paas.labs.stratio.com:2181',
-                     'level': 1,
-                     'minLength': 3,
-                     'maxLength': 256,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_PLUGIN_ZK_CONNECT'
+                  "dbType": {
+                     "description": "",
+                     "type": "string",
+                     "readOnly": false,
+                     "title": "Type of database",
+                     "default": "postgres"
                   },
-                  'Sparta_Zookeeper_Path': {
-                     'title': 'Path',
-                     'readOnly': true,
-                     'type': 'string',
-                     'default': '/stratio/sparta',
-                     'level': 1,
-                     'minLength': 3,
-                     'maxLength': 100,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_ZOOKEEPER_PATH'
+                  "metadataDbHost": {
+                     "description": "The host of the database uses as metadata repository",
+                     "type": "string",
+                     "maxLength": 100,
+                     "minLength": 3,
+                     "required": true,
+                     "readOnly": false,
+                     "title": "Host",
+                     "default": "pg-0001.test.mesos"
                   },
-                  'Sparta_Plugin_Zookeeper_Watchers': {
-                     'title': 'Watchers',
-                     'required': false,
-                     'readOnly': false,
-                     'type': 'boolean',
-                     'default': true,
-                     'level': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_PLUGIN_ZOOKEEPER_WATCHERS'
+                  "dbPort": {
+                     "description": "The port of the database used as metadata repository",
+                     "type": "integer",
+                     "minimum": 1,
+                     "required": true,
+                     "readOnly": false,
+                     "title": "Port of the database",
+                     "default": 5432
                   },
-                  'Sparta_Zookeeper_Retry_Interval': {
-                     'title': 'Retry interval',
-                     'required': false,
-                     'readOnly': false,
-                     'type': 'integer',
-                     'default': 10000,
-                     'level': 1,
-                     'minimum': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_ZOOKEEPER_RETRY_INTERVAL'
+                  "metadataDbName": {
+                     "description": "The database name used in the database with the metadata repository",
+                     "type": "string",
+                     "maxLength": 100,
+                     "minLength": 3,
+                     "required": false,
+                     "readOnly": false,
+                     "title": "Database name",
+                     "default": "discovery"
                   },
-                  'Sparta_Zookeeper_Retry_Atempts': {
-                     'title': 'Retry atempts',
-                     'required': false,
-                     'readOnly': false,
-                     'type': 'integer',
-                     'default': 5,
-                     'level': 1,
-                     'minimum': 1,
-                     'maximum': 100,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_ZOOKEEPER_RETRY_ATEMPTS'
+                  "tenantName": {
+                     "description": "The tenant name used in vault to store de secrets of this instance",
+                     "type": "string",
+                     "maxLength": 100,
+                     "minLength": 3,
+                     "required": false,
+                     "readOnly": false,
+                     "title": "Tenant Name",
+                     "default": "discovery"
                   },
-                  'Sparta_Zookeeper_Connection_Timeout': {
-                     'title': 'Connection TimeOut',
-                     'required': false,
-                     'readOnly': false,
-                     'type': 'integer',
-                     'default': 15000,
-                     'level': 1,
-                     'minimum': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_ZOOKEEPER_CONNECTION_TIMEOUT'
-                  },
-                  'Sparta_Zookeeper_Session_Timeout': {
-                     'title': 'Session TimeOut',
-                     'required': false,
-                     'readOnly': false,
-                     'type': 'integer',
-                     'default': 60000,
-                     'level': 1,
-                     'minimum': 1,
-                     'exclusiveMinimum': false,
-                     'exclusiveMaximum': false,
-                     'internalName': 'SPARTA_ZOOKEEPER_SESSION_TIMEOUT'
+                  "metadataDbUser": {
+                     "description": "The user name of the database with the metabase repository if we are using user to connect to the database",
+                     "type": "string",
+                     "maxLength": 100,
+                     "minLength": 3,
+                     "required": false,
+                     "readOnly": false,
+                     "title": "Database user"
                   }
-               }
+               },
+               "required": [
+                  "metadataDbHost",
+                  "dbPort"
+               ]
+            },
+            "identity": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "standard"
+               },
+               "name": "identity",
+               "title": "Service indentity",
+               "description": "",
+               "properties": {
+                  "approlename": {
+                     "description": "App role used to recover a Vault token with a pre-defined policy",
+                     "type": "string",
+                     "readOnly": false,
+                     "title": "Vault role",
+                     "default": "open"
+                  }
+               },
+               "required": []
+            },
+            "calico": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "standard"
+               },
+               "name": "calico",
+               "title": "Calico Network",
+               "description": "",
+               "properties": {
+                  "networkSegmentation": {
+                     "description": "Enable Calico network for PostgreSQL Agent.",
+                     "type": "boolean",
+                     "readOnly": true,
+                     "title": "Network segmentation",
+                     "default": true
+                  },
+                  "useDynamicAuthentication": {
+                     "description": "Enable dynamic authentication",
+                     "type": "boolean",
+                     "required": false,
+                     "readOnly": true,
+                     "title": "Dynamic authentication",
+                     "default": true
+                  },
+                  "calicoNetwork": {
+                     "description": "Network's name where PostgreSQL Agent will be added.",
+                     "type": "string",
+                     "readOnly": false,
+                     "title": "Calico network"
+                  },
+                  "networkName": {
+                     "description": "Docker user network name",
+                     "type": "string",
+                     "required": true,
+                     "readOnly": false,
+                     "title": "Network name",
+                     "enum": [
+                        "demo"
+                     ]
+                  }
+               },
+               "required": [
+                  "networkName"
+               ]
+            },
+            "resources": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "accordion"
+               },
+               "name": "resources",
+               "title": "Resources",
+               "description": "",
+               "properties": {
+                  "instances": {
+                     "description": "Number of Discovery instances to run.",
+                     "type": "integer",
+                     "required": true,
+                     "readOnly": false,
+                     "title": "Instances",
+                     "default": 1
+                  },
+                  "cpus": {
+                     "description": "CPU shares to allocate to each Discovery instance.",
+                     "type": "integer",
+                     "required": true,
+                     "readOnly": false,
+                     "level": 1,
+                     "title": "CPU",
+                     "default": 1
+                  },
+                  "mem": {
+                     "description": "Memory (MB) to allocate to each Bootstrap instance.",
+                     "type": "integer",
+                     "required": true,
+                     "readOnly": false,
+                     "title": "Memory (MB)",
+                     "default": 2048
+                  }
+               },
+               "required": [
+                  "instances",
+                  "cpus",
+                  "mem"
+               ]
             }
          },
-         'required': ['serviceId', 'serviceName']
+         "required": [
+            "serviceId"
+         ]
+      },
+      "settings": {
+         "type": "object",
+         "additionalProperties": false,
+         "ui": {
+            "component": "standard"
+         },
+         "name": "settings",
+         "title": "Settings",
+         "description": "",
+         "properties": {
+            "jdbcParameters": {
+               "description": "An optional variable to append to the connection string additional JDBC configuration parameters",
+               "type": "string",
+               "maxLength": 100,
+               "minLength": 3,
+               "required": false,
+               "readOnly": false,
+               "title": "Additional JDBC configuration parameters",
+               "default": "prepareThreshold=0"
+            },
+            "calico": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "switch"
+               },
+               "name": "calico",
+               "title": "Calico security",
+               "description": "Use Calico security to this Sparta instance",
+               "properties": {
+                  "calicoEnabled": {
+                     "description": "Whether or not enable the Calico security.",
+                     "type": "boolean",
+                     "readOnly": false,
+                     "ui": {
+                        "name": "scp-sc-sparta-andromeda-calicoenabled"
+                     },
+                     "title": "Use calico",
+                     "default": true
+                  },
+                  "networkName": {
+                     "description": "Docker user network name",
+                     "type": "string",
+                     "readOnly": false,
+                     "ui": {
+                        "name": "scp-sc-sparta-andromeda-networkname"
+                     },
+                     "title": "Network name",
+                     "enum": [
+                        "stratio"
+                     ]
+                  },
+                  "calicoNetwork": {
+                     "description": "Name of the calico network where sparta and the workflows are deployed if calico security is enabled. It uses the same value of Network name.",
+                     "type": "string",
+                     "required": false,
+                     "readOnly": false,
+                     "ui": {
+                        "name": "scp-sc-sparta-andromeda-caliconetwork"
+                     },
+                     "title": "Calico network"
+                  }
+               },
+               "required": [
+                  "networkName"
+               ]
+            },
+            "init": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "standard"
+               },
+               "name": "init",
+               "title": "Admin user",
+               "description": "When installing discovery for the first time, It will create an admin user with this parameters",
+               "properties": {
+                  "mb-init-admin-user": {
+                     "description": "The name of the admin user created as admin when Discovery is deployed.",
+                     "type": "string",
+                     "maxLength": 100,
+                     "minLength": 3,
+                     "readOnly": false,
+                     "title": "Name of the admin user",
+                     "default": "Demo"
+                  },
+                  "mb-init-admin-password": {
+                     "description": "The password of the admin user created as admin when Discovery is deployed.",
+                     "type": "integer",
+                     "minimum": 1,
+                     "required": false,
+                     "readOnly": false,
+                     "title": "Password of the admin user",
+                     "default": 123456
+                  },
+                  "mb-init-admin-mail": {
+                     "description": "The mail of the admin user created as admin when Discovery is deployed.",
+                     "type": "string",
+                     "maxLength": 100,
+                     "minLength": 3,
+                     "required": false,
+                     "readOnly": false,
+                     "title": "Mail of the admin user",
+                     "default": "demo@demo.com"
+                  }
+               },
+
+               "required": []
+            },
+            "Login": {
+               "type": "object",
+               "additionalProperties": false,
+               "ui": {
+                  "component": "standard"
+               },
+               "name": "Login",
+               "title": "Login by headers",
+               "description": "",
+               "properties": {
+                  "mb-user-header": {
+                     "description": "",
+                     "type": "string",
+                     "required": false,
+                     "readOnly": false,
+                     "title": "User"
+                  },
+                  "mb-group-header": {
+                     "description": "",
+                     "type": "string",
+                     "readOnly": false,
+                     "title": "Group"
+                  },
+                  "mb-admin-group-header": {
+                     "description": "",
+                     "type": "string",
+                     "readOnly": false,
+                     "title": "Admin groups"
+                  }
+               },
+               "required": []
+            }
+         },
+         "required": []
+      },
+      "environment": {
+         "type": "object",
+         "additionalProperties": false,
+         "ui": {
+            "component": "standard"
+         },
+         "name": "environment",
+         "title": "Environment",
+         "description": "",
+         "properties": {
+            "VAULT_HOST": {
+               "type": "string",
+               "maxLength": 100,
+               "minLength": 3,
+               "required": false,
+               "readOnly": true,
+               "title": "Vault host",
+               "default": "vault.service.paas.labs.demo.com"
+            },
+            "VAULT_PORT": {
+               "type": "integer",
+               "minimum": 1,
+               "required": false,
+               "readOnly": true,
+               "level": 1,
+               "title": "Vault port",
+               "default": 8200
+            }
+         },
+         "required": []
       }
    }
 };

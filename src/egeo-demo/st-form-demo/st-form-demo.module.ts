@@ -11,7 +11,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StDemoGeneratorModule, StFormModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StFormModule, StTextareaModule } from '@stratio/egeo';
 import { StFormDemoComponent } from './st-form-demo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       FormsModule,
       StFormModule,
       ReactiveFormsModule,
+      StTextareaModule,
       StDemoGeneratorModule.withComponents({ components: [StFormDemoComponent] })
    ],
    declarations: [StFormDemoComponent]

@@ -15,20 +15,18 @@ import { JSON_SCHEMA } from './json-schema';
 
 @Component({
    selector: 'st-form-demo',
-   templateUrl: 'st-form-demo.html'
+   templateUrl: 'st-form-demo.html',
+   styleUrls: ['./st-form-demo.component.scss']
 })
 export class StFormDemoComponent {
    public jsonSchema: any;
    public model: any = {  };
+   public schemaError: string;
 
    @ViewChild('formModel') public formModel: NgForm;
 
    constructor() {
       this.jsonSchema = JSON_SCHEMA;
-   }
-
-   showFormStatus(): void {
-      console.log(this.formModel.valid);
    }
 
    onChange(model: any): void {
@@ -40,6 +38,16 @@ export class StFormDemoComponent {
          this.formModel.control.disable();
       } else {
          this.formModel.control.enable();
+      }
+   }
+
+   onChangeSchema(jsonSchema: any): void {
+      try {
+         this.jsonSchema = JSON.parse(jsonSchema);
+         this.schemaError = undefined;
+      } catch(error) {
+         this.schemaError = error;
+         console.log(error);
       }
    }
 }
