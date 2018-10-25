@@ -13,7 +13,7 @@
 <section class="container-liquid demo-layout">
    <p class="introduction">Dynamic forms are designed to generate forms using a json schema as input where fields are
       defined</p>
-   <h1 class="title">Test it yourself</h1>
+   <h1 class="title">Test it by yourself</h1>
    <span class="separator"></span>
 
    <div class="row form-layout">
@@ -45,11 +45,12 @@
    <p *ngIf="formModel.invalid">Invalid</p>
 
 
-   <h1 class="title">Visual improvements</h1>
+   <h1 class="title">Visual section improvements</h1>
    <span class="separator"></span>
 
    <h2 class="subtitle">Section Switch</h2>
    <span class="separator"></span>
+   <p class="paragraph">This section can be used when it contains fields that depend on another one. When switch is disabled, only fields associated to it is sent.</p>
    <p class="code-demo">
      {{ {
       ui: {
@@ -60,6 +61,7 @@
 
    <h2 class="subtitle">Section Accordion</h2>
    <span class="separator"></span>
+   <p class="paragraph">This section has only visual effects and it displays all its fields hidden.</p>
 
    <p class="code-demo">
       {{ {
@@ -71,6 +73,7 @@
 
    <h2 class="subtitle">Optional Section</h2>
    <span class="separator"></span>
+   <p class="paragraph">This section has only visual effects and it displays all its fields hidden.</p>
 
    <p class="code-demo">
       {{ {
@@ -78,6 +81,27 @@
       component: 'show-more'
       }
       } | json }}
+   </p>
+
+   <h1 class="title">Visual field improvements</h1>
+   <span class="separator"></span>
+   <h2 class="subtitle">Show/Hide fields</h2>
+   <span class="separator"></span>
+   <p class="code-demo">
+      {{ {
+      ui: {
+      visible: {field_key1: 'field_value1', field_key2: 'field_value2'}
+      }
+      } | json }}
+   </p>
+   <h2 class="subtitle">Related fields</h2>
+   <span class="separator"></span>
+   <p class="code-demo">
+      {{ {
+      ui: {
+      relatedTo: 'field_key1'
+      }
+      }| json }}
    </p>
 </section>
 
