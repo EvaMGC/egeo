@@ -8,10 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
-import { JSON_SCHEMA } from './json-schema';
+import { Component } from '@angular/core';
+import { StHorizontalTab } from '@stratio/egeo';
 
 @Component({
    selector: 'st-form-demo',
@@ -19,35 +17,19 @@ import { JSON_SCHEMA } from './json-schema';
    styleUrls: ['./st-form-demo.component.scss']
 })
 export class StFormDemoComponent {
-   public jsonSchema: any;
-   public model: any = {  };
-   public schemaError: string;
+   public activeOption: StHorizontalTab;
 
-   @ViewChild('formModel') public formModel: NgForm;
+   public options: StHorizontalTab[] = [
+      {id: 'formEditor', text: 'Demo'},
+      {id: 'visualSectionImprovements', text: 'Visual Section improvements'},
+      {id: 'visualFieldImprovements', text: 'Visual Field improvements'}
+   ];
 
    constructor() {
-      this.jsonSchema = JSON_SCHEMA;
+      this.activeOption = this.options[0];
    }
 
-   onChange(model: any): void {
-      this.model = model;
-   }
-
-   changeFormStatus(): void {
-      if (this.formModel.control.enabled) {
-         this.formModel.control.disable();
-      } else {
-         this.formModel.control.enable();
-      }
-   }
-
-   onChangeSchema(jsonSchema: any): void {
-      try {
-         this.jsonSchema = JSON.parse(jsonSchema);
-         this.schemaError = undefined;
-      } catch(error) {
-         this.schemaError = error;
-         console.log(error);
-      }
+   public onChangeOption(selectedOption: StHorizontalTab): void {
+      this.activeOption = selectedOption;
    }
 }

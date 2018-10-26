@@ -1,4 +1,4 @@
-/**
+/*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -8,11 +8,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-@import '../../theme/constants/colors';
-@import '../../theme/constants/fonts';
+import { Component } from '@angular/core';
 
-.horizontal-tabs {
-   width: 100%;
-   display: block;
+
+@Component({
+   selector: 'st-visual-field-improvements-demo',
+   templateUrl: 'st-visual-field-improvements-editor-demo.html',
+   styleUrls: ['st-visual-field-improvements-demo.component.scss']
+})
+export class StVisualFieldImprovementsDemoComponent {
+
+
 }
-
