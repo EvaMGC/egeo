@@ -12,7 +12,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
 import { cloneDeep as _cloneDeep } from 'lodash';
-import { StDropDownMenuItem } from '@stratio/egeo';
+import { StDropDownMenuItem, StDropDownMenuGroup } from '@stratio/egeo';
 
 @Component({
    selector: 'st-tag-input-demo',
@@ -30,7 +30,8 @@ export class StTagInputDemoComponent implements OnInit {
       templateDriven: ['Tag Template Driven1', 'Tag Template Driven2'],
       templateDrivenRequired: [],
       templateDrivenDisabled: [],
-      templateDrivenAutocomplete: []
+      templateDrivenAutocomplete: [],
+      autoCompletedGroupList: []
    };
 
    public list: StDropDownMenuItem[] = [
@@ -48,7 +49,37 @@ export class StTagInputDemoComponent implements OnInit {
       { label: 'Vanuatu', value: 'VU' },
       { label: 'Venezuela', value: 'VE' }
    ];
-   public filteredlist: StDropDownMenuItem[] = [];
+   public filteredList: StDropDownMenuItem[] = [];
+   public groupList: StDropDownMenuGroup[] = [
+      <StDropDownMenuGroup> {title: 'Group1', items: [
+         {label: 'Option 1.1', value: 'option11'},
+         {label: 'Option 1.2', value: 'option12'}
+      ]},
+      <StDropDownMenuGroup> {title: 'Group2', items: [
+         {label: 'Option 2.1', value: 'option21'},
+         {label: 'Option 2.2', value: 'option22'},
+         {label: 'Option 2.3', value: 'option23'},
+         {label: 'Option 2.4', value: 'option24'}
+      ]},
+      <StDropDownMenuGroup> {title: 'Group3', items: [
+         {label: 'Option 3.1', value: 'option31'},
+         {label: 'Option 3.2', value: 'option32'}
+      ]},
+      <StDropDownMenuGroup> {title: 'Group4', items: [
+         {label: 'Option 4.1', value: 'option41'},
+         {label: 'Option 4.2', value: 'option42'},
+         {label: 'Option 4.3', value: 'option43'}
+      ]},
+      <StDropDownMenuGroup> {title: 'Group5', items: [
+         {label: 'Option 5.1', value: 'option51'},
+         {label: 'Option 5.2', value: 'option52'}
+      ]},
+      <StDropDownMenuGroup> {title: 'Group6', items: [
+         {label: 'Option 6.1', value: 'option61'},
+         {label: 'Option 6.2', value: 'option62'}
+      ]}
+   ];
+   public filteredGroupList: StDropDownMenuGroup[] = [];
 
    public reactiveForm: FormGroup; // our model driven form
    public forceReactiveValidations: boolean = false;
@@ -66,7 +97,8 @@ export class StTagInputDemoComponent implements OnInit {
          'tag-input-integer': [],
          'tag-input-reactive-required': [this.tags.reactiveRequired, Validators.required],
          'tag-input-reactive-disabled': [this.tags.reactiveDisabled],
-         'tag-input-reactive-autocomplete': [this.tags.reactiveDisabled]
+         'tag-input-reactive-autocomplete': [this.tags.reactiveDisabled],
+         'tag-input-auto-completed-group-list': [this.tags.autoCompletedGroupList, Validators.compose([Validators.minLength(2), Validators.maxLength(5)])],
       });
    }
 
@@ -105,6 +137,23 @@ export class StTagInputDemoComponent implements OnInit {
 
    onFilterList(event: any): void {
       let text: string = event.target.innerText;
-      this.filteredlist = text ? _cloneDeep(this.list.filter(country => country.label.toLowerCase().search(text.toLowerCase()) > -1)) : [];
+      this.filteredList = text ? _cloneDeep(this.list.filter(country => country.label.toLowerCase().search(text.toLowerCase()) > -1)) : [];
+   }
+
+   onFilterGroupList(event: any): void {
+      let text: string = event.target.innerText;
+      this.filteredGroupList = text ? _cloneDeep(this.groupList.filter(item => item.items.filter(_item => _item.label.toLowerCase().search(text.toLowerCase())) > -1)) : [];
+      console.log(this.filteredGroupList)
+   }
+
+   getGroupAutoCompletedErrorMessage(): string {
+      const currentValue = this.reactiveForm.controls['tag-input-auto-completed-group-list'].value;
+      if (currentValue.length < 2) {
+         return 'You have to enter two items at leas';
+      }
+      else if (currentValue.length > 5) {
+         return 'Only 5 items are allowed';
+      }
+      return null;
    }
 }

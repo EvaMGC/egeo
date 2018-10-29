@@ -1,4 +1,4 @@
-/**
+/*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -9,26 +9,12 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
- h1 {
-   font-family: 'Nunito Sans Bold';
-   font-size: 20px;
-   margin-bottom: 20px;
-   padding: 0;
-   line-height: 25px;
-   font-weight: lighter;
-}
+import { NgModule } from '@angular/core';
+import { StClickOutside } from './st-click-outside.directive';
 
-.separator {
-   display: block;
-   margin: 10px;
-   overflow: hidden;
-}
-
-button {
-   float: right;
-   margin-left: 10px;
-}
-
-.example {
-   padding-bottom: 20px;
-}
+@NgModule({
+   imports: [],
+   declarations: [StClickOutside],
+   exports: [StClickOutside]
+})
+export class StClickOutsideModule { }

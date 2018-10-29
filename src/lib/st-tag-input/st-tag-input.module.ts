@@ -16,9 +16,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
 import { StLabelModule } from '../st-label/st-label.module';
 import { StTagInputComponent } from './st-tag-input.component';
+import { StClickOutsideModule } from '../directives/st-click-outside/st-click-outside.module';
 
 @NgModule({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule, StLabelModule, StDropdownMenuModule],
+   imports: [CommonModule, FormsModule, ReactiveFormsModule, StLabelModule, StDropdownMenuModule, StClickOutsideModule],
    declarations: [StTagInputComponent],
    exports: [StTagInputComponent]
 })

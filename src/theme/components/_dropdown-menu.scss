@@ -12,8 +12,8 @@
  @import '../utils/forms';
 
  %select-dropdown-menu-title {
-    color: $action-secondary-06;
-    font-family: $egeo-nunito-sans-light;
+    color: $neutral-08;
+    font-family: $egeo-nunito-sans-bold;
     font-size: $egeo-font-size-xxsmall;
     line-height: $egeo-line-height-xxxsmall;
  }
@@ -41,9 +41,13 @@
        @extend %select-dropdown-menu-title;
        padding:13px 15px 2px;
        display: flex;
-       border-bottom: 1px solid $action-secondary-03;
     }
 
+    .st-dropdown-menu-parent {
+       span {
+          padding-left: 6px;
+       }
+    }
     .st-dropdown-menu-item {
        padding: 9px 15px;
        color: $action-secondary-07;

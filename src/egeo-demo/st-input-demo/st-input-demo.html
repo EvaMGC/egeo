@@ -29,7 +29,7 @@
       <st-input class="st-form-field" type="text" formControlName="disabledFieldWithValue"
                 placeholder="This field is disabled" label="Disabled field"></st-input>
 
-      <st-input class="st-form-field" type="text" formControlName="requiredField" placeholder="This field is required"
+      <st-input class="st-form-field" type="text" formControlName="requiredField" placeholder="This field is required" [forceValidations]="true"
                 [errors]="requiredError" label="Required field" contextualHelp="This is a required field"></st-input>
 
       <st-input class="st-form-field" type="text" formControlName="numberField"

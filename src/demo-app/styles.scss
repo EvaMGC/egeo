@@ -94,7 +94,7 @@ main {
       font-weight: 300;
       font-style: normal;
       font-stretch: normal;
-      line-height: $egeo-line-height-xsmall;
+      line-height: $egeo-line-height-xxxlarge;
       letter-spacing: normal;
       color: $neutral-13;
       height: 100px;
@@ -109,6 +109,19 @@ main {
       letter-spacing: normal;
       color: $neutral-13;
       padding: 26px 0;
+      display: inline-block;
+   }
+
+   .subtitle {
+      font-family: $egeo-nunito-sans;
+      font-size: $egeo-font-size-large;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: $egeo-line-height-large;
+      letter-spacing: normal;
+      color: $neutral-13;
+      padding: 26px 0;
+      display: inline-block;
    }
 
    .paragraph {

@@ -17,4 +17,4 @@ import { Component } from '@angular/core';
    styleUrls: ['st-visual-section-improvements-demo.component.scss']
 })
 export class StVisualSectionImprovementsDemoComponent {
-
+}
