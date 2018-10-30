@@ -11,8 +11,8 @@
 
 -->
 <section>
-   <h2 class="title">Show/Hide fields</h2>
-   <span class="separator"></span>
+   <h2 class="subtitle">Show/Hide fields</h2>
+   <p class="paragraph">Fields can be hidden or displayed dynamically according to the value of another field. Next, you can see an example to configure the conditions for which a field will be visible. Take into account that all conditions have to be fulfilled to display a field.</p>
    <p class="code-demo">
       {{ {
       ui: {
@@ -20,12 +20,13 @@
       }
       } | json }}
    </p>
-   <h2 class="title">Related fields</h2>
-   <span class="separator"></span>
+   <h2 class="subtitle">Related fields</h2>
+   <p class="paragraph">When there are some fields related with each other, they can be placed together in the same line. To place a field next to the previous one, you have to add this:</p>
+
    <p class="code-demo">
       {{ {
       ui: {
-      relatedTo: 'field_key1'
+      relatedTo: 'previous_field_key'
       }
       }| json }}
    </p>

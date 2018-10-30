@@ -257,9 +257,7 @@ describe('StTagInputComponent', () => {
          expect(comp.items[1]).toEqual(simpleTags[2]);
          expect(fixture.nativeElement.querySelectorAll('.icon-cross.remove-tag-button').length).toBe(simpleTags.length - 1);
       });
-
    });
-
 
    it('Should add tag when press enter, comma or tab with input text', () => {
       const id: string = 'test-id';
@@ -540,6 +538,11 @@ describe('StTagInputComponent', () => {
          expect(comp.items[comp.items.length - 1]).toEqual('New Tag');
          expect(comp.expandedMenu).toBeFalsy();
          expect(comp.hasAutocomplete).toBeFalsy();
+      });
+
+      it ('If number of chars before displaying the autocomplete list is 0, when user searches a text and adds a tag, ' +
+         'autocomplete list is displayed without being filtered', () => {
+
       });
    });
 

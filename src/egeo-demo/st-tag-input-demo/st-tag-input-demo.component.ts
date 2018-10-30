@@ -10,7 +10,6 @@
  */
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
-
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { StDropDownMenuItem, StDropDownMenuGroup } from '@stratio/egeo';
 
@@ -51,33 +50,45 @@ export class StTagInputDemoComponent implements OnInit {
    ];
    public filteredList: StDropDownMenuItem[] = [];
    public groupList: StDropDownMenuGroup[] = [
-      <StDropDownMenuGroup> {title: 'Group1', items: [
-         {label: 'Option 1.1', value: 'option11'},
-         {label: 'Option 1.2', value: 'option12'}
-      ]},
-      <StDropDownMenuGroup> {title: 'Group2', items: [
-         {label: 'Option 2.1', value: 'option21'},
-         {label: 'Option 2.2', value: 'option22'},
-         {label: 'Option 2.3', value: 'option23'},
-         {label: 'Option 2.4', value: 'option24'}
-      ]},
-      <StDropDownMenuGroup> {title: 'Group3', items: [
-         {label: 'Option 3.1', value: 'option31'},
-         {label: 'Option 3.2', value: 'option32'}
-      ]},
-      <StDropDownMenuGroup> {title: 'Group4', items: [
-         {label: 'Option 4.1', value: 'option41'},
-         {label: 'Option 4.2', value: 'option42'},
-         {label: 'Option 4.3', value: 'option43'}
-      ]},
-      <StDropDownMenuGroup> {title: 'Group5', items: [
-         {label: 'Option 5.1', value: 'option51'},
-         {label: 'Option 5.2', value: 'option52'}
-      ]},
-      <StDropDownMenuGroup> {title: 'Group6', items: [
-         {label: 'Option 6.1', value: 'option61'},
-         {label: 'Option 6.2', value: 'option62'}
-      ]}
+      <StDropDownMenuGroup> {
+         title: 'Group1', items: [
+            { label: 'Option 1.1', value: 'option11' },
+            { label: 'Option 1.2', value: 'option12' }
+         ]
+      },
+      <StDropDownMenuGroup> {
+         title: 'Group2', items: [
+            { label: 'Option 2.1', value: 'option21' },
+            { label: 'Option 2.2', value: 'option22' },
+            { label: 'Option 2.3', value: 'option23' },
+            { label: 'Option 2.4', value: 'option24' }
+         ]
+      },
+      <StDropDownMenuGroup> {
+         title: 'Group3', items: [
+            { label: 'Option 3.1', value: 'option31' },
+            { label: 'Option 3.2', value: 'option32' }
+         ]
+      },
+      <StDropDownMenuGroup> {
+         title: 'Group4', items: [
+            { label: 'Option 4.1', value: 'option41' },
+            { label: 'Option 4.2', value: 'option42' },
+            { label: 'Option 4.3', value: 'option43' }
+         ]
+      },
+      <StDropDownMenuGroup> {
+         title: 'Group5', items: [
+            { label: 'Option 5.1', value: 'option51' },
+            { label: 'Option 5.2', value: 'option52' }
+         ]
+      },
+      <StDropDownMenuGroup> {
+         title: 'Group6', items: [
+            { label: 'Option 6.1', value: 'option61' },
+            { label: 'Option 6.2', value: 'option62' }
+         ]
+      }
    ];
    public filteredGroupList: StDropDownMenuGroup[] = [];
 
@@ -88,7 +99,7 @@ export class StTagInputDemoComponent implements OnInit {
    public errorTemplateDriveMessage: string | null = null;
    public disabledReactive: boolean = true;
    public disabledTemplateDrive: boolean = true;
-   public pattern: any =  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+   public pattern: any = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
    constructor(private _fb: FormBuilder) {
       this.reactiveForm = _fb.group({
@@ -105,6 +116,7 @@ export class StTagInputDemoComponent implements OnInit {
    ngOnInit(): void {
       this.reactiveForm.valueChanges.subscribe(res => console.log('Reactive Form', res));
       this.templateDrivenForm.valueChanges.subscribe(res => console.log('Template Driven Form', res));
+      this.filteredGroupList = _cloneDeep(this.groupList);
    }
 
    onSubmitReactiveForm(): void {
@@ -137,13 +149,21 @@ export class StTagInputDemoComponent implements OnInit {
 
    onFilterList(event: any): void {
       let text: string = event.target.innerText;
-      this.filteredList = text ? _cloneDeep(this.list.filter(country => country.label.toLowerCase().search(text.toLowerCase()) > -1)) : [];
+      this.filteredList = text ? _cloneDeep(this.list.filter(country => country.label.toLowerCase().indexOf(text.toLowerCase()) !== -1)) : [];
    }
 
    onFilterGroupList(event: any): void {
       let text: string = event.target.innerText;
-      this.filteredGroupList = text ? _cloneDeep(this.groupList.filter(item => item.items.filter(_item => _item.label.toLowerCase().search(text.toLowerCase())) > -1)) : [];
-      console.log(this.filteredGroupList)
+      console.log('voy a buscar con ' + text);
+      this.filteredGroupList = _cloneDeep(this.groupList);
+      this.filteredGroupList = <StDropDownMenuGroup[]> this.filteredGroupList.filter(item => {
+         const result = item.items.filter(_item => {
+            return _item.label.toLowerCase().indexOf(text.toLowerCase()) !== -1;
+         });
+         item.items = result;
+         return result && result.length ? item : undefined;
+      });
+      console.log(this.filteredGroupList);
    }
 
    getGroupAutoCompletedErrorMessage(): string {

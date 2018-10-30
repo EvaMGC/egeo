@@ -11,13 +11,13 @@
 
 -->
 <section>
-   <h1 class="title">Test it by yourself</h1>
-   <span class="separator"></span>
+   <h1 class="title">Try it by yourself</h1>
+   <p class="paragraph">Dynamic forms are generating using a json schema to define its fields. Here you can try it making modifications on the json schema of the editor.</p>
 
    <div class="row form-layout">
       <p class="col-sm-12 col-lg-12 col-xs-12 schema-error">{{schemaError}}</p>
       <div class="col-sm-6 col-lg-6 col-xs-12">
-         <st-form [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel"
+         <st-form class="form" [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel"
                   [textFieldMaxWidth]="70">
          </st-form>
          <div class="button-toolbar">
@@ -27,20 +27,20 @@
          </div>
       </div>
 
-      <div class="col-sm-6 col-lg-6 col-xs-12">
+      <div class="col-sm-6 col-lg-6 col-xs-12 form-editor-container">
+         <h2 class="editor-title">JSON Schema</h2>
          <textarea class="form-editor" spellcheck="false" [ngClass]="{error: schemaError}" [ngModel]="jsonSchema | json"
                    (ngModelChange)="onChangeSchema($event)">
          </textarea>
       </div>
-
-      <div class="form-output">
-         <h2>Form Output</h2>
-         {{model | json}}
-         <h2>Form Validation</h2>
-         <p *ngIf="formModel.valid">Valid</p>
-         <p *ngIf="formModel.invalid">Invalid</p>
-      </div>
    </div>
 
+   <div class="form-output">
+      <h2>Form Output</h2>
+      {{model | json}}
+      <h2>Form Validation</h2>
+      <p *ngIf="formModel.valid">Valid</p>
+      <p *ngIf="formModel.invalid">Invalid</p>
+   </div>
 </section>
 

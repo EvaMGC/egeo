@@ -19,7 +19,7 @@
    line-height: $egeo-font-size-medium;
    letter-spacing: normal;
    color: $neutral-12;
-   padding: 26px 0;
+   padding: 26px 0 10px 0;
 }
 
 .code-demo {
@@ -27,4 +27,6 @@
    font-size: 14px;
    line-height: 1.6em;
    color: $neutral-10;
+   padding: 20px;
+   background-color: $neutral-01;
 }

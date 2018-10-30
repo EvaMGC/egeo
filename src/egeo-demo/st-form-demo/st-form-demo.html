@@ -14,7 +14,7 @@
    <p class="introduction">Dynamic forms are designed to generate forms using a json schema as input where fields are
       defined</p>
 
-   <st-horizontal-tabs [options]="options" [activeOption]="activeOption"
+   <st-horizontal-tabs class="horizontal-tabs" [options]="options" [activeOption]="activeOption"
                        (changedOption)="onChangeOption($event)"></st-horizontal-tabs>
    <st-form-editor-demo [hidden]="activeOption.id !== 'formEditor'"></st-form-editor-demo>
    <st-visual-section-improvements-demo

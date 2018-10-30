@@ -266,7 +266,17 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       if (!this._isDisabled) {
          this._focus = true;
          this._newElementInput.focus();
+         if (!this.charsToShowAutocompleteList) {
+            this._newElementInput.innerText = '';
+            const event: any = new Event('input', {
+               'bubbles': true,
+               'cancelable': true
+            });
+            event.data = '';
+            this._newElementInput.dispatchEvent( event);
+         }
          this.showAutocompleteMenu();
+
       }
       event.stopPropagation();
    }
@@ -285,6 +295,15 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          case 13: // Enter
             if (this.innerInputContent.length && this.isValidInput) {
                this.addTag(this.innerInputContent);
+               if (!this.charsToShowAutocompleteList) {
+                  this._newElementInput.innerText = '';
+                  const event: any = new Event('input', {
+                     'bubbles': true,
+                     'cancelable': true
+                  });
+                  event.data = '';
+                  this._newElementInput.dispatchEvent( event);
+               }
             }
             event.preventDefault();
             break;
@@ -397,6 +416,10 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    private deleteTag(index: number): void {
       this.items.splice(index, 1);
       this.onChange(this.items);
+
+      this._newElementInput.value = '';
+      this.innerInputContent = '';
+      this._newElementInput.dispatchEvent(new Event('input'));
    }
 
    private clearInput(): void {

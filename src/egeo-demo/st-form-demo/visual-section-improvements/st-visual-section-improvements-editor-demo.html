@@ -11,10 +11,9 @@
 
 -->
 <section>
-   <h2 class="title">Section Switch</h2>
-   <span class="separator"></span>
+   <h2 class="subtitle">Section Switch</h2>
    <p class="paragraph">This section can be used when it contains fields that depend on another one. When switch is
-      disabled, section fields are not added to the form output.</p>
+      disabled, only field associated to switch is added to the form output.</p>
    <p class="code-demo">
       {{ {
       ui: {
@@ -23,8 +22,7 @@
       } | json }}
    </p>
 
-   <h2 class="title">Section Accordion</h2>
-   <span class="separator"></span>
+   <h2 class="subtitle">Section Accordion</h2>
    <p class="paragraph">It displays all its fields collapsed by default and its name only is visible.
       This section has only visual effects and always section fields are added to the form output</p>
 
@@ -36,9 +34,8 @@
       } | json }}
    </p>
 
-   <h2 class="title">Optional Section</h2>
-   <span class="separator"></span>
-   <p class="paragraph">This section has only visual effects and it displays all its fields hidden by default.</p>
+   <h2 class="subtitle">Optional Section</h2>
+   <p class="paragraph">This type of section can be choose for fields which user does not need to modify them. This section has only visual effects and it displays all its fields hidden by default.</p>
 
    <p class="code-demo">
       {{ {
