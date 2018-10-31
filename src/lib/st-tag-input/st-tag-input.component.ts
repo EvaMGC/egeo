@@ -133,7 +133,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
                private _cd: ChangeDetectorRef) {
    }
 
-
    /** @input {boolean} [disabled=false] Disable the component. It is false by default */
    @Input()
    get disabled(): boolean {
@@ -266,7 +265,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       if (!this._isDisabled) {
          this._focus = true;
          this._newElementInput.focus();
-         this._forceResetAutCcompleteList();
+         this._forceResetAutoCompleteList();
          this.showAutocompleteMenu();
       }
       event.stopPropagation();
@@ -286,7 +285,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          case 13: // Enter
             if (this.innerInputContent.length && this.isValidInput) {
                this.addTag(this.innerInputContent);
-               this._forceResetAutCcompleteList();
+               this._forceResetAutoCompleteList();
             }
             event.preventDefault();
             break;
@@ -442,7 +441,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       }
    }
 
-   private _forceResetAutCcompleteList(): void {
+   private _forceResetAutoCompleteList(): void {
       if (!this.charsToShowAutocompleteList && this.withAutocomplete) {
          this._newElementInput.innerText = '';
          const event: any = new Event('input', {

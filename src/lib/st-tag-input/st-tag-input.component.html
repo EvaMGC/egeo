@@ -20,7 +20,7 @@
              [ngClass]="{ 'active': hasFocus, 'error': hasError }">{{label}}</label>
 
       <div #inputElement class="st-tag-input__input st-input"
-           [attr.disabled]="disableValue" (clickOutside)="onClickOutside()"
+           [attr.disabled]="disableValue" (clickOutside)="onClickOutside($event)"
            [ngClass]="{ 'active': hasFocus, 'error': hasError }" (click)="onInputFocusIn($event)">
 
          <span *ngIf="hasPlaceholder" class="st-tag-input__placeholder" [attr.disabled]="disableValue">{{placeholder}}</span>
