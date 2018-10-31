@@ -8,6 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
  h1 {
    font-family: 'Nunito Sans Bold';
    font-size: 20px;
@@ -26,4 +27,8 @@
 button {
    float: right;
    margin-left: 10px;
+}
+
+.example {
+   padding-bottom: 20px;
 }

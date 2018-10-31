@@ -13,15 +13,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { cloneDeep as _cloneDeep } from 'lodash';
-
 import { StTagInputComponent } from './st-tag-input.component';
 import { StTagInputModule } from './st-tag-input.module';
 import { StLabelModule } from '../st-label/st-label.module';
+import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { StClickOutsideModule } from '../directives/st-click-outside/st-click-outside.module';
 
 const simpleTags: string[] = ['Example 1', 'Example 2', 'Example 3'];
 
 // tslint:disable-next-line:max-line-length
-const ipFormat: any =  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+const ipFormat: any = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+const fakeInfoMessage = 'This is an informative message';
 
 describe('StTagInputComponent', () => {
    let comp: StTagInputComponent;
@@ -29,10 +31,13 @@ describe('StTagInputComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [FormsModule, ReactiveFormsModule, StLabelModule],
+         imports: [FormsModule, ReactiveFormsModule, StLabelModule, StClickOutsideModule],
          declarations: [StTagInputComponent],
          schemas: [NO_ERRORS_SCHEMA]
       })
+         .overrideComponent(StTagInputComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
@@ -209,7 +214,10 @@ describe('StTagInputComponent', () => {
 
       const tag: DebugElement = fixture.debugElement.query(By.css('.tag-item'));
       tag.nativeElement.focus();
-      tag.triggerEventHandler('keydown', { keyCode: 46, preventDefault: () => {} });
+      tag.triggerEventHandler('keydown', {
+         keyCode: 46, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.hasFocus).toBeTruthy();
@@ -218,12 +226,42 @@ describe('StTagInputComponent', () => {
 
       const newTag: DebugElement = fixture.debugElement.query(By.css('.tag-item'));
       newTag.nativeElement.focus();
-      newTag.triggerEventHandler('keydown', { keyCode: 8, preventDefault: () => {} });
+      newTag.triggerEventHandler('keydown', {
+         keyCode: 8, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.hasFocus).toBeTruthy();
       expect(comp.tagSelected).toBeNull();
       expect(comp.items.length).toEqual(simpleTags.length - 2);
+   });
+
+   describe('Should remove tag when user clicks on the remove button of a tag', () => {
+      it('if input tag is disabled, remove button is not displayed and tag can not be removed', () => {
+         comp.items = _cloneDeep(simpleTags);
+         comp.disabled = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.icon-cross.remove-tag-button')).toBeNull();
+      });
+
+      it('if input tag is not disabled, remove button is displayed and tag is removed when user clicks on it', () => {
+         comp.items = _cloneDeep(simpleTags);
+         comp.disabled = false;
+         fixture.detectChanges();
+
+         const removeButtons = fixture.nativeElement.querySelectorAll('.icon-cross.remove-tag-button');
+
+         expect(removeButtons.length).toBe(simpleTags.length);
+
+         removeButtons[1].click();
+         fixture.detectChanges();
+
+         expect(comp.items.length).toBe(simpleTags.length - 1);
+         expect(comp.items[1]).toEqual(simpleTags[2]);
+         expect(fixture.nativeElement.querySelectorAll('.icon-cross.remove-tag-button').length).toBe(simpleTags.length - 1);
+      });
    });
 
    it('Should add tag when press enter, comma or tab with input text', () => {
@@ -238,7 +276,10 @@ describe('StTagInputComponent', () => {
       expect(comp.isValidInput).toBeTruthy();
 
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 188, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(1);
@@ -246,7 +287,10 @@ describe('StTagInputComponent', () => {
       expect(comp.innerInputContent).toEqual('');
 
       comp.innerInputContent = 'New Tag 2';
-      input.triggerEventHandler('keydown', { keyCode: 13, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 13, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(2);
@@ -254,7 +298,10 @@ describe('StTagInputComponent', () => {
       expect(comp.innerInputContent).toEqual('');
 
       comp.innerInputContent = 'New Tag 3';
-      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 9, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(3);
@@ -274,21 +321,30 @@ describe('StTagInputComponent', () => {
 
       comp.innerInputContent = simpleTags[0];
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 188, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(simpleTags.length);
       expect(comp.isValidInput).toBeFalsy();
 
       comp.innerInputContent = simpleTags[1];
-      input.triggerEventHandler('keydown', { keyCode: 13, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 13, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(simpleTags.length);
       expect(comp.isValidInput).toBeFalsy();
 
       comp.innerInputContent = simpleTags[2];
-      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 9, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.items.length).toEqual(simpleTags.length);
@@ -329,7 +385,10 @@ describe('StTagInputComponent', () => {
       expect(comp.innerInputContent).not.toEqual('');
 
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 46, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 46, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.innerInputContent).toEqual('');
@@ -348,14 +407,20 @@ describe('StTagInputComponent', () => {
       const container: HTMLLabelElement = fixture.debugElement.query(By.css('.st-input')).nativeElement;
       container.click();
       const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 9, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.hasFocus).toBeTruthy();
       expect(comp.innerInputContent).toEqual('');
       comp.innerInputContent = 'New Tag';
 
-      input.triggerEventHandler('keydown', { keyCode: 9, preventDefault: () => {} });
+      input.triggerEventHandler('keydown', {
+         keyCode: 9, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
       expect(comp.innerInputContent).toBe('');
@@ -409,77 +474,238 @@ describe('StTagInputComponent', () => {
       expect(comp.tagSelected).toBeNull();
    });
 
-   it('Should display autocomplete list with autocomplete', () => {
-      const id: string = 'test-id';
-      (fixture.elementRef.nativeElement as HTMLElement).id = id;
-      comp.label = 'Test';
-      comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
-      comp.withAutocomplete = true;
+   it('Should be printed as invalid if it has an error message and it is not pristine', () => {
+      comp.isPristine = true;
+      comp.errorMessage = 'This is a fake error message';
       fixture.detectChanges();
 
-      expect(comp.expandedMenu).toBeFalsy();
-      expect(comp.hasAutocomplete).toBeFalsy();
+      expect(fixture.nativeElement.querySelector('.st-input-error-message')).toBeNull();
+      expect(fixture.nativeElement.querySelector('.st-tag-input__input').classList).not.toContain('error');
 
-      comp.onInputText('New Tag');
-      comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }, { value: '2', label: '2' }];
+      comp.isPristine = false;
       fixture.detectChanges();
 
-      expect(comp.expandedMenu).toBeTruthy();
-      expect(comp.hasAutocomplete).toBeTruthy();
-
-      comp.onInputText('');
-      fixture.detectChanges();
-
-      expect(comp.expandedMenu).toBeFalsy();
-      expect(comp.hasAutocomplete).toBeFalsy();
+      expect(fixture.nativeElement.querySelector('.st-input-error-message')).not.toBeNull();
+      expect(fixture.nativeElement.querySelector('.st-tag-input__input').classList).toContain('error');
    });
 
-   it('Should add tag from autocomplete list ', () => {
-      const id: string = 'test-id';
-      (fixture.elementRef.nativeElement as HTMLElement).id = id;
-      comp.label = 'Test';
-      comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
-      comp.withAutocomplete = true;
-      comp.items = _cloneDeep(simpleTags);
-      fixture.detectChanges();
+   describe('It should be able to active the autocomplete function', () => {
+      it('Should display autocomplete list with autocomplete if it is active and after user has typed the required number of characters', () => {
+         const id: string = 'test-id';
+         (fixture.elementRef.nativeElement as HTMLElement).id = id;
+         comp.label = 'Test';
+         comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
+         comp.withAutocomplete = true;
+         fixture.detectChanges();
 
-      expect(comp.items.length).toEqual(simpleTags.length);
+         expect(comp.expandedMenu).toBeFalsy();
+         expect(comp.hasAutocomplete).toBeFalsy();
 
-      comp.onListSelect(comp.autocompleteList[0]);
-      fixture.detectChanges();
+         comp.autocompleteList = [{ value: 'first', label: 'first' }, { value: 'second', label: 'second' },
+            { value: 'thrid', label: 'thrid' }, { value: 'fourth', label: 'fourth' }, {
+               value: 'fifth',
+               label: 'fifth'
+            }];
 
-      expect(comp.items.length).toEqual(simpleTags.length + 1);
-      expect(comp.items[comp.items.length - 1]).toEqual('1');
+         comp.charsToShowAutocompleteList = 3;
+         comp.onInputText('fo');
+         fixture.detectChanges();
+
+         expect(comp.expandedMenu).toBeFalsy();
+         expect(comp.hasAutocomplete).toBeFalsy();
+
+         comp.onInputText('fourth');
+         fixture.detectChanges();
+
+         expect(comp.expandedMenu).toBeTruthy();
+         expect(comp.hasAutocomplete).toBeTruthy();
+
+         comp.onInputText('');
+         fixture.detectChanges();
+
+         expect(comp.expandedMenu).toBeFalsy();
+         expect(comp.hasAutocomplete).toBeFalsy();
+      });
+
+      it('Should add tag from autocomplete list ', () => {
+         const id: string = 'test-id';
+         (fixture.elementRef.nativeElement as HTMLElement).id = id;
+         comp.label = 'Test';
+         comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
+         comp.withAutocomplete = true;
+         comp.items = _cloneDeep(simpleTags);
+         fixture.detectChanges();
+
+         expect(comp.items.length).toEqual(simpleTags.length);
+
+         comp.onListSelect(<StDropDownMenuItem> comp.autocompleteList[0]);
+         fixture.detectChanges();
+
+         expect(comp.items.length).toEqual(simpleTags.length + 1);
+         expect(comp.items[comp.items.length - 1]).toEqual('1');
+      });
+
+      it('Should add tag when click outside with autocomplete list ', () => {
+         const id: string = 'test-id';
+         (fixture.elementRef.nativeElement as HTMLElement).id = id;
+         comp.label = 'Test';
+         comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
+         comp.withAutocomplete = true;
+         comp.items = _cloneDeep(simpleTags);
+         fixture.detectChanges();
+
+         expect(comp.items.length).toEqual(simpleTags.length);
+         expect(comp.expandedMenu).toBeFalsy();
+         expect(comp.hasAutocomplete).toBeFalsy();
+
+         comp.onInputText('New Tag');
+         fixture.detectChanges();
+
+         expect(comp.expandedMenu).toBeTruthy();
+         expect(comp.hasAutocomplete).toBeTruthy();
+
+         let div = document.createElement('div');
+         document.body.appendChild(div);
+         div.click();
+         fixture.detectChanges();
+
+         expect(comp.items.length).toEqual(simpleTags.length + 1);
+         expect(comp.items[comp.items.length - 1]).toEqual('New Tag');
+         expect(comp.expandedMenu).toBeFalsy();
+         expect(comp.hasAutocomplete).toBeFalsy();
+      });
+
+      it('If number of chars before displaying the autocomplete list is 0, when user searches a text and adds a tag, ' +
+         'input event is emitted to force to display the autocomplete list reset', () => {
+         comp.charsToShowAutocompleteList = 0;
+         comp.withAutocomplete = true;
+         comp.innerInputContent = 'aa';
+         fixture.detectChanges();
+
+         const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+         spyOn(comp.newElementInput.nativeElement, 'dispatchEvent').and.callThrough();
+
+         input.triggerEventHandler('keydown', {
+            keyCode: 188, preventDefault: () => {
+            }
+         });
+         fixture.detectChanges();
+
+         const inputEvent = comp.newElementInput.nativeElement.dispatchEvent.calls.mostRecent().args[0];
+         expect(comp.newElementInput.nativeElement.innerText).toEqual('');
+         expect(comp.newElementInput.nativeElement.dispatchEvent).toHaveBeenCalled();
+         expect(inputEvent.data).toEqual('');
+         expect(inputEvent.bubbles).toEqual(true);
+      });
+
+      it('If number of chars before displaying the autocomplete list is 0, when user clicks on input tag ' +
+         'input event is emitted to force to display the autocomplete list reset', () => {
+         comp.charsToShowAutocompleteList = 0;
+         comp.withAutocomplete = true;
+         comp.innerInputContent = 'aa';
+         fixture.detectChanges();
+
+         spyOn(comp.newElementInput.nativeElement, 'dispatchEvent').and.callThrough();
+         fixture.nativeElement.querySelector('.st-tag-input__text.inner-input').click();
+         fixture.detectChanges();
+
+         expect(comp.newElementInput.nativeElement.dispatchEvent).toHaveBeenCalled();
+         const inputEvent = comp.newElementInput.nativeElement.dispatchEvent.calls.mostRecent().args[0];
+         expect(comp.newElementInput.nativeElement.innerText).toEqual('');
+         expect(inputEvent.data).toEqual('');
+         expect(inputEvent.bubbles).toEqual(true);
+      });
    });
 
-   it('Should add tag when click outside with autocomplete list ', () => {
-      const id: string = 'test-id';
-      (fixture.elementRef.nativeElement as HTMLElement).id = id;
-      comp.label = 'Test';
-      comp.autocompleteList = [{ value: '1', label: '1' }, { value: '2', label: '2' }];
-      comp.withAutocomplete = true;
-      comp.items = _cloneDeep(simpleTags);
+   describe('Should be able to be configured to allow free text and not', () => {
+
+      it('by default, it allows free text', () => {
+         expect(comp.allowFreeText).toBeTruthy();
+      });
+
+      it('if it allows free text, user can clicks on input an types something', () => {
+         comp.allowFreeText = true;
+         comp.items = [];
+         fixture.detectChanges();
+
+         comp.innerInputContent = 'fake value';
+         const input = fixture.debugElement.query(By.css('.st-tag-input__text.inner-input'));
+         const enterKeyDownEventObj = {
+            keyCode: 13, preventDefault: () => {
+            }
+         };
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+
+         expect(comp.items[comp.items.length - 1]).toEqual('fake value');
+
+         comp.allowFreeText = false;
+         comp.items = [];
+
+         fixture.detectChanges();
+
+         input.triggerEventHandler('keydown', enterKeyDownEventObj);
+         fixture.detectChanges();
+
+         expect(comp.items.length).toBe(0);
+      });
+   });
+
+   describe('Should be able to display an informative message', () => {
+      it('it is displayed by default if item list is empty when it is initialized', () => {
+         comp.infoMessage = fakeInfoMessage;
+
+         comp.writeValue(_cloneDeep(simpleTags));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.info-message')).toBeNull();
+      });
+
+      it('it is displayed (if it exists) until user adds a tag', () => {
+         comp.infoMessage = undefined;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.info-message')).toBeNull();
+
+         comp.infoMessage = fakeInfoMessage;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.info-message')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.info-message').innerHTML).toEqual(fakeInfoMessage);
+
+         comp.innerInputContent = 'New tag';
+         const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+         input.triggerEventHandler('keydown', {
+            keyCode: 9, preventDefault: () => {
+            }
+         });
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.info-message')).toBeNull();
+      });
+   });
+
+   it('it should be able to display an informative message (if it exists) until user interacts with tag input and ' +
+      'if model is empty when tag input is initialized', () => {
+      comp.infoMessage = undefined;
       fixture.detectChanges();
 
-      expect(comp.items.length).toEqual(simpleTags.length);
-      expect(comp.expandedMenu).toBeFalsy();
-      expect(comp.hasAutocomplete).toBeFalsy();
+      expect(fixture.nativeElement.querySelector('.info-message')).toBeNull();
 
-      comp.onInputText('New Tag');
+      comp.infoMessage = fakeInfoMessage;
       fixture.detectChanges();
 
-      expect(comp.expandedMenu).toBeTruthy();
-      expect(comp.hasAutocomplete).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('.info-message').innerHTML).toEqual(fakeInfoMessage);
 
-      let div = document.createElement('div');
-      document.body.appendChild(div);
-      div.click();
+      comp.innerInputContent = 'New tag';
+      const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
+      input.triggerEventHandler('keydown', {
+         keyCode: 9, preventDefault: () => {
+         }
+      });
       fixture.detectChanges();
 
-      expect(comp.items.length).toEqual(simpleTags.length + 1);
-      expect(comp.items[comp.items.length - 1]).toEqual('New Tag');
-      expect(comp.expandedMenu).toBeFalsy();
-      expect(comp.hasAutocomplete).toBeFalsy();
+      expect(fixture.nativeElement.querySelector('.info-message')).toBeNull();
+
    });
 
    describe('It should be able to configure the type of its items', () => {
@@ -489,7 +715,10 @@ describe('StTagInputComponent', () => {
       beforeEach(() => {
          fixture.detectChanges();
          input = fixture.debugElement.query(By.css('.st-tag-input__text.inner-input'));
-         enterKeyDownEventObj = {keyCode: 13, preventDefault: () => {}};
+         enterKeyDownEventObj = {
+            keyCode: 13, preventDefault: () => {
+            }
+         };
       });
 
       it('by default type of items is text', () => {
@@ -613,9 +842,13 @@ describe('StTagInputComponent', () => {
 
       beforeEach(async(() => {
          TestBed.configureTestingModule({
-            imports: [FormsModule, ReactiveFormsModule, StTagInputModule],
+            imports: [FormsModule, ReactiveFormsModule, StTagInputModule, StClickOutsideModule],
             declarations: [StTagInputTestReactiveComponent]
-         }).compileComponents();  // compile template and css
+         })
+            .overrideComponent(StTagInputComponent, {
+               set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();  // compile template and css
       }));
 
       beforeEach(() => {
@@ -638,6 +871,18 @@ describe('StTagInputComponent', () => {
          expect(compTagInput.items).toEqual(simpleTags);
       });
 
+      it('Should hide informative message if formControl is changed from outside', () => {
+         compTagInput.infoMessage = fakeInfoMessage;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.info-message')).not.toBeNull();
+
+         comp.reactiveForm.get('tags').setValue(simpleTags);
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.info-message')).toBeNull();
+      });
+
       it('Should change model when add tag', () => {
          const responseFunction = jasmine.createSpy('response');
          comp.reactiveForm.get('tags').valueChanges.subscribe(responseFunction);
@@ -650,7 +895,10 @@ describe('StTagInputComponent', () => {
          fixture.detectChanges();
 
          const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-         input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+         input.triggerEventHandler('keydown', {
+            keyCode: 188, preventDefault: () => {
+            }
+         });
          fixture.detectChanges();
 
          expect(compTagInput.items.length).toEqual(1);
@@ -673,7 +921,7 @@ describe('StTagInputComponent', () => {
          expect(comp.reactiveForm.valid).toBeTruthy();
       });
 
-      it ('if regular expression is introduced as input, only values that match it will be valid', () => {
+      it('if regular expression is introduced as input, only values that match it will be valid', () => {
          compTagInput.type = 'text';
          compTagInput.regularExpression = ipFormat;
          compTagInput.ngOnInit();
@@ -683,7 +931,10 @@ describe('StTagInputComponent', () => {
          fixture.detectChanges();
 
          const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-         input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+         input.triggerEventHandler('keydown', {
+            keyCode: 188, preventDefault: () => {
+            }
+         });
          fixture.detectChanges();
 
          expect(compTagInput.items.length).toEqual(0);
@@ -691,7 +942,10 @@ describe('StTagInputComponent', () => {
          compTagInput.innerInputContent = '192.168.1.1';
          fixture.detectChanges();
 
-         input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+         input.triggerEventHandler('keydown', {
+            keyCode: 188, preventDefault: () => {
+            }
+         });
          fixture.detectChanges();
 
          expect(compTagInput.items.length).toEqual(1);
@@ -709,7 +963,10 @@ describe('StTagInputComponent', () => {
             fixture.detectChanges();
 
             const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
             fixture.detectChanges();
 
             expect(compTagInput.items.length).toEqual(0);
@@ -717,7 +974,10 @@ describe('StTagInputComponent', () => {
             compTagInput.innerInputContent = '34.56fg';
             fixture.detectChanges();
 
-            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
             fixture.detectChanges();
 
             expect(compTagInput.items.length).toEqual(0);
@@ -725,14 +985,17 @@ describe('StTagInputComponent', () => {
             compTagInput.innerInputContent = '34.56';
             fixture.detectChanges();
 
-            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
             fixture.detectChanges();
 
             expect(compTagInput.items.length).toEqual(1);
             expect(compTagInput.items[0]).toEqual(34.56);
          });
 
-         it ('if form control has invalid values, only will be added the valid numbers', () => {
+         it('if form control has invalid values, only will be added the valid numbers', () => {
             (<any> comp.reactiveForm.controls).tags.setValue(['text', 2, 6.67]);
             fixture.detectChanges();
 
@@ -796,7 +1059,7 @@ describe('StTagInputComponent', () => {
             expect(compTagInput.items[0]).toEqual(56);
          });
 
-         it ('if form control has invalid values, only will be added the valid integers', () => {
+         it('if form control has invalid values, only will be added the valid integers', () => {
             (<any> comp.reactiveForm.controls).tags.setValue(['text', 78, 6]);
             fixture.detectChanges();
 
@@ -804,6 +1067,7 @@ describe('StTagInputComponent', () => {
             expect(compTagInput.items).toEqual([78, 6]);
          });
       });
+
    });
 });
 
@@ -882,7 +1146,10 @@ describe('StTagInputComponent', () => {
             fixture.detectChanges();
 
             const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-            input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+            input.triggerEventHandler('keydown', {
+               keyCode: 188, preventDefault: () => {
+               }
+            });
             fixture.detectChanges();
 
             expect(compTagInput.items.length).toEqual(1);
@@ -918,14 +1185,20 @@ describe('StTagInputComponent', () => {
                fixture.detectChanges();
 
                const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
                expect(compTagInput.items.length).toEqual(1);
 
                compTagInput.innerInputContent = 'new tag 2';
                fixture.detectChanges();
 
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
 
                expect(compTagInput.items.length).toEqual(2);
@@ -941,14 +1214,20 @@ describe('StTagInputComponent', () => {
                fixture.detectChanges();
 
                const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
                expect(compTagInput.items.length).toEqual(1);
 
                compTagInput.innerInputContent = 'forbidden value';
                fixture.detectChanges();
 
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
 
                expect(compTagInput.items.length).toEqual(1); // is not added the forbidden value
@@ -967,14 +1246,20 @@ describe('StTagInputComponent', () => {
                fixture.detectChanges();
 
                const input: DebugElement = fixture.debugElement.query(By.css('.inner-input'));
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
                expect(compTagInput.items.length).toEqual(1);
 
                compTagInput.innerInputContent = 'invalid ip';
                fixture.detectChanges();
 
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
 
                expect(compTagInput.items.length).toEqual(1);
@@ -982,7 +1267,10 @@ describe('StTagInputComponent', () => {
                compTagInput.innerInputContent = '192.168.1.1';
                fixture.detectChanges();
 
-               input.triggerEventHandler('keydown', { keyCode: 188, preventDefault: () => {} });
+               input.triggerEventHandler('keydown', {
+                  keyCode: 188, preventDefault: () => {
+                  }
+               });
                fixture.detectChanges();
 
                expect(compTagInput.items.length).toEqual(2);

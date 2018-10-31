@@ -2,7 +2,11 @@
 
 ## 13.4.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-tag-input: Allow to be configured to display an option list without typing anything 
+* st-tag-input: Allow to be configured to allow or avoid to type a free text
+
 
 ## 13.3.0 (October 30, 2018)
 

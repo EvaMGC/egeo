@@ -86,3 +86,73 @@ main {
    margin-bottom: 100px;
 }
 
+.demo-layout {
+
+   .introduction {
+      font-family: $egeo-nunito-sans;
+      font-size: 25px;
+      font-weight: 300;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: $egeo-line-height-xxxlarge;
+      letter-spacing: normal;
+      color: $neutral-13;
+      height: 100px;
+   }
+
+   .title {
+      font-family: $egeo-nunito-sans-bold;
+      font-size: $egeo-font-size-xlarge;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: $egeo-line-height-xlarge;
+      letter-spacing: normal;
+      color: $neutral-13;
+      padding: 26px 0;
+      display: inline-block;
+   }
+
+   .subtitle {
+      font-family: $egeo-nunito-sans;
+      font-size: $egeo-font-size-large;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: $egeo-line-height-large;
+      letter-spacing: normal;
+      color: $neutral-13;
+      padding: 26px 0;
+      display: inline-block;
+   }
+
+   .paragraph {
+      font-family: $egeo-nunito-sans;
+      font-size: $egeo-font-size-medium;
+      font-weight: 300;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: $egeo-line-height-medium;
+      letter-spacing: normal;
+      color: $neutral-13;
+      padding-bottom: 20px;
+   }
+
+   .separator {
+      display: block;
+      width: 75px;
+      height: 1px;
+      background-color: $brand;
+      margin-bottom: 30px;
+   }
+
+   .list {
+      font-family: $egeo-nunito-sans;
+      font-size: $egeo-font-size-small;
+      line-height: $egeo-line-height-large;
+      color: $neutral-11;
+      padding-left: 25px;
+   }
+
+}
+
+
+

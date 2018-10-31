@@ -33,6 +33,9 @@
 
       &.active {
          border-color: $input-field-onfocus;
+         .remove-tag-button {
+            color: $neutral-12;
+         }
       }
 
       &[disabled] {
@@ -83,6 +86,28 @@
          margin-top: -1px;
          border-top-left-radius: 0;
          border-top-right-radius: 0;
+      }
+   }
+
+   .info-message {
+      font-family: $egeo-nunito-sans;
+      font-size: $egeo-font-size-xxsmall;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: $egeo-line-height-xxsmall;
+      letter-spacing: normal;
+      color: $neutral-10;
+   }
+
+   .remove-tag-button {
+      font-size: $egeo-font-size-xxxsmall;
+      line-height: $egeo-line-height-xxxsmall;
+      color: $action-secondary-05;
+      margin-left: 10px;
+      cursor: pointer;
+      &:hover {
+         color: $neutral-13;
       }
    }
 }

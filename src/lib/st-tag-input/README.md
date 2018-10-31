@@ -4,18 +4,21 @@
 
 ## Inputs
 
-| Property          | Type               | Req   | Description                                                                                                           | Default |
-| ----------------- | ------------------ | ----- | --------------------------------------------------------------------------------------------------------------------- | ------- |
-| label             | String \| null     | False | Label to show over the input. It is empty by default                                                                  | null    |
-| tooltip           | String \| null     | False | The tooltip to show  over the label. It is empty by default                                                           | null    |
-| placeholder       | String \| null     | False | The text that appears as placeholder of the input. It is empty by default                                             | null    |
-| errorMessage      | String \| null     | False | Error message to show. It is empty by default                                                                         | null    |
-| type              | String \| null     | False | Type of the items                                                                                                     | null    |
-| withAutocomplete  | Boolean            | False | Enable autocomplete feature. It is false by default                                                                   | false   |
-| autocompleteList  | StDropDownMenuItem | False | List to be used for autocomplete feature. It is empty by default                                                      | Array() |
-| forbiddenValues   | String[]           | False | A list of values that user can not type and if he types one of them,tag input will be invalid. It is empty by default | Array() |
-| regularExpression | String             | False | Regular expression to validate values. It is null by default                                                          |         |
-| disabled          | Boolean            | False | Disable the component. It is false by default                                                                         | false   |
+| Property                    | Type                                          | Req   | Description                                                                                                           | Default |
+| --------------------------- | --------------------------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------- | ------- |
+| label                       | String \| null                                | False | Label to show over the input. It is empty by default                                                                  | null    |
+| tooltip                     | String \| null                                | False | The tooltip to show  over the label. It is empty by default                                                           | null    |
+| placeholder                 | String \| null                                | False | The text that appears as placeholder of the input. It is empty by default                                             | null    |
+| errorMessage                | String \| null                                | False | Error message to show. It is empty by default                                                                         | null    |
+| type                        | String \| null                                | False | Type of the items                                                                                                     | null    |
+| withAutocomplete            | Boolean                                       | False | Enable autocomplete feature. It is false by default                                                                   | false   |
+| autocompleteList            | (StDropDownMenuItem \| StDropDownMenuGroup)[] | False | List to be used for autocomplete feature. It is empty by default                                                      | Array() |
+| charsToShowAutocompleteList | Boolean                                       | False | List to be used for autocomplete feature. It is empty by default                                                      | Array() |
+| allowFreeText               | Boolean                                       | False | Boolean to allow user to type a free text or not                                                                      | true    |
+| infoMessage                 | String                                        | False | Message used to inform user about what values he has to introduce                                                     |         |
+| forbiddenValues             | String[]                                      | False | A list of values that user can not type and if he types one of them,tag input will be invalid. It is empty by default | Array() |
+| regularExpression           | String                                        | False | Regular expression to validate values. It is null by default                                                          |         |
+| disabled                    | Boolean                                       | False | Disable the component. It is false by default                                                                         | false   |
 
 ## Example
 

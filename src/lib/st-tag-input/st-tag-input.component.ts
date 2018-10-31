@@ -20,11 +20,11 @@ import {
    ViewChild,
    ElementRef,
    SimpleChanges,
-   HostBinding,
-   HostListener
+   HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
+
+import { StDropDownMenuItem, StDropDownMenuGroup } from '../st-dropdown-menu/st-dropdown-menu.interface';
 
 /**
  * @description {Component} Tag Input
@@ -85,7 +85,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    /** @input {string | null} [tooltip=null] The tooltip to show  over the label. It is empty by default */
    @Input() tooltip: string | null = null;
    /** @input {string | null} [placeholder=null] The text that appears as placeholder of the input. It is empty by default */
-   @Input() placeholder: string | null = null; // TODO
+   @Input() placeholder: string | null = null;
    /** @input {string | null} [errorMessage=null] Error message to show. It is empty by default */
    @Input() errorMessage: string | null = null;
    /** @input {string | null} [type=null] Type of the items */
@@ -93,8 +93,14 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    /** @input {boolean} [withAutocomplete=false] Enable autocomplete feature. It is false by default */
    @Input() withAutocomplete: boolean = false;
-   /** @input {StDropDownMenuItem} [autocompleteList=Array()] List to be used for autocomplete feature. It is empty by default */
-   @Input() autocompleteList: StDropDownMenuItem[] = [];
+   /** @input {(StDropDownMenuItem | StDropDownMenuGroup)[]} [autocompleteList=Array()] List to be used for autocomplete feature. It is empty by default */
+   @Input() autocompleteList: (StDropDownMenuItem | StDropDownMenuGroup)[] = [];
+   /** @input {boolean} [charsToShowAutocompleteList=Array()] List to be used for autocomplete feature. It is empty by default */
+   @Input() charsToShowAutocompleteList: number = 1;
+   /** @input {boolean} [allowFreeText=true] Boolean to allow user to type a free text or not */
+   @Input() allowFreeText: boolean = true;
+   /** @input {string} [infoMessage=] Message used to inform user about what values he has to introduce */
+   @Input() infoMessage: string;
 
    /** @input {string[]} [forbiddenValues=Array()] A list of values that user can not type and if he types one of them,
     * tag input will be invalid. It is empty by default
@@ -109,6 +115,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    public expandedMenu: boolean = false;
    public items: any[] = [];
    public innerInputContent: string = '';
+   public isPristine: boolean = true;
 
    private _focus: boolean = false;
    private _isDisabled: boolean = false;
@@ -118,6 +125,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    onChange = (_: any) => {
    }
+
    onTouched = () => {
    }
 
@@ -125,8 +133,13 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
                private _cd: ChangeDetectorRef) {
    }
 
+
    /** @input {boolean} [disabled=false] Disable the component. It is false by default */
    @Input()
+   get disabled(): boolean {
+      return this._isDisabled;
+   }
+
    set disabled(value: boolean) {
       this._isDisabled = value;
    }
@@ -136,7 +149,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    }
 
    get hasError(): boolean {
-      return this.errorMessage !== null;
+      return !this.isPristine && this.errorMessage !== null && this.errorMessage !== undefined;
    }
 
    get hasFocus(): boolean {
@@ -144,12 +157,12 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    }
 
    get hasPlaceholder(): boolean {
-      return !this._focus && !this.items.length && this.placeholder !== null && this.placeholder.length > 0;
+      return !this._focus && !this.items.length && this.placeholder && this.placeholder.length > 0;
    }
 
    @HostBinding('class.st-tag-input--autocomplete')
    get hasAutocomplete(): boolean {
-      return this.expandedMenu && this.autocompleteList !== null && this.autocompleteList.length > 0;
+      return this.expandedMenu && this.autocompleteList && this.autocompleteList.length > 0;
    }
 
    get disableValue(): string | null {
@@ -221,6 +234,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
             }
          }
          this.onChange(this.items);
+         this.isPristine = false;
          this._cd.markForCheck();
       }
    }
@@ -252,7 +266,10 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       if (!this._isDisabled) {
          this._focus = true;
          this._newElementInput.focus();
+         this._forceResetAutCcompleteList();
+         this.showAutocompleteMenu();
       }
+      event.stopPropagation();
    }
 
    onInputFocusOut(event: Event): void {
@@ -260,6 +277,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          this._focus = false;
          this.addCurrentTag();
       }
+      event.stopPropagation();
    }
 
    onInputKeyDown(event: any): void {
@@ -268,6 +286,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          case 13: // Enter
             if (this.innerInputContent.length && this.isValidInput) {
                this.addTag(this.innerInputContent);
+               this._forceResetAutCcompleteList();
             }
             event.preventDefault();
             break;
@@ -352,10 +371,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       }
    }
 
-   @HostListener('document:click', ['$event'])
    onClickOutside(event: Event): void {
-      const isInputElement: boolean = this.inputElement.nativeElement.contains(event.target);
-      if (!isInputElement && this.expandedMenu) {
+      if (this.expandedMenu) {
          this._focus = false;
          this.addCurrentTag();
       }
@@ -367,6 +384,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          this.items.push(parsedValue);
          this.clearInput();
          this.onChange(this.items);
+         this.isPristine = false;
       }
    }
 
@@ -381,6 +399,10 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    private deleteTag(index: number): void {
       this.items.splice(index, 1);
       this.onChange(this.items);
+
+      this._newElementInput.value = '';
+      this.innerInputContent = '';
+      this._newElementInput.dispatchEvent(new Event('input'));
    }
 
    private clearInput(): void {
@@ -392,10 +414,10 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    }
 
    private showAutocompleteMenu(): void {
-      if (this.withAutocomplete && !this.expandedMenu) {
+      if (this.withAutocomplete && !this.expandedMenu && this.charsToShowAutocompleteList <= this.innerInputContent.length) {
          this.expandedMenu = true;
       }
-      if (this.innerInputContent === '') {
+      if (this.innerInputContent === '' && this.charsToShowAutocompleteList) {
          this.expandedMenu = false;
       }
       this._cd.markForCheck();
@@ -417,6 +439,17 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          }
          default:
             return tag;
+      }
+   }
+
+   private _forceResetAutCcompleteList(): void {
+      if (!this.charsToShowAutocompleteList && this.withAutocomplete) {
+         this._newElementInput.innerText = '';
+         const event: any = new Event('input', {
+            'bubbles': true
+         });
+         event.data = '';
+         this._newElementInput.dispatchEvent(event);
       }
    }
 }

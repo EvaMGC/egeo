@@ -1,4 +1,4 @@
-/**
+/*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -8,16 +8,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-@import '../../theme/constants/colors';
-@import '../../theme/constants/fonts';
 
-.horizontal-tabs {
-   width: 100%;
-   display: block;
-}
+import { NgModule } from '@angular/core';
+import { StClickOutside } from './st-click-outside.directive';
 
-.demo {
-   display: block;
-   padding: 60px 0;
-}
-
+@NgModule({
+   imports: [],
+   declarations: [StClickOutside],
+   exports: [StClickOutside]
+})
+export class StClickOutsideModule { }
