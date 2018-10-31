@@ -266,17 +266,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       if (!this._isDisabled) {
          this._focus = true;
          this._newElementInput.focus();
-         if (!this.charsToShowAutocompleteList) {
-            this._newElementInput.innerText = '';
-            const event: any = new Event('input', {
-               'bubbles': true,
-               'cancelable': true
-            });
-            event.data = '';
-            this._newElementInput.dispatchEvent( event);
-         }
+         this._forceResetAutCcompleteList();
          this.showAutocompleteMenu();
-
       }
       event.stopPropagation();
    }
@@ -295,15 +286,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          case 13: // Enter
             if (this.innerInputContent.length && this.isValidInput) {
                this.addTag(this.innerInputContent);
-               if (!this.charsToShowAutocompleteList) {
-                  this._newElementInput.innerText = '';
-                  const event: any = new Event('input', {
-                     'bubbles': true,
-                     'cancelable': true
-                  });
-                  event.data = '';
-                  this._newElementInput.dispatchEvent( event);
-               }
+               this._forceResetAutCcompleteList();
             }
             event.preventDefault();
             break;
@@ -456,6 +439,17 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          }
          default:
             return tag;
+      }
+   }
+
+   private _forceResetAutCcompleteList(): void {
+      if (!this.charsToShowAutocompleteList && this.withAutocomplete) {
+         this._newElementInput.innerText = '';
+         const event: any = new Event('input', {
+            'bubbles': true
+         });
+         event.data = '';
+         this._newElementInput.dispatchEvent( event);
       }
    }
 }
