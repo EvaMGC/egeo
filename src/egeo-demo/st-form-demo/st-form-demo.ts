@@ -8,38 +8,28 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
-import { JSON_SCHEMA } from './json-schema';
+import { Component } from '@angular/core';
+import { StHorizontalTab } from '@stratio/egeo';
 
 @Component({
    selector: 'st-form-demo',
-   templateUrl: 'st-form-demo.html'
+   templateUrl: 'st-form-demo.html',
+   styleUrls: ['./st-form-demo.component.scss']
 })
 export class StFormDemoComponent {
-   public jsonSchema: any;
-   public model: any = {  };
+   public activeOption: StHorizontalTab;
 
-   @ViewChild('formModel') public formModel: NgForm;
+   public options: StHorizontalTab[] = [
+      {id: 'formEditor', text: 'Demo'},
+      {id: 'visualSectionImprovements', text: 'Visual Section improvements'},
+      {id: 'visualFieldImprovements', text: 'Visual Field improvements'}
+   ];
 
    constructor() {
-      this.jsonSchema = JSON_SCHEMA;
+      this.activeOption = this.options[0];
    }
 
-   showFormStatus(): void {
-      console.log(this.formModel.valid);
-   }
-
-   onChange(model: any): void {
-      this.model = model;
-   }
-
-   changeFormStatus(): void {
-      if (this.formModel.control.enabled) {
-         this.formModel.control.disable();
-      } else {
-         this.formModel.control.enable();
-      }
+   public onChangeOption(selectedOption: StHorizontalTab): void {
+      this.activeOption = selectedOption;
    }
 }
