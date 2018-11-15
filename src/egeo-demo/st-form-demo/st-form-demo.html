@@ -10,23 +10,16 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div style="width: 100%; position: relative;">
-      <st-form [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel" [textFieldMaxWidth]="70"></st-form>
-   </div>
-   <br>
+<section class="container-liquid demo-layout">
+   <p class="introduction">Dynamic forms are designed to generate forms using a json schema as input where fields are
+      defined</p>
 
-   <button class="button button-primary" (click)="showFormStatus()">
-      <span>Show form status</span>
-   </button>
-
-   <button class="button button-secondary-gray" (click)="changeFormStatus()">
-      <span>Disable/Enable form</span>
-   </button>
-
+   <st-horizontal-tabs class="horizontal-tabs" [options]="options" [activeOption]="activeOption"
+                       (changedOption)="onChangeOption($event)"></st-horizontal-tabs>
+   <st-form-editor-demo [hidden]="activeOption.id !== 'formEditor'"></st-form-editor-demo>
+   <st-visual-section-improvements-demo
+      [hidden]="activeOption.id !== 'visualSectionImprovements'"></st-visual-section-improvements-demo>
+   <st-visual-field-improvements-demo
+      [hidden]="activeOption.id !== 'visualFieldImprovements'"></st-visual-field-improvements-demo>
 </section>
-<h1>MODEL</h1>
-{{model | json}}
-<br><br><br>
-<h1>VALIDATION</h1>
-{{formModel.valid}}
+

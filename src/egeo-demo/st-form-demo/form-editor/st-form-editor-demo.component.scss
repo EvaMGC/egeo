@@ -1,0 +1,90 @@
+/**
+ * © 2017 Stratio Big Data Inc., Sucursal en España.
+ *
+ * This software is licensed under the Apache License, Version 2.0.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the terms of the License for more details.
+ *
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+@import '../../../theme/constants/colors';
+@import '../../../theme/constants/fonts';
+
+:host {
+   padding: 20px 0;
+
+   .form-editor-container {
+      position: relative;
+      .form-editor {
+         font-family: monospace;
+         font-size: 14px;
+         line-height: 1.6em;
+         color: $neutral-10;
+         width: 100%;
+         border: 1px solid $neutral-06;
+         padding: 20px;
+         background-color: $neutral-01;
+         position: absolute;
+         top: 70px;
+         right: 0;
+         bottom: 0;
+
+         &.error {
+            color: $status-critical-default;
+         }
+      }
+
+      .editor-title {
+         font-family: $egeo-nunito-sans-bold;
+         font-size: $egeo-font-size-xlarge;
+         font-style: normal;
+         font-stretch: normal;
+         line-height: $egeo-line-height-xlarge;
+         letter-spacing: normal;
+         color: $neutral-13;
+         padding: 26px 0;
+         display: inline-block;
+      }
+   }
+
+   .schema-error {
+      color: $status-critical-default;
+      font-family: $egeo-nunito-sans-light;
+      font-size: $egeo-font-size-xsmall;
+      width: 100%;
+   }
+
+   .form {
+      padding-right: 15px;
+      display: block;
+   }
+
+   .button-toolbar {
+      text-align: right;
+      .button {
+         margin-left: 20px;
+      }
+   }
+
+   .form-output {
+      background-color: $neutral-01;
+      padding: 5px 20px 20px;
+      margin-top: 20px;
+      font-family: $egeo-nunito-sans-light;
+      font-size: $egeo-font-size-xxsmall;
+      line-height: $egeo-font-size-medium;
+
+      h2 {
+         font-family: $egeo-nunito-sans-bold;
+         font-size: $egeo-font-size-small;
+         font-style: normal;
+         font-stretch: normal;
+         line-height: $egeo-font-size-small;
+         letter-spacing: normal;
+         color: $neutral-10;
+         padding-bottom: 15px;
+         padding-top: 15px;
+      }
+   }
+}
