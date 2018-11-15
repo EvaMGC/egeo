@@ -13,6 +13,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { cloneDeep as _cloneDeep } from 'lodash';
+
 import { StTagInputComponent } from './st-tag-input.component';
 import { StTagInputModule } from './st-tag-input.module';
 import { StLabelModule } from '../st-label/st-label.module';
@@ -63,7 +64,7 @@ describe('StTagInputComponent', () => {
 
       expect(comp.hasLabel).toBeFalsy();
       expect(comp.hasFocus).toBeFalsy();
-      expect(comp.hasError).toBeFalsy();
+      expect(comp.showError()).toBeFalsy();
       expect(comp.hasPlaceholder).toBeFalsy();
       expect(comp.hasAutocomplete).toBeFalsy();
       expect(comp.disableValue).toBeNull('');
@@ -487,6 +488,23 @@ describe('StTagInputComponent', () => {
 
       expect(fixture.nativeElement.querySelector('.st-input-error-message')).not.toBeNull();
       expect(fixture.nativeElement.querySelector('.st-tag-input__input').classList).toContain('error');
+   });
+
+   it('Error is displayed when component is created invalid if forceValidations input is true', () => {
+      comp.forceValidations = true;
+      comp.errorMessage = 'This is a fake error message';
+
+      fixture.detectChanges();
+      expect(fixture.nativeElement.innerHTML).toContain('This is a fake error message');
+   });
+
+   it('Error is not displayed when component is created invalid but forceValidations input is true', () => {
+      comp.forceValidations = false;
+      comp.errorMessage = 'This is a fake error message';
+
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.innerHTML).not.toContain('This is a fake error message');
    });
 
    describe('It should be able to active the autocomplete function', () => {

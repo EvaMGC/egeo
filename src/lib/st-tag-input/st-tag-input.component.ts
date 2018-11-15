@@ -13,18 +13,18 @@ import {
    ChangeDetectionStrategy,
    ChangeDetectorRef,
    Component,
-   forwardRef,
-   Input,
-   OnInit,
-   OnChanges,
-   ViewChild,
    ElementRef,
+   forwardRef,
+   HostBinding,
+   Input,
+   OnChanges,
+   OnInit,
    SimpleChanges,
-   HostBinding
+   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
-import { StDropDownMenuItem, StDropDownMenuGroup } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 
 /**
  * @description {Component} Tag Input
@@ -108,6 +108,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    @Input() forbiddenValues: string[] = [];
    /** @input {string} [regularExpression=] Regular expression to validate values. It is null by default */
    @Input() regularExpression: any | null = null;
+   /** @Input {boolean} [forceValidations=false] If you specify it to 'true', the tag input checks the errors before being modified by user */
+   @Input() forceValidations: boolean = false;
 
    @ViewChild('newElement') newElementInput: ElementRef;
    @ViewChild('inputElement') inputElement: ElementRef;
@@ -145,10 +147,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    get hasLabel(): boolean {
       return this.label !== null && this.label.length > 0;
-   }
-
-   get hasError(): boolean {
-      return !this.isPristine && this.errorMessage !== null && this.errorMessage !== undefined;
    }
 
    get hasFocus(): boolean {
@@ -219,8 +217,13 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       this._regularExp = new RegExp(this.regularExpression);
    }
 
+
    ngOnChanges(changes: SimpleChanges): void {
       this.checkAutocompleteMenuChange(changes);
+      if (this.forceValidations) {
+         this.writeValue(this.items);
+      }
+      this._cd.markForCheck();
    }
 
    writeValue(data: any): void {
@@ -375,6 +378,10 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          this._focus = false;
          this.addCurrentTag();
       }
+   }
+
+   showError(): boolean {
+      return this.errorMessage !== undefined && (!this.isPristine || this.forceValidations) && !this._focus && !this.disabled;
    }
 
    private addTag(tag: string): void {

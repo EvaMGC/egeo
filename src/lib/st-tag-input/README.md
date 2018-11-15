@@ -18,6 +18,7 @@
 | infoMessage                 | String                                        | False | Message used to inform user about what values he has to introduce                                                     |         |
 | forbiddenValues             | String[]                                      | False | A list of values that user can not type and if he types one of them,tag input will be invalid. It is empty by default | Array() |
 | regularExpression           | String                                        | False | Regular expression to validate values. It is null by default                                                          |         |
+| forceValidations            | Boolean                                       | False | If you specify it to 'true', the tag input checks the errors before being modified by user                            | false   |
 | disabled                    | Boolean                                       | False | Disable the component. It is false by default                                                                         | false   |
 
 ## Example

@@ -17,11 +17,11 @@
       <label *ngIf="hasLabel" class="st-tag-input__label st-label" [attr.id]="labelId"
              [attr.title]="tooltip"
              [attr.disabled]="disableValue"
-             [ngClass]="{ 'active': hasFocus, 'error': hasError }">{{label}}</label>
+             [ngClass]="{ 'active': hasFocus, 'error': showError() }">{{label}}</label>
 
       <div #inputElement class="st-tag-input__input st-input"
            [attr.disabled]="disableValue" (clickOutside)="onClickOutside($event)"
-           [ngClass]="{ 'active': hasFocus, 'error': hasError }" (click)="onInputFocusIn($event)">
+           [ngClass]="{ 'active': hasFocus, 'error': showError() }" (click)="onInputFocusIn($event)">
 
          <span *ngIf="hasPlaceholder" class="st-tag-input__placeholder" [attr.disabled]="disableValue">{{placeholder}}</span>
          <div class="st-tag-input__item tag-item" *ngFor="let item of items; let i = index;"
@@ -49,6 +49,6 @@
 
 </st-dropdown-menu>
 <span class="info-message" *ngIf="infoMessage && isPristine">{{infoMessage}}</span>
-<span *ngIf="errorMessage && !isPristine" class="st-input-error-message">{{errorMessage}}</span>
+<span *ngIf="showError()" class="st-input-error-message">{{errorMessage}}</span>
 
 

@@ -170,6 +170,9 @@
             [(ngModel)]="tags.templateDrivenRequired"
             [errorMessage]="errorTemplateDriveMessage"
             required
+            [forceValidations]="true"
+            minlength="2"
+            maxlength="3"
             [label]="'Tag Input with require'"
             [id]="'tag-input-template-driven-required-demo'"
             [placeholder]="'Add tags separated by commas'"
