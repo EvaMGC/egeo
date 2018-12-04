@@ -3,7 +3,12 @@
 ## 14.0.0 (upcoming)
 
 **Breaking changes:**
+
 * st-foreground-notifications: allow to control multiple notifications
+
+**Fixed bugs:**
+
+* st-select: Disable html native autocomplete
 
 ## 13.4.0 (November 19, 2018)
 
