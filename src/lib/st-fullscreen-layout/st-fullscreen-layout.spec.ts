@@ -10,7 +10,7 @@
  */
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+
 import { StFullscreenLayoutComponent } from './st-fullscreen-layout';
 import { StWindowRefService } from '../utils/window-service';
 
@@ -43,15 +43,6 @@ describe('StFullscreenLayoutComponent', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(StFullscreenLayoutComponent);
       comp = fixture.componentInstance;
-   });
-
-   it('should be initialized', () => {
-      comp.title = 'test';
-      fixture.detectChanges();
-
-      const element: HTMLParagraphElement = fixture.debugElement.query(By.css('.title')).nativeElement;
-
-      expect(element.innerText).toEqual('test');
    });
 
    it('it should disable scroll to body in order not to see the content of the previous page', () => {

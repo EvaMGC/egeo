@@ -16,7 +16,7 @@ import { StWindowRefService } from '../utils/window-service';
 /**
  * @description {Component} [Fullscreen Layout]
  *
- * Component that show a fullscreen view with title and space for buttons and a
+ * Component that shows a full screen view with a title and space for buttons and a
  * main content defined by user using ng-content
  *
  * @example
@@ -24,7 +24,8 @@ import { StWindowRefService } from '../utils/window-service';
  * {html}
  *
  * ```
- * <st-fullscreen-layout [title]="'Edition'">
+ * <st-fullscreen-layout>
+ *    <p class="st-fullscreen-layout-title">Edition</p>
  *    <div class="st-fullscreen-layout-buttons">
  *       <button class="button button-secondary-line button-separator" (click)="onClickHideButton()">Cancel</button>
  *       <button class="button button-primary" (click)="onClickHideButton()">Save</button>
@@ -42,9 +43,6 @@ import { StWindowRefService } from '../utils/window-service';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StFullscreenLayoutComponent implements OnDestroy {
-   /** @Input {string} [title=""] Title of fullscreen layout */
-   @Input() title: string = '';
-
    constructor( private windowRef: StWindowRefService) {
       this.windowRef.nativeWindow.document.body.style.overflow = 'hidden';
    }

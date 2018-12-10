@@ -13,7 +13,8 @@
 <div class="st-fullscreen-layout">
    <div class="st-fullscreen-layout-header">
       <div class="container">
-         <p class="title">{{title}}</p>
+         <ng-content select=".st-fullscreen-layout-title"></ng-content>
+
          <div class="buttons">
             <ng-content select=".st-fullscreen-layout-buttons"></ng-content>
          </div>
