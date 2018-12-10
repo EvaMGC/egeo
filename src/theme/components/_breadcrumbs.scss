@@ -11,7 +11,7 @@
 @import '../constants/colors';
 @import '../constants/fonts';
 
-.sth-breadcrumbs {
+.st-breadcrumbs {
    &__item {
       font-family: $egeo-nunito-sans-semiBold;
       color: $action-primary-default;
@@ -30,6 +30,10 @@
 
          &:hover {
             color: $action-primary-hover;
+         }
+
+         i + span {
+            margin-left: 5px;
          }
       }
 
@@ -50,7 +54,17 @@
          padding-left: 0;
       }
    }
-
 }
 
+.st-breadcrumbs.title-mode {
+   .st-breadcrumbs__item,
+   .st-breadcrumbs__item--text {
+      font-size: $egeo-font-size-xlarge;
+      font-weight: bold;
+      color: $neutral-13;
+   }
+   .st-breadcrumbs__item:after {
+      font-size: $egeo-font-size-small;
+   }
+}
 

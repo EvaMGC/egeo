@@ -2,6 +2,10 @@
 
 ## 14.0.0 (upcoming)
 
+**New features:**
+
+* st-breadcrumbs: Allow to configure visualization mode as "default" or "title"
+
 **Breaking changes:**
 
 * st-foreground-notifications: allow to control multiple notifications
@@ -127,7 +131,7 @@
 
 **Breaking changes:**
 
-* st-bread-crumb: Changed options from string to object with label and icon to allow icons
+* st-breadcrumb: Changed options from string to object with label and icon to allow icons
 * st-two-list: Includes checkbox all button in list-scroll component. Emits new event with number of elements selected.
 
 **Others**

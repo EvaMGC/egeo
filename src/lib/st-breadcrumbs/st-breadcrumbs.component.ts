@@ -19,7 +19,7 @@ import {
    SimpleChanges
 } from '@angular/core';
 import { range as _range } from 'lodash';
-import { StBreadCrumbItem } from './st-breadcrumbs.interface';
+import { StBreadCrumbItem, StBreadCrumbMode } from './st-breadcrumbs.interface';
 
 /**
  * @description {Component} [Breadcrumbs]
@@ -55,6 +55,8 @@ export class StBreadCrumbsComponent implements OnInit, OnChanges {
    @Input() options: StBreadCrumbItem[] = [];
    /** @Input {number} [elementsToShow=5] Max number of elements to show. */
    @Input() elementsToShow: number = 5;
+   /** @Input {StBreadCrumbMode} [mode=StBreadCrumbMode.DEFAULT] Visualization mode */
+   @Input() mode: StBreadCrumbMode = StBreadCrumbMode.DEFAULT;
    /** @Input {string} [qaTag=''] Id value for qa test */
    @Input() qaTag: string;
 
