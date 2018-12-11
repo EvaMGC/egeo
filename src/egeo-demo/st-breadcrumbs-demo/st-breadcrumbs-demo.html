@@ -22,29 +22,31 @@
     </st-breadcrumbs-item>
 </st-breadcrumbs>
 <br>
-<br>
 <h1>Without ng-content and only icons</h1>
 <st-breadcrumbs [options]="otherOptions" (select)="outputEmitter($event)" qaTag="breadcrumbs2">
 </st-breadcrumbs>
 <br>
-<br><br>
 <h1>Without ng-content and icons or labels</h1>
 <st-breadcrumbs [options]="otherOptions2" (select)="outputEmitter($event)" qaTag="breadcrumbs2">
 </st-breadcrumbs>
 <br>
-<br>
 <h1>Without ng-content, icons and labels and 5 elements max</h1>
 <st-breadcrumbs [options]="options" (select)="outputEmitter($event)" qaTag="breadcrumbs2">
 </st-breadcrumbs>
-
 <br>
 <h1>Without ng-content, icons and labels and 10 elements max</h1>
 <st-breadcrumbs [options]="options" (select)="outputEmitter($event)" qaTag="breadcrumbs3" [elementsToShow]="10">
 </st-breadcrumbs>
+<br>
+<br>
+<h1>Title mode</h1>
+<st-breadcrumbs [options]="options" (select)="outputEmitter($event)" mode="title" qaTag="breadcrumbs4" [elementsToShow]="4">
+</st-breadcrumbs>
 
 <br>
 <br>
 <br>
+
 <button class="button button-primary" (click)="reset()">Reset</button>
 
 <st-demo-logger></st-demo-logger>

@@ -14,3 +14,5 @@ export class StBreadCrumbItem {
    label?: string;
    icon?: string;
 }
+
+export enum StBreadCrumbMode { DEFAULT =  <any> 'default', TITLE =  <any> 'title'}

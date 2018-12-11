@@ -10,7 +10,7 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<ul class="st-breadcrumbs" [attr.id]="qaTag">
+<ul class="st-breadcrumbs {{mode}}-mode" [attr.id]="qaTag">
    <ng-content select="st-breadcrumbs-item"></ng-content>
    <div *ngIf="options.length">
       <st-breadcrumbs-item 
