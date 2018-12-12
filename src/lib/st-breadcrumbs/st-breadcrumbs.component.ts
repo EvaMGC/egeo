@@ -97,10 +97,6 @@ export class StBreadCrumbsComponent implements OnInit, OnChanges {
       return index > -1 ? this.options[index].icon : '';
    }
 
-   public hasLabel(index: number): boolean {
-      return index > -1 && Boolean(this.options[index].label);
-   }
-
    public hasIcon(index: number): boolean {
       return index > -1 && Boolean(this.options[index].icon);
    }

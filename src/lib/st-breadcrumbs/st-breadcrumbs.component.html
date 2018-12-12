@@ -12,15 +12,15 @@
 -->
 <ul class="st-breadcrumbs {{mode}}-mode" [attr.id]="qaTag">
    <ng-content select="st-breadcrumbs-item"></ng-content>
-   <div *ngIf="options.length">
-      <st-breadcrumbs-item 
+   <ng-container *ngIf="options.length">
+      <st-breadcrumbs-item
          class="sth-breadcrumbs__item-container"
          *ngFor="let idx of indexArray; let last=last"
          (click)="onSelect(idx)"
          [active]="last"
          [qaTag]="qaTag + '-' + idx">
-            <i *ngIf="hasIcon" [ngClass]="getIcon(idx)"></i>
-            <span *ngIf="hasLabel">{{getLabel(idx)}}</span>
-        </st-breadcrumbs-item>
-   </div>
+         <i *ngIf="hasIcon(idx)" [ngClass]="getIcon(idx)"></i>
+         <span>{{getLabel(idx)}}</span>
+      </st-breadcrumbs-item>
+   </ng-container>
 </ul>

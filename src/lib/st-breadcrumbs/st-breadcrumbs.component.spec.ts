@@ -68,7 +68,6 @@ describe('StBreadCrumbsComponent', () => {
          const itemUndefined: StBreadCrumbItem = { id: '' };
          component.options[1] = itemUndefined;
          fixture.detectChanges();
-         expect(component.hasLabel(1)).toBeFalsy();
          expect(component.hasIcon(1)).toBeFalsy();
          expect(component.getId(1)).toEqual('');
          expect(component.getIcon(1)).toBeUndefined();
@@ -77,7 +76,6 @@ describe('StBreadCrumbsComponent', () => {
       it('should be initialized with id, label and icon', () => {
          component.options[1] = item;
          fixture.detectChanges();
-         expect(component.hasLabel(1)).toBeTruthy();
          expect(component.hasIcon(1)).toBeTruthy();
          expect(component.getId(1)).toEqual('home');
          expect(component.getIcon(1)).toEqual('icon-home');
@@ -121,15 +119,10 @@ describe('StBreadCrumbsComponent', () => {
       fixture.detectChanges();
       expect(component.getId(3)).toEqual(menuMock[3].id);
    });
+
    it('Should get label when index is greater than -1', () => {
       fixture.detectChanges();
       expect(component.getLabel(3)).toEqual(String(menuMock[3].label));
-   });
-
-   it(`should not show anything if not have label`, () => {
-      let label = component.getLabel(0);
-      fixture.detectChanges();
-      expect(component.hasLabel(0)).toBeFalsy();
    });
 
    it('Should get icon when index is greater than -1', () => {

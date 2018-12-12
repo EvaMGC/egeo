@@ -49,11 +49,12 @@
       }
    }
 
-   &__item-container:first-child {
-      .sth-breadcrumbs__item--text {
+   st-breadcrumbs-item:first-child {
+      .st-breadcrumbs__item--text {
          padding-left: 0;
       }
    }
+
 }
 
 .st-breadcrumbs.title-mode {
