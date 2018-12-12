@@ -50,7 +50,8 @@ export { StAlertsService } from './st-alerts/st-alerts.service';
 
 // Breadcrumb
 export {
-   StBreadCrumbItem
+   StBreadCrumbItem,
+   StBreadCrumbMode
 } from './st-breadcrumbs/st-breadcrumbs.interface';
 export { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 
