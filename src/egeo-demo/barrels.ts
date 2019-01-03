@@ -55,6 +55,7 @@ import { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-tw
 import { StVerticalTabsDemoModule } from './st-vertical-tabs-demo/st-vertical-tabs-demo.module';
 import { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';
 import { StDraggableCardDemoModule } from './st-draggable-card-demo/st-draggable-card-demo.module';
+import { StFilterSelectorDemoModule } from './st-filter-selector-demo/st-filter-selector-demo.module';
 
 
 export const EGEO_DEMO_MODULES: any[] = [
@@ -67,6 +68,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StDraggableCardDemoModule,
    StDropdownMenuDemoModule,
    StFileButtonDemoModule,
+   StFilterSelectorDemoModule,
    StFooterDemoModule,
    StForegroundNotificationsDemoModule,
    StFormDemoModule,

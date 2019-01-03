@@ -76,6 +76,9 @@ export {
 } from './st-dropdown-menu/st-dropdown-menu.interface';
 export { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 
+// Filter selector
+export { StFilterSelectorModule } from './st-filter-selector/st-filter-selector.module';
+
 // File button
 export { StFileButtonModule } from './st-file-button/st-file-button.module';
 

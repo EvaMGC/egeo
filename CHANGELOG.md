@@ -2,7 +2,10 @@
 
 ## 15.0.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-filter-selector: Create component
+
 
 ## 14.0.0 (December 19, 2018)
 

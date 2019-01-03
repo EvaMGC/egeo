@@ -20,6 +20,7 @@ export { StButtonDemoModule } from './st-button-demo/st-button-demo.module';
 export { StCheckboxDemoModule } from './st-checkbox-demo/st-checkbox-demo.module';
 export { StDraggableCardDemoModule } from './st-draggable-card-demo/st-draggable-card-demo.module';
 export { StDropdownMenuDemoModule } from './st-dropdown-menu-demo/st-dropdown-menu-demo.module';
+export { StFilterSelectorDemoModule } from './st-filter-selector-demo/st-filter-selector-demo.module';
 export { StFooterDemoModule } from './st-footer-demo/st-footer-demo.module';
 export { StFormDemoModule } from './st-form-demo/st-form-demo.module';
 export { StFormListDemoModule } from './st-form-list-demo/st-form-list-demo.module';
