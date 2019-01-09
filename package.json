@@ -66,7 +66,7 @@
       "@types/lodash": "4.14.116",
       "@types/minimist": "1.2.0",
       "@types/node": "6.0.60",
-      "@types/prismjs": "^1.9.0",
+      "@types/prismjs": "1.6.0",
       "@types/run-sequence": "0.0.29",
       "@types/showdown": "1.4.32",
       "autoprefixer": "7.1.1",

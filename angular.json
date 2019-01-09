@@ -46,7 +46,9 @@
             "styles": [
               "src/demo-app/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/prismjs/prism.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -15,7 +15,7 @@ import {
    Input,
    ViewEncapsulation
  } from '@angular/core';
- import * as Prism from 'prismjs';
+declare var Prism;
 
  @Component({
    encapsulation: ViewEncapsulation.None,

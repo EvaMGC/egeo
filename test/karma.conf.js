@@ -39,7 +39,8 @@ module.exports = function(config) {
          },
          {
             pattern: 'src/lib/**/*.+(ts|html)'
-         }
+         },
+         { pattern: "node_modules/prismjs/prism.js", included: true },
       ],
       client: {
          args: args
