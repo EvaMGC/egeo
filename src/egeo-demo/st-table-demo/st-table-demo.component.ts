@@ -9,7 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { StTableHeader } from '@stratio/egeo';
+import { cloneDeep as _cloneDeep } from 'lodash';
+import { Order, ORDER_TYPE, StTableHeader } from '@stratio/egeo';
 
 @Component({
    templateUrl: './st-table-demo.component.html',
@@ -21,45 +22,53 @@ export class StTableDemoComponent {
       ts: 'demo/st-table-demo/st-table-demo.component.ts',
       component: 'lib/st-table/st-table.component.ts'
    };
+   public smallTableFields: StTableHeader[] = [
+      { id: 'id', label: 'Id' },
+      { id: 'name', label: 'Name' },
+      { id: 'lastName', label: 'Last Name' }];
+
    public fields: StTableHeader[] = [
-      { id: 'id', label: 'Id',  sortable: true}, { id: 'name', label: 'Name' }, { id: 'lastName', label: 'Last Name' },
-      { id: 'phone', label: 'Phone' }, { id: 'company', label: 'Company' },
-      { id: 'completedProfile', label: 'Completed profile', sortable: false }];
+      { id: 'id', label: 'Id' },
+      { id: 'name', label: 'Name' },
+      { id: 'lastName', label: 'Last Name' },
+      { id: 'phone', label: 'Phone' },
+      { id: 'company', label: 'Company' },
+      { id: 'completedProfile', label: 'Completed profile' }];
 
    public header: boolean = true;
 
-   public data: Array<{id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string}> = [
+   public data: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }> = [
       {
-         id: '4545-df56-s345',
+         id: '4545-df56-s341',
          name: 'Antonio',
          lastName: 'López',
          phone: 60052520145,
          company: 'Stratio',
-         completedProfile: '80%'
+         completedProfile: '100%'
       },
       {
-         id: '4545-df56-s345',
+         id: '4545-df56-s342',
          name: 'Marina',
          lastName: 'Lara',
          phone: 600456520145,
          company: 'Stratio',
-         completedProfile: '80%'
+         completedProfile: '20%'
       },
       {
-         id: '4545-df56-s345',
+         id: '4545-df56-s343',
          name: 'Álvaro',
          lastName: 'García',
          phone: 60052320145,
          company: 'Stratio',
-         completedProfile: '80%'
+         completedProfile: '10%'
       },
       {
-         id: '4545-df56-s345',
+         id: '4545-df56-s344',
          name: 'Marina',
          lastName: 'González',
          phone: 600455640145,
          company: 'Stratio',
-         completedProfile: '80%'
+         completedProfile: '50%'
       }, {
          id: '4545-df56-s345',
          name: 'Pepe',
@@ -69,19 +78,54 @@ export class StTableDemoComponent {
          completedProfile: '80%'
       },
       {
-         id: '4545-df56-s345',
+         id: '4545-df56-s346',
          name: 'María',
          lastName: 'Rodríguez',
          phone: 60065620145,
          company: 'Stratio',
-         completedProfile: '80%'
+         completedProfile: '70%'
       }
    ];
+   public sortedData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
+   public selectedCheckboxes: boolean[][] = [[], []];
+   public visibleCheckboxes: boolean[][] = [[], []];
 
-   public selectedTable1: boolean[] = [];
-   public selectedTable2: boolean[] = [];
+
+   constructor() {
+      this.sortedData = _cloneDeep(this.data);
+   }
+
+   // Selectable tables
 
    public onSelectRow(event: any, rowIndex: number, selected: Array<boolean>) {
       selected[rowIndex] = event.checked;
+   }
+
+   public changeCheckBoxVisibility(visible: boolean, tableNumber: number, position: number): void {
+      this.visibleCheckboxes[tableNumber][position] = visible;
+   }
+
+   public isCheckBoxVisible(tablePosition: number, position: number): boolean {
+      return this.visibleCheckboxes[tablePosition][position] || this.selectedCheckboxes[tablePosition].indexOf(true) > -1;
+   }
+
+   public thereAreSomeCheckboxesChecked(tablePosition: number): boolean {
+      return this.selectedCheckboxes[tablePosition].indexOf(true) > -1;
+   }
+
+   public onSelectAll(selected: boolean, tablePosition: number) {
+      this.selectedCheckboxes[tablePosition] = [];
+      for (let i = 0; i < this.data.length; ++i) {
+         this.selectedCheckboxes[tablePosition].push(selected);
+      }
+   }
+
+   // Sortable tables
+
+   public onSortTable(order: Order): void {
+      const reverseConst: number = order.type === ORDER_TYPE.ASC ? 1 : -1;
+      this.sortedData = [...this.data].sort((a, b) => {
+         return a[order.orderBy].toString().localeCompare(b[order.orderBy].toString()) * reverseConst;
+      });
    }
 }

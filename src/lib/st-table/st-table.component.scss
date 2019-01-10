@@ -11,43 +11,45 @@
 
 .st-table {
    width: 100%;
-}
 
-.st-table__header-item {
-   text-transform: capitalize;
+   &__header-item {
+      text-transform: capitalize;
+   }
+
+   &__header-text {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      cursor: inherit;
+   }
+
+   &__order-arrow {
+      padding-left: 5px;
+   }
+
+   &--fixed-header {
+      display: flex;
+      flex-flow: column;
+   }
+
+   &--fixed-header thead {
+      display: block;
+      > tr {
+         display: flex;
+         > th {
+            flex: 1;
+            display: inline-flex;
+         }
+      }
+   }
+
 }
 
 .sortable {
    cursor: pointer;
-}
-
-.st-table__header-text {
-   height: 100%;
-   display: flex;
-   flex-direction: row;
-   flex-wrap: nowrap;
-   align-items: center;
-   justify-content: flex-start;
-   cursor: inherit;
-}
-
-.st-table__order-arrow {
-   padding-left: 5px;
-}
-
-.st-table--fixed-header {
-   display: flex;
-   flex-flow: column;
-}
-
-.st-table--fixed-header thead {
-   display: block;
-   > tr {
-      display: flex;
-      > th {
-         flex: 1;
-         display: inline-flex;
-      }
-   }
 }
 

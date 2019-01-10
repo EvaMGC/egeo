@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
@@ -24,7 +24,7 @@ import { StTableHeader } from './shared/table-header.interface';
  * {html}
  *
  * ```
- * <st-table [fields]="fields" [sortable]="true" (changeOrder)="yourFunctionToOrder($event)" qaTag="table-qa-tag">
+ * <st-table [fields]="fields" [sortable]="true" (changeOrder)="yourFunctionToOrder($event)">
  * <tr st-table-row *ngFor="let userData of data">
  * <td st-table-cell st-table-row-content>
  *    <label >{{userData.id}}</label>
@@ -60,16 +60,13 @@ import { StTableHeader } from './shared/table-header.interface';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class StTableComponent {
+export class StTableComponent implements OnInit {
    /** @Input {StTableHeader[]} [fields=''] List of field displayed in the header */
    @Input() @StRequired() fields: StTableHeader[];
    /** @Input {string} [qaTag=''] Prefix used to generate the id values for qa tests */
    @Input() qaTag: string;
    /** @Input {boolean} [header=true] Boolean to show or hide the header */
    @Input() header: boolean = true;
-
-   /** @Input {boolean} [fixedHeader=false] Boolean to fix the table header */
-   @Input() fixedHeader: boolean = false;
 
    /**
     * @Input {boolean} [sortable=true] Boolean to make sortable the table, To enable sorting of columns use
@@ -86,6 +83,10 @@ export class StTableComponent {
 
    /** @Input {string} [customClasses=] Classes for adding styles to table tag from outside. These can be: separated-rows */
    @Input() customClasses: string;
+
+   /** @Input {number} [maxHeight=] Maximum height for tables with fixed header. This input is needed for tables with header fixed */
+   @Input() maxHeight: number;
+
 
    /** @Input {boolean} [selectedAll=false] It specifies if all rows are selected */
    @Input()
@@ -115,10 +116,16 @@ export class StTableComponent {
     */
    @Output() selectAll: EventEmitter<boolean> = new EventEmitter();
 
+   public tableClass: any;
    public orderTypes: any = ORDER_TYPE;
 
    private _selectedAll: boolean;
    private _hasHoverMenu: boolean = true;
+
+
+   ngOnInit(): void {
+      this.tableClass = this.getClasses();
+   }
 
    public onChangeOrder(field: StTableHeader): void {
       if (field && this.isSortable(field)) {
@@ -133,7 +140,7 @@ export class StTableComponent {
 
    public getClasses(): any {
       let classes: any = {};
-      if ( this.fixedHeader) {
+      if ( this.maxHeight) {
          classes['st-table--fixed-header'] = true;
       }
       classes[this.customClasses] = this.customClasses;
@@ -151,7 +158,7 @@ export class StTableComponent {
 
    public getHeaderItemClass(field: StTableHeader): string {
       let isOrderAsc = this.isSortedByFieldAndDirection(field, this.orderTypes.ASC);
-      return isOrderAsc ? 'icon-arrow2_up' : 'icon-arrow2_down';
+      return isOrderAsc ? 'icon-arrow4_up' : 'icon-arrow4_down';
    }
 
    public isSortedByField(field: StTableHeader): boolean {

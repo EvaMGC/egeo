@@ -5,11 +5,15 @@
 **New features:**
 
 * st-filter-selector: Create component
+* st-table: Allow display tables with white and default themes
 
-**Documentation:**
+**Breaking changes:**
 
-* egeo:  Show the examples source code in Egeo Web
+* st-table: Remove 'fixedHeader' input. It is changed to 'maxHeight' in order to specify the maximum height to table
 
+**Others:**
+
+* Web:  Show the examples source code in Egeo Web
 
 
 ## 14.0.0 (December 19, 2018)
@@ -22,7 +26,6 @@
 
 * st-foreground-notifications: allow to control multiple notifications
 * st-fullscreen-layout: Allow to customize title
-
 
 **Fixed bugs:**
 

@@ -11,10 +11,199 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="container-liquid">
+   <section class="container-liquid demo-layout">
+      <p class="introduction">Tables are structured grids of information that help users understand large amounts of
+         data.</p>
+      <span class="separator"></span>
+      <h1 class="title">Design and behaviour</h1>
+      <p class="paragraph">When a user needs to understand, manipulate, or edit a group of information that is
+         text-based
+         and has the same content structure you use a Table component. Table’s main content can be of two main types:
+         Normal content tables and file system content. Depending on the type of table’s content some options will be
+         available when selecting one or more rows allowing the user to perform bulk options. As well, if 2 or more
+         items
+         are selected a row, a new row will appear under the header of the table allowing to select all the avaiable
+         items
+         on the table even if it has pagination. Tables can have a breadcrumbs row before the table header if the table
+         type allows folder / files navigation. In that case too a first folder with two dots allows the user go back to
+         the parent folder.
+      </p>
 
-      <h1>Simple table</h1>
-      <st-table [fields]="fields" [sortable]="true" qaTag="table-qa-tag">
+      <h1 class="title">Normal content table design and behaviour</h1>
+      <p class="paragraph">They can have two rows of items before the table header.
+         On the first you can have a title on the top left (optional) and dropdown filters on the right (optional)
+         On second you can have a Search box (Optional) on the left, and toolbar icons (optional) on the right. You can
+         choose between an Add toolbar icon or a more explicit Call to Action button on the right. In case you have
+         toolbar
+         icons and a CTA, please, place your CTA as the latest element of the row.
+         When the user scrolls and reach the header of the table, this element will remain sticked to the main header
+         while
+         scrolling so the user always know what kind of data is seeing on the current table. On scroll up the subheader
+         will appear. To understand better this behaviour please interact with the following tables</p>
+
+
+         <h2 class="subtitle">Selectable tables</h2>
+      <p class="paragraph"> Tables can be configured to stand up or not the selected rows.</p>
+      <div class="row">
+         <div class="col-sm-6 col-lg-6 col-xs-12">
+            <st-table [fields]="smallTableFields"
+                      [sortable]="false"
+                      [selectableAll]="thereAreSomeCheckboxesChecked(0)"
+                      (selectAll)="onSelectAll($event, 0)">
+               <tr st-table-row *ngFor="let userData of data; let index = index"
+                   [selected]="selectedCheckboxes[0][index]"
+                   (mouseenter)="changeCheckBoxVisibility(true, 0, index)"
+                   (mouseleave)="changeCheckBoxVisibility(false, 0, index)">
+
+                  <td st-table-cell class="clickable" st-table-row-content>
+                     <st-checkbox *ngIf="isCheckBoxVisible(0, index)" class="st-table__checkbox"
+                                  [checked]="selectedCheckboxes[0][index]"
+                                  (change)="onSelectRow($event, index, selectedCheckboxes[0])">
+                     </st-checkbox>
+                     <label>{{userData.id}}</label>
+                  </td>
+                  <td st-table-cell st-table-row-content>
+                     <label>{{userData.name}}</label>
+                  </td>
+                  <td st-table-cell st-table-row-content>
+                     <label>{{userData.lastName}}</label>
+                  </td>
+                  <td st-table-row-hover>
+                     <i class="icon icon-ellipsis"></i>
+                  </td>
+               </tr>
+            </st-table>
+         </div>
+         <div class="col-sm-6 col-lg-6 col-xs-12">
+
+            <st-table [fields]="smallTableFields"
+                      [sortable]="false"
+                      [selectableAll]="thereAreSomeCheckboxesChecked(0)"
+                      [hasHoverMenu]="true"
+                      (selectAll)="onSelectAll($event, 0)">
+               <tr st-table-row *ngFor="let userData of data; let index = index"
+                   [selected]="selectedCheckboxes[0][index]"
+                   [standUpSelected]="false"
+                   (mouseenter)="changeCheckBoxVisibility(true, 0, index)"
+                   (mouseleave)="changeCheckBoxVisibility(false, 0, index)">
+                  <td st-table-cell class="clickable" st-table-row-content>
+                     <st-checkbox *ngIf="isCheckBoxVisible(0, index)" class="st-table__checkbox"
+                                  [checked]="selectedCheckboxes[0][index]"
+                                  (change)="onSelectRow($event, index, selectedCheckboxes[0])">
+                     </st-checkbox>
+                     <label>{{userData.id}}</label>
+                  </td>
+                  <td st-table-cell st-table-row-content>
+                     <label>{{userData.name}}</label>
+                  </td>
+                  <td st-table-cell st-table-row-content>
+                     <label>{{userData.lastName}}</label>
+                  </td>
+                  <td st-table-row-hover>
+                     <i class="icon icon-ellipsis"></i>
+                  </td>
+               </tr>
+            </st-table>
+         </div>
+      </div>
+      <h2 class="subtitle">Table with custom theme</h2>
+      <p class="paragraph"> Custom classes can be added to native table in order to customize its look. There is a predefined theme called <b>white</b> and it is normally used to navigation tables</p>
+
+      <st-table [fields]="fields" [sortable]="false"
+                [selectableAll]="thereAreSomeCheckboxesChecked(1)"
+                customClasses="white"
+                (selectAll)="onSelectAll($event, 1)">
+         <tr st-table-row *ngFor="let userData of data; let index = index" [selected]="selectedCheckboxes[1][index]"
+             (mouseenter)="changeCheckBoxVisibility(true, 1, index)"
+             (mouseleave)="changeCheckBoxVisibility(false, 1, index)">
+            <td st-table-cell st-table-row-content>
+               <st-checkbox *ngIf="isCheckBoxVisible(1, index)" class="st-table__checkbox"
+                            [checked]="selectedCheckboxes[1][index]"
+                            (change)="onSelectRow($event, index, selectedCheckboxes[1])">
+               </st-checkbox>
+               <label>{{userData.id}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.name}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.lastName}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.phone}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.company}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.completedProfile}}</label>
+            </td>
+            <td st-table-row-hover>
+               <i class="icon icon-ellipsis"></i>
+            </td>
+         </tr>
+      </st-table>
+
+
+      <h2 class="subtitle">Sortable table</h2>
+      <p class="paragraph">Table can be configured as sortable or not. Moreover, it allows to configure only specific fields as sortable </p>
+      <st-table [fields]="fields" (changeOrder)="onSortTable($event)"
+                customClasses="white">
+         <tr st-table-row *ngFor="let userData of sortedData; let index = index">
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.id}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.name}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.lastName}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.phone}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.company}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.completedProfile}}</label>
+            </td>
+
+            <td st-table-row-hover>
+               <i class="icon icon-ellipsis"></i>
+            </td>
+         </tr>
+      </st-table>
+
+
+      <h2 class="subtitle">Table with fixed header</h2>
+
+      <st-table [fields]="fields" [sortable]="false" maxHeight="350" [hasHoverMenu]="false">
+         <tr st-table-row *ngFor="let userData of data">
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.id}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.name}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.lastName}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.phone}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.company}}</label>
+            </td>
+            <td st-table-cell st-table-row-content>
+               <label>{{userData.completedProfile}}</label>
+            </td>
+         </tr>
+      </st-table>
+
+
+      <h2 class="subtitle">Table without header</h2>
+      <st-table [fields]="fields" [header]="false">
          <tr st-table-row *ngFor="let userData of data">
             <td st-table-cell st-table-row-content>
                <label>{{userData.id}}</label>
@@ -40,116 +229,8 @@
          </tr>
       </st-table>
 
-      <h1>Simple table with fixed header</h1>
-      <st-table [fields]="fields" [sortable]="true" [fixedHeader]="true" qaTag="table-qa-tag">
-         <tr st-table-row *ngFor="let userData of data">
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.id}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.name}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.lastName}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.phone}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.company}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.completedProfile}}</label>
-            </td>
-            <td st-table-row-hover>
-               <i class="icon icon-arrow2_right"></i>
-            </td>
-         </tr>
-      </st-table>
-
-      <h1>Selectable table without hover menu and configured to not stand up rows when selected</h1>
-      <st-table [fields]="fields" [sortable]="true" [selectableAll]="true" [hasHoverMenu]="false" qaTag="table-qa-tag">
-         <tr st-table-row *ngFor="let userData of data; let i = index" [selected]="selectedTable1[i]" [standUpSelected]="false">
-            <td st-table-cell st-table-row-content>
-               <st-checkbox (change)="onSelectRow($event, i, selectedTable1)"></st-checkbox>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.id}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.name}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.lastName}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.phone}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.company}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.completedProfile}}</label>
-            </td>
-         </tr>
-      </st-table>
-
-      <h1>Selectable table without hover menu and configured to stand up rows when selected</h1>
-      <st-table [fields]="fields" [sortable]="true" [selectableAll]="true" [hasHoverMenu]="false" qaTag="table-qa-tag">
-         <tr st-table-row *ngFor="let userData of data; let i = index" [selected]="selectedTable2[i]" [standUpSelected]="true">
-            <td st-table-cell st-table-row-content>
-               <st-checkbox (change)="onSelectRow($event, i, selectedTable2)"></st-checkbox>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.id}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.name}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.lastName}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.phone}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.company}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.completedProfile}}</label>
-            </td>
-         </tr>
-      </st-table>
-
-      <h1>Simple table without header but with hover menu</h1>
-      <st-table [fields]="fields" [sortable]="true" [header]="false" qaTag="table-qa-tag">
-         <tr st-table-row *ngFor="let userData of data">
-            <td st-table-cell st-table-row-content>
-               <label class="example-pedro-test">{{userData.id}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.name}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.lastName}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.phone}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.company}}</label>
-            </td>
-            <td st-table-cell st-table-row-content>
-               <label>{{userData.completedProfile}}</label>
-            </td>
-            <td st-table-row-hover>
-               <i class="icon icon-arrow2_right"></i>
-            </td>
-         </tr>
-      </st-table>
-
-      <h1>Table with complex hover actions and the custom class 'separated rows'</h1>
-      <st-table [fields]="fields" [sortable]="true" customClasses="separated-rows" qaTag="table-qa-tag">
+      <h2 class="subtitle">Table with complex hover actions and the custom class 'separated rows'</h2>
+      <st-table [fields]="fields" [sortable]="false" customClasses="separated-rows" qaTag="table-qa-tag">
          <tr st-table-row *ngFor="let userData of data">
             <td st-table-cell st-table-row-content>
                <label>{{userData.id}}</label>
@@ -176,8 +257,8 @@
          </tr>
       </st-table>
 
-      <h1>Table with special content (charts, images)</h1>
-      <st-table [fields]="fields" [sortable]="true" qaTag="table-qa-tag">
+      <h2 class="subtitle">Table with special content (charts, images)</h2>
+      <st-table [fields]="fields" [hasHoverMenu]="false">
          <tr st-table-row *ngFor="let userData of data">
             <td st-table-cell st-table-row-content>
                <label>{{userData.id}}</label>
@@ -197,16 +278,17 @@
             <td st-table-cell st-table-row-content>
                <div style="width: 25px;  height: 25px;">
                   <svg viewBox="0 0 100 100" style="display: block; width: 100%;">
-                     <path d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94" stroke="#eee" stroke-width="1" fill-opacity="0"></path>
-                     <path d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94" stroke="rgb(55,181,228)" stroke-width="6" fill-opacity="0"
-                         style="stroke-dasharray: 295.416, 295.416; stroke-dashoffset: 59.0832;"></path>
+                     <path d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94" stroke="#eee" stroke-width="1"
+                           fill-opacity="0"></path>
+                     <path d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94" stroke="rgb(55,181,228)"
+                           stroke-width="6" fill-opacity="0"
+                           style="stroke-dasharray: 295.416, 295.416; stroke-dashoffset: 59.0832;"></path>
                   </svg>
                </div>
             </td>
-            <td st-table-row-hover>
-               <i class="icon icon-arrow2_right"></i>
-            </td>
          </tr>
       </st-table>
+
    </section>
+
 </st-docs>
