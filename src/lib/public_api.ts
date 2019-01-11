@@ -124,6 +124,7 @@ export {
    StHorizontalTabsModule
 } from './st-horizontal-tabs/st-horizontal-tabs.module';
 export {
+   StHorizontalTabStatus,
    StHorizontalTab,
    StHorizontalTabSchema
 } from './st-horizontal-tabs/st-horizontal-tabs.model';

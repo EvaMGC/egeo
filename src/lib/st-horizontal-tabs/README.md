@@ -4,16 +4,16 @@
 
 ## Inputs
 
-| Property     | Type              | Req   | Description                                                                                                       | Default |
-| ------------ | ----------------- | ----- | ----------------------------------------------------------------------------------------------------------------- | ------- |
-| activeOption | StHorizontalTab   | False | Current active option                                                                                             | ''      |
+| Property     | Type              | Req   | Description                                                                                                      | Default |
+| ------------ | ----------------- | ----- | ---------------------------------------------------------------------------------------------------------------- | ------- |
+| activeOption | StHorizontalTab   | False | Current active option                                                                                            | ''      |
 | options      | StHorizontalTab[] | True  | An array of StHorizontalTab objects (see below) that defines the links that will appear and that will be disabled | ''      |
-| qaTag        | String            | False | Prefix used to generate the id values for qa tests                                                                | ''      |
+| qaTag        | String            | False | Prefix used to generate the id values for qa tests                                                               | ''      |
 
 ## Outputs
 
-| Property      | Type            | Description                                                                                  |
-| ------------- | --------------- | -------------------------------------------------------------------------------------------- |
+| Property      | Type            | Description                                                                                 |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------- |
 | changedOption | StHorizontalTab | This event is emitted when active option has changed. It has the active option name as param |
 
 ## Example
@@ -27,7 +27,7 @@
 
 ## Models
 
-*Id and text of a tab* (StStHorizontalTab)
+*Id, text and optional status of a tab* (StStHorizontalTab)
 
 ```typescript
 

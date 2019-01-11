@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { StHorizontalTab } from '@stratio/egeo';
+import { StHorizontalTab, StHorizontalTabStatus } from '@stratio/egeo';
 
 @Component({
    selector: 'st-horizontal-tabs-demo',
@@ -24,9 +24,9 @@ export class StHorizontalTabsDemoComponent {
       component: 'lib/st-horizontal-tabs/st-horizontal-tabs.component.ts'
    };
    public options: StHorizontalTab[] = [
-      {id: 'overview', text: 'Overview'},
+      {id: 'overview', text: 'Overview', status: StHorizontalTabStatus.warning},
       {id: 'activity', text: 'Activity'},
-      {id: 'dashboard', text: 'Dashboard'},
+      {id: 'dashboard', text: 'Dashboard', status: StHorizontalTabStatus.error},
       {id: 'nodes', text: 'Nodes'}
    ];
 

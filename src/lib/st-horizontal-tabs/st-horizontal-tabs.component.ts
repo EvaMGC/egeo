@@ -8,11 +8,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import {
-   ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { findIndex } from 'lodash';
-import { StHorizontalTab } from './st-horizontal-tabs.model';
+import { StHorizontalTab, StHorizontalTabStatus } from './st-horizontal-tabs.model';
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 
 /**
@@ -22,7 +20,7 @@ import { StEgeo, StRequired } from '../decorators/require-decorators';
  *
  * @model
  *
- *   [Id and text of a tab] {./st-horizontal-tabs.model.ts#StStHorizontalTab}
+ *   [Id, text and optional status of a tab] {./st-horizontal-tabs.model.ts#StStHorizontalTab}
  *
  * @example
  *
@@ -73,7 +71,7 @@ export class StHorizontalTabsComponent implements OnInit {
       this.changedOption.emit(option);
    }
 
-   private optionPosition(option: StHorizontalTab): number {
-      return findIndex(this.options, (o) => o.id === option.id);
+   getTabStatus(tab: StHorizontalTab): string {
+      return tab.status ? StHorizontalTabStatus[tab.status] : '';
    }
 }

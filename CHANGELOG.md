@@ -5,7 +5,8 @@
 **New features:**
 
 * st-filter-selector: Create component
-* st-table: Allow display tables with white and default themes
+* st-table: Allow to display tables with white and default themes
+* st-horizontal-tabs: Allow to add classes to tabs according to its status
 
 **Breaking changes:**
 

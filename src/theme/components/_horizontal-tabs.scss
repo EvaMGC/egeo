@@ -14,6 +14,7 @@
 .st-horizontal-tabs {
    border-bottom: solid 1px $neutral-06;
 }
+
 .tab {
    color: $action-primary-default;
    text-decoration: none;
@@ -29,6 +30,26 @@
    &:focus {
       text-decoration: none;
       outline: none;
+   }
+
+   &.warning,   &.error{
+      &:after {
+         font-family: $egeo-stratio-icons;
+         font-size: $egeo-font-size-xlarge;
+         content: "\e622";
+         display: inline-block;
+      }
+   }
+   &.warning {
+      &:after {
+         color: $status-warning-default;
+      }
+   }
+
+   &.error {
+      &:after {
+         color: $status-critical-default;
+      }
    }
 }
 

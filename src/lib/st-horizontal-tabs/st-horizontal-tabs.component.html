@@ -12,11 +12,9 @@
 -->
 <nav class="st-horizontal-tabs">
    <a *ngFor="let option of options; let i = index;"
-      class="tab"
+      class="tab {{getTabStatus(option)}}"
       (click)="activateOption(option)"
       href="javascript:void(0)"
       [ngClass]="{'tab--active': isActive(option)}"
-      [attr.id]="qaTag + '-tab-' + i">
-      {{option.text}}
-   </a>
+      [attr.id]="qaTag + '-tab-' + i">{{option.text}}</a>
 </nav>

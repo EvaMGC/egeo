@@ -8,10 +8,12 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { cloneDeep as _cloneDeep } from 'lodash';
 
-import { StHorizontalTab } from './st-horizontal-tabs.model';
+import { StHorizontalTab, StHorizontalTabStatus } from './st-horizontal-tabs.model';
 import { StHorizontalTabsComponent } from './st-horizontal-tabs.component';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 
 describe('StHorizontalTabsComponent', () => {
@@ -19,6 +21,9 @@ describe('StHorizontalTabsComponent', () => {
       TestBed.configureTestingModule({
          declarations: [StHorizontalTabsComponent]
       })
+         .overrideComponent(StHorizontalTabsComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
@@ -53,7 +58,6 @@ describe('StHorizontalTabsComponent', () => {
 
          expect(() => component.ngOnInit()).toThrowError('st-horizontal-tabs-component: field options is a required field');
       });
-
 
       it('only if option list has one option at least and if active tab is not defined, first option is activated', () => {
          // without options
@@ -107,5 +111,16 @@ describe('StHorizontalTabsComponent', () => {
 
          expect(component.changedOption.emit).toHaveBeenCalledWith(fakeOptions[0]);
       });
+   });
+
+   it('should be able to add classes to tabs according to its status', () => {
+      component.options = _cloneDeep(fakeOptions);
+      component.options[1].status = StHorizontalTabStatus.warning;
+      component.options[2].status = StHorizontalTabStatus.error;
+
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelectorAll('.tab')[1].classList).toContain('warning');
+      expect(fixture.nativeElement.querySelectorAll('.tab')[2].classList).toContain('error');
    });
 });

@@ -10,12 +10,16 @@
  */
 import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
 
+export enum StHorizontalTabStatus { warning = <any> 'warning', error = <any> 'error' }
+
 export interface StHorizontalTab {
    id: string;
    text: string;
+   status?: StHorizontalTabStatus;
 }
 
 export interface StHorizontalTabSchema {
    id: string;
    text: TranslateableElement;
 }
+
