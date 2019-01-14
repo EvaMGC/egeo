@@ -11,7 +11,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { Order, ORDER_TYPE } from './shared/order';
@@ -282,22 +281,23 @@ describe('StTableComponent', () => {
 
 
    describe ('it should fix its header in order to be displayed although page scrolling', () => {
-
-      it ('if input "maxHeight" is specified, header is fixed and table height will be applied in pixels', () => {
-         component.maxHeight = 200;
-         fixture.detectChanges();
-
-         expect(fixture.debugElement.query(By.css('table')).styles['max-height']).toBe('200px');
+      it ('if input "fixedHeader" is not specified, header is not fixed', () => {
+         expect(fixture.nativeElement.querySelector('table').classList).not.toContain('st-table--fixed-header');
       });
 
-      it ('if input "maxHeight" is not specified, header is not fixed', () => {
-         component.maxHeight = undefined;
+      it ('if input "fixedHeader" is true, header is fixed', () => {
+         component.fixedHeader = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('table').classList).toContain('st-table--fixed-header');
+      });
+
+      it ('if input "fixedHeader" is false, header is not fixed', () => {
+         component.fixedHeader = false;
          fixture.detectChanges();
 
          expect(fixture.nativeElement.querySelector('table').classList).not.toContain('st-table--fixed-header');
-         expect(fixture.debugElement.query(By.css('table')).styles['max-height']).toBeNull();
       });
-
    });
 
    it ('Custom classes can be added to the table', () => {

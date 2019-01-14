@@ -84,9 +84,8 @@ export class StTableComponent implements OnInit {
    /** @Input {string} [customClasses=] Classes for adding styles to table tag from outside. These can be: separated-rows */
    @Input() customClasses: string;
 
-   /** @Input {number} [maxHeight=] Maximum height for tables with fixed header. This input is needed for tables with header fixed */
-   @Input() maxHeight: number;
-
+   /** @Input {boolean} [fixedHeader=false] Boolean to fix the table header */
+   @Input() fixedHeader: boolean = false;
 
    /** @Input {boolean} [selectedAll=false] It specifies if all rows are selected */
    @Input()
@@ -140,7 +139,7 @@ export class StTableComponent implements OnInit {
 
    public getClasses(): any {
       let classes: any = {};
-      if ( this.maxHeight) {
+      if ( this.fixedHeader) {
          classes['st-table--fixed-header'] = true;
       }
       classes[this.customClasses] = this.customClasses;
