@@ -13,7 +13,7 @@
 | selectableAll | Boolean         | False | Boolean to show or hide a checkbox in the header to select or deselect all rows                                                                                               | false   |
 | currentOrder  | Order           | False | It specifies what is the current order applied to the table                                                                                                                  | ''      |
 | customClasses | String          | False | Classes for adding styles to table tag from outside. These can be: separated-rows                                                                                            |         |
-| maxHeight     | Number          | False | Maximum height for tables with fixed header. This input is needed for tables with header fixed                                                                               |         |
+| fixedHeader   | Boolean         | False | Boolean to fix the table header                                                                                                                                              | false   |
 | selectedAll   | Boolean         | False | It specifies if all rows are selected                                                                                                                                        | false   |
 | hasHoverMenu  | Boolean         | False | It specifies if a menu has to be displayed when user puts the mouse over the rows. Remember to add a cell with the selector st-table-row-hover for adding content to the menu | true    |
 
@@ -30,8 +30,7 @@
 ```html
 <st-table [fields]="fields"
       [sortable]="true"
-      (changeOrder)="yourFunctionToOrder($event)"
-      qaTag="table-qa-tag">
+      (changeOrder)="yourFunctionToOrder($event)">
     <tr st-table-row
           ngFor="let userData of data">
         <td st-table-cell

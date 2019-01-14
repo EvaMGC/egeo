@@ -14,7 +14,7 @@
 
 **Breaking changes:**
 
-* st-table: Remove 'fixedHeader' input. It is changed to 'maxHeight' in order to specify the maximum height to table
+* st-table: Checkbox 'Select all' is added to the first header field inside of taking a separated cell
 
 **Fixed bugs:**
 

@@ -177,8 +177,9 @@
 
 
       <h2 class="subtitle">Table with fixed header</h2>
+      <p class="paragraph">In order to fix the header, it is needed to set the input 'fixedHeader' to true and specify to st-table tag from outside <i><b>"display:flex; height: 'the desired height'</b></i>"</p>
 
-      <st-table [fields]="fields" [sortable]="false" maxHeight="350" [hasHoverMenu]="false">
+      <st-table [fields]="fields" [sortable]="false" [fixedHeader]="true" [hasHoverMenu]="false" class="table--fixed-header">
          <tr st-table-row *ngFor="let userData of data">
             <td st-table-cell st-table-row-content>
                <label>{{userData.id}}</label>

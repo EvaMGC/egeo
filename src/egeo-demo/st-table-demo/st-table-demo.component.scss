@@ -16,11 +16,13 @@ td > .icon-ellipsis {
    font-size: 24px;
 }
 
-.table--fixed-header {
-   max-height: 200px;
-}
-
-
 .button-toolbar {
    margin-right: 6px;
+}
+
+.table {
+   &--fixed-header {
+      display: flex;
+      height: 350px;
+   }
 }
