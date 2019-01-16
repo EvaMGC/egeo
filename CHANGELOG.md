@@ -1,10 +1,6 @@
 # Changelog
 
-## 16.0.0 (upcoming)
-
-* Pending changelog
-
-## 15.0.0 (upcoming)
+## 15.0.1 (January 14, 2019)
 
 **New features:**
 
@@ -23,6 +19,8 @@
 **Others:**
 
 * Web:  Show the examples source code in Egeo Web
+
+* Because of technical problems, the 15.0.0 release could not be correctly released. Therefore, version 15.0.1 is the first available 15.0.x version.
 
 
 ## 14.0.0 (December 19, 2018)

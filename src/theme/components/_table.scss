@@ -55,7 +55,7 @@
    text-align: left;
    color: $neutral-13;
    border-bottom: 1px solid $neutral-04;
-   transition: all ease-in-out 0.3s;
+   transition: background-color ease-in-out 0.3s;
 
    &:hover {
       td.clickable,

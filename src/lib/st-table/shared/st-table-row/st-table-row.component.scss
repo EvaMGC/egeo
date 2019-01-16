@@ -14,11 +14,9 @@
 }
 
 .hover-menu {
-   width: 100%;
-   float: right;
    opacity: 0;
    padding: 20px;
-   text-align: right;
+   position: relative;
 }
 
 .hover-menu--show {
