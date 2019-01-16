@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.0.2 (upcoming)
+
+**Fixed bugs:**
+
+* st-table: Remove transition for all attributes in order to prevent a wrong behaviour
+
+
 ## 15.0.1 (January 14, 2019)
 
 **New features:**
