@@ -43,6 +43,11 @@
    <h1>Title mode</h1>
    <st-breadcrumbs [options]="options" (select)="outputEmitter($event)" mode="title" qaTag="breadcrumbs4" [elementsToShow]="4">
    </st-breadcrumbs>
+   <br>
+   <h1>Breadcrumb with a long text</h1>
+   <st-breadcrumbs [options]="options" (select)="outputEmitter($event)" mode="title" qaTag="breadcrumbs5" 
+      [ngStyle]="{'width': '250px', 'display':'flex', 'border': '1px solid #cdcdcd','padding': '5px'}">
+   </st-breadcrumbs>
 
    <br>
    <br>

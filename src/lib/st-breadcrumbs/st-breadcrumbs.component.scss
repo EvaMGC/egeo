@@ -9,6 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 ul {
+   text-overflow: ellipsis;
+   overflow: hidden;
    list-style: none;
    margin: 0;
    padding: 0;

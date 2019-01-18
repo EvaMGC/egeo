@@ -4,7 +4,7 @@
 
 **Fixed bugs:**
 
-* st-modal: Fix style bug when a long text is displayed
+* st-breadcrumb, st-modal: Fix style bug when a long text displays displaced section
 * st-two-list: Searcher disappears when user is typing and introduces a text without results
 
 
