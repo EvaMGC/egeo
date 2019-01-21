@@ -11,6 +11,7 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StDropDownMenuItem, StDropDownVisualMode } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { StPopOffset, StPopPlacement } from '../st-pop/st-pop.model';
 
 /**
  * @description {Component} [Filter selector]
@@ -46,6 +47,10 @@ export class StFilterSelectorComponent implements OnInit {
    @Input() filterList: StDropDownMenuItem[] = [];
    /** @Input {StDropDownMenuItem} [selected=] Selected option */
    @Input() selected: StDropDownMenuItem;
+   /** @Input {StPopOffset} [offset={x: 0, y: 10}] Position for the menu */
+   @Input() offset: StPopOffset = {x: 0, y: 10};
+   /** @Input {StPopPlacement} [placement=StPopPlacement.BOTTOM_START] Possible positions of menu with respect element to attach */
+   @Input() placement: StPopPlacement = StPopPlacement.BOTTOM_START;
    /** @Output {StDropDownMenuItem} [clickFilter=] Event emitted when an option is selected */
    @Output() clickFilter: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
    /** @Output {boolean} [changeFilterVisibility=] Event emitted when visibility of options changes */

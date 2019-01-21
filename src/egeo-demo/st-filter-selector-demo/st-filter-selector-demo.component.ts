@@ -8,13 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component } from '@angular/core';
-import { StDropDownMenuItem, StHorizontalTab } from '@stratio/egeo';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { StDropDownMenuItem } from '@stratio/egeo';
 
 @Component({
    selector: 'st-horizontal-tabs-demo',
    templateUrl: './st-filter-selector-demo.component.html',
-   styleUrls: ['./st-filter-selector-demo.component.scss']
+   styleUrls: ['./st-filter-selector-demo.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class StFilterSelectorDemoComponent {
@@ -33,6 +34,15 @@ export class StFilterSelectorDemoComponent {
 
    public selectedFilter: StDropDownMenuItem[] = [];
    public openFilter: boolean[] = [];
+
+   public placementOptions: StDropDownMenuItem[] = [
+      {label: 'Left', value: 'left'},
+      {label: 'Right', value: 'right'}
+   ];
+
+   constructor(public cd: ChangeDetectorRef) {
+
+   }
 
    public onFilter(selected: StDropDownMenuItem, index: number): void {
       this.selectedFilter[index] = selected;

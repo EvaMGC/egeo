@@ -10,13 +10,17 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StDocsModule, StFilterSelectorModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StFilterSelectorModule, StInputModule, StSelectModule } from '@stratio/egeo';
 
 import { StFilterSelectorDemoComponent } from './st-filter-selector-demo.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
    imports: [
       CommonModule,
+      FormsModule,
+      StInputModule,
+      StSelectModule,
       StFilterSelectorModule,
       StDemoGeneratorModule.withComponents({
          components: [StFilterSelectorDemoComponent]

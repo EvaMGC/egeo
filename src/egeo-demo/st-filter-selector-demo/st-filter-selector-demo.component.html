@@ -15,7 +15,8 @@
       <p class="introduction">This component allows user to choose between a list of filter options</p>
       <span class="separator"></span>
       <h1 class="title">Design and behaviour</h1>
-      <p class="paragraph">It can be stylized from outside in order to be more flexible. Moreover, if there is not any selected option, it will  </p>
+      <p class="paragraph">It can be stylized from outside in order to be more flexible. Moreover, if there is not any
+         selected option, it will emit an event to activate the first option from outside </p>
       <div class="row col-sm-12">
          <st-filter-selector class="filter-1 col-sm-4"
                              [filterList]="filterList"
@@ -42,6 +43,30 @@
                              (clickFilter)="onFilter($event, 2)"
                              (changeFilterVisibility)="onChangeFilterVisibility($event, 2)"
                              (closeFilter)="onCloseFilter(2)">
+         </st-filter-selector>
+      </div>
+      <span class="separator"></span>
+      <p class="paragraph">Moreover, it is possible to place the menu in a specific position through the input <b>offset</b>
+      </p>
+      <p class="paragraph">Next, you can test it</p>
+      <div class="row col-sm-12">
+
+         <div class="filter-3 col-sm-4">
+            <st-input [(ngModel)]="x" fieldType="number" label="Horizontal position"></st-input>
+            <st-input [(ngModel)]="y" fieldType="number" label="Vertical position"></st-input>
+            <st-select [options]="placementOptions" [(ngModel)]="placement" class="st-form-field">
+            </st-select>
+         </div>
+
+         <st-filter-selector class="filter-3 col-sm-4"
+                             [filterList]="filterList"
+                             [openFilter]="openFilter[3]"
+                             [offset]="{x: x || 0, y: y || 0}"
+                             [selected]="selectedFilter[3]"
+                             (clickFilter)="onFilter($event, 3)"
+                             (change)="cd.markForCheck()"
+                             (changeFilterVisibility)="onChangeFilterVisibility($event, 3)"
+                          >
          </st-filter-selector>
       </div>
    </section>

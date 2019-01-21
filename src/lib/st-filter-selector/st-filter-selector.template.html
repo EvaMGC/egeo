@@ -15,10 +15,11 @@
    class="st-filter-selector"
    [items]="filterList"
    attr.id="filterListId"
-   [offset]="{x: 0, y: 10}"
    [active]="openFilter"
    [visualMode]="sectionMenuVisualMode"
    (change)="onClickFilter($event)"
+   [offset]="offset"
+   [placement]="placement"
    (clickOutside)="onCloseFilter()">
    <div (click)="onChangeFilterVisibility()" class="filter-title">
       <span>{{ selected?.label }}</span>
