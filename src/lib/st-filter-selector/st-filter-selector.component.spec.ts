@@ -56,13 +56,13 @@ describe('FilterSelectorComponent', () => {
       });
    });
 
-   it('If there is not any selected filter, it should emit and event to select the first option', () => {
+   it('If there is not any selected filter, it should emit and event to select the value of the first option', () => {
       spyOn(component.clickFilter, 'emit');
       component.selected = undefined;
       component.ngOnInit();
       fixture.detectChanges();
 
-      expect(component.clickFilter.emit).toHaveBeenCalledWith(fakeFilters[0]);
+      expect(component.clickFilter.emit).toHaveBeenCalledWith(fakeFilters[0].value);
    });
 
    it('Should display the filters', () => {
@@ -96,7 +96,7 @@ describe('FilterSelectorComponent', () => {
 
    describe('When user clicks on a filter item', () => {
 
-      it('Should emit an event', () => {
+      it('Should emit an event with its value', () => {
          spyOn(component.clickFilter, 'emit');
          component.openFilter = true;
          fixture.detectChanges();
@@ -104,7 +104,7 @@ describe('FilterSelectorComponent', () => {
          fixture.nativeElement.querySelectorAll('.st-dropdown-menu-item')[2].click();
          fixture.detectChanges();
 
-         expect(component.clickFilter.emit).toHaveBeenCalledWith(component.filterList[2]);
+         expect(component.clickFilter.emit).toHaveBeenCalledWith(component.filterList[2].value);
       });
    });
 });

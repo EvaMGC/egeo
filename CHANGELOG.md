@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.0.3 (upcoming)
+
+**Fixed bugs:**
+
+* st-filter-selector: Emit value of the selected option inside of the entire one.
+
+
 ## 15.0.2 (January 16, 2019)
 
 **Fixed bugs:**

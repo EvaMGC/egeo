@@ -15,7 +15,7 @@ import { StDropDownMenuItem, StDropDownVisualMode } from '../st-dropdown-menu/st
 /**
  * @description {Component} [Filter selector]
  *
- * The filter selector allows display a filter with a list of options
+ * The filter selector allows to display a filter with a list of options
  *
  * @example
  *
@@ -25,7 +25,7 @@ import { StDropDownMenuItem, StDropDownVisualMode } from '../st-dropdown-menu/st
  * <st-filter-selector
  *    [filterList]="filter"
  *    [openFilter]="openFilter"
- *    [selected]="selectedFilter"
+ *    [selected]="selectedFilter.value"
  *    (clickFilter)="onFilter($event)"
  *    (changeFilterVisibility)="onChangeFilterVisibility()"
  *    (closeFilter)="onCloseFilter()">
@@ -44,8 +44,8 @@ export class StFilterSelectorComponent implements OnInit {
    @Input() openFilter: boolean = false;
    /** @Input {StDropDownMenuItem[]} [filterList=] List of options */
    @Input() filterList: StDropDownMenuItem[] = [];
-   /** @Input {StDropDownMenuItem} [selected=] Selected option */
-   @Input() selected: StDropDownMenuItem;
+   /** @Input {any} [selected=] Value of the selected option */
+   @Input() selected: any;
    /** @Output {StDropDownMenuItem} [clickFilter=] Event emitted when an option is selected */
    @Output() clickFilter: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
    /** @Output {boolean} [changeFilterVisibility=] Event emitted when visibility of options changes */
@@ -57,12 +57,12 @@ export class StFilterSelectorComponent implements OnInit {
 
    ngOnInit(): void {
       if (!this.selected) {
-         this.clickFilter.emit(this.filterList[0]);
+         this.clickFilter.emit(this.filterList[0].value);
       }
    }
 
    onClickFilter(selectedFilter: StDropDownMenuItem): void {
-      this.clickFilter.emit(selectedFilter);
+      this.clickFilter.emit(selectedFilter.value);
    }
 
    onChangeFilterVisibility(): void {

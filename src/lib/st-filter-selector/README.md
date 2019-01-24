@@ -1,6 +1,6 @@
 # Filter selector (Component)
 
-   The filter selector allows display a filter with a list of options
+   The filter selector allows to display a filter with a list of options
 
 ## Inputs
 
@@ -8,7 +8,7 @@
 | ---------- | -------------------- | ----- | --------------------------------------------------------------------------- | ------- |
 | openFilter | Boolean              | False | This boolean is needed to specify the status of the filter (open or closed) | false   |
 | filterList | StDropDownMenuItem[] | False | List of options                                                             |         |
-| selected   | StDropDownMenuItem   | False | Selected option                                                             |         |
+| selected   | Any                  | False | Value of the selected option                                                |         |
 
 ## Outputs
 
@@ -24,7 +24,7 @@
 ```html
 <st-filter-selector [filterList]="filter"
       [openFilter]="openFilter"
-      [selected]="selectedFilters[index]"
+      [selected]="selectedFilter"
       (clickFilter)="onFilter($event)"
       (changeFilterVisibility)="onChangeFilterVisibility()"
       (closeFilter)="onCloseFilter()">
