@@ -11,7 +11,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
-import { StEgeo, StRequired } from '../../decorators/require-decorators';
+import { StRequired } from '../../decorators/require-decorators';
 import { StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from '../st-two-list-selection.model';
 
 @Component({

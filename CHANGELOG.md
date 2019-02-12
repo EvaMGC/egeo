@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.0.3 (upcoming)
+
+**Fixed bugs:**
+
+* st-two-list: Searcher disappears when user is typing and introduces a text without results
+
+
 ## 15.0.2 (January 16, 2019)
 
 **Fixed bugs:**

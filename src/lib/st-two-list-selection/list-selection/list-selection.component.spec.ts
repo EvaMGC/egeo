@@ -28,18 +28,15 @@ import { StSearchModule } from '../../st-search/st-search.module';
 import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
 
 // Mdel
-import { StTwoListSelectionConfig, StTwoListSelectionElement } from '../st-two-list-selection.model';
+import { StTwoListSelectionElement } from '../st-two-list-selection.model';
 
 let comp: ListSelectionComponent;
 let fixture: ComponentFixture<ListSelectionComponent>;
-let de: DebugElement;
 
-let listTitle: 'All';
-let listSearchPlaceholder: 'Search all';
 let qaTag: string = 'st-two-list-test';
 
 function generateData(numData: number): StTwoListSelectionElement[] {
-   return _times(10, (i) => {
+   return _times(numData, (i) => {
       return {
          id: i,
          name: i > 5 ? `${i}Element` : `Element${i}`

@@ -20,8 +20,8 @@ import { StTwoListSelectionElement } from './st-two-list-selection.model';
 let cd;
 let changeEmitter;
 
-function generateData(): StTwoListSelectionElement[] {
-   return _times(10, (i) => {
+function generateData(numData: number): StTwoListSelectionElement[] {
+   return _times(numData, (i) => {
       return {
          id: i,
          name: i > 5 ? `${i}Element` : `Element${i}`
@@ -29,7 +29,7 @@ function generateData(): StTwoListSelectionElement[] {
    });
 }
 
-let originalAllElements: StTwoListSelectionElement[] = generateData();
+let originalAllElements: StTwoListSelectionElement[] = generateData(10);
 let selectedElements: StTwoListSelectionElement[] = [];
 
 describe('[StTwoListSelection]', () => {
