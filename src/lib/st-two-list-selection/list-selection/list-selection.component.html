@@ -14,7 +14,7 @@
    <div class="list-selection__rectangle">
       <p class="title sth-two-list__list-title" [ngClass]="{'sth-two-list__important-title': important}">{{title}}</p>
       <p class="subtitle sth-two-list__list-subtitle">{{subtitle}}</p>
-      <st-search [disabled]="list.length === 0" class="search" *ngIf="hasSearch && ( list && list.length >= showSearchNumber) || (hasSearch && !showSearchNumber)" [placeholder]="searchPlaceholder" [qaTag]="searchQaTag" (search)="search.emit($event)"></st-search>
+      <st-search class="search" *ngIf="hasSearch && ( list && list.length >= showSearchNumber) || (hasSearch && !showSearchNumber)" [placeholder]="searchPlaceholder" [qaTag]="searchQaTag" (search)="search.emit($event)"></st-search>
    </div>
    <list-item [disabled]="list.length === 0" class="list-selection__list-item-all" *ngIf="hasAllList && scrollItems" [item]="itemAll"
       (selectItem)="selectItem.emit(itemAll);" [editable]="editable" [qaTag]="listCheckAllQaTag"></list-item>
