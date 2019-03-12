@@ -2,6 +2,10 @@
 
 ## 16.0.0 (upcoming)
 
+**New features:**
+
+* st-search: Allow to differentiate search events by its origin
+
 **Fixed bugs:**
 
 * st-breadcrumb, st-modal: Fix style bug when a long text displays displaced section

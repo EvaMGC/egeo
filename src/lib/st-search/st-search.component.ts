@@ -10,18 +10,18 @@
  */
 import {
    ChangeDetectionStrategy,
+   ChangeDetectorRef,
    Component,
+   ElementRef,
    EventEmitter,
    Input,
    OnChanges,
    OnDestroy,
    OnInit,
    Output,
-   SimpleChanges,
    Renderer2,
-   ChangeDetectorRef,
-   ViewChild,
-   ElementRef
+   SimpleChanges,
+   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -29,6 +29,7 @@ import { Subscription } from 'rxjs';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { EventWindowManager } from '../utils/event-window-manager';
 import { debounceTime } from 'rxjs/operators';
+import { StSearchEvent, StSearchEventOrigin } from './st-search.model';
 
 /**
  * @description {Component} [Search]
@@ -103,7 +104,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
    /** @Output { Object(filter?: string, text: string)} [search=''] Event emitted when search is launched. It contains
     * the text typed by the user and the filter value selected (only if filter is displayed)
     */
-   @Output() search: EventEmitter<{filter?: string, text: string}> = new EventEmitter<{filter?: string, text: string}>();
+   @Output() search: EventEmitter<StSearchEvent> = new EventEmitter<StSearchEvent>();
 
    public searchBox: FormControl = new FormControl();
    public showClear: boolean;
@@ -144,7 +145,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
    }
 
    public onChangeFilter(): void {
-      this.emitValue(false);
+      this.emitValue(false, StSearchEventOrigin.FILTER);
    }
 
    public ngOnDestroy(): void {
@@ -157,10 +158,10 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
       this.closeElement();
    }
 
-   public launchSearch(force: boolean): void {
+   public launchSearch(force: boolean, origin: StSearchEventOrigin): void {
       if (this.canSearch()) {
          this.showAutoCompleteMenu();
-         this.emitValue(force);
+         this.emitValue(force, origin);
       } else {
          this.closeElement();
       }
@@ -169,7 +170,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
    public onKeyPress(event: KeyboardEvent): void {
       let key: number = event.keyCode || event.which;
       if (key === 13) {
-         this.launchSearch(true);
+         this.launchSearch(true, StSearchEventOrigin.ENTER);
       }
    }
 
@@ -179,7 +180,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
          this.searchBox.setValue(item.label);
          this.cd.markForCheck();
          this.closeElement();
-         this.emitValue(true);
+         this.emitValue(true, StSearchEventOrigin.LIST);
          this.manageSubscription();
       }
    }
@@ -187,13 +188,13 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
    public clearInput(): void {
       this.searchBox.setValue('');
       this.closeElement();
-      this.emitValue(true);
+      this.emitValue(true, StSearchEventOrigin.INPUT);
    }
 
-   private emitValue(force: boolean): void {
+   private emitValue(force: boolean, origin: StSearchEventOrigin): void {
       if (this.isEqualPrevious(force)) {
          this.lastEmittedText = this.searchBox.value;
-         let newSearch: {filter?: string, text: string} = {text: this.lastEmittedText || ''};
+         let newSearch: StSearchEvent = {text: this.lastEmittedText || '', origin: origin};
          if (this.filter) {
             newSearch.filter = this.filter;
          }
@@ -272,7 +273,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
          this.subscriptionSearch = this.searchBox
             .valueChanges.pipe(
             debounceTime(this.debounce))
-            .subscribe((event) => this.launchSearch(false));
+            .subscribe((event) => this.launchSearch(false,  StSearchEventOrigin.INPUT));
       }
    }
 }

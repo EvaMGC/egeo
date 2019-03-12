@@ -210,6 +210,10 @@ export {
 
 // Search
 export { StSearchModule } from './st-search/st-search.module';
+export {
+   StSearchEvent,
+   StSearchEventOrigin
+} from './st-search/st-search.model';
 
 // Select
 export { StSelectModule } from './st-select/st-select.module';
