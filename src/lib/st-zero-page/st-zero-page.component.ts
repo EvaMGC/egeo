@@ -8,6 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 /**

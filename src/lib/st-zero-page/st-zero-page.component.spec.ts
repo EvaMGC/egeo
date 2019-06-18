@@ -8,6 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StZeroPageComponent } from './st-zero-page.component';

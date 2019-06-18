@@ -58,6 +58,9 @@ export { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 // Bubble
 export { StBubbleModule } from './st-bubble/st-bubble.module';
 
+// Color picker
+export { StColorPickerModule } from './st-color-picker/st-color-picker.module';
+
 // Checkbox
 export { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 

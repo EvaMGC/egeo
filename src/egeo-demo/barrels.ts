@@ -53,6 +53,7 @@ import { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';
 import { StDraggableCardDemoModule } from './st-draggable-card-demo/st-draggable-card-demo.module';
 import { StFilterSelectorDemoModule } from './st-filter-selector-demo/st-filter-selector-demo.module';
 import { StZeroPageDemoModule } from './st-zero-page-demo/st-zero-page-demo.module';
+import { StColorPickerDemoModule } from './st-color-picker-demo/st-color-picker-demo.module';
 
 
 export const EGEO_DEMO_MODULES: any[] = [
@@ -62,6 +63,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StBubbleDemoModule,
    StButtonDemoModule,
    StCheckboxDemoModule,
+   StColorPickerDemoModule,
    StDraggableCardDemoModule,
    StDropdownMenuDemoModule,
    StFileButtonDemoModule,

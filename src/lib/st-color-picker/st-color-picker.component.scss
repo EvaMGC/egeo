@@ -9,20 +9,27 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+.st-color-picker {
 
-import { StZeroPageComponent } from './st-zero-page.component';
+   .label {
+      display: block;
+      margin-bottom: 15px;
+   }
 
-@NgModule({
-   imports: [
-      CommonModule
-   ],
-   declarations: [
-      StZeroPageComponent
-   ],
-   exports: [StZeroPageComponent]
-})
+   .palette {
+      display: flex;
 
-export class StZeroPageModule {
+      .color-ball {
+         width: 36px;
+         height: 36px;
+         border-radius: 50px;
+         margin-left: 15px;
+         cursor: pointer;
+
+         &:first-child {
+            margin-left: 0;
+         }
+      }
+   }
+
 }

@@ -2,7 +2,10 @@
 
 ## 16.5.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-color-picker: Create component
+
 
 ## 16.4.0 (June 10, 2019)
 

@@ -8,21 +8,20 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { StDemoGeneratorModule, StDocsModule, StColorPickerModule } from '@stratio/egeo';
 
-import { StZeroPageComponent } from './st-zero-page.component';
+import { StColorPickerDemoComponent } from './st-color-picker-demo';
+
 
 @NgModule({
    imports: [
-      CommonModule
+      CommonModule,
+      StColorPickerModule,
+      StDemoGeneratorModule.withComponents({ components: [StColorPickerDemoComponent] }),
+      StDocsModule
    ],
-   declarations: [
-      StZeroPageComponent
-   ],
-   exports: [StZeroPageComponent]
+   declarations: [StColorPickerDemoComponent]
 })
-
-export class StZeroPageModule {
-}
+export class StColorPickerDemoModule { }

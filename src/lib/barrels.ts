@@ -55,6 +55,7 @@ import { StWidgetModule } from './st-widget/st-widget.module';
 import { StFormFieldModule } from './st-form/st-form-field/st-form-field.module';
 import { StForegroundNotificationsModule } from './st-foreground-notifications/st-foreground-notifications.module';
 import { StZeroPageModule } from './st-zero-page/st-zero-page.module';
+import { StColorPickerModule } from './st-color-picker/st-color-picker.module';
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -62,6 +63,7 @@ export const DECLARATIONS: any[] = [
    StBreadcrumbsModule,
    StBubbleModule,
    StCheckboxModule,
+   StColorPickerModule,
    StDocsModule,
    StDraggableCardModule,
    StDropdownMenuModule,

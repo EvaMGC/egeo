@@ -9,20 +9,16 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { StZeroPageComponent } from './st-zero-page.component';
+import { StColorPickerComponent } from './st-color-picker.component';
+import { StLabelModule } from '../st-label/st-label.module';
 
 @NgModule({
-   imports: [
-      CommonModule
-   ],
-   declarations: [
-      StZeroPageComponent
-   ],
-   exports: [StZeroPageComponent]
+   imports: [CommonModule, StLabelModule],
+   declarations: [StColorPickerComponent],
+   exports: [StColorPickerComponent]
 })
-
-export class StZeroPageModule {
+export class StColorPickerModule {
 }
