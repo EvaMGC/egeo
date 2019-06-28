@@ -10,9 +10,13 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { StColorPickerComponent } from './st-color-picker.component';
+
+const fakePalette: string[] = ['#128bdd', '#999999', '#fa9330', '#fdbd2b', '#2cce93', '#cd89d2', '#0f1b27', '#8898a7'];
 
 describe('StColorPickerComponent', () => {
    let fixture: ComponentFixture<StColorPickerComponent>;
@@ -34,6 +38,7 @@ describe('StColorPickerComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          declarations: [StColorPickerComponent],
+         imports: [ReactiveFormsModule, FormsModule],
          providers: [],
          schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();  // compile template and css
@@ -43,7 +48,7 @@ describe('StColorPickerComponent', () => {
       fixture = TestBed.createComponent(StColorPickerComponent);
       component = fixture.componentInstance;
       nativeElement = fixture.nativeElement;
-      component.palette = ['#128bdd', '#999999', '#fa9330', '#fdbd2b', '#2cce93', '#cd89d2', '#0f1b27', '#8898a7'];
+      component.palette = fakePalette;
       fixture.detectChanges();
    });
 
@@ -68,5 +73,68 @@ describe('StColorPickerComponent', () => {
 
       expect(component.change.emit).toHaveBeenCalledWith(component.palette[2]);
    });
+});
 
+
+describe('Color picker with FormControl', () => {
+
+   @Component({
+      template: `
+         <st-color-picker [formControl]="formControl" [palette]="fakePalette">
+         </st-color-picker>
+      `
+   })
+   class ColorPicker {
+      formControl: FormControl = new FormControl();
+   }
+
+   let formComponent: ColorPicker;
+   let debugElement: DebugElement;
+   let colorPickerInstance: StColorPickerComponent;
+   let fixture: ComponentFixture<ColorPicker>;
+
+   beforeEach(async(() => {
+      TestBed.configureTestingModule({
+         imports: [
+            ReactiveFormsModule,
+            FormsModule
+         ],
+         declarations: [StColorPickerComponent, ColorPicker]
+      })
+         .compileComponents();  // compile template and css
+   }));
+
+   beforeEach(() => {
+      fixture = TestBed.createComponent(ColorPicker);
+      debugElement = fixture.debugElement.query(By.directive(StColorPickerComponent));
+      colorPickerInstance = debugElement.injector.get(StColorPickerComponent);
+      formComponent = fixture.componentInstance;
+   });
+
+   describe('When form control marked as disabled', () => {
+
+      it('Should toggle the disabled state', () => {
+         spyOn(colorPickerInstance, 'setDisabledState');
+
+         formComponent.formControl.disable();
+         fixture.detectChanges();
+         expect(colorPickerInstance.setDisabledState).toHaveBeenCalledWith(true);
+
+         formComponent.formControl.enable();
+         fixture.detectChanges();
+
+         expect(colorPickerInstance.setDisabledState).toHaveBeenCalledWith(false);
+      });
+
+   });
+
+   describe('When add value to the form control', () => {
+
+      it('Should update the selected value with the value', () => {
+         formComponent.formControl.setValue(fakePalette[2]);
+         fixture.detectChanges();
+         expect(colorPickerInstance.selected).toBe(fakePalette[2]);
+      });
+
+   });
 });

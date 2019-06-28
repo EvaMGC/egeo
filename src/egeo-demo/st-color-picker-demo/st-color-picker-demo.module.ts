@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { StDemoGeneratorModule, StDocsModule, StColorPickerModule } from '@stratio/egeo';
 
 import { StColorPickerDemoComponent } from './st-color-picker-demo';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { StColorPickerDemoComponent } from './st-color-picker-demo';
       CommonModule,
       StColorPickerModule,
       StDemoGeneratorModule.withComponents({ components: [StColorPickerDemoComponent] }),
-      StDocsModule
+      StDocsModule,
+      FormsModule,
+      ReactiveFormsModule
    ],
    declarations: [StColorPickerDemoComponent]
 })

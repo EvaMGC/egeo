@@ -9,7 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * @description {Component} [Color picker]
@@ -31,10 +32,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
    selector: 'st-color-picker',
    templateUrl: './st-color-picker.component.html',
-   styleUrls: ['./st-color-picker.component.scss']
+   styleUrls: ['./st-color-picker.component.scss'],
+   providers: [
+      { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StColorPickerComponent), multi: true }
+   ]
 })
 
-export class StColorPickerComponent {
+export class StColorPickerComponent implements ControlValueAccessor {
    /** @Input {string} [label=] Optional label displayed on the top of the color picker */
    @Input() label: string;
    /** @Input {string[]} [palette=] List of colors to be selected */
@@ -43,6 +47,16 @@ export class StColorPickerComponent {
    @Output() change: EventEmitter<string> = new EventEmitter<string>();
 
    private _selected: string;
+   private _disabled: boolean;
+   private registeredOnChange: (_: any) => void;
+
+   onChange = (_: string) => {
+      this._selected = _;
+      this.change.emit(this._selected);
+   }
+
+   onTouched = () => {
+   }
 
    @Input()
    get selected(): string {
@@ -55,9 +69,35 @@ export class StColorPickerComponent {
 
    onSelectColor(color: string): void {
       this.change.emit(color);
+      this.onChange(color);
    }
 
    isSelected(color: string): boolean {
       return this.selected === color;
+   }
+
+   // load external change
+   writeValue(value: string): void {
+      if (!this._disabled) {
+         this._selected = value;
+         this.change.emit(this._selected);
+         if (this.registeredOnChange) {
+            this.registeredOnChange(value);
+         }
+      }
+   }
+
+   // Registry the change function to propagate internal model changes
+   registerOnChange(fn: (_: any) => void): void {
+      this.onChange = fn;
+   }
+
+   // Registry the touch function to propagate internal touch events
+   registerOnTouched(fn: () => void): void {
+      this.onTouched = fn;
+   }
+
+   setDisabledState(disable: boolean): void {
+      this._disabled = disable;
    }
 }

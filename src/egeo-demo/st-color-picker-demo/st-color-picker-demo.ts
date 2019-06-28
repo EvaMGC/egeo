@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
    selector: 'st-color-picker-demo',
@@ -24,7 +25,7 @@ export class StColorPickerDemoComponent {
 
    public palette1: string[] = ['#128bdd', '#999999', '#fa9330', '#fdbd2b', '#2cce93', '#cd89d2', '#0f1b27', '#8898a7'];
    public palette2: string[] = ['#128b6d', '#997899', '#fa9270', '#fa9339', '#2cd093', '#cd68c2', '#8d1627', '#2899b7'];
-
+   public formControl: FormControl = new FormControl();
    public selectedColors: string[] = [];
 
    public onSelectColor(color: string, index: number): void {

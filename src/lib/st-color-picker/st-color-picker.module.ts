@@ -14,9 +14,10 @@ import { NgModule } from '@angular/core';
 
 import { StColorPickerComponent } from './st-color-picker.component';
 import { StLabelModule } from '../st-label/st-label.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-   imports: [CommonModule, StLabelModule],
+   imports: [CommonModule, StLabelModule, FormsModule, ReactiveFormsModule],
    declarations: [StColorPickerComponent],
    exports: [StColorPickerComponent]
 })
