@@ -5,15 +5,17 @@
 **New features:**
 
 * st-color-picker: Create component
-* st-two-list-selection: allow to show dropdown menu options  if it is a non-editable list.
+* st-two-list-selection: Allow to show dropdown menu options  if it is a non-editable list.
 
 **Fixed bugs:**
 
-* st-table: Fixed error with selectableAll and sortable columns
+* st-table: Fix error with selectableAll and sortable columns
 
 **Others:**
 
-* st-breadcrumbs: changed 'title mode' links color to default
+* st-breadcrumbs: change 'title mode' links color to default
+* Update icon font to 1.12
+
 
 ## 16.4.0 (June 10, 2019)
 

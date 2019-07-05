@@ -68,6 +68,39 @@ i {
    -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-dashboards:before {
+   content: "\e9d0";
+}
+.icon-streaming:before {
+   content: "\e9d1";
+}
+.icon-notebooks:before {
+   content: "\e9d2";
+}
+.icon-project:before {
+   content: "\e9d3";
+}
+.icon-operational:before {
+   content: "\e9d4";
+}
+.icon-instant:before {
+   content: "\e9d5";
+}
+.icon-integrity:before {
+   content: "\e9cb";
+}
+.icon-insert-literal:before {
+   content: "\e9cc";
+}
+.icon-partial-info:before {
+   content: "\e9cd";
+}
+.icon-left-padding:before {
+   content: "\e9ce";
+}
+.icon-mask:before {
+   content: "\e9cf";
+}
 .icon-square-chevron-down:before {
    content: "\e9be";
 }
@@ -1321,7 +1354,6 @@ i {
 }
 .icon-debug:before {
    content: "\e9b7";
-   color: #555;
 }
 .icon-loto:before {
    content: "\e998";
