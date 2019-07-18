@@ -20,8 +20,9 @@
 
       <div *ngIf="active" [ngClass]="listClasses" [style.minWidth]='widthMenu'>
          <ng-content select=[dropdown-header]></ng-content>
-
-         <ul *ngIf="!isItemGroup" [attr.aria-hidden]="!active" aria-label="submenu" [style.maxHeight]="menuMaxHeight" [attr.id]="menuId" #itemList>
+         <ul *ngIf="!isItemGroup && ((items && items.length) || emptyListMessage)" [attr.aria-hidden]="!active"
+             aria-label="submenu" [style.maxHeight]="menuMaxHeight"
+             [attr.id]="menuId" #itemList>
             <st-dropdown-menu-item
                *ngFor="let item of items; let i = index"
                [attr.id]="getItemId(item.value)"
@@ -31,14 +32,15 @@
                [styleSelected]="styleSelected"
                (change)="onChange($event)">
             </st-dropdown-menu-item>
-            <div *ngIf="!items || items.length === 0" class="without-results st-dropdown-menu-without-results" [style.maxWidth]='widthMenu'>
+            <div *ngIf="!items || items.length === 0" class="without-results st-dropdown-menu-without-results"
+                 [style.maxWidth]='widthMenu'>
                {{emptyListMessage}}
             </div>
          </ul>
 
          <div *ngIf="isItemGroup">
-
-            <ul [attr.aria-hidden]="!active" aria-label="submenu" [style.maxHeight]="menuMaxHeight" [attr.id]="menuId" #itemList>
+            <ul [attr.aria-hidden]="!active" aria-label="submenu" [style.maxHeight]="menuMaxHeight"
+                [attr.id]="menuId" #itemList>
                <li class="st-dropdown-menu-parent" *ngFor="let group of items">
                   <h3>
                      <span>{{ group.title }}</span>
@@ -54,14 +56,14 @@
                         (change)="onChange($event)">
                      </st-dropdown-menu-item>
 
-                     <div class="without-results st-dropdown-menu-without-results" [style.maxWidth]='widthMenu' *ngIf="!group || !group.items || group.items.length === 0">
+                     <div class="without-results st-dropdown-menu-without-results" [style.maxWidth]='widthMenu'
+                          *ngIf="!group || !group.items || group.items.length === 0">
                         {{emptyListMessage}}
                      </div>
                   </ul>
                </li>
             </ul>
          </div>
-
          <ng-content select=[dropdown-footer]></ng-content>
       </div>
    </div>

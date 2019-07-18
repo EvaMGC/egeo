@@ -528,14 +528,11 @@ describe('StDropdownMenu', () => {
          expect(ul.scrollTop).toBe(0);
       });
 
-      it('Should have scroll to 0 in menu when item list it\'s empty ', () => {
+      it('Should not add a list container when item list it\'s empty ', () => {
          instanceTestComp.items = [];
-         instanceTestComp.active = true;
-         instanceTestComp.selected = simpleItems[0];
          instanceTestFixture.detectChanges();
 
-         let ul: HTMLInputElement = instanceTestFixture.debugElement.query(By.css('ul')).nativeElement;
-         expect(ul.scrollTop).toBe(0);
+         expect(instanceTestFixture.debugElement.query(By.css('ul'))).toBeNull();
       });
 
       it('Should emit the same object as input on select (Extra parameters)', () => {

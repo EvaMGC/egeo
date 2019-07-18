@@ -9,7 +9,25 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
+@import '../../theme/constants/index';
+
 st-dropdown-menu {
    position: relative;
    display: block;
+}
+
+.logout-button {
+   border-top: 1px solid $neutral-03;
+   padding: 15px 0 10px;
+   text-align: center;
+
+   &:hover {
+      background-color: $action-secondary-01;
+   }
+
+   i {
+      display: inline-flex;
+      margin-right: 10px;
+      font-size: $egeo-font-size-small;
+   }
 }

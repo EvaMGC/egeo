@@ -163,6 +163,17 @@ describe('StDropdownMenuItemComponent', () => {
       expect(span.nativeElement.innerText).toEqual(item.label);
    });
 
+   it('label and icon should be displayed with the color specified on the model', () => {
+      comp.item = Object.assign({}, { icon: 'logout-button', iconColor: 'red', labelColor: '#857aba' }, item);
+      fixture.detectChanges();
+
+      const icon: DebugElement = fixture.debugElement.query(By.css('li i'));
+      const label: DebugElement = fixture.debugElement.query(By.css('li span'));
+
+      expect(icon.styles.color).toEqual('red');
+      expect(label.styles.color).toEqual('#857aba');
+   });
+
    it('should emit on change', () => {
       spyOn(comp.change, 'emit');
       comp.item = item;

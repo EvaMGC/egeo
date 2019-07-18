@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { StDropDownMenuItem, StDropDownMenuGroup, StDropDownVisualMode } from '@stratio/egeo';
+import { StDropDownMenuGroup, StDropDownMenuItem, StDropDownVisualMode } from '@stratio/egeo';
 
 import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.service';
 
@@ -57,15 +57,31 @@ export class StDropdownMenuDemoComponent {
    }
 
    getVisualMode(menuId: number): StDropDownVisualMode {
-      return menuId % 2 ? StDropDownVisualMode.OPTION_LIST: StDropDownVisualMode.MENU_LIST;
+      return menuId % 2 ? StDropDownVisualMode.OPTION_LIST : StDropDownVisualMode.MENU_LIST;
    }
 
    private generateNormal(): StDropDownMenuItem[] {
-      return Array.from(Array<StDropDownMenuItem>(5)).map((_value, i) => ({
-         label: `Option ${i}`,
-         value: `option-${i}`,
-         test: 'test'
-      }));
+     return [
+         {
+            label: 'Delete',
+            value: 'delete',
+            labelColor: 'red',
+            iconColor: 'red',
+            icon: 'icon-trash'
+         },
+         {
+            label: 'Archived',
+            value: 'archived',
+            iconColor: 'gray',
+            icon: 'icon-dot'
+         },
+         {
+            label: 'Publish',
+            value: 'published',
+            iconColor: 'blue',
+            icon: 'icon-cloud-upload'
+         }
+         ];
    }
 
    private generateWithScroll(): StDropDownMenuItem[] {
@@ -84,33 +100,41 @@ export class StDropdownMenuDemoComponent {
 
    private generateGroup(): StDropDownMenuGroup[] {
       return [
-         {title: 'Severity', items: [
-            {label: 'Critical Error', value: 'critical'},
-            {label: 'Warning', value: 'Warning'}
-         ]},
-         {title: 'Status', items: [
-            {label: 'Active', value: 'active'},
-            {label: 'Inactive', value: 'inactive'}
-         ]}
+         {
+            title: 'Severity', items: [
+               { label: 'Critical Error', value: 'critical' },
+               { label: 'Warning', value: 'Warning' }
+            ]
+         },
+         {
+            title: 'Status', items: [
+               { label: 'Active', value: 'active' },
+               { label: 'Inactive', value: 'inactive' }
+            ]
+         }
       ];
    }
 
    private generateGroupWithScroll(): StDropDownMenuGroup[] {
       return [
-         {title: 'Severity', items: [
-            {label: 'Critical Error', value: 'critical'},
-            {label: 'Warning', value: 'Warning'}
-         ]},
-         {title: 'Status', items: [
-            {label: 'Active', value: 'active'},
-            {label: 'Inactive', value: 'inactive'},
-            {label: 'Paused', value: 'paused'},
-            {label: 'Stopped', value: 'stopped'},
-            {label: 'Running', value: 'running'},
-            {label: 'Waiting', value: 'waiting'},
-            {label: 'Delayed', value: 'delayed'},
-            {label: 'Unknown', value: 'unknown'}
-         ]}
+         {
+            title: 'Severity', items: [
+               { label: 'Critical Error', value: 'critical' },
+               { label: 'Warning', value: 'Warning' }
+            ]
+         },
+         {
+            title: 'Status', items: [
+               { label: 'Active', value: 'active' },
+               { label: 'Inactive', value: 'inactive' },
+               { label: 'Paused', value: 'paused' },
+               { label: 'Stopped', value: 'stopped' },
+               { label: 'Running', value: 'running' },
+               { label: 'Waiting', value: 'waiting' },
+               { label: 'Delayed', value: 'delayed' },
+               { label: 'Unknown', value: 'unknown' }
+            ]
+         }
       ];
    }
 }
