@@ -1,6 +1,6 @@
 # Changelog
 
-## 16.5.0 (upcoming)
+## 17.0.0 (upcoming)
 
 **New features:**
 
@@ -24,7 +24,8 @@
 **Others:**
 
 * st-breadcrumbs: change 'title mode' links color to default
-* Update icon font to 1.12
+* Update icon font to 1.14
+* Update lodash to 4.17.13
 
 
 ## 16.4.0 (June 10, 2019)

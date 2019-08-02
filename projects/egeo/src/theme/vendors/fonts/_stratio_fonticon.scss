@@ -68,6 +68,9 @@ i {
    -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arangodb:before {
+   content: "\e9d6";
+}
 .icon-dashboards:before {
    content: "\e9d0";
 }
@@ -1024,6 +1027,9 @@ i {
 }
 .icon-message-circle:before {
    content: "\e927";
+}
+.icon-no-comment:before {
+   content: "\e9d7";
 }
 .icon-message-square:before {
    content: "\e928";

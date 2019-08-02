@@ -2,7 +2,7 @@
    "name": "@stratio/egeo",
    "version": "",
    "dependencies": {
-      "lodash": "4.17.10",
+      "lodash": "4.17.13",
       "ngx-virtual-scroller": "^1.0.11",
       "prismjs": "prismjs"
    },
