@@ -8,10 +8,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+import { task } from 'gulp';
+import { cleanTask } from '../util/task_helpers';
+import { buildConfig } from 'build-tools';
 
-import './tasks/clean';
-import './tasks/build';
-import './tasks/logo';
-import './tasks/generate-theme';
-import './tasks/others';
-import './tasks/egeo-publish';
+/** Deletes the dist/ directory. */
+task('clean', cleanTask(buildConfig.outputDir));

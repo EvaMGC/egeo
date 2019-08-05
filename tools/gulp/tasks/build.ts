@@ -11,5 +11,5 @@
 
 import { task } from 'gulp';
 
-task('build:logo', () => require('package-tools/logo'));
+task('prepare-build', ['prepare-build:logo', 'clean']);
 task('build', ['build:styles']);

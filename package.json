@@ -8,7 +8,7 @@
       "start": "gulp demo-app:copy:sourcecode && ng serve --project=egeo-demo",
       "release": "gulp publish",
       "clean": "gulp clean",
-      "build": "gulp build:logo && npm run build:lib && npm run build:demo-app",
+      "build": "gulp prepare-build && npm run build:lib && npm run build:demo-app",
       "build:web:aot": "gulp aot:build",
       "build:lib": "ng build && npm run build:theme",
       "build:theme": "gulp build",
