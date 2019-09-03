@@ -24,6 +24,7 @@
 * Construction tasks: Fixed package.json main config
 * theme: fix st-widget imports
 * fix prismjs dependency
+* ngx-virtual-scroller: Put version to 3.0.2 to fix compatibility error with internal library tweenjs
 
 **Breaking changes:**
 
