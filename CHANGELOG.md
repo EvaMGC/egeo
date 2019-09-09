@@ -21,6 +21,7 @@
 * theme: fix st-widget imports
 * fix prismjs dependency
 * ngx-virtual-scroller: Put version to 3.0.2 to fix compatibility error with internal library tweenjs
+* Fix public api export
 
 **Breaking changes:**
 
