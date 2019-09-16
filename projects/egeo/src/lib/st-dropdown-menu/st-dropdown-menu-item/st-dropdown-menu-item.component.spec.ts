@@ -174,6 +174,24 @@ describe('StDropdownMenuItemComponent', () => {
       expect(label.styles.color).toEqual('#857aba');
    });
 
+   it('text info should be displayed below the label only if it is provided on the model', () => {
+      const fakeTextInfo = 'This is an optional text';
+      comp.item = Object.assign({}, { label: 'This is my label', textInfo: fakeTextInfo }, item);
+      fixture.detectChanges();
+
+      let textInfo: HTMLSpanElement = fixture.nativeElement.querySelector('.text-info');
+
+      expect(textInfo).not.toBeNull();
+      expect(textInfo.innerText).toContain(fakeTextInfo);
+
+      comp.item = Object.assign({}, { label: 'This is my label' }, item);
+      fixture.detectChanges();
+
+      textInfo = fixture.nativeElement.querySelector('.text-info');
+
+      expect(textInfo).toBeNull();
+   });
+
    it('should emit on change', () => {
       spyOn(comp.change, 'emit');
       comp.item = item;

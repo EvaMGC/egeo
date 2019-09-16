@@ -17,6 +17,7 @@ export class StDropDownMenuItem {
    icon?: string;
    labelColor?: string;
    iconColor?: string;
+   textInfo?: string;
    selected?: boolean;
    hasHtml?: boolean;
    [key: string]: any; // To do model more extensible if any other component needs to send more data

@@ -1,6 +1,10 @@
 # Changelog
 
-## 18.0.0 (upcoming)
+## 17.1.0 (upcoming)
+
+**New features:**
+
+* st-dropdown-menu: Allow to display a text info below label
 
 **Fixed bugs:**
 

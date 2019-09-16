@@ -73,7 +73,8 @@ export class StDropdownMenuDemoComponent {
             label: 'Archived',
             value: 'archived',
             iconColor: 'gray',
-            icon: 'icon-dot'
+            icon: 'icon-grid-2',
+            textInfo: 'This is an optional text'
          },
          {
             label: 'Publish',
