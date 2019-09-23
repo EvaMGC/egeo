@@ -24,14 +24,20 @@
 }
 
 .bubble-demo-content {
-   //padding: 30px;
    display: flex;
    flex-wrap: nowrap;
    white-space: nowrap;
 }
 
-.bubble-demo-component {
-   position: relative;
-   right: 42px;
-   top: 10px;
+.buttons {
+   float: left;
+}
+
+.bubble-container {
+  float: right;
+}
+
+st-switch {
+   display: block;
+   margin: 15px;
 }

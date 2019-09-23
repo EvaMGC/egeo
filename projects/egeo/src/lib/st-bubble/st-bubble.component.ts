@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { StPopOffset, StPopPlacement } from '../st-pop/st-pop.model';
 
@@ -41,6 +41,13 @@ export class StBubbleComponent {
    @Input() offset: StPopOffset = { x: 0, y: 17 };
    /** @Input {boolean} [showArrow=true] when true, arrow icon is displayed    */
    @Input() showArrow?: boolean = true;
+   /** @Input {boolean} [animation=true] when true, bubble is displayed with an animation  */
+   @Input() animation?: boolean = true;
+   /** @Input {boolean} [openToLeft=true] when true, bubble is displayed with the arrow to the right  */
+   @Input() openToLeft?: boolean = true;
+   /** @Input {boolean} [animation=false] when true, bubble is displayed with theme small  */
+   @Input() small?: boolean = false;
 
    public placement: StPopPlacement = StPopPlacement.BOTTOM;
+
 }

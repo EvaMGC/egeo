@@ -10,16 +10,22 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule } from '@stratio/egeo';
-import { StBubbleDemoComponent } from './st-bubble-demo.component';
+import { StDemoGeneratorModule, StInputModule, StSwitchModule } from '@stratio/egeo';
 import { StBubbleModule, StDocsModule } from '@stratio/egeo';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { StBubbleDemoComponent } from './st-bubble-demo.component';
 
 @NgModule({
    imports: [
       CommonModule,
       StBubbleModule,
       StDemoGeneratorModule.withComponents({ components: [StBubbleDemoComponent] }),
-      StDocsModule
+      StDocsModule,
+      StSwitchModule,
+      FormsModule,
+      ReactiveFormsModule,
+      StInputModule
    ],
    declarations: [StBubbleDemoComponent],
    providers: []

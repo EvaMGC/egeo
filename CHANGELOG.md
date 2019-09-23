@@ -5,6 +5,7 @@
 **New features:**
 
 * st-dropdown-menu: Allow to display a text info below label
+* st-bubble: Allow to disable or enable animation and small theme and added functionality to open to left or right
 
 **Fixed bugs:**
 

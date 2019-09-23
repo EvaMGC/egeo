@@ -10,12 +10,20 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-pop [hidden]="hidden" [placement]="placement" [openToLeft]="true" [offset]="offset" class="st-bubble">
+
+
+<st-pop [hidden]="hidden" [placement]="placement" [offset]="offset" class="st-bubble" [openToLeft]="openToLeft">
    <div pop-button>
       <ng-content select=[bubble-button]></ng-content>
    </div>
-
-   <div pop-content [style.z-index]="9" class="st-bubble__content" [ngClass]="{'st-bubble__content--with-arrow': showArrow, 'st-bubble__content--show': !hidden}">
-     <span class="text"> {{text}} </span>
+   <div pop-content [style.z-index]="9" class="st-bubble__content"
+        [ngClass]="{
+        'st-bubble__content--animated': animation,
+        'st-bubble__content--small': small,
+        'st-bubble__content--with-arrow': showArrow,
+        'st-bubble__content--to-left': openToLeft,
+        'st-bubble__content--to-right': !openToLeft,
+        'st-bubble__content--show': !hidden}">
+      <span class="text"> {{text}} </span>
    </div>
 </st-pop>

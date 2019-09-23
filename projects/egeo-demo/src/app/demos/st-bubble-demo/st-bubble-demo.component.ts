@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
    selector: 'st-bubble-demo',
@@ -23,6 +24,10 @@ export class StBubbleDemoComponent {
    };
    public text: string = 'What needed to deploy Crossdata?';
    public hidden: boolean = true;
+   public animationFormControl: FormControl = new FormControl(true);
+   public smallFormControl: FormControl = new FormControl(false);
+   public openToLeftFormControl: FormControl = new FormControl(true);
+
 
    onClick(): void {
       this.hidden = !this.hidden;

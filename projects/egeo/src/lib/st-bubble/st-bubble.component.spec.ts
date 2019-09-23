@@ -73,6 +73,53 @@ describe('StBubbleComponent', () => {
 
          expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).toContain('st-bubble__content--with-arrow');
       });
+   });
 
+   describe('Animation should be enabled or disabled using the input "animation"', () => {
+      it ('If input "animation" is true, animation is enabled', () => {
+         component.animation = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).toContain('st-bubble__content--animated');
+      });
+
+      it ('If input "animation" is false, animation is disabled', () => {
+         component.animation = false;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).not.toContain('st-bubble__content--animated');
+      });
+   });
+
+   describe('Small theme should be enabled or disabled using the input "small"', () => {
+      it ('If input "small" is true, theme small is enabled', () => {
+         component.small = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).toContain('st-bubble__content--small');
+      });
+
+      it ('If input "small" is false, theme small is disabled', () => {
+         component.small = false;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).not.toContain('st-bubble__content--small');
+      });
+   });
+
+   describe('It should be able to be configure to be displayed to the left or right', () => {
+      it ('If input "openToLeft" is true, bubble is open to the left', () => {
+         component.openToLeft = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).toContain('st-bubble__content--to-left');
+      });
+
+      it ('If input "openToLeft" is false, bubble is open to the right', () => {
+         component.openToLeft = false;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).toContain('st-bubble__content--to-right');
+      });
    });
 });
