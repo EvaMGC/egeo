@@ -13,17 +13,21 @@ import { CommonModule } from '@angular/common';
 import {
    StDemoGeneratorModule,
    StDocsModule,
-   StFullscreenLayoutModule
+   StFullscreenLayoutModule, StSwitchModule
 } from '@stratio/egeo';
 
 import { StFullscreenLayoutComponent } from './st-fullscreen-layout-demo';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
    imports: [
       CommonModule,
       StFullscreenLayoutModule,
       StDemoGeneratorModule.withComponents({ components: [StFullscreenLayoutComponent] }),
-      StDocsModule
+      StDocsModule,
+      StSwitchModule,
+      FormsModule,
+      ReactiveFormsModule
    ],
    declarations: [StFullscreenLayoutComponent]
 })

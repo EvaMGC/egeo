@@ -16,11 +16,12 @@
          customizing its title, header buttons and content</p>
 
       <span class="separator"></span>
-
+      <st-switch class="full-width-switch" label="Enabled full width" [formControl]="fullwWidthFormControl">
+      </st-switch>
       <button class="button button-primary" (click)="onClickShowButton()">Show full screen layout</button>
 
       <div *ngIf="showFullscreenLayout">
-         <st-fullscreen-layout>
+         <st-fullscreen-layout [fullWidth]="fullwWidthFormControl.value">
             <p class="st-fullscreen-layout-title"><i class="icon-home"></i>Customized title</p>
             <div class="st-fullscreen-layout-buttons">
                <button class="button button-secondary-line button-separator" (click)="onClickHideButton()">Cancel</button>

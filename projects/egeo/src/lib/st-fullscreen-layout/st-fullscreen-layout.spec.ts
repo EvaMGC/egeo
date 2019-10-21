@@ -18,7 +18,7 @@ import { StWindowRefService } from '../utils/window-service';
 
 describe('StFullscreenLayoutComponent', () => {
 
-   let comp: StFullscreenLayoutComponent;
+   let component: StFullscreenLayoutComponent;
    let fixture: ComponentFixture<StFullscreenLayoutComponent>;
    let fakeWindowRefService: any;
 
@@ -42,14 +42,22 @@ describe('StFullscreenLayoutComponent', () => {
 
    beforeEach(() => {
       fixture = TestBed.createComponent(StFullscreenLayoutComponent);
-      comp = fixture.componentInstance;
+      component = fixture.componentInstance;
    });
 
    it('it should disable scroll to body in order not to see the content of the previous page', () => {
       expect(window.document.body.style.overflow).toEqual('hidden');
 
-      comp.ngOnDestroy();
+      component.ngOnDestroy();
 
       expect(fakeWindowRefService.nativeWindow.document.body.overflow).toBeUndefined();
+   });
+
+   it('If input fullWidth is true, a class is displayed to fit the entire screen´s width', () => {
+      component.fullWidth = true;
+
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.container').classList).toContain('full-width');
    });
 });

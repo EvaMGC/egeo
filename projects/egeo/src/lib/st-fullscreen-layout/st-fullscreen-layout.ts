@@ -24,7 +24,7 @@ import { StWindowRefService } from '../utils/window-service';
  * {html}
  *
  * ```
- * <st-fullscreen-layout>
+ * <st-fullscreen-layout [fullWidth]="true">
  *    <p class="st-fullscreen-layout-title">Edition</p>
  *    <div class="st-fullscreen-layout-buttons">
  *       <button class="button button-secondary-line button-separator" (click)="onClickHideButton()">Cancel</button>
@@ -43,6 +43,9 @@ import { StWindowRefService } from '../utils/window-service';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StFullscreenLayoutComponent implements OnDestroy {
+   /** @Input {boolean} [fullWidth=false] Enable full width visualization */
+   @Input() fullWidth: boolean;
+
    constructor( private windowRef: StWindowRefService) {
       this.windowRef.nativeWindow.document.body.style.overflow = 'hidden';
    }

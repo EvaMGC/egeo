@@ -8,16 +8,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+@import '../constants/fonts';
+@import '../constants/colors';
+@import '../constants/settings';
 
- @import '../constants/fonts';
- @import '../constants/colors';
- @import '../constants/settings';
-
-
- .st-fullscreen-layout {
+.st-fullscreen-layout {
    border-radius: 0;
    background-color: $neutral-01;
-    z-index: $fullscreen-z-index;
+   z-index: $fullscreen-z-index;
+
    .st-fullscreen-layout-header {
       border-radius: 0;
       background-color: $neutral-00;
@@ -33,9 +32,13 @@
          white-space: nowrap;
       }
    }
- }
 
- .st-fullscreen-layout-content {
-    display: flex;
-    width: 100%;
- }
+   .container.full-width {
+      max-width: 100%;
+   }
+}
+
+.st-fullscreen-layout-content {
+   display: flex;
+   width: 100%;
+}

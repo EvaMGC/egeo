@@ -1,4 +1,4 @@
-/*
+   /*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+   import { FormControl } from '@angular/forms';
 
 @Component({
    selector: 'st-fullscreen-layout-demo',
@@ -22,6 +23,7 @@ export class StFullscreenLayoutComponent {
       component: 'lib/st-fullscreen-layout/st-fullscreen-layout.ts'
    };
    showFullscreenLayout: boolean = false;
+   fullwWidthFormControl: FormControl = new FormControl();
 
    onClickShowButton(): void {
       this.showFullscreenLayout = true;
