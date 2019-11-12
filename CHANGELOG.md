@@ -2,7 +2,10 @@
 
 ## 17.3.0 (upcoming)
 
-* Pending changelog
+**Others:**
+
+* Update icon font to 1.24
+
 
 ## 17.2.0 (October 25, 2019)
 
