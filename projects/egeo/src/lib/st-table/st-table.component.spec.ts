@@ -159,7 +159,7 @@ describe('StTableComponent', () => {
       it('if field is different to the current order`s one, current order is changed to the selected field and in direction ASC', () => {
          component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.ASC);
 
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[fakeFields.length - 1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item label')[fakeFields.length - 1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
@@ -178,7 +178,7 @@ describe('StTableComponent', () => {
       it('if field is the same to the current order`s one, only order direction is changed', () => {
          // ascent sorting
          component.currentOrder = new Order(fakeFields[0].id, ORDER_TYPE.ASC);
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[0];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item label')[0];
          headerItem.click();
          fixture.detectChanges();
 
@@ -214,12 +214,12 @@ describe('StTableComponent', () => {
       });
 
       it('should stand up the field`s header which table is sorted by', () => {
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item')[fakeFields.length - 1];
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item label')[fakeFields.length - 1];
          headerItem.click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
 
-         expect(headerItem.classList).toContain('st-table__header-item--selected');
+         expect(headerItem.parentElement.classList).toContain('st-table__header-item--selected');
       });
 
    });
