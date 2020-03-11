@@ -5,7 +5,7 @@
 **New features:**
 
 * st-table: Includes new field 'filterable' to apply filters by column.
-* st-bubble: Allow to add a min width from outside and cut words when there are longer than width
+* st-bubble: Allow to add a min and max width from outside and cut words when there are longer than width
 
 **Breaking changes:**
 

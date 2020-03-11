@@ -129,4 +129,12 @@ describe('StBubbleComponent', () => {
 
       expect(fixture.nativeElement.querySelector('.st-bubble__content').style['min-width']).toEqual('400px');
    });
+
+   it ('if max width is defined as input, it is applied to bubble container and a class is added to cut words', () => {
+      component.maxWidth = '800px';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.st-bubble__content').style['max-width']).toEqual('800px');
+      expect(fixture.nativeElement.querySelector('.st-bubble__content').classList).toContain('st-bubble__content--cut-words');
+   });
 });

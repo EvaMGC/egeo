@@ -23,8 +23,10 @@
         'st-bubble__content--with-arrow': showArrow,
         'st-bubble__content--to-left': openToLeft,
         'st-bubble__content--to-right': !openToLeft,
-        'st-bubble__content--show': !hidden}"
-        [style.min-width]="minWidth">
+        'st-bubble__content--show': !hidden,
+        'st-bubble__content--cut-words': maxWidth}"
+        [style.min-width]="minWidth"
+        [style.max-width]="maxWidth">
       <span class="text"> {{text}} </span>
    </div>
 </st-pop>

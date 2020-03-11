@@ -79,6 +79,14 @@
       &--to-right:before {
          left: 14px;
       }
+
+      &:not(.st-bubble__content--cut-words) .text {
+         white-space: nowrap;
+      }
+
+      &--cut-words .text {
+         overflow-wrap: break-word;
+      }
    }
 
 }

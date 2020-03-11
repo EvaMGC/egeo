@@ -13,7 +13,8 @@
 | animation  | Boolean     | False | when true, bubble is displayed with an animation           | true           |
 | openToLeft | Boolean     | False | when true, bubble is displayed with the arrow to the right | true           |
 | small      | Boolean     | False | when true, bubble is displayed with theme small            | false          |
-| minWidth   | Boolean     | False | min width for bubble                                       | string         |
+| minWidth   | String      | False | min width for bubble                                       |                |
+| maxWidth   | String      | False | max width for bubble                                       |                |
 
 ## Example
 

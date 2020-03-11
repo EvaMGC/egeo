@@ -47,8 +47,10 @@ export class StBubbleComponent {
    @Input() openToLeft?: boolean = true;
    /** @Input {boolean} [small=false] when true, bubble is displayed with theme small  */
    @Input() small?: boolean = false;
-   /** @Input {boolean} [minWidth=string] min width for bubble  */
+   /** @Input {string} [minWidth=] min width for bubble  */
    @Input() minWidth?: string;
+   /** @Input {string} [maxWidth=] max width for bubble  */
+   @Input() maxWidth?: string;
 
    public placement: StPopPlacement = StPopPlacement.BOTTOM;
 
