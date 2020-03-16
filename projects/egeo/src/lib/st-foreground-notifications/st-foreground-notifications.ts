@@ -40,7 +40,7 @@ import { StatusNotification, StNotificationElement } from './st-foreground-notif
 
 export class StForegroundNotificationsComponent implements AfterViewInit, OnChanges, OnInit {
 
-   /** @Input {bollean} [visible=flase] When true the notification is shown */
+   /** @Input {boolean} [visible=false] When true the notification is shown */
    @Input()
    set visible(value: boolean) {
       if (value !== undefined) {

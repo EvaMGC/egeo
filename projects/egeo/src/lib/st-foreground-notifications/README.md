@@ -6,7 +6,7 @@
 
 | Property      | Type                     | Req   | Description                                                                                                                                     | Default |
 | ------------- | ------------------------ | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| visible       | Bollean                  | False | When true the notification is shown                                                                                                             | flase   |
+| visible       | Boolean                  | False | When true the notification is shown                                                                                                             | false   |
 | autoCloseTime | AutoCloseTime            | False | Defines the time in milliseconds for autoclose the notification. The autoclose only applies if only have one notification and status is success | '1000'  |
 | notifications | StNotificationElement [] | False | '] Array of notifications                                                                                                                       | '[      |
 

@@ -6,10 +6,12 @@
 
 * st-table: Includes new field 'filterable' to apply filters by column.
 * st-bubble: Allow to add a min and max width from outside and cut words when there are longer than width
+* st-alert: Publish alert box component
 
 **Breaking changes:**
 
 * st-header: Include new UX defined styles to header
+* st-alert: Change link behaviour to emit link when it is clicked
 
 **Others:**
 

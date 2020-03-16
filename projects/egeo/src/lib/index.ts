@@ -46,7 +46,9 @@ export { StClickOutside } from './directives/st-click-outside/st-click-outside.d
 // Alerts
 export { StAlertsModule } from './st-alerts/st-alerts.module';
 export { StAlertsComponent } from './st-alerts/st-alerts.component';
-export { StAlertLink, STALERT_SEVERITY } from './st-alerts/st-alerts.model';
+export { StAlertBoxModule } from './st-alerts/alert-box/st-alert-box.module';
+export { StAlertBoxComponent } from './st-alerts/alert-box/st-alert-box.component';
+export { StAlert, StAlertLink, STALERT_SEVERITY } from './st-alerts/st-alerts.model';
 export { StAlertsService } from './st-alerts/st-alerts.service';
 
 // Breadcrumb

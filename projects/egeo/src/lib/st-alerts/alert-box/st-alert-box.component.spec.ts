@@ -78,19 +78,32 @@ describe('StAlertsComponent', () => {
          expect(component.getSeverityColor()).toEqual('');
       });
 
-      it('Should go to link', () => {
+      it('Should emit an event when user clicks link', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };
          component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
          component.showInConsole = false;
          fixture.detectChanges();
 
-         spyOn(window, 'open');
+         spyOn(component.clickLink, 'emit');
 
          component.goTo();
 
-         expect(window.open).toHaveBeenCalled();
-         expect(window.open).toHaveBeenCalledWith(link.link);
+         expect(component.clickLink.emit).toHaveBeenCalledWith(link);
       });
+
+      it('Should emit an event when user clicks on close button', () => {
+         let link: StAlertLink = { link: 'test', title: 'test title' };
+         component.alert = new StAlert(0, 'Error', 'error message', STALERT_SEVERITY.ERROR, 1000, 500, link);
+         component.showInConsole = false;
+         fixture.detectChanges();
+
+         spyOn(component.close, 'emit');
+
+         fixture.nativeElement.querySelector('.sth-alert-box-close-button').click();
+
+         expect(component.close.emit).toHaveBeenCalledWith(true);
+      });
+
 
       it('Should notify in console error', () => {
          let link: StAlertLink = { link: 'test', title: 'test title' };

@@ -19,13 +19,31 @@ import { StAlertsService } from './st-alerts.service';
    styleUrls: ['./st-alerts.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
+/**
+ * @description {Component} [Alerts]
+ *
+ * Alerts are made to let the user know errors or information about he is trying to do.
+ *
+ * @model
+ *
+ *  [Alert] {./st-alerts.model.ts#StAlert}
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-alerts [showInConsole]="true"></st-alerts>
+ *
+ * ```
+ */
 export class StAlertsComponent {
-
+   /** @Input {boolean} [showInConsole=false] Display logs in console */
    @Input() showInConsole: boolean = false;
+   /** @Input {string} [qaTag=] Component qa tag */
    @Input() qaTag: string = 'st-alert-manager';
 
    constructor(
-      private _cd: ChangeDetectorRef,
       public alertService: StAlertsService
    ) { }
 }

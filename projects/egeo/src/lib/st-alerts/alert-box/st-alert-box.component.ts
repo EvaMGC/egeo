@@ -13,20 +13,39 @@ import {
    Input,
    OnInit,
    ChangeDetectorRef,
-   ChangeDetectionStrategy
+   ChangeDetectionStrategy, Output, EventEmitter
 } from '@angular/core';
 
-import { STALERT_SEVERITY, StAlert } from '../st-alerts.model';
+import { STALERT_SEVERITY, StAlert, StAlertLink } from '../st-alerts.model';
 
 @Component({
    selector: 'st-alert-box',
    templateUrl: './st-alert-box.component.html',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
+/**
+ * @description {Component} [Alert Box]
+ *
+ * Alert box is made to let the user know errors or information about he is trying to do.
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-alert-box [alert]="alert" [showInConsole]="showInConsole"></st-alert-box>
+ *
+ * ```
+ */
 export class StAlertBoxComponent implements OnInit {
-
+   /** @Input {StAlert} [alert=] Data of the alert */
    @Input() alert: StAlert;
+   /** @Input {boolean} [showInConsole=false] Display logs in console */
    @Input() showInConsole: boolean = false;
+   /** @Output {StAlertLink} [clickLink=] Event emitted when link is clicked */
+   @Output() clickLink: EventEmitter<StAlertLink> = new EventEmitter();
+   /** @Output {boolean} [close=] Event emitted when alert is closed */
+   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
    public iconValue: string;
    public opacity: number = 0;
@@ -55,6 +74,7 @@ export class StAlertBoxComponent implements OnInit {
 
    closeAlert(): void {
       this.alert.cancel();
+      this.close.emit(true);
    }
 
    getIcon(): string {
@@ -76,7 +96,7 @@ export class StAlertBoxComponent implements OnInit {
    }
 
    goTo(): void {
-      window.open(this.alert.link.link);
+      this.clickLink.emit(this.alert.link);
    }
 
    changeOpacity(opacity: number): void {
