@@ -63,6 +63,10 @@ export { StBreadCrumbsComponent } from './st-breadcrumbs/st-breadcrumbs.componen
 export { StBubbleModule } from './st-bubble/st-bubble.module';
 export { StBubbleComponent } from './st-bubble/st-bubble.component';
 
+// Bubble on ellipsis
+export { StBubbleOnEllipsisModule } from './st-bubble-on-ellipsis/st-bubble-on-ellipsis.module';
+export { StBubbleOnEllipsisComponent } from './st-bubble-on-ellipsis/st-bubble-on-ellipsis.component';
+
 // Color picker
 export { StColorPickerModule } from './st-color-picker/st-color-picker.module';
 export { StColorPickerComponent } from './st-color-picker/st-color-picker.component';

@@ -8,6 +8,7 @@
 * st-bubble: Allow to add a min and max width from outside and cut words when there are longer than width
 * st-alert: Publish alert box component
 * st-alert: Adapted to new style definition
+* st-bubble-on-ellipsis: Create component to display a bubble below a text when it is longer than container width
 
 **Breaking changes:**
 

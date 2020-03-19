@@ -9,22 +9,21 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-.content {
-   display: inline-block;
-}
-
-.arrow {
-   border-radius: 2px;
-   bottom: 47px;
-   float: right;
-   height: 13px;
-   margin-right: 15px;
-   position: relative;
-   transform: rotate(-45deg);
-   width: 13px;
-}
-
-.text {
+:host {
    display: block;
-   text-align: center;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.bubble-trigger {
+   text-overflow: ellipsis;
+}
+
+.bubble {
+   display: block;
+
+   &--open-to-left {
+      margin-left: 50%;
+   }
 }
