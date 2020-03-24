@@ -2,7 +2,12 @@
 
 ## 21.0.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
+* st-input: Export min and max validators to can be validated
+* st-form-directives: Public directive module in order to can be used from outside
+* st-click-outside: Public directive module in order to can be used from outside
+
 
 ## 20.0.0 (March 24, 2020)
 

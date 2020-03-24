@@ -21,15 +21,15 @@
 
       <form [formGroup]="myForm" novalidate>
          <st-input class="st-form-field" type="text" formControlName="name" placeholder="Enter your name" label="Field" default="default name"
-             contextualHelp="This is a normal field"></st-input>
+                   contextualHelp="This is a normal field"></st-input>
          <st-input class="st-form-field" type="text" formControlName="disabledField" placeholder="This field is disabled" label="Disabled field"></st-input>
          <st-input class="st-form-field" type="text" formControlName="disabledFieldWithValue" placeholder="This field is disabled" label="Disabled field"></st-input>
 
          <st-input class="st-form-field" type="text" formControlName="requiredField" placeholder="This field is required" [errors]="requiredError"
-             label="Required field" contextualHelp="This is a required field"></st-input>
+                   label="Required field" contextualHelp="This is a required field"></st-input>
 
          <st-input class="st-form-field" type="text" formControlName="numberField" placeholder="This is a number field" label="Number field"
-             fieldType="number" step="0.6"></st-input>
+                   fieldType="number" step="0.6"></st-input>
 
          <st-input class="st-form-field" type="text" formControlName="autocompletedField" placeholder="This field has an autocomplete list"
                    [autocompleteList]="autocompleteList" [charsToShowAutocompleteList]="0"
@@ -39,7 +39,7 @@
             <label class="st-label">Native Input with st-input class</label>
             <input class="st-input st-form-field" formControlName="requiredField" placeholder="This field is created with st-input class" />
 
-            <input class="st-input st-form-field" formControlName="numberField" placeholder="Number field" type="number" />
+            <input class="st-input st-form-field" formControlName="numberField" placeholder="Number field" type="number" [min]="1" [maxlength]="1" />
          </div>
          <div class="st-form-field">
             <label class="st-label">Native disabled Input with class</label>
