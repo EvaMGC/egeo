@@ -17,11 +17,13 @@ import { StLabelModule } from '../st-label/st-label.module';
 import { StFormDirectiveModule } from '../directives/form/form-directives.module';
 import { StDropdownMenuModule } from '../st-dropdown-menu/st-dropdown-menu.module';
 import { StClickOutsideModule } from '../directives/st-click-outside/st-click-outside.module';
+import { StMinValidator } from '../directives/form/st-min-validator/st-min-validator';
+import { StMaxValidator } from '../directives/form/st-max-validator/st-max-validator';
 
 @NgModule({
    imports: [CommonModule, FormsModule, ReactiveFormsModule, StLabelModule, StFormDirectiveModule, StDropdownMenuModule, StClickOutsideModule],
    declarations: [StInputComponent],
-   exports: [StInputComponent]
+   exports: [StInputComponent, StMinValidator, StMaxValidator]
 })
 export class StInputModule {
 }

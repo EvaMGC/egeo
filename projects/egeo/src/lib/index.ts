@@ -39,10 +39,11 @@ export { StFilterList } from './pipes/search-filter/search-filter.pipe';
 export { StInputAdjustable } from './directives/st-input-adjustable/st-input-adjustable';
 export { StMinValidator } from './directives/form/st-min-validator/st-min-validator';
 export { StMaxValidator } from './directives/form/st-max-validator/st-max-validator';
+export { StFormDirectiveModule } from './directives/form/form-directives.module';
 export { StClickOutside } from './directives/st-click-outside/st-click-outside.directive';
+export { StClickOutsideModule } from './directives/st-click-outside/st-click-outside.module';
 
 /**************************** MODULES *************************************************/
-
 // Alerts
 export { StAlertsModule } from './st-alerts/st-alerts.module';
 export { StAlertLink, STALERT_SEVERITY } from './st-alerts/st-alerts.model';
