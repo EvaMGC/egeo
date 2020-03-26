@@ -15,7 +15,7 @@ import { get as _get } from 'lodash';
 import { StPopOffset } from '../st-pop/st-pop.model';
 
 /**
- * @description {Component} [StBubbleLabel]
+ * @description {Component} [StBubbleOnEllipsis]
  *
  * This component displays a bubble below a content if its width is longer than container
  *
@@ -24,24 +24,33 @@ import { StPopOffset } from '../st-pop/st-pop.model';
  * {html}
  *
  * ```
- *    <st-bubble-label [qaTag]="qaTag" [text]="text" [hidden]="hidden">
- *    </st-bubble-label>
+ *      <st-bubble-on-ellipsis
+ *         [text]="'Text for bubble'"
+ *         [openToLeft]="true"
+ *         [maxWidth]="'40%'">
+ *          Any text
+ *      </st-bubble-on-ellipsis>
  * ```
  */
 @Component({
    selector: 'st-bubble-on-ellipsis',
    styleUrls: ['./st-bubble-on-ellipsis.component.scss'],
-   templateUrl: './st-bubble-on-ellipsis.component.html'
+   templateUrl: './st-bubble-on-ellipsis.component.html',
+   host: {
+      '[class.multi-line]': 'lines > 1',
+      '[style.-webkit-line-clamp]': 'lines'
+   }
 })
 export class StBubbleOnEllipsisComponent {
 
    /** @Input {string} [text=] Text of the bubble */
    @Input() text: string;
-
    /** @Input {string} [minWidth=] min width for bubble  */
    @Input() minWidth?: string;
    /** @Input {string} [maxWidth=] max width for bubble  */
    @Input() maxWidth?: string;
+   /** @Input {string} [lines=1] number of lines where ellipsis is placed  */
+   @Input() lines?: number = 1;
 
    @ViewChild('bubbleTrigger', { static: false }) bubbleTrigger: ElementRef;
 
@@ -66,7 +75,8 @@ export class StBubbleOnEllipsisComponent {
    }
 
    onShowBubble(): void {
-      if (_get(this.bubbleTrigger, 'nativeElement.parentElement.offsetWidth') < _get(this.bubbleTrigger, 'nativeElement.parentElement.scrollWidth')) {
+      if (_get(this.bubbleTrigger, 'nativeElement.parentElement.offsetWidth') < _get(this.bubbleTrigger, 'nativeElement.parentElement.scrollWidth')
+         || _get(this.bubbleTrigger, 'nativeElement.parentElement.offsetHeight') < _get(this.bubbleTrigger, 'nativeElement.parentElement.scrollHeight')) {
          this.visible = true;
       }
    }

@@ -2,6 +2,10 @@
 
 ## 21.0.0 (upcoming)
 
+**New features:**
+
+* st-bubble-on-ellipsis: Allow to specify how many lines have to be displayed before ellipsis
+
 **Fixed bugs:**
 
 * st-input: Export min and max validators to can be validated

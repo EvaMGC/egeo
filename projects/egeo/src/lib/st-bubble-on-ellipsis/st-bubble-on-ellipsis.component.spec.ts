@@ -19,13 +19,14 @@ import { CommonModule } from '@angular/common';
 const textTrigger = 'Text that trigger bubble';
 
 @Component({
-   template: '<div [style.max-width]="containerMaxWidth"><st-bubble-on-ellipsis  [text]="text" [openToLeft]="openToLeft">     ' +
+   template: '<div [style.max-width]="containerMaxWidth"><st-bubble-on-ellipsis  [text]="text" [openToLeft]="openToLeft" [lines]="lines">     ' +
       '{{text}}</st-bubble-on-ellipsis></div>'
 })
 class TestStBubbleOnEllipsisComponent {
    @Input() text: string = textTrigger;
    @Input() containerMaxWidth: string = '';
    @Input() openToLeft: boolean;
+   @Input() lines: number;
 }
 
 let component: TestStBubbleOnEllipsisComponent;
@@ -59,11 +60,52 @@ describe('StBubbleOnEllipsisComponent', () => {
       fixture.detectChanges();
    });
 
-   describe('When user puts the mouse over the content', () => {
-      it('If its width is longer than the container with, bubble is displayed', (done) => {
-         component.containerMaxWidth = '20px';
-         fixture.detectChanges();
+   describe('When ellipsis has to be displayed in the first line', () => {
 
+      describe('When user puts the mouse over the content', () => {
+         it('If its width is longer than the container with, bubble is displayed', (done) => {
+            component.containerMaxWidth = '20px';
+            fixture.detectChanges();
+
+            fixture.nativeElement.querySelector('.bubble-trigger').dispatchEvent(new Event('mouseenter'));
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => {
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('st-bubble .content').style.visibility).toEqual('visible');
+               done();
+            });
+
+         });
+
+         it('If its width is smaller than the container with, bubble is not displayed', (done) => {
+            component.containerMaxWidth = '500px';
+            component.text = 'A';
+            fixture.detectChanges();
+
+            fixture.nativeElement.querySelector('.bubble-trigger').dispatchEvent(new Event('mouseenter'));
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => {
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('st-bubble .content').style.visibility).toEqual('hidden');
+               done();
+            });
+         });
+      });
+   });
+
+   describe('When ellipsis has to be displayed in different line than the first one', () => {
+      beforeEach(() => {
+         component.lines = 2;
+         component.containerMaxWidth = '100px';
+         component.text = 'This is a long text and we want to display it with ellipsis only if it takes up more than two lines';
+         fixture.detectChanges();
+      });
+
+      it('If text takes up more the specified lines, bubble is displayed', (done) => {
          fixture.nativeElement.querySelector('.bubble-trigger').dispatchEvent(new Event('mouseenter'));
          fixture.detectChanges();
 
@@ -76,9 +118,8 @@ describe('StBubbleOnEllipsisComponent', () => {
 
       });
 
-      it('If its width is smaller than the container with, bubble is not displayed', (done) => {
-         component.containerMaxWidth = '500px';
-         component.text = 'A';
+      it('If text does not take up the specified lines, bubble is not displayed', (done) => {
+         component.lines = 8;
          fixture.detectChanges();
 
          fixture.nativeElement.querySelector('.bubble-trigger').dispatchEvent(new Event('mouseenter'));
@@ -90,6 +131,7 @@ describe('StBubbleOnEllipsisComponent', () => {
             expect(fixture.nativeElement.querySelector('st-bubble .content').style.visibility).toEqual('hidden');
             done();
          });
+
       });
    });
 
