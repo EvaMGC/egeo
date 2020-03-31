@@ -1,4 +1,3 @@
-import { StWindowRefService } from '../utils/window-service';
 /*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
@@ -10,10 +9,12 @@ import { StWindowRefService } from '../utils/window-service';
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { DebugElement } from '@angular/core';
-import { Component, EventEmitter, Input, Output, ComponentFactoryResolver, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick, inject } from '@angular/core/testing';
+import { Component, EventEmitter, Input, Output, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+
+import { StWindowRefService } from '../utils/window-service';
 
 // Component
 import { StModalComponent } from './st-modal.component';
@@ -83,7 +84,6 @@ describe('StModal', () => {
    describe('StModalComponent', () => {
       let comp: StModalComponent;
       let fixture: ComponentFixture<StModalComponent>;
-      let de: DebugElement;
 
       beforeEach(async(() => {
          TestBed.configureTestingModule({
@@ -105,6 +105,7 @@ describe('StModal', () => {
       });
 
       it('should be init', () => {
+         windowMock.screen.width = 400;
          comp.modalConfig = Object.assign({}, defaultConfig, { message });
          fixture.detectChanges();
          expect(comp.buttons).toEqual([]);

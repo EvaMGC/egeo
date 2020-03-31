@@ -48,7 +48,7 @@ describe('StTagInputComponent', () => {
    });
 
    it('Should init correctly', () => {
-      (fixture.elementRef.nativeElement as HTMLElement).id = null;
+      (fixture.elementRef.nativeElement as HTMLElement).removeAttribute('id');
       fixture.detectChanges();
 
       expect(comp.label).toBeNull();

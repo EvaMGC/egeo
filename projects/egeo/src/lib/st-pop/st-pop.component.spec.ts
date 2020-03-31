@@ -112,6 +112,6 @@ describe('StPopComponent', () => {
 
       fixture.detectChanges();
       let content: HTMLElement = fixture.debugElement.nativeElement.querySelector('#content');
-      expect(content.style.transform).toBeUndefined();
+      expect(content.style.transform).toEqual('');
    });
 });

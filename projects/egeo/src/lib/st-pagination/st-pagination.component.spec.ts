@@ -31,7 +31,7 @@ describe('StPaginationComponent', () => {
    });
 
    it('Should be initialized correctly', () => {
-      (fixture.elementRef.nativeElement as HTMLElement).id = null;
+      (fixture.elementRef.nativeElement as HTMLElement).removeAttribute('id');
       fixture.detectChanges();
 
       expect(component.currentPage).toEqual(1);

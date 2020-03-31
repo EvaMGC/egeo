@@ -114,7 +114,7 @@ describe('StDropdownMenu', () => {
 
       it('Should init correctly', () => {
          comp.items = simpleItems;
-         fixture.elementRef.nativeElement.id = null;
+         fixture.elementRef.nativeElement.removeAttribute('id');
          fixture.detectChanges();
 
          const defaultMaxHeight: number = comp.itemsBeforeScroll * 42; // 42 it's default row height
@@ -275,17 +275,17 @@ describe('StDropdownMenu', () => {
          expect((item.nativeElement as HTMLDivElement).innerText).toEqual(comp.emptyListMessage);
       });
 
-      it('Should propagate emit on select', () => {
+      it('Should propagate emit on select', (done) => {
          comp.items = simpleItems;
          comp.active = true;
-         const id: string = 'test-id';
-         (fixture.elementRef.nativeElement as HTMLElement).id = id;
+         (fixture.elementRef.nativeElement as HTMLElement).id = 'test-id';
          spyOn(comp.change, 'emit');
 
          fixture.whenStable().then(() => {
             comp.onChange(simpleItems[0]);
             expect(comp.change.emit).toHaveBeenCalled();
             expect(comp.change.emit).toHaveBeenCalledWith(simpleItems[0]);
+            done();
          });
       });
 

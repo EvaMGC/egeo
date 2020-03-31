@@ -12,15 +12,15 @@ function parseTestPattern(argv) {
       if (v === '--') {
          found = true;
       }
-   }).
-   filter(function(a) {
+   }).filter(function(a) {
       return a
-   }).
-   join(' ');
+   }).join(' ');
    return pattern ? ['--grep', pattern] : [];
 }
 
 var args = parseTestPattern(process.argv);
+
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = function(config) {
    config.set({
@@ -28,7 +28,7 @@ module.exports = function(config) {
       frameworks: ['jasmine', '@angular-devkit/build-angular'],
       plugins: [
          require('karma-jasmine'),
-         require('karma-phantomjs-launcher'),
+         require('karma-chrome-launcher'),
          require('karma-mocha-reporter'),
          require('karma-junit-reporter'),
          require('karma-coverage-istanbul-reporter'),
@@ -72,7 +72,13 @@ module.exports = function(config) {
       colors: true,
       logLevel: config.LOG_INFO,
       autoWatch: false,
-      browsers: ['PhantomJS'],
+      browsers: ["Chrome_no_sandbox"],
+      customLaunchers: {
+         Chrome_no_sandbox: {
+            base: 'ChromeHeadless',
+            flags: ['--no-sandbox']
+         }
+      },
       singleRun: false,
       failOnEmptyTestSuite: false
    });

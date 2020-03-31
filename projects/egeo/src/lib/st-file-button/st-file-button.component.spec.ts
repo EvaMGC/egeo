@@ -22,7 +22,7 @@ let fakeAccepted: string = 'json, png';
 let fakeButtonClass: string = 'button-sq3';
 let fileInput: DebugElement;
 const data: any = {};
-let fakeFile: File = <File> (new Blob([data], {type: 'json'}));
+let fakeFile: File = <File> (new Blob([data], { type: 'json' }));
 
 let eventData: any;
 
@@ -45,7 +45,7 @@ describe('StFileButtonComponent', () => {
       fixture.detectChanges();
       fileInput = fixture.debugElement.query(By.css('input'));
 
-      eventData = {target: {files: []}, srcElement: {}};
+      eventData = { target: { files: [] }, srcElement: {} };
    });
 
    describe('when it is initialized', () => {
@@ -91,8 +91,7 @@ describe('StFileButtonComponent', () => {
 
       describe('an event is emitted with files as params only if all files have an accepted extension and type', () => {
          it('if there is at least an invalid file, event is not emitted', () => {
-            let invalidFile = Object.create(fakeFile);
-            invalidFile.type = 'txt';
+            let invalidFile: File = Object.assign({}, fakeFile, { type: 'txt' });
             eventData.target.files = [fakeFile, invalidFile];
 
             fileInput.triggerEventHandler('change', eventData);
@@ -101,7 +100,7 @@ describe('StFileButtonComponent', () => {
          });
 
          it('if all files are valid, event is emitted with files as params', () => {
-            eventData.target.files =  [fakeFile, fakeFile];
+            eventData.target.files = [fakeFile, fakeFile];
 
             fileInput.triggerEventHandler('change', eventData);
 
@@ -109,17 +108,15 @@ describe('StFileButtonComponent', () => {
          });
 
          it('if there is a file without type, its extension is searched in the accepted extensions', () => {
-            let fileWithoutType = Object.create(fakeFile);
-            fileWithoutType.type = '';
-            fileWithoutType.name = 'invalidFile.Extension.txt';
+            let fileWithoutType: File = Object.assign({}, fakeFile, { type: '', name: 'invalidFile.Extension.txt' });
 
-            eventData.target.files =  [fakeFile, fileWithoutType];
+            eventData.target.files = [fakeFile, fileWithoutType];
 
             fileInput.triggerEventHandler('change', eventData);
 
             expect(component.selected.emit).not.toHaveBeenCalled();
 
-            fileWithoutType.name = 'validFile.Extension.json';
+            fileWithoutType = Object.assign({}, fakeFile, { type: '', name: 'validFile.Extension.json' });
 
             eventData.target.files = [fakeFile, fileWithoutType];
 

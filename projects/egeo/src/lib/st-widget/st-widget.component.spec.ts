@@ -46,7 +46,7 @@ describe('StWidgetComponent', () => {
 
 
    it('If host element does not have defined id, Element Id should be undefined', () => {
-      fixture.nativeElement.id = null;
+      fixture.nativeElement.removeAttribute('id');
 
       fixture.detectChanges();
 

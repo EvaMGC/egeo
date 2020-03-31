@@ -88,7 +88,7 @@ describe('StHeader', () => {
       it('Should be able to init correctly', () => {
          windowMock.setInnerWidth(2000);
          comp.menu = menu;
-         fixture.elementRef.nativeElement.id = null;
+         fixture.elementRef.nativeElement.removeAttribute('id');
          fixture.detectChanges();
 
          expect(comp.id).toEqual('st-header');
@@ -118,7 +118,7 @@ describe('StHeader', () => {
          windowMock.setInnerWidth(1000);
          window.dispatchEvent(new Event('resize'));
          fixture.detectChanges();
-         expect(comp.showMenuNames).toBeTruthy();
+         expect(comp.showMenuNames).toBeFalsy();
       }));
 
       it('Should be able to select a menu option without navigate', inject([Router], (router: Router) => {

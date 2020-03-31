@@ -124,7 +124,6 @@ export class StHeaderComponent implements AfterViewInit {
    private checkMenuLabelVisibility(): void {
       const windowSize: number = this._windowServiceRef.nativeWindow.innerWidth;
       const canShowMenuNames = this._headerSize <= windowSize;
-
       if (this.showMenuNames !== canShowMenuNames) {
          this.showMenuNames = canShowMenuNames;
       }
