@@ -92,8 +92,8 @@ export class StDropdownMenuComponent implements AfterViewInit, OnInit, OnChanges
    /** @output {any} [scrollAtBottom] Event emitted when scroll reach the end of the list */
    @Output() scrollAtBottom: EventEmitter<any> = new EventEmitter<any>();
 
-   @ViewChild('buttonId', {static: false}) buttonElement: ElementRef;
-   @ViewChild('itemList', {static: false}) itemListElement: ElementRef;
+   @ViewChild('buttonId', { static: false }) buttonElement: ElementRef;
+   @ViewChild('itemList', { static: false }) itemListElement: ElementRef;
 
    widthMenu: string = '0px';
 

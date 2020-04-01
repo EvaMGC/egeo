@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { StDropDownMenuGroup, StDropDownMenuItem, StDropDownVisualMode } from '@stratio/egeo';
 
 import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.service';
@@ -72,7 +72,7 @@ export class StDropdownMenuDemoComponent {
    }
 
    private generateNormal(): StDropDownMenuItem[] {
-     return [
+      return [
          {
             label: 'Delete',
             value: 'delete',
@@ -92,8 +92,19 @@ export class StDropdownMenuDemoComponent {
             value: 'published',
             iconColor: 'blue',
             icon: 'icon-cloud-upload'
+         },
+         {
+            label: 'province of birth',
+            labelColor: '#8898a7',
+            value: 'fk',
+            iconColor: '#000000',
+            icon: 'icon-arrow-up',
+            extraIcon: 'icon-info',
+            extraIconColor: '#8898a7',
+            extraIconBubble: 'To connect this table you have to set “Province” as root',
+            textInfo: 'This is an optional text'
          }
-         ];
+      ];
    }
 
    private generateWithScroll(length: number = 0): StDropDownMenuItem[] {

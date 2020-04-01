@@ -5,12 +5,17 @@
 **New features:**
 
 * st-bubble-on-ellipsis: Allow to specify how many lines have to be displayed before ellipsis
+* st-dropdown-menu: Allow to display a right aligned extra icon with bubble
 
 **Fixed bugs:**
 
 * st-input: Export min and max validators to can be validated
 * st-form-directives: Public directive module in order to can be used from outside
 * st-click-outside: Public directive module in order to can be used from outside
+
+**Others:**
+
+* Configure puppeteer to launch tests
 
 
 ## 20.0.0 (March 24, 2020)

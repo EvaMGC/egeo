@@ -10,15 +10,13 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { StBubbleModule } from './../../st-bubble/st-bubble.module';
+import { StDropdownMenuItemComponent } from './st-dropdown-menu-item.component';
 
-import { StDropdownMenuComponent } from './st-dropdown-menu.component';
-import { StPopModule } from '../st-pop/st-pop.module';
-import { StSpinnerModule } from '../st-spinner/st-spinner.module';
-import { StDropdownMenuItemModule } from './st-dropdown-menu-item/st-dropdown-menu-item.module';
 
 @NgModule({
-   imports: [CommonModule, StPopModule, StSpinnerModule, StDropdownMenuItemModule],
-   declarations: [StDropdownMenuComponent],
-   exports: [StDropdownMenuComponent]
+   imports: [CommonModule, StBubbleModule],
+   declarations: [StDropdownMenuItemComponent],
+   exports: [StDropdownMenuItemComponent]
 })
-export class StDropdownMenuModule { }
+export class StDropdownMenuItemModule { }

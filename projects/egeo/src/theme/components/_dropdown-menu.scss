@@ -82,10 +82,33 @@
          background-color: $action-10;
       }
 
+      .label-container {
+         width: 100%;
+
+         .label {
+            display: inline-flex;
+            flex-direction: column;
+         }
+      }
+
       i {
+         line-height: $egeo-line-height-24;
+         font-size: $egeo-font-size-14;
          display: inline-flex;
-         margin-right: 10px;
-         line-height: $egeo-line-height-22;
+
+         &.icon {
+            margin-right: 10px;
+         }
+
+         &.extra-icon {
+            margin-left: 10px;
+         }
+      }
+
+      .extra-icon__bubble {
+         display: inline-block;
+         margin-left: 10px;
+         float: right;
       }
 
       .label {
@@ -136,6 +159,12 @@
 
       .label {
          white-space: nowrap;
+         font-size: $egeo-font-size-14;
+         font-weight: normal;
+         font-stretch: normal;
+         font-style: normal;
+         line-height: $egeo-line-height-22;
+         letter-spacing: normal;
       }
    }
 }

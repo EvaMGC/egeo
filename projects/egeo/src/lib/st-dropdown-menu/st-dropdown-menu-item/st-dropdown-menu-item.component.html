@@ -17,10 +17,33 @@
    (click)="onChangeItem()"
    (keyup.enter)="onChangeItem()"
    *ngIf="hasItem">
-   <i *ngIf="hasIcon" [ngClass]="icon" [style.color]="item.iconColor"></i>
+   <i *ngIf="hasIcon" class="icon" [ngClass]="icon" [style.color]="item.iconColor"></i>
    <div *ngIf="!item.hasHtml" class="label-container">
-      <span [style.color]="item.labelColor" class="label">{{item.label}}</span>
-      <span *ngIf="item.textInfo" class="text-info">{{item.textInfo}}</span>
+      <span class="label">
+         <span [style.color]="item.labelColor" class="label">{{item.label}}</span>
+         <span *ngIf="item.textInfo" class="text-info">{{item.textInfo}}</span>
+      </span>
+      <ng-container *ngIf="hasExtraIcon">
+         <i class="extra-icon" *ngIf="!item.extraIconBubble"
+            [ngClass]="item.extraIcon"
+            [style.color]="item.extraIconColor">
+         </i>
+         <st-bubble *ngIf="item.extraIconBubble" class="extra-icon__bubble"
+                    [hidden]="!visibleExtraButtonBubble"
+                    [small]="true"
+                    [text]="item.extraIconBubble"
+                    [animation]="false"
+                    [showArrow]="true"
+                    [offset]="{x: 38, y: 9}"
+                    [openToLeft]="true">
+            <i bubble-button
+               [ngClass]="item.extraIcon"
+               [style.color]="item.extraIconColor"
+               (mouseenter)="onToggleExtraButtonBubble()"
+               (mouseleave)="onToggleExtraButtonBubble()">
+            </i>
+         </st-bubble>
+      </ng-container>
    </div>
 
    <div *ngIf="item.hasHtml" [innerHTML]="html"></div>

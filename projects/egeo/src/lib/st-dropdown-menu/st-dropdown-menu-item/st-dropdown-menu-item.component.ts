@@ -25,12 +25,18 @@ export class StDropdownMenuItemComponent {
 
    @Output() change: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
 
+   visibleExtraButtonBubble: boolean;
+
    constructor(private sanitizer: DomSanitizer) {
 
    }
 
    onChangeItem(): void {
       this.change.emit(this.item);
+   }
+
+   onToggleExtraButtonBubble(): void {
+      this.visibleExtraButtonBubble = !this.visibleExtraButtonBubble;
    }
 
    get isSelected(): boolean {
@@ -48,6 +54,10 @@ export class StDropdownMenuItemComponent {
 
    get hasIcon(): boolean {
       return this.hasItem && this.item.icon !== undefined && this.item.icon !== null;
+   }
+
+   get hasExtraIcon(): boolean {
+      return this.hasItem && this.item.extraIcon !== undefined && this.item.extraIcon !== null;
    }
 
    get hasItem(): boolean {

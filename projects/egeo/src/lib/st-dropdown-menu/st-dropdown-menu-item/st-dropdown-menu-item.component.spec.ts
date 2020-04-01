@@ -8,12 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ChangeDetectionStrategy, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu.interface';
 import { StDropdownMenuItemComponent } from './st-dropdown-menu-item.component';
+import { StBubbleModule } from '../../st-bubble/st-bubble.module';
+import { StBubbleComponent } from '../..';
 
 const item: StDropDownMenuItem = {
    label: 'example 1',
@@ -27,9 +29,13 @@ describe('StDropdownMenuItemComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
+         imports: [StBubbleModule],
          declarations: [StDropdownMenuItemComponent],
          schemas: [NO_ERRORS_SCHEMA]
       })
+         .overrideComponent(StBubbleComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
@@ -164,13 +170,13 @@ describe('StDropdownMenuItemComponent', () => {
    });
 
    it('label and icon should be displayed with the color specified on the model', () => {
-      comp.item = Object.assign({}, { icon: 'logout-button', iconColor: 'red', labelColor: '#857aba' }, item);
+      comp.item = Object.assign({}, { icon: 'logout-button', iconColor: '#fefefe', labelColor: '#857aba' }, item);
       fixture.detectChanges();
 
-      const icon: DebugElement = fixture.debugElement.query(By.css('li i'));
-      const label: DebugElement = fixture.debugElement.query(By.css('li span'));
+      const icon: DebugElement = fixture.debugElement.query(By.css('li i.icon'));
+      const label: DebugElement = fixture.debugElement.query(By.css('li .label > span'));
 
-      expect(icon.styles.color).toEqual('red');
+      expect(icon.styles.color).toEqual('#fefefe');
       expect(label.styles.color).toEqual('#857aba');
    });
 
@@ -241,5 +247,58 @@ describe('StDropdownMenuItemComponent', () => {
 
       expect(fixture.nativeElement.querySelector('.st-dropdown-menu-item > div').innerText).toEqual('A Man and a Woman');
       expect(fixture.nativeElement.querySelector('.st-dropdown-menu-item > div').innerHTML).toEqual(comp.item.label);
+   });
+
+   describe('should be able to display an extra button if it is introduced', () => {
+      it('icon is displayed with the color introduced', () => {
+         comp.item = {
+            label: '<b>A</b> M<b>a</b>n <b>a</b>nd <b>a</b> Wom<b>a</b>n',
+            hasHtml: false,
+            value: 'info',
+            extraIconColor: '#fefefe',
+            extraIcon: 'icon-info'
+         };
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-dropdown-menu-item i.extra-icon').classList).toContain('icon-info');
+         expect(fixture.debugElement.query(By.css('.st-dropdown-menu-item i.extra-icon')).styles.color).toEqual('#fefefe');
+      });
+
+      describe('If bubble for extra icon is introduced', () => {
+         beforeEach(() => {
+            comp.item = {
+               label: '<b>A</b> M<b>a</b>n <b>a</b>nd <b>a</b> Wom<b>a</b>n',
+               hasHtml: false,
+               value: 'info',
+               extraIconColor: '#fefefe',
+               extraIcon: 'icon-info',
+               extraIconBubble: 'This is an informative text'
+            };
+            fixture.detectChanges();
+         });
+
+         it('it is only displayed when user puts mouse over the icon', (done) => {
+            expect(fixture.nativeElement.querySelector('.st-dropdown-menu-item .extra-icon__bubble i').classList).toContain('icon-info');
+
+            fixture.nativeElement.querySelector('.st-dropdown-menu-item .extra-icon__bubble i').dispatchEvent(new Event('mouseenter'));
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => {
+               fixture.detectChanges();
+               expect(fixture.nativeElement.querySelector('.st-dropdown-menu-item st-bubble .content').style.visibility).toEqual('visible');
+
+               fixture.nativeElement.querySelector('.st-dropdown-menu-item .extra-icon__bubble i').dispatchEvent(new Event('mouseleave'));
+               fixture.detectChanges();
+
+               fixture.whenStable().then(() => {
+                  fixture.detectChanges();
+
+                  expect(fixture.nativeElement.querySelector('.st-dropdown-menu-item st-bubble .content').style.visibility).toEqual('hidden');
+                  done();
+               });
+
+            });
+         });
+      });
    });
 });
