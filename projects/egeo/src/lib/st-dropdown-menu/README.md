@@ -26,6 +26,8 @@
 | -------------- | ------------------ | --------------------------------------------------- |
 | change         | StDropDownMenuItem | Event emitted when user select an item              |
 | scrollAtBottom | Any                | Event emitted when scroll reach the end of the list |
+| itemMouseEnter | StDropDownMenuItem | Event emitted when mouse is over an item            |
+| itemMouseLeave | StDropDownMenuItem | Event emitted when mouse leaves an item             |
 
 ## Example
 

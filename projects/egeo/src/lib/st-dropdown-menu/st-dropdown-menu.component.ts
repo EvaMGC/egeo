@@ -91,6 +91,10 @@ export class StDropdownMenuComponent implements AfterViewInit, OnInit, OnChanges
 
    /** @output {any} [scrollAtBottom] Event emitted when scroll reach the end of the list */
    @Output() scrollAtBottom: EventEmitter<any> = new EventEmitter<any>();
+   /** @output {StDropDownMenuItem} [itemMouseEnter] Event emitted when mouse is over an item */
+   @Output() itemMouseEnter: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
+   /** @output {StDropDownMenuItem} [itemMouseLeave] Event emitted when mouse leaves an item */
+   @Output() itemMouseLeave: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
 
    @ViewChild('buttonId', { static: false }) buttonElement: ElementRef;
    @ViewChild('itemList', { static: false }) itemListElement: ElementRef;
@@ -173,6 +177,14 @@ export class StDropdownMenuComponent implements AfterViewInit, OnInit, OnChanges
       if (element.scrollHeight - element.scrollTop === element.clientHeight && !this.isLoading) {
          this.scrollAtBottom.emit();
       }
+   }
+
+   onMouseEnter(item: StDropDownMenuItem): void {
+      this.itemMouseEnter.emit(item);
+   }
+
+   onMouseLeave(item: StDropDownMenuItem): void {
+      this.itemMouseLeave.emit(item);
    }
 
    @HostListener('window:resize')

@@ -56,6 +56,10 @@ export class StFilterSelectorComponent implements OnInit {
    @Output() changeFilterVisibility: EventEmitter<boolean> = new EventEmitter<boolean>();
    /** @Output {boolean} [closeFilter=] Event emitted when option menu is closed */
    @Output() closeFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
+   /** @output {StDropDownMenuItem} [itemMouseEnter] Event emitted when mouse is over an item */
+   @Output() itemMouseEnter: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
+   /** @output {StDropDownMenuItem} [itemMouseLeave] Event emitted when mouse leaves an item */
+   @Output() itemMouseLeave: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
 
    public readonly sectionMenuVisualMode: StDropDownVisualMode = StDropDownVisualMode.MENU_LIST;
    public menuPlacement: StPopPlacement;
@@ -79,5 +83,13 @@ export class StFilterSelectorComponent implements OnInit {
 
    onCloseFilter(): void {
       this.closeFilter.emit(true);
+   }
+
+   onItemMouseEnter(item: StDropDownMenuItem): void {
+      this.itemMouseEnter.emit(item);
+   }
+
+   onItemMouseLeave(item: StDropDownMenuItem): void {
+      this.itemMouseLeave.emit(item);
    }
 }

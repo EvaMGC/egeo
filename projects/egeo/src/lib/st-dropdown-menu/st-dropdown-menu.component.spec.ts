@@ -73,7 +73,7 @@ class TestDropdownComponent {
    items: StDropDownMenuItem[];
    active: boolean = false;
    selected: StDropDownMenuItem;
-   @ViewChild('dropdown', {static: false}) dropdownItem: StDropdownMenuComponent;
+   @ViewChild('dropdown', { static: false }) dropdownItem: StDropdownMenuComponent;
    dropdownWidth: string = '300px';
    visualMode: StDropDownVisualMode = StDropDownVisualMode.OPTION_LIST;
    keyBoardMove: boolean = false;
@@ -441,6 +441,27 @@ describe('StDropdownMenu', () => {
          });
       });
 
+      it('When mouse is over an item, event is emitted', () => {
+         comp.items = simpleItems;
+         comp.active = true;
+         fixture.detectChanges();
+         spyOn(comp.itemMouseEnter, 'emit');
+
+         fixture.nativeElement.querySelectorAll('st-dropdown-menu-item')[2].dispatchEvent(new Event('mouseenter'));
+
+         expect(comp.itemMouseEnter.emit).toHaveBeenCalledWith(simpleItems[2]);
+      });
+
+      it('When mouse leaves an item, event is emitted', () => {
+         comp.items = simpleItems;
+         comp.active = true;
+         fixture.detectChanges();
+         spyOn(comp.itemMouseLeave, 'emit');
+
+         fixture.nativeElement.querySelectorAll('st-dropdown-menu-item')[3].dispatchEvent(new Event('mouseleave'));
+
+         expect(comp.itemMouseLeave.emit).toHaveBeenCalledWith(simpleItems[3]);
+      });
    });
 
    describe('Instance', () => {
@@ -565,5 +586,6 @@ describe('StDropdownMenu', () => {
          expect(instanceTestComp.onChange).toHaveBeenCalled();
          expect(instanceTestComp.onChange).toHaveBeenCalledWith(itemsWithExtraParams[2]);
       });
+
    });
 });

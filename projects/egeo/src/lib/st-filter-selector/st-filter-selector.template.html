@@ -19,7 +19,9 @@
    [openToLeft]="menuAlignedToRight"
    [visualMode]="sectionMenuVisualMode"
    (change)="onClickFilter($event)"
-   (clickOutside)="onCloseFilter()">
+   (clickOutside)="onCloseFilter()"
+   (itemMouseEnter)="onItemMouseEnter($event)"
+   (itemMouseLeave)="onItemMouseLeave($event)">
    <div (click)="onChangeFilterVisibility()" class="filter-title">
       <span>{{ selected?.label }}</span>
       <i class="icon-arrow2_down arrow"></i>

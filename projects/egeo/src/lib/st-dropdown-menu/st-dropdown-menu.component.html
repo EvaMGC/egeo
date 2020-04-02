@@ -31,7 +31,9 @@
                [item]="item"
                [selectedItem]="selectedItem"
                [styleSelected]="styleSelected"
-               (change)="onChange($event)">
+               (change)="onChange($event)"
+               (mouseenter)="onMouseEnter(item)"
+               (mouseleave)="onMouseLeave(item)">
             </st-dropdown-menu-item>
             <div *ngIf="isLoading" class="spinner-container">
                <st-spinner class="spinner"></st-spinner>
@@ -57,7 +59,9 @@
                         [item]="item"
                         [selectedItem]="selectedItem"
                         [styleSelected]="styleSelected"
-                        (change)="onChange($event)">
+                        (change)="onChange($event)"
+                        (mouseenter)="onMouseEnter(item)"
+                        (mouseleave)="onMouseLeave(item)">
                      </st-dropdown-menu-item>
 
                      <div class="without-results st-dropdown-menu-without-results" [style.maxWidth]='widthMenu'

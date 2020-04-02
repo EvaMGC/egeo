@@ -114,4 +114,24 @@ describe('FilterSelectorComponent', () => {
          expect(component.clickFilter.emit).toHaveBeenCalledWith(component.filterList[2]);
       });
    });
+
+   it('When mouse is over an item, event is emitted', () => {
+      component.openFilter = true;
+      fixture.detectChanges();
+      spyOn(component.itemMouseEnter, 'emit');
+
+      fixture.nativeElement.querySelectorAll('st-dropdown-menu-item')[1].dispatchEvent(new Event('mouseenter'));
+
+      expect(component.itemMouseEnter.emit).toHaveBeenCalledWith(fakeFilters[1]);
+   });
+
+   it('When mouse leaves an item, event is emitted', () => {
+      component.openFilter = true;
+      fixture.detectChanges();
+      spyOn(component.itemMouseLeave, 'emit');
+
+      fixture.nativeElement.querySelectorAll('st-dropdown-menu-item')[2].dispatchEvent(new Event('mouseleave'));
+
+      expect(component.itemMouseLeave.emit).toHaveBeenCalledWith(fakeFilters[2]);
+   });
 });

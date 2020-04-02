@@ -6,6 +6,8 @@
 
 * st-bubble-on-ellipsis: Allow to specify how many lines have to be displayed before ellipsis
 * st-dropdown-menu: Allow to display a right aligned extra icon with bubble
+* st-dropdown-menu: Emit events when mouse enters and leaves an item
+* st-filter-selector: Emit events when mouse enters and leaves an option
 
 **Fixed bugs:**
 

@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 import { StDropDownMenuItem, StHorizontalTab } from '@stratio/egeo';
 
 @Component({
-   selector: 'st-horizontal-tabs-demo',
+   selector: 'st-filter-selector-demo',
    templateUrl: './st-filter-selector-demo.component.html',
    styleUrls: ['./st-filter-selector-demo.component.scss']
 })

@@ -18,6 +18,8 @@
 | clickFilter            | StDropDownMenuItem | Event emitted when an option is selected         |
 | changeFilterVisibility | Boolean            | Event emitted when visibility of options changes |
 | closeFilter            | Boolean            | Event emitted when option menu is closed         |
+| itemMouseEnter         | StDropDownMenuItem | Event emitted when mouse is over an item         |
+| itemMouseLeave         | StDropDownMenuItem | Event emitted when mouse leaves an item          |
 
 ## Example
 
