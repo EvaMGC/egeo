@@ -18,8 +18,8 @@ $egeo-droid-sans-mono: true !default;
 $egeo-nunito-sans:                  'Nunito Sans' !default;
 $egeo-stratio-icons:                'ico_stratio' !default;
 
-/// font-size:
-$egeo-font-size-10: 0.625rem !default; // 10px
+/// font-size (base 14):
+$egeo-font-size-10: 0.714rem !default; // 10px
 $egeo-font-size-11: 0.786rem !default; // 11px
 $egeo-font-size-12: 0.857rem !default; // 12px
 $egeo-font-size-14: 1rem !default;     // 14px
@@ -34,7 +34,7 @@ $egeo-font-size-42: 3rem !default;     // 42px
 $egeo-font-size-48: 3.429rem !default; // 48px
 $egeo-font-size-52: 3.714rem !default; // 52px
 
-/// line-height:
+/// line-height (base 14):
 $egeo-line-height-18: 1.286rem !default; // 18px
 $egeo-line-height-20: 1.429rem !default; // 20px
 $egeo-line-height-22: 1.571rem !default; // 22px
@@ -50,12 +50,12 @@ $egeo-line-height-58: 4.143rem !default; // 58px
 $egeo-line-height-62: 4.429rem !default; // 62px
 
 // deprecated:
-$egeo-font-size-xxxlarge:  1.813rem !default;   // 29px
-$egeo-font-size-xxlarge:   1.563rem !default;   // 25px
-$egeo-font-size-xlarge:    1.375rem !default;   // 22px
-$egeo-font-size-xsmall:    0.938rem !default;   // 15px
+$egeo-font-size-xxxlarge:  1.813rem !default;   // 29px (base 16)
+$egeo-font-size-xxlarge:   1.563rem !default;   // 25px (base 16)
+$egeo-font-size-xlarge:    1.375rem !default;   // 22px (base 16)
+$egeo-font-size-xsmall:    0.938rem !default;   // 15px (base 16)
 
-$egeo-line-height-xxxlarge:   2.125rem !default;  // 34px
-$egeo-line-height-xxlarge:    1.875rem !default;  // 30px
-$egeo-line-height-small:      1.313rem !default;  // 21px
-$egeo-line-height-xxxsmall:   1.063rem !default;  // 17px
+$egeo-line-height-xxxlarge:   2.125rem !default;  // 34px (base 16)
+$egeo-line-height-xxlarge:    1.875rem !default;  // 30px (base 16)
+$egeo-line-height-small:      1.313rem !default;  // 21px (base 16)
+$egeo-line-height-xxxsmall:   1.063rem !default;  // 17px (base 16)

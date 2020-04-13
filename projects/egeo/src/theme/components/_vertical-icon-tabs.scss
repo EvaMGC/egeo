@@ -1,0 +1,43 @@
+/**
+ * © 2017 Stratio Big Data Inc., Sucursal en España. All rights reserved.
+ *
+ * This software – including all its source code – contains proprietary
+ * information of Stratio Big Data Inc., Sucursal en España and
+ * may not be revealed, sold, transferred, modified, distributed or
+ * otherwise made available, licensed or sublicensed to third parties;
+ * nor reverse engineered, disassembled or decompiled, without express
+ * written authorization from Stratio Big Data Inc., Sucursal en España.
+ */
+@import '../constants/fonts';
+@import '../constants/colors';
+
+.st-vertical-icon-tabs {
+   background-color: $neutral-2;
+   border-right: 1px solid $space-20;
+   text-align: center;
+
+   .tab {
+      color: $space-70;
+
+      &__text {
+         font-size: $egeo-font-size-10;
+         font-family: $egeo-nunito-sans;
+         font-stretch: normal;
+         font-style: normal;
+         font-weight: 600;
+         letter-spacing: normal;
+         line-height: $egeo-line-height-18;
+      }
+
+      &--active {
+         background-color: $neutral-full;
+         border-color: $space-20;
+         border-right: 1px solid white;
+         color: $space-110;
+      }
+
+      i {
+         font-size: $egeo-font-size-18;
+      }
+   }
+}

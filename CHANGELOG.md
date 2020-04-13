@@ -8,6 +8,7 @@
 * st-dropdown-menu: Allow to display a right aligned extra icon with bubble
 * st-dropdown-menu: Emit events when mouse enters and leaves an item
 * st-filter-selector: Emit events when mouse enters and leaves an option
+* st-vertical-icon-tabs: Create component
 
 **Fixed bugs:**
 

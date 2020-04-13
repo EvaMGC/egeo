@@ -63,6 +63,7 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-tooltip', name: 'Tooltip', path: 'tooltip-demo', moduleLazyLoad: 'StTooltipDemoModule' },
    { id: 'st-two-list-selection', name: 'Two List Selection', path: 'two-list-selection-demo', moduleLazyLoad: 'StTwoListSelectionDemoModule' },
    { id: 'st-vertical-tabs', name: 'Vertical Tabs', path: 'vertical-tabs-demo', moduleLazyLoad: 'StVerticalTabsDemoModule' },
+   { id: 'st-vertical-icon-tabs', name: 'Vertical Icon Tabs', path: 'vertical-icon-tabs-demo', moduleLazyLoad: 'StVerticalIconTabsDemoModule' },
    { id: 'st-zero-page', name: 'Zero page', path: 'zero-page-demo', moduleLazyLoad: 'StZeroPageDemoModule' },
    { id: 'st-widget', name: 'Widget', path: 'widget-demo', moduleLazyLoad: 'StWidgetDemoModule' }
 ];
@@ -113,6 +114,7 @@ const routes: Routes = [
    { path: 'tooltip-demo', loadChildren: './st-tooltip-demo/st-tooltip-demo.module#StTooltipDemoModule' },
    { path: 'two-list-selection-demo', loadChildren: './st-two-list-selection-demo/st-two-list-selection-demo.module#StTwoListSelectionDemoModule' },
    { path: 'vertical-tabs-demo', loadChildren: './st-vertical-tabs-demo/st-vertical-tabs-demo.module#StVerticalTabsDemoModule' },
+   { path: 'vertical-icon-tabs-demo', loadChildren: './st-vertical-icon-tabs-demo/st-vertical-icon-tabs-demo.module#StVerticalIconTabsDemoModule' },
    { path: 'zero-page-demo', loadChildren: './st-zero-page-demo/st-zero-page-demo.module#StZeroPageDemoModule' },
    { path: 'widget-demo', loadChildren: './st-widget-demo/st-widget-demo.module#StWidgetDemoModule' }
 ];

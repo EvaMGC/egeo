@@ -50,5 +50,6 @@ export { StTextareaDemoModule } from './st-textarea-demo/st-textarea-demo.module
 export { StToggleButtonsDemoModule } from './st-toggle-buttons-demo/st-toggle-buttons-demo.module';
 export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
 export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
+export { StVerticalIconTabsDemoModule } from './st-vertical-icon-tabs-demo/st-vertical-icon-tabs-demo.module';
 export { StVerticalTabsDemoModule } from './st-vertical-tabs-demo/st-vertical-tabs-demo.module';
 export { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';

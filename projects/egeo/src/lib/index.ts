@@ -336,6 +336,10 @@ export { StTwoListSelectionViewComponent } from './st-two-list-selection/st-two-
 export { StVerticalTabsModule } from './st-vertical-tabs/st-vertical-tabs.module';
 export { StVerticalTabsComponent } from './st-vertical-tabs/st-vertical-tabs.component';
 
+// Vertical icon tabs
+export { StVerticalIconTabsModule } from './st-vertical-icon-tabs/st-vertical-icon-tabs.module';
+export { StVerticalIconTabsComponent } from './st-vertical-icon-tabs/st-vertical-icon-tabs.component';
+
 // Widget
 export { StWidgetModule } from './st-widget/st-widget.module';
 export { StWidgetComponent } from './st-widget/st-widget.component';

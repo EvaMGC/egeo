@@ -56,6 +56,7 @@ import { StFilterSelectorDemoModule } from './st-filter-selector-demo/st-filter-
 import { StZeroPageDemoModule } from './st-zero-page-demo/st-zero-page-demo.module';
 import { StColorPickerDemoModule } from './st-color-picker-demo/st-color-picker-demo.module';
 import { StBubbleOnEllipsisDemoModule } from '@app/demos/st-bubble-on-ellipsis-demo/st-bubble-on-ellipsis-demo.module';
+import { StVerticalIconTabsModule } from '@stratio/egeo';
 
 
 export const EGEO_DEMO_MODULES: any[] = [
@@ -103,6 +104,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StToggleButtonsDemoModule,
    StTooltipDemoModule,
    StTwoListSelectionDemoModule,
+   StVerticalIconTabsModule,
    StVerticalTabsDemoModule,
    StZeroPageDemoModule,
    StWidgetDemoModule

@@ -1,0 +1,40 @@
+/**
+ * © 2017 Stratio Big Data Inc., Sucursal en España. All rights reserved.
+ *
+ * This software – including all its source code – contains proprietary
+ * information of Stratio Big Data Inc., Sucursal en España and
+ * may not be revealed, sold, transferred, modified, distributed or
+ * otherwise made available, licensed or sublicensed to third parties;
+ * nor reverse engineered, disassembled or decompiled, without express
+ * written authorization from Stratio Big Data Inc., Sucursal en España.
+ */
+
+nav {
+   display: flex;
+   flex-direction: column;
+   width: 60px;
+   height: 100%;
+}
+
+.tab {
+   padding: 12px 8px 12px 11px;
+   text-align: center;
+
+   &--active {
+      width: 101%;
+      border-width: 1px 0 1px 0;
+      border-style: solid;
+      border-right: 1px solid white;
+   }
+
+   &:first-child {
+      &.tab--active {
+         border-top: none;
+      }
+   }
+
+   i {
+      display: block;
+      margin-bottom: 6px;
+   }
+}
