@@ -8,29 +8,27 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 import { JSON_SCHEMA } from './json-schema';
 
 @Component({
    selector: 'st-form-editor-demo',
    templateUrl: 'st-form-editor-demo.html',
-   styleUrls: ['st-form-editor-demo.component.scss']
+   styleUrls: ['st-form-editor-demo.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StFormEditorDemoComponent {
    public jsonSchema: any;
-   public model: any = {  };
+   public model: any = {};
    public schemaError: string;
+   public schemaChangeTimer: number;
 
-   @ViewChild('formModel', {static: false}) public formModel: NgForm;
+   @ViewChild('formModel', { static: false }) public formModel: NgModel;
 
-   constructor() {
+   constructor(private _cd: ChangeDetectorRef) {
       this.jsonSchema = JSON_SCHEMA;
-   }
-
-   onChange(model: any): void {
-      this.model = model;
    }
 
    changeFormStatus(): void {
@@ -42,12 +40,18 @@ export class StFormEditorDemoComponent {
    }
 
    onChangeSchema(jsonSchema: any): void {
-      try {
-         this.jsonSchema = JSON.parse(jsonSchema);
-         this.schemaError = undefined;
-      } catch (error) {
-         this.schemaError = error;
-         console.log(error);
+      if (this.schemaChangeTimer !== undefined) {
+         clearTimeout(this.schemaChangeTimer);
       }
+      this.schemaChangeTimer = setTimeout(() => {
+            try {
+               this.jsonSchema = JSON.parse(jsonSchema);
+               this.schemaError = undefined;
+               this._cd.markForCheck();
+            } catch (error) {
+               this.schemaError = error;
+            }
+         }, 1000
+      );
    }
 }

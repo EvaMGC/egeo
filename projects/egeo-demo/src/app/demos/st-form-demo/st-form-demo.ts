@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { StHorizontalTab } from '@stratio/egeo';
+import { StIconTab } from '../../../../../egeo/src/lib/st-vertical-icon-tabs/st-icon-tabs.model';
 
 @Component({
    selector: 'st-form-demo',
@@ -17,24 +17,37 @@ import { StHorizontalTab } from '@stratio/egeo';
    styleUrls: ['./st-form-demo.component.scss']
 })
 export class StFormDemoComponent {
-   public activeOption: StHorizontalTab;
+   public activeOption: StIconTab;
    public configDoc: any = {
       html: 'demo/st-form-demo/st-form-demo.html',
       ts: 'demo/st-form-demo/st-form-demo.ts',
       component: 'lib/st-form/st-form.component.ts'
    };
 
-   public options: StHorizontalTab[] = [
-      {id: 'formEditor', text: 'Demo'},
-      {id: 'visualSectionImprovements', text: 'Visual Section improvements'},
-      {id: 'visualFieldImprovements', text: 'Visual Field improvements'}
-   ];
+   public options: StIconTab[] =
+      [
+         {
+            id: 'demo',
+            iconClass: 'icon-edit-3',
+            text: 'Demo'
+         },
+         {
+            id: 'visualSectionImprovements',
+            iconClass: 'icon-content-left',
+            text: 'Visual Section improvements'
+         },
+         {
+            id: 'visualFieldImprovements',
+            iconClass: 'icon-eye2',
+            text: 'Visual Field improvements'
+         }];
+
 
    constructor() {
       this.activeOption = this.options[0];
    }
 
-   public onChangeOption(selectedOption: StHorizontalTab): void {
+   public onChangeOption(selectedOption: StIconTab): void {
       this.activeOption = selectedOption;
    }
 }

@@ -11,9 +11,29 @@
 @import 'constants/colors';
 @import 'constants/fonts';
 
-.horizontal-tabs {
-   width: 100%;
+
+.demo-container {
+   border-top: 1px solid $space-10;
    display: block;
-   margin-bottom: 30px;
+   height: 100%;
+
+   .vertical-tabs {
+      display: inline-block;
+      height: 100vh;
+      position: fixed;
+      vertical-align: top;
+      width: 82px;
+   }
+
+   .tab-container {
+      display: inline-block;
+      height: 72.5vh;
+      overflow: auto;
+      overflow-x: hidden;
+      padding-left: 106px;
+      padding-right: 20px;
+      width: 100%;
+   }
+
 }
 

@@ -11,7 +11,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StDemoGeneratorModule, StDocsModule, StFormModule, StTextareaModule, StHorizontalTabsModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StFormModule, StTextareaModule, StVerticalIconTabsModule } from '@stratio/egeo';
 import { StFormDemoComponent } from './st-form-demo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StFormEditorDemoComponent } from './form-editor/st-form-editor-demo';
@@ -26,7 +26,7 @@ import { StVisualFieldImprovementsDemoComponent } from './visual-field-improveme
       StFormModule,
       ReactiveFormsModule,
       StTextareaModule,
-      StHorizontalTabsModule,
+      StVerticalIconTabsModule,
       StDemoGeneratorModule.withComponents({ components: [StFormDemoComponent] })
    ],
    declarations: [StFormDemoComponent, StFormEditorDemoComponent, StVisualFieldImprovementsDemoComponent,

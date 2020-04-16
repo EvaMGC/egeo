@@ -14,75 +14,86 @@
 :host {
    padding: 20px 0;
 
-   .form-editor-container {
-      position: relative;
-      .form-editor {
-         font-family: monospace;
-         font-size: 14px;
-         line-height: 1.6em;
-         color: $neutral-60;
-         width: 100%;
-         border: 1px solid $neutral-20;
-         padding: 20px;
-         background-color: $neutral-2;
-         position: absolute;
-         top: 70px;
-         right: 0;
-         bottom: 0;
+   .form-result, .textarea-container {
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+   }
 
-         &.error {
-            color: $error;
-         }
+   .title {
+      padding-top: 14px;
+   }
+
+   .subtitle {
+      padding-top: 0;
+   }
+
+   .textarea-container {
+      height: 50vh;
+      padding-right: 20px;
+
+      .textarea-title {
+         color: $neutral;
+         display: inline-block;
+         font-size: $egeo-font-size-xlarge;
+         font-stretch: normal;
+         font-style: normal;
+         font-weight: bold;
+         letter-spacing: normal;
+         line-height: $egeo-line-height-26;
+         padding: 26px 0;
       }
 
-      .editor-title {
-         font-weight: bold;
-         font-size: $egeo-font-size-xlarge;
-         font-style: normal;
-         font-stretch: normal;
-         line-height: $egeo-line-height-26;
-         letter-spacing: normal;
-         color: $neutral;
-         padding: 26px 0;
-         display: inline-block;
+      .textarea {
+         border: 1px solid $neutral-20;
+         color: $neutral-60;
+         font-family: monospace;
+         font-size: 14px;
+         height: 100%;
+         line-height: 1.6em;
+         padding: 15px 20px;
+         width: 100%;
+         resize: none;
+      }
+   }
+
+   .form-result {
+      .form {
+         display: block;
+         margin-top: -25px;
+         padding-right: 30px;
       }
    }
 
    .schema-error {
       color: $error;
-      font-weight: 100;
       font-size: $egeo-font-size-xsmall;
+      font-weight: 100;
       width: 100%;
    }
 
-   .form {
-      padding-right: 15px;
-      display: block;
-   }
-
    .button-toolbar {
+      margin-top: 20px;
       text-align: right;
-      .button {
-         margin-left: 20px;
-      }
    }
 
    .form-output {
       background-color: $neutral-2;
-      padding: 5px 20px 20px;
-      margin-top: 20px;
-      font-weight: 100;
       font-size: $egeo-font-size-14;
+      font-weight: 100;
       line-height: $egeo-font-size-18;
+      margin-top: 20px;
+      padding: 5px 20px 20px;
+      width: 100%;
 
       h2 {
-         font-weight: bold;
-         font-size: $egeo-font-size-16;
-         font-style: normal;
-         font-stretch: normal;
-         line-height: $egeo-font-size-16;
-         letter-spacing: normal;
          color: $neutral-60;
+         font-size: $egeo-font-size-16;
+         font-stretch: normal;
+         font-style: normal;
+         font-weight: bold;
+         letter-spacing: normal;
+         line-height: $egeo-font-size-16;
          padding-bottom: 15px;
          padding-top: 15px;
       }

@@ -12,12 +12,21 @@
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
    <section class="container-liquid demo-layout">
-      <p class="introduction">Dynamic forms are designed to generate forms using a json schema as input where fields are
-         defined</p>
 
-      <st-horizontal-tabs class="horizontal-tabs" [options]="options" [activeOption]="activeOption" (changedOption)="onChangeOption($event)"></st-horizontal-tabs>
-      <st-form-editor-demo [hidden]="activeOption.id !== 'formEditor'"></st-form-editor-demo>
-      <st-visual-section-improvements-demo [hidden]="activeOption.id !== 'visualSectionImprovements'"></st-visual-section-improvements-demo>
-      <st-visual-field-improvements-demo [hidden]="activeOption.id !== 'visualFieldImprovements'"></st-visual-field-improvements-demo>
+      <div class="demo-container">
+         <st-vertical-icon-tabs class="vertical-tabs"
+                                [options]="options"
+                                (changeOption)="onChangeOption($event)"
+                                [activeOption]="activeOption">
+         </st-vertical-icon-tabs>
+
+         <div class="tab-container st-custom-scrollbar">
+            <st-form-editor-demo [hidden]="activeOption !== options[0]"></st-form-editor-demo>
+            <st-visual-section-improvements-demo
+               [hidden]="activeOption !== options[1]"></st-visual-section-improvements-demo>
+            <st-visual-field-improvements-demo
+               [hidden]="activeOption !== options[2]"></st-visual-field-improvements-demo>
+         </div>
+      </div>
    </section>
 </st-docs>
