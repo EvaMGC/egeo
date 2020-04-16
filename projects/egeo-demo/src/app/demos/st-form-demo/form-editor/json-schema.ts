@@ -25,7 +25,6 @@ export const JSON_SCHEMA: any = {
             'serviceId': {
                'description': 'Service ID of the Service',
                'type': 'string',
-               'required': true,
                'readOnly': false,
                'pattern': '(.*)',
                'title': 'Service ID',
@@ -44,14 +43,12 @@ export const JSON_SCHEMA: any = {
                   'haproxyhost': {
                      'description': 'HA Proxy host',
                      'type': 'string',
-                     'required': true,
                      'title': 'HA Proxy host',
                      'default': 'discovery.labs.demo.com'
                   },
                   'haproxypath': {
                      'description': 'HA Proxy path to expose',
                      'type': 'string',
-                     'required': true,
                      'title': 'Path HA Proxy',
                      'default': '/discovery'
                   }
@@ -74,7 +71,6 @@ export const JSON_SCHEMA: any = {
                   'dbSslEnabled': {
                      'description': 'TLS secured connection with PostgreSQL',
                      'type': 'boolean',
-                     'required': false,
                      'readOnly': true,
                      'title': 'Connection with SSL',
                      'default': true
@@ -91,7 +87,6 @@ export const JSON_SCHEMA: any = {
                      'type': 'string',
                      'maxLength': 100,
                      'minLength': 3,
-                     'required': true,
                      'readOnly': false,
                      'title': 'Host',
                      'default': 'pg-0001.test.mesos'
@@ -100,7 +95,6 @@ export const JSON_SCHEMA: any = {
                      'description': 'The port of the database used as metadata repository',
                      'type': 'integer',
                      'minimum': 1,
-                     'required': true,
                      'readOnly': false,
                      'title': 'Port of the database',
                      'default': 5432
@@ -110,7 +104,6 @@ export const JSON_SCHEMA: any = {
                      'type': 'string',
                      'maxLength': 100,
                      'minLength': 3,
-                     'required': false,
                      'readOnly': false,
                      'title': 'Database name',
                      'default': 'discovery'
@@ -120,7 +113,6 @@ export const JSON_SCHEMA: any = {
                      'type': 'string',
                      'maxLength': 100,
                      'minLength': 3,
-                     'required': false,
                      'readOnly': false,
                      'title': 'Tenant Name',
                      'default': 'discovery'
@@ -130,7 +122,6 @@ export const JSON_SCHEMA: any = {
                      'type': 'string',
                      'maxLength': 100,
                      'minLength': 3,
-                     'required': false,
                      'readOnly': false,
                      'title': 'Database user'
                   }
@@ -180,7 +171,6 @@ export const JSON_SCHEMA: any = {
                   'useDynamicAuthentication': {
                      'description': 'Enable dynamic authentication',
                      'type': 'boolean',
-                     'required': false,
                      'readOnly': true,
                      'title': 'Dynamic authentication',
                      'default': true
@@ -194,7 +184,6 @@ export const JSON_SCHEMA: any = {
                   'networkName': {
                      'description': 'Docker user network name',
                      'type': 'string',
-                     'required': true,
                      'readOnly': false,
                      'title': 'Network name',
                      'enum': [
@@ -219,7 +208,6 @@ export const JSON_SCHEMA: any = {
                   'instances': {
                      'description': 'Number of Discovery instances to run.',
                      'type': 'integer',
-                     'required': true,
                      'readOnly': false,
                      'title': 'Instances',
                      'default': 1
@@ -227,7 +215,6 @@ export const JSON_SCHEMA: any = {
                   'cpus': {
                      'description': 'CPU shares to allocate to each Discovery instance.',
                      'type': 'integer',
-                     'required': true,
                      'readOnly': false,
                      'level': 1,
                      'title': 'CPU',
@@ -236,7 +223,6 @@ export const JSON_SCHEMA: any = {
                   'mem': {
                      'description': 'Memory (MB) to allocate to each Bootstrap instance.',
                      'type': 'integer',
-                     'required': true,
                      'readOnly': false,
                      'title': 'Memory (MB)',
                      'default': 2048
@@ -268,7 +254,6 @@ export const JSON_SCHEMA: any = {
                'type': 'string',
                'maxLength': 100,
                'minLength': 3,
-               'required': false,
                'readOnly': false,
                'title': 'Additional JDBC configuration parameters',
                'default': 'prepareThreshold=0'
@@ -309,7 +294,6 @@ export const JSON_SCHEMA: any = {
                      'description': 'Name of the calico network where sparta and the workflows' +
                      'are deployed if calico security is enabled. It uses the same value of Network name.',
                      'type': 'string',
-                     'required': false,
                      'readOnly': false,
                      'ui': {
                         'name': 'scp-sc-sparta-andromeda-caliconetwork'
@@ -344,7 +328,6 @@ export const JSON_SCHEMA: any = {
                      'description': 'The password of the admin user created as admin when Discovery is deployed.',
                      'type': 'integer',
                      'minimum': 1,
-                     'required': false,
                      'readOnly': false,
                      'title': 'Password of the admin user',
                      'default': 123456
@@ -354,7 +337,6 @@ export const JSON_SCHEMA: any = {
                      'type': 'string',
                      'maxLength': 100,
                      'minLength': 3,
-                     'required': false,
                      'readOnly': false,
                      'title': 'Mail of the admin user',
                      'default': 'demo@demo.com'
@@ -376,7 +358,6 @@ export const JSON_SCHEMA: any = {
                   'mb-user-header': {
                      'description': '',
                      'type': 'string',
-                     'required': false,
                      'readOnly': false,
                      'title': 'User'
                   },
@@ -412,7 +393,6 @@ export const JSON_SCHEMA: any = {
                'type': 'string',
                'maxLength': 100,
                'minLength': 3,
-               'required': false,
                'readOnly': true,
                'title': 'Vault host',
                'default': 'vault.service.paas.labs.demo.com'
@@ -420,7 +400,6 @@ export const JSON_SCHEMA: any = {
             'VAULT_PORT': {
                'type': 'integer',
                'minimum': 1,
-               'required': false,
                'readOnly': true,
                'level': 1,
                'title': 'Vault port',

@@ -90,16 +90,9 @@ main {
       }
    }
 
-   &:after {
-      content: ' ';
-      width: 100%;
-      height: 80px;
-      display: block;
-   }
-
    st-prism-highlight {
       pre {
-         margin: 0px;
+         margin: 0;
          background-color: $neutral-full;
       }
    }

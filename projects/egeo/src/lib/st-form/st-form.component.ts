@@ -9,22 +9,22 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   Component,
-   Input,
-   Output,
-   forwardRef,
-   ViewChild,
-   EventEmitter,
-   ChangeDetectionStrategy,
    AfterViewChecked,
-   OnInit,
+   AfterViewInit,
+   ChangeDetectionStrategy,
+   Component,
+   EventEmitter,
+   forwardRef,
+   Input,
    OnDestroy,
-   AfterViewInit
+   Output,
+   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormControl } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
+
 /**
  * @description {Component} [Dynamic form]
  *
@@ -53,9 +53,7 @@ import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
    ]
 })
 
-export class StFormComponent implements AfterViewInit, AfterViewChecked, ControlValueAccessor, OnInit, OnDestroy {
-   /** @Input {any} [schema=] JSON schema needed to generate the form */
-   @Input() schema: any;
+export class StFormComponent implements AfterViewInit, AfterViewChecked, ControlValueAccessor, OnDestroy {
    /** @Input {string} [parentName=] Name of the parent section. By default, it is undefined */
    @Input() parentName: string;
    /** @Input {string} [nestingLevel=0] This informs about the nesting level of the form. This input is only used for design purposes */
@@ -82,23 +80,31 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-   @ViewChild('form', {static: false}) form: NgForm;
+   @ViewChild('form', { static: false }) form: NgForm;
 
    public showCollapsedSectionFields: boolean = false;
    public innerValue: any = {};
    private _value: any = {};
    private _parentFieldSubscription: Subscription[] = [];
    private _parentFields: string[];
+   private _schema: any;
 
-   ngOnInit(): void {
-      if (this.schema.dependencies) {
-         this._parentFields = Object.keys(this.schema.dependencies);
+   /** @Input {any} [schema=] JSON schema needed to generate the form */
+   @Input() get schema(): any {
+      return this._schema;
+   }
+
+   set schema(schema: any) {
+      this._schema = schema;
+      this._value = {};
+      if (this._schema.dependencies) {
+         this._parentFields = Object.keys(this._schema.dependencies);
       }
    }
 
    ngAfterViewInit(): void {
       if (!this.forceValidations) {
-            this.form.form.markAsPristine();
+         this.form.form.markAsPristine();
       }
    }
 

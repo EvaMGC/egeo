@@ -12,35 +12,38 @@
 -->
 <section>
    <h1 class="title">Try it by yourself</h1>
-   <p class="paragraph">Dynamic forms are generating using a json schema to define its fields. Here you can try it making modifications on the json schema of the editor.</p>
+   <p class="paragraph">Dynamic forms are generating using a json schema to define its fields. Here you can try it
+      making modifications on the json schema of the editor.</p>
 
-   <div class="row form-layout">
-      <p class="col-sm-12 col-lg-12 col-xs-12 schema-error">{{schemaError}}</p>
-      <div class="col-sm-6 col-lg-6 col-xs-12">
-         <st-form class="form" [schema]="jsonSchema" [(ngModel)]="model" sectionDescriptionLevel="2" #formModel="ngModel"
-                  [textFieldMaxWidth]="70">
-         </st-form>
-         <div class="button-toolbar">
-            <button class="button button-primary" (click)="changeFormStatus()">
-               <span>Disable/Enable form</span>
-            </button>
-         </div>
+   <div class="textarea-container">
+      <h2 class="subtitle">JSON Schema</h2>
+      <textarea class="textarea st-custom-scrollbar" spellcheck="false" [ngClass]="{error: schemaError}"
+                [ngModel]="jsonSchema | json"
+                (ngModelChange)="onChangeSchema($event)">
+      </textarea>
+
+      <div class="form-output">
+         <h2>Form Output</h2>
+         {{model | json}}
+         <h2>Form Validation</h2>
+         <p *ngIf="formModel?.valid">Valid</p>
+         <p *ngIf="formModel?.invalid">Invalid</p>
       </div>
-
-      <div class="col-sm-6 col-lg-6 col-xs-12 form-editor-container">
-         <h2 class="editor-title">JSON Schema</h2>
-         <textarea class="form-editor" spellcheck="false" [ngClass]="{error: schemaError}" [ngModel]="jsonSchema | json"
-                   (ngModelChange)="onChangeSchema($event)">
-         </textarea>
+      <div class="button-toolbar">
+         <button class="button button-primary" (click)="changeFormStatus()">
+            <span>Disable/Enable form</span>
+         </button>
       </div>
    </div>
 
-   <div class="form-output">
-      <h2>Form Output</h2>
-      {{model | json}}
-      <h2>Form Validation</h2>
-      <p *ngIf="formModel.valid">Valid</p>
-      <p *ngIf="formModel.invalid">Invalid</p>
+   <div class="form-result">
+      <h2 class="subtitle">Generated Form</h2>
+
+      <p *ngIf="schemaError" class="schema-error">{{schemaError}}</p>
+
+      <st-form *ngIf="jsonSchema" #formModel="ngModel" class="form" [schema]="jsonSchema" sectionDescriptionLevel="2"
+               [(ngModel)]="model"
+               [textFieldMaxWidth]="70">
+      </st-form>
    </div>
 </section>
-

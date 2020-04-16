@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { StFormComponent } from '../st-form.component';
@@ -706,11 +706,11 @@ describe('StFormComponent', () => {
 
    describe('Section descriptions can be displayed using the input "sectionDescriptionLevel"', () => {
 
-      it ('if sectionDescriptionLevel is not introduced, section descriptions are not displayed', () => {
+      it('if sectionDescriptionLevel is not introduced, section descriptions are not displayed', () => {
          expect(fixture.nativeElement.querySelector('#executor-section .description')).toBeNull();
       });
 
-      it ('if sectionDescriptionLevel is introduced, section descriptions are only displayed if section level' +
+      it('if sectionDescriptionLevel is introduced, section descriptions are only displayed if section level' +
          ' is minor than sectionDescriptionLevel', () => {
          component.sectionDescriptionLevel = 1;
 
@@ -730,18 +730,18 @@ describe('StFormComponent', () => {
    });
 
    describe('form can be configured to be able to enable or disable the visualization of tooltips through the input "showTooltips"', () => {
-      it ('by default, tooltips are displayed', () => {
+      it('by default, tooltips are displayed', () => {
          expect(fixture.nativeElement.querySelector('label').title).toEqual(component.schema.properties.genericIntegerInput.description);
       });
 
-      it ('if input is false, tooltips are not displayed', () => {
+      it('if input is false, tooltips are not displayed', () => {
          component.showTooltips = false;
          fixture.detectChanges();
 
          expect(fixture.nativeElement.querySelector('label').title).toEqual('');
       });
 
-      it ('if input is true, tooltips are displayed in fields with description', () => {
+      it('if input is true, tooltips are displayed in fields with description', () => {
          component.showTooltips = true;
          fixture.detectChanges();
 
@@ -757,12 +757,12 @@ describe('StFormComponent', () => {
          <st-form [schema]="schema" [(ngModel)]="model" name="generated" #formModel="ngModel">
          </st-form>
       </form>
-      `
+   `
 })
 class FormInTemplateDrivenFormComponent {
    public schema: any = _cloneDeep(JSON_SCHEMA);
    public model: any = {};
-   @ViewChild('formModel', {static: false}) public formModel: NgForm;
+   @ViewChild('formModel', { static: false }) public formModel: NgForm;
 
    constructor() {
       this.schema.properties.security = {
@@ -844,12 +844,32 @@ describe('StFormComponent in templateDriven form', () => {
 
          expect(templateDrivenComp.model.dns).toEqual(templateDrivenComp.schema.properties.dns.default);
 
-
          templateDrivenFixture.nativeElement.querySelector('#security-input').click();
          templateDrivenFixture.detectChanges();
 
          expect(templateDrivenComp.model.dns).toBeUndefined();
          done();
+      });
+   });
+
+
+   it('When schema is changed, model should be reset and only contain the properties of the new schema', (done) => {
+      templateDrivenFixture.detectChanges();
+
+      templateDrivenFixture.whenStable().then(() => {
+         expect(templateDrivenComp.formModel.value.executor).not.toBeUndefined();
+
+         const _newSchema = _cloneDeep(JSON_SCHEMA);
+         delete _newSchema.properties.executor;
+         templateDrivenComp.schema = _newSchema;
+         templateDrivenFixture.detectChanges();
+
+         templateDrivenFixture.whenStable().then(() => {
+            templateDrivenFixture.detectChanges();
+
+            expect(templateDrivenComp.formModel.value.executor).toBeUndefined();
+            done();
+         });
       });
    });
 });

@@ -14,9 +14,9 @@
 .st-form {
 
    .optional-fields-button {
-      width: 100%;
       margin: 0 0 20px;
       text-transform: lowercase;
+      width: 100%;
       i {
          font-size: $egeo-font-size-12;
          padding-right: 5px;
@@ -24,19 +24,19 @@
    }
 
    .title {
-      width: 100%;
       color: $neutral;
-      padding-top: 10px;
-      padding-bottom: 20px;
       font-weight: bold;
+      padding-bottom: 20px;
+      padding-top: 10px;
+      width: 100%;
    }
 
    .description {
+      color: $neutral-70;
       font-size: $egeo-font-size-16;
       line-height: $egeo-line-height-small;
-      width: 100%;
-      color: $neutral-70;
       padding-bottom: 20px;
+      width: 100%;
    }
 
    .category {
@@ -87,48 +87,52 @@
       }
    }
 
-   .accordion > .title {
-      padding-top: 0;
-      padding-bottom: 15px;
-      border-bottom: 1px solid $neutral-15;
-      width: 100%;
-      position: relative;
-      margin-bottom: 15px;
-      cursor: pointer;
+   .accordion {
+      display: block;
 
-      &:after {
-         content: '\E605';
-         font-family: $egeo-stratio-icons;
-         font-size: $egeo-font-size-16;
-         right: 0;
-         position: absolute;
-      }
-   }
-
-   .accordion--open {
       & > .title {
-         border-bottom: none;
-         margin-bottom: 10px;
+         border-bottom: 1px solid $neutral-15;
+         cursor: pointer;
+         margin-bottom: 15px;
+         padding-bottom: 15px;
+         padding-top: 0;
+         position: relative;
+         width: 100%;
+
          &:after {
-            content: '\E63F';
+            content: '\E605';
+            font-family: $egeo-stratio-icons;
+            font-size: $egeo-font-size-16;
+            position: absolute;
+            right: 0;
          }
       }
 
-      &::after {
-         content: '';
-         padding-top: 15px;
-         margin-bottom: 10px;
-         border-bottom: 1px solid $neutral-20;
-         width: 100%;
-         display: inline-block;
+      &--open {
+         & > .title {
+            border-bottom: none;
+            margin-bottom: 10px;
+            &:after {
+               content: '\E63F';
+            }
+         }
+
+         &::after {
+            border-bottom: 1px solid $neutral-20;
+            content: '';
+            display: inline-block;
+            margin-bottom: 10px;
+            padding-top: 15px;
+            width: 100%;
+         }
       }
    }
 
    .form-field {
       &.parent-field {
          .st-switch {
-            padding-top: 20px;
             display: inline-block;
+            padding-top: 20px;
             label {
                color: $neutral;
                vertical-align: middle;
@@ -145,16 +149,16 @@
          }
 
          .st-select {
-           .arrow {
-              display: none;
-           }
+            .arrow {
+               display: none;
+            }
          }
       }
    }
 
    .disabled-section-info {
-      font-size: $egeo-font-size-16;
       color: $neutral-30;
+      font-size: $egeo-font-size-16;
       padding-bottom: 20px;
       &::first-letter {
          text-transform: uppercase;
@@ -162,25 +166,25 @@
    }
 
    & > form {
+      align-content: stretch;
+      align-items: flex-start;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: flex-start;
-      align-content: stretch;
-      align-items: flex-start;
    }
 
    .form-field-container {
-      flex: 1 1 auto;
       align-self: auto;
+      flex: 1 1 auto;
       flex-basis: auto !important;
    }
 
    .line-break {
       flex-basis: 100%;
-      width: 0;
       height: 0;
       overflow: hidden;
+      width: 0;
    }
 
    .form-field-container + .form-field-container {
