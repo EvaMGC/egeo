@@ -1,0 +1,31 @@
+<!--
+
+    © 2017 Stratio Big Data Inc., Sucursal en España.
+
+    This software is licensed under the Apache License, Version 2.0.
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the terms of the License for more details.
+
+    SPDX-License-Identifier: Apache-2.0.
+
+-->
+<div (click)="onClick(tag)"
+     (mouseenter)="onChangeBubbleVisibility(true)"
+     (mouseleave)="onChangeBubbleVisibility(false)">
+
+   <div class="st-tag__text"><span *ngIf="tag.icon" class="st-tag__icon {{tag.icon}}"></span>{{tag.text}}</div>
+
+   <span *ngIf="removable" (click)="onRemove()"
+         class="st-tag__remove-button"><i class="icon-cross"></i>
+   </span>
+   <st-bubble *ngIf="tag.bubble" class="st-tag__bubble-container"
+              [animation]="false"
+              [showArrow]="true"
+              [small]="true"
+              [offset]="{x: 20, y: 5}"
+              [hidden]="!showBubble"
+              [text]="tag.bubble">
+      <span bubble-button></span>
+   </st-bubble>
+</div>

@@ -1,0 +1,155 @@
+/**
+ * © 2017 Stratio Big Data Inc., Sucursal en España.
+ *
+ * This software is licensed under the Apache License, Version 2.0.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the terms of the License for more details.
+ *
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+@import '../constants/colors';
+@import '../constants/fonts';
+
+%tag-events {
+   &:not([disabled]):hover {
+      background-color: $action-10;
+      color: $action;
+   }
+
+   &[disabled] {
+      background-color: $space-10;
+      color: $space-50;
+   }
+}
+
+.st-tag {
+   background-color: $space-10;
+   color: black;
+   font-family: $egeo-nunito-sans;
+   font-size: $egeo-font-size-11;
+   vertical-align: middle;
+
+   &--selected {
+      background-color: $action !important;
+
+      .st-tag__text, .st-tag__icon, .st-tag__remove-button {
+         color: white !important;
+      }
+   }
+
+   &__text, &__icon, &__remove-button {
+      text-align: center;
+      vertical-align: middle;
+   }
+
+   &__icon {
+      vertical-align: initial;
+   }
+
+   &__text {
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+
+   &--removable {
+      .st-tag__text {
+         max-width: calc(86% - 10px);
+      }
+   }
+
+   &:not(.st-tag--removable) {
+      .st-tag__text {
+         max-width: 100%;
+      }
+   }
+
+   &--clickable {
+      cursor: pointer;
+   }
+
+   &__remove-button {
+      color: $space-70;
+      font-size: $egeo-font-size-11;
+      float: right;
+      width: 14%;
+      margin-left: 10px;
+   }
+
+   &.small {
+      @extend %tag-events;
+      height: 20px;
+
+      .st-tag__text {
+         line-height: $egeo-line-height-22;
+         font-size: $egeo-font-size-11;
+      }
+
+      .st-tag__remove-button {
+         height: 20px;
+      }
+
+      &__icon {
+         font-size: $egeo-font-size-10;
+      }
+
+   }
+
+   &.medium {
+      @extend %tag-events;
+      height: 23px;
+
+      .st-tag__text {
+         line-height: $egeo-line-height-24;
+         font-size: $egeo-font-size-12;
+      }
+
+      .st-tag__remove-button {
+         height: 23px;
+      }
+
+      &__icon {
+         font-size: $egeo-font-size-11;
+      }
+   }
+
+   &.large {
+      @extend %tag-events;
+      height: 30px;
+
+      .st-tag__text {
+         font-size: $egeo-font-size-14;
+         line-height: $egeo-line-height-32;
+      }
+
+      .st-tag__remove-button {
+         height: 30px;
+      }
+
+      .st-tag__icon {
+         font-size: $egeo-font-size-12;
+      }
+   }
+
+   &.info {
+      background-color: $action-10;
+      color: $action;
+   }
+
+   &.error {
+      background-color: $error-10;
+      color: $error-140;
+   }
+
+   &.warning {
+      background-color: $warning-10;
+      color: $warning;
+   }
+
+   &.success {
+      background-color: $success-10;
+      color: $success;
+   }
+}

@@ -8,16 +8,22 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StVerticalIconTabsComponent } from './st-vertical-icon-tabs.component';
+import { StDemoGeneratorModule, StDocsModule } from '@stratio/egeo';
 
+import { StTagDemoComponent } from './st-tag-demo.component';
+import { StTagModule } from '../../../../../egeo/src/lib/st-tag/st-tag.module';
 
 @NgModule({
-  declarations: [StVerticalIconTabsComponent],
-  exports: [StVerticalIconTabsComponent],
-  imports: [
-    CommonModule
-  ]
+   imports: [
+      CommonModule,
+      StTagModule,
+      StDemoGeneratorModule.withComponents({ components: [StTagDemoComponent] }),
+      StDocsModule
+   ],
+   declarations: [StTagDemoComponent],
+   providers: []
 })
-export class StVerticalIconTabsModule { }
+export class StTagDemoModule { }

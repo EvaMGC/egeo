@@ -57,6 +57,7 @@ import { StZeroPageDemoModule } from './st-zero-page-demo/st-zero-page-demo.modu
 import { StColorPickerDemoModule } from './st-color-picker-demo/st-color-picker-demo.module';
 import { StBubbleOnEllipsisDemoModule } from '@app/demos/st-bubble-on-ellipsis-demo/st-bubble-on-ellipsis-demo.module';
 import { StVerticalIconTabsModule } from '@stratio/egeo';
+import { StTagDemoModule } from '@app/demos/st-tag-demo/st-tag-demo.module';
 
 
 export const EGEO_DEMO_MODULES: any[] = [
@@ -99,6 +100,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StSpinnerDemoModule,
    StSwitchDemoModule,
    StTableDemoModule,
+   StTagDemoModule,
    StTagInputDemoModule,
    StTextareaDemoModule,
    StToggleButtonsDemoModule,

@@ -8,16 +8,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { StVerticalIconTabsComponent } from './st-vertical-icon-tabs.component';
 
-
-@NgModule({
-  declarations: [StVerticalIconTabsComponent],
-  exports: [StVerticalIconTabsComponent],
-  imports: [
-    CommonModule
-  ]
-})
-export class StVerticalIconTabsModule { }
+export class StTagItem {
+   id: any;
+   text: string;
+   icon?: string;
+   bubble?: string;
+   [key: string]: any;
+}

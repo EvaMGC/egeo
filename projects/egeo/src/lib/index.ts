@@ -289,6 +289,11 @@ export { StTableCellComponent } from './st-table/shared/st-table-cell/st-table-c
 export { StTableHeader } from './st-table/shared/table-header.interface';
 export { Order, ORDER_TYPE } from './st-table/shared/order';
 
+// Tag
+export { StTagModule } from './st-tag/st-tag.module';
+export { StTagComponent } from './st-tag/st-tag.component';
+export { StTagItem } from './st-tag/st-tag.model';
+
 // Tag Input
 export { StTagInputModule } from './st-tag-input/st-tag-input.module';
 export { StTagInputComponent } from './st-tag-input/st-tag-input.component';

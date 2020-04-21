@@ -9,6 +9,7 @@
 * st-dropdown-menu: Emit events when mouse enters and leaves an item
 * st-filter-selector: Emit events when mouse enters and leaves an option
 * st-vertical-icon-tabs: Create component
+* st-tag: Create component
 
 **Fixed bugs:**
 
