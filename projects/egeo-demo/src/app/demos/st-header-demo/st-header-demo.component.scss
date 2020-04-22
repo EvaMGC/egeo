@@ -10,14 +10,6 @@
  */
 @import 'constants/index';
 
-.sth-header-user-menu {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    justify-self: flex-end;
-}
-
 .con-stratio_imagotipo {
    font-size: 27px;
 }
@@ -70,5 +62,11 @@
    }
    .icon-plus {
       margin-right: 9px;
+   }
+}
+
+.st-user-action {
+   i {
+      color: $error;
    }
 }

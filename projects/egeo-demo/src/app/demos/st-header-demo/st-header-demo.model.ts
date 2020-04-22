@@ -16,18 +16,18 @@ export const HEADER_MENU: Array<StHeaderMenuOption> = [
       label: 'Sources',
       link: '/header-demo/test1',
       subMenus: [{
-         label: 'USERS',
+         label: 'Users',
          link: '/header-demo/test1/subtest1'
       },
       {
-         label: 'GROUPS',
+         label: 'Groups',
          link: '/header-demo/test1/subtest2'
       }]
    },
    {
       icon: 'icon-puzzle',
       label: 'Datasets',
-      link: '/header-demo/test2',
+      link: '/header-demo',
       subMenus: []
    },
    {

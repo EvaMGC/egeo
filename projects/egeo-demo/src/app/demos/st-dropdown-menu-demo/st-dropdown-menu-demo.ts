@@ -74,11 +74,27 @@ export class StDropdownMenuDemoComponent {
    private generateNormal(): StDropDownMenuItem[] {
       return [
          {
-            label: 'Delete',
-            value: 'delete',
-            labelColor: 'red',
-            iconColor: 'red',
-            icon: 'icon-trash'
+            label: 'Edit',
+            value: 'edit',
+            icon: 'icon-cogs'
+         },
+         {
+            label: 'Rename',
+            value: 'rename',
+            icon: 'icon-cogs'
+         },
+         {
+            label: 'Schedule',
+            value: 'schedule',
+            icon: 'icon-eye',
+            topSeparator: true,
+            bottomSeparator: true
+         },
+         {
+            label: 'Security',
+            value: 'security',
+            icon: 'icon-lock',
+            disabled: true
          },
          {
             label: 'Archived',
@@ -91,11 +107,11 @@ export class StDropdownMenuDemoComponent {
             label: 'Publish',
             value: 'published',
             iconColor: 'blue',
-            icon: 'icon-cloud-upload'
+            icon: 'icon-cloud-upload',
+            disabled: true
          },
          {
             label: 'province of birth',
-            labelColor: '#8898a7',
             value: 'fk',
             iconColor: '#000000',
             icon: 'icon-arrow-up',
@@ -103,6 +119,14 @@ export class StDropdownMenuDemoComponent {
             extraIconColor: '#8898a7',
             extraIconBubble: 'To connect this table you have to set “Province” as root',
             textInfo: 'This is an optional text'
+         },
+         {
+            label: 'Delete',
+            value: 'delete',
+            iconColor: 'red',
+            labelColor: 'red',
+            icon: 'icon-trash',
+            topSeparator: true
          }
       ];
    }

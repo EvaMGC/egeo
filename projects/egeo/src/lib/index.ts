@@ -124,6 +124,7 @@ export {
 } from './st-header/st-header.model';
 export { StHeaderModule } from './st-header/st-header.module';
 export { StHeaderComponent } from './st-header/st-header.component';
+export { StHeaderUtils } from './st-header/st-header.utils';
 
 // Dynamic form
 export { StFormModule } from './st-form/st-form.module';

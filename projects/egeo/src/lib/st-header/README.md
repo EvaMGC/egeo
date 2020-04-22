@@ -21,10 +21,10 @@
 ```html
 <st-header [menu]="headerMenuSchema"
       id="header">
-    <div class="sth-header-logo">
+    <div class="st-header-logo">
         <!-- Logo as svg, image, etc. -->
     </div>
-    <div class="sth-header-user-menu">
+    <div class="st-header-user-menu">
         <!-- Right header menu, with user menu, notifications, etc -->
     </div>
 

@@ -10,6 +10,6 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<nav class="sth-header-menu" [attr.id]="qaId">
-   <st-header-menu-option *ngFor="let option of menu" class="sth-header-menu-item" [option]="option" [attr.id]="itemId" [showMenuName]="showMenuNames" (selectMenu)="selectMenu.emit($event)"></st-header-menu-option>
+<nav class="st-header-menu" [attr.id]="qaId">
+   <st-header-menu-option *ngFor="let option of menu" class="st-header-menu-item" [option]="option" [attr.id]="itemId" [showMenuName]="showMenuNames" (selectMenu)="selectMenu.emit($event)"></st-header-menu-option>
 </nav>

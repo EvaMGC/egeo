@@ -2,7 +2,11 @@
 
 ## 21.0.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-header: Apply new UX definition
+* st-dropdown-menu: Apply new UX definition
+
 
 ## 20.1.0 (upcoming)
 

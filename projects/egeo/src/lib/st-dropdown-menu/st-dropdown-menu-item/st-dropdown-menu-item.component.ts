@@ -32,7 +32,9 @@ export class StDropdownMenuItemComponent {
    }
 
    onChangeItem(): void {
-      this.change.emit(this.item);
+      if (!this.item.disabled) {
+         this.change.emit(this.item);
+      }
    }
 
    onToggleExtraButtonBubble(): void {

@@ -1,4 +1,4 @@
-/**
+/*
  * © 2017 Stratio Big Data Inc., Sucursal en España.
  *
  * This software is licensed under the Apache License, Version 2.0.
@@ -8,30 +8,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-@import 'constants/index';
 
-:host {
-   display: flex;
-   width: 100%;
-   height: 100vh;
-}
+import { StHeaderMenuOption } from './st-header.model';
 
+export class StHeaderUtils {
 
-.app-content {
-   margin-top: 50px;
-   width: 100%;
-}
-
-.behind-notification {
-   position: absolute;
-   top: 5px;
-   right: 5px;
-   padding: 5px 15px;
-   font-weight: bold;
-   color: $neutral-2;
-   background-color: $status-warning-default;
-
-   &:hover {
-      background-color: $warning;
+   public static isRouteActive(option: StHeaderMenuOption, url: string): boolean {
+      return option && url.indexOf(option.link) > -1;
    }
+
 }

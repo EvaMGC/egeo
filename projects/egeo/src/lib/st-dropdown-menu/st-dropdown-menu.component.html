@@ -20,10 +20,15 @@
 
       <div *ngIf="active" [ngClass]="listClasses" [style.minWidth]='widthMenu'>
          <ng-content select=[dropdown-header]></ng-content>
-         <ul *ngIf="!isItemGroup && ((items && items.length) || emptyListMessage)" [attr.aria-hidden]="!active"
-             aria-label="submenu" [style.maxHeight]="menuMaxHeight"
-             [attr.id]="menuId" #itemList
-            (scroll)="onHandleScroll()">
+
+         <ul *ngIf="!isItemGroup && ((items && items.length) || emptyListMessage)"
+             #itemList
+             aria-label="submenu"
+             [ngClass]="{'st-custom-scrollbar': displayAsMenuList()}"
+             [attr.aria-hidden]="!active"
+             [style.maxHeight]="menuMaxHeight"
+             [attr.id]="menuId"
+             (scroll)="onHandleScroll()">
             <st-dropdown-menu-item
                *ngFor="let item of items; let i = index"
                [attr.id]="getItemId(item.value)"

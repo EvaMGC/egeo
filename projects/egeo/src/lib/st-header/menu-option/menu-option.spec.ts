@@ -8,11 +8,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { cloneDeep as _cloneDeep } from 'lodash';
 
 import { RouterStub } from '../../tests/router-stub';
 import { StHeaderMenuOptionComponent } from './menu-option';
@@ -34,7 +34,6 @@ let fakeMenuWithSubmenu: StHeaderMenuOption = {
 
 let comp: StHeaderMenuOptionComponent;
 let fixture: ComponentFixture<StHeaderMenuOptionComponent>;
-let de: DebugElement;
 
 describe('StHeader', () => {
    describe('StHeaderMenuOptionComponent', () => {
@@ -46,6 +45,10 @@ describe('StHeader', () => {
                { provide: Router, useClass: RouterStub }
             ]
          })
+         // remove this block when the issue #12313 of Angular is fixed
+            .overrideComponent(StHeaderMenuOptionComponent, {
+               set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
             .compileComponents();  // compile template and css
       }));
 
@@ -64,7 +67,6 @@ describe('StHeader', () => {
          expect(comp.hasSubmenu).toBeFalsy();
          expect(comp.submenuList).toEqual([]);
       });
-
 
       it('should be initialized correctly with submenu', () => {
          comp.option = fakeMenuWithSubmenu;
@@ -89,18 +91,19 @@ describe('StHeader', () => {
       });
 
       it('should be initialized correctly with submenu elements and one active', inject([Router], (router: RouterStub) => {
+         comp.option = _cloneDeep(fakeMenuWithSubmenu);
+
          let expectedSubmenuList: StHeaderMenuItem[] = [{
-            label: fakeMenuWithSubmenu.subMenus[0].label,
-            value: fakeMenuWithSubmenu.subMenus[0].link,
+            label: comp.option.subMenus[0].label,
+            value: comp.option.subMenus[0].link,
             selected: true,
             selection: {
-               link: fakeMenuWithSubmenu.subMenus[0].link,
+               link: comp.option.subMenus[0].link,
                external: undefined,
                openInNewPage: undefined
             }
          }];
 
-         comp.option = fakeMenuWithSubmenu;
          comp.showMenuName = true;
          fixture.detectChanges();
 
@@ -118,18 +121,7 @@ describe('StHeader', () => {
 
          fixture.detectChanges();
 
-         let expectedSubmenuList: StHeaderMenuItem[] = [{
-            label: fakeMenuWithSubmenu.subMenus[0].label,
-            value: fakeMenuWithSubmenu.subMenus[0].link,
-            selected: false,
-            selection: {
-               link: fakeMenuWithSubmenu.subMenus[0].link,
-               external: undefined,
-               openInNewPage: undefined
-            } as StHeaderSelection
-         }];
-
-         let arrow: HTMLElement = fixture.debugElement.query(By.css('.sth-header-menu-option-arrow')).nativeElement;
+         let arrow: HTMLElement = fixture.debugElement.query(By.css('.st-header-menu-option-arrow')).nativeElement;
          arrow.click();
          fixture.detectChanges();
          expect(comp.isActive).toBeTruthy();
@@ -139,7 +131,7 @@ describe('StHeader', () => {
          expect(comp.isActive).toBeFalsy();
 
          // Open whith name
-         const menu: HTMLElement = fixture.debugElement.query(By.css('.sth-header-menu-option')).nativeElement;
+         const menu: HTMLElement = fixture.debugElement.query(By.css('.st-header-menu-option')).nativeElement;
          menu.click();
          fixture.detectChanges();
 
@@ -153,7 +145,7 @@ describe('StHeader', () => {
          comp.showMenuName = true;
 
          fixture.detectChanges();
-         const arrow: HTMLElement = fixture.debugElement.query(By.css('.sth-header-menu-option-arrow')).nativeElement;
+         const arrow: HTMLElement = fixture.debugElement.query(By.css('.st-header-menu-option-arrow')).nativeElement;
          arrow.click();
          fixture.detectChanges();
 
@@ -178,7 +170,7 @@ describe('StHeader', () => {
          comp.showMenuName = true;
 
          fixture.detectChanges();
-         const menuOption: HTMLElement = fixture.debugElement.query(By.css('.sth-header-menu-option')).nativeElement;
+         const menuOption: HTMLElement = fixture.debugElement.query(By.css('.st-header-menu-option')).nativeElement;
          menuOption.click();
          fixture.detectChanges();
 
@@ -188,49 +180,50 @@ describe('StHeader', () => {
       });
 
       it('should update the active menu option in navigation event', inject([Router], (router: RouterStub) => {
+         comp.option = _cloneDeep(fakeMenuWithSubmenu);
+
          const expectedSubmenuList: StHeaderMenuItem[] = [{
-            label: fakeMenuWithSubmenu.subMenus[0].label,
-            value: fakeMenuWithSubmenu.subMenus[0].link,
+            label:  comp.option.subMenus[0].label,
+            value:  comp.option.subMenus[0].link,
             selected: false,
             selection: {
-               link: fakeMenuWithSubmenu.subMenus[0].link,
+               link:  comp.option.subMenus[0].link,
                external: undefined,
                openInNewPage: undefined
             } as StHeaderSelection
          }];
-         comp.option = fakeMenuWithSubmenu;
-         comp.showMenuName = true;
          router.url = 'test';
+
+         comp.showMenuName = true;
 
          fixture.detectChanges();
          expect(comp.submenuList).toEqual(expectedSubmenuList);
-         expect(comp.isRouteActive()).toBeFalsy();
+         expect(comp.isCurrentRoute).toBeFalsy();
 
          router.launchNewEvent(new NavigationStart(0, 'submenu1'));
          fixture.detectChanges();
          expect(comp.submenuList).toEqual(expectedSubmenuList);
-         expect(comp.isRouteActive()).toBeFalsy();
+         expect(comp.isCurrentRoute).toBeFalsy();
 
          router.launchNewEvent(new NavigationEnd(0, 'submenu1', 'submenu1'));
          router.url = 'fakePath/submenu1';
          fixture.detectChanges();
          expectedSubmenuList[0].selected = true;
          expect(comp.submenuList).toEqual(expectedSubmenuList);
-         expect(comp.isRouteActive()).toBeTruthy();
+         expect(comp.isCurrentRoute).toBeTruthy();
       }));
 
-      it('should be destroyed without subscription', inject([Router], (router: RouterStub) => {
+      it('should be destroyed without subscription', () => {
          comp.option = fakeMenuWithSubmenu;
          comp.showMenuName = true;
 
          fixture.detectChanges();
          expect(comp.isActive).toBeFalsy();
 
-         router.closeSubscriptions();
          comp.ngOnDestroy();
          fixture.detectChanges();
 
          expect(comp.isActive).toBeFalsy();
-      }));
+      });
    });
 });

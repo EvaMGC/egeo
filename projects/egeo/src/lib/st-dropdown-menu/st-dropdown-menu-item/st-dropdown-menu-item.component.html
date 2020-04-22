@@ -12,7 +12,7 @@
 -->
 <li *ngIf="hasItem"
     [attr.tabindex]="index"
-    [ngClass]="{'selected': isSelected}"
+    [ngClass]="{'selected': isSelected, 'disabled': item.disabled, 'top-separator': item.topSeparator, 'bottom-separator': item.bottomSeparator}"
     class="st-dropdown-menu-item"
     (click)="onChangeItem()"
     (keyup.enter)="onChangeItem()"
@@ -20,7 +20,7 @@
    <i *ngIf="hasIcon" class="icon" [ngClass]="icon" [style.color]="item.iconColor"></i>
    <div *ngIf="!item.hasHtml" class="label-container">
       <span class="label">
-         <span [style.color]="item.labelColor" class="label">{{item.label}}</span>
+         <span [style.color]="item.labelColor">{{item.label}}</span>
          <span *ngIf="item.textInfo" class="text-info">{{item.textInfo}}</span>
       </span>
       <ng-container *ngIf="hasExtraIcon">

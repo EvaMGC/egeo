@@ -10,21 +10,23 @@
  */
 import {
    ChangeDetectionStrategy,
+   ChangeDetectorRef,
    Component,
+   ElementRef,
+   EventEmitter,
+   HostBinding,
+   HostListener,
    Input,
    OnDestroy,
-   ElementRef,
    Output,
-   EventEmitter,
-   HostListener,
-   ViewChild,
-   ChangeDetectorRef
+   ViewChild
 } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { StHeaderMenuOption, StHeaderSelection, StHeaderMenuItem } from '../st-header.model';
-import { HostBinding } from '@angular/core';
+import { StHeaderMenuItem, StHeaderMenuOption, StHeaderSelection } from '../st-header.model';
+import { StDropDownVisualMode } from './../../st-dropdown-menu/st-dropdown-menu.interface';
+import { StHeaderUtils } from '../st-header.utils';
 
 @Component({
    selector: 'st-header-menu-option',
@@ -34,55 +36,47 @@ import { HostBinding } from '@angular/core';
 })
 export class StHeaderMenuOptionComponent implements OnDestroy {
 
-   @Input() option: StHeaderMenuOption;
    @Input() showMenuName: boolean;
 
    @Output() selectMenu: EventEmitter<StHeaderSelection> = new EventEmitter<StHeaderSelection>();
 
-   @ViewChild('menu', {static: false}) menu: ElementRef;
-   @HostBinding('class.active') public get isCurrentRoute(): boolean {
-      return this.isRouteActive();
-   }
-   public isActive: boolean;
+   @ViewChild('menu', { static: false }) menu: ElementRef;
 
-   private subscription: Subscription;
-   private actualPath: string = '';
+   @HostBinding('class.active')
+   public get isCurrentRoute(): boolean {
+      return StHeaderUtils.isRouteActive(this._option, this.router.url);
+   }
+
+   public isActive: boolean;
+   public visualMode: StDropDownVisualMode = StDropDownVisualMode.MENU_LIST;
+   public hasSubmenu: boolean;
+   public qaId: string;
+   public submenuList: StHeaderMenuItem[];
+
+   private _subscription: Subscription;
+   private _actualPath: string = '';
+   private _option: StHeaderMenuOption;
+
+   @Input()
+   get option(): StHeaderMenuOption {
+      return this._option;
+   }
+
+   set option(_option: StHeaderMenuOption) {
+      this._option = _option;
+      this.hasSubmenu = _option.subMenus && _option.subMenus.length > 0;
+      this.qaId = this._getQaId();
+      this.submenuList = this._getSubmenuList();
+   }
 
    constructor(private elementRef: ElementRef, private router: Router, private cd: ChangeDetectorRef) {
-      this.subscription = this.router.events.subscribe((event) => this.onRouterEvent(event));
-      this.actualPath = this.router.url;
-   }
-
-   public get qaId(): string {
-      let id: string = `${this.elementRef.nativeElement.id}-${this.option.label.toLowerCase()}`;
-      id.replace(/\s+/ig, '_');
-      return id;
-   }
-
-   public get hasSubmenu(): boolean {
-      return this.option.subMenus && this.option.subMenus.length > 0;
-   }
-
-   public get submenuList(): StHeaderMenuItem[] {
-      return this.hasSubmenu ? this.option.subMenus.map(_ => ({
-         label: _.label,
-         value: _.link,
-         selected: this.actualPath === _.link,
-         selection: {
-            link: _.link,
-            external: _.external,
-            openInNewPage: _.openInNewPage
-         } as StHeaderSelection
-      })) : [];
-   }
-
-   public isRouteActive(): boolean {
-      return this.router.url.indexOf(this.option.link) > -1;
+      this._subscription = this.router.events.subscribe((event) => this._onRouterEvent(event));
+      this._actualPath = this.router.url;
    }
 
    public ngOnDestroy(): void {
       this.isActive = false;
-      this.subscription.unsubscribe();
+      this._subscription.unsubscribe();
    }
 
    public onMenuClick(): void {
@@ -90,9 +84,9 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
          this.isActive = !this.isActive;
       } else {
          this.selectMenu.emit({
-            link: this.option.link,
-            external: this.option.external,
-            openInNewPage: this.option.openInNewPage
+            link: this._option.link,
+            external: this._option.external,
+            openInNewPage: this._option.openInNewPage
          });
       }
    }
@@ -110,10 +104,37 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
       }
    }
 
-   private onRouterEvent(event: any): void {
+   private _onRouterEvent(event: any): void {
       if (event instanceof NavigationEnd) {
-         this.actualPath = event.urlAfterRedirects;
+         this._actualPath = event.urlAfterRedirects;
+         this.submenuList = this._getSubmenuList();
          this.cd.markForCheck();
       }
    }
+
+
+   private _getQaId(): string {
+      if (!this._option) {
+         return null;
+      }
+      let id: string = `${this.elementRef.nativeElement.id}-${this._option.label.toLowerCase()}`;
+      id.replace(/\s+/ig, '_');
+      return id;
+   }
+
+
+   private _getSubmenuList(): StHeaderMenuItem[] {
+      return this._option && this.hasSubmenu ? this._option.subMenus.map(_ => ({
+         label: _.label,
+         value: _.link,
+         selected: this._actualPath === _.link,
+         selection: {
+            link: _.link,
+            external: _.external,
+            openInNewPage: _.openInNewPage
+         } as StHeaderSelection
+      })) : [];
+   }
+
+
 }

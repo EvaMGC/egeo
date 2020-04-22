@@ -8,8 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, ViewChild, HostListener } from '@angular/core';
-import { StHeaderMenuOption, StLauncherGroup } from '@stratio/egeo';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { StHeaderMenuOption, StLauncherGroup, StPopOffset } from '@stratio/egeo';
 
 import { HEADER_MENU, LAUNCHER_ITEMS } from './st-header-demo.model';
 
@@ -26,23 +26,21 @@ export class StHeaderDemoComponent {
       component: 'lib/st-header/st-header.component.ts'
    };
    public height: string;
-   public launcherTitle: string = 'Services';
    public headerMenuSchema: StHeaderMenuOption[] = HEADER_MENU;
-   public launcherItems: StLauncherGroup[] = LAUNCHER_ITEMS;
    public showLauncherMenu: boolean = false;
+   public showUserProfileMenu: boolean = false;
+   public userMenuOffset: StPopOffset = { x: 50, y: 7 };
 
-   @ViewChild('launcher', {static: false}) launcherElement: ElementRef;
+   @ViewChild('launcher', { static: false }) launcherElement: ElementRef;
 
-   constructor(private _cd: ChangeDetectorRef) {}
 
-   onMenuClick(): void {
-      this.showLauncherMenu = !this.showLauncherMenu;
+   toggleUserProfile(): void {
+      this.showUserProfileMenu = !this.showUserProfileMenu;
    }
-
    @HostListener('document:click', ['$event'])
    onClickOutside(event: Event): void {
       const expandNewValue: boolean = this.showLauncherMenu && this.launcherElement &&
-      this.launcherElement.nativeElement.contains(event.target);
+         this.launcherElement.nativeElement.contains(event.target);
 
       if (expandNewValue !== this.showLauncherMenu) {
          this.showLauncherMenu = expandNewValue;

@@ -187,6 +187,10 @@ export class StDropdownMenuComponent implements AfterViewInit, OnInit, OnChanges
       this.itemMouseLeave.emit(item);
    }
 
+   displayAsMenuList(): boolean {
+      return this.visualMode === StDropDownVisualMode.MENU_LIST;
+   }
+
    @HostListener('window:resize')
    @HostListener('window:load')
    updateWidth(): void {
@@ -208,9 +212,6 @@ export class StDropdownMenuComponent implements AfterViewInit, OnInit, OnChanges
       }
    }
 
-   private displayAsMenuList(): boolean {
-      return this.visualMode === StDropDownVisualMode.MENU_LIST;
-   }
 
    private getItemValueMerged(value: any): string {
       return value.toString().replace(/\s+/g, '_');

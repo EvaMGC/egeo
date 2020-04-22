@@ -10,14 +10,22 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<header class="sth-header" #headerDivElement>
-   <div class="sth-header-container container">
-      <div class="sth-header-container-fix-part" #headerFixPart>
-         <ng-content select=".sth-header-logo"></ng-content>
-         <st-header-menu class="sth-header-menu-component" [menu]="menu" [attr.id]="menuContainerId" [showMenuNames]="showMenuNames" (selectMenu)="onSelectMenu($event)"></st-header-menu>
+<header class="st-header" #headerDivElement>
+   <div class="st-header-container container">
+      <div class="st-header-container-fix-part" #headerFixPart>
+         <ng-content select=".st-header-logo"></ng-content>
+         <st-header-menu class="st-header-menu-component"
+                         [menu]="menu"
+                         [attr.id]="menuContainerId"
+                         [showMenuNames]="showMenuNames"
+                         (selectMenu)="onSelectMenu($event)">
+         </st-header-menu>
       </div>
-      <div class="sth-header-user-menu-container" #userMenuContainerElement>
-         <ng-content select=".sth-header-user-menu"></ng-content>
+      <div class="st-header-shortcut-buttons-container" #userMenuContainerElement>
+         <ng-content select=".st-header-shortcut-buttons"></ng-content>
+      </div>
+      <div class="st-header-user-menu-container" #userMenuContainerElement>
+         <ng-content select=".st-header-user-menu"></ng-content>
       </div>
    </div>
 </header>

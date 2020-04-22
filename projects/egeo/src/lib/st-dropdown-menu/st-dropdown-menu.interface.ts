@@ -23,6 +23,9 @@ export class StDropDownMenuItem {
    extraIcon?: string;
    extraIconBubble?: string;
    extraIconColor?: string;
+   disabled?: boolean;
+   topSeparator?: boolean;
+   bottomSeparator?: boolean;
    [key: string]: any; // To do model more extensible if any other component needs to send more data
 }
 

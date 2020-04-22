@@ -11,12 +11,22 @@
 
 -->
 
-<st-dropdown-menu [items]="submenuList" (change)="changeOption($event)" [active]="isActive && hasSubmenu" [placement]="'bottom-start'" [offset]="{x: 0, y: 5}">
-   <div class="sth-header-menu-option" [attr.id]="qaId" #menu (click)="onMenuClick()">
-      <a class="sth-header-menu-option-name">
-         <i *ngIf="option.icon" [ngClass]="option.icon" class="sth-header-menu-option-icon" [title]="option.label"></i>
-         <div *ngIf="showMenuName" class="sth-header-menu-option-label">{{option.label}}</div>
+<st-dropdown-menu [items]="submenuList"
+                  [visualMode]="visualMode"
+                  [active]="isActive && hasSubmenu"
+                  [placement]="'bottom-start'"
+                  [offset]="{x: 0, y: 10}"
+                  (change)="changeOption($event)">
+   <div class="st-header-menu-option" #menu
+        [attr.id]="qaId"
+        (click)="onMenuClick()">
+      <a class="st-header-menu-option-name">
+         <i *ngIf="option.icon"
+            class="st-header-menu-option-icon"
+            [ngClass]="option.icon"
+            [title]="option.label"></i>
+         <div *ngIf="showMenuName" class="st-header-menu-option-label">{{option.label}}</div>
       </a>
-      <i *ngIf="hasSubmenu" class="icon-arrow2_down sth-header-menu-option-arrow"></i>
+      <i *ngIf="hasSubmenu" class="icon-arrow2_down st-header-menu-option-arrow"></i>
    </div>
 </st-dropdown-menu>
