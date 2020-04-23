@@ -62,14 +62,14 @@
    }
 
    &__filter-arrow {
-      bottom: -3px;
       color: $space-80;
       cursor: pointer;
-      font-size: 0.857rem;
+      font-size: $egeo-font-size-12;
       font-weight: bold;
-      left: 5px;
       position: relative;
       vertical-align: middle;
+      margin-left: 4px;
+      line-height: 13px;
    }
 }
 

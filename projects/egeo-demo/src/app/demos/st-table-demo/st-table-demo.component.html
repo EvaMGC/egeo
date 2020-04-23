@@ -47,7 +47,7 @@
       <p class="paragraph"> Tables can be configured to stand up or not the selected rows.</p>
       <div class="row">
          <div class="col-sm-6 col-lg-6 col-xs-12">
-            <st-table [fields]="smallTableFields" [sortable]="false" [selectableAll]="true" (selectAll)="onSelectAll($event, 0)">
+            <st-table [fields]="smallTableFields" [sortable]="false" [selectableAll]="true" [hasHoverMenu]="true" (selectAll)="onSelectAll($event, 0)">
                <tbody>
                   <tr st-table-row *ngFor="let userData of data; let index = index" [selected]="selectedCheckboxes[0][index]">
 
@@ -101,7 +101,7 @@
       <h2 class="subtitle">Sortable table</h2>
       <p class="paragraph">Table can be configured as sortable or not. Moreover, it allows to configure only specific
          fields as sortable </p>
-      <st-table [fields]="fields" (changeOrder)="onSortTable($event)">
+      <st-table [fields]="fields" [hasHoverMenu]="true" (changeOrder)="onSortTable($event)">
          <tbody>
             <tr st-table-row *ngFor="let userData of sortedData; let index = index">
                <td st-table-cell st-table-row-content>
@@ -133,7 +133,7 @@
       <h2 class="subtitle">Filterable and sortable table</h2>
       <p class="paragraph">Table can be configured as filterable or not. Moreover, it allows to configure only specific
          fields as filterable </p>
-      <st-table [filterable]="true" [fields]="filterFields" (selectedFilters)="onSelectedFilters($event)" (changeOrder)="onSortTable($event)">
+      <st-table [filterable]="true" [fields]="filterFields" [hasHoverMenu]="true" (selectedFilters)="onSelectedFilters($event)" (changeOrder)="onSortTable($event)">
          <tbody>
             <tr st-table-row *ngFor="let userData of filterData; let index = index">
                <td st-table-cell st-table-row-content>
@@ -191,7 +191,7 @@
             </button>
          </div>
       </ng-template>
-      <st-table [sortable]="false" [filterable]="true" [fields]="filterFields" [templateContentFilter]="filterContent" [statusFilter]="statusFilter">
+      <st-table [sortable]="false" [filterable]="true" [fields]="filterFields" [hasHoverMenu]="true" [templateContentFilter]="filterContent" [statusFilter]="statusFilter">
          <tbody>
             <tr st-table-row *ngFor="let userData of filterData; let index = index">
                <td st-table-cell st-table-row-content>
@@ -286,7 +286,7 @@
 
 
       <h2 class="subtitle">Table without header</h2>
-      <st-table [fields]="fields" [header]="false">
+      <st-table [fields]="fields" [header]="false" [hasHoverMenu]="true">
          <tbody>
             <tr st-table-row *ngFor="let userData of data">
                <td st-table-cell st-table-row-content>
@@ -315,7 +315,7 @@
       </st-table>
 
       <h2 class="subtitle">Table with complex hover actions and the custom class 'separated rows'</h2>
-      <st-table [fields]="fields" [sortable]="false" customClasses="separated-rows" qaTag="table-qa-tag">
+      <st-table [fields]="fields" [sortable]="false" [hasHoverMenu]="true" customClasses="separated-rows" qaTag="table-qa-tag">
          <tbody>
             <tr st-table-row *ngFor="let userData of data">
                <td st-table-cell st-table-row-content>
