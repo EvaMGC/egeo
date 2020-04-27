@@ -67,6 +67,7 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
       this.hasSubmenu = _option.subMenus && _option.subMenus.length > 0;
       this.qaId = this._getQaId();
       this.submenuList = this._getSubmenuList();
+      this.cd.markForCheck();
    }
 
    constructor(private elementRef: ElementRef, private router: Router, private cd: ChangeDetectorRef) {
@@ -82,6 +83,7 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
    public onMenuClick(): void {
       if (this.hasSubmenu) {
          this.isActive = !this.isActive;
+         this.cd.markForCheck();
       } else {
          this.selectMenu.emit({
             link: this._option.link,
@@ -93,6 +95,7 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
 
    public changeOption(selected: StHeaderMenuItem): void {
       this.isActive = false;
+      this.cd.markForCheck();
       this.selectMenu.emit(selected.selection);
    }
 
@@ -101,6 +104,7 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
       const isMyComponent: boolean = this.isActive && this.menu.nativeElement.contains(event.target);
       if (!isMyComponent && this.isActive) {
          this.isActive = false;
+         this.cd.markForCheck();
       }
    }
 

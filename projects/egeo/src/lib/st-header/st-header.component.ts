@@ -11,6 +11,7 @@
 import {
    AfterViewInit,
    ChangeDetectionStrategy,
+   ChangeDetectorRef,
    Component,
    ElementRef,
    EventEmitter,
@@ -68,9 +69,9 @@ export class StHeaderComponent implements AfterViewInit {
    /** @Output {StHeaderSelection} [selectMenu] Notify any menu option selection */
    @Output() selectMenu: EventEmitter<StHeaderSelection> = new EventEmitter<StHeaderSelection>();
 
-   @ViewChild('headerDivElement', {static: false}) headerDivElement: ElementRef;
-   @ViewChild('headerFixPart', {static: false}) headerFixPart: ElementRef;
-   @ViewChild('userMenuContainerElement', {static: true}) userMenuContainer: ElementRef;
+   @ViewChild('headerDivElement', { static: false }) headerDivElement: ElementRef;
+   @ViewChild('headerFixPart', { static: false }) headerFixPart: ElementRef;
+   @ViewChild('userMenuContainerElement', { static: true }) userMenuContainer: ElementRef;
 
    public showMenuNames: boolean = true;
 
@@ -79,17 +80,22 @@ export class StHeaderComponent implements AfterViewInit {
    constructor(
       private _router: Router,
       private _windowServiceRef: StWindowRefService,
-      private _el: ElementRef
+      private _el: ElementRef,
+      private _cd: ChangeDetectorRef
    ) { }
 
    public ngAfterViewInit(): void {
       this._headerSize = this.headerFixPart.nativeElement.getBoundingClientRect().width + this.userMenuElementWidth + 20;
-      this.checkMenuLabelVisibility();
+      setTimeout(() => {
+         this.checkMenuLabelVisibility();
+         this._cd.markForCheck();
+      });
    }
 
    @HostListener('window:resize', [])
    onResize(): void {
       this.checkMenuLabelVisibility();
+      this._cd.markForCheck();
    }
 
    public get id(): string {
@@ -126,6 +132,7 @@ export class StHeaderComponent implements AfterViewInit {
       const canShowMenuNames = this._headerSize <= windowSize;
       if (this.showMenuNames !== canShowMenuNames) {
          this.showMenuNames = canShowMenuNames;
+         this._cd.markForCheck();
       }
    }
 }

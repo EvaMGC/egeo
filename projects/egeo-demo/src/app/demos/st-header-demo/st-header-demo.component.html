@@ -30,7 +30,8 @@
          </div>
          <div class="st-header-user-menu" (clickOutside)="toggleUserProfile()">
             <span class="st-header-user-info">
-               <span class="st-header-user-info__name">Pablo García
+               <span class="st-header-user-info__name-line">
+                  <span class="st-header-user-info__name">Pablo García</span>
                    <st-pop-over class="st-header-user-info__arrow"
                                 [hidden]="!showUserProfileMenu"
                                 [offset]="{x: -10, y: 10}"
@@ -47,8 +48,8 @@
                         </div>
                      </div>
                    </st-pop-over>
-               </span>
 
+               </span>
                <span class="st-header-user-info__description">Software Designer</span>
             </span>
 

@@ -8,8 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { NO_ERRORS_SCHEMA, ElementRef } from '@angular/core';
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 import { RouterStub } from '../tests/router-stub';
@@ -28,14 +28,15 @@ let menu: StHeaderMenuOption[] = [
       icon: 'icon-head',
       label: 'IDENTITIES',
       link: '/navigation/header/test1',
-      subMenus: [{
-         label: 'USER',
-         link: '/navigation/header/test1/subtest1'
-      },
-      {
-         label: 'GROUP',
-         link: '/navigation/header/test1/subtest2'
-      }]
+      subMenus: [
+         {
+            label: 'USER',
+            link: '/navigation/header/test1/subtest1'
+         },
+         {
+            label: 'GROUP',
+            link: '/navigation/header/test1/subtest2'
+         }]
    },
    {
       icon: 'icon-puzzle',
@@ -54,6 +55,7 @@ class WindowMock {
    }
    open(_url?: string, _target?: string, _features?: string, _replace?: boolean): void { }
 }
+
 let windowMock: WindowMock = new WindowMock();
 
 class WindowRefMock {
@@ -86,7 +88,6 @@ describe('StHeader', () => {
       });
 
       it('Should be able to init correctly', () => {
-         windowMock.setInnerWidth(2000);
          comp.menu = menu;
          fixture.elementRef.nativeElement.removeAttribute('id');
          fixture.detectChanges();
@@ -116,13 +117,11 @@ describe('StHeader', () => {
          expect(comp.showMenuNames).toBeTruthy();
 
          windowMock.setInnerWidth(1000);
-         window.dispatchEvent(new Event('resize'));
-         fixture.detectChanges();
+         comp.onResize();
          expect(comp.showMenuNames).toBeFalsy();
       }));
 
       it('Should be able to select a menu option without navigate', inject([Router], (router: Router) => {
-         windowMock.setInnerWidth(2000);
          spyOn(router, 'navigate');
          let responseFunction = jasmine.createSpy('response');
          comp.selectMenu.subscribe(responseFunction);
@@ -141,7 +140,6 @@ describe('StHeader', () => {
 
       it('Should be able to open external link in new page',
          inject([Router, StWindowRefService], (router: Router, windowRefService: StWindowRefService) => {
-            windowMock.setInnerWidth(2000);
             spyOn(router, 'navigate');
             spyOn(windowRefService.nativeWindow, 'open');
             const responseFunction = jasmine.createSpy('response');
@@ -162,7 +160,6 @@ describe('StHeader', () => {
 
       it('Should be able to open external link in the same page',
          inject([Router, StWindowRefService], (router: Router, windowRefService: StWindowRefService) => {
-            windowMock.setInnerWidth(2000);
             spyOn(router, 'navigate');
             spyOn(windowRefService.nativeWindow, 'open');
             const responseFunction = jasmine.createSpy('response');
@@ -183,6 +180,7 @@ describe('StHeader', () => {
 
       it(`Should hide the menu labels when they don't fit on the screen`, () => {
          windowMock.setInnerWidth(2000);
+         comp.onResize();
          comp.menu = menu;
          fixture.detectChanges();
 
