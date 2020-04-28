@@ -18,45 +18,45 @@
 
 .sth-alert-box {
    width: 100%;
-   color: $neutral;
+   color: var(--egeo-theme-neutral, $neutral);
    font-weight: 400;
    min-height: 100px;
    display: block;
    position: relative;
    border-radius: 4px;
-   background-color: $neutral-full;
-   border: solid 1px $space-20;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
+   border: solid 1px var(--egeo-theme-space-20, $space-20);
    border-left: 4px solid;
 
    &-success {
-      border-left-color: $success;
+      border-left-color: var(--egeo-theme-success, $success);
 
       .status-icon {
-         color: $success;
+         color: var(--egeo-theme-success, $success);
       }
    }
 
    &-warning {
-      border-left-color: $warning;
+      border-left-color: var(--egeo-theme-warning, $warning);
 
       .status-icon {
-         color: $warning;
+         color: var(--egeo-theme-warning, $warning);
       }
    }
 
    &-error {
-      border-left-color: $error;
+      border-left-color: var(--egeo-theme-error, $error);
 
       .status-icon {
-         color: $error;
+         color: var(--egeo-theme-error, $error);
       }
    }
 
    &-info {
-      border-left-color: $action;
+      border-left-color: var(--egeo-theme-action, $action);
 
       .status-icon {
-         color: $action;
+         color: var(--egeo-theme-action, $action);
       }
    }
 
@@ -96,8 +96,8 @@
       font-size: $egeo-font-size-14;
       text-decoration: none;
       cursor: pointer;
-      background-color: $neutral-4;
-      color: $action;
+      background-color: var(--egeo-theme-neutral-4, $neutral-4);
+      color: var(--egeo-theme-action, $action);
       padding: 12px 0 6px 0;
       text-align: center;
    }

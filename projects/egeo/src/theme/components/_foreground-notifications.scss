@@ -15,36 +15,36 @@
 .foreground-notification {
    box-shadow: 0 1px 4px 1px rgba(124, 124, 124, 0.15);
    &.default {
-         background-color: $neutral-full;
-         color: $neutral;
+         background-color: var(--egeo-theme-neutral-full, $neutral-full);
+         color: var(--egeo-theme-neutral, $neutral);
 
          .close {
-            color: $neutral-50;
+            color: var(--egeo-theme-neutral-50, $neutral-50);
          }
       }
 
       &.critical {
-         border-color: $error-120;
-         background-color: $error;
-         color: $neutral-full;
+         border-color: var(--egeo-theme-error-120, $error-120);
+         background-color: var(--egeo-theme-error, $error);
+         color: var(--egeo-theme-neutral-full, $neutral-full);
       }
 
       &.success {
-         border-color: $success-120;
-         background-color: $success;
-         color: $neutral-full;
+         border-color: var(--egeo-theme-success-120, $success-120);
+         background-color: var(--egeo-theme-success, $success);
+         color: var(--egeo-theme-neutral-full, $neutral-full);
       }
 
       &.warning {
-         border-color: $warning;
+         border-color: var(--egeo-theme-warning, $warning);
          background-color: $status-warning-default;
-         color: $neutral-full;
+         color: var(--egeo-theme-neutral-full, $neutral-full);
       }
 
       &.running {
-         border-color: $action-120;
-         background-color: $action;
-         color: $neutral-full;
+         border-color: var(--egeo-theme-action-120, $action-120) ;
+         background-color: var(--egeo-theme-action, $action);
+         color: var(--egeo-theme-neutral-full, $neutral-full);
       }
    }
 

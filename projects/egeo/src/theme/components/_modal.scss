@@ -8,7 +8,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-
 @import '../constants/fonts';
 @import '../constants/colors';
 @import '../constants/settings';
@@ -18,13 +17,13 @@
 }
 
 .st-modal-container {
-   background-color: rgba($neutral, 0.3);
+   background-color: rgba(var(--egeo-theme-neutral, $neutral), 0.3);
    z-index: $modal-z-index;
 
    .st-modal {
-      background-color: $neutral-full;
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
       border-radius: 4px;
-      box-shadow: 0 1px 10px 0 rgba($neutral-60, 0.8);
+      box-shadow: 0 1px 10px 0 rgba(var(--egeo-theme-neutral-60, $neutral-60), 0.8);
       display: flex;
       flex-direction: column;
 
@@ -36,19 +35,19 @@
          border-radius: 0;
 
          .st-modal-header {
-            background-color: $neutral-full;
+            background-color: var(--egeo-theme-neutral-full, $neutral-full);
             border-radius: 0;
          }
-         background-color: $neutral-4;
+         background-color: var(--egeo-theme-neutral-4, $neutral-4);
       }
 
       .st-modal-header {
-         background-color: $neutral-full;
+         background-color: var(--egeo-theme-neutral-full, $neutral-full);
          border-radius: 4px 4px 0 0;
          padding: 0 30px;
 
          .title {
-            color: $neutral;
+            color: var(--egeo-theme-neutral, $neutral);
             font-size: $egeo-font-size-18;
             font-weight: 900;
             line-height: $egeo-line-height-22;
@@ -57,7 +56,7 @@
          }
 
          .close-button {
-            color: $neutral;
+            color: var(--egeo-theme-neutral, $neutral);
             cursor: pointer;
             font-family: $egeo-stratio-icons;
             font-size: $egeo-font-size-20;
@@ -70,11 +69,11 @@
          }
 
          .status-icon.icon-circle-cross {
-            color: $error;
+            color: var(--egeo-theme-error, $error);
          }
 
-         .status-icon.icon-alert{
-            color: $warning;
+         .status-icon.icon-alert {
+            color: var(--egeo-theme-warning, $warning);
          }
       }
 
@@ -86,7 +85,7 @@
          }
 
          .st-modal-message-plain-title {
-            color: $space-110;
+            color: var(--egeo-theme-space-110, $space-110);
             font-weight: 100;
             font-size: $egeo-font-size-xxlarge;
             line-height: $egeo-line-height-xxxlarge;
@@ -95,7 +94,7 @@
             text-align: left;
          }
          .st-modal-message-plain-message {
-            color: $neutral-70;
+            color: var(--egeo-theme-neutral-70, $neutral-70);
             font-weight: normal;
             font-size: $egeo-font-size-14;
             line-height: $egeo-line-height-small;

@@ -42,11 +42,11 @@
 }
 
 .st-input::placeholder {
-   color: $neutral-30;
+   color: var(--egeo-theme-neutral-30, $neutral-30);
 }
 
 .st-input-error-message {
    font-size: 13px;
-   color: $error;
+   color: var(--egeo-theme-error, $error);
 }
 

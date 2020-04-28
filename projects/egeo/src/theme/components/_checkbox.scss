@@ -13,7 +13,7 @@
 @import '../constants/fonts';
 
 %checkbox-default {
-   color: $space-110;
+   color: var(--egeo-theme-space-110, $space-110);
    font-weight: 400;
    font-size: $egeo-font-size-xsmall;
    line-height: $egeo-font-size-20;
@@ -36,8 +36,8 @@
    }
 
    .custom-checkbox {
-      border: 1px solid $neutral-30;
-      background-color: $neutral-full;
+      border: 1px solid var(--egeo-theme-neutral-30, $neutral-30);
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
       border-radius: .125rem;
       width: 1rem;
       height: 1rem;
@@ -46,11 +46,11 @@
       top: .125rem;
       margin-right: 5px;
       &.icon-check2 {
-         background-color: $action;
-         border: 1px solid $action;
+         background-color: var(--egeo-theme-action, $action);
+         border: 1px solid var(--egeo-theme-action, $action);
       }
       &:before {
-         color: $neutral-full;
+         color: var(--egeo-theme-neutral-full, $neutral-full);
          position: absolute;
          top: -.1rem;
          left: -.0625rem;
@@ -64,19 +64,19 @@
    }
 
    &:not(.disabled).st-label {
-      color: $space-110;
+      color: var(--egeo-theme-space-110, $space-110);
    }
 
    &.disabled {
-      color: $neutral-20;
+      color: var(--egeo-theme-neutral-20, $neutral-20);
       cursor: default;
 
       .custom-checkbox {
-         border-color: $neutral-20;
+         border-color: var(--egeo-theme-neutral-20, $neutral-20);
          background-color: $neutral-14;
          &.icon-check2 {
-            background-color: $neutral-20;
-            border-color: $neutral-20;
+            background-color: var(--egeo-theme-neutral-20, $neutral-20);
+            border-color: var(--egeo-theme-neutral-20, $neutral-20);
          }
       }
    }

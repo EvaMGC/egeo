@@ -14,12 +14,12 @@
 
 .st-fullscreen-layout {
    border-radius: 0;
-   background-color: $neutral-2;
+   background-color: var(--egeo-theme-neutral-2, $neutral-2);
    z-index: $fullscreen-z-index;
 
    .st-fullscreen-layout-header {
       border-radius: 0;
-      background-color: $neutral-full;
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
       z-index: $fullscreen-z-index + 1;
 
       .st-fullscreen-layout-title {
@@ -28,7 +28,7 @@
          font-family: $egeo-nunito-sans;
          font-size: $egeo-font-size-18;
          line-height: $egeo-line-height-22;
-         color: $neutral;
+         color: var(--egeo-theme-neutral, $neutral);
          white-space: nowrap;
       }
    }
@@ -45,9 +45,9 @@
 
 
 .st-fullscreen-layout.full-width {
-   background-color: $neutral-full;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
    .st-fullscreen-layout-header {
-      border-bottom: 1px solid $space-20;
+      border-bottom: 1px solid var(--egeo-theme-space-20, $space-20);
    }
    .st-fullscreen-layout-container {
       padding-top: 70px;

@@ -13,42 +13,42 @@
 
 .sth-radio-menu-option {
    font-weight: normal;
-   color: $neutral-50;
+   color: var(--egeo-theme-neutral-50, $neutral-50);
 
    &.active {
-      color: $neutral-80;
-      background-color: $neutral-4;
+      color: var(--egeo-theme-neutral-80, $neutral-80);
+      background-color: var(--egeo-theme-neutral-4, $neutral-4);
 
       &:after {
-         border-left: 60px solid $neutral-4;
+         border-left: 60px solid var(--egeo-theme-neutral-4, $neutral-4);
       }
 
       &:before {
-         background-color: $neutral-4;
+         background-color: var(--egeo-theme-neutral-4, $neutral-4);
       }
    }
 
    &.no-active {
-      color: $neutral-20;
+      color: var(--egeo-theme-neutral-20, $neutral-20);
    }
 }
 
 .theme-gray-1 {
    .sth-radio-menu-option {
       &.active {
-         background-color: $neutral-8;
+         background-color: var(--egeo-theme-neutral-8, $neutral-8);
 
          &:after {
-            border-left: 60px solid $neutral-8;
+            border-left: 60px solid var(--egeo-theme-neutral-8, $neutral-8);
          }
 
          &:before {
-            background-color: $neutral-8;
+            background-color: var(--egeo-theme-neutral-8, $neutral-8);
          }
       }
 
       &.no-active {
-         color: $neutral-30;
+         color: var(--egeo-theme-neutral-30, $neutral-30);
       }
    }
 }
@@ -56,21 +56,21 @@
 .theme-gray-2 {
    .sth-radio-menu-option {
 
-      background-color: $neutral-full;
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
       &.active {
-         background-color: $neutral-4;
+         background-color: var(--egeo-theme-neutral-4, $neutral-4);
 
          &:after {
-            border-left: 60px solid $neutral-4;
+            border-left: 60px solid var(--egeo-theme-neutral-4, $neutral-4);
          }
 
          &:before {
-            background-color: $neutral-4;
+            background-color: var(--egeo-theme-neutral-4, $neutral-4);
          }
       }
 
       &.no-active {
-         color: $neutral-20;
+         color: var(--egeo-theme-neutral-20, $neutral-20);
       }
    }
 }

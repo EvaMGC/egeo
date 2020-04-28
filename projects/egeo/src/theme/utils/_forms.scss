@@ -15,9 +15,9 @@
    font-weight: 400;
    font-size: $egeo-font-size-xsmall;
    line-height: $egeo-line-height-20;
-   color: $space-110;
-   background-color: $neutral-full;
-   border: 1px solid $neutral-30;
+   color: var(--egeo-theme-space-110, $space-110);
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
+   border: 1px solid var(--egeo-theme-neutral-30, $neutral-30);
    padding: 10px 17px 10px 15px;
    border-radius: 4px;
    vertical-align: bottom;
@@ -28,19 +28,19 @@
       min-height: $egeo-line-height-20;
    }
    &::placeholder {
-      color: $neutral-50;
+      color: var(--egeo-theme-neutral-50, $neutral-50);
    }
 
    &:focus {
-      border-color: $action;
+      border-color: var(--egeo-theme-action, $action);
    }
 
    &:disabled {
-      border-color: $neutral-20;
-      color: $neutral-2;
+      border-color: var(--egeo-theme-neutral-20, $neutral-20);
+      color: var(--egeo-theme-neutral-2, $neutral-2);
 
       &::placeholder {
-         color: $neutral-40;
+         color: var(--egeo-theme-neutral-40, $neutral-40);
       }
    }
 }

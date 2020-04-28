@@ -8,67 +8,72 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
- @import 'constants/index';
+@import 'constants/index';
 
- :host {
-    width: 100%;
- }
+:host {
+   width: 100%;
+}
 
- .head {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    background-color: $neutral-full;
-    width: 100%;
+.head {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   align-items: center;
+   background-color: $neutral-full;
+   width: 100%;
 
-    .header-container {
-       display: flex;
-       width: 100%;
-       flex-wrap: nowrap;
-       align-items: center;
-    }
+   .header-container {
+      display: flex;
+      width: 100%;
+      flex-wrap: nowrap;
+      align-items: center;
+   }
 
-    .notification {
-       position: relative;
-       margin: auto;
-       height: 40px;
-       width: 614px;
-       border-radius: 5px;
-       background-color: $neutral-full;
-       color: $action;
-       display: flex;
-       align-items: center;
-       flex-wrap: nowrap;
-       box-shadow: 0 1px 4px 1px rgba(124, 124, 124, 0.15);
-       font-weight: 400;
-       font-size: $egeo-font-size-xsmall;
-       text-align: center;
-       justify-content: center;
-       i {
-          margin-right: 5px;
-       }
+   .notification-container {
+      position: absolute;
+      width: 100%;
+      left: 0;
 
-       .close-button {
-          position: absolute;
-          right: 20px;
-          top: 10px;
-          color: $neutral-20;
-          font-size: $egeo-font-size-20;
-       }
-    }
+      .notification {
+         position: relative;
+         margin: auto;
+         height: 40px;
+         width: 614px;
+         border-radius: 5px;
+         background-color: $neutral-full;
+         color: $action;
+         display: flex;
+         align-items: center;
+         flex-wrap: nowrap;
+         box-shadow: 0 1px 4px 1px rgba(124, 124, 124, 0.15);
+         font-weight: 400;
+         font-size: $egeo-font-size-xsmall;
+         text-align: center;
+         justify-content: center;
+         i {
+            margin-right: 5px;
+         }
 
-    st-search {
-       max-width: 200px;
-       min-width: 100px;
-       margin-left: auto;
-    }
- }
+         .close-button {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: $neutral-20;
+            font-size: $egeo-font-size-20;
+         }
+      }
+   }
 
+   st-search {
+      max-width: 200px;
+      min-width: 100px;
+      margin-left: auto;
+   }
+}
 
- ul {
-    list-style: none;
- }
+ul {
+   list-style: none;
+}
 
 .group {
    display: flex;
@@ -92,9 +97,9 @@
    }
 }
 
- .list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: 22px;
- }
+.list {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   margin-left: 22px;
+}

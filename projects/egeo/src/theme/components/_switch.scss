@@ -16,26 +16,26 @@
 
    & > label {
       line-height: $egeo-line-height-20;
-      color: $space-110;
+      color: var(--egeo-theme-space-110, $space-110);
       font-size: $egeo-font-size-xsmall;
       font-weight: 400;
    }
 }
 
 .st-switch__circle {
-   background-color: $neutral-full;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
 }
 
 .st-switch--on {
    .st-switch__box {
-      background-color: $action;
+      background-color: var(--egeo-theme-action, $action);
    }
 }
 
 .st-switch--off {
    .st-switch__box {
-      background-color: $neutral-20;
-      border: solid 1px $neutral-20;
+      background-color: var(--egeo-theme-neutral-20, $neutral-20);
+      border: solid 1px var(--egeo-theme-neutral-20, $neutral-20);
    }
 }
 

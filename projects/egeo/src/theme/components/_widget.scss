@@ -12,42 +12,42 @@
  @import '../constants/fonts';
  @import '../constants/colors';
 
- $border : 1px solid  $neutral-8;
+ $border : 1px solid  var(--egeo-theme-neutral-8, $neutral-8);
 
 .st-widget{
    box-shadow: 0 1px 2px 0 rgba($neutral-10, 0.17);
-   background-color: $neutral-full;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
    border: $border;
 
    &__header{
 
       border-bottom: $border;
       .drag-drop-action{
-         color: $space-30;
+         color: var(--egeo-theme-space-30, $space-30);
 
       }
       .setting-action{
          font-size: $egeo-font-size-20;
-         color: $space-30;
+         color: var(--egeo-theme-space-30, $space-30);
 
          :hover{
-            color: $space-110
+            color: var(--egeo-theme-space-110, $space-110)
          }
       }
    }
 
    &__title{
-      color: $neutral-80;
+      color: var(--egeo-theme-neutral-80, $neutral-80);
       font-weight: 400;
       font-size: $egeo-font-size-16;
       font-family: $egeo-nunito-sans;
    }
 
    &__body .resize-action::after{
-      border: 1px solid $space-20;
+      border: 1px solid var(--egeo-theme-space-20, $space-20);
    }
    &.dragging{
       border-color: $input-field-onfocus;
-      box-shadow:  0 1px 4px 2px $neutral-15;
+      box-shadow:  0 1px 4px 2px var(--egeo-theme-neutral-15, $neutral-15);;
    }
 }

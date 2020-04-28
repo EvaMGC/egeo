@@ -22,9 +22,9 @@
 
 .st-form-field {
    .st-label {
-      color: $space-70;
+      color: var(--egeo-theme-space-70, $space-70);
       &.active {
-         color: $action;
+         color: var(--egeo-theme-action, $action);
       }
    }
 
@@ -34,25 +34,25 @@
          border-color: $input-field-onfocus;
       }
       &:disabled {
-         border-color: $neutral-20;
+         border-color: var(--egeo-theme-neutral-20, $neutral-20);
          background-color: $neutral-14;
-         color: $neutral-30;
+         color: var(--egeo-theme-neutral-30, $neutral-30);
          overflow: auto;
          resize: none;
          cursor: not-allowed;
       }
       &:disabled:placeholder {
-         color: $neutral-30;
+         color: var(--egeo-theme-neutral-30, $neutral-30);
       }
    }
 
    &.ng-invalid:not(.ng-pristine) {
       .st-label {
-         color: $error;
+         color: var(--egeo-theme-error, $error);
       }
       input,
       textarea {
-         border-color: $error;
+         border-color: var(--egeo-theme-error, $error);
       }
    }
 }
@@ -66,9 +66,9 @@
    height: 100%;
    cursor: pointer;
    font-size: $egeo-font-size-18;
-   color: $neutral-50;
+   color: var(--egeo-theme-neutral-50, $neutral-50);
 
    &:hover {
-      color: $neutral-70;
+      color: var(--egeo-theme-neutral-70, $neutral-70);
    }
 }

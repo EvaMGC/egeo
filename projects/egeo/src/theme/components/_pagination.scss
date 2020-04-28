@@ -16,7 +16,7 @@
 
    &__label {
       font-size: $egeo-font-size-14;
-      color: $neutral-70;
+      color: var(--egeo-theme-neutral-70, $neutral-70);
    }
 
    &__per-page {

@@ -14,15 +14,15 @@
 
 .st-pop-over {
     &__content {
-        background-color: $neutral-full;
+        background-color: var(--egeo-theme-neutral-full, $neutral-full);
         border-radius: 4px;
-        box-shadow: 0 2px 4px 0 $neutral-15;
-        border: solid 1px $space-20;
+        box-shadow: 0 2px 4px 0 var(--egeo-theme-neutral-15, $neutral-15);;
+        border: solid 1px var(--egeo-theme-space-20, $space-20);
 
        &--with-arrow:after {
           content: '';
-          background-color: $neutral-full;
-          border: 1px solid $neutral-40;
+          background-color: var(--egeo-theme-neutral-full, $neutral-full);
+          border: 1px solid var(--egeo-theme-neutral-40, $neutral-40);
           border-bottom-width: 0;
           border-left-width: 0;
           border-radius: 2px;
@@ -42,7 +42,7 @@
         font-size: $egeo-font-size-12;
         line-height: $egeo-line-height-xxxsmall;
         text-transform: none;
-        color: $space-70;
+        color: var(--egeo-theme-space-70, $space-70);
         padding: 6px 15px 6px 15px;
         display: flex;
 
@@ -51,12 +51,12 @@
        }
 
        &--underlined {
-          border-bottom: solid 1px $space-20;
+          border-bottom: solid 1px var(--egeo-theme-space-20, $space-20);
        }
     }
     &__arrow {
-        background-color: $neutral-full;
-        border: 1px solid $neutral-40;
+        background-color: var(--egeo-theme-neutral-full, $neutral-full);
+        border: 1px solid var(--egeo-theme-neutral-40, $neutral-40);
         border-bottom-width: 0;
         border-left-width: 0;
         transition: margin-top 0.4s;

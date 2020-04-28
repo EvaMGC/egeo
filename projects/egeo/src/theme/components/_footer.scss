@@ -12,11 +12,11 @@
 @import '../constants/colors';
 
 .st-footer {
-   background-color: $neutral-full;
-   background: $space-110;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
+   background: var(--egeo-theme-space-110, $space-110);
    font-weight: 100;
    font-size: $egeo-font-size-14;
-   color: $neutral-full;
+   color: var(--egeo-theme-neutral-full, $neutral-full);
 
    .st-footer-container {
       margin: 0 auto;
@@ -31,7 +31,7 @@
 
 .st-footer-links {
    cursor: pointer;
-   color: $neutral-full;
+   color: var(--egeo-theme-neutral-full, $neutral-full);
    font-weight: normal;
    font-size: $egeo-font-size-14;
 
@@ -43,7 +43,7 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      color: $neutral-full;
+      color: var(--egeo-theme-neutral-full, $neutral-full);
       margin-left: 15px;
    }
 }

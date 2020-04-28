@@ -44,10 +44,10 @@
 @keyframes secondary-color {
    100%,
    0% {
-      stroke: $neutral-full;
+      stroke: var(--egeo-theme-neutral-full, $neutral-full);
    }
    50% {
-      stroke: $neutral-full;
+      stroke: var(--egeo-theme-neutral-full, $neutral-full);
    }
 }
 

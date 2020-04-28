@@ -13,7 +13,7 @@
 @import '../constants/settings';
 
 .st-header {
-   background-color: $space;
+   background-color: var(--egeo-theme-space, $space);
    display: flex;
    flex-direction: row;
    flex-wrap: nowrap;
@@ -61,7 +61,7 @@
       .st-header-shortcut-buttons-container {
          align-content: flex-end;
          align-items: center;
-         color: $space-30;
+         color: var(--egeo-theme-space-30, $space-30);
          display: flex;
          flex-direction: row;
          flex-grow: 1;
@@ -76,7 +76,7 @@
             margin-right: 30px;
 
             &.active {
-               color: $neutral-full;
+               color: var(--egeo-theme-neutral-full, $neutral-full);
             }
          }
       }
@@ -95,7 +95,7 @@
 
          .st-header-user-menu {
             display: flex;
-            border-left: 1px solid $neutral-full;
+            border-left: 1px solid var(--egeo-theme-neutral-full, $neutral-full);
          }
 
          .st-header-user-info {
@@ -106,7 +106,7 @@
             padding-left: 20px;
 
             .st-header-user-info__name-line {
-               color: $neutral-full;
+               color: var(--egeo-theme-neutral-full, $neutral-full);
                font-size: $egeo-font-size-14;
                font-stretch: normal;
                font-style: normal;
@@ -124,7 +124,7 @@
 
             &__description {
                align-self: center;
-               color: $space-40;
+               color: var(--egeo-theme-space-40, $space-40);
                display: block;
                font-size: $egeo-font-size-12;
                line-height: $egeo-line-height-18;
@@ -135,7 +135,7 @@
             }
 
             &__arrow {
-               color: $neutral-full;
+               color: var(--egeo-theme-neutral-full, $neutral-full);
                cursor: pointer;
                display: inline-block;
                font-size: $egeo-font-size-12;
@@ -148,7 +148,7 @@
             padding: 15px;
 
             .st-user-action {
-               color: $neutral-80;
+               color: var(--egeo-theme-neutral-80, $neutral-80);
                cursor: pointer;
                display: flex;
                font-family: $egeo-nunito-sans;
@@ -181,7 +181,7 @@
 
 .st-header-menu-option {
    align-items: flex-end;
-   color: $space-30;
+   color: var(--egeo-theme-space-30, $space-30);
    display: flex;
    flex-direction: row;
    flex-wrap: nowrap;
@@ -193,7 +193,7 @@
 
    &.active,
    &:hover {
-      color: $neutral-full;
+      color: var(--egeo-theme-neutral-full, $neutral-full);
    }
 
    .st-header-menu-option-name {

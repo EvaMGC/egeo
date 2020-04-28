@@ -13,42 +13,42 @@
 
 /// titles:
 .egeo-title-giant {
-   color:         $neutral-70;
+   color:         var(--egeo-theme-neutral-70, $neutral-70);
    font-family:   $egeo-nunito-sans;
    font-weight:   700;
    font-size:     $egeo-font-size-xxxlarge;
    line-height:   $egeo-line-height-xxxlarge;
 }
 .egeo-title-extra-large {
-   color:         $neutral-70;
+   color:         var(--egeo-theme-neutral-70, $neutral-70);
    font-family:   $egeo-nunito-sans;
    font-weight:   600;
    font-size:     $egeo-font-size-xxlarge;
    line-height:   $egeo-line-height-xxlarge;
 }
 .egeo-title-large {
-   color:         $neutral-70;
+   color:         var(--egeo-theme-neutral-70, $neutral-70);
    font-family:   $egeo-nunito-sans;
    font-weight:   700;
    font-size:     $egeo-font-size-xlarge;
    line-height:   $egeo-line-height-26;
 }
 .egeo-title-medium {
-   color:         $neutral-70;
+   color:         var(--egeo-theme-neutral-70, $neutral-70);
    font-family:   $egeo-nunito-sans;
    font-weight:   700;
    font-size:     $egeo-font-size-20;
    line-height:   $egeo-line-height-24;
 }
 .egeo-title-small {
-   color:         $neutral-70;
+   color:         var(--egeo-theme-neutral-70, $neutral-70);
    font-family:   $egeo-nunito-sans;
    font-weight:   700;
    font-size:     $egeo-font-size-18;
    line-height:   $egeo-line-height-22;
 }
 .egeo-title-mini {
-   color:         $neutral-70;
+   color:         var(--egeo-theme-neutral-70, $neutral-70);
    font-family:   $egeo-nunito-sans;
    font-weight:   700;
    font-size:     $egeo-font-size-16;
@@ -57,14 +57,14 @@
 
 /// text:
 .egeo-p {
-   color:         $neutral-60;
+   color:         var(--egeo-theme-neutral-60, $neutral-60);
    font-weight:   400;
    font-family:   $egeo-nunito-sans;
    font-size:     $egeo-font-size-16;
    line-height:   $egeo-line-height-small;
 }
 .egeo-p-small {
-   color:         $neutral-60;
+   color:         var(--egeo-theme-neutral-60, $neutral-60);
    font-family:   $egeo-nunito-sans;
    font-weight:   400;
    font-size:     $egeo-font-size-14;

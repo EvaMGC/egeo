@@ -14,11 +14,11 @@
 .st-tooltip-on {
 
    &:before {
-      border: 1px solid $neutral-10;
+      border: 1px solid var(--egeo-theme-neutral-10, $neutral-10);
       border-radius: 3px;
       bottom: 125%;
-      box-shadow: 0 0 10px 2px $neutral-10;
-      color: $neutral-80;
+      box-shadow: 0 0 10px 2px var(--egeo-theme-neutral-10, $neutral-10);
+      color: var(--egeo-theme-neutral-80, $neutral-80);
       font-size: $egeo-font-size-14;
       padding: 10px 20px;
       font-weight: 400;
@@ -26,8 +26,8 @@
 
    &:after {
       bottom: calc(125% - 3px);
-      border-bottom: 1px solid $neutral-15;
-      border-right: 1px solid $neutral-15;
+      border-bottom: 1px solid var(--egeo-theme-neutral-15, $neutral-15);;
+      border-right: 1px solid var(--egeo-theme-neutral-15, $neutral-15);;
       height: 6px;
       left: 10px;
       transform: rotate(45deg);
@@ -36,6 +36,6 @@
 
    &:before,
    &:after {
-      background: $neutral-full;
+      background: var(--egeo-theme-neutral-full, $neutral-full);
    }
 }

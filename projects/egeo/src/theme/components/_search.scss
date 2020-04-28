@@ -15,7 +15,7 @@
 .sth-search {
    .st-search-filter.disabled {
       .arrow {
-         background-color: $neutral-full;
+         background-color: var(--egeo-theme-neutral-full, $neutral-full);
       }
    }
 
@@ -28,7 +28,7 @@
 .sth-search::placeholder {
    font-weight: normal;
    font-size: $egeo-font-size-xsmall;
-   color: $neutral-50;
+   color: var(--egeo-theme-neutral-50, $neutral-50);
 }
 
 .sth-search .sth-search-input {
@@ -36,7 +36,7 @@
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xsmall;
    font-weight: normal;
-   background-color: $neutral-full;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
    border-radius: 4px;
 }
 
@@ -55,11 +55,11 @@
 
 .sth-search-icon {
    font-size: $egeo-font-size-14;
-   color: $neutral-60;
+   color: var(--egeo-theme-neutral-60, $neutral-60);
 }
 
 .sth-search .sth-search-input:focus + .sth-search-icon {
-   color: $action !important;
+   color: var(--egeo-theme-action, $action) !important;
 }
 
 .sth-search-filter {

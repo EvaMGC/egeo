@@ -24,11 +24,11 @@
    }
 
    &::-webkit-scrollbar-thumb {
-     box-shadow: inset 0 0 10px 10px $neutral-15;
+     box-shadow: inset 0 0 10px 10px var(--egeo-theme-neutral-15, $neutral-15);
      border-radius: 80px !important;
      border: solid 2px transparent;
    }
 
-   scrollbar-color: $neutral-15 $neutral-full;
+   scrollbar-color: var(--egeo-theme-neutral-15, $neutral-15) var(--egeo-theme-neutral-full, $neutral-full);
    scrollbar-width: thin;
  }

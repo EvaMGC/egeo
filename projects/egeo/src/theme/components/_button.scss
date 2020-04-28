@@ -13,7 +13,7 @@
 
 /// tipography EXTENDS (@extend %button-label-regular;):
 %button-label-regular {
-   color: $neutral-full;
+   color: var(--egeo-theme-neutral-full, $neutral-full);
    font-family: $egeo-nunito-sans;
    font-weight: normal;
    font-size: $egeo-font-size-14;
@@ -30,39 +30,39 @@
 }
 
 %button-label-large {
-   color: $neutral-full;
+   color: var(--egeo-theme-neutral-full, $neutral-full);
    font-family: $egeo-nunito-sans;
    font-weight: normal;
    line-height: $egeo-line-height-22;
    height: 50px;
    &[disabled] {
-      color: $neutral-20;
+      color: var(--egeo-theme-neutral-20, $neutral-20);
    }
 }
 
 %button-toolbar-ico-default {
-   color: $neutral-60;
+   color: var(--egeo-theme-neutral-60, $neutral-60);
    font-family: $egeo-stratio-icons;
    font-size: $egeo-font-size-18;
    line-height: $egeo-line-height-22;
    &[disabled] {
-      color: $neutral-20;
+      color: var(--egeo-theme-neutral-20, $neutral-20);
    }
 }
 
 .button-link {
-   color: $action;
+   color: var(--egeo-theme-action, $action);
    font-family: $egeo-nunito-sans;
    font-weight: normal;
    font-size: $egeo-font-size-14;
    line-height: $egeo-line-height-20;
 
    &:hover {
-      color: $action-120;
+      color: var(--egeo-theme-action-120, $action-120) ;
    }
 
    :active {
-      color: $action-150;
+      color: var(--egeo-theme-action-150, $action-150) ;
    }
 
    &[disabled] {
@@ -120,86 +120,86 @@
    }
 
    &.button-primary {
-      background-color: $action;
+      background-color: var(--egeo-theme-action, $action);
 
       &:hover {
-         background-color: $action-120;
+         background-color: var(--egeo-theme-action-120, $action-120) ;
       }
 
       &:active {
-         background-color: $action-150;
+         background-color: var(--egeo-theme-action-150, $action-150) ;
       }
 
       &[disabled] {
-         background-color: $action-10;
-         color: $action-60;
+         background-color: var(--egeo-theme-action-10, $action-10) ;
+         color: var(--egeo-theme-action-60, $action-60) ;
       }
    }
 
    &.button-secondary {
-      background-color: $neutral-full;
-      border: solid $action 1px;
-      color: $action;
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
+      border: solid var(--egeo-theme-action, $action) 1px;
+      color: var(--egeo-theme-action, $action);
 
       &:hover {
-         color: $action-120;
-         border-color: $action-120;
+         color: var(--egeo-theme-action-120, $action-120) ;
+         border-color: var(--egeo-theme-action-120, $action-120) ;
       }
 
       &[disabled] {
-         color: $action-60;
-         border-color: $action-40;
+         color: var(--egeo-theme-action-60, $action-60) ;
+         border-color: var(--egeo-theme-action-40, $action-40) ;
       }
 
       &.large {
-         color: $action;
+         color: var(--egeo-theme-action, $action);
          padding: .875rem 2.4375rem;
       }
 
       &.small {
-         color: $action;
+         color: var(--egeo-theme-action, $action);
          padding: 0.2rem 1rem;
       }
    }
 
    &.button-critical {
-      background-color: $error;
+      background-color: var(--egeo-theme-error, $error);
 
       &:hover {
-         background-color: $error-120;
+         background-color: var(--egeo-theme-error-120, $error-120);
       }
 
       &:active {
-         background-color: $error-140;
+         background-color: var(--egeo-theme-error-140, $error-140);
       }
 
       &[disabled] {
-         background-color: $error-10;
-         color: $space-30;
+         background-color: var(--egeo-theme-error-10, $error-10);
+         color: var(--egeo-theme-space-30, $space-30);
       }
    }
 
    &.button-borderless {
-      background-color: $space-5;
-      color: $space-80;
+      background-color: var(--egeo-theme-space-5, $space-5);
+      color: var(--egeo-theme-space-80, $space-80);
 
       &:hover {
-         background-color: $space-10;
-         color: $space;
+         background-color: var(--egeo-theme-space-10, $space-10);
+         color: var(--egeo-theme-space, $space);
       }
 
       &:active {
-         background-color: $space-5;
-         color: $space-80;
+         background-color: var(--egeo-theme-space-5, $space-5);
+         color: var(--egeo-theme-space-80, $space-80);
       }
 
       &[disabled] {
-         background-color: $space-5;
-         color: $space-30;
+         background-color: var(--egeo-theme-space-5, $space-5);
+         color: var(--egeo-theme-space-30, $space-30);
       }
 
       &.large {
-         color: $space-80;
+         color: var(--egeo-theme-space-80, $space-80);
       }
 
    }
@@ -207,7 +207,7 @@
    &.button-toolbar {
       @extend %button-toolbar-ico-default;
       border-radius: 4px;
-      border: solid 1px $neutral-8;
+      border: solid 1px var(--egeo-theme-neutral-8, $neutral-8);
       background-color: white;
 
       &.small {
@@ -217,12 +217,12 @@
       }
 
       &:hover {
-         border: solid 1px $neutral-30;
+         border: solid 1px var(--egeo-theme-neutral-30, $neutral-30);
       }
 
       &[disabled] {
          border: none;
-         background-color: $neutral-8;
+         background-color: var(--egeo-theme-neutral-8, $neutral-8);
       }
 
       i {

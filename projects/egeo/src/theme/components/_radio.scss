@@ -15,11 +15,11 @@
    font-weight: 400;
    font-size: $egeo-font-size-xsmall;
    line-height:  $egeo-line-height-20;
-   color: $space-110;
+   color: var(--egeo-theme-space-110, $space-110);
 }
 
 .st-radio.disabled {
-   color: $neutral-20;
+   color: var(--egeo-theme-neutral-20, $neutral-20);
    cursor: default !important;
 }
 
@@ -42,24 +42,24 @@
 }
 
 .custom-radio {
-   background-color: $neutral-full;
-   border: 1px solid $neutral-30;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
+   border: 1px solid var(--egeo-theme-neutral-30, $neutral-30);
 
    &.checked {
-      background-color: $action;
-      border-color: $action;
+      background-color: var(--egeo-theme-action, $action);
+      border-color: var(--egeo-theme-action, $action);
 
       &:before {
-         background-color: $neutral-full;
+         background-color: var(--egeo-theme-neutral-full, $neutral-full);
       }
    }
 
    &.disabled {
-      border-color: $neutral-20;
-      color: $neutral-20;
+      border-color: var(--egeo-theme-neutral-20, $neutral-20);
+      color: var(--egeo-theme-neutral-20, $neutral-20);
       background-color: $neutral-14;
       &.checked {
-         background-color: $neutral-20;
+         background-color: var(--egeo-theme-neutral-20, $neutral-20);
       }
    }
 

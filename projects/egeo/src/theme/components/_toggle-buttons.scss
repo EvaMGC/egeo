@@ -18,22 +18,22 @@
    }
 
    .sth-toggle-buttons__buttons {
-      border-color: $space-20;
+      border-color: var(--egeo-theme-space-20, $space-20);
    }
 
    .sth-toggle-buttons__button {
-      color: $neutral-80;
-      background: $neutral-full;
+      color: var(--egeo-theme-neutral-80, $neutral-80);
+      background: var(--egeo-theme-neutral-full, $neutral-full);
       font-size: $egeo-font-size-14;
    }
 
    .sth-toggle-buttons__button:hover {
-      background: $action-10;
+      background: var(--egeo-theme-action-10, $action-10) ;
    }
 
    .sth-toggle-buttons__button--active,
    .sth-toggle-buttons__button--active:hover {
-      background: $action-10;
+      background: var(--egeo-theme-action-10, $action-10) ;
       cursor: default;
    }
 }

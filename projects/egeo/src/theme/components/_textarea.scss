@@ -18,7 +18,7 @@
 
 .st-textarea-error-message {
    font-size: $egeo-font-size-12;
-   color: $error;
+   color: var(--egeo-theme-error, $error);
 }
 
 st-textarea > .st-form-control-reset-button {

@@ -12,7 +12,7 @@
 @import '../constants/colors';
 
 .sth-page-title {
-   border-bottom: 2px solid $neutral-20;
+   border-bottom: 2px solid var(--egeo-theme-neutral-20, $neutral-20);
 }
 
 .sth-page-title-main-title {
@@ -21,28 +21,28 @@
 }
 
 .sth-page-title-title {
-  color: $neutral-70;
+  color: var(--egeo-theme-neutral-70, $neutral-70);
   text-transform: uppercase;
 }
 
 .sth-page-title-pre-title {
-   color: $neutral-30;
+   color: var(--egeo-theme-neutral-30, $neutral-30);
    text-transform: uppercase;
 }
 
 .sth-page-title-button-box {
-   border-right: 2px solid $neutral-20;
+   border-right: 2px solid var(--egeo-theme-neutral-20, $neutral-20);
 
    .st-temporal-button-style {
       border-radius: 100%;
-      border: 2px solid $neutral-40;
+      border: 2px solid var(--egeo-theme-neutral-40, $neutral-40);
       height: 30px;
       width: 30px;
       &:active {
          box-shadow: 0 0 0 2px $brand;
       }
       &:hover {
-         border: 2px solid $neutral-50 !important;
+         border: 2px solid var(--egeo-theme-neutral-50, $neutral-50) !important;
       }
       & i {
          padding: 0;
@@ -53,16 +53,16 @@
 
 
 .sth-error {
-   border-color: $error !important;
+   border-color: var(--egeo-theme-error, $error) !important;
 }
 
 .sth-error-text {
    font-size: 13px;
-   color: $error;
+   color: var(--egeo-theme-error, $error);
 }
 
 .sth-button-edit {
-   color: $neutral-40;
+   color: var(--egeo-theme-neutral-40, $neutral-40);
 }
 
 .sth-editable {

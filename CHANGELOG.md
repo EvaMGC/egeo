@@ -11,6 +11,10 @@
 
 * st-table: Filtered header fields are introduced as input and they are not modified inside table component
 
+**Others:**
+
+* Added css variables to customize colors from outside
+
 
 ## 20.1.0 (April 27, 2020)
 

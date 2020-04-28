@@ -18,8 +18,8 @@
 
    &__header {
       font-family: $egeo-nunito-sans;
-      border-bottom: 1px solid $space-50;
-      color: $space-80;
+      border-bottom: 1px solid var(--egeo-theme-space-50, $space-50);
+      color: var(--egeo-theme-space-80, $space-80);
    }
 
    &__checkbox {
@@ -35,7 +35,7 @@
       font-style: normal;
       line-height: normal;
       letter-spacing: normal;
-      color: $space-80;
+      color: var(--egeo-theme-space-80, $space-80);
       display: inline-block;
    }
 
@@ -57,12 +57,12 @@
       bottom: 4px;
       font-weight: bold;
       font-size: $egeo-font-size-12;
-      color: $space-80;
+      color: var(--egeo-theme-space-80, $space-80);
       vertical-align: middle;
    }
 
    &__filter-arrow {
-      color: $space-80;
+      color: var(--egeo-theme-space-80, $space-80);
       cursor: pointer;
       font-size: $egeo-font-size-12;
       font-weight: bold;
@@ -83,14 +83,14 @@
    font-family: $egeo-nunito-sans;
    text-align: left;
    vertical-align: top;
-   box-shadow: inset 0 -1px 0 0 $space-20;
+   box-shadow: inset 0 -1px 0 0 var(--egeo-theme-space-20, $space-20);
    transition: background-color ease-in-out 0.3s;
    font-weight: normal;
    font-stretch: normal;
    font-style: normal;
    letter-spacing: normal;
    font-size: $egeo-font-size-14;
-   color: $space-110;
+   color: var(--egeo-theme-space-110, $space-110);
 
    td {
       font-size: $egeo-font-size-14;
@@ -99,17 +99,17 @@
    &:hover {
       td.clickable > * {
          cursor: pointer;
-         color: $action;
+         color: var(--egeo-theme-action, $action);
       }
    }
 }
 
 .st-table-row:hover {
-   background-color: $action-10;
+   background-color: var(--egeo-theme-action-10, $action-10) ;
 }
 
 .st-table-row.selected {
-   background-color: $space-5;
+   background-color: var(--egeo-theme-space-5, $space-5);
 }
 
 .st-table--fixed-header tbody {
@@ -139,10 +139,10 @@
 .st-table-hover {
    display: flex;
    justify-content: flex-end;
-   color: $space-50;
+   color: var(--egeo-theme-space-50, $space-50);
    padding: 0 25px 0 20px;
 
    &:hover {
-      color: $space;
+      color: var(--egeo-theme-space, $space);
    }
 }

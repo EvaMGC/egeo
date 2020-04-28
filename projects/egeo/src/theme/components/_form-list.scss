@@ -22,10 +22,10 @@
 
    .remove-button {
       font-size: $egeo-font-size-20;
-      color: $neutral-50;
+      color: var(--egeo-theme-neutral-50, $neutral-50);
 
       &:hover {
-         color: $neutral-70;
+         color: var(--egeo-theme-neutral-70, $neutral-70);
       }
    }
 

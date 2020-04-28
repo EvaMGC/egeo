@@ -12,12 +12,12 @@
 @import '../constants/colors';
 
 .st-vertical-icon-tabs {
-   background-color: $neutral-2;
-   border-right: 1px solid $space-20;
+   background-color: var(--egeo-theme-neutral-2, $neutral-2);
+   border-right: 1px solid var(--egeo-theme-space-20, $space-20);
    text-align: center;
 
    .tab {
-      color: $space-70;
+      color: var(--egeo-theme-space-70, $space-70);
 
       &__text {
          font-size: $egeo-font-size-10;
@@ -30,10 +30,10 @@
       }
 
       &--active {
-         background-color: $neutral-full;
-         border-color: $space-20;
+         background-color: var(--egeo-theme-neutral-full, $neutral-full);
+         border-color: var(--egeo-theme-space-20, $space-20);
          border-right: 1px solid white;
-         color: $space-110;
+         color: var(--egeo-theme-space-110, $space-110);
       }
 
       i {

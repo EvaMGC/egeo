@@ -17,8 +17,8 @@
       font-weight: normal;
       font-size: $egeo-font-size-16;
       line-height: $egeo-line-height-22;
-      color: $neutral-80;
-      background-color: $neutral-full;
+      color: var(--egeo-theme-neutral-80, $neutral-80);
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
       padding: 30px;
       height: 90px;
       cursor: pointer;
@@ -28,19 +28,19 @@
       }
 
       &--collapsed {
-         border-bottom: solid 1px $space-5;
+         border-bottom: solid 1px var(--egeo-theme-space-5, $space-5);
       }
 
       &--count {
          font-weight: normal;
          font-size: $egeo-font-size-xsmall;
          line-height: $egeo-line-height-small;
-         color: $neutral-60;
-         background-color: $space-20;
+         color: var(--egeo-theme-neutral-60, $neutral-60);
+         background-color: var(--egeo-theme-space-20, $space-20);
       }
 
       &--arrow {
-         border-color: transparent transparent $neutral-2 transparent;
+         border-color: transparent transparent var(--egeo-theme-neutral-2, $neutral-2) transparent;
       }
    }
 
@@ -48,13 +48,13 @@
       font-weight: normal;
       font-size: $egeo-font-size-xsmall;
       line-height: $egeo-line-height-small;
-      color: $neutral-70;
-      background-color: $neutral-2;
+      color: var(--egeo-theme-neutral-70, $neutral-70);
+      background-color: var(--egeo-theme-neutral-2, $neutral-2);
       padding: 15px 30px 15px 30px;
       cursor: pointer;
 
       &:hover {
-         color: $action-120;
+         color: var(--egeo-theme-action-120, $action-120) ;
       }
    }
 
@@ -62,13 +62,13 @@
       font-weight: normal;
       font-size: $egeo-font-size-14;
       line-height: $egeo-line-height-small;
-      color: $action;
-      background-color: $neutral-2;
+      color: var(--egeo-theme-action, $action);
+      background-color: var(--egeo-theme-neutral-2, $neutral-2);
       padding: 15px 30px 15px 30px;
       cursor: pointer;
 
       &:hover {
-         color: $action-120;
+         color: var(--egeo-theme-action-120, $action-120) ;
       }
    }
 }

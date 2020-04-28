@@ -15,27 +15,27 @@
    &__title {
       font-weight: normal;
       font-size: $egeo-font-size-16;
-      color: $neutral-40;
+      color: var(--egeo-theme-neutral-40, $neutral-40);
    }
    &.themeA {
-      border: 1px solid $neutral-10;
-      background-color: $neutral-full;
+      border: 1px solid var(--egeo-theme-neutral-10, $neutral-10);
+      background-color: var(--egeo-theme-neutral-full, $neutral-full);
    }
    &.themeB {
-      background-color: $neutral-4;
+      background-color: var(--egeo-theme-neutral-4, $neutral-4);
    }
 }
 
 .sth-item-list__item {
-   border-top: 1px solid $neutral-10;
+   border-top: 1px solid var(--egeo-theme-neutral-10, $neutral-10);
    font-weight: 400;
    font-size: $egeo-font-size-14;
-   color: $neutral-40;
+   color: var(--egeo-theme-neutral-40, $neutral-40);
    &:hover {
       background-color: rgba($brand, 0.1);
    }
    &--selected {
-      background-color: $neutral-10;
+      background-color: var(--egeo-theme-neutral-10, $neutral-10);
       font-weight: 600;
    }
 }

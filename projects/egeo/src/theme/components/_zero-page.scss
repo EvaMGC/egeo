@@ -12,13 +12,13 @@
  @import '../constants/fonts';
  @import '../constants/colors';
 
- $border : 1px solid  $neutral-8;
+ $border : 1px solid  var(--egeo-theme-neutral-8, $neutral-8);
 
 .st-zero-page {
 
    &__title {
       font-family: $egeo-nunito-sans;
-      color: $neutral;
+      color: var(--egeo-theme-neutral, $neutral);
       font-size: $egeo-font-size-xlarge;
       font-weight: bold;
       line-height: $egeo-line-height-18;
@@ -28,7 +28,7 @@
       font-family: $egeo-nunito-sans;
       font-size: $egeo-font-size-16;
       line-height: $egeo-line-height-small;
-      color: $neutral-40;
+      color: var(--egeo-theme-neutral-40, $neutral-40);
       text-align: center;
       padding: 20px 0 30px;
    }

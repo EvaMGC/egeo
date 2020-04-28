@@ -13,25 +13,25 @@
 
 %tag-events {
    &:not([disabled]):hover {
-      background-color: $action-10;
-      color: $action;
+      background-color: var(--egeo-theme-action-10, $action-10) ;
+      color: var(--egeo-theme-action, $action);
    }
 
    &[disabled] {
-      background-color: $space-10;
-      color: $space-50;
+      background-color: var(--egeo-theme-space-10, $space-10);
+      color: var(--egeo-theme-space-50, $space-50);
    }
 }
 
 .st-tag {
-   background-color: $space-10;
+   background-color: var(--egeo-theme-space-10, $space-10);
    color: black;
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-11;
    vertical-align: middle;
 
    &--selected {
-      background-color: $action !important;
+      background-color: var(--egeo-theme-action, $action) !important;
 
       .st-tag__text, .st-tag__icon, .st-tag__remove-button {
          color: white !important;
@@ -71,7 +71,7 @@
    }
 
    &__remove-button {
-      color: $space-70;
+      color: var(--egeo-theme-space-70, $space-70);
       font-size: $egeo-font-size-11;
       float: right;
       width: 14%;
@@ -134,22 +134,22 @@
    }
 
    &.info {
-      background-color: $action-10;
-      color: $action;
+      background-color: var(--egeo-theme-action-10, $action-10) ;
+      color: var(--egeo-theme-action, $action);
    }
 
    &.error {
-      background-color: $error-10;
-      color: $error-140;
+      background-color: var(--egeo-theme-error-10, $error-10);
+      color: var(--egeo-theme-error-140, $error-140);
    }
 
    &.warning {
-      background-color: $warning-10;
-      color: $warning;
+      background-color: var(--egeo-theme-warning-10, $warning-10);
+      color: var(--egeo-theme-warning, $warning);
    }
 
    &.success {
-      background-color: $success-10;
-      color: $success;
+      background-color: var(--egeo-theme-success-10, $success-10);
+      color: var(--egeo-theme-success, $success);
    }
 }

@@ -24,7 +24,7 @@
    }
 
    .title {
-      color: $neutral;
+      color: var(--egeo-theme-neutral, $neutral);
       font-weight: bold;
       padding-bottom: 20px;
       padding-top: 10px;
@@ -32,7 +32,7 @@
    }
 
    .description {
-      color: $neutral-70;
+      color: var(--egeo-theme-neutral-70, $neutral-70);
       font-size: $egeo-font-size-16;
       line-height: $egeo-line-height-small;
       padding-bottom: 20px;
@@ -91,7 +91,7 @@
       display: block;
 
       & > .title {
-         border-bottom: 1px solid $neutral-15;
+         border-bottom: 1px solid var(--egeo-theme-neutral-15, $neutral-15);;
          cursor: pointer;
          margin-bottom: 15px;
          padding-bottom: 15px;
@@ -118,7 +118,7 @@
          }
 
          &::after {
-            border-bottom: 1px solid $neutral-20;
+            border-bottom: 1px solid var(--egeo-theme-neutral-20, $neutral-20);
             content: '';
             display: inline-block;
             margin-bottom: 10px;
@@ -134,7 +134,7 @@
             display: inline-block;
             padding-top: 20px;
             label {
-               color: $neutral;
+               color: var(--egeo-theme-neutral, $neutral);
                vertical-align: middle;
             }
          }
@@ -144,7 +144,7 @@
          input, textarea {
             background-color: transparent;
             border: none;
-            color: $space-110;
+            color: var(--egeo-theme-space-110, $space-110);
             padding: 0;
          }
 
@@ -157,7 +157,7 @@
    }
 
    .disabled-section-info {
-      color: $neutral-30;
+      color: var(--egeo-theme-neutral-30, $neutral-30);
       font-size: $egeo-font-size-16;
       padding-bottom: 20px;
       &::first-letter {

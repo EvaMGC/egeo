@@ -12,34 +12,34 @@
 @import '../constants/colors';
 
 .sth-two-list__list-item {
-   border-bottom: 1px solid $neutral-10;
+   border-bottom: 1px solid var(--egeo-theme-neutral-10, $neutral-10);
 }
 
 .sth-two-list__list-title {
    font-weight: normal;
    font-size: $egeo-font-size-16;
-   color: $neutral-40;
+   color: var(--egeo-theme-neutral-40, $neutral-40);
    &.sth-two-list__important-title {
-      color: $neutral-50;
+      color: var(--egeo-theme-neutral-50, $neutral-50);
    }
 }
 
 .sth-two-list {
    font-weight: 400;
    font-size: $egeo-font-size-xsmall;
-   color: $neutral-50;
+   color: var(--egeo-theme-neutral-50, $neutral-50);
 }
 
 .sth-two-list__list {
-   background-color: $neutral-full;
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
 }
 
 .sth-two-list__all-list {
-   border: 1px solid $neutral-8;
+   border: 1px solid var(--egeo-theme-neutral-8, $neutral-8);
 }
 
 .sth-two-list__selected-list {
-   border: 1px solid $neutral-30;
+   border: 1px solid var(--egeo-theme-neutral-30, $neutral-30);
 }
 
 .sth-two-list-selection__item-normal {

@@ -12,24 +12,24 @@
 @import '../constants/colors';
 
 .sth-info-box {
-   background-color: $neutral-4;
-   border-bottom: 1px solid $neutral-10;
+   background-color: var(--egeo-theme-neutral-4, $neutral-4);
+   border-bottom: 1px solid var(--egeo-theme-neutral-10, $neutral-10);
 }
 
 .sth-info-box__header {
-   background-color: $neutral-8;
+   background-color: var(--egeo-theme-neutral-8, $neutral-8);
 }
 
 .sth-info-box__header__icon {
    text-align: center;
    font-family: $egeo-stratio-icons;
    font-size: $egeo-font-size-20;
-   color: $neutral-50;
+   color: var(--egeo-theme-neutral-50, $neutral-50);
 }
 
 .sth-info-box__header__text {
    text-align: center;
-   color: $neutral-50;
+   color: var(--egeo-theme-neutral-50, $neutral-50);
    text-transform: uppercase;
    font-weight: normal;
 }
