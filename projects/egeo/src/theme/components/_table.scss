@@ -70,6 +70,11 @@
       vertical-align: middle;
       margin-left: 4px;
       line-height: 13px;
+
+      &.icon-facets-2 {
+         vertical-align: baseline;
+         line-height: 20px;
+      }
    }
 }
 

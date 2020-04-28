@@ -7,6 +7,10 @@
 * st-header: Apply new UX definition
 * st-dropdown-menu: Apply new UX definition
 
+**Fixed bugs:**
+
+* st-table: Filtered header fields are introduced as input and they are not modified inside table component
+
 
 ## 20.1.0 (April 27, 2020)
 

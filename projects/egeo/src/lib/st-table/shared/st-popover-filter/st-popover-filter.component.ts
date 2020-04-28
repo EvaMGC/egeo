@@ -8,15 +8,16 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, Input, TemplateRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { cloneDeep as _cloneDeep, get as _get } from 'lodash';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { get as _get } from 'lodash';
 
 import { StTableHeader } from '../../shared/table-header.interface';
 
 @Component({
    selector: 'st-popover-filter',
    templateUrl: './st-popover-filter.component.html',
-   styleUrls: ['./st-popover-filter.component.scss']
+   styleUrls: ['./st-popover-filter.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StPopoverFilterComponent {
 
@@ -38,19 +39,12 @@ export class StPopoverFilterComponent {
    /** @Output {} [filter=''] Event emitted  when user interacts with filter button without a custom template */
    @Output() filter: EventEmitter<any> = new EventEmitter();
 
-   constructor(private _cd: ChangeDetectorRef) { }
-
-   public checkFilterIcon(): void {
-      this.filtered = this.field.filters.filterConfig.filter((conf) => conf.selected).length > 0;
-      this._cd.markForCheck();
-   }
-
    public getConfigField(field: StTableHeader, config: string): any {
       return _get(field, `filters.${config}`);
    }
 
-   public getFilteredIcon(filtered: boolean): string {
-      return (filtered) ? 'icon-facets-2' : 'icon-arrow4_down';
+   public getFilteredIcon(): string {
+      return this.filtered ? 'icon-facets-2' : 'icon-arrow4_down';
    }
 
    public onChangeFilter(indexFilter: number, event: Event): void {

@@ -133,7 +133,12 @@
       <h2 class="subtitle">Filterable and sortable table</h2>
       <p class="paragraph">Table can be configured as filterable or not. Moreover, it allows to configure only specific
          fields as filterable </p>
-      <st-table [filterable]="true" [fields]="filterFields" [hasHoverMenu]="true" (selectedFilters)="onSelectedFilters($event)" (changeOrder)="onSortTable($event)">
+      <st-table [filterable]="true"
+                [fields]="filterFields"
+                [statusFilter]="statusFilter"
+                [hasHoverMenu]="true"
+                (selectedFilters)="onSelectedFilters($event)"
+                (changeOrder)="onSortTable($event)">
          <tbody>
             <tr st-table-row *ngFor="let userData of filterData; let index = index">
                <td st-table-cell st-table-row-content>
@@ -191,7 +196,13 @@
             </button>
          </div>
       </ng-template>
-      <st-table [sortable]="false" [filterable]="true" [fields]="filterFields" [hasHoverMenu]="true" [templateContentFilter]="filterContent" [statusFilter]="statusFilter">
+      <st-table
+         [sortable]="false"
+         [filterable]="true"
+         [fields]="filterFields"
+         [hasHoverMenu]="true"
+         [templateContentFilter]="filterContent"
+         [statusFilter]="statusFilter">
          <tbody>
             <tr st-table-row *ngFor="let userData of filterData; let index = index">
                <td st-table-cell st-table-row-content>

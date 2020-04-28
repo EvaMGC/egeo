@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Order, ORDER_TYPE, StTableHeader } from '@stratio/egeo';
 import { cloneDeep as _cloneDeep, filter as _filter, intersectionBy as _intersectionBy } from 'lodash';
 
@@ -179,10 +179,14 @@ export class StTableDemoComponent implements OnInit {
       });
    }
 
-   public onSelectedFilters(event: Event): void {
-      if ((<any>event).length > 0) {
+   public onSelectedFilters(event: StTableHeader[]): void {
+      this.statusFilter = [];
+      if (event.length > 0) {
          let filterElement = [];
-         (<any>event).map((filter) => {
+         event.map((filter) => {
+            const filterPosition = this.filterFields.findIndex(_field => _field.id === filter.id);
+            this.statusFilter[filterPosition] = true;
+
             filterElement.push([].concat.apply([], filter.filters.filterConfig.map((config) => {
                return _filter(this.data, (user) => {
                   return user[filter.id] === config.name;
@@ -193,6 +197,7 @@ export class StTableDemoComponent implements OnInit {
       } else {
          this.filterData = this.data;
       }
+      this._cd.markForCheck();
    }
 
    public onFilter(index: number): void {

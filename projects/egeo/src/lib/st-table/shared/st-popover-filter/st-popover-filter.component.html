@@ -12,7 +12,7 @@
 -->
 <st-pop-over  class="st-table__popover" qaTag="pop-over-table" [title]="getConfigField(field, 'title')" [hidden]="hidden"
     [offset]="{x: 6, y: 0}" [showSettingBtn]="getConfigField(field, 'showSettingBtn')">
-   <i pop-over-button class='st-table__filter-arrow' [ngClass]="getFilteredIcon(filtered)">
+   <i pop-over-button class='st-table__filter-arrow' [ngClass]="getFilteredIcon()">
    </i>
    <div pop-over-content class="st-table__popover-content">
       <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:index}"></ng-container>
@@ -22,7 +22,7 @@
                <span>{{filter.name}}</span>
             </st-checkbox>
          </div>
-         <button id="filter-button-{{index}}" class="button button-primary small st-table__popover-button" (click)="onFilter(); checkFilterIcon()">
+         <button id="filter-button-{{index}}" class="button button-primary small st-table__popover-button" (click)="onFilter()">
             <span>{{getConfigField(field, 'buttonText')}}</span>
          </button>
       </div>

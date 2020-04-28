@@ -262,7 +262,6 @@ describe('StTableComponent', () => {
    });
 
    describe('When user clicks on a filter arrow in the table header', () => {
-
       beforeEach(() => {
          spyOn(component.selectedFilters, 'emit');
          component.filterable = true;
@@ -287,7 +286,6 @@ describe('StTableComponent', () => {
       it('if not has custom template and select an option, clicking on button should emit eventEmitter with selected filters', () => {
          let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
          headerItem[4].querySelector('.st-table__filter-arrow').click();
-         fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
          let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[0];
          popover.querySelector('.st-table__popover-button').click();
@@ -296,11 +294,7 @@ describe('StTableComponent', () => {
 
          popover.querySelector('st-checkbox').querySelector('input').click();
          popover.querySelector('.st-table__popover-button').click();
-         fixture.detectChanges();
-         expect(headerItem[4].querySelector('.icon-facets-2')).not.toBeNull();
 
-         fixture.changeDetectorRef.markForCheck();
-         fixture.detectChanges();
          expect(component.selectedFilters.emit).toHaveBeenCalledWith([fakeFields[4]]);
       });
    });
