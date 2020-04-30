@@ -15,7 +15,7 @@
    &__item {
       font-weight: 600;
       color: var(--egeo-theme-action, $action);
-      font-family: $egeo-nunito-sans;
+      font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
       font-size: $egeo-font-size-xsmall;
 
       &:after {

@@ -17,7 +17,7 @@
    box-shadow: 2px 2px 5px 0 var(--egeo-theme-neutral-8, $neutral-8);
    border: solid 1px var(--egeo-theme-neutral-8, $neutral-8);
    text-transform: capitalize;
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
 
    .item-list {
       &--inner {

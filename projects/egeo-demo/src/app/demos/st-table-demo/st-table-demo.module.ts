@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { StDemoGeneratorModule, StDocsModule, StTableModule, StCheckboxModule, StToggleButtonsModule } from '@stratio/egeo';
 
 import { StTableDemoComponent } from './st-table-demo.component';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 @NgModule({
    imports: [
@@ -21,7 +22,8 @@ import { StTableDemoComponent } from './st-table-demo.component';
       StCheckboxModule,
       StDemoGeneratorModule.withComponents({ components: [StTableDemoComponent] }),
       StDocsModule,
-      StToggleButtonsModule
+      StToggleButtonsModule,
+      CssPropertyTableModule
    ],
    declarations: [StTableDemoComponent]
 })

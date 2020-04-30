@@ -14,7 +14,7 @@
 /// tipography EXTENDS (@extend %button-label-regular;):
 %button-label-regular {
    color: var(--egeo-theme-neutral-full, $neutral-full);
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight: normal;
    font-size: $egeo-font-size-14;
    line-height: $egeo-line-height-18;
@@ -22,7 +22,7 @@
 }
 
 %button-label-small {
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight: normal;
    font-size: $egeo-font-size-14;
    line-height: $egeo-line-height-18;
@@ -31,7 +31,7 @@
 
 %button-label-large {
    color: var(--egeo-theme-neutral-full, $neutral-full);
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight: normal;
    line-height: $egeo-line-height-22;
    height: 50px;
@@ -52,7 +52,7 @@
 
 .button-link {
    color: var(--egeo-theme-action, $action);
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight: normal;
    font-size: $egeo-font-size-14;
    line-height: $egeo-line-height-20;

@@ -18,7 +18,7 @@
 .tab {
    color: var(--egeo-theme-action, $action);
    text-decoration: none;
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight: 600;
    font-size: $egeo-font-size-xsmall;
    text-transform: capitalize;

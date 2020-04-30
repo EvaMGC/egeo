@@ -17,7 +17,7 @@
 .st-zero-page {
 
    &__title {
-      font-family: $egeo-nunito-sans;
+      font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
       color: var(--egeo-theme-neutral, $neutral);
       font-size: $egeo-font-size-xlarge;
       font-weight: bold;
@@ -25,7 +25,7 @@
    }
 
    &__info {
-      font-family: $egeo-nunito-sans;
+      font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
       font-size: $egeo-font-size-16;
       line-height: $egeo-line-height-small;
       color: var(--egeo-theme-neutral-40, $neutral-40);

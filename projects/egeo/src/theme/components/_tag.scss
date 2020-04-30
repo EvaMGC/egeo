@@ -26,7 +26,7 @@
 .st-tag {
    background-color: var(--egeo-theme-space-10, $space-10);
    color: black;
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-size: $egeo-font-size-11;
    vertical-align: middle;
 

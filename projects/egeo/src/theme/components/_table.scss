@@ -12,13 +12,15 @@
 @import '../constants/colors';
 
 .st-table {
+   border-collapse: collapse;
+
    th, td {
       padding: 9px 20px 9px 20px;
    }
 
    &__header {
-      font-family: $egeo-nunito-sans;
-      border-bottom: 1px solid var(--egeo-theme-space-50, $space-50);
+      font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
+      border-bottom: 1px solid var(--egeo-st-table__header--border-bottom, (--egeo-theme-space-50, $space-50));
       color: var(--egeo-theme-space-80, $space-80);
    }
 
@@ -28,19 +30,19 @@
    }
 
    &__header-text {
-      text-align: left;
-      font-size: $egeo-font-size-12;
-      font-weight: 600;
+      font-size: var(--egeo-st-table__header--font-size, var(---egeo-theme-font-size-12, $egeo-font-size-12));
+      font-weight: var(--egeo-st-table__header--font-weight, 600);
       font-stretch: normal;
       font-style: normal;
       line-height: normal;
-      letter-spacing: normal;
       color: var(--egeo-theme-space-80, $space-80);
       display: inline-block;
+      text-transform: var(--egeo-st-table__header--text-transform, initial);
+      letter-spacing: var(--egeo-st-table__header--letter-spacing, normal);
    }
 
    &__header-item {
-      text-align: left;
+      text-align: var(--egeo-st-table__header--text-align, left);
 
       .st-table__checkbox {
          display: inline-block;
@@ -56,7 +58,7 @@
       left: -20px;
       bottom: 4px;
       font-weight: bold;
-      font-size: $egeo-font-size-12;
+      font-size: var(--egeo-st-table__header--font-size, var(---egeo-theme-font-size-12, $egeo-font-size-12));
       color: var(--egeo-theme-space-80, $space-80);
       vertical-align: middle;
    }
@@ -64,7 +66,7 @@
    &__filter-arrow {
       color: var(--egeo-theme-space-80, $space-80);
       cursor: pointer;
-      font-size: $egeo-font-size-12;
+      font-size: var(--egeo-st-table__header--font-size, var(---egeo-theme-font-size-12, $egeo-font-size-12));
       font-weight: bold;
       position: relative;
       vertical-align: middle;
@@ -80,20 +82,19 @@
 
 // row theme
 .st-table-row {
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    text-align: left;
    vertical-align: top;
-   box-shadow: inset 0 -1px 0 0 var(--egeo-theme-space-20, $space-20);
+   box-shadow: inset 0 -1px 0 0 var(--egeo-st-table__row--border-bottom, var(--egeo-theme-space-20, $space-20));
    transition: background-color ease-in-out 0.3s;
    font-weight: normal;
    font-stretch: normal;
    font-style: normal;
    letter-spacing: normal;
-   font-size: $egeo-font-size-14;
    color: var(--egeo-theme-space-110, $space-110);
 
    td {
-      font-size: $egeo-font-size-14;
+      font-size: var(--egeo-st-table__row--font-size, var(--egeo-theme-font-size-14, $egeo-font-size-14));
    }
 
    &:hover {
@@ -105,11 +106,11 @@
 }
 
 .st-table-row:hover {
-   background-color: var(--egeo-theme-action-10, $action-10) ;
+   background-color: var(--egeo-st-table__row--hover--bg-color, var(--egeo-theme-action-10, $action-10));
 }
 
 .st-table-row.selected {
-   background-color: var(--egeo-theme-space-5, $space-5);
+   background-color: var(--egeo-st-table__row--selected--bg-color, var(--egeo-theme-space-5, $space-5));
 }
 
 .st-table--fixed-header tbody {

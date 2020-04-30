@@ -25,7 +25,7 @@
       .st-fullscreen-layout-title {
          text-align: left;
          font-weight: 900;
-         font-family: $egeo-nunito-sans;
+         font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
          font-size: $egeo-font-size-18;
          line-height: $egeo-line-height-22;
          color: var(--egeo-theme-neutral, $neutral);

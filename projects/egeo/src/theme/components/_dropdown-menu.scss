@@ -135,7 +135,7 @@
 
       & .text-info {
          display: block;
-         font-family: $egeo-nunito-sans;
+         font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
          font-size: $egeo-font-size-12;
          line-height: 12px;
          font-weight: normal;
@@ -148,7 +148,7 @@
 
    .st-dropdown-menu-without-results {
       padding: 20px;
-      font-family: $egeo-nunito-sans;
+      font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
       font-size: $egeo-font-size-14;
       font-weight: 300;
       color: var(--egeo-theme-neutral-50, $neutral-50);

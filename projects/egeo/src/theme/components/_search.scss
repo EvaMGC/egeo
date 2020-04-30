@@ -33,7 +33,7 @@
 
 .sth-search .sth-search-input {
    @extend %st-form-control;
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-size: $egeo-font-size-xsmall;
    font-weight: normal;
    background-color: var(--egeo-theme-neutral-full, $neutral-full);

@@ -14,7 +14,7 @@
 .st-label {
    display: inline-block;
    font-weight: 400;
-   font-family: $egeo-nunito-sans;
+   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-size: $egeo-font-size-12;
    line-height: $egeo-line-height-18;
    margin-bottom: 5px;

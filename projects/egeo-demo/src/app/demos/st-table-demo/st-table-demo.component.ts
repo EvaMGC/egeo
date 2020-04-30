@@ -11,6 +11,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Order, ORDER_TYPE, StTableHeader } from '@stratio/egeo';
 import { cloneDeep as _cloneDeep, filter as _filter, intersectionBy as _intersectionBy } from 'lodash';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    templateUrl: './st-table-demo.component.html',
@@ -81,6 +82,59 @@ export class StTableDemoComponent implements OnInit {
       },
       { id: 'company', label: 'Company' },
       { id: 'completedProfile', label: 'Completed profile' }];
+
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-table__header--font-size',
+         description: 'Header font size',
+         default: '$egeo-font-size-12'
+      },
+      {
+         name: '--egeo-st-table__header--font-weight',
+         description: 'Header font weight',
+         default: '600'
+      },
+      {
+         name: '--egeo-st-table__header--text-transform',
+         description: 'Header text transform',
+         default: 'initial'
+      },
+      {
+         name: '--egeo-st-table__header--letter-spacing',
+         description: 'Header letter spacing',
+         default: 'normal'
+      },
+      {
+         name: '--egeo-st-table__header--text-align',
+         description: 'Header text align',
+         default: 'left'
+      },
+      {
+         name: '--egeo-st-table__header--border-bottom',
+         description: 'Header border bottom color',
+         default: '$space-50'
+      },
+      {
+         name: '--egeo-st-table__row--font-size',
+         description: 'Row font size',
+         default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-table__row--hover--bg-color',
+         description: 'Row background color on hover',
+         default: '$action-10'
+      },
+      {
+         name: '--egeo-st-table__row--border-bottom',
+         description: 'Row border bottom color',
+         default: '$action-10'
+      },
+      {
+         name: '--egeo-st-table__row--selected--bg-color',
+         description: 'Selected row background color',
+         default: '$space-5'
+      }
+   ];
 
    public header: boolean = true;
 

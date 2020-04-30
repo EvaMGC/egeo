@@ -14,42 +14,42 @@
 /// titles:
 .egeo-title-giant {
    color:         var(--egeo-theme-neutral-70, $neutral-70);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   700;
    font-size:     $egeo-font-size-xxxlarge;
    line-height:   $egeo-line-height-xxxlarge;
 }
 .egeo-title-extra-large {
    color:         var(--egeo-theme-neutral-70, $neutral-70);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   600;
    font-size:     $egeo-font-size-xxlarge;
    line-height:   $egeo-line-height-xxlarge;
 }
 .egeo-title-large {
    color:         var(--egeo-theme-neutral-70, $neutral-70);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   700;
    font-size:     $egeo-font-size-xlarge;
    line-height:   $egeo-line-height-26;
 }
 .egeo-title-medium {
    color:         var(--egeo-theme-neutral-70, $neutral-70);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   700;
    font-size:     $egeo-font-size-20;
    line-height:   $egeo-line-height-24;
 }
 .egeo-title-small {
    color:         var(--egeo-theme-neutral-70, $neutral-70);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   700;
    font-size:     $egeo-font-size-18;
    line-height:   $egeo-line-height-22;
 }
 .egeo-title-mini {
    color:         var(--egeo-theme-neutral-70, $neutral-70);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   700;
    font-size:     $egeo-font-size-16;
    line-height:   $egeo-line-height-small;
@@ -59,13 +59,13 @@
 .egeo-p {
    color:         var(--egeo-theme-neutral-60, $neutral-60);
    font-weight:   400;
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-size:     $egeo-font-size-16;
    line-height:   $egeo-line-height-small;
 }
 .egeo-p-small {
    color:         var(--egeo-theme-neutral-60, $neutral-60);
-   font-family:   $egeo-nunito-sans;
+   font-family:   var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-weight:   400;
    font-size:     $egeo-font-size-14;
    line-height:   $egeo-line-height-18;

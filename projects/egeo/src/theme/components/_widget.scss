@@ -40,7 +40,7 @@
       color: var(--egeo-theme-neutral-80, $neutral-80);
       font-weight: 400;
       font-size: $egeo-font-size-16;
-      font-family: $egeo-nunito-sans;
+      font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    }
 
    &__body .resize-action::after{
