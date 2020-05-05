@@ -34,20 +34,20 @@
 @keyframes primary-color {
    100%,
    0% {
-      stroke: $brand;
+      stroke: var(--egeo-st-spinner__primary-color--stroke, var(--egeo-theme-brand, $brand));
    }
    50% {
-      stroke: $brand;
+      stroke: var(--egeo-st-spinner__primary-color--stroke, var(--egeo-theme-brand, $brand));
    }
 }
 
 @keyframes secondary-color {
    100%,
    0% {
-      stroke: var(--egeo-theme-neutral-full, $neutral-full);
+      stroke: var(--egeo-st-spinner__secondary-color--stroke, var(--egeo-theme-neutral-full, $neutral-full));
    }
    50% {
-      stroke: var(--egeo-theme-neutral-full, $neutral-full);
+      stroke: var(--egeo-st-spinner__secondary-color--stroke, var(--egeo-theme-neutral-full, $neutral-full));
    }
 }
 

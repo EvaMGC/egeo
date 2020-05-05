@@ -24,7 +24,7 @@
       cursor: pointer;
 
       &:hover {
-         background-color: rgba($brand, 0.1);
+         background-color: rgba(var(--egeo-theme-brand, $brand), 0.1);
       }
 
       &--collapsed {

@@ -32,7 +32,7 @@
    font-size: $egeo-font-size-14;
    color: var(--egeo-theme-neutral-40, $neutral-40);
    &:hover {
-      background-color: rgba($brand, 0.1);
+      background-color: rgba(var(--egeo-theme-brand, $brand), 0.1);
    }
    &--selected {
       background-color: var(--egeo-theme-neutral-10, $neutral-10);

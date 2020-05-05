@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { StDemoGeneratorModule, StDocsModule, StSpinnerModule, StInputModule } from '@stratio/egeo';
 
 import { StSpinnerDemoComponent } from './st-spinner-demo';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 @NgModule({
    imports: [
@@ -21,6 +22,7 @@ import { StSpinnerDemoComponent } from './st-spinner-demo';
       StSpinnerModule,
       StInputModule,
       FormsModule,
+      CssPropertyTableModule,
       StDemoGeneratorModule.withComponents({
          components: [StSpinnerDemoComponent]
       }),

@@ -42,7 +42,7 @@ $progress-bar-piece-animation-duration: 250ms !default;
       content: '';
       display: inline-block;
       left: 0;
-      background: linear-gradient(90deg, transparent 5%, $brand 40%, $brand 93%, transparent 97%);
+      background: linear-gradient(90deg, transparent 5%, var(--egeo-theme-brand, $brand) 40%, var(--egeo-theme-brand, $brand) 93%, transparent 97%);
    }
 
    .progress-bar-primary {
