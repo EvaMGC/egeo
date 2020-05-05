@@ -13,20 +13,20 @@
 | filterable            | Boolean         | False | Boolean to make filterable the table, To enable filtering of columns use the new "filterable" field inside stTableHeader model (necesary define filterConfig).                | true      |
 | selectableAll         | Boolean         | False | Boolean to show or hide a checkbox in the header to select or deselect all rows                                                                                               | false     |
 | currentOrder          | Order           | False | It specifies what is the current order applied to the table                                                                                                                   | ''        |
-| customClasses         | String          | False | Classes for adding styles to table tag from outside. These can be: separated-rows                                                                                             |           |
-| fixedHeader           | Boolean         | False | Boolean to fix the table header                                                                                                                                               | false     |
 | templateContentFilter | TemplateRef     | False | Reference to paint a custom template inside popover content                                                                                                                   | undefined |
 | statusFilter          | Boolean[]       | False | List of status filter by column, needed with templateContentFilter                                                                                                            | ''        |
+| fixedHeader           | Boolean         | False | Boolean to fix the table header                                                                                                                                               | false     |
+| customClasses         | String          | False | Classes for adding styles to table tag from outside. These can be: separated-rows                                                                                             |           |
 | selectedAll           | Boolean         | False | It specifies if all rows are selected                                                                                                                                         | false     |
 | hasHoverMenu          | Boolean         | False | It specifies if a menu has to be displayed when user puts the mouse over the rows. Remember to add a cell with the selector st-table-row-hover for adding content to the menu | false     |
 
 ## Outputs
 
-| Property        | Type            | Description                                                                         |
-| --------------- | --------------- | ----------------------------------------------------------------------------------- |
-| changeOrder     | Order           | Event emitted with the new order which has to be applied to the table rows          |
-| selectAll       | Boolean         | Event emitted  when user interacts with the checkbox to select or deselect all rows |
-| selectedFilters | StTableHeader[] | Event emitted  when user interacts with filter button without a custom template     |
+| Property      | Type            | Description                                                                         |
+| ------------- | --------------- | ----------------------------------------------------------------------------------- |
+| changeOrder   | Order           | Event emitted with the new order which has to be applied to the table rows          |
+| selectAll     | Boolean         | Event emitted  when user interacts with the checkbox to select or deselect all rows |
+| selectFilters | StTableHeader[] | Event emitted  when user interacts with filter button without a custom template     |
 
 ## Example
 
@@ -66,5 +66,40 @@
         </td>
     </tr>
 </st-table>
+```
+
+## Models
+
+*StTableHeader* (StTableHeader)
+
+```typescript
+export interface StTableHeader {
+    id: string;
+    label: string;
+    sortable ? : boolean;
+    filters ? : StFilterHeader;
+    filterable ? : boolean;
+}
+```
+
+*StDynamicTableHeader* (StFilterElement)
+
+```typescript
+export interface StFilterElement {
+    id: String | number;
+    name: String | number;
+    selected ? : boolean;
+}
+```
+
+*StFilterHeader* (StFilterHeader)
+
+```typescript
+export interface StFilterHeader {
+    filterConfig ? : StFilterElement[];
+    showSettingBtn ? : boolean;
+    title: string;
+    buttonText ? : string;
+}
 ```
 

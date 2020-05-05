@@ -68,7 +68,7 @@ export class StCheckboxComponent implements ControlValueAccessor {
    /** @Input {string} [contextualHelp=''] Information displayed at a tooltip */
    @Input() contextualHelp: string;
    /** @Output {{ checked: boolean, value: any }} [change=''] This is emitted when user clicks on the checkbox */
-   @Output() change: EventEmitter<any> = new EventEmitter<any>();
+   @Output() change: EventEmitter<{ checked: boolean, value: any }> = new EventEmitter<{ checked: boolean, value: any }>();
 
    private _checked: boolean = false;
 

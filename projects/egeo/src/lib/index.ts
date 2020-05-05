@@ -290,6 +290,11 @@ export { StTableCellComponent } from './st-table/shared/st-table-cell/st-table-c
 export { StTableHeader } from './st-table/shared/table-header.interface';
 export { Order, ORDER_TYPE } from './st-table/shared/order';
 
+// Dynamic Table
+export { StDynamicTableModule } from './st-dynamic-table/st-dynamic-table.module';
+export { StDynamicTableComponent } from './st-dynamic-table/st-dynamic-table.component';
+export { StDynamicTableHeader, StDynamicTableUISpecification, StDynamicTableUserInterface } from './st-dynamic-table/st-dynamic-table.model';
+
 // Tag
 export { StTagModule } from './st-tag/st-tag.module';
 export { StTagComponent } from './st-tag/st-tag.component';
@@ -345,6 +350,7 @@ export { StVerticalTabsComponent } from './st-vertical-tabs/st-vertical-tabs.com
 // Vertical icon tabs
 export { StVerticalIconTabsModule } from './st-vertical-icon-tabs/st-vertical-icon-tabs.module';
 export { StVerticalIconTabsComponent } from './st-vertical-icon-tabs/st-vertical-icon-tabs.component';
+export { StIconTab } from './st-vertical-icon-tabs/st-icon-tabs.model';
 
 // Widget
 export { StWidgetModule } from './st-widget/st-widget.module';

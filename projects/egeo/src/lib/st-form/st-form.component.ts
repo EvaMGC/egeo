@@ -24,6 +24,7 @@ import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Ng
 import { Subscription } from 'rxjs';
 
 import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
+import { JSONSchema4 } from 'json-schema';
 
 /**
  * @description {Component} [Dynamic form]
@@ -87,14 +88,14 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    private _value: any = {};
    private _parentFieldSubscription: Subscription[] = [];
    private _parentFields: string[];
-   private _schema: any;
+   private _schema: JSONSchema4;
 
-   /** @Input {any} [schema=] JSON schema needed to generate the form */
-   @Input() get schema(): any {
+   /** @Input {JSONSchema4 [schema=] JSON schema needed to generate the form */
+   @Input() get schema(): JSONSchema4 {
       return this._schema;
    }
 
-   set schema(schema: any) {
+   set schema(schema: JSONSchema4) {
       this._schema = schema;
       this._value = {};
       if (this._schema.dependencies) {
@@ -116,7 +117,7 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
 
                this._parentFieldSubscription[i] = this.form.control.controls[this._parentFields[i]].valueChanges.subscribe((value) => {
                   if (!value) {
-                     let childrenFields: string[] = this.schema.dependencies[parentField];
+                     let childrenFields: JSONSchema4 | string[] = this.schema.dependencies[parentField];
                      for (let j = 0; j < childrenFields.length; ++j) {
                         if (this.form.controls[childrenFields[j]]) {
                            this._value[childrenFields[j]] = undefined;

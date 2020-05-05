@@ -137,7 +137,7 @@ export class StTableDemoComponent implements OnInit {
    ];
 
    public header: boolean = true;
-
+   public currentOrder: Order[] = [];
    public data: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }> = [
       {
          id: '4545-df56-s341',
@@ -222,7 +222,8 @@ export class StTableDemoComponent implements OnInit {
 
    // Sortable tables
 
-   public onSortTable(order: Order): void {
+   public onSortTable(order: Order, tablePosition: number): void {
+      this.currentOrder[tablePosition] = order;
       const reverseConst: number = order.type === ORDER_TYPE.ASC ? 1 : -1;
       this.sortedData = [...this.data].sort((a, b) => {
          return a[order.orderBy].toString().localeCompare(b[order.orderBy].toString()) * reverseConst;
