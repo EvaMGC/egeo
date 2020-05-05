@@ -6,6 +6,7 @@
 
 * st-dropdown-menu: Apply new UX definition
 * st-table: Allow to customize some styles from outside using css variables
+* st-sidebar: Allow to customize some styles from outside using css variables
 
 **Breaking changes:**
 

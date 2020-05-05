@@ -13,9 +13,9 @@
 
 .st-sidebar {
    padding: 30px;
-   background-color: var(--egeo-theme-neutral-full, $neutral-full);
-   box-shadow: 2px 2px 5px 0 var(--egeo-theme-neutral-8, $neutral-8);
-   border: solid 1px var(--egeo-theme-neutral-8, $neutral-8);
+   background-color: var(--egeo-st-sidebar--bg-color, var(--egeo-theme-neutral-full, $neutral-full));
+   box-shadow: 2px 2px 5px 0 var(--egeo-st-sidebar--box-shadow, var(--egeo-theme-neutral-8, $neutral-8));
+   border: solid 1px var(--egeo-st-sidebar--border-color, var(--egeo-theme-neutral-8, $neutral-8));
    text-transform: capitalize;
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
 
@@ -80,15 +80,15 @@
             padding-top: 15px;
             display: block;
             height: 0;
-            border-bottom: solid 1px var(--egeo-theme-neutral-15, $neutral-15);;
+            border-bottom: solid 1px var(--egeo-st-sidebar__item--border-bottom-color, var(--egeo-theme-neutral-15, $neutral-15));
          }
 
          &:not(.item-list--inner) .item--complex > .item__label:before {
             content: '\E605';
-            font-family: $egeo-stratio-icons;
+            font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
             display: inline-block;
-            font-size: $egeo-font-size-16;
-            color: var(--egeo-theme-neutral-30, $neutral-30);
+            font-size: var(--egeo-st-sidebar__item--font-size, $egeo-font-size-16);
+            color: var(--egeo-st-sidebar__complex-item__chevron--color, var(--egeo-theme-neutral-30, $neutral-30));
             padding-right: 6px;
             vertical-align: bottom;
             height: 22px;
@@ -107,17 +107,17 @@
 
    .title {
       font-weight: 900;
-      font-size: $egeo-font-size-20;
-      line-height: $egeo-line-height-24;
-      color: var(--egeo-theme-neutral, $neutral);
+      font-size: var(--egeo-st-sidebar__title--font-size, $egeo-font-size-20);
+      line-height:  var(--egeo-st-sidebar__title--line-height, $egeo-line-height-24);
+      color: var(--egeo-st-sidebar_tittle--color, var(--egeo-theme-neutral, $neutral));
       padding-bottom: 30px;
    }
 
    .item {
       font-weight: 400;
-      font-size: $egeo-font-size-16;
-      line-height: $egeo-line-height-small;
-      color: var(--egeo-theme-neutral-70, $neutral-70);
+      font-size: var(--egeo-st-sidebar__item--font-size, $egeo-font-size-16);
+      line-height: var(--egeo-st-sidebar__item--line-height, $egeo-line-height-small);
+      color: var(--egeo-st-sidebar__item--color, var(--egeo-theme-neutral-70, $neutral-70));
       margin-bottom: 20px;
       position: relative;
 
@@ -128,7 +128,7 @@
             content: '';
             width: 5px;
             height: 20px;
-            background-color: $brand;
+            background-color: var(--egeo-st-sidebar__item__mark--color, var(--egeo-theme-brand, $brand));
             border-radius: 4px;
             position: absolute;
             left: 0;
@@ -143,9 +143,9 @@
       &.warning {
          .item__label:after {
             content: '\E613';
-            font-family: $egeo-stratio-icons;
-            color: var(--egeo-theme-error, $error);
-            font-size: $egeo-font-size-16;
+            font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
+            color: var(--egeo-st-sidebar__warning--color, var(--egeo-theme-error, $error));
+            font-size:  var(--egeo-st-sidebar__warning--font-size, $egeo-font-size-16);
             position: relative;
             padding-left: 10px;
             vertical-align: text-top;
@@ -157,13 +157,13 @@
             width: 40px;
             height: 20px;
             border-radius: 10px;
-            background-color: var(--egeo-theme-neutral-15, $neutral-15);;
+            background-color: var(--egeo-st-sidebar__result--bg-color, var(--egeo-theme-neutral-15, $neutral-15));
             font-weight: 400;
-            font-size: $egeo-font-size-12;
+            font-size:  var(--egeo-st-sidebar__result--font-size, $egeo-font-size-12);
             float: right;
             display: inline-block;
             .result__text {
-               color: var(--egeo-theme-neutral-60, $neutral-60);
+               color: var(--egeo-st-sidebar__result__text--bg-color, var(--egeo-theme-neutral-60, $neutral-60));
                text-align: center;
                display: inline-block;
                width: 100%;
@@ -172,7 +172,7 @@
       }
 
       &--disabled {
-         color: var(--egeo-theme-neutral-30, $neutral-30);
+         color: var(--egeo-st-sidebar__disabled-item--color, var(--egeo-theme-neutral-30, $neutral-30));
          cursor: default !important;
       }
    }

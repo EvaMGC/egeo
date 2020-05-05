@@ -10,6 +10,7 @@
  */
 import { Component } from '@angular/core';
 import { StSidebarItem, StSidebarVisualMode } from '@stratio/egeo';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    selector: 'st-sidebar-demo',
@@ -79,6 +80,98 @@ export class StSidebarDemoComponent {
    public activeItem: StSidebarItem;
    public enableSearchMode: boolean = false;
    public complexMode: StSidebarVisualMode = StSidebarVisualMode.complex;
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-sidebar--bg-color',
+         description: 'Background color',
+         default: '$neutral-full'
+      },
+      {
+         name: '--egeo-st-sidebar--box-shadow',
+         description: 'Box shadow color',
+         default: '$neutral-8'
+      },
+      {
+         name: '--egeo-st-sidebar--border-color',
+         description: 'Sidebar border color',
+         default: '$neutral-8'
+      },
+      {
+         name: '--egeo-st-sidebar__item--border-bottom-color',
+         description: 'Item border bottom color',
+         default: '$neutral-15'
+      },
+      {
+         name: '--egeo-st-sidebar__item--font-size',
+         description: 'Item font size',
+         default: '$egeo-font-size-16'
+      },
+      {
+         name: '--egeo-st-sidebar__item--color',
+         description: 'Item text color',
+         default: '$neutral-70'
+      },
+      {
+         name: '--egeo-st-sidebar__title--font-size',
+         description: 'Title font size',
+         default: '$egeo-font-size-20'
+      },
+      {
+         name: '--egeo-st-sidebar__title--line-height',
+         description: 'Title line height',
+         default: '$egeo-line-height-24'
+      },
+      {
+         name: '--egeo-st-sidebar_tittle--color',
+         description: 'Title color',
+         default: '$neutral'
+      },
+      {
+         name: '--egeo-st-sidebar__item--line-height',
+         description: 'Item line height',
+         default: '$egeo-line-height-small'
+      },
+      {
+         name: '--egeo-st-sidebar__complex-item__chevron--color',
+         description: 'Complex item chevron color',
+         default: '$neutral-30'
+      },
+      {
+         name: '--egeo-st-sidebar__item__mark--color',
+         description: 'Item mark color',
+         default: '$brand'
+      },
+      {
+         name: '--egeo-st-sidebar__warning--color',
+         description: 'Warning icon color',
+         default: '$error'
+      },
+      {
+         name: '--egeo-st-sidebar__warning--font-size',
+         description: 'Warning icon font size',
+         default: '$egeo-font-size-16'
+      },
+      {
+         name: '--egeo-st-sidebar__result--bg-color',
+         description: 'Result text color',
+         default: '$neutral-15'
+      },
+      {
+         name: '--egeo-st-sidebar__result--font-size',
+         description: 'Result font size',
+         default: '$egeo-font-size-12'
+      },
+      {
+         name: '--egeo-st-sidebar__result__text--bg-color',
+         description: 'Result background color',
+         default: '$neutral-60'
+      },
+      {
+         name: '--egeo-st-sidebar__disabled-item--color',
+         description: 'Disabled item color',
+         default: '$neutral-30'
+      }
+   ];
 
    onChangeActive(item: StSidebarItem): void {
       this.activeItem = item;

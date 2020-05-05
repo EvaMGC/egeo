@@ -11,7 +11,15 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="col-sm-12">
+   <section class="col-sm-12 demo-layout">
+      <p class="introduction">Sidebar allows to navigate user through content.</p>
+      <span class="separator"></span>
+      <h1 class="title">Theme customization</h1>
+      <p class="paragraph">You can customize some table styles using the following css variables</p>
+      <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
+
+
+      <h1 class="title">Examples</h1>
       <st-switch (change)="enableSearchMode = $event" label="Enable search mode" class="col-sm-12 row"></st-switch>
 
       <div class="sidebar-container">
