@@ -8,7 +8,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-export const JSON_SCHEMA: any = {
+import { JSONSchema4 } from 'json-schema';
+
+export const JSON_SCHEMA: JSONSchema4 = {
    '$schema': 'http://json-schema.org/schema#',
    'title': 'General',
    'properties': {

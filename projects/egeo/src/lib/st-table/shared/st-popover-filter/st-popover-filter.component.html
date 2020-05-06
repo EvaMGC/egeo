@@ -23,6 +23,7 @@
             </st-checkbox>
          </div>
          <button id="filter-button-{{index}}" class="button button-primary small st-table__popover-button" (click)="onFilter()">
+            <i *ngIf="!getConfigField(field, 'buttonText')" class="icon icon-filter"></i>
             <span>{{getConfigField(field, 'buttonText')}}</span>
          </button>
       </div>

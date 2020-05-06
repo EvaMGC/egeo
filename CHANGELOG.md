@@ -6,12 +6,15 @@
 
 * st-dropdown-menu: Apply new UX definition
 * st-table: Allow to customize some styles from outside using css variables
+* st-dynamic-table: Create dynamic table component in order to render tables using a json schema to define their structure
 * st-spinner: Allow to customize its color from outside using css variables
 
 **Breaking changes:**
 
 * st-header: Apply new UX definition
 * egeo-theme: Moved fonts to egeo-ui-base
+* st-table: Rename output selectedFilters to selectFilters
+* st-table: Current order now is not changed inside component. It only emits the output "changeOrder" to be changed outside
 
 **Fixed bugs:**
 

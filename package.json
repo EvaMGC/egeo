@@ -80,6 +80,7 @@
       "@types/prismjs": "1.16.0",
       "@types/run-sequence": "0.0.29",
       "@types/showdown": "1.4.32",
+      "@types/json-schema": "7.0.4",
       "autoprefixer": "7.1.1",
       "caniuse-lite": "1.0.30000997",
       "chalk": "2.1.0",

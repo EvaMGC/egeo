@@ -23,6 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Ng
 import { StInputError } from '../../st-input/st-input.error.model';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
+import { JSONSchema4 } from 'json-schema';
 
 @StEgeo()
 @Component({
@@ -40,7 +41,7 @@ import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.inte
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
-   @Input() @StRequired() schema: any;
+   @Input() @StRequired() schema: JSONSchema4;
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
    @Input() qaTag: string;

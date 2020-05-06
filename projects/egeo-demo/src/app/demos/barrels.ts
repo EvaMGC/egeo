@@ -58,6 +58,7 @@ import { StColorPickerDemoModule } from './st-color-picker-demo/st-color-picker-
 import { StBubbleOnEllipsisDemoModule } from '@app/demos/st-bubble-on-ellipsis-demo/st-bubble-on-ellipsis-demo.module';
 import { StVerticalIconTabsModule } from '@stratio/egeo';
 import { StTagDemoModule } from '@app/demos/st-tag-demo/st-tag-demo.module';
+import { StDynamicTableDemoModule } from '@app/demos/st-dynamic-table-demo/st-dynamic-table-demo.module';
 
 
 export const EGEO_DEMO_MODULES: any[] = [
@@ -99,6 +100,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StSidebarDemoModule,
    StSpinnerDemoModule,
    StSwitchDemoModule,
+   StDynamicTableDemoModule,
    StTableDemoModule,
    StTagDemoModule,
    StTagInputDemoModule,
