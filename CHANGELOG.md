@@ -2,7 +2,7 @@
 
 ## 21.0.0 (upcoming)
 
-**New features:**
+**New features:** 
 
 * st-dropdown-menu: Apply new UX definition
 * st-table: Allow to customize some styles from outside using css variables
