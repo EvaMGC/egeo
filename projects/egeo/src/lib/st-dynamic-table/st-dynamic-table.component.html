@@ -1,0 +1,51 @@
+<!--
+
+    © 2017 Stratio Big Data Inc., Sucursal en España.
+
+    This software is licensed under the Apache License, Version 2.0.
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the terms of the License for more details.
+
+    SPDX-License-Identifier: Apache-2.0.
+
+-->
+
+<st-table *ngIf="fields && fields.length && items"
+          class="dynamic-table"
+          [fields]="fields"
+          [header]="header"
+          [sortable]="sortable"
+          [filterable]="filterable"
+          [selectableAll]="selectableAll"
+          [hasHoverMenu]="hasHoverMenu"
+          [fixedHeader]="fixedHeader"
+          [currentOrder]="currentOrder"
+          [customClasses]="customClasses"
+          [selectedAll]="selectedAll"
+          [templateContentFilter]="templateContentFilter"
+          [statusFilter]="statusFilter"
+          (selectAll)="onSelectAll($event)"
+          (changeOrder)="onChangeOrder($event)"
+          (selectFilters)="onSelectedFilters($event)">
+   <tbody>
+   <tr st-table-row *ngFor="let item of items; let row = index" [selected]="selected[row]">
+      <td st-table-cell st-table-row-content
+          *ngFor="let field of fields; let cell = index"
+          [ngClass]="getCellClasses(fields[cell])"
+          [ngStyle]="getCellStyles(fields[cell])">
+
+         <st-checkbox *ngIf="selectable && !cell"
+                      class="st-table__checkbox"
+                      [checked]="selected[row]"
+                      (change)="onSelectRow($event, row)">
+         </st-checkbox>
+         <label (click)="onClickCellLabel(row, field.id, item[field.id])">{{item[field.id]}}</label>
+      </td>
+      <td st-table-row-hover class="st-table-hover" *ngIf="hasHoverMenu">
+         <i class="icon {{hoverButton}}" (click)="onShowHoverMenu(row)"></i>
+         <ng-content select='[st-dynamic-table-hover-menu]' *ngIf="activeHoverMenu === row"></ng-content>
+      </td>
+   </tr>
+   </tbody>
+</st-table>

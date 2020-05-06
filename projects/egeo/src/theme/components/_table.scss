@@ -128,7 +128,12 @@
          flex: 1;
          display: flex;
          justify-content: flex-start;
+
+         &.hover-menu {
+            justify-content: flex-end;
+         }
       }
+
    }
 }
 

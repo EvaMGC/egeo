@@ -45,6 +45,7 @@ export { StSelectDemoModule } from './st-select-demo/select-demo.module';
 export { StSpinnerDemoModule } from './st-spinner-demo/st-spinner-demo.module';
 export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
 export { StTableDemoModule } from './st-table-demo/st-table-demo.module';
+export { StDynamicTableDemoModule } from './st-dynamic-table-demo/st-dynamic-table-demo.module';
 export { StTagInputDemoModule } from './st-tag-input-demo/st-tag-input-demo.module';
 export { StTextareaDemoModule } from './st-textarea-demo/st-textarea-demo.module';
 export { StToggleButtonsDemoModule } from './st-toggle-buttons-demo/st-toggle-buttons-demo.module';

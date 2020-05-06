@@ -114,11 +114,11 @@
          visibility: visible;
 
          & > .item-content .item-icon {
-             color: $brand;
+             color: var(--egeo-theme-brand, $brand);
          }
 
          & > .item-content .icon.has-submenu {
-            color: $brand;
+            color: var(--egeo-theme-brand, $brand);
          }
       }
 

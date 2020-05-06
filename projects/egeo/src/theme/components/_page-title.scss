@@ -39,7 +39,7 @@
       height: 30px;
       width: 30px;
       &:active {
-         box-shadow: 0 0 0 2px $brand;
+         box-shadow: 0 0 0 2px var(--egeo-theme-brand, $brand);
       }
       &:hover {
          border: 2px solid var(--egeo-theme-neutral-50, $neutral-50) !important;

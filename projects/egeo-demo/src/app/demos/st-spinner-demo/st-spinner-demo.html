@@ -11,24 +11,29 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="container-liquid">
+   <section class="container-liquid demo-layout">
 
-      <st-input class="st-form-field" type="number" [(ngModel)]="size" placeholder="Enter a size for the spinner" label="Size of spinner">
+      <h1 class="title">Theme customization</h1>
+      <p class="paragraph">You can customize some table styles using the following css variables</p>
+      <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
+      <br>
+      <h2 class="subtitle">Size of spinner</h2>
+      <st-input class="st-form-field size-input" type="number" [(ngModel)]="size" placeholder="Enter a size for the spinner" label="Size of spinner">
       </st-input>
       <br>
-      <h1>Spinner with theme 'primary'</h1>
+      <h2 class="subtitle">Spinner with theme 'primary'</h2>
 
       <st-spinner [style.width.px]="size" [style.height.px]="size" class="spinner">
       </st-spinner>
 
-      <h1>Spinner with theme 'secondary'</h1>
+      <h2 class="subtitle">Spinner with theme 'secondary'</h2>
       <div class="secondary-theme-container">
          <st-spinner theme="secondary" class="spinner" [style.width.px]="size" [style.height.px]="size">
          </st-spinner>
       </div>
       <br>
 
-      <h1>Spinner inside a button</h1>
+      <h2 class="subtitle">Spinner inside a button</h2>
       <div class="col-md-3">
          <button class="button button-primary">
             <st-spinner theme="secondary" class="spinner">

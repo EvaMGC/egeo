@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    selector: 'st-spinner-demo',
@@ -22,4 +23,18 @@ export class StSpinnerDemoComponent {
       component: 'lib/st-spinner/st-spinner.component.ts'
    };
    public size: number = 50;
+
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-spinner__primary-color--stroke',
+         description: 'Stroke primary color',
+         default: '$brand'
+      },
+      {
+         name: '--egeo-st-spinner__secondary-color--stroke',
+         description: 'Stroke secondary color',
+         default: '$neutral-full'
+      }
+   ];
+
 }

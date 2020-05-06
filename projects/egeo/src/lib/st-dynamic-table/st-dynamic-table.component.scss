@@ -9,21 +9,17 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-@import 'constants/index';
-
-.spinner {
-   display: block;
-   margin: auto;
-}
-
-.secondary-theme-container {
+:host {
+   display: flex;
    width: 100%;
-   background-color: $space-10;
+   overflow-y: auto;
+
+   .dynamic-table {
+      display: flex;
+      width: 100%;
+   }
+
+   .st-table-hover > i {
+      cursor: pointer;
+   }
 }
-
-.size-input {
-   display: block;
-   width: 200px;
-}
-
-

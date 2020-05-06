@@ -19,7 +19,8 @@ let component: TestStTableRowComponent;
 
 @Component({
 
-   template: `<tr #rowWithHoverMenu st-table-row id="row-with-hover-menu">
+   template: `
+      <tr #rowWithHoverMenu st-table-row id="row-with-hover-menu">
          <td st-table-cell st-table-row-content>
             <label>{{userData.id}}</label>
          </td>
@@ -33,7 +34,7 @@ let component: TestStTableRowComponent;
             <i class="icon icon-arrow2_right"></i>
          </td>
       </tr>
-       <tr #row st-table-row id="row">
+      <tr #row st-table-row id="row">
          <td st-table-cell st-table-row-content>
             <label>{{userData.id}}</label>
          </td>
@@ -47,8 +48,8 @@ let component: TestStTableRowComponent;
 })
 
 class TestStTableRowComponent {
-   @ViewChild('row', {static: true}) row: StTableRowComponent;
-   @ViewChild('rowWithHoverMenu', {static: true}) rowWithHoverMenu: StTableRowComponent;
+   @ViewChild('row', { static: false }) row: StTableRowComponent;
+   @ViewChild('rowWithHoverMenu', { static: false }) rowWithHoverMenu: StTableRowComponent;
 
    userData: {} = {
       id: '4545-df56-s345',
@@ -77,7 +78,7 @@ describe('StTableRowComponent', () => {
       fixture = TestBed.createComponent(TestStTableRowComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
-      rowElement  = fixture.nativeElement.querySelector('#row');
+      rowElement = fixture.nativeElement.querySelector('#row');
       rowWithHoverMenuElement = fixture.nativeElement.querySelector('#row-with-hover-menu');
    });
 
@@ -104,10 +105,6 @@ describe('StTableRowComponent', () => {
 
          expect(rowElement.classList).toContain('selected');
       });
-   });
-
-   it('if row does not have a hover menu, reserved column is removed', () => {
-      expect(rowElement.querySelector('td.hover-menu')).toBeNull();
    });
 
    describe('if row has a hover menu', () => {
