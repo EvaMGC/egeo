@@ -40,7 +40,7 @@
                       [checked]="selected[row]"
                       (change)="onSelectRow($event, row)">
          </st-checkbox>
-         <label (click)="onClickCellLabel(row, field.id, item[field.id])">{{item[field.id]}}</label>
+         <span (click)="onClickCellLabel(row, field.id, item[field.id])">{{item[field.id]}}</span>
       </td>
       <td st-table-row-hover class="st-table-hover" *ngIf="hasHoverMenu">
          <i class="icon {{hoverButton}}" (click)="onShowHoverMenu(row)"></i>

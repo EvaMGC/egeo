@@ -28,7 +28,6 @@ import { StInfoBoxModule } from './st-info-box/st-info-box.module';
 import { StInputModule } from './st-input/st-input.module';
 import { StItemListModule } from './st-item-list/st-item-list.module';
 import { StLabelModule } from './st-label/index';
-import { StMenuModule } from './st-menu/st-menu.module';
 import { StLauncherModule } from './st-launcher/st-launcher.module';
 import { StModalModule } from './st-modal/st-modal.module';
 import { StModal2Module } from './st-modal2/st-modal2.module';
@@ -57,6 +56,8 @@ import { StFormFieldModule } from './st-form/st-form-field/st-form-field.module'
 import { StForegroundNotificationsModule } from './st-foreground-notifications/st-foreground-notifications.module';
 import { StZeroPageModule } from './st-zero-page/st-zero-page.module';
 import { StColorPickerModule } from './st-color-picker/st-color-picker.module';
+import { StDynamicTableModule } from './st-dynamic-table/st-dynamic-table.module';
+import { StVerticalIconTabsModule } from './st-vertical-icon-tabs/st-vertical-icon-tabs.module';
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -98,12 +99,14 @@ export const DECLARATIONS: any[] = [
    StSidebarModule,
    StSpinnerModule,
    StSwitchModule,
+   StDynamicTableModule,
    StTableModule,
    StTagInputModule,
    StTextareaModule,
    StToggleButtonsModule,
    StTooltipModule,
    StTwoListSelectionModule,
+   StVerticalIconTabsModule,
    StVerticalTabsModule,
    StWidgetModule,
    StZeroPageModule

@@ -93,7 +93,7 @@
    letter-spacing: normal;
    color: var(--egeo-theme-space-110, $space-110);
 
-   td {
+   td, td > * {
       font-size: var(--egeo-st-table__row--font-size, var(--egeo-theme-font-size-14, $egeo-font-size-14));
    }
 
