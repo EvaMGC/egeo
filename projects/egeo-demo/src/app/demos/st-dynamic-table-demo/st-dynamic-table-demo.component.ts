@@ -154,6 +154,11 @@ export class StDynamicTableDemoComponent implements OnInit {
    public activeHoverMenuPosition: number[] = [];
    public cssProperties: CssProperty[] = [
       {
+         name: '--egeo-st-dynamic-table__hover-button--font-size',
+         description: 'Hover button font size',
+         default: '$egeo-font-size-20'
+      },
+      {
          name: '--egeo-st-table__header--font-size',
          description: 'Header font size',
          default: '$egeo-font-size-12'

@@ -20,6 +20,9 @@
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
 
    .item-list {
+      padding: 0;
+      margin: 0;
+
       &--inner {
          margin-top: 15px;
          padding-left: 15px;
@@ -106,10 +109,11 @@
    }
 
    .title {
-      font-weight: 900;
+      margin: 0;
+      font-weight: var(--egeo-st-sidebar__title--font-weigh, 900);
       font-size: var(--egeo-st-sidebar__title--font-size, $egeo-font-size-20);
       line-height:  var(--egeo-st-sidebar__title--line-height, $egeo-line-height-24);
-      color: var(--egeo-st-sidebar_tittle--color, var(--egeo-theme-neutral, $neutral));
+      color: var(--egeo-st-sidebar__title--color, var(--egeo-theme-neutral, $neutral));
       padding-bottom: 30px;
    }
 

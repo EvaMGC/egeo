@@ -8,18 +8,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+@import '../constants/fonts';
+@import '../constants/colors';
 
-:host {
-   display: flex;
-   width: 100%;
-   overflow-y: auto;
+.st-dynamic-table {
 
-   .st-dynamic-table {
-      display: flex;
-      width: 100%;
-   }
-
-   .st-table-hover > i {
-      cursor: pointer;
+   .st-table-hover {
+      i {
+         font-size: var(--egeo-st-dynamic-table__hover-button--font-size, $egeo-font-size-20);
+         line-height: 0;
+      }
    }
 }

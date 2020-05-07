@@ -117,12 +117,17 @@ export class StSidebarDemoComponent {
          default: '$egeo-font-size-20'
       },
       {
+         name: '--egeo-st-sidebar__title--font-weight',
+         description: 'Title font weight',
+         default: '900'
+      },
+      {
          name: '--egeo-st-sidebar__title--line-height',
          description: 'Title line height',
          default: '$egeo-line-height-24'
       },
       {
-         name: '--egeo-st-sidebar_tittle--color',
+         name: '--egeo-st-sidebar__title--color',
          description: 'Title color',
          default: '$neutral'
       },
