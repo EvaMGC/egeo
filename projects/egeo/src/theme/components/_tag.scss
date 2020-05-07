@@ -29,6 +29,19 @@
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-size: $egeo-font-size-11;
    vertical-align: middle;
+   height: 20px;
+   .st-tag__text {
+      line-height: $egeo-line-height-22;
+      font-size: $egeo-font-size-11;
+   }
+
+   .st-tag__remove-button {
+      height: 20px;
+   }
+
+   &__icon {
+      font-size: $egeo-font-size-10;
+   }
 
    &--selected {
       background-color: var(--egeo-theme-action, $action) !important;
