@@ -32,6 +32,7 @@ import { StDropdownMenuComponent } from '../../st-dropdown-menu/st-dropdown-menu
 import { StTextareaModule } from '../../st-textarea/st-textarea.module';
 import { StTextareaComponent } from '../../st-textarea/st-textarea.component';
 import { getParentElement } from '../spec/st-form.component.spec';
+import { JSONSchema4Type } from 'json-schema';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -1031,7 +1032,7 @@ describe('StFormFieldComponent', () => {
       });
 
       it('if select has a default value and user interacts with it, he will be able to reset to the default value', (done) => {
-         let fakeDefault: string = component.schema.value.enum[2];
+         let fakeDefault: JSONSchema4Type = component.schema.value.enum[2];
          component.schema.value.default = fakeDefault;
 
          const input: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;

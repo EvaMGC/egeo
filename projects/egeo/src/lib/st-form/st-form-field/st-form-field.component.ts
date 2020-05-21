@@ -23,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Ng
 import { StInputError } from '../../st-input/st-input.error.model';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
-import { JSONSchema4 } from 'json-schema';
+import { JSONSchema4, JSONSchema4Type, JSONSchema4TypeName } from 'json-schema';
 
 @StEgeo()
 @Component({
@@ -41,7 +41,7 @@ import { JSONSchema4 } from 'json-schema';
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
-   @Input() @StRequired() schema: JSONSchema4;
+   @Input() @StRequired() schema: {key: string, value: JSONSchema4};
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
    @Input() qaTag: string;
@@ -75,11 +75,6 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    setValue(value: any): void {
       this.onChange(value);
       this.valueChange.emit(value);
-   }
-
-   setSwitchValue(enabled: boolean): void {
-      this.onChange(enabled || undefined);
-      this.valueChange.emit(enabled || undefined);
    }
 
    validate(control: FormControl): any {
@@ -136,7 +131,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
          case 'integer':
             return 'number';
          default:
-            return this.schema.value.type;
+            return <JSONSchema4TypeName> this.schema.value.type;
       }
    }
 
@@ -156,7 +151,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
       return this.schema.value.examples && this.schema.value.examples[0] ? this.schema.value.examples[0] : '';
    }
 
-   get default(): string {
+   get default(): JSONSchema4Type {
       return this.schema.value.default;
    }
 
@@ -229,7 +224,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
       let options: StDropDownMenuItem[] = [];
       if (this.schema.value.enum) {
          options.push(<StDropDownMenuItem> { label: 'Select one option', value: undefined });
-         let enumValues: string[] = this.schema.value.enum;
+         let enumValues: string[] = <string[]> this.schema.value.enum;
          enumValues.forEach((value) => {
             options.push(<StDropDownMenuItem> { label: value, value: value });
          });

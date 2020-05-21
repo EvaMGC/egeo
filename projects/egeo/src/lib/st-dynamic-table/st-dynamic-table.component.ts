@@ -210,7 +210,7 @@ export class StDynamicTableComponent {
    public onClickFk(item: any, field: StDynamicTableHeader): void {
       this.clickFk.emit({
          fk: field.fk,
-         value: item[field.fk.field]
+         value: item[field.id]
       });
    }
 
