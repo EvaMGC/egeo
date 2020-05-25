@@ -180,11 +180,13 @@ export class StPaginationComponent implements OnInit, OnChanges {
    }
 
    onChangePerPage(perPage: number): void {
-      this.currentPage = 1;
-      this.perPage = perPage;
-      this.updatePages();
-      this.selectedItem = this.items.find(item => item.value === this.perPage);
-      this.changePerPage.emit(this.perPage);
+      if (perPage && typeof perPage === 'number') {
+         this.currentPage = 1;
+         this.perPage = perPage;
+         this.updatePages();
+         this.selectedItem = this.items.find(item => item.value === this.perPage);
+         this.changePerPage.emit(this.perPage);
+      }
    }
 
    private addPageOption(option: PaginateOptions): void {

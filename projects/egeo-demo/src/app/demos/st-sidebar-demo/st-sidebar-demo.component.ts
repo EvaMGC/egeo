@@ -60,8 +60,8 @@ export class StSidebarDemoComponent {
       },
       {
          id: 'sectionB', label: 'Section B', items: [
-         { id: 'sub-sectionB.1', label: 'Subitem 1.1',    disabled: true },
-         { id: 'sub-sectionB.2', label: 'Subitem 1.2' }]
+            { id: 'sub-sectionB.1', label: 'Subitem 1.1', disabled: true },
+            { id: 'sub-sectionB.2', label: 'Subitem 1.2' }]
       },
       {
          id: 'sectionC', label: 'Section C',
@@ -145,6 +145,11 @@ export class StSidebarDemoComponent {
          name: '--egeo-st-sidebar__item__mark--color',
          description: 'Item mark color',
          default: '$brand'
+      },
+      {
+         name: '--egeo-st-sidebar__item--margin-bottom',
+         description: 'Item margin bottom',
+         default: '15px'
       },
       {
          name: '--egeo-st-sidebar__warning--color',

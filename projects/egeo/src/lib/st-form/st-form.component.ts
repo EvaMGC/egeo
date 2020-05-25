@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
 
 import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
 import { JSONSchema4 } from 'json-schema';
+import { StInputError } from '../st-input/st-input.error.model';
 
 /**
  * @description {Component} [Dynamic form]
@@ -73,6 +74,9 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
 
    /** @Input {number} [textFieldMaxWidth=] Maximum width of a field needed to paint a input or textarea */
    @Input() textFieldMaxWidth: number;
+
+   /** @Input {StInputError} [errorMessages=] Field error translations */
+   @Input() errorMessages: StInputError;
 
    /** @Input {boolean} [showTooltips=-1] Enable or disable displaying of tooltips
     * By default, tooltips are displayed

@@ -9,17 +9,19 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   Component,
-   OnInit,
-   Input,
-   Output,
-   forwardRef,
    ChangeDetectionStrategy,
+   Component,
    EventEmitter,
-   ViewChild,
-   HostBinding, OnChanges, SimpleChanges
+   forwardRef,
+   HostBinding,
+   Input,
+   OnChanges,
+   OnInit,
+   Output,
+   SimpleChanges,
+   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, NgModel } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { StInputError } from '../../st-input/st-input.error.model';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
@@ -41,7 +43,7 @@ import { JSONSchema4, JSONSchema4Type, JSONSchema4TypeName } from 'json-schema';
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
-   @Input() @StRequired() schema: {key: string, value: JSONSchema4};
+   @Input() @StRequired() schema: { key: string, value: JSONSchema4 };
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
    @Input() qaTag: string;
@@ -50,16 +52,27 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    @Input() hasDependencies: boolean;
    @Input() forceValidations: boolean;
    @Input() showTooltip: boolean = true;
-   @Input() maxWidth: number;
+   @Input() maxWidth: number; // number of characters from witch inputs will be displayed as textarea
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
-   @ViewChild('templateModel', {static: false}) templateModel: NgModel;
+   @ViewChild('templateModel', { static: false }) templateModel: NgModel;
 
    public disabled: boolean = false; // To check disable
    public focus: boolean = false;
    public errorMessage: string = undefined;
    public selectOptions: StDropDownMenuItem[];
    public innerValue: any;
+   public errors: StInputError;
+
+   private readonly _defaultErrorMessages: StInputError = {
+      generic: 'Error',
+      required: 'This field is required',
+      minLength: 'The field min length is ',
+      maxLength: 'The field max length is ',
+      min: 'The number has to be higher than ',
+      max: 'The number has to be minor than ',
+      pattern: 'Invalid value'
+   };
 
    @HostBinding('class.read-only')
    get readOnly(): boolean {
@@ -87,6 +100,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
       if (this.schema.value && this.schema.value.enum) {
          this.selectOptions = this.getSelectOptions();
       }
+      this._loadErrorMessages();
       setTimeout(() => {
          if (this.default !== undefined && (this.innerValue === undefined || this.innerValue === null)) {
             this.innerValue = this.default;
@@ -100,25 +114,10 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
 
    public ngOnChanges(changes: SimpleChanges): void {
       if (changes.schema) {
-        this.selectOptions = this.getSelectOptions();
+         this.selectOptions = this.getSelectOptions();
       }
    }
 
-   get errors(): any {
-      if (this.errorMessages) {
-         return this.errorMessages;
-      }
-
-      return {
-         generic: 'Error',
-         required: 'This field is required',
-         minLength: 'The field min length is ' + this.schema.value.minLength,
-         maxLength: 'The field max length is ' + this.schema.value.maxLength,
-         min: 'The number has to be higher than ' + (this.min - this.getInputStep()),
-         max: 'The number has to be minor than ' + (this.max + this.getInputStep()),
-         pattern: 'Invalid value'
-      };
-   }
 
    get type(): string {
       switch (this.schema.value.type) {
@@ -189,9 +188,9 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    }
 
    writeValue(value: any): void {
-         this.innerValue = value;
-         this.valueChange.emit(value);
-         this.onChange(value);
+      this.innerValue = value;
+      this.valueChange.emit(value);
+      this.onChange(value);
    }
 
    registerOnChange(fn: (_: any) => void): void {
@@ -234,5 +233,17 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
 
    onBlur(): void {
       this.blur.emit();
+   }
+
+   private _loadErrorMessages(): void {
+      this.errors = {
+         required: (this.errorMessages && this.errorMessages.required) || this._defaultErrorMessages.required,
+         pattern: (this.errorMessages && this.errorMessages.pattern) || this._defaultErrorMessages.pattern,
+         generic: (this.errorMessages && this.errorMessages.generic) || this._defaultErrorMessages.generic,
+         minLength: ((this.errorMessages && this.errorMessages.minLength) || this._defaultErrorMessages.minLength) + this.schema.value.minLength,
+         maxLength: ((this.errorMessages && this.errorMessages.maxLength) || this._defaultErrorMessages.maxLength) + this.schema.value.maxLength,
+         min: ((this.errorMessages && this.errorMessages.min) || this._defaultErrorMessages.min) + (this.min - this.getInputStep()),
+         max: ((this.errorMessages && this.errorMessages.max) || this._defaultErrorMessages.max) + (this.max + this.getInputStep())
+      };
    }
 }

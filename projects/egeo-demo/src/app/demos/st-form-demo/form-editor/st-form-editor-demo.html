@@ -43,7 +43,8 @@
 
       <st-form *ngIf="jsonSchema" #formModel="ngModel" class="form" [schema]="jsonSchema" sectionDescriptionLevel="2"
                [(ngModel)]="model"
-               [textFieldMaxWidth]="70">
+               [textFieldMaxWidth]="70"
+               [errorMessages]="errorMessages">
       </st-form>
    </div>
 </section>

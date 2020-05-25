@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StFormEditorDemoComponent } from './form-editor/st-form-editor-demo';
 import { StVisualSectionImprovementsDemoComponent } from './visual-section-improvements/st-visual-section-improvements-editor-demo';
 import { StVisualFieldImprovementsDemoComponent } from './visual-field-improvements/st-visual-field-improvements-editor-demo';
+import { StThemeCustomization } from '@app/demos/st-form-demo/visual-customization/st-theme-customization-demo';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 @NgModule({
    imports: [
@@ -27,10 +29,11 @@ import { StVisualFieldImprovementsDemoComponent } from './visual-field-improveme
       ReactiveFormsModule,
       StTextareaModule,
       StVerticalIconTabsModule,
+      CssPropertyTableModule,
       StDemoGeneratorModule.withComponents({ components: [StFormDemoComponent] })
    ],
    declarations: [StFormDemoComponent, StFormEditorDemoComponent, StVisualFieldImprovementsDemoComponent,
-      StVisualSectionImprovementsDemoComponent]
+      StVisualSectionImprovementsDemoComponent, StThemeCustomization]
 })
 export class StFormDemoModule { }
 

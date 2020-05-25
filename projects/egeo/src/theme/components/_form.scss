@@ -129,6 +129,9 @@
    }
 
    .form-field {
+      padding-bottom: var(--egeo-st-form-field--padding-bottom, 20px);
+      max-width: var(--egeo-st-fomr-field--max-width, 100%);
+
       &.parent-field {
          .st-switch {
             display: inline-block;

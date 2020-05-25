@@ -32,6 +32,11 @@ export class StFormDemoComponent {
             text: 'Demo'
          },
          {
+            id: 'cssProperties',
+            iconClass: 'icon-formatter',
+            text: 'Theme Customization'
+         },
+         {
             id: 'visualSectionImprovements',
             iconClass: 'icon-content-left',
             text: 'Visual Section improvements'

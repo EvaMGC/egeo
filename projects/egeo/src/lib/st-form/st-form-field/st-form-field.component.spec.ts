@@ -33,6 +33,7 @@ import { StTextareaModule } from '../../st-textarea/st-textarea.module';
 import { StTextareaComponent } from '../../st-textarea/st-textarea.component';
 import { getParentElement } from '../spec/st-form.component.spec';
 import { JSONSchema4Type } from 'json-schema';
+import { StInputError } from '../..';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -182,6 +183,7 @@ describe('StFormFieldComponent', () => {
 
             it('if minimum is exclusive, when user puts a value equal or minor than the minimum, validation error is displayed', () => {
                component.schema.value.exclusiveMinimum = true;
+               component.ngOnInit();
                fixture.detectChanges();
 
                input = fixture.nativeElement.querySelector('#genericIntegerInput');
@@ -210,6 +212,7 @@ describe('StFormFieldComponent', () => {
 
             it('if minimum is not exclusive, when user puts a value equal to the minimum, input will be valid', () => {
                component.schema.value.exclusiveMinimum = false;
+               component.ngOnInit();
                fixture.detectChanges();
 
                input = fixture.nativeElement.querySelector('#genericIntegerInput');
@@ -239,6 +242,7 @@ describe('StFormFieldComponent', () => {
 
             it('if maximum is exclusive, when user puts a value equal or major than the maximum, validation error is displayed', () => {
                component.schema.value.exclusiveMaximum = true;
+               component.ngOnInit();
                fixture.detectChanges();
 
                input = fixture.nativeElement.querySelector('#genericIntegerInput');
@@ -1156,14 +1160,53 @@ describe('StFormFieldComponent', () => {
       fixture.detectChanges();
       expect(fixture.nativeElement.querySelector('label').title).toEqual(component.schema.value.description);
    });
-})
-;
+
+   describe('Error messages can be customized from outside', () => {
+         beforeEach(() => {
+            const genericIntegerInput = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
+            component.schema = { key: 'genericIntegerInput', value: _cloneDeep(genericIntegerInput) };
+            component.errorMessages = { required: 'Campo requerido' };
+            component.required = true;
+            fixture.detectChanges();
+         });
+
+         it('If some error message is introduced from outside, it is displayed', () => {
+            const input = fixture.nativeElement.querySelector('input');
+            fixture.detectChanges();
+
+            input.focus();
+            input.value = null;
+            input.dispatchEvent(new Event('input'));
+            input.blur();
+
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('Campo requerido');
+         });
+
+         it('If some error message is not introduced from outside, default error is displayed', () => {
+            const input = fixture.nativeElement.querySelector('input');
+            fixture.detectChanges();
+
+            input.focus();
+            input.value = 0;
+            input.dispatchEvent(new Event('input'));
+            input.blur();
+
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than 5');
+         });
+      }
+   );
+});
 
 
 @Component({
    template: `
       <form [formGroup]="reactiveForm" novalidate>
-         <st-form-field [schema]="schema" [qaTag]="qaTag" [ngModel]="model" formControlName="formField" [required]="required">
+         <st-form-field [schema]="schema" [qaTag]="qaTag" [ngModel]="model" formControlName="formField" [required]="required"
+                        [errorMessages]="errorMessages">
          </st-form-field>
       </form>
    `,
@@ -1174,6 +1217,7 @@ class FormReactiveFormComponent {
    @Input() required: boolean;
    @Input() qaTag: string;
    @Input() model: any;
+   @Input() errorMessages: StInputError;
 
    public reactiveForm: FormGroup = new FormGroup({ 'formField': new FormControl() });
 }
@@ -1351,6 +1395,5 @@ describe('StFormFieldComponent in reactive form', () => {
       });
 
    });
-
 });
 

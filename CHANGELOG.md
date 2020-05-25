@@ -17,6 +17,7 @@
 * st-pop-over: Allow to choose placement and added input 'openToLeft' to be displayed from the button left side 
 * st-button: Allow to customize its style from outside using css variables
 * st-button: Updated button colors
+* st-form: Allow to customize some styles from outside using css variables and error messages
 
 **Breaking changes:**
 
@@ -25,12 +26,14 @@
 * st-table: Rename output selectedFilters to selectFilters
 * st-table: Current order now is not changed inside component. It only emits the output "changeOrder" to be changed outside
 * st-table: The height of the table must be defined when fixedHeader is true
+* theme: Removed $input-field-error from colors. Use $error color
 
 **Fixed bugs:**
 
 * st-table: Filtered header fields are introduced as input and they are not modified inside table component
 * st-tag: Fix default style without size class
 * st-table: Fix table filters popup position
+* st-pagination: Fix bug when user clicks several times on per page select
 
 **Others:**
 

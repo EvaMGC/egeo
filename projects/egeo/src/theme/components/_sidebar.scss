@@ -27,7 +27,7 @@
          padding-left: 15px;
 
          .item {
-            margin-bottom: 15px;
+            margin-bottom: var(--egeo-st-sidebar__item--margin-bottom, 15px);
             text-overflow: ellipsis;
             overflow: hidden;
          }
