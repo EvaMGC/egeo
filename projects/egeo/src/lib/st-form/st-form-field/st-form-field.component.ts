@@ -25,7 +25,8 @@ import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Ng
 import { StInputError } from '../../st-input/st-input.error.model';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
-import { JSONSchema4, JSONSchema4Type, JSONSchema4TypeName } from 'json-schema';
+import { JSONSchema4Type, JSONSchema4TypeName } from 'json-schema';
+import { StFormSchema } from '../st-form.model';
 
 @StEgeo()
 @Component({
@@ -43,7 +44,7 @@ import { JSONSchema4, JSONSchema4Type, JSONSchema4TypeName } from 'json-schema';
 })
 
 export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
-   @Input() @StRequired() schema: { key: string, value: JSONSchema4 };
+   @Input() @StRequired() schema: { key: string, value: StFormSchema };
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
    @Input() qaTag: string;
@@ -53,6 +54,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    @Input() forceValidations: boolean;
    @Input() showTooltip: boolean = true;
    @Input() maxWidth: number; // number of characters from witch inputs will be displayed as textarea
+   @Output() clickLink: EventEmitter<string> = new EventEmitter<string>();
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
    @ViewChild('templateModel', { static: false }) templateModel: NgModel;
@@ -233,6 +235,10 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
 
    onBlur(): void {
       this.blur.emit();
+   }
+
+   onClickLink(): void {
+      this.clickLink.emit(this.schema.key);
    }
 
    private _loadErrorMessages(): void {

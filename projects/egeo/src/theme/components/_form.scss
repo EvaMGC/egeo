@@ -130,7 +130,7 @@
 
    .form-field {
       padding-bottom: var(--egeo-st-form-field--padding-bottom, 20px);
-      max-width: var(--egeo-st-fomr-field--max-width, 100%);
+      max-width: var(--egeo-st-form-field--max-width, 100%);
 
       &.parent-field {
          .st-switch {
@@ -145,10 +145,10 @@
 
       &.read-only {
          input, textarea {
-            background-color: transparent;
-            border: none;
+            background-color: var(--egeo-st-form-field__read-only--bg-color, transparent);
+            border: var(--egeo-st-form-field__read-only--border, none);
             color: var(--egeo-theme-space-110, $space-110);
-            padding: 0;
+            padding: var(--egeo-st-form-field__read-only--padding, 0);
          }
 
          .st-select {

@@ -18,6 +18,7 @@
 * st-button: Allow to customize its style from outside using css variables
 * st-button: Updated button colors
 * st-form: Allow to customize some styles from outside using css variables and error messages
+* st-form: Allow to display a link before field if it is defined on ui block
 
 **Breaking changes:**
 

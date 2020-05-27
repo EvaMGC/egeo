@@ -14,13 +14,14 @@
 | textFieldMaxWidth       | Number       | False | Maximum width of a field needed to paint a input or textarea                                                |                                  |
 | errorMessages           | StInputError | False | Field error translations                                                                                    |                                  |
 | showTooltips            | Boolean      | False | Enable or disable displaying of tooltips By default, tooltips are displayed                                 | -1                               |
-| schema                  |              | False | {JSONSchema4  JSON schema needed to generate the form                                                       |                                  |
+| schema                  |              | False | {StFormSchema  Form schema needed to generate the form                                                      |                                  |
 
 ## Outputs
 
-| Property    | Type | Description                                                            |
-| ----------- | ---- | ---------------------------------------------------------------------- |
-| valueChange | Any  | Event emitted when value is changed. This emits the current form value |
+| Property    | Type   | Description                                                            |
+| ----------- | ------ | ---------------------------------------------------------------------- |
+| valueChange | Any    | Event emitted when value is changed. This emits the current form value |
+| clickLink   | String | Event emitted when link is clicked. It returns the field path          |
 
 ## Example
 
@@ -30,5 +31,29 @@
       [(ngModel)]="model"
       #formModel="ngModel">
 </st-form>
+```
+
+## Models
+
+*Form Schema* (StFormSchema)
+
+```typescript
+export interface StFormSchema {
+   ui?: StFormUIDefinition;
+   properties?: { [key: string]: StFormSchema };
+
+   [key: string]: any;
+   }
+```
+
+
+*Form UI Definition* (StFormUIDefinition)
+
+```typescript
+export interface StFormUIDefinition {
+    relatedTo ? : string;
+    visible ? : {
+        [key: string]: any
+    }
 ```
 

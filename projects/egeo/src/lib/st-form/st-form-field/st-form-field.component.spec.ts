@@ -1101,7 +1101,7 @@ describe('StFormFieldComponent', () => {
          booleanProperty = {
             'title': 'Enable security',
             'description': 'Enable or disable the security',
-            'type': 'boolean',
+            'type': <JSONSchema4Type> 'boolean',
             'default': true
          };
          component.hasDependencies = true;
@@ -1162,43 +1162,56 @@ describe('StFormFieldComponent', () => {
    });
 
    describe('Error messages can be customized from outside', () => {
-         beforeEach(() => {
-            const genericIntegerInput = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
-            component.schema = { key: 'genericIntegerInput', value: _cloneDeep(genericIntegerInput) };
-            component.errorMessages = { required: 'Campo requerido' };
-            component.required = true;
-            fixture.detectChanges();
-         });
+      beforeEach(() => {
+         const genericIntegerInput = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
+         component.schema = { key: 'genericIntegerInput', value: _cloneDeep(genericIntegerInput) };
+         component.errorMessages = { required: 'Campo requerido' };
+         component.required = true;
+         fixture.detectChanges();
+      });
 
-         it('If some error message is introduced from outside, it is displayed', () => {
-            const input = fixture.nativeElement.querySelector('input');
-            fixture.detectChanges();
+      it('If some error message is introduced from outside, it is displayed', () => {
+         const input = fixture.nativeElement.querySelector('input');
+         fixture.detectChanges();
 
-            input.focus();
-            input.value = null;
-            input.dispatchEvent(new Event('input'));
-            input.blur();
+         input.focus();
+         input.value = null;
+         input.dispatchEvent(new Event('input'));
+         input.blur();
 
-            fixture.detectChanges();
+         fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('Campo requerido');
-         });
+         expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('Campo requerido');
+      });
 
-         it('If some error message is not introduced from outside, default error is displayed', () => {
-            const input = fixture.nativeElement.querySelector('input');
-            fixture.detectChanges();
+      it('If some error message is not introduced from outside, default error is displayed', () => {
+         const input = fixture.nativeElement.querySelector('input');
+         fixture.detectChanges();
 
-            input.focus();
-            input.value = 0;
-            input.dispatchEvent(new Event('input'));
-            input.blur();
+         input.focus();
+         input.value = 0;
+         input.dispatchEvent(new Event('input'));
+         input.blur();
 
-            fixture.detectChanges();
+         fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than 5');
-         });
-      }
-   );
+         expect(fixture.nativeElement.querySelector('.st-input-error-layout span').innerHTML).toBe('The number has to be higher than 5');
+      });
+   });
+
+   it('should display a link after field if property link is introduced in ui definition', () => {
+      const genericIntegerInput = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
+      component.schema = { key: 'genericIntegerInput', value: _cloneDeep(genericIntegerInput) };
+      component.schema.value.ui = {link: 'Select a value from this link'};
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.button.button-link.small').innerHTML).toContain('Select a value from this link');
+
+      component.schema.value.ui.link = null;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.button.button-link.small')).toBeNull();
+   });
 });
 
 

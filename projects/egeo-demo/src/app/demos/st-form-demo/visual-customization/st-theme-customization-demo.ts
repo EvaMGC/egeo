@@ -26,9 +26,24 @@ export class StThemeCustomization {
          default: '20px'
       },
       {
-         name: '--egeo-st-fomr-field--max-width',
+         name: '--egeo-st-form-field--max-width',
          description: 'Form field max width',
          default: '100%'
+      },
+      {
+         name: '--egeo-st-form-field__read-only--bg-color',
+         description: 'Read only form field background color',
+         default: '100%'
+      },
+      {
+         name: '--egeo-st-form-field__read-only--border',
+         description: 'Read only form field border',
+         default: '100%'
+      },
+      {
+         name: '--egeo-st-form-field__read-only--padding',
+         description: 'Read only form field padding',
+         default: '0'
       }
    ];
 

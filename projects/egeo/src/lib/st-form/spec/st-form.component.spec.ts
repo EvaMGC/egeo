@@ -25,6 +25,7 @@ import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
 import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 import { StSwitchComponent } from '../../st-switch/st-switch.component';
 import { StInputComponent } from '../../st-input/st-input.component';
+import { FORM_UI_COMPONENT } from '../shared/ui-component.interface';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;
@@ -229,7 +230,7 @@ describe('StFormComponent', () => {
                'title': 'Section name',
                'type': 'object',
                'ui': {
-                  'component': 'show-more'
+                  'component': FORM_UI_COMPONENT.SHOW_MORE
                },
                'properties': {
                   'name': {
@@ -361,7 +362,7 @@ describe('StFormComponent', () => {
                'title': 'Section name',
                'type': 'object',
                'ui': {
-                  'component': 'switch'
+                  'component': FORM_UI_COMPONENT.SWITCH
                },
                'properties': {
                   'enable': {
@@ -458,7 +459,7 @@ describe('StFormComponent', () => {
                'title': 'Section name',
                'type': 'object',
                'ui': {
-                  'component': 'accordion'
+                  'component': FORM_UI_COMPONENT.ACCORDION
                },
                'properties': {
                   'name': {

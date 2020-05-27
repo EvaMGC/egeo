@@ -9,6 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 /**************************** MAIN MODULES *********************************************/
+import { StFormSchema } from './st-form/st-form.model';
+
 export { EgeoModule } from './egeo.module';
 
 /**************************** UTILS AND OTHERS *****************************************/
@@ -131,8 +133,10 @@ export { StFormModule } from './st-form/st-form.module';
 export { StFormComponent } from './st-form/st-form.component';
 export { StFormFieldComponent } from './st-form/st-form-field/st-form-field.component';
 export { StFormFieldModule } from './st-form/st-form-field/st-form-field.module';
+export { StFormSchema } from './st-form/st-form.model';
 export { StFormListModule } from './st-form-list/st-form-list.module';
 export { StFormListComponent } from './st-form-list/st-form-list.component';
+
 
 // Foreground notifications
 

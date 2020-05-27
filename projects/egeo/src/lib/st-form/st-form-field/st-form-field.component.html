@@ -88,3 +88,5 @@
            [qaTag]="schema.key"
            [id]="qaTag">
 </st-switch>
+
+<span *ngIf="schema?.value?.ui?.link" class="button button-link small" (click)="onClickLink()">{{schema.value.ui.link}}</span>

@@ -56,4 +56,8 @@ export class StFormEditorDemoComponent {
          }, 1000
       );
    }
+
+   onClickLink(fieldPath: string): void {
+      console.log(fieldPath);
+   }
 }

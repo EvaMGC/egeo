@@ -19,7 +19,8 @@
                    'accordion--open': isAnAccordion() && showCollapsedSectionFields}"
       novalidate>
    <h1 *ngIf="schema.title && !isASwitchSection()" class="title" (click)="onClickTitle()">{{schema.title}}</h1>
-   <p *ngIf="schema.description && nestingLevel <= sectionDescriptionLevel" class="description">{{schema.description}}</p>
+   <p *ngIf="schema.description && nestingLevel <= sectionDescriptionLevel" class="description">
+      {{schema.description}}</p>
    <span class="optional-fields-button" *ngIf="iShowMoreSection()">
    <button class="button button-link"
            (click)="onChangeOptionalFieldsVisibility()">
@@ -42,7 +43,8 @@
                         [showTooltip]="showTooltips"
                         [qaTag]="property.key"
                         [errorMessages]="errorMessages"
-                        [attr.id]="property.key + '-form-field'">
+                        [attr.id]="property.key + '-form-field'"
+                        (clickLink)="onClickLink($event)">
          </st-form-field>
 
          <div *ngIf="property.value.type === 'object' && fieldHasToBeCreated(property.key)">
@@ -53,12 +55,13 @@
                [name]="property.key"
                [textFieldMaxWidth]="textFieldMaxWidth"
                [ngModel]="innerValue[property.key]"
-               (ngModelChange)="onChangeProperty($event, property.key)"
                [attr.id]="property.key + '-section'"
                [nestingLevel]="nestingLevel + 1"
                [showTooltips]="showTooltips"
                [sectionDescriptionLevel]="sectionDescriptionLevel"
-               [errorMessages]="errorMessages">
+               [errorMessages]="errorMessages"
+               (clickLink)="onClickLink(property.key + '.' + $event)"
+               (ngModelChange)="onChangeProperty($event, property.key)">
             </st-form>
          </div>
       </div>

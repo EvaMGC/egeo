@@ -26,11 +26,17 @@ import { Subscription } from 'rxjs';
 import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
 import { JSONSchema4 } from 'json-schema';
 import { StInputError } from '../st-input/st-input.error.model';
+import { StFormSchema } from './st-form.model';
 
 /**
  * @description {Component} [Dynamic form]
  *
  * The form component allows to generate forms dynamically using a JSON schema.
+ *
+ * @model
+ *
+ *   [Form Schema] {./st-form.model.ts#StFormSchema}
+ *   [Form UI Definition] {./st-form.model.ts#StFormUIDefinition}
  *
  * @example
  *
@@ -84,6 +90,8 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    @Input() showTooltips: boolean = true;
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
+   /** @Output {string} [clickLink=] Event emitted when link is clicked. It returns the field path */
+   @Output() clickLink: EventEmitter<string> = new EventEmitter<string>();
 
    @ViewChild('form', { static: false }) form: NgForm;
 
@@ -92,14 +100,14 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    private _value: any = {};
    private _parentFieldSubscription: Subscription[] = [];
    private _parentFields: string[];
-   private _schema: JSONSchema4;
+   private _schema: StFormSchema;
 
-   /** @Input {JSONSchema4 [schema=] JSON schema needed to generate the form */
-   @Input() get schema(): JSONSchema4 {
+   /** @Input {StFormSchema [schema=] Form schema needed to generate the form */
+   @Input() get schema(): StFormSchema {
       return this._schema;
    }
 
-   set schema(schema: JSONSchema4) {
+   set schema(schema: StFormSchema) {
       this._schema = schema;
       this._value = {};
       if (this._schema.dependencies) {
@@ -209,7 +217,8 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    }
 
    isRelatedField(propertyName: string): boolean {
-      return this.schema.properties[propertyName].ui && this.schema.properties[propertyName].ui.relatedTo;
+      return this._schema.properties[propertyName].ui && this.schema.properties[propertyName].ui.relatedTo
+         && this.schema.properties[propertyName].ui.relatedTo.length > 0;
    }
 
    // When value is received from outside
@@ -279,6 +288,10 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
 
    isTheFirstField(propertyName: string): boolean {
       return propertyName === Object.keys(this.schema.properties)[0];
+   }
+
+   onClickLink(fieldKey: string): void {
+      this.clickLink.emit(fieldKey);
    }
 
    private getParentField(propertyName: string): string {

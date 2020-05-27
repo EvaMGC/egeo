@@ -44,7 +44,8 @@
       <st-form *ngIf="jsonSchema" #formModel="ngModel" class="form" [schema]="jsonSchema" sectionDescriptionLevel="2"
                [(ngModel)]="model"
                [textFieldMaxWidth]="70"
-               [errorMessages]="errorMessages">
+               [errorMessages]="errorMessages"
+               (clickLink)="onClickLink($event)">
       </st-form>
    </div>
 </section>
