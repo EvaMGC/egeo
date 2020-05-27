@@ -14,13 +14,35 @@
 
 .st-fullscreen-layout {
    border-radius: 0;
-   background-color: var(--egeo-theme-neutral-2, $neutral-2);
+   background-color: var(--egeo-theme-neutral-full, $neutral-full);
    z-index: $fullscreen-z-index;
+
+
+   &__close {
+      font-size: $egeo-font-size-18;
+      border-right: 1px solid $space-20;
+      padding-right: 1.2rem;
+      margin-right: 1.5rem;
+
+      .icon {
+         cursor: pointer;
+         color: $space;
+         border-radius: 4px;
+         vertical-align: middle;
+         padding: 5px;
+
+         &:hover {
+            color: $space-110;
+            background-color: $action-10;
+         }
+      }
+   }
 
    .st-fullscreen-layout-header {
       border-radius: 0;
       background-color: var(--egeo-theme-neutral-full, $neutral-full);
       z-index: $fullscreen-z-index + 1;
+      border-bottom: 1px solid $space-20;
 
       .st-fullscreen-layout-title {
          text-align: left;

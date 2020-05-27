@@ -4,9 +4,10 @@
 
 ## Inputs
 
-| Property  | Type    | Req   | Description                     | Default |
-| --------- | ------- | ----- | ------------------------------- | ------- |
-| fullWidth | Boolean | False | Enable full width visualization | false   |
+| Property        | Type    | Req   | Description                     | Default |
+| --------------- | ------- | ----- | ------------------------------- | ------- |
+| fullWidth       | Boolean | False | Enable full width visualization | false   |
+| showCloseButton | Boolean | False | Shows header close button       | true    |
 
 ## Example
 

@@ -13,6 +13,9 @@
 <div class="st-fullscreen-layout" [ngClass]="{'full-width': fullWidth}">
    <div class="st-fullscreen-layout-header">
       <div class="container">
+         <div class="st-fullscreen-layout__close" *ngIf="showCloseButton">
+            <span class="icon icon-cross" (click)="close.emit()"></span>
+         </div>
          <ng-content select=".st-fullscreen-layout-title"></ng-content>
 
          <div class="buttons">

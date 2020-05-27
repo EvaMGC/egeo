@@ -18,6 +18,7 @@
 * st-button: Allow to customize its style from outside using css variables
 * st-button: Updated button colors
 * st-form: Allow to customize some styles from outside using css variables and error messages
+* st-fullscreen-layout: Added close button and changed background-color
 * st-form: Allow to display a link before field if it is defined on ui block
 
 **Breaking changes:**
@@ -28,6 +29,7 @@
 * st-table: Current order now is not changed inside component. It only emits the output "changeOrder" to be changed outside
 * st-table: The height of the table must be defined when fixedHeader is true
 * theme: Removed $input-field-error from colors. Use $error color
+* st-fullscreen-layout: Implement close output event or disable scroll button
 
 **Fixed bugs:**
 

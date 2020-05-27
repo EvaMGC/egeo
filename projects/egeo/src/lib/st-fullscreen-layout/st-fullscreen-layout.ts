@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { StWindowRefService } from '../utils/window-service';
 
@@ -45,6 +45,10 @@ import { StWindowRefService } from '../utils/window-service';
 export class StFullscreenLayoutComponent implements OnDestroy {
    /** @Input {boolean} [fullWidth=false] Enable full width visualization */
    @Input() fullWidth: boolean;
+   /** @Input {boolean} [showCloseButton=true] Shows header close button */
+   @Input() showCloseButton: boolean = true;
+
+   @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
    constructor( private windowRef: StWindowRefService) {
       this.windowRef.nativeWindow.document.body.style.overflow = 'hidden';
