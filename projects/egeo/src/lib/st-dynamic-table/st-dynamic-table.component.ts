@@ -67,9 +67,6 @@ export class StDynamicTableComponent {
    /** @Input {Object(key: string, value: any)[]} [items=''] Item list displayed as table rows */
    @Input() @StRequired() items: { key: string, value: any }[];
 
-   /** @Input {StDynamicTableUserInterface} [uiDefinitions=''] UI definition for each field */
-   @Input() uiDefinitions: StDynamicTableUserInterface;
-
    /** @Input {string} [qaTag=''] Prefix used to generate the id values for qa tests */
    @Input() qaTag: string;
    /** @Input {boolean} [header=true] Boolean to show or hide the header */
@@ -158,10 +155,10 @@ export class StDynamicTableComponent {
    /** @Output {StDynamicTableFkEvent} [clickFk=] Event emitted when user clicks on Fk cell */
    @Output() clickFk: EventEmitter<StDynamicTableFkEvent> = new EventEmitter<StDynamicTableFkEvent>();
 
-
    public fields: StDynamicTableHeader[] = [];
 
    private _jsonSchema: JSONSchema4;
+   private _uiDefinitions: StDynamicTableUserInterface;
 
    private _templateContentFilter: TemplateRef<any>;
 
@@ -176,7 +173,20 @@ export class StDynamicTableComponent {
 
    set jsonSchema(_jsonSchema: JSONSchema4) {
       this._jsonSchema = _jsonSchema;
-      this.fields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(this._jsonSchema, this.uiDefinitions);
+      this.fields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(this._jsonSchema, this._uiDefinitions);
+      this.updateFields.emit(this.fields);
+      this._cd.markForCheck();
+   }
+
+   /** @Input {StDynamicTableUserInterface} [uiDefinitions=''] UI definition for each field */
+   @Input()
+   get uiDefinitions(): StDynamicTableUserInterface {
+      return this._uiDefinitions;
+   }
+
+   set uiDefinitions(_uiDefinitions: StDynamicTableUserInterface) {
+      this._uiDefinitions = _uiDefinitions;
+      this.fields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(this._jsonSchema, this._uiDefinitions);
       this.updateFields.emit(this.fields);
       this._cd.markForCheck();
    }
