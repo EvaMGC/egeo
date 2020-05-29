@@ -37,6 +37,7 @@
 * st-tag: Fix default style without size class
 * st-table: Fix table filters popup position
 * st-pagination: Fix bug when user clicks several times on per page select
+* st-select: Fix bug when select is used without being part of a form
 
 **Others:**
 
