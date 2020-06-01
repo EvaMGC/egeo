@@ -23,6 +23,7 @@ export interface StDynamicTableUISpecification {
       name: string;
    };
    templateRef?: string;
+   visible?: boolean;
 }
 
 

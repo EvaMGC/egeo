@@ -25,20 +25,23 @@ export class StDynamicTableUtils {
                const _property = jsonSchema.properties[_propertyKey];
                if (_property && _property.type !== 'object') {
                   const uiDefinition: StDynamicTableUISpecification = uiDefinitions && uiDefinitions[_propertyKey];
-                  const filters: StFilterHeader = StDynamicTableUtils.getHeaderFiltersFromJsonSchema(_property, uiDefinition);
-                  const isSortable = uiDefinition && uiDefinitions[_propertyKey].sortable;
+                  const visible: boolean = !uiDefinition || uiDefinition.visible !== false;
+                  if (visible) {
+                     const filters: StFilterHeader = StDynamicTableUtils.getHeaderFiltersFromJsonSchema(_property, uiDefinition);
+                     const isSortable = uiDefinition && uiDefinitions[_propertyKey].sortable;
 
-                  fields.push({
-                     id: _propertyKey,
-                     label: _property.title || _propertyKey,
-                     reference: _property.$ref,
-                     fk: uiDefinition && uiDefinition.fk,
-                     group: uiDefinition && uiDefinition.group_field ? uiDefinition.group_field.name : null,
-                     filters: filters,
-                     filterable: filters && (filters.templateRef !== undefined || (filters.filterConfig && filters.filterConfig.length > 0)),
-                     sortable: isSortable,
-                     type: _property.type ? this._getTypes(_propertyKey, _property.type.toString(), jsonSchema, uiDefinition) : null
-                  });
+                     fields.push({
+                        id: _propertyKey,
+                        label: _property.title || _propertyKey,
+                        reference: _property.$ref,
+                        fk: uiDefinition && uiDefinition.fk,
+                        group: uiDefinition && uiDefinition.group_field ? uiDefinition.group_field.name : null,
+                        filters: filters,
+                        filterable: filters && (filters.templateRef !== undefined || (filters.filterConfig && filters.filterConfig.length > 0)),
+                        sortable: isSortable,
+                        type: _property.type ? this._getTypes(_propertyKey, _property.type.toString(), jsonSchema, uiDefinition) : null
+                     });
+                  }
                }
             });
          }
@@ -69,11 +72,12 @@ export class StDynamicTableUtils {
       return filters;
    }
 
-   private static _getTypes(key: string, type: string, jsonSchema: JSONSchema4, uiDefinition: StDynamicTableUISpecification): {field: string; type: string}[] {
+   private static _getTypes(key: string, type: string, jsonSchema: JSONSchema4,
+                            uiDefinition: StDynamicTableUISpecification): { field: string; type: string }[] {
       if (uiDefinition && uiDefinition.group_field && uiDefinition.group_field.name) {
          const fields = uiDefinition.group_field.name.split(' - ');
-         return fields.map(field => ({ field: field, type: jsonSchema.properties[field].type.toString()}));
+         return fields.map(field => ({ field: field, type: jsonSchema.properties[field].type.toString() }));
       }
-      return [{ field: key, type: type}];
+      return [{ field: key, type: type }];
    }
 }

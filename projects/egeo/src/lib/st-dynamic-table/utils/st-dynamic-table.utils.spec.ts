@@ -111,6 +111,42 @@ describe('StDynamicTableUtils', () => {
             });
             expect(headerFields[2].filterable).toBeTruthy();
          });
+
+         describe('If UI definition object is introduced', () => {
+            it('and property is defined as not visible, is not added as header field', () => {
+               headerFields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(jsonSchema, { memory: { visible: false } });
+
+               expect(headerFields.length).toEqual(2);
+               expect(headerFields[0].id).toEqual('cores');
+               expect(headerFields[0].label).toEqual(jsonSchema.properties.cores.title);
+               expect(headerFields[1].id).toEqual('home');
+               expect(headerFields[1].label).toEqual(jsonSchema.properties.home.title);
+            });
+
+            it('and property is defined as visible, is added as header field', () => {
+               headerFields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(jsonSchema, { memory: { visible: true } });
+
+               expect(headerFields.length).toEqual(3);
+               expect(headerFields[0].id).toEqual('cores');
+               expect(headerFields[0].label).toEqual(jsonSchema.properties.cores.title);
+               expect(headerFields[1].id).toEqual('memory');
+               expect(headerFields[1].label).toEqual(jsonSchema.properties.memory.title);
+               expect(headerFields[2].id).toEqual('home');
+               expect(headerFields[2].label).toEqual(jsonSchema.properties.home.title);
+            });
+
+            it('and property does not have visible property, is added as header field', () => {
+               headerFields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(jsonSchema, { memory: {} });
+
+               expect(headerFields.length).toEqual(3);
+               expect(headerFields[0].id).toEqual('cores');
+               expect(headerFields[0].label).toEqual(jsonSchema.properties.cores.title);
+               expect(headerFields[1].id).toEqual('memory');
+               expect(headerFields[1].label).toEqual(jsonSchema.properties.memory.title);
+               expect(headerFields[2].id).toEqual('home');
+               expect(headerFields[2].label).toEqual(jsonSchema.properties.home.title);
+            });
+         });
       });
    });
 
