@@ -12,6 +12,14 @@
 @import '../constants/colors';
 @import '../utils/forms';
 
+st-search.small {
+   input {
+      @extend %st-form-small-globals;
+   }
+   .st-select {
+      @extend %st-select-small-props;
+   }
+}
 .sth-search {
    .st-search-filter.disabled {
       .arrow {
@@ -24,7 +32,6 @@
    }
 
 }
-
 .sth-search::placeholder {
    font-weight: normal;
    font-size: $egeo-font-size-xsmall;

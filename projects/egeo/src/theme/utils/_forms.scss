@@ -23,7 +23,7 @@
    vertical-align: bottom;
    outline: none;
    width: 100%;
-   height: var(--egeo-st-form-cotrol--height, 40px);
+   height: var(--egeo-st-form-control--height, 40px);
 
    input {
       min-height: $egeo-line-height-20;
@@ -49,3 +49,24 @@
 %st-form-control.error {
    border-color: var(--egeo-theme-error, $error);
 }
+
+%st-select-small-props {
+   .arrow {
+      padding: 0;
+      right: 9px;
+      top: 9px;
+   }
+}
+%st-form-small-globals {
+   padding: 6px 15px 5px 9px;
+   --egeo-st-form-control--height: 32px;
+
+   + i, + i.st-search-icon {
+      top: 9px;
+   }
+
+   + .st-form-control-reset-button {
+      --egeo-st-form-control__reset-button--line-height: 36px;
+   }
+}
+

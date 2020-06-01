@@ -1,7 +1,18 @@
 @import '../constants/colors';
 @import '../constants/fonts';
+@import '../utils/forms';
 
+st-form-list.small {
+   input, textarea {
+      @extend %st-form-small-globals;
+   }
+
+   .st-select {
+      @extend %st-select-small-props;
+   }
+}
 .st-form-list {
+
    .st-form-list__row {
       &:not(:first-child) {
          label {

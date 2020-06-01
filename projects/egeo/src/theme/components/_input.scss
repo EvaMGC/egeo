@@ -12,6 +12,11 @@
 @import '../constants/fonts';
 @import '../utils/forms';
 
+st-input.small {
+   input, textarea {
+      @extend %st-form-small-globals;
+   }
+}
 .st-input {
    @extend %st-form-control;
 

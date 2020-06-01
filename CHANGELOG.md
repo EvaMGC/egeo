@@ -2,12 +2,16 @@
 
 ## 21.1.0 (upcoming)
 
+**New features:**
+
+* st-form: added .small class to affect form inner inputs or input components individually.
+
 **Fixed bugs:**
 
 * st-select: Fix bug when select is used without being part of a form
 
 
-## 21.0.0 (upcoming)
+## 21.0.0 (June 01, 2020)
 
 **New features:**
 

@@ -10,8 +10,19 @@
  */
 @import '../constants/fonts';
 @import '../constants/colors';
+@import '../utils/forms';
 
 .st-form {
+
+   &.small {
+      input, textarea {
+         @extend %st-form-small-globals;
+      }
+
+      .st-select {
+         @extend %st-select-small-props;
+      }
+   }
 
    .optional-fields-button {
       margin: 0 0 20px;
