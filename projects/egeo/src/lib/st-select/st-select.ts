@@ -19,6 +19,7 @@ import {
    HostBinding,
    Injector,
    Input,
+   OnInit,
    Output,
    ViewChild
 } from '@angular/core';
@@ -40,7 +41,7 @@ import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-
       { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => StSelectComponent), multi: true }
    ]
 })
-export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
+export class StSelectComponent implements AfterViewInit, OnInit, ControlValueAccessor {
 
    @Input() placeholder: string = '';
    @Input() name: string = '';
@@ -82,6 +83,12 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    constructor(private _selectElement: ElementRef,
                private _injector: Injector,
                private _cd: ChangeDetectorRef) {
+   }
+
+   ngOnInit(): void {
+      if (this.selected) {
+         this.inputFormControl.setValue(this.selected.label);
+      }
    }
 
    // TODO: MOVE THIS TO FORM-BASE

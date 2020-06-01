@@ -2,7 +2,10 @@
 
 ## 21.1.0 (upcoming)
 
-* Pending changelog
+**Fixed bugs:**
+
+* st-select: Fix bug when select is used without being part of a form
+
 
 ## 21.0.0 (upcoming)
 
@@ -41,6 +44,7 @@
 * st-tag: Fix default style without size class
 * st-table: Fix table filters popup position
 * st-pagination: Fix bug when user clicks several times on per page select
+* st-select: Fix bug when select is used without being part of a form
 
 **Others:**
 
