@@ -19,6 +19,7 @@ import { StTableComponent } from './st-table.component';
 import { StTableHeader } from './shared/table-header.interface';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
 import { StPopOverModule } from '../st-pop-over/st-pop-over.module';
+import { StClickOutsideModule } from '../directives/st-click-outside/st-click-outside.module';
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
@@ -38,7 +39,7 @@ describe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [CommonModule, RouterTestingModule, StCheckboxModule, StPopOverModule],
+         imports: [CommonModule, RouterTestingModule, StCheckboxModule, StPopOverModule, StClickOutsideModule],
          declarations: [StPopoverFilterComponent, StTableComponent]
       })
       // remove this block when the issue #12313 of Angular is fixed
@@ -283,6 +284,27 @@ describe('StTableComponent', () => {
          popover.querySelector('.st-table__popover-button').click();
 
          expect(component.selectFilters.emit).toHaveBeenCalledWith([fakeFields[4]]);
+      });
+
+      it('and user clicks outside popover, it has to be closed', (done) => {
+         fixture.nativeElement.querySelector('.st-table__header-item .st-table__filter-arrow').click();
+         fixture.detectChanges();
+         let popover = fixture.nativeElement.querySelector('.st-table__popover .content');
+
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            expect(popover.style.visibility).toEqual('visible');
+
+            fixture.nativeElement.click();  // click outside popover
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('.st-table__popover .content').style.visibility).toEqual('hidden');
+               done();
+            });
+         });
       });
    });
 

@@ -101,6 +101,11 @@ export class StTableDemoComponent implements OnInit {
          default: '$egeo-line-height-18'
       },
       {
+         name: '--egeo-st-table__header--color',
+         description: 'Header font color',
+         default: '$space-80'
+      },
+      {
          name: '--egeo-st-table__header--text-transform',
          description: 'Header text transform',
          default: 'initial'
