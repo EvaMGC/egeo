@@ -12,17 +12,14 @@ import {
    ChangeDetectionStrategy,
    ChangeDetectorRef,
    Component,
+   ElementRef,
    EventEmitter,
    Input,
-   OnChanges,
    OnInit,
-   Output,
-   SimpleChanges,
-   ElementRef
+   Output
 } from '@angular/core';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { Paginate, PaginateOptions, PaginateTexts } from './st-pagination.interface';
-import { PaginateIconClasses } from './st-pagination.interface';
+import { Paginate, PaginateIconClasses, PaginateOptions, PaginateTexts } from './st-pagination.interface';
 
 /**
  * @description {Component} [Table]
@@ -62,12 +59,8 @@ import { PaginateIconClasses } from './st-pagination.interface';
    styleUrls: ['./st-pagination.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StPaginationComponent implements OnInit, OnChanges {
-   /** @Input {number} [perPage=20] The maximum number of items displayed per page */
-   @Input() perPage: number = 20;
+export class StPaginationComponent implements OnInit {
 
-   /** @Input {number} [total=''] Total of items */
-   @Input() total: number;
 
    /** @Input {PaginateTexts} [label={element: 'Rows', perPage: 'per page', of: 'of'}] Translated texts displayed at the pagination */
    @Input() label: PaginateTexts = {
@@ -83,7 +76,7 @@ export class StPaginationComponent implements OnInit, OnChanges {
    ];
 
    /** @Input {PaginateIconClasses} [iconClasses=Object(previous='', next='')] Icon classes for previous and next page buttons */
-   @Input() iconClasses: PaginateIconClasses = {previous: 'icon-arrow2_left', next: 'icon-arrow2_right'};
+   @Input() iconClasses: PaginateIconClasses = { previous: 'icon-arrow2_left', next: 'icon-arrow2_right' };
 
    /** @Output {Paginate} [change=''] Event emitted when user interacts with some of the elements in the pagination.
     *  This sends the new pagination status (current page and items per page)
@@ -103,6 +96,29 @@ export class StPaginationComponent implements OnInit, OnChanges {
 
    set currentPage(currentPage: number) {
       this._currentPage = currentPage;
+      this.updatePages(false);
+   }
+
+   /** @Input {number} [perPage=20] The maximum number of items displayed per page */
+   @Input()
+   get perPage(): number {
+      return this._perPage;
+   }
+
+   set perPage(perPage: number) {
+      this.onChangePerPage(perPage, false);
+   }
+
+   /** @Input {number} [total=''] Total of items */
+   @Input()
+   get total(): number {
+      return this._total;
+   }
+
+   set total(total: number) {
+      this._total = total;
+      this.generateItems();
+      this.updatePages(false);
    }
 
    public disableNextButton: boolean = false;
@@ -113,6 +129,8 @@ export class StPaginationComponent implements OnInit, OnChanges {
    public selectedItem: StDropDownMenuItem;
 
    private _currentPage: number = 1;
+   private _perPage: number = 20;
+   private _total: number;
 
    constructor(private _cd: ChangeDetectorRef,
                private _paginationElement: ElementRef) {
@@ -144,26 +162,12 @@ export class StPaginationComponent implements OnInit, OnChanges {
       this.generateItems();
    }
 
-   ngOnChanges(changes: SimpleChanges): void {
-      if (changes.total && changes.total.previousValue !== changes.total.currentValue && !changes.total.firstChange) {
-         this.generateItems();
-         this.updatePages(false);
-      }
-      if (changes.currentPage && changes.currentPage.previousValue !== changes.currentPage.currentValue && !changes.currentPage.firstChange) {
-         this._currentPage = changes.currentPage.currentValue;
-         this.updatePages(false);
-      }
-      if (changes.perPage && changes.perPage.previousValue !== changes.perPage.currentValue && !changes.perPage.firstChange) {
-         this.onChangePerPage(changes.perPage.currentValue);
-      }
-   }
-
    generateItems(): void {
       this.items = [];
       this.perPageOptions.forEach(this.addPageOption.bind(this));
 
       if (this.items.length) {
-         this.selectedItem = this.items.find(item => item.value === this.perPage) || this.items[0];
+         this.selectedItem = this.items.find(item => item.value === this._perPage) || this.items[0];
       }
 
       this._cd.markForCheck();
@@ -179,18 +183,20 @@ export class StPaginationComponent implements OnInit, OnChanges {
       this.updatePages();
    }
 
-   onChangePerPage(perPage: number): void {
+   onChangePerPage(perPage: number, emit: boolean = true): void {
       if (perPage && typeof perPage === 'number') {
-         this.currentPage = 1;
-         this.perPage = perPage;
-         this.updatePages();
-         this.selectedItem = this.items.find(item => item.value === this.perPage);
-         this.changePerPage.emit(this.perPage);
+         this._currentPage = 1;
+         this._perPage = perPage;
+         this.updatePages(emit);
+         this.selectedItem = this.items.find(item => item.value === this._perPage);
+         if (emit) {
+            this.changePerPage.emit(this._perPage);
+         }
       }
    }
 
    private addPageOption(option: PaginateOptions): void {
-      if (this.total && (!option.showFrom || option.showFrom <= this.total)) {
+      if (this._total && (!option.showFrom || option.showFrom <= this._total)) {
          this.items.push({
             label: `${option.value}`,
             value: option.value
@@ -199,18 +205,18 @@ export class StPaginationComponent implements OnInit, OnChanges {
    }
 
    private updatePages(emit: boolean = true): void {
-      this.lastItem = this.perPage * this._currentPage;
+      this.lastItem = this._perPage * this._currentPage;
 
-      if (this.currentPage === 1) {
+      if (this._currentPage === 1) {
          this.firstItem = this._currentPage;
          this.disablePrevButton = true;
       } else {
-         this.firstItem = this.perPage * (this._currentPage - 1) + 1;
+         this.firstItem = this._perPage * (this._currentPage - 1) + 1;
          this.disablePrevButton = false;
       }
 
-      if (this.lastItem >= this.total) {
-         this.lastItem = this.total;
+      if (this.lastItem >= this._total) {
+         this.lastItem = this._total;
          this.disableNextButton = true;
       } else {
          this.disableNextButton = false;
@@ -219,7 +225,7 @@ export class StPaginationComponent implements OnInit, OnChanges {
       if (emit) {
          this.change.emit({
             currentPage: this._currentPage,
-            perPage: this.perPage
+            perPage: this._perPage
          });
       }
    }

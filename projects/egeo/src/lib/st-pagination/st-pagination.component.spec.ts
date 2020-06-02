@@ -180,9 +180,7 @@ describe('StPaginationComponent', () => {
          component.total = 50;
          fixture.detectChanges();
 
-         fixture.componentInstance.total = 300;
-
-         component.ngOnChanges({ total: new SimpleChange(50, 300, false) });
+         component.total = 300;
          fixture.detectChanges();
 
          expect(component.items.length).toBe(3);
@@ -193,9 +191,7 @@ describe('StPaginationComponent', () => {
          component.total = 45;
          fixture.detectChanges();
 
-         fixture.componentInstance.currentPage = 3;
-
-         component.ngOnChanges({ currentPage: new SimpleChange(1, 3, false) });
+         component.currentPage = 3;
          fixture.detectChanges();
 
          expect(component.disableNextButton).toBeTruthy();
@@ -205,11 +201,10 @@ describe('StPaginationComponent', () => {
       });
 
       it('should change page attributes when the items per pages changes', () => {
-         component.perPage = 20;
-         component.total = 100;
          component.currentPage = 3;
+         component.perPage = 50;
+         component.total = 100;
 
-         component.ngOnChanges({ perPage: new SimpleChange(20, 50, false) });
          fixture.detectChanges();
 
          expect(component.disableNextButton).toBeFalsy();
@@ -223,9 +218,7 @@ describe('StPaginationComponent', () => {
       it('should change page attributes when the current page changes', () => {
          component.perPage = 20;
          component.total = 100;
-         component.currentPage = 3;
-
-         component.ngOnChanges({ currentPage: new SimpleChange(3, 2, false) });
+         component.currentPage = 2;
          fixture.detectChanges();
 
          expect(component.currentPage).toEqual(2);
@@ -260,47 +253,5 @@ describe('StPaginationComponent', () => {
          expect(component.lastItem).toEqual(50);
          expect(component.selectedItem.value).toEqual(50);
       });
-   });
-
-
-   it('When it listens any change, it only force to update the changed input if it is not its first change', () => {
-      spyOn(component, 'generateItems').and.callThrough();
-      spyOn(component, 'onChangePerPage').and.callThrough();
-
-      component.currentPage = 3;
-      component.total = 3;
-      component.perPage = 3;
-
-      component.ngOnChanges({
-         currentPage: new SimpleChange(3, 2, true),
-         total: new SimpleChange(3, 2, true),
-         perPage: new SimpleChange(3, 2, true)
-      });
-
-
-      expect(component.generateItems).not.toHaveBeenCalled();
-      expect(component.onChangePerPage).not.toHaveBeenCalled();
-      expect(component.currentPage).toBe(3);
-      expect(component.total).toBe(3);
-      expect(component.perPage).toBe(3);
-
-      component.ngOnChanges({
-         currentPage: new SimpleChange(3, 2, false)
-      });
-
-      expect(component.currentPage).toBe(2);
-
-      component.ngOnChanges({
-         total: new SimpleChange(3, 2, false)
-      });
-
-      expect(component.generateItems).toHaveBeenCalled();
-
-      component.ngOnChanges({
-         perPage: new SimpleChange(3, 2, false)
-      });
-
-      expect(component.onChangePerPage).toHaveBeenCalled();
-      expect(component.perPage).toBe(2);
    });
 });
