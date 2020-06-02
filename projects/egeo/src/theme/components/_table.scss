@@ -23,7 +23,7 @@
 
    &__header {
       border-bottom: 1px solid var(--egeo-st-table__header--border-bottom, var(--egeo-theme-space-50, $space-50));
-      color: var(--egeo-theme-space-80, $space-80);
+      color: var(--egeo-st-table__header--color, var(--egeo-theme-space-80, $space-80));
       font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    }
 

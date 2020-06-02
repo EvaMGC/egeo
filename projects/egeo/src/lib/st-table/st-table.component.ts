@@ -212,13 +212,19 @@ export class StTableComponent implements OnInit {
             _get(field, 'filters.templateRef');
    }
 
-   public onClickPopover(index: number, field: StTableHeader): void {
+   public onClickPopover(event: MouseEvent, index: number, field: StTableHeader): void {
+      event.stopPropagation();
       if (this.visibleFilter === index) {
          this.visibleFilter = -1;
       } else {
          this.visibleFilter = index;
       }
       this.clickFilter.emit(field);
+      this._cd.markForCheck();
+   }
+
+   public onHidePopover(): void {
+      this.visibleFilter = -1;
       this._cd.markForCheck();
    }
 
