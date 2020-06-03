@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { get as _get } from 'lodash';
 
 import { StTableHeader } from '../../shared/table-header.interface';
@@ -25,9 +25,6 @@ export class StPopoverFilterComponent {
    /** @Input {StTableHeader} [field=''] field displayed in the header */
    @Input() field: StTableHeader;
 
-   /** @Input {boolean} [field=''] field to show popover */
-   @Input() hidden: boolean;
-
    /** @Input {number} [index=''] index of field displayed in the header */
    @Input() index: number;
 
@@ -43,12 +40,36 @@ export class StPopoverFilterComponent {
    /** @Output [filter=''] Event emitted  when user interacts with filter button without a custom template */
    @Output() filter: EventEmitter<any> = new EventEmitter();
 
+   @ViewChild('filterMenu', { static: false }) filterMenu: ElementRef;
+
+   public openToLeft: boolean;
+   public offsetX: number;
+
+   private _hidden: boolean;
+
+   constructor(private _elementRef: ElementRef) {
+
+   }
+
+   /** @Input {boolean} [hidden=''] field to show popover */
+   @Input()
+   get hidden(): boolean {
+      return this._hidden;
+   }
+
+   set hidden(hidden: boolean) {
+      if (!hidden) {
+         this.offsetX = (this.filterMenu.nativeElement.parentElement.offsetLeft - this._elementRef.nativeElement.offsetWidth)  * -1;
+      }
+      this._hidden = hidden;
+   }
+
    public getConfigField(field: StTableHeader, config: string): any {
       return _get(field, `filters.${config}`);
    }
 
    public getFilteredIcon(): string {
-      return this.filtered ? this.iconClasses.selected :  this.iconClasses.enabled;
+      return this.filtered ? this.iconClasses.selected : this.iconClasses.enabled;
    }
 
    public onChangeFilter(indexFilter: number, event: Event): void {

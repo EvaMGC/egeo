@@ -9,6 +9,8 @@
 * st-dynamic-table: Manage default ordering in table component
 * st-table: Allow to display "sticky" the hover menu
 * st-table: Close filter menu when user clicks outside
+* st-table: Filter menus are displayed aligned to the left side of their cell
+
 
 **Fixed bugs:**
 

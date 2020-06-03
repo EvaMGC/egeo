@@ -48,4 +48,14 @@ describe('StPopoverFilterComponent', () => {
    it('should create', () => {
       expect(component).toBeTruthy();
    });
+
+   describe('Should calculate its position in axis X when it is going to be visible', () => {
+      it ('and should be aligned to the left side of parent', () => {
+         const parentOffset = 50;
+         spyOnProperty(component.filterMenu.nativeElement.parentElement, 'offsetLeft').and.returnValue(parentOffset);
+         component.hidden = false;
+
+         expect(component.offsetX).toEqual((parentOffset - fixture.nativeElement.offsetWidth) * -1);
+      });
+   });
 });

@@ -14,12 +14,12 @@
               [title]="getConfigField(field, 'title')"
               [hidden]="hidden"
               [showArrow]="false"
-              [openToLeft]="index > 0"
-              [offset]="{x: 0, y: 0}"
+              [openToLeft]="false"
+              [offset]="{x: offsetX, y: 0}"
               [showSettingBtn]="getConfigField(field, 'showSettingBtn')">
    <i pop-over-button class='st-table__filter-arrow' [ngClass]="getFilteredIcon()">
    </i>
-   <div pop-over-content class="st-table__popover-content">
+   <div pop-over-content class="st-table__popover-content" #filterMenu>
       <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:index}"></ng-container>
       <div class="st-table__popover-content-filter" *ngIf="!templateContentFilter">
          <div *ngFor="let filter of field.filters.filterConfig; let indexFilter = index">
