@@ -73,8 +73,9 @@
       font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
       font-size: var(--egeo-st-table__header--font-size, var(---egeo-theme-font-size-12, $egeo-font-size-12));
       font-weight: bold;
-      line-height: 13px;
+      line-height:  var(--egeo-st-table__header__filter-arrow--line-height, 13px);
       margin-left: 4px;
+      min-width: 12px;
       position: relative;
       vertical-align: middle;
 

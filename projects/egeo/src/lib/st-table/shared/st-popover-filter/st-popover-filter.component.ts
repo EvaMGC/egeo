@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { get as _get } from 'lodash';
 
 import { StTableHeader } from '../../shared/table-header.interface';
@@ -40,8 +40,6 @@ export class StPopoverFilterComponent {
    /** @Output [filter=''] Event emitted  when user interacts with filter button without a custom template */
    @Output() filter: EventEmitter<any> = new EventEmitter();
 
-   @ViewChild('filterMenu', { static: false }) filterMenu: ElementRef;
-
    public openToLeft: boolean;
    public offsetX: number;
 
@@ -59,7 +57,7 @@ export class StPopoverFilterComponent {
 
    set hidden(hidden: boolean) {
       if (!hidden) {
-         this.offsetX = (this.filterMenu.nativeElement.parentElement.offsetLeft - this._elementRef.nativeElement.offsetWidth)  * -1;
+         this.offsetX = (this._elementRef.nativeElement.offsetLeft - this._elementRef.nativeElement.offsetWidth)  * -1;
       }
       this._hidden = hidden;
    }

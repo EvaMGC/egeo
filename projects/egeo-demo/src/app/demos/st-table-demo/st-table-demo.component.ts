@@ -126,6 +126,11 @@ export class StTableDemoComponent implements OnInit {
          default: '$space-50'
       },
       {
+         name: '--egeo-st-table__header__filter-arrow--line-height',
+         description: 'Header filter arrow line height',
+         default: '13px'
+      },
+      {
          name: '--egeo-st-table__row--font-size',
          description: 'Row font size',
          default: '$egeo-font-size-14'
