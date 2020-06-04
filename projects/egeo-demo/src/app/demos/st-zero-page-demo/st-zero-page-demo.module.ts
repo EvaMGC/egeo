@@ -13,13 +13,15 @@ import { NgModule } from '@angular/core';
 import { StDemoGeneratorModule, StDocsModule, StZeroPageModule } from '@stratio/egeo';
 
 import { StZeroPageDemoComponent } from './st-zero-page-demo.component';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 @NgModule({
    imports: [
       CommonModule,
       StZeroPageModule,
       StDemoGeneratorModule.withComponents({ components: [StZeroPageDemoComponent] }),
-      StDocsModule
+      StDocsModule,
+      CssPropertyTableModule
    ],
    declarations: [StZeroPageDemoComponent]
 })

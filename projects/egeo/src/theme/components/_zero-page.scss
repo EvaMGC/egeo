@@ -8,29 +8,29 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+@import '../constants/fonts';
+@import '../constants/colors';
 
- @import '../constants/fonts';
- @import '../constants/colors';
-
- $border : 1px solid  var(--egeo-theme-neutral-8, $neutral-8);
+$border: 1px solid var(--egeo-theme-neutral-8, $neutral-8);
+$infoPadding: 20px 0 30px;
 
 .st-zero-page {
 
    &__title {
+      color: var(--egeo-st-zero-page__title--color, var(--egeo-theme-neutral, $neutral));
       font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-      color: var(--egeo-theme-neutral, $neutral);
-      font-size: $egeo-font-size-xlarge;
+      font-size: var(--egeo-st-zero-page__title--font-size, $egeo-font-size-xlarge);
       font-weight: bold;
-      line-height: $egeo-line-height-18;
+      line-height: var(--egeo-st-zero-page__title--line-height, $egeo-line-height-18);
    }
 
    &__info {
+      color: var(--egeo-st-zero-page__info--color, var(--egeo-theme-neutral-40, $neutral-40));
       font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-      font-size: $egeo-font-size-16;
-      line-height: $egeo-line-height-small;
-      color: var(--egeo-theme-neutral-40, $neutral-40);
+      font-size: var(--egeo-st-zero-page__info--font-size, $egeo-font-size-16);
+      line-height: var(--egeo-st-zero-page__info--line-height, $egeo-line-height-small);
+      padding: var(--egeo-st-zero-page__info--padding, $infoPadding);
       text-align: center;
-      padding: 20px 0 30px;
    }
 
 }
