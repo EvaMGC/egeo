@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    selector: 'st-checkbox-demo',
@@ -22,4 +23,23 @@ export class StCheckboxDemoComponent {
       ts: 'demo/st-checkbox-demo/st-checkbox-demo.component.ts',
       component: 'lib/st-checkbox/st-checkbox.component.ts'
    };
+
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-checkbox__icon--content',
+         description: 'Checked icon content',
+         default: '\e64c"'
+      },
+      {
+         name: '--egeo-st-checkbox__icon--line-height',
+         description: 'Checked icon line height',
+         default: '1'
+      },
+      {
+         name: '--egeo-st-checkbox__icon--font-size',
+         description: 'Checked icon font size',
+         default: '14px'
+      }
+   ];
+
 }

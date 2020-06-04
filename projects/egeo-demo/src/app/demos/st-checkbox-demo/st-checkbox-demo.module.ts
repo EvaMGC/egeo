@@ -13,11 +13,13 @@ import { CommonModule } from '@angular/common';
 import { StDemoGeneratorModule, StCheckboxModule, StDocsModule } from '@stratio/egeo';
 
 import { StCheckboxDemoComponent } from './st-checkbox-demo.component';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 @NgModule({
    imports: [
       CommonModule,
       StCheckboxModule,
+      CssPropertyTableModule,
       StDemoGeneratorModule.withComponents({
          components: [StCheckboxDemoComponent]
       }),

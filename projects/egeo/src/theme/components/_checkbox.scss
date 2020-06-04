@@ -45,9 +45,17 @@
       position: relative;
       top: .125rem;
       margin-right: 5px;
-      &.icon-check2 {
+
+      &--checked {
          background-color: var(--egeo-theme-action, $action);
          border: 1px solid var(--egeo-theme-action, $action);
+         font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
+
+         &:before {
+            content: var(--egeo-st-checkbox__icon--content, "\e64c");
+            line-height: var(--egeo-st-checkbox__icon--line-height, 1);
+            font-size: var(--egeo-st-checkbox__icon--font-size, 14px);
+         }
       }
       &:before {
          color: var(--egeo-theme-neutral-full, $neutral-full);
@@ -74,7 +82,7 @@
       .custom-checkbox {
          border-color: var(--egeo-theme-neutral-20, $neutral-20);
          background-color: $neutral-14;
-         &.icon-check2 {
+         &--checked {
             background-color: var(--egeo-theme-neutral-20, $neutral-20);
             border-color: var(--egeo-theme-neutral-20, $neutral-20);
          }

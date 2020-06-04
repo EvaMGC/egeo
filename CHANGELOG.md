@@ -10,7 +10,7 @@
 * st-table: Allow to display "sticky" the hover menu
 * st-table: Close filter menu when user clicks outside
 * st-table: Filter menus are displayed aligned to the left side of their cell
-
+* st-checkbox: Allow to customize checked icon from outside using css variables
 
 **Fixed bugs:**
 
