@@ -25,7 +25,7 @@ import { StCheckboxComponent } from '../../st-checkbox/st-checkbox.component';
 import { StFormFieldComponent } from '../st-form-field/st-form-field.component';
 import { StSwitchComponent } from '../../st-switch/st-switch.component';
 import { StInputComponent } from '../../st-input/st-input.component';
-import { FORM_UI_COMPONENT } from '../shared/ui-component.interface';
+import { FORM_UI_COMPONENT } from '../st-form-field/st-form-field.interface';
 
 let component: StFormComponent;
 let fixture: ComponentFixture<StFormComponent>;

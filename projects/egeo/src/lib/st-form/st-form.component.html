@@ -43,6 +43,7 @@
                         [showTooltip]="showTooltips"
                         [qaTag]="property.key"
                         [errorMessages]="errorMessages"
+                        [translations]="translations"
                         [attr.id]="property.key + '-form-field'"
                         (clickLink)="onClickLink($event)">
          </st-form-field>
@@ -60,6 +61,7 @@
                [showTooltips]="showTooltips"
                [sectionDescriptionLevel]="sectionDescriptionLevel"
                [errorMessages]="errorMessages"
+               [translations]="translations"
                (clickLink)="onClickLink(property.key + '.' + $event)"
                (ngModelChange)="onChangeProperty($event, property.key)">
             </st-form>

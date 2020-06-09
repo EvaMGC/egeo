@@ -77,10 +77,18 @@
 
 ```typescript
 export interface StDynamicTableUISpecification {
-    sortable ? : boolean;
-    styles ? : {
-        [key: string]: string;
-    }
+    sortable?: boolean;
+      sort?: string;
+      styles?: {
+         [key: string]: string;
+      };
+      fk?: StDynamicTableFk;
+      group_field?: {
+         view: string;
+         fkTable: string;
+      };
+      templateRef?: string;
+      visible?: boolean;
 ```
 
 *StDynamicTableUserInterface* (StDynamicTableUserInterface)

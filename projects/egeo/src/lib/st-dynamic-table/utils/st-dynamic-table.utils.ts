@@ -35,7 +35,7 @@ export class StDynamicTableUtils {
                         label: _property.title || _propertyKey,
                         reference: _property.$ref,
                         fk: uiDefinition && uiDefinition.fk,
-                        group: uiDefinition && uiDefinition.group_field ? uiDefinition.group_field.name : null,
+                        group: uiDefinition && uiDefinition.group_field ? uiDefinition.group_field.view : null,
                         filters: filters,
                         filterable: filters && (filters.templateRef !== undefined || (filters.filterConfig && filters.filterConfig.length > 0)),
                         sortable: isSortable,
@@ -75,8 +75,8 @@ export class StDynamicTableUtils {
 
    private static _getTypes(key: string, type: string, jsonSchema: JSONSchema4,
                             uiDefinition: StDynamicTableUISpecification): { field: string; type: string }[] {
-      if (uiDefinition && uiDefinition.group_field && uiDefinition.group_field.name) {
-         const fields = uiDefinition.group_field.name.split(' - ');
+      if (uiDefinition && uiDefinition.group_field && uiDefinition.group_field.view) {
+         const fields = uiDefinition.group_field.view.split(' - ');
          return fields.map(field => ({ field: field, type: jsonSchema.properties[field].type.toString() }));
       }
       return [{ field: key, type: type }];

@@ -8,25 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import {
-   ChangeDetectionStrategy,
-   Component,
-   EventEmitter,
-   forwardRef,
-   HostBinding,
-   Input,
-   OnChanges,
-   OnInit,
-   Output,
-   SimpleChanges,
-   ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { StInputError } from '../../st-input/st-input.error.model';
 import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
 import { JSONSchema4Type, JSONSchema4TypeName } from 'json-schema';
 import { StFormSchema } from '../st-form.model';
+import { StFormFieldTranslations } from './st-form-field.interface';
 
 @StEgeo()
 @Component({
@@ -43,8 +32,7 @@ import { StFormSchema } from '../st-form.model';
    }
 })
 
-export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
-   @Input() @StRequired() schema: { key: string, value: StFormSchema };
+export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() required: boolean = false;
    @Input() errorMessages: StInputError;
    @Input() qaTag: string;
@@ -54,6 +42,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    @Input() forceValidations: boolean;
    @Input() showTooltip: boolean = true;
    @Input() maxWidth: number; // number of characters from witch inputs will be displayed as textarea
+   @Input() translations?: StFormFieldTranslations;
    @Output() clickLink: EventEmitter<string> = new EventEmitter<string>();
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
@@ -66,6 +55,8 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    public innerValue: any;
    public errors: StInputError;
 
+   private _schema: { key: string, value: StFormSchema };
+
    private readonly _defaultErrorMessages: StInputError = {
       generic: 'Error',
       required: 'This field is required',
@@ -76,9 +67,19 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
       pattern: 'Invalid value'
    };
 
+   @Input() @StRequired()
+   get schema(): { key: string, value: StFormSchema } {
+      return this._schema;
+   }
+
+   set schema(schema: { key: string, value: StFormSchema }) {
+      this._schema = schema;
+      this.selectOptions = this.getSelectOptions();
+   }
+
    @HostBinding('class.read-only')
    get readOnly(): boolean {
-      return this.schema && this.schema.value && this.schema.value.readOnly === true;
+      return this._schema && this._schema.value && this._schema.value.readOnly === true;
    }
 
    onChange = (_: any) => {
@@ -99,7 +100,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    }
 
    ngOnInit(): void {
-      if (this.schema.value && this.schema.value.enum) {
+      if (this._schema.value && this._schema.value.enum) {
          this.selectOptions = this.getSelectOptions();
       }
       this._loadErrorMessages();
@@ -108,72 +109,61 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
             this.innerValue = this.default;
             this.onChange(this.innerValue);
          }
-         if (this.schema.value.readOnly) {
+         if (this._schema.value.readOnly) {
             this.setDisabledState(true);
          }
       });
    }
 
-   public ngOnChanges(changes: SimpleChanges): void {
-      if (changes.schema) {
-         this.selectOptions = this.getSelectOptions();
-      }
-   }
-
-
    get type(): string {
-      switch (this.schema.value.type) {
+      switch (this._schema.value.type) {
          case 'string':
-            if (!this.schema.value.enum) {
-               return 'text';
-            } else {
-               return 'select';
-            }
+            return this._schema.value.enum ? 'select' : 'text';
          case 'integer':
-            return 'number';
+            return this._schema.value.enum ? 'select' : 'number';
          default:
-            return <JSONSchema4TypeName> this.schema.value.type;
+            return <JSONSchema4TypeName> this._schema.value.type;
       }
    }
 
    get min(): number {
-      return this.schema.value.exclusiveMinimum ? this.schema.value.minimum + this.getInputStep() : this.schema.value.minimum;
+      return this._schema.value.exclusiveMinimum ? this._schema.value.minimum + this.getInputStep() : this._schema.value.minimum;
    }
 
    get max(): number {
-      return this.schema.value.exclusiveMaximum ? this.schema.value.maximum - this.getInputStep() : this.schema.value.maximum;
+      return this._schema.value.exclusiveMaximum ? this._schema.value.maximum - this.getInputStep() : this._schema.value.maximum;
    }
 
    get label(): string {
-      return this.schema.value.title;
+      return this._schema.value.title;
    }
 
    get placeholder(): string {
-      return this.schema.value.examples && this.schema.value.examples[0] ? this.schema.value.examples[0] : '';
+      return this._schema.value.examples && this._schema.value.examples[0] ? this._schema.value.examples[0] : '';
    }
 
    get default(): JSONSchema4Type {
-      return this.schema.value.default;
+      return this._schema.value.default;
    }
 
    get description(): string {
       if (this.showTooltip) {
-         return this.schema.value.description;
+         return this._schema.value.description;
       } else {
          return undefined;
       }
    }
 
    get minLength(): number {
-      return this.schema.value.minLength;
+      return this._schema.value.minLength;
    }
 
    get maxLength(): number {
-      return this.schema.value.maxLength;
+      return this._schema.value.maxLength;
    }
 
    get pattern(): string {
-      return this.schema.value.pattern;
+      return this._schema.value.pattern;
    }
 
    hasType(type: string): boolean {
@@ -214,7 +204,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    }
 
    getInputStep(): number {
-      if (this.schema.value.type === 'number') {
+      if (this._schema.value.type === 'number') {
          return 0.1;
       } else {
          return 1;
@@ -223,11 +213,16 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
 
    getSelectOptions(): StDropDownMenuItem[] {
       let options: StDropDownMenuItem[] = [];
-      if (this.schema.value.enum) {
-         options.push(<StDropDownMenuItem> { label: 'Select one option', value: undefined });
-         let enumValues: string[] = <string[]> this.schema.value.enum;
+      if (this._schema.value.enum) {
+         const placeholder: string = (this.translations && this.translations.placeholder) || 'Select one option';
+         options.push(<StDropDownMenuItem> { label: placeholder, value: undefined });
+         let enumValues: any[] = <any[]> this._schema.value.enum;
+         const uiOptions: StDropDownMenuItem[] = (this._schema.value.ui && this._schema.value.ui.options) || [];
+         options.push(...uiOptions);
          enumValues.forEach((value) => {
-            options.push(<StDropDownMenuItem> { label: value, value: value });
+            if (!options.find(_option => _option.value === value)) {
+               options.push(<StDropDownMenuItem> { label: value, value: value });
+            }
          });
       }
       return options;
@@ -238,7 +233,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    }
 
    onClickLink(): void {
-      this.clickLink.emit(this.schema.key);
+      this.clickLink.emit(this._schema.key);
    }
 
    private _loadErrorMessages(): void {
@@ -246,8 +241,8 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
          required: (this.errorMessages && this.errorMessages.required) || this._defaultErrorMessages.required,
          pattern: (this.errorMessages && this.errorMessages.pattern) || this._defaultErrorMessages.pattern,
          generic: (this.errorMessages && this.errorMessages.generic) || this._defaultErrorMessages.generic,
-         minLength: ((this.errorMessages && this.errorMessages.minLength) || this._defaultErrorMessages.minLength) + this.schema.value.minLength,
-         maxLength: ((this.errorMessages && this.errorMessages.maxLength) || this._defaultErrorMessages.maxLength) + this.schema.value.maxLength,
+         minLength: ((this.errorMessages && this.errorMessages.minLength) || this._defaultErrorMessages.minLength) + this._schema.value.minLength,
+         maxLength: ((this.errorMessages && this.errorMessages.maxLength) || this._defaultErrorMessages.maxLength) + this._schema.value.maxLength,
          min: ((this.errorMessages && this.errorMessages.min) || this._defaultErrorMessages.min) + (this.min - this.getInputStep()),
          max: ((this.errorMessages && this.errorMessages.max) || this._defaultErrorMessages.max) + (this.max + this.getInputStep())
       };

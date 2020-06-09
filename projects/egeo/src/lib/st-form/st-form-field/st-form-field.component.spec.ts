@@ -33,7 +33,7 @@ import { StTextareaModule } from '../../st-textarea/st-textarea.module';
 import { StTextareaComponent } from '../../st-textarea/st-textarea.component';
 import { getParentElement } from '../spec/st-form.component.spec';
 import { JSONSchema4Type } from 'json-schema';
-import { StInputError } from '../..';
+import { StFormSchema, StInputError } from '../..';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -937,13 +937,13 @@ describe('StFormFieldComponent', () => {
 
    describe('should be able to render selects with their validations', () => {
       let selectElement: HTMLSelectElement;
-      let selectProperty: any;
+      let selectProperty: StFormSchema;
 
       beforeEach(() => {
          spyOn(window, 'setTimeout').and.callFake((func) => {
             func();
          });
-         selectProperty = JSON_SCHEMA.properties.log_level;
+         selectProperty = _cloneDeep(JSON_SCHEMA.properties.log_level);
          component.schema = { key: 'log_level', value: selectProperty };
          component.qaTag = 'log_level';
 
@@ -985,21 +985,78 @@ describe('StFormFieldComponent', () => {
          });
       });
 
-      it('options have to be generated using the enum property and the first one to leave it empty', () => {
-         let enumValues = selectProperty.enum;
-         fixture.detectChanges();
-         (<HTMLInputElement> selectElement.querySelector('#log_level-input')).click();
-         fixture.detectChanges();
+      describe('Options have to be generated', () => {
 
-         let options: NodeListOf<Element> = selectElement.querySelectorAll('.st-dropdown-menu-item');
+         it('using the enum property and the first one to leave it empty', () => {
+            let enumValues: string[] = <string[]> selectProperty.enum;
+            fixture.detectChanges();
+            (<HTMLInputElement> selectElement.querySelector('#log_level-input')).click();
+            fixture.detectChanges();
 
-         expect(options.length).toBe(enumValues.length + 1);
-         expect((<HTMLLIElement> options[0]).innerText).toEqual('Select one option');
+            let options: NodeListOf<Element> = selectElement.querySelectorAll('.st-dropdown-menu-item');
 
-         for (let i = 1; i < options.length; ++i) {
-            expect((<HTMLLIElement> options[i]).innerText).toEqual(enumValues[i - 1]);
-         }
+            expect(options.length).toBe(enumValues.length + 1);
+            expect((<HTMLLIElement> options[0]).innerText).toEqual('Select one option');
+
+            for (let i = 1; i < options.length; ++i) {
+               expect((<HTMLLIElement> options[i]).innerText).toEqual(enumValues[i - 1]);
+            }
+         });
+
+         describe('and if options property is defined in UI definitions', () => {
+            let options: NodeListOf<Element>;
+
+            beforeEach(() => {
+               selectProperty = _cloneDeep(JSON_SCHEMA.properties.log_level);
+               selectProperty.ui = {
+                  options: [
+                     {
+                        label: 'Trace label',
+                        value: 'TRACE'
+                     },
+                     {
+                        label: 'Info label',
+                        value: 'INFO'
+                     },
+                     {
+                        label: 'Error label',
+                        value: 'ERROR'
+                     },
+                     {
+                        label: 'New option',
+                        value: 'NEW'
+                     }
+                  ]
+               };
+               component.schema = { key: 'log_level', value: selectProperty };
+               fixture.detectChanges();
+               selectElement = fixture.nativeElement.querySelector('#log_level');
+
+               (<HTMLInputElement> selectElement.querySelector('#log_level-input')).click();
+               fixture.detectChanges();
+
+               options = selectElement.querySelectorAll('.st-dropdown-menu-item');
+            });
+
+            it('options from enum and options are merged', () => {
+               expect(options.length).toEqual(8); // enum values plus option added in options property from ui definitions
+            });
+
+            it('it is used to print a label inside of the value', () => {
+               expect((<HTMLLIElement> options[1]).innerText).toEqual('Trace label');
+               expect((<HTMLLIElement> options[2]).innerText).toEqual('Info label');
+               expect((<HTMLLIElement> options[3]).innerText).toEqual('Error label');
+               expect((<HTMLLIElement> options[4]).innerText).toEqual('New option');
+            });
+
+            it('Options from enum without label in ui definitions, are displayed with its value', () => {
+               expect((<HTMLLIElement> options[5]).innerText).toEqual('DEBUG');
+               expect((<HTMLLIElement> options[6]).innerText).toEqual('WARN');
+               expect((<HTMLLIElement> options[7]).innerText).toEqual('FATAL');
+            });
+         });
       });
+
 
       it('if user clicks on the first option, model is empty', () => {
          fixture.nativeElement.querySelector('#log_level-input').click();
@@ -1202,7 +1259,7 @@ describe('StFormFieldComponent', () => {
    it('should display a link after field if property link is introduced in ui definition', () => {
       const genericIntegerInput = _cloneDeep(JSON_SCHEMA.properties.genericIntegerInput);
       component.schema = { key: 'genericIntegerInput', value: _cloneDeep(genericIntegerInput) };
-      component.schema.value.ui = {link: 'Select a value from this link'};
+      component.schema.value.ui = { link: 'Select a value from this link' };
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('.button.button-link.small').innerHTML).toContain('Select a value from this link');

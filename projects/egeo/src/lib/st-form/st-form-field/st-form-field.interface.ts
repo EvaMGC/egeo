@@ -4,4 +4,8 @@ export enum FORM_UI_COMPONENT {
    ACCORDION = <any> 'accordion'
 }
 
+export interface StFormFieldTranslations {
+   placeholder?: string;
+}
+
 

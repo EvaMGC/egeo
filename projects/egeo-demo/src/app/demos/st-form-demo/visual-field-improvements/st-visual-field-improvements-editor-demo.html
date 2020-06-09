@@ -30,5 +30,26 @@
       }
       }| json }}
    </p>
+
+   <h2 class="subtitle">Customization of options in a select</h2>
+   <p class="paragraph">When we want to give a more descriptive label to options in a select, we can use the property <b>options</b> of ui.
+      There we can define a list of pair of name and value that will be used to create the option menu.</p>
+   <p class="paragraph"> If you use this property, you have to know that options will be combined with the options specified in <b>enum</b> property from json schema.
+   The options defined in enum property but not in options property will be displayed without label.
+   </p>
+
+   <p class="code-demo">
+      {{ {
+      ui: {
+      options: [
+      {label: 'Spanish',
+      value: 'es'},
+      {
+      label: 'English',
+      value: 'en'
+      }
+      ]
+      } }| json }}
+   </p>
 </section>
 

@@ -22,7 +22,8 @@ export interface StDynamicTableUISpecification {
    };
    fk?: StDynamicTableFk;
    group_field?: {
-      name: string;
+      view: string;
+      fkTable: string;
    };
    templateRef?: string;
    visible?: boolean;

@@ -23,10 +23,10 @@ import {
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
 import { JSONSchema4 } from 'json-schema';
 import { StInputError } from '../st-input/st-input.error.model';
 import { StFormSchema } from './st-form.model';
+import { FORM_UI_COMPONENT, StFormFieldTranslations } from './st-form-field/st-form-field.interface';
 
 /**
  * @description {Component} [Dynamic form]
@@ -88,6 +88,10 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
     * By default, tooltips are displayed
     */
    @Input() showTooltips: boolean = true;
+
+   /** @Input {StFormFieldTranslations} [translations=] Field translations */
+   @Input() translations?: StFormFieldTranslations;
+
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    /** @Output {string} [clickLink=] Event emitted when link is clicked. It returns the field path */
