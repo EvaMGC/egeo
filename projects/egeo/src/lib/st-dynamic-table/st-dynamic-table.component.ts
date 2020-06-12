@@ -63,8 +63,8 @@ import { StTableIconClasses } from '../st-table/st-table.interface';
 })
 
 export class StDynamicTableComponent {
-   /** @Input {Object(key: string, value: any)[]} [items=''] Item list displayed as table rows */
-   @Input() @StRequired() items: { key: string, value: any }[];
+   /** @Input {Object([key: string]: any)[]} [items=''] Item list displayed as table rows */
+   @Input() @StRequired() items: { [key: string]: any }[];
 
    /** @Input {string} [qaTag=''] Prefix used to generate the id values for qa tests */
    @Input() qaTag: string;
@@ -162,6 +162,7 @@ export class StDynamicTableComponent {
    private _uiDefinitions: StDynamicTableUserInterface;
 
    private _templateContentFilter: TemplateRef<any>;
+   private _fkSeparator: string = ' - ';
 
    constructor(private _cd: ChangeDetectorRef) {
    }
@@ -221,11 +222,12 @@ export class StDynamicTableComponent {
       });
    }
 
-   public getCellContent(item: { key: string, value: any }, field: StDynamicTableHeader): string {
+   public getCellContent(item: { [key: string]: any}, field: StDynamicTableHeader): string {
       if (field.group) {
-         return field.group.split(' - ')
+         const groupLabel = field.group.split(this._fkSeparator)
             .map(_groupKey => item[_groupKey])
-            .join(' - ');
+            .join(this._fkSeparator);
+         return groupLabel.length > this._fkSeparator.length ? groupLabel : item[field.id];
       }
       return item[field.id];
    }

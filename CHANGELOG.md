@@ -25,6 +25,7 @@
 * st-select: Fix bug when select is used without being part of a form
 * st-table: Fix wrong css variable name
 * st-pagination: Remove duplicated event emitted when items per page are changed
+* st-dynamic-table: Fix bug in foreign key management when property does not exist on row
 
 
 ## 21.0.0 (June 01, 2020)
