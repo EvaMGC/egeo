@@ -35,9 +35,19 @@ export class StBubbleDemoComponent {
          default: '15px'
       },
       {
-         name: '--st-bubble__text-font-size',
+         name: '--egeo-st-bubble__text--font-size',
          description: 'Bubble text font size',
          default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-bubble__text--padding',
+         description: 'Bubble text padding',
+         default: '15px 20px'
+      },
+      {
+         name: '--egeo-st-bubble__small__text--padding',
+         description: 'Small bubble text padding',
+         default: '10px 15px'
       }
    ];
 

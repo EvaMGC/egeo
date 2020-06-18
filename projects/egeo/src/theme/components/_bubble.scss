@@ -41,8 +41,8 @@
 
       .text {
          color: var(--egeo-theme-neutral-full, $neutral-full);
-         padding: 15px 20px;
-         font-size:  var(--st-bubble__text-font-size, $egeo-font-size-14);
+         padding: var(--egeo-st-bubble__text--padding, 15px 20px);
+         font-size:  var(--egeo-st-bubble__text--font-size, $egeo-font-size-14);
          font-weight: 400;
          text-align: center;
          line-height: normal;
@@ -50,7 +50,7 @@
 
       &--small {
          .text {
-            padding: 10px 15px;
+            padding: var(--egeo-st-bubble__small__text--padding, 10px 15px);
          }
       }
 
