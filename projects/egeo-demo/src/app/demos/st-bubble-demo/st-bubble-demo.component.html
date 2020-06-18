@@ -11,8 +11,14 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="container-liquid">
-      <div class="bubble-demo-container">
+   <section class="container-liquid demo-layout">
+
+      <h1 class="title">Theme customization</h1>
+      <p class="paragraph">You can customize some styles using the following css variables</p>
+      <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
+
+      <section class="bubble-demo-container">
+         <h1 class="title">Example</h1>
          <div class="buttons">
             <st-switch label="Enabled animation" [(formControl)]="animationFormControl">
             </st-switch>
@@ -35,6 +41,6 @@
                </button>
             </st-bubble>
          </div>
-      </div>
+      </section>
    </section>
 </st-docs>

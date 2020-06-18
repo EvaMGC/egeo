@@ -15,6 +15,7 @@ import { StBubbleModule, StDocsModule } from '@stratio/egeo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StBubbleDemoComponent } from './st-bubble-demo.component';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 @NgModule({
    imports: [
@@ -25,7 +26,8 @@ import { StBubbleDemoComponent } from './st-bubble-demo.component';
       StSwitchModule,
       FormsModule,
       ReactiveFormsModule,
-      StInputModule
+      StInputModule,
+      CssPropertyTableModule
    ],
    declarations: [StBubbleDemoComponent],
    providers: []

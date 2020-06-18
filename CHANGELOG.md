@@ -6,6 +6,7 @@
 
 * st-form: Allow to render selects with integer value
 * st-form: Allow to customize select option labels using the UI Definition object
+* st-bubble: Allow to customize the right margin of arrow and text font size
 
 **Fixed bugs:**
 

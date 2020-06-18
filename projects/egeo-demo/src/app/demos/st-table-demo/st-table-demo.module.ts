@@ -10,7 +10,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StDemoGeneratorModule, StDocsModule, StTableModule, StCheckboxModule, StToggleButtonsModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTableModule, StCheckboxModule, StToggleButtonsModule, StDropdownMenuModule } from '@stratio/egeo';
 
 import { StTableDemoComponent } from './st-table-demo.component';
 import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
@@ -23,7 +23,8 @@ import { CssPropertyTableModule } from '@app/shared/css-property-table/css-prope
       StDemoGeneratorModule.withComponents({ components: [StTableDemoComponent] }),
       StDocsModule,
       StToggleButtonsModule,
-      CssPropertyTableModule
+      CssPropertyTableModule,
+      StDropdownMenuModule
    ],
    declarations: [StTableDemoComponent]
 })

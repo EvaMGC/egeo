@@ -9,11 +9,13 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
+.title {
+   display: block;
+}
 
 .bubble-demo-container {
    width: 800px;
    height: 300px;
-   padding: 20px;
 }
 
 .bubble-demo-items {

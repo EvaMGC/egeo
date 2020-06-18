@@ -22,6 +22,13 @@ st-table {
    }
 }
 
+.row-menu {
+   position: absolute;
+   right: 24px;
+   min-height: 96px;
+   top: 52px;
+}
+
 td > .icon-ellipsis {
    cursor: pointer;
    font-size: $egeo-font-size-16;

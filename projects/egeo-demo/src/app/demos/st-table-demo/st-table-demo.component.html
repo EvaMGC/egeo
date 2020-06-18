@@ -212,7 +212,8 @@
       <st-table [fields]="fields" [hasHoverMenu]="true" [sortable]="false" [filterable]="false" [stickyHoverMenu]="true"
       style="display: block; max-width: 50%; overflow: auto">
          <tbody>
-         <tr st-table-row *ngFor="let userData of data; let index = index">
+         <tr st-table-row *ngFor="let userData of data; let index = index"
+             (mouseleave)="activeMenu = -1">
             <td st-table-cell st-table-row-content>
                <label>{{userData.id}}</label>
             </td>
@@ -233,7 +234,13 @@
             </td>
 
             <td st-table-row-hover class="st-table-hover">
-               <i class="icon icon-ellipsis"></i>
+               <i class="icon icon-ellipsis" (click)="activeMenu = index"></i>
+               <st-dropdown-menu
+                                 class="row-menu"
+                                 [items]="rowActions"
+                                 [active]="activeMenu === index"
+                                 [visualMode]="1">
+               </st-dropdown-menu>
             </td>
          </tr>
          </tbody>

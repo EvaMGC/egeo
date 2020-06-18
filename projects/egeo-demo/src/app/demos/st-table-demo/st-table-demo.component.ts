@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Order, ORDER_TYPE, StTableHeader } from '@stratio/egeo';
+import { Order, ORDER_TYPE, StDropDownMenuItem, StTableHeader } from '@stratio/egeo';
 import { cloneDeep as _cloneDeep, filter as _filter, intersectionBy as _intersectionBy } from 'lodash';
 import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
@@ -222,6 +222,20 @@ export class StTableDemoComponent implements OnInit {
    public sortedData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public selectedCheckboxes: boolean[][] = [[], []];
    public statusFilter: boolean[];
+   public rowActions: StDropDownMenuItem[] = [
+      {
+         value: 'edit',
+         icon: 'edit-icon',
+         label: 'Edit'
+      }, {
+         value: 'remove',
+         icon: 'trash-icon',
+         label: 'Delete',
+         iconColor: 'red',
+         labelColor: 'red'
+      }
+   ];
+   public activeMenu: number;
 
    constructor(private _cd: ChangeDetectorRef) {
       this.sortedData = _cloneDeep(this.data);

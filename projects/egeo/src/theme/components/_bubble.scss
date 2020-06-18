@@ -42,7 +42,7 @@
       .text {
          color: var(--egeo-theme-neutral-full, $neutral-full);
          padding: 15px 20px;
-         font-size: $egeo-font-size-14;
+         font-size:  var(--st-bubble__text-font-size, $egeo-font-size-14);
          font-weight: 400;
          text-align: center;
          line-height: normal;
@@ -67,7 +67,7 @@
          width: 20px;
          height: 20px;
          bottom: 47px;
-         margin-right: 15px;
+         margin-right: var(--egeo-st-bubble__arrow--margin-right, 15px);
          transform: rotate(45deg) skew(15deg, 15deg);
          z-index: -1;
       }

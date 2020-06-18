@@ -10,6 +10,7 @@
  */
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    selector: 'st-bubble-demo',
@@ -27,6 +28,18 @@ export class StBubbleDemoComponent {
    public animationFormControl: FormControl = new FormControl(true);
    public smallFormControl: FormControl = new FormControl(false);
    public openToLeftFormControl: FormControl = new FormControl(true);
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-bubble__arrow--margin-right',
+         description: 'Bubble arrow margin right',
+         default: '15px'
+      },
+      {
+         name: '--st-bubble__text-font-size',
+         description: 'Bubble text font size',
+         default: '$egeo-font-size-14'
+      }
+   ];
 
 
    onClick(): void {
