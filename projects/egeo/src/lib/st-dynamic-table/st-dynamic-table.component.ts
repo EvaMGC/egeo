@@ -12,8 +12,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { JSONSchema4 } from 'json-schema';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
-import { Order, ORDER_TYPE } from '../st-table/shared/order';
-import { StTableHeader } from '../st-table/shared/table-header.interface';
+import { Order } from '../st-table/shared/order';
 import { StDynamicTableUtils } from './utils/st-dynamic-table.utils';
 import { StDynamicTableHeader, StDynamicTableUserInterface, StDynamicTableFkEvent } from './st-dynamic-table.model';
 import { StTableIconClasses } from '../st-table/st-table.interface';
@@ -77,7 +76,7 @@ export class StDynamicTableComponent {
    @Input() sortable: boolean = true;
    /**
     * @Input {boolean} [filterable=false] Boolean to make filterable the table, To enable filtering of columns use
-    * the new "filterable" field inside stTableHeader model (necesary define filterConfig).
+    * the new "filterable" field inside stTableHeader model (necessary define filterConfig).
     */
    @Input() filterable: boolean = false;
    /**
@@ -140,13 +139,13 @@ export class StDynamicTableComponent {
     */
    @Output() selectAll: EventEmitter<boolean> = new EventEmitter<boolean>();
    /** @Output {EventEmitter<StTableHeader[]>} [fields=] Event emitted when header fields are being loaded */
-   @Output() updateFields: EventEmitter<StTableHeader[]> = new EventEmitter<StTableHeader[]>();
+   @Output() updateFields: EventEmitter<StDynamicTableHeader[]> = new EventEmitter<StDynamicTableHeader[]>();
 
    /** @Output {string} [clickFilter=] Event emitted when using filters custom template  */
-   @Output() clickFilter: EventEmitter<StTableHeader> = new EventEmitter();
+   @Output() clickFilter: EventEmitter<StDynamicTableHeader> = new EventEmitter();
 
    /** @Output {StTableHeader[]} [selectFilters=] Event emitted  when user interacts with filter button without a custom template */
-   @Output() selectFilters: EventEmitter<StTableHeader[]> = new EventEmitter<StTableHeader[]>();
+   @Output() selectFilters: EventEmitter<StDynamicTableHeader[]> = new EventEmitter<StDynamicTableHeader[]>();
    /** @Output {EventEmitter<number} [showHoverMenu=] Event emitted when user clicks on hover button of a row */
    @Output() showHoverMenu: EventEmitter<number> = new EventEmitter<number>();
    /** @Output {Object(checked: boolean, row: number)} [selectRow=] Event emitted when user clicks on checkbox of a row */
@@ -203,7 +202,7 @@ export class StDynamicTableComponent {
       this.selectAll.emit(checked);
    }
 
-   public onSelectedFilters(selectedFilters: StTableHeader[]): void {
+   public onSelectedFilters(selectedFilters: StDynamicTableHeader[]): void {
       this.selectFilters.emit(selectedFilters);
    }
 

@@ -8,16 +8,19 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Order, ORDER_TYPE, StDropDownMenuItem, StTableHeader } from '@stratio/egeo';
 import { cloneDeep as _cloneDeep, filter as _filter, intersectionBy as _intersectionBy } from 'lodash';
+
 import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
    templateUrl: './st-table-demo.component.html',
-   styleUrls: ['./st-table-demo.component.scss']
+   styleUrls: ['./st-table-demo.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StTableDemoComponent implements OnInit {
+export class StTableDemoComponent {
    public configDoc: any = {
       html: 'demo/st-table-demo/st-table-demo.component.html',
       ts: 'demo/st-table-demo/st-table-demo.component.ts',
@@ -41,6 +44,25 @@ export class StTableDemoComponent implements OnInit {
          id: 'id', label: 'Id', filters: {
             filterConfig: [
                {
+                  id: '4545-df56-s344',
+                  name: '4545-df56-s344'
+               },
+               {
+                  id: '4545-df56-s346',
+                  name: '4545-df56-s346'
+               }
+            ],
+            title: 'Filter By',
+            buttonText: 'Apply'
+         }
+      },
+      { id: 'name', label: 'Name' },
+      {
+         id: 'lastName',
+         label: 'Last Name',
+         filters: {
+            filterConfig: [
+               {
                   id: '0',
                   name: 'López'
                },
@@ -52,11 +74,6 @@ export class StTableDemoComponent implements OnInit {
             title: 'Filter By',
             buttonText: 'Apply'
          }
-      },
-      { id: 'name', label: 'Name' },
-      {
-         id: 'lastName',
-         label: 'Last Name'
       },
       {
          id: 'phone',
@@ -219,9 +236,10 @@ export class StTableDemoComponent implements OnInit {
       }
    ];
    public filterData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
+   public customFilterData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public sortedData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public selectedCheckboxes: boolean[][] = [[], []];
-   public statusFilter: boolean[];
+   public statusFilter: boolean[][] = [[], []];
    public rowActions: StDropDownMenuItem[] = [
       {
          value: 'edit',
@@ -236,20 +254,14 @@ export class StTableDemoComponent implements OnInit {
       }
    ];
    public activeMenu: number;
+   public idFilterFormControl: FormControl = new FormControl();
+   public lastNameFilterFormControl: FormControl = new FormControl();
+   public phoneFilterFormControl: FormControl = new FormControl();
 
    constructor(private _cd: ChangeDetectorRef) {
       this.sortedData = _cloneDeep(this.data);
       this.filterData = _cloneDeep(this.data);
-   }
-
-   ngOnInit(): void {
-      this.statusFilter = new Array(this.fields.length);
-      this.statusFilter.fill(false);
-   }
-
-   public checkIcon(index: number): void {
-      this.statusFilter[index] = !this.statusFilter[index];
-      this._cd.markForCheck();
+      this.customFilterData = _cloneDeep(this.data);
    }
 
    // Selectable tables
@@ -279,28 +291,43 @@ export class StTableDemoComponent implements OnInit {
       });
    }
 
-   public onSelectedFilters(event: StTableHeader[]): void {
-      this.statusFilter = [];
-      if (event.length > 0) {
-         let filterElement = [];
-         event.map((filter) => {
-            const filterPosition = this.filterFields.findIndex(_field => _field.id === filter.id);
-            this.statusFilter[filterPosition] = true;
+   public onSelectedFilters(event: StTableHeader[], tablePosition: number): void {
+      if (tablePosition === 0) {
+         this.statusFilter[0] = [];
+         if (event.length > 0) {
+            let filterElement = [];
+            event.map((filter) => {
+               const filterPosition = this.filterFields.findIndex(_field => _field.id === filter.id);
+               this.statusFilter[0][filterPosition] = true;
 
-            filterElement.push([].concat.apply([], filter.filters.filterConfig.map((config) => {
-               return _filter(this.data, (user) => {
-                  return user[filter.id] === config.name;
-               });
-            })));
-         });
-         this.filterData = <any>_intersectionBy(...filterElement, 'id');
+               filterElement.push([].concat.apply([], filter.filters.filterConfig.map((config) => {
+                  return _filter(this.data, (user) => {
+                     return user[filter.id] === config.name;
+                  });
+               })));
+            });
+            this.filterData = <any>_intersectionBy(...filterElement, 'id');
+         } else {
+            this.filterData = this.data;
+         }
       } else {
-         this.filterData = this.data;
+         this.onCustomFilter();
       }
       this._cd.markForCheck();
    }
 
-   public onFilter(index: number): void {
-      // do stuff to filter table
+   public onCustomFilter(): void {
+      const id: string = this.idFilterFormControl.value;
+      const lastName: string = this.lastNameFilterFormControl.value;
+      const phone: string = this.phoneFilterFormControl.value;
+      this.customFilterData = this.data.filter(_row =>
+         (!id || _row.id === id) &&
+         (!phone || String(_row.phone) === phone) &&
+         (!lastName || String(_row.lastName) === lastName));
+      this.statusFilter[1][0] = Boolean(id && id.length);
+      this.statusFilter[1][2] = Boolean(lastName && lastName.length);
+      this.statusFilter[1][3] = Boolean(phone && phone.length);
+
+      this._cd.markForCheck();
    }
 }

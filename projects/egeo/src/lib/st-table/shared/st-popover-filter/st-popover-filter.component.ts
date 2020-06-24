@@ -8,11 +8,21 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import {
+   AfterViewInit,
+   ChangeDetectionStrategy,
+   Component,
+   ElementRef,
+   EventEmitter,
+   HostListener,
+   Input,
+   OnDestroy,
+   Output,
+   TemplateRef
+} from '@angular/core';
 import { get as _get } from 'lodash';
 
 import { StTableHeader } from '../../shared/table-header.interface';
-import { StTableFilterIconClasses } from '../../st-table.interface';
 
 @Component({
    selector: 'st-popover-filter',
@@ -20,30 +30,33 @@ import { StTableFilterIconClasses } from '../../st-table.interface';
    styleUrls: ['./st-popover-filter.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StPopoverFilterComponent {
-
+export class StPopoverFilterComponent implements OnDestroy {
+   /**
+    * @description {Component} [Popover Filter]
+    *
+    * The popover filter component allows user to filter table data according to column values
+    *
+    */
    /** @Input {StTableHeader} [field=''] field displayed in the header */
    @Input() field: StTableHeader;
 
    /** @Input {number} [index=''] index of field displayed in the header */
    @Input() index: number;
 
-   /** @Input {boolean} [filtered=''] Status filter by column, needed with templateContentFilter to change filtered icon */
-   @Input() filtered: boolean;
-
    /** @Input {TemplateRef} [templateContentFilter=undefined] Reference to paint a custom template inside popover content */
    @Input() templateContentFilter?: TemplateRef<any>;
 
-   /** @Input {{StTableFilterIconClasses} [iconClasses=''] List of icon classes */
-   @Input() iconClasses?: StTableFilterIconClasses = new StTableFilterIconClasses();
-
    /** @Output [filter=''] Event emitted  when user interacts with filter button without a custom template */
    @Output() filter: EventEmitter<any> = new EventEmitter();
+
+   /** @Output [close=''] Event emitted when menu has to be closed */
+   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
    public openToLeft: boolean;
    public offsetX: number;
 
    private _hidden: boolean;
+   private _submitButton: HTMLButtonElement;
 
    constructor(private _elementRef: ElementRef) {
 
@@ -57,7 +70,10 @@ export class StPopoverFilterComponent {
 
    set hidden(hidden: boolean) {
       if (!hidden) {
-         this.offsetX = (this._elementRef.nativeElement.offsetLeft - this._elementRef.nativeElement.offsetWidth)  * -1;
+         this.offsetX = (this._elementRef.nativeElement.offsetLeft - this._elementRef.nativeElement.offsetWidth) * -1;
+         this._addSubmitButtonListener();
+      } else {
+         this._removeSubmitButtonListener();
       }
       this._hidden = hidden;
    }
@@ -66,15 +82,44 @@ export class StPopoverFilterComponent {
       return _get(field, `filters.${config}`);
    }
 
-   public getFilteredIcon(): string {
-      return this.filtered ? this.iconClasses.selected : this.iconClasses.enabled;
-   }
-
-   public onChangeFilter(indexFilter: number, event: Event): void {
-      this.field.filters.filterConfig[indexFilter].selected = (<any>event).checked;
+   public onChangeFilter(indexFilter: number, event: { checked: boolean, value: any }): void {
+      this.field.filters.filterConfig[indexFilter].selected = event.checked;
    }
 
    public onFilter(): void {
       this.filter.emit();
+      this.close.emit();
+   }
+
+   public onCloseMenu(): void {
+      if (!this._hidden) {
+         this.close.emit(true);
+      }
+   }
+
+   @HostListener('document:keydown.enter')
+   public onPressEnter(): void {
+      if (!this._hidden) {
+         this.onFilter();
+      }
+   }
+
+   ngOnDestroy(): void {
+      this._removeSubmitButtonListener();
+   }
+
+   private _addSubmitButtonListener(): void {
+      if (this._elementRef && this._elementRef.nativeElement) {
+         this._submitButton = this._elementRef.nativeElement.querySelector('button[popover-filter-submit]');
+         if (this._submitButton) {
+            this._submitButton.addEventListener('click', this.onCloseMenu.bind(this));
+         }
+      }
+   }
+
+   private _removeSubmitButtonListener(): void {
+      if (this._submitButton) {
+         this._submitButton.removeEventListener('click', this.onCloseMenu.bind(this));
+      }
    }
 }

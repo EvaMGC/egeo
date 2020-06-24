@@ -10,24 +10,35 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-pop-over  class="st-table__popover" qaTag="pop-over-table"
-              [title]="getConfigField(field, 'title')"
-              [hidden]="hidden"
-              [showArrow]="false"
-              [openToLeft]="false"
-              [offset]="{x: offsetX, y: 0}"
-              [showSettingBtn]="getConfigField(field, 'showSettingBtn')">
-   <i pop-over-button class='st-table__filter-arrow' [ngClass]="getFilteredIcon()">
-   </i>
+<st-pop-over class="st-table__popover" qaTag="pop-over-table"
+             [title]="getConfigField(field, 'title')"
+             [hidden]="hidden"
+             [showArrow]="false"
+             [openToLeft]="false"
+             [offset]="{x: offsetX, y: 0}"
+             [showSettingBtn]="getConfigField(field, 'showSettingBtn')"
+             (clickOutside)="onCloseMenu()">
+   <div pop-over-button>
+      <ng-content select="[popover-filter-button]"></ng-content>
+   </div>
    <div pop-over-content class="st-table__popover-content">
-      <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:index}"></ng-container>
+      <ng-container [ngTemplateOutlet]="templateContentFilter"
+                    [ngTemplateOutletContext]="{index:index}">
+      </ng-container>
       <div class="st-table__popover-content-filter" *ngIf="!templateContentFilter">
+
          <div *ngFor="let filter of field.filters.filterConfig; let indexFilter = index">
-            <st-checkbox name="filter.name" [checked]="filter.selected" [value]="false" (change)="onChangeFilter(indexFilter, $event)">
+            <st-checkbox
+               name="filter.name"
+               [checked]="filter.selected"
+               (change)="onChangeFilter(indexFilter, $event)"
+               (click)="$event.stopPropagation()">
                <span>{{filter.name}}</span>
             </st-checkbox>
          </div>
-         <button id="filter-button-{{index}}" class="button button-primary small st-table__popover-button" (click)="onFilter()">
+         <button id="filter-button-{{index}}"
+                 class="button button-primary small st-table__popover-button"
+                 (click)="onFilter()">
             <i *ngIf="!getConfigField(field, 'buttonText')" class="icon icon-filter"></i>
             <span>{{getConfigField(field, 'buttonText')}}</span>
          </button>

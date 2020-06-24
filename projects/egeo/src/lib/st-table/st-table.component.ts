@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, TemplateRef, HostBinding, Host } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
@@ -84,7 +84,7 @@ export class StTableComponent implements OnInit {
    @Input() sortable: boolean = true;
    /**
     * @Input {boolean} [filterable=true] Boolean to make filterable the table, To enable filtering of columns use
-    * the new "filterable" field inside stTableHeader model (necesary define filterConfig).
+    * the new "filterable" field inside stTableHeader model (necessary define filterConfig).
     */
    @Input() filterable: boolean = false;
    /**
@@ -98,8 +98,10 @@ export class StTableComponent implements OnInit {
 
    /** @Input {TemplateRef} [templateContentFilter=undefined] Reference to paint a custom template inside popover content */
    @Input() templateContentFilter?: TemplateRef<any>;
+
    /** @Input {boolean[]} [statusFilter=''] List of status filter by column, needed with templateContentFilter */
    @Input() statusFilter?: boolean[];
+
    /** @Input {StTableIconClasses} [iconClasses=''] List of icon classes */
    @Input() iconClasses?: StTableIconClasses = new StTableIconClasses();
 
@@ -110,10 +112,10 @@ export class StTableComponent implements OnInit {
    get fixedHeader(): boolean {
       return this._fixedHeader;
    }
+
    set fixedHeader(newValue: boolean) {
       this._fixedHeader = newValue;
    }
-
 
    /** @Input {boolean} [stickyHoverMenu=false] Boolean to fix hover menu always visible */
    @Input()
@@ -121,6 +123,7 @@ export class StTableComponent implements OnInit {
    get stickyHoverMenu(): boolean {
       return this._stickyHoverMenu;
    }
+
    set stickyHoverMenu(newValue: boolean) {
       this._stickyHoverMenu = newValue;
    }
@@ -174,7 +177,6 @@ export class StTableComponent implements OnInit {
    @Output() selectFilters: EventEmitter<StTableHeader[]> = new EventEmitter();
 
    public tableClasses: any = {};
-   public orderTypes: any = ORDER_TYPE;
    public visibleFilter: number = -1;
 
    private _fixedHeader: boolean = false;
@@ -194,7 +196,7 @@ export class StTableComponent implements OnInit {
    }
 
    public getHeaderItemClass(field: StTableHeader): string {
-      let isOrderAsc = this.isSortedByFieldAndDirection(field, this.orderTypes.ASC);
+      let isOrderAsc = this.isSortedByFieldAndDirection(field, ORDER_TYPE.ASC);
       return isOrderAsc ? this.iconClasses.sort.asc : this.iconClasses.sort.desc;
    }
 
@@ -207,23 +209,12 @@ export class StTableComponent implements OnInit {
    }
 
    public isFilterable(field: StTableHeader): boolean {
-      return this.filterable && (_get(field, 'filters.filterConfig')) ||
-            (this.templateContentFilter && _get(field, 'filters')) ||
-            _get(field, 'filters.templateRef');
+      return this.filterable && ((_get(field, 'filters.filterConfig')) ||
+         (this.templateContentFilter && _get(field, 'filters')) ||
+         _get(field, 'filters.templateRef'));
    }
 
-   public onClickPopover(event: MouseEvent, index: number, field: StTableHeader): void {
-      event.stopPropagation();
-      if (this.visibleFilter === index) {
-         this.visibleFilter = -1;
-      } else {
-         this.visibleFilter = index;
-      }
-      this.clickFilter.emit(field);
-      this._cd.markForCheck();
-   }
-
-   public onHidePopover(): void {
+   public onHideFilterMenu(): void {
       this.visibleFilter = -1;
       this._cd.markForCheck();
    }
@@ -244,7 +235,7 @@ export class StTableComponent implements OnInit {
       this.selectAll.emit(event.checked);
    }
 
-   public onSelectedFilters(event: Event): void {
+   public onSelectFilters(): void {
       let selectedFilters = _cloneDeep(this.fields);
       selectedFilters = selectedFilters.filter((field) => {
          if (_get(field, 'filters.filterConfig')) {
@@ -255,6 +246,21 @@ export class StTableComponent implements OnInit {
          }
       });
       this.selectFilters.emit(selectedFilters);
+   }
+
+   public onChangeFilterVisibility(event: MouseEvent, index: number, field: StTableHeader): void {
+      event.stopPropagation();
+      this.visibleFilter = this.visibleFilter === index ? undefined : index;
+      this.clickFilter.emit(field);
+      this._cd.markForCheck();
+   }
+
+   public getFilterIconClasses(position: number): { [key: string]: boolean } {
+      const classes: { [key: string]: boolean } = {};
+      classes['st-table__filter-arrow'] = true;
+      classes[this.statusFilter[position] ? this.iconClasses.filter.selected : this.iconClasses.filter.enabled] = true;
+
+      return classes;
    }
 
    private changeOrderDirection(): Order {

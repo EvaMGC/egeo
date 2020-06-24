@@ -31,12 +31,13 @@
                             [field]="field"
                             [index]="i"
                             [templateContentFilter]="templateContentFilter"
-                            [filtered]="statusFilter[i]"
                             [hidden]="visibleFilter !== i"
-                            [iconClasses]="iconClasses?.filter"
-                            (filter)="onSelectedFilters($event)"
-                            (click)="onClickPopover($event, i, field)"
-                            (clickOutside)="onHidePopover()">
+                            (filter)="onSelectFilters()"
+                            (close)="onHideFilterMenu()">
+            <i popover-filter-button
+               [ngClass]="getFilterIconClasses(i)"
+               (click)="onChangeFilterVisibility($event, i, field)">
+            </i>
          </st-popover-filter>
       </th>
       <th *ngIf="hasHoverMenu"></th> <!-- For hover cell -->

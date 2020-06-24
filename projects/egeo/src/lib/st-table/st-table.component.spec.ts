@@ -271,17 +271,18 @@ describe('StTableComponent', () => {
          }
       });
 
-      it('if not has custom template and select an option, clicking on button should emit eventEmitter with selected filters', () => {
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
-         headerItem[4].querySelector('.st-table__filter-arrow').click();
+      it('if not has custom template and select an option, clicking on button should emit and event with selected filters', () => {
+         let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+         (<HTMLButtonElement> headerItems[4].querySelector('.st-table__filter-arrow')).click();
          fixture.detectChanges();
          let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[0];
-         popover.querySelector('.st-table__popover-button').click();
+         (<HTMLButtonElement> headerItems[4].querySelector('.st-table__popover-button')).click();
          fixture.detectChanges();
-         expect(headerItem[4].querySelector('.icon-arrow4_down')).not.toBeNull();
+         expect(headerItems[4].querySelector('.icon-arrow4_down')).not.toBeNull();
 
          popover.querySelector('st-checkbox').querySelector('input').click();
-         popover.querySelector('.st-table__popover-button').click();
+         (<HTMLButtonElement> headerItems[4].querySelector('.st-table__popover-button')).click();
+         fixture.detectChanges();
 
          expect(component.selectFilters.emit).toHaveBeenCalledWith([fakeFields[4]]);
       });
@@ -297,6 +298,27 @@ describe('StTableComponent', () => {
             expect(popover.style.visibility).toEqual('visible');
 
             fixture.nativeElement.click();  // click outside popover
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+               fixture.detectChanges();
+
+               expect(fixture.nativeElement.querySelector('.st-table__popover .content').style.visibility).toEqual('hidden');
+               done();
+            });
+         });
+      });
+
+      it('and user presses key ENTER, it has to be closed', (done) => {
+         fixture.nativeElement.querySelector('.st-table__header-item .st-table__filter-arrow').click();
+         fixture.detectChanges();
+         let popover = fixture.nativeElement.querySelector('.st-table__popover .content');
+
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            expect(popover.style.visibility).toEqual('visible');
+            const enterKeyEvent: KeyboardEvent = new KeyboardEvent('keydown', {key: 'Enter'});
+            document.dispatchEvent(enterKeyEvent); // click enter key
             fixture.detectChanges();
             fixture.whenStable().then(() => {
                fixture.detectChanges();

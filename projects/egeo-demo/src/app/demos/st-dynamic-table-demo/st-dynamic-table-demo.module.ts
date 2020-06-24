@@ -10,11 +10,12 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StDemoGeneratorModule, StDocsModule, StTableModule, StCheckboxModule, StToggleButtonsModule, StDropdownMenuModule } from '@stratio/egeo';
+import { StCheckboxModule, StDemoGeneratorModule, StDocsModule, StDropdownMenuModule, StInputModule, StToggleButtonsModule } from '@stratio/egeo';
 
 import { StDynamicTableDemoComponent } from './st-dynamic-table-demo.component';
 import { StDynamicTableModule } from '../../../../../egeo/src/lib/st-dynamic-table/st-dynamic-table.module';
 import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
    imports: [
@@ -25,8 +26,12 @@ import { CssPropertyTableModule } from '@app/shared/css-property-table/css-prope
       StDocsModule,
       StToggleButtonsModule,
       StDropdownMenuModule,
-      CssPropertyTableModule
+      CssPropertyTableModule,
+      StInputModule,
+      FormsModule,
+      ReactiveFormsModule
    ],
    declarations: [StDynamicTableDemoComponent]
 })
-export class StDynamicTableDemoModule { }
+export class StDynamicTableDemoModule {
+}

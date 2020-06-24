@@ -8,10 +8,12 @@
 * st-form: Allow to customize select option labels using the UI Definition object
 * st-bubble: Allow to customize the right margin of arrow, text font size and padding
 * st-dynamic-table: Remove management of the default sort
+* st-table: Close filter menu when enter key is pressed
 
 **Fixed bugs:**
 
 * st-dynamic-table: Fix bug in foreign key management when property does not exist on row
+* st-table: Do not close filter menu when user clicks on filter menu container
 
 **Breaking changes:**
 

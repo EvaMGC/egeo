@@ -8,19 +8,21 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { cloneDeep as _cloneDeep } from 'lodash';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { cloneDeep as _cloneDeep, filter as _filter, intersectionBy as _intersectionBy } from 'lodash';
 import { JSONSchema4 } from 'json-schema';
-import { Order, ORDER_TYPE, StDropDownMenuItem } from '@stratio/egeo';
+import { Order, ORDER_TYPE, StDropDownMenuItem, StDynamicTableHeader } from '@stratio/egeo';
 
 import { StDynamicTableUserInterface } from '../../../../../egeo/src/lib/st-dynamic-table/st-dynamic-table.model';
 import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
    templateUrl: './st-dynamic-table-demo.component.html',
-   styleUrls: ['./st-dynamic-table-demo.component.scss']
+   styleUrls: ['./st-dynamic-table-demo.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StDynamicTableDemoComponent implements OnInit {
+export class StDynamicTableDemoComponent {
    public configDoc: any = {
       html: 'demo/st-table-demo/st-table-demo.component.html',
       ts: 'demo/st-table-demo/st-table-demo.component.ts',
@@ -68,7 +70,6 @@ export class StDynamicTableDemoComponent implements OnInit {
          }
       }
    };
-
    public jsonSchemaFk: JSONSchema4 = {
       '$schema': 'http://json-schema.org/schema#',
       'title': 'Fks Table',
@@ -86,14 +87,7 @@ export class StDynamicTableDemoComponent implements OnInit {
          },
          'tipo_id': {
             'title': 'Tipo User Fk',
-            'description': 'Tipo User',
-            'fk': {
-               'table': 'user.bank_user',
-               'field': 'id'
-            },
-            'group_field': {
-               'name': 'tipo_id - descripcion'
-            }
+            'description': 'Tipo User'
          },
          'descripcion': {
             'title': 'Descripción',
@@ -101,7 +95,6 @@ export class StDynamicTableDemoComponent implements OnInit {
          }
       }
    };
-
    public uiDefinition: StDynamicTableUserInterface = {
       company: { sortable: false },
       id: {
@@ -113,9 +106,18 @@ export class StDynamicTableDemoComponent implements OnInit {
          styles: {
             color: '#DF2935'
          }
+      },
+      tipo_id: {
+         fk: {
+            table: 'user.bank_user',
+            field: 'id'
+         },
+         group_field: {
+            view: 'tipo_id - descripcion',
+            fkTable: 'id'
+         }
       }
    };
-
    public currentOrder: Order;
 
    public users: Array<{ id: string, name: string, lastName: string, phone: number, company: string, status: string }> = [
@@ -167,8 +169,11 @@ export class StDynamicTableDemoComponent implements OnInit {
          status: 'Busy'
       }
    ];
+   public sortedUsers: Array<{ id: string, name: string, lastName: string, phone: number, company: string, status: string }> = [];
+   public filteredUsers: Array<{ id: string, name: string, lastName: string, phone: number, company: string, status: string }> = [];
+   public customFilteredUsers: Array<{ id: string, name: string, lastName: string, phone: number, company: string, status: string }> = [];
 
-   public fks: Array<{ }> = [
+   public fks: Array<{}> = [
       {
          codigo: 'K',
          descripcion: 'admin',
@@ -218,8 +223,6 @@ export class StDynamicTableDemoComponent implements OnInit {
          tipo_id: 13
       }
    ];
-
-   public sortedUsers: Array<{ id: string, name: string, lastName: string, phone: number, company: string, status: string }> = [];
    public selectedCheckboxes: boolean[][] = [[], []];
    public statusFilter: boolean[] = [];
    public selected: boolean[][] = [];
@@ -295,12 +298,19 @@ export class StDynamicTableDemoComponent implements OnInit {
       }
    ];
 
+   public customFilterFormControl: FormControl = new FormControl();
+   public tableFields: StDynamicTableHeader[][] = [];
+   public activeFilters: boolean[][] = [[], [], [], []];
 
    constructor(private _cd: ChangeDetectorRef) {
       this.sortedUsers = _cloneDeep(this.users);
+      this.filteredUsers = _cloneDeep(this.users);
+      this.customFilteredUsers = _cloneDeep(this.users);
    }
 
-   ngOnInit(): void {
+
+   public onUpdateFields(fields: StDynamicTableHeader[], tablePosition: number): void {
+      this.tableFields[tablePosition] = fields;
    }
 
    // Selectable tables
@@ -332,6 +342,42 @@ export class StDynamicTableDemoComponent implements OnInit {
       this.sortedUsers = [...this.sortedUsers].sort((a, b) => {
          return a[order.orderBy].toString().localeCompare(b[order.orderBy].toString()) * reverseConst;
       });
+
+   }
+
+   // Filterable tables
+
+   public onCustomStatusFilter(tablePosition: number): void {
+      const filter = this.customFilterFormControl.value;
+      this.customFilteredUsers = this.users.filter(_user => _user.status === filter);
+      this.activeFilters[tablePosition][5] = Boolean(filter && filter.length > 0);
+      this._cd.markForCheck();
+
+   }
+
+   public onFilter(tableFields: StDynamicTableHeader[], tablePosition: number): void {
+      if (tablePosition < 3) {
+         this.statusFilter = [];
+         if (tableFields.length > 0) {
+            let filterElement = [];
+            tableFields.map((filter) => {
+               const filterPosition = this.tableFields[tablePosition].findIndex(_field => _field.id === filter.id);
+               this.statusFilter[filterPosition] = true;
+
+               filterElement.push([].concat.apply([], filter.filters.filterConfig.map((config) => {
+                  return _filter(this.users, (user) => {
+                     return user[filter.id] === config.name;
+                  });
+               })));
+            });
+            this.filteredUsers = <any>_intersectionBy(...filterElement, 'id');
+         } else {
+            this.filteredUsers = this.users;
+         }
+         this._cd.markForCheck();
+      } else {
+         this.onCustomStatusFilter(tablePosition);
+      }
 
    }
 }

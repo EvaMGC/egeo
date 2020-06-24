@@ -52,25 +52,6 @@ td > .icon-ellipsis {
    }
 }
 
-.subtitle {
-   font-weight: 400;
-   font-size: $egeo-font-size-20;
-   font-style: normal;
-   font-stretch: normal;
-   line-height: $egeo-line-height-24;
-   letter-spacing: normal;
-   color: $neutral;
-   padding: 26px 0;
-   display: inline-block;
-}
-
-.paragraph {
-   font-weight: normal;
-   font-size: $egeo-font-size-18;
-   font-style: normal;
-   font-stretch: normal;
-   line-height: $egeo-line-height-22;
-   letter-spacing: normal;
-   color: $neutral;
-   padding-bottom: 20px;
+.custom-filter-container {
+   display: block;
 }
