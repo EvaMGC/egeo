@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StDemoGeneratorModule, StDocsModule, StSelectModule } from '@stratio/egeo';
 
 import { SelectDemoComponent } from './select-demo';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SelectDemoComponent } from './select-demo';
       FormsModule,
       ReactiveFormsModule,
       StDemoGeneratorModule.withComponents({ components: [SelectDemoComponent] }),
-      StDocsModule
+      StDocsModule,
+      CssPropertyTableModule
    ],
    declarations: [SelectDemoComponent]
 })

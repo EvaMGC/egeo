@@ -11,11 +11,13 @@
 * st-table: Close filter menu when enter key is pressed
 * st-sidebar: add dynamic icons
 * st-sidebar: minor change styles after UX suggestions
+* st-select: Allow to customize arrow icon through css variables
 
 **Fixed bugs:**
 
 * st-dynamic-table: Fix bug in foreign key management when property does not exist on row
 * st-table: Do not close filter menu when user clicks on filter menu container
+* st-dropdown: Fix functionality to change the focused option with arrow keys
 
 **Breaking changes:**
 

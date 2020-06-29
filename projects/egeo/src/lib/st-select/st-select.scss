@@ -13,11 +13,12 @@
 }
 
 .arrow {
-   position: absolute;
-   right: 8px;
-   top: 8px;
-   padding: 5px 5px 5px 9px;
    cursor: pointer;
+   padding: 5px 5px 5px 9px;
+   position: absolute;
+   right: 2px;
+   top: 3px;
+   bottom: 3px;
 }
 
 .st-select-menu {
@@ -25,8 +26,8 @@
 }
 
 .input-container {
-   position: relative;
    display: inline-block;
+   position: relative;
    width: 100%;
 }
 
@@ -36,13 +37,13 @@
 
 .st-search {
    &-icon {
+      cursor: pointer;
       position: absolute;
       right: 28px;
       top: 28px;
-      cursor: pointer;
 
-     &:focus {
-        outline: none;
-     }
+      &:focus {
+         outline: none;
+      }
    }
 }

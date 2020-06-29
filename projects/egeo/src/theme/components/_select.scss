@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 @import '../utils/forms';
+@import '../constants/fonts';
 
 st-select.small {
    input {
@@ -16,16 +17,28 @@ st-select.small {
    }
    @extend %st-select-small-props;
 }
+
 .st-select {
    input, .st-dropdown-menu {
       cursor: pointer;
    }
+
    .st-label {
       display: flex;
       width: 100%;
    }
    .arrow {
       background-color: var(--egeo-theme-neutral-full, $neutral-full);
+      margin: var(--egeo-st-select__arrow--margin, 5px 8px 0 0);
+      font-style: normal;
+      color:  var(--egeo-st-select__arrow--color, inherit);
+
+      &:before {
+         content: var(--egeo-st-select__arrow--content, "\e63f");
+         line-height: var(--egeo-st-select__arrow--line-height, 1);
+         font-size: var(--egeo-st-select__arrow--font-size, 14px);
+         font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
+      }
    }
 
    .arrow[disabled] {

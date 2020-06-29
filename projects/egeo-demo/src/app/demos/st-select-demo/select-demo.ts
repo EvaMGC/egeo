@@ -12,6 +12,7 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { StDropDownMenuItem } from '@stratio/egeo';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 
 @Component({
@@ -28,6 +29,33 @@ export class SelectDemoComponent {
       ts: 'demo/st-select-demo/select-demo.ts',
       component: 'lib/st-select/st-select.ts'
    };
+
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-select__arrow--content',
+         description: 'Arrow icon content',
+         default: '\e63f'
+      },
+      {
+         name: '--egeo-st-select__arrow--line-height',
+         description: 'Arrow icon line height',
+         default: '1'
+      }, {
+         name: '--egeo-st-select__arrow--font-size',
+         description: 'Arrow icon font size',
+         default: '14px'
+      },
+      {
+         name: '--egeo-st-select__arrow--color',
+         description: 'Arrow icon color',
+         default: 'inherit'
+      },
+      {
+         name: '--egeo-st-select__arrow--margin',
+         description: 'Arrow icon margin',
+         default: ' 5px 8px 0 0'
+      }
+   ];
 
    options: StDropDownMenuItem[] = [];
    filteredOptions: StDropDownMenuItem[] = [];

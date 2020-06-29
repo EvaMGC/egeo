@@ -8,25 +8,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-h1 {
-   font-family: 'Nunito Sans';
-   font-weight: bold;
-   font-size: 20px;
-   margin-bottom: 20px;
-   padding: 0;
-   line-height: 25px;
-}
 
-p {
-   font-family: 'Nunito Sans';
-   margin: 0;
-   padding: 0
-}
-
-.separator {
+.demo-layout > .title,
+.demo-layout > .subtitle {
    display: block;
-   margin: 10px;
-   overflow: hidden;
 }
 
 st-select {
@@ -38,4 +23,8 @@ st-select {
 form {
    border: 1px solid black;
    padding: 20px;
+}
+
+.button {
+   margin: 20px 0;
 }

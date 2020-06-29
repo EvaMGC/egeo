@@ -11,18 +11,23 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="container-liquid">
+   <section class="container-liquid demo-layout">
+      <h1 class="title">Theme customization</h1>
+      <p class="paragraph">You can customize some styles using the following css variables</p>
+      <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
+
+      <h1 class="title">Examples</h1>
+
+      <h2 class="subtitle">Basic select without form with keyboard listener to move between options</h2>
 
       <st-select placeholder="Select option" [options]="options" [disabled]="disabled" [keyBoardMove]="true"
                  [default]="options[2].value">
       </st-select>
 
-      <div class="separator"></div>
       <button class="button button-primary" (click)="changeOptions()">Change options</button>
 
-      <div class="separator"></div>
-      <br><br>
-      <h1>TEMPLATE DRIVEN EXAMPLE</h1>
+      <h2 class="subtitle">Template Driven Example</h2>
+
       <form #templateDrivenForm="ngForm" novalidate autocomplete="off" class="col-md-3">
          <div class="form-group">
 
@@ -31,8 +36,7 @@
                        placeholder="Select option" [options]="options" name="option1" required id="test"
                        (select)="onSelect($event)" class="st-form-field">
             </st-select>
-            <div class="separator"></div>
-
+            <br>
 
             Disabled select
 
@@ -44,7 +48,7 @@
 
             <button class="button button-primary"><span>Submit</span></button>
 
-            <div class="separator"></div>
+            <br>
 
             <p>Form value: {{ templateDrivenForm.value | json }}</p>
             <p>Form status: {{ templateDrivenForm.disabled ? 'DISABLED' : templateDrivenForm.valid ? 'VALID' : 'INVALID'
@@ -52,11 +56,8 @@
          </div>
       </form>
 
-      <div class="separator"></div>
-      <div class="separator"></div>
-      <div class="separator"></div>
+      <h2 class="subtitle">Model Driven / Reactive Example</h2>
 
-      <h1>MODEL DRIVEN / REACTIVE EXAMPLE</h1>
       <form [formGroup]="reactiveForm" novalidate autocomplete="off" class="col-md-3">
          <div class="form-group">
 
@@ -65,49 +66,42 @@
             </st-select>
          </div>
 
-         <div class="separator"></div>
-
+         <br>
          <button class="button button-primary"><span>Submit</span></button>
-
-         <div class="separator"></div>
+         <br>
 
          <p>Form value: {{ reactiveForm.value | json }}</p>
          <p>Form status: {{ reactiveForm.status | json }}</p>
       </form>
 
-      <br><br>
-      <h1>TEMPLATE DRIVEN EXAMPLE</h1>
-      <br>
+      <h2 class="subtitle">Template Driven Example</h2>
+
       <button class="button button-primary" (click)="changeDisabled()">Change disable</button>
 
-      <div class="separator"></div>
+      <h2 class="subtitle">Search Option Example</h2>
 
-      <h1>SEARCH OPTION EXAMPLE</h1>
-
-      <st-select [enabledSearcher]="true" placeholder="Select option" placeholderSearch="Search..."
+      <st-select [enabledSearcher]="true"
+                 placeholder="Select option"
+                 placeholderSearch="Search..."
                  [options]="filteredOptions"
                  [disabled]="disabled"
                  (search)="onSearch($event)">
       </st-select>
 
-      <div class="separator"></div>
+      <h2 class="subtitle">Scroll with spinner option</h2>
 
-      <h1>SCROLL WITH SPINNER OPTION</h1>
       <st-select [enabledSearcher]="true" placeholder="Select option" placeholderSearch="Search..." [options]="filteredOptions"
                  [disabled]="disabled" [isLoading]="isLoading" (scrollAtBottom)="onScrollAtBottom()" (search)="onSearch($event)">
       </st-select>
 
-      <div class="separator"></div>
-
-      <h1>WITHOUT FORM</h1>
+      <h2 class="subtitle">Without form</h2>
 
       <st-select class="st-pagination__selector"
          [options]="options"
          label="Select option"
          [selected]="options[1]"
          [attr.id]="selectId"
-         (select)="onChangePerPage($event)"></st-select>
-      <br>
-      <br>
+         (select)="onChangePerPage($event)">
+      </st-select>
    </section>
 </st-docs>
