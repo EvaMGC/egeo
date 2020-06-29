@@ -301,7 +301,7 @@ describe('StDropdownMenu', () => {
             spyOn(HTMLLIElement.prototype, 'focus');
 
             const keyboardEvent = new Event('keydown');
-            (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_DOWN;
+            (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_DOWN;
             document.dispatchEvent(keyboardEvent);
 
             expect(HTMLLIElement.prototype.focus).not.toHaveBeenCalled();
@@ -324,7 +324,7 @@ describe('StDropdownMenu', () => {
 
             it('If user presses key down and there isn´t an option selected, first option is focused', () => {
                const keyboardEvent = new Event('keydown');
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_DOWN;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_DOWN;
 
                document.dispatchEvent(keyboardEvent);
 
@@ -343,7 +343,7 @@ describe('StDropdownMenu', () => {
                }
 
                const keyboardEvent = new Event('keydown');
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_DOWN;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_DOWN;
                document.dispatchEvent(keyboardEvent);
 
                expect(options[4].focus).toHaveBeenCalledTimes(1);
@@ -363,7 +363,7 @@ describe('StDropdownMenu', () => {
                }
 
                const keyboardEvent = new Event('keydown');
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_DOWN;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_DOWN;
                document.dispatchEvent(keyboardEvent);
 
                expect(options[0].focus).toHaveBeenCalledTimes(1);
@@ -374,7 +374,7 @@ describe('StDropdownMenu', () => {
 
             it('If user presses key up and there isn´t an option selected, first option is focused', () => {
                const keyboardEvent = new Event('keydown');
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_UP;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_UP;
                document.dispatchEvent(keyboardEvent);
 
                expect(options[0].focus).toHaveBeenCalledTimes(1);
@@ -383,7 +383,7 @@ describe('StDropdownMenu', () => {
                }
             });
 
-            it('If user presses key up and there is an option selected, previous option is focused', () => {
+            it('If user presses key up and there is an option selected but no one focused, previous option to the selected is focused', () => {
                comp.ngOnDestroy();
                comp.selectedItem = (<StDropDownMenuItem> comp.items[3]);
                comp.ngOnInit();
@@ -392,12 +392,33 @@ describe('StDropdownMenu', () => {
                }
 
                const keyboardEvent = new Event('keydown');
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_UP;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_UP;
                document.dispatchEvent(keyboardEvent);
 
                expect(options[2].focus).toHaveBeenCalledTimes(1);
                for (let i = 0; i < options.length; ++i) {
                   if (i !== 2) {
+                     expect(options[i].focus).not.toHaveBeenCalled();
+                  }
+               }
+            });
+
+            it('If user presses key up and there is an option selected and other focused, previous option to the current focused one is focused', () => {
+               comp.ngOnDestroy();
+               comp.selectedItem = (<StDropDownMenuItem> comp.items[1]);
+               comp.ngOnInit();
+
+               const keyboardEvent = new Event('keydown');
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_DOWN;
+               document.dispatchEvent(keyboardEvent);
+               for (let i = 0; i < options.length; ++i) {
+                  (<jasmine.Spy> options[i].focus).calls.reset();
+               }
+               document.dispatchEvent(keyboardEvent); // two under options
+
+               expect(options[3].focus).toHaveBeenCalledTimes(1);
+               for (let i = 0; i < options.length; ++i) {
+                  if (i !== 3) {
                      expect(options[i].focus).not.toHaveBeenCalled();
                   }
                }
@@ -412,7 +433,7 @@ describe('StDropdownMenu', () => {
                }
 
                const keyboardEvent = new Event('keydown');
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_UP;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_UP;
                document.dispatchEvent(keyboardEvent);
 
                expect(options[comp.items.length - 1].focus).toHaveBeenCalledTimes(1);
@@ -427,7 +448,7 @@ describe('StDropdownMenu', () => {
                comp.ngOnInit();
                const keyboardEvent = new Event('keydown');
 
-               (<any> keyboardEvent).code = ARROW_KEY_CODE.ARROW_DOWN;
+               (<any> keyboardEvent).key = ARROW_KEY_CODE.ARROW_DOWN;
                document.dispatchEvent(keyboardEvent);
                spyOn(comp.change, 'emit');
 

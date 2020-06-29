@@ -237,16 +237,17 @@ export class StDropdownMenuComponent implements AfterViewInit, OnInit, OnChanges
       }
    }
 
-   private arrowKeyListener(e: KeyboardEvent): void {
+   private arrowKeyListener(event: KeyboardEvent): void {
       const selectedItemPosition = this.getSelectedItemPosition();
-      if (selectedItemPosition > -1) {
+      if (selectedItemPosition > -1 && this._focusedOptionPos < 0) {
          this._focusedOptionPos = selectedItemPosition;
       }
       let nextFocus: number;
-      if (e.code === ARROW_KEY_CODE.ARROW_DOWN || e.code === ARROW_KEY_CODE.ARROW_UP) {
+      if (event.key === ARROW_KEY_CODE.ARROW_DOWN || event.key === ARROW_KEY_CODE.ARROW_UP) {
          event.preventDefault();
+
          const options: HTMLLIElement[] = this.el.nativeElement.querySelectorAll('.st-dropdown-menu-item');
-         nextFocus = e.code === ARROW_KEY_CODE.ARROW_DOWN || this._focusedOptionPos === -1 ? 1 : -1;
+         nextFocus = (event.key === ARROW_KEY_CODE.ARROW_DOWN || this._focusedOptionPos === -1) ? 1 : -1;
          this._focusedOptionPos = this._focusedOptionPos + nextFocus;
          if (this._focusedOptionPos < 0) {
             this._focusedOptionPos = options.length - 1;
