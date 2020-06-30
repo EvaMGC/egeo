@@ -12,6 +12,7 @@
 * st-sidebar: add dynamic icons
 * st-sidebar: minor change styles after UX suggestions
 * st-select: Allow to customize arrow icon through css variables
+* st-form: Allow to hide a fields without depending on another one
 
 **Fixed bugs:**
 

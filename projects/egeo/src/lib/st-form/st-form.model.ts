@@ -16,7 +16,7 @@ import { FORM_UI_COMPONENT } from './st-form-field/st-form-field.interface';
 
 export interface StFormUIDefinition {
    relatedTo?: string;
-   visible?: { [key: string]: any };
+   visible?: { [key: string]: any } | boolean;
    component?: FORM_UI_COMPONENT;
    link?: string;
    options?: StDropDownMenuItem[];

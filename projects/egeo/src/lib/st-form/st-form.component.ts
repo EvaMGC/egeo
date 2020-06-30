@@ -311,8 +311,8 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    }
 
    private fulfillDependencyVisibility(propertyName: string): boolean {
-      let fulfill: boolean = true;
-      let propertySchema: any = this.schema.properties[propertyName];
+      let propertySchema: StFormSchema = this.schema.properties[propertyName];
+      let fulfill: boolean = !propertySchema.ui || propertySchema.ui.visible !== false;
       if (propertySchema.ui && propertySchema.ui.visible) {
          const keys: string[] = Object.keys(propertySchema.ui.visible);
          let i = 0;

@@ -624,6 +624,24 @@ describe('StFormComponent', () => {
             expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
          });
 
+         it('a field is not displayed if it has the property visible equals to false', () => {
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+
+            component.schema.properties.a.ui = { visible: false };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#a')).toBeNull();
+         });
+
+         it('a field is displayed if it has the property visible equals to true', () => {
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+
+            component.schema.properties.a.ui = { visible: true };
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
+         });
+
          it('a field is displayed if all the conditions specified in the property visible are fulfilled', () => {
             expect(fixture.nativeElement.querySelector('#a')).not.toBeNull();
             expect(fixture.nativeElement.querySelector('#b')).toBeNull();
