@@ -12,7 +12,12 @@
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
    <st-demo-logger></st-demo-logger>
-   <section class="container-liquid">
+   <section class="container-liquid demo-layout">
+      <h1 class="title">Theme customization</h1>
+      <p class="paragraph">You can customize some styles using the following css variables</p>
+      <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
+
+      <h1 class="title">Examples</h1>
 
       <div *ngFor="let menu of menus; let idx = index">
          <ng-container *ngIf="idx < 5">
@@ -35,9 +40,9 @@
          </ng-container>
       </div>
    </section>
-   <section class="container-liquid">
+   <section class="container-liquid demo-layout">
       <div>
-         <h1>Scroll with Loading more spinner</h1>
+         <h1 class="title">Scroll with Loading more spinner</h1>
          <br>
          <st-dropdown-menu [keyBoardMove]="true" [items]="menus[5]" [active]="active[5]"
                            [selectedItem]="selectedValue[5]"

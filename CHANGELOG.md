@@ -14,12 +14,13 @@
 * st-select: Allow to customize arrow icon through css variables
 * st-form: Allow to hide a fields without depending on another one
 * st-sidebar: Display an optional message when search does not have any results
+* st-dropdown-menu: Allow to customize some styles from outside using css variables
 
 **Fixed bugs:**
 
 * st-dynamic-table: Fix bug in foreign key management when property does not exist on row
 * st-table: Do not close filter menu when user clicks on filter menu container
-* st-dropdown: Fix functionality to change the focused option with arrow keys
+* st-dropdown-menu: Fix functionality to change the focused option with arrow keys
 * st-sidebar: Do not emit change event after searching something
 
 **Breaking changes:**

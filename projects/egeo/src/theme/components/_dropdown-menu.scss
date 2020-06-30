@@ -11,31 +11,32 @@
 @import '../utils/forms';
 
 %select-dropdown-menu-title {
-   color: var(--egeo-theme-neutral-40, $neutral-40);
-   font-weight: bold;
-   font-size: $egeo-font-size-14;
-   line-height: $egeo-line-height-xxxsmall;
+   color: var(--egeo-st-dropdown-menu__title--color, var(--egeo-theme-neutral-40, $neutral-40));
+   font-weight: var(--egeo-st-dropdown-menu__title--font-weight, bold);
+   font-size: var(--egeo-st-dropdown-menu__title--font-size, $egeo-font-size-14);
+   line-height: var(--egeo-st-dropdown-menu__title--line-height, $egeo-line-height-xxxsmall);
 }
 
 %select-dropdown-menu-default {
-   color: var(--egeo-theme-space-110, $space-110);
-   font-weight: 400;
-   font-size: $egeo-font-size-xsmall;
-   line-height: $egeo-line-height-20;
+   color: var(--egeo-st-dropdown-menu--color, var(--egeo-theme-space-110, $space-110));
+   font-weight: var(--egeo-st-dropdown-menu--font-weight, 400);
+   font-size: var(--egeo-st-dropdown-menu--font-size, $egeo-font-size-xsmall);
+   line-height: var(--egeo-st-dropdown-menu--line-height, $egeo-line-height-20);
 }
 
 .st-dropdown-menu {
-   background-color: var(--egeo-theme-neutral-full, $neutral-full);
-   border-radius: 4px;
-   border: solid 1px var(--egeo-theme-neutral-30, $neutral-30);
+   background-color: var(--egeo-st-dropdown-menu--bg-color, var(--egeo-theme-neutral-full, $neutral-full));
+   border: solid 1px var(--egeo-st-dropdown-menu--border-color, var(--egeo-theme-neutral-30, $neutral-30));
+   border-radius: var(--egeo-st-dropdown-menu--border-radius, 4px);
+
    &.active {
       border-color: $input-field-onfocus;
    }
 
    ul {
       list-style: none;
-      overflow-y: auto;
       margin: 0;
+      overflow-y: auto;
       padding: 0;
 
       &:focus {
@@ -67,8 +68,8 @@
    }
 
    .st-dropdown-menu-item {
-      padding: 9px 15px;
-      font-weight: 400;
+      padding: var(--egeo-st-dropdown-menu__item--padding, 9px 15px);
+      font-weight:  var(--egeo-st-dropdown-menu__item--font-weight, 400);
       cursor: pointer;
       display: flex;
 
@@ -77,27 +78,27 @@
       }
 
       &:hover, &:focus {
-         background-color: var(--egeo-theme-space-5, $space-5);
+         background-color: var(--egeo-st-dropdown-menu__item__hover--bg-color, var(--egeo-theme-space-5, $space-5));
          outline: none;
       }
 
       &.selected {
-         background-color: var(--egeo-theme-action-10, $action-10) ;
+         background-color:  var(--egeo-st-dropdown-menu__item__selected--bg-color, var(--egeo-theme-action-10, $action-10));
       }
 
       &.disabled {
          & *:not(i) {
-            color: var(--egeo-theme-space-40, $space-40) !important;
+            color:  var(--egeo-st-dropdown-menu__item__disabled--color, var(--egeo-theme-space-40, $space-40)) !important;
          }
          cursor: default;
       }
 
       &.top-separator {
-         border-top: 1px solid var(--egeo-theme-space-20, $space-20);
+         border-top: 1px solid var(--egeo-st-dropdown-menu__separator--color, var(--egeo-theme-space-20, $space-20));
       }
 
       &.bottom-separator {
-         border-bottom: 1px solid var(--egeo-theme-space-20, $space-20);
+         border-bottom: 1px solid  var(--egeo-st-dropdown-menu__separator--color, var(--egeo-theme-space-20, $space-20));
       }
 
       .label-container {
@@ -111,10 +112,11 @@
       }
 
       i {
-         line-height: $egeo-line-height-20;
-         font-size: $egeo-font-size-12;
+         color:  var(--egeo-st-dropdown-menu__icon--color, var(--egeo-theme-space-70, $space-70));
          display: inline-flex;
-         color: var(--egeo-theme-space-70, $space-70);
+         font-size: var(--egeo-st-dropdown-menu__icon--font-size, $egeo-font-size-12);
+         line-height: var(--egeo-st-dropdown-menu__icon--line-height, $egeo-line-height-20);
+         font-family:  var(--egeo-theme-icon-font, $egeo-stratio-icons);
 
          &.icon {
             margin-right: 10px;
@@ -137,24 +139,24 @@
       }
 
       & .text-info {
+         color: var(--egeo-st-dropdown-menu__text-info--color, var(--egeo-theme-neutral-40, $neutral-40));
          display: block;
          font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-         font-size: $egeo-font-size-12;
-         line-height: 12px;
-         font-weight: normal;
-         font-style: normal;
+         font-size:  var(--egeo-st-dropdown-menu__text-info--font-size, $egeo-font-size-12);
          font-stretch: normal;
+         font-style: normal;
+         font-weight: normal;
          letter-spacing: normal;
-         color: var(--egeo-theme-neutral-40, $neutral-40);
+         line-height: var(--egeo-st-dropdown-menu__text-info--line-height, 12px);
       }
    }
 
    .st-dropdown-menu-without-results {
-      padding: 20px;
+      color: var(--egeo-st-dropdown-menu__without-results--color, var(--egeo-theme-neutral-50, $neutral-50));
       font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-      font-size: $egeo-font-size-14;
-      font-weight: 300;
-      color: var(--egeo-theme-neutral-50, $neutral-50);
+      font-size:  var(--egeo-st-dropdown-menu__without-results--font-size, $egeo-font-size-14);
+      font-weight: var(--egeo-st-dropdown-menu__without-results--font-weight, 300);
+      padding: var(--egeo-st-dropdown-menu__without-results--padding, 20px);
    }
 
    &:not(.menu-list) .label {
@@ -163,30 +165,30 @@
 }
 
 .st-dropdown-menu.menu-list {
-   border-radius: 4px;
-   background-color: var(--egeo-theme-neutral-full, $neutral-full);
-   box-shadow: 0 3px 9px 0 rgba(17, 17, 17, 0.25);
+   background-color: var(--egeo-st-dropdown-menu__menu-list--bg-color, var(--egeo-theme-neutral-full, $neutral-full));
    border-color: transparent;
-   padding: 4px 0;
+   border-radius: var(--egeo-st-dropdown-menu__menu-list--border-radius, 4px);
+   box-shadow: var(--egeo-st-dropdown-menu__menu-list--box-shadow, 0 3px 9px 0 rgba(17, 17, 17, 0.25));
+   padding: var(--egeo-st-dropdown-menu__menu-list--padding, 4px 0);
 
    .st-dropdown-menu-item {
-      min-height: 40px;
-      padding: 10px 20px;
-      font-size: $egeo-font-size-14;
-      color: var(--egeo-theme-space-110, $space-110);
+      color:  var(--egeo-st-dropdown-menu__menu-list__item--color, var(--egeo-theme-space-110, $space-110));
+      font-size: var(--egeo-st-dropdown-menu__menu-list__item--font-size, $egeo-font-size-14);
+      min-height: var(--egeo-st-dropdown-menu__menu-list__item--min-height, 40px);
+      padding: var(--egeo-st-dropdown-menu__menu-list__item--padding, 10px 20px);
 
       &:hover {
-         background-color: var(--egeo-theme-action-10, $action-10) ;
+         background-color: var(--egeo-st-dropdown-menu__menu-list__item__hover--bg-color, var(--egeo-theme-action-10, $action-10));
       }
 
       .label {
-         white-space: nowrap;
-         font-size: $egeo-font-size-14;
-         font-weight: normal;
+         font-size: var(--egeo-st-dropdown-menu__menu-list__item--font-size, $egeo-font-size-14);
          font-stretch: normal;
          font-style: normal;
-         line-height: $egeo-line-height-22;
+         font-weight: normal;
          letter-spacing: normal;
+         line-height: var(--egeo-st-dropdown-menu__menu-list__item--line-height, $egeo-line-height-22);
+         white-space: nowrap;
       }
    }
 }

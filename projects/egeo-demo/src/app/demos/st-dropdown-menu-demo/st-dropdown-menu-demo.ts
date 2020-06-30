@@ -12,6 +12,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { StDropDownMenuGroup, StDropDownMenuItem, StDropDownVisualMode } from '@stratio/egeo';
 
 import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.service';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    selector: 'st-dropdown-menu-demo',
@@ -25,6 +26,199 @@ export class StDropdownMenuDemoComponent {
       ts: 'demo/st-dropdown-menu-demo/st-dropdown-menu-demo.ts',
       component: 'lib/st-dropdown-menu/st-dropdown-menu.component.ts'
    };
+
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo-st-dropdown-menu__title--color',
+         description: 'Title color',
+         default: '$neutral-40'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__title--font-weight',
+         description: 'Title font weight',
+         default: 'bold'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__title--font-size',
+         description: 'Title font size',
+         default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__title--line-height',
+         description: 'Title line height',
+         default: '$egeo-line-height-xxxsmall'
+      }, {
+         name: '--egeo-st-dropdown-menu--color',
+         description: 'Text color',
+         default: '$space-110'
+      },
+      {
+         name: '--egeo-st-dropdown-menu--font-weight',
+         description: 'Text font weight',
+         default: '400'
+      },
+      {
+         name: '--egeo-st-dropdown-menu--font-size',
+         description: 'Text font size',
+         default: '$egeo-font-size-xsmall'
+      },
+      {
+         name: '--egeo-st-dropdown-menu--line-height',
+         description: 'Text line height',
+         default: '$egeo-line-height-20'
+      },
+      {
+         name: '--egeo-st-dropdown-menu--bg-color',
+         description: 'Menu background color',
+         default: '$neutral-full'
+      },
+      {
+         name: '--egeo-st-dropdown-menu--border-color',
+         description: 'Menu border color',
+         default: '$neutral-30'
+      },
+      {
+         name: '--egeo-st-dropdown-menu--border-radius',
+         description: 'Menu border radius',
+         default: '4px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__item--padding',
+         description: 'Item padding',
+         default: '9px 15px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__item--font-weight',
+         description: 'Item font weight',
+         default: '400'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__item__hover--bg-color',
+         description: 'Hover item background color',
+         default: '$space-5'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__item__selected--bg-color',
+         description: 'Selected item background color',
+         default: '$action-10'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__item__disabled--color',
+         description: 'Disabled item color',
+         default: '$space-40'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__separator--color',
+         description: 'Separator color',
+         default: '$space-20'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__icon--color',
+         description: 'Item icon color',
+         default: '$space-70'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__icon--font-size',
+         description: 'Icon font size',
+         default: '$egeo-font-size-12'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__icon--line-height',
+         description: 'Icon line height',
+         default: '$egeo-line-height-20'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__text-info--color',
+         description: 'Text info color',
+         default: '$neutral-40'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__text-info--font-size',
+         description: 'Text info font size',
+         default: '$egeo-font-size-12'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__text-info--line-height',
+         description: 'Text info line height',
+         default: '12px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__without-results--color',
+         description: 'Without results label color',
+         default: '$neutral-50'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__without-results--font-size',
+         description: 'Without results label font size',
+         default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__without-results--font-weight',
+         description: 'Without results label font weight',
+         default: '300'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__without-results--padding',
+         description: 'Without results label padding',
+         default: ' 20px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list--bg-color',
+         description: 'Menu list background color',
+         default: '$neutral-full'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list--border-radius',
+         description: 'Menu list border radius',
+         default: '4px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list--box-shadow',
+         description: 'Menu list box shadow',
+         default: '0 3px 9px 0 rgba(17, 17, 17, 0.25)'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list--padding',
+         description: 'Menu list padding',
+         default: '4px 0'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item--color',
+         description: 'Menu list item color',
+         default: '$space-110'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item--font-size',
+         description: 'Menu list item font-size',
+         default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item--min-height',
+         description: 'Menu list item min height',
+         default: '40px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item--padding',
+         description: 'Menu list item padding',
+         default: '10px 20px'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item__hover--bg-color',
+         description: 'Menu list hover item background color',
+         default: '$action-10'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item--font-size',
+         description: 'Menu list item font size',
+         default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-dropdown-menu__menu-list__item--line-height',
+         description: 'Menu list item line height',
+         default: '$egeo-line-height-22'
+      }
+   ];
+
    public titles: string[] = [];
    public menus: ((StDropDownMenuItem | StDropDownMenuGroup)[])[] = [];
    public active: boolean[] = [];

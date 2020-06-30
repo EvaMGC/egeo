@@ -24,6 +24,7 @@ import { StDemoGeneratorModule, StDocsModule, StPopModule, StDropdownMenuModule 
 
 import { StDemoLoggerModule } from '../shared/st-demo-logger/st-demo-logger.module';
 import { StDropdownMenuDemoComponent } from './st-dropdown-menu-demo';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { StDropdownMenuDemoComponent } from './st-dropdown-menu-demo';
       StDocsModule,
       StDropdownMenuModule,
       StPopModule,
+      CssPropertyTableModule,
       StDemoLoggerModule.withService(),
       StDemoGeneratorModule.withComponents({ components: [StDropdownMenuDemoComponent] })
    ],
