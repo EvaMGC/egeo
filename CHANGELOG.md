@@ -10,15 +10,17 @@
 * st-dynamic-table: Remove management of the default sort
 * st-table: Close filter menu when enter key is pressed
 * st-sidebar: add dynamic icons
-* st-sidebar: minor change styles after UX suggestions
+* st-sidebar: Minor style changes after UX suggestions
 * st-select: Allow to customize arrow icon through css variables
 * st-form: Allow to hide a fields without depending on another one
+* st-sidebar: Display an optional message when search does not have any results
 
 **Fixed bugs:**
 
 * st-dynamic-table: Fix bug in foreign key management when property does not exist on row
 * st-table: Do not close filter menu when user clicks on filter menu container
 * st-dropdown: Fix functionality to change the focused option with arrow keys
+* st-sidebar: Do not emit change event after searching something
 
 **Breaking changes:**
 

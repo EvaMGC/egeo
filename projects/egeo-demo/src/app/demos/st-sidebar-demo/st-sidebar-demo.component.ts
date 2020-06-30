@@ -9,8 +9,11 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
+import { cloneDeep as _cloneDeep } from 'lodash';
 import { StSidebarItem, StSidebarVisualMode } from '@stratio/egeo';
+
 import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
+
 
 @Component({
    selector: 'st-sidebar-demo',
@@ -76,7 +79,9 @@ export class StSidebarDemoComponent {
             { id: 'sub-sectionD.2', label: 'Subitem 1.2' }]
       }
    ];
-
+   public complexItems: StSidebarItem[];
+   public filteredItems: StSidebarItem[];
+   public filteredComplexItems: StSidebarItem[];
    public activeItem: StSidebarItem;
    public enableSearchMode: boolean = false;
    public complexMode: StSidebarVisualMode = StSidebarVisualMode.complex;
@@ -190,14 +195,45 @@ export class StSidebarDemoComponent {
          name: '--egeo-st-sidebar__warning-icon--content',
          description: 'Warning icon',
          default: '\E613'
+      },
+      {
+         name: '--egeo-st-sidebar__empty-results--color',
+         description: 'Empty results message color',
+         default: '$neutral-70'
+      },
+      {
+         name: '--egeo-st-sidebar__empty-results--font-size',
+         description: 'Empty results message font size',
+         default: '$egeo-font-size-12'
+      },
+      {
+         name: '--egeo-st-sidebar__empty-results--padding',
+         description: 'Empty results message padding',
+         default: '0 0 20px 0'
       }
    ];
+
+   constructor() {
+      this.activeItem = this.items[2].items[0].items[1];
+      this.complexItems = _cloneDeep(this.items);
+      this.filteredItems = _cloneDeep(this.items);
+      this.filteredComplexItems = _cloneDeep(this.items);
+   }
 
    onChangeActive(item: StSidebarItem): void {
       this.activeItem = item;
    }
 
-   constructor() {
-      this.activeItem = this.items[2].items[0].items[1];
+   onSearch(searchText: string, complex: boolean): void {
+      let list: StSidebarItem[] = _cloneDeep(complex ? this.complexItems : this.items);
+      if (searchText) {
+         list = list.filter(_item => _item.label.indexOf(searchText) > -1);
+      }
+      if (complex) {
+         this.filteredComplexItems = list;
+      } else {
+         this.filteredItems = list;
+      }
    }
+
 }

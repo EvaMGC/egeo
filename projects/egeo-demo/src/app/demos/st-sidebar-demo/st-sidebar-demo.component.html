@@ -18,15 +18,21 @@
       <p class="paragraph">You can customize some table styles using the following css variables</p>
       <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
 
-
       <h1 class="title">Examples</h1>
       <st-switch (change)="enableSearchMode = $event" label="Enable search mode" class="col-sm-12 row"></st-switch>
 
       <div class="sidebar-container">
          <h1>Normal visualization </h1>
 
-         <st-sidebar class="sidebar" title="Mesos Manager" [items]="items" qaTag="sidebar-demo" [active]="activeItem" [searchMode]="enableSearchMode"
-             (change)="onChangeActive($event)">
+         <st-sidebar class="sidebar"
+                     qaTag="sidebar-demo"
+                     title="Mesos Manager"
+                     [items]="filteredItems"
+                     [active]="activeItem"
+                     [searchMode]="enableSearchMode"
+                     emptyResults="Search without results. Try with another term"
+                     (change)="onChangeActive($event)"
+                     (search)="onSearch($event, false)">
             <span class="header" sidebar-header> HEADER CONTENT</span>
             <span class="footer" sidebar-footer> FOOTER CONTENT</span>
          </st-sidebar>
@@ -34,10 +40,17 @@
 
       <div class="sidebar-container">
          <h1>Complex visualization </h1>
-         <st-sidebar class="sidebar" title="Mesos Manager" [visualMode]="complexMode" [items]="items" qaTag="sidebar-demo" [active]="activeItem"
-             [searchMode]="enableSearchMode" (change)="onChangeActive($event)">
+         <st-sidebar class="sidebar"
+                     qaTag="sidebar-demo"
+                     title="Mesos Manager"
+                     [visualMode]="complexMode"
+                     [items]="filteredComplexItems"
+                     [active]="activeItem"
+                     [searchMode]="enableSearchMode"
+                     emptyResults="Search without results. Try with another term"
+                     (change)="onChangeActive($event)"
+                     (search)="onSearch($event, true)">
             <span sidebar-footer> FOOTER CONTENT</span>
-
          </st-sidebar>
       </div>
    </section>

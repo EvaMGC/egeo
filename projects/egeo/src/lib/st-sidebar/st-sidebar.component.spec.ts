@@ -49,10 +49,10 @@ describe('StSidebar', () => {
          { id: 'roles', label: 'Roles' },
          {
             id: 'complex', label: 'Complex', items: [
-            { id: 'child-1', label: 'Child 1' },
-            { id: 'child-2', label: 'Child 2', items: [{ id: 'child-2.1', label: 'Child 2.1' }] },
-            { id: 'child-3', label: 'Child 3' }
-         ]
+               { id: 'child-1', label: 'Child 1' },
+               { id: 'child-2', label: 'Child 2', items: [{ id: 'child-2.1', label: 'Child 2.1' }] },
+               { id: 'child-3', label: 'Child 3' }
+            ]
          }
       ];
 
@@ -225,18 +225,34 @@ describe('StSidebar', () => {
             done();
          }, 0);
       });
+
+
+      it('When user interacts with the search input and list is empty, message can be configured to be displayed', () => {
+         component.searchMode = true;
+         component.searchText = 'fake search';
+         component.items = [];
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.empty-results')).toBeNull();
+
+         component.emptyResults = 'Search without results. Try with another term';
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.empty-results')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.empty-results').innerText).toEqual(component.emptyResults);
+      });
    });
 });
 
 
-
 @Component({
    template: `
-    <st-sidebar [items]="items">
-       <span sidebar-header>TEST HEADER</span>
-       <span sidebar-footer>TEST FOOTER</span>
-    </st-sidebar>
-      `
+      <st-sidebar [items]="items">
+         <span sidebar-header>TEST HEADER</span>
+         <span sidebar-footer>TEST FOOTER</span>
+      </st-sidebar>
+   `
 })
 class StSidebarComponentTestComponent {
    public items: StSidebarItem[] = [
@@ -275,8 +291,8 @@ class StSidebarComponentTestComponent {
       },
       {
          id: 'sectionB', label: 'Section B', items: [
-         { id: 'sub-sectionB.1', label: 'Subitem 1.1',    disabled: true },
-         { id: 'sub-sectionB.2', label: 'Subitem 1.2' }]
+            { id: 'sub-sectionB.1', label: 'Subitem 1.1', disabled: true },
+            { id: 'sub-sectionB.2', label: 'Subitem 1.2' }]
       },
       {
          id: 'sectionC', label: 'Section C',

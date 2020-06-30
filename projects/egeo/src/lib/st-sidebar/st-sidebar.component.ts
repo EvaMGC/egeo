@@ -8,10 +8,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, Input, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { StSidebarItem } from './st-sidebar-item.interface';
 import { StSidebarVisualMode } from './st-sidebar-visual-mode';
+import { StSearchEvent } from '../st-search/st-search.model';
 
 /**
  * @description {Component} [Sidebar]
@@ -36,7 +37,6 @@ import { StSidebarVisualMode } from './st-sidebar-visual-mode';
    selector: 'st-sidebar',
    templateUrl: './st-sidebar.component.html',
    styleUrls: ['./st-sidebar.component.scss'],
-   providers: [],
    host: { class: 'st-sidebar' },
    changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -51,6 +51,10 @@ export class StSidebarComponent {
    @Input() defaultActive: boolean = true;
    /** @Input {boolean} [searchMode=''] Boolean to enable or disable the search mode. By default, it is disabled */
    @Input() searchMode: boolean = false;
+   /** @Input {string} [searchPlaceholder='Search'] Search placeholder */
+   @Input() searchPlaceholder: string = 'Search';
+   /** @Input {string} [emptyResults=] Message displayed when search does not have any result */
+   @Input() emptyResults?: string;
    /** @Input {StSidebarVisualMode} [visualMode='StSidebarVisualMode.normal'] Visual mode used to display the item list */
    @Input() visualMode: StSidebarVisualMode = StSidebarVisualMode.normal;
    /** @Output {StSidebarItem} [change=''] Event emitted when the active item is changed. This emits the active item */
@@ -58,6 +62,7 @@ export class StSidebarComponent {
    /** @Output {string} [search=''] Event emitted when search mode is enabled and user interacts with the search input */
    @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
+   public searchText: string;
 
    onChange(item: StSidebarItem): void {
       if (!this.active || this.active.id !== item.id) {
@@ -65,8 +70,9 @@ export class StSidebarComponent {
       }
    }
 
-   onSearch(searchData: any): void {
+   onSearch(searchData: StSearchEvent): void {
       if (searchData) {
+         this.searchText = searchData.text;
          this.search.emit(searchData.text);
       }
    }

@@ -4,14 +4,16 @@
 
 ## Inputs
 
-| Property      | Type                | Req   | Description                                                              | Default                      |
-| ------------- | ------------------- | ----- | ------------------------------------------------------------------------ | ---------------------------- |
-| title         | String              | False | Title displayed on the top of menu                                       | ''                           |
-| active        | StSidebarItem       | False | The current active item                                                  | ''                           |
-| items         | StSidebarItem[]     | False | List of items displayed on the menu                                      | ''                           |
-| defaultActive | Boolean             | False | Unset first item as active by default if false                           | true                         |
-| searchMode    | Boolean             | False | Boolean to enable or disable the search mode. By default, it is disabled | ''                           |
-| visualMode    | StSidebarVisualMode | False | Visual mode used to display the item list                                | 'StSidebarVisualMode.normal' |
+| Property          | Type                | Req   | Description                                                              | Default                      |
+| ----------------- | ------------------- | ----- | ------------------------------------------------------------------------ | ---------------------------- |
+| title             | String              | False | Title displayed on the top of menu                                       | ''                           |
+| active            | StSidebarItem       | False | The current active item                                                  | ''                           |
+| items             | StSidebarItem[]     | False | List of items displayed on the menu                                      | ''                           |
+| defaultActive     | Boolean             | False | Unset first item as active by default if false                           | true                         |
+| searchMode        | Boolean             | False | Boolean to enable or disable the search mode. By default, it is disabled | ''                           |
+| searchPlaceholder | String              | False | Search placeholder                                                       | 'Search'                     |
+| emptyResults      | String              | False | Message displayed when search does not have any result                   |                              |
+| visualMode        | StSidebarVisualMode | False | Visual mode used to display the item list                                | 'StSidebarVisualMode.normal' |
 
 ## Outputs
 

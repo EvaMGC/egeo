@@ -12,11 +12,11 @@
 @import '../constants/fonts';
 
 .st-sidebar {
-   padding: 30px;
    background-color: var(--egeo-st-sidebar--bg-color, var(--egeo-theme-neutral-full, $neutral-full));
-   box-shadow: 2px 2px 5px 0 var(--egeo-st-sidebar--box-shadow, var(--egeo-theme-neutral-8, $neutral-8));
    border: solid 1px var(--egeo-st-sidebar--border-color, var(--egeo-theme-neutral-8, $neutral-8));
+   box-shadow: 2px 2px 5px 0 var(--egeo-st-sidebar--box-shadow, var(--egeo-theme-neutral-8, $neutral-8));
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
+   padding: 30px;
 
    .item-list {
       margin: 0;
@@ -27,8 +27,8 @@
          padding-left: 15px;
 
          .item {
-            text-overflow: ellipsis;
             overflow: hidden;
+            text-overflow: ellipsis;
          }
 
          & > li:last-of-type {
@@ -37,10 +37,11 @@
       }
 
       & .item > .item__label {
-         vertical-align: top;
-         overflow: hidden;
          display: inline-block;
+         overflow: hidden;
          text-overflow: ellipsis;
+         vertical-align: top;
+         word-break: break-all;
 
          &:first-letter {
             text-transform: capitalize;
@@ -82,21 +83,21 @@
 
          &:not(.item-list--inner) > .item:after {
             content: '';
-            padding-top: 15px;
             display: block;
             height: 0;
+            padding-top: 15px;
          }
 
          &:not(.item-list--inner) .item--complex > .item__label:before {
-            content:  var(--egeo-st-sidebar__chevron-right-icon--content, "\E605");
-            font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
-            display: inline-block;
-            font-size: var(--egeo-st-sidebar__item--font-size, $egeo-font-size-14);
             color: var(--egeo-st-sidebar__complex-item__chevron--color, var(--egeo-theme-neutral-30, $neutral-30));
+            content:  var(--egeo-st-sidebar__chevron-right-icon--content, "\E605");
+            display: inline-block;
+            float: left;
+            font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
+            font-size: var(--egeo-st-sidebar__item--font-size, $egeo-font-size-14);
+            height: 22px;
             padding-right: 6px;
             vertical-align: bottom;
-            height: 22px;
-            float: left;
          }
 
          &:not(.item-list--inner) .item--complex.item--expanded > .item__label:before {
@@ -110,11 +111,11 @@
    }
 
    .title {
-      margin: 0;
-      font-weight: var(--egeo-st-sidebar__title--font-weight, 900);
-      font-size: var(--egeo-st-sidebar__title--font-size, $egeo-font-size-20);
-      line-height: var(--egeo-st-sidebar__title--line-height, $egeo-line-height-24);
       color: var(--egeo-st-sidebar__title--color, var(--egeo-theme-neutral, $neutral));
+      font-size: var(--egeo-st-sidebar__title--font-size, $egeo-font-size-20);
+      font-weight: var(--egeo-st-sidebar__title--font-weight, 900);
+      line-height: var(--egeo-st-sidebar__title--line-height, $egeo-line-height-24);
+      margin: 0;
       padding-bottom: 30px;
 
       &:first-letter {
@@ -123,10 +124,10 @@
    }
 
    .item {
-      font-weight: 400;
-      font-size: var(--egeo-st-sidebar__item--font-size, $egeo-font-size-14);
-      line-height: var(--egeo-st-sidebar__item--line-height, $egeo-line-height-small);
       color: var(--egeo-st-sidebar__item--color, var(--egeo-theme-neutral-70, $neutral-70));
+      font-size: var(--egeo-st-sidebar__item--font-size, $egeo-font-size-14);
+      font-weight: 400;
+      line-height: var(--egeo-st-sidebar__item--line-height, $egeo-line-height-small);
       margin-bottom: 15px;
       position: relative;
 
@@ -134,14 +135,14 @@
          font-weight: bold;
 
          &::before {
-            content: '';
-            width: 5px;
-            height: 20px;
             background-color: var(--egeo-st-sidebar__item__mark--color, var(--egeo-theme-brand, $brand));
             border-radius: 4px;
-            position: absolute;
+            content: '';
+            height: 20px;
             left: 0;
+            position: absolute;
             top: 0;
+            width: 5px;
          }
       }
 
@@ -151,30 +152,30 @@
 
       &.warning {
          .item__label:after {
+            color: var(--egeo-st-sidebar__warning--color, var(--egeo-theme-error, $error));
             content: var(--egeo-st-sidebar__warning-icon--content, "\E613");
             font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
-            color: var(--egeo-st-sidebar__warning--color, var(--egeo-theme-error, $error));
             font-size: var(--egeo-st-sidebar__warning--font-size, $egeo-font-size-14);
-            position: relative;
             padding-left: 10px;
+            position: relative;
             vertical-align: text-top;
          }
       }
 
       & > .result {
          &__box {
-            width: 40px;
-            height: 20px;
-            border-radius: 10px;
             background-color: var(--egeo-st-sidebar__result--bg-color, var(--egeo-theme-neutral-15, $neutral-15));
-            font-weight: 400;
-            font-size: var(--egeo-st-sidebar__result--font-size, $egeo-font-size-12);
-            float: right;
+            border-radius: 10px;
             display: inline-block;
+            float: right;
+            font-size: var(--egeo-st-sidebar__result--font-size, $egeo-font-size-12);
+            font-weight: 400;
+            height: 20px;
+            width: 40px;
             .result__text {
                color: var(--egeo-st-sidebar__result__text--bg-color, var(--egeo-theme-neutral-60, $neutral-60));
-               text-align: center;
                display: inline-block;
+               text-align: center;
                width: 100%;
             }
          }
@@ -184,6 +185,13 @@
          color: var(--egeo-st-sidebar__disabled-item--color, var(--egeo-theme-neutral-30, $neutral-30));
          cursor: default !important;
       }
+   }
+
+   .empty-results {
+      color: var(--egeo-st-sidebar__empty-results--color, var(--egeo-theme-neutral-70, $neutral-70));
+      display: block;
+      font-size: var(--egeo-st-sidebar__empty-results--font-size, var(--egeo-theme-font-size-12, $egeo-font-size-12));
+      padding: var(--egeo-st-sidebar__empty-results--padding, 0 0 20px 0);
    }
 
 }
