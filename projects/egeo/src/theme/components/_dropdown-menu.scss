@@ -30,7 +30,7 @@
    border-radius: var(--egeo-st-dropdown-menu--border-radius, 4px);
 
    &.active {
-      border-color: $input-field-onfocus;
+      border-color: var(--egeo-st-dropdown-menu__active--border-color, var(--egeo-theme-action-10, $action-10));
    }
 
    ul {
@@ -69,7 +69,7 @@
 
    .st-dropdown-menu-item {
       padding: var(--egeo-st-dropdown-menu__item--padding, 9px 15px);
-      font-weight:  var(--egeo-st-dropdown-menu__item--font-weight, 400);
+      font-weight: var(--egeo-st-dropdown-menu__item--font-weight, 400);
       cursor: pointer;
       display: flex;
 
@@ -83,12 +83,12 @@
       }
 
       &.selected {
-         background-color:  var(--egeo-st-dropdown-menu__item__selected--bg-color, var(--egeo-theme-action-10, $action-10));
+         background-color: var(--egeo-st-dropdown-menu__item__selected--bg-color, var(--egeo-theme-action-10, $action-10));
       }
 
       &.disabled {
          & *:not(i) {
-            color:  var(--egeo-st-dropdown-menu__item__disabled--color, var(--egeo-theme-space-40, $space-40)) !important;
+            color: var(--egeo-st-dropdown-menu__item__disabled--color, var(--egeo-theme-space-40, $space-40)) !important;
          }
          cursor: default;
       }
@@ -98,7 +98,7 @@
       }
 
       &.bottom-separator {
-         border-bottom: 1px solid  var(--egeo-st-dropdown-menu__separator--color, var(--egeo-theme-space-20, $space-20));
+         border-bottom: 1px solid var(--egeo-st-dropdown-menu__separator--color, var(--egeo-theme-space-20, $space-20));
       }
 
       .label-container {
@@ -112,11 +112,11 @@
       }
 
       i {
-         color:  var(--egeo-st-dropdown-menu__icon--color, var(--egeo-theme-space-70, $space-70));
+         color: var(--egeo-st-dropdown-menu__icon--color, var(--egeo-theme-space-70, $space-70));
          display: inline-flex;
          font-size: var(--egeo-st-dropdown-menu__icon--font-size, $egeo-font-size-12);
          line-height: var(--egeo-st-dropdown-menu__icon--line-height, $egeo-line-height-20);
-         font-family:  var(--egeo-theme-icon-font, $egeo-stratio-icons);
+         font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
 
          &.icon {
             margin-right: 10px;
@@ -142,7 +142,7 @@
          color: var(--egeo-st-dropdown-menu__text-info--color, var(--egeo-theme-neutral-40, $neutral-40));
          display: block;
          font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-         font-size:  var(--egeo-st-dropdown-menu__text-info--font-size, $egeo-font-size-12);
+         font-size: var(--egeo-st-dropdown-menu__text-info--font-size, $egeo-font-size-12);
          font-stretch: normal;
          font-style: normal;
          font-weight: normal;
@@ -154,7 +154,7 @@
    .st-dropdown-menu-without-results {
       color: var(--egeo-st-dropdown-menu__without-results--color, var(--egeo-theme-neutral-50, $neutral-50));
       font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-      font-size:  var(--egeo-st-dropdown-menu__without-results--font-size, $egeo-font-size-14);
+      font-size: var(--egeo-st-dropdown-menu__without-results--font-size, $egeo-font-size-14);
       font-weight: var(--egeo-st-dropdown-menu__without-results--font-weight, 300);
       padding: var(--egeo-st-dropdown-menu__without-results--padding, 20px);
    }
@@ -166,13 +166,13 @@
 
 .st-dropdown-menu.menu-list {
    background-color: var(--egeo-st-dropdown-menu__menu-list--bg-color, var(--egeo-theme-neutral-full, $neutral-full));
-   border-color: transparent;
+   border: 0;
    border-radius: var(--egeo-st-dropdown-menu__menu-list--border-radius, 4px);
    box-shadow: var(--egeo-st-dropdown-menu__menu-list--box-shadow, 0 3px 9px 0 rgba(17, 17, 17, 0.25));
    padding: var(--egeo-st-dropdown-menu__menu-list--padding, 4px 0);
 
    .st-dropdown-menu-item {
-      color:  var(--egeo-st-dropdown-menu__menu-list__item--color, var(--egeo-theme-space-110, $space-110));
+      color: var(--egeo-st-dropdown-menu__menu-list__item--color, var(--egeo-theme-space-110, $space-110));
       font-size: var(--egeo-st-dropdown-menu__menu-list__item--font-size, $egeo-font-size-14);
       min-height: var(--egeo-st-dropdown-menu__menu-list__item--min-height, 40px);
       padding: var(--egeo-st-dropdown-menu__menu-list__item--padding, 10px 20px);
