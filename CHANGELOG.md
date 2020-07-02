@@ -16,6 +16,7 @@
 * st-sidebar: Display an optional message when search does not have any results
 * st-dropdown-menu: Allow to customize some styles from outside using css variables
 * st-modal: add optional and customizable close button to basic modal
+* st-search: Allow to customize icon styles from outside using css variables
 
 **Fixed bugs:**
 

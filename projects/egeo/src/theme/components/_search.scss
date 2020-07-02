@@ -61,12 +61,24 @@ st-search.small {
 }
 
 .sth-search-icon {
-   font-size: $egeo-font-size-14;
-   color: var(--egeo-theme-neutral-60, $neutral-60);
+   font-size: var(--egeo--st-search__icon--font-size, $egeo-font-size-14);
+   color: var(--egeo-st-search__icon--color, var(--egeo-theme-neutral-60, $neutral-60));
+   line-height: var(--egeo--st-search__icon--line-height, 1);
+   font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
+   font-style: normal;
+   margin-top:  var(--egeo-st-search__icon--margin-top, 13px);
+
+   &--search:before {
+      content:  var(--egeo-st-search__search-icon--content, '\e036');
+   }
+
+   &--clear:before {
+      content:  var(--egeo-st-search__clear-icon--content, '\e117');
+   }
 }
 
 .sth-search .sth-search-input:focus + .sth-search-icon {
-   color: var(--egeo-theme-action, $action) !important;
+   color: var(--egeo-st-search__icon__focus--color, var(--egeo-theme-action, $action)) !important;
 }
 
 .sth-search-filter {

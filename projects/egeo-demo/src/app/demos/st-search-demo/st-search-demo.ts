@@ -11,6 +11,7 @@
 import { Component } from '@angular/core';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { StDropDownMenuItem } from '@stratio/egeo';
+import { CssProperty } from '@app/shared/css-property-table/css-property-table.model';
 
 @Component({
    selector: 'st-search-demo',
@@ -48,6 +49,43 @@ export class StSearchDemoComponent {
    ];
 
    public filteredMenu: StDropDownMenuItem[] = [];
+   public cssProperties: CssProperty[] = [
+      {
+         name: '--egeo--st-search__icon--font-size',
+         description: 'Icon font size',
+         default: '$egeo-font-size-14'
+      },
+      {
+         name: '--egeo-st-search__icon--color',
+         description: 'Icon color',
+         default: '$neutral-60'
+      },
+      {
+         name: '--egeo--st-search__icon--line-height',
+         description: 'Icon line height',
+         default: '1'
+      },
+      {
+         name: '--egeo-st-search__icon--margin-top',
+         description: 'Icon margin top',
+         default: '13px'
+      },
+      {
+      name: '--egeo-st-search__icon__focus--color',
+         description: 'Focus icon color',
+         default: '$action'
+      },
+      {
+         name: '--egeo-st-search__search-icon--content',
+         description: 'Search icon content',
+         default: '\e036'
+      },
+      {
+         name: '--egeo-st-search__clear-icon--content',
+         description: 'Clear icon content',
+         default: '\e117'
+      }
+   ];
 
    onSearchResult(value: { filter: string, text: string }): void {
       this.searched = value.text;

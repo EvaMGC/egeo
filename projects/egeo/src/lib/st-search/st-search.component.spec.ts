@@ -272,7 +272,7 @@ describe('StSearchComponent', () => {
       input.nativeElement.dispatchEvent(new Event('focus'));
       fixture.detectChanges();
 
-      let clearButton: DebugElement = fixture.debugElement.query(By.css('.icon-cross'));
+      let clearButton: DebugElement = fixture.debugElement.query(By.css('.sth-search-icon--clear'));
       expect(component.searchBox.value).toEqual('test');
 
       clearButton.nativeElement.dispatchEvent(new Event('mousedown'));
@@ -489,21 +489,21 @@ describe('StSearchComponent', () => {
       it ('by default, it is shown', () => {
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-search-icon.icon-search')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-search-icon.sth-search-icon--search')).not.toBeNull();
       });
 
       it ('if showIcon is true, it is shown', () => {
          component.showIcon = true;
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-search-icon.icon-search')).not.toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-search-icon.sth-search-icon--search')).not.toBeNull();
       });
 
       it ('if showIcon is true, it is shown', () => {
          component.showIcon = false;
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('.st-search-icon.icon-search')).toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-search-icon.sth-search-icon--search')).toBeNull();
       });
    });
 });

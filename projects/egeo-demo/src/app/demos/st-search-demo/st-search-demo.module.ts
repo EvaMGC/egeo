@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { StDemoGeneratorModule, StDocsModule, StSearchModule } from '@stratio/egeo';
 
 import { StSearchDemoComponent } from './st-search-demo';
+import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { StSearchDemoComponent } from './st-search-demo';
       StSearchModule,
       FormsModule,
       StDemoGeneratorModule.withComponents({ components: [StSearchDemoComponent] }),
-      StDocsModule
+      StDocsModule,
+      CssPropertyTableModule
    ],
    declarations: [StSearchDemoComponent]
 })
