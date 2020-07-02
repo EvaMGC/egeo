@@ -61,9 +61,9 @@ st-search.small {
 }
 
 .sth-search-icon {
-   font-size: var(--egeo--st-search__icon--font-size, $egeo-font-size-14);
+   font-size: var(--egeo-st-search__icon--font-size, $egeo-font-size-14);
    color: var(--egeo-st-search__icon--color, var(--egeo-theme-neutral-60, $neutral-60));
-   line-height: var(--egeo--st-search__icon--line-height, 1);
+   line-height: var(--egeo-st-search__icon--line-height, 1);
    font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
    font-style: normal;
    margin-top:  var(--egeo-st-search__icon--margin-top, 13px);

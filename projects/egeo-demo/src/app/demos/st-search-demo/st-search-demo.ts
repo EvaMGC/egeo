@@ -51,7 +51,7 @@ export class StSearchDemoComponent {
    public filteredMenu: StDropDownMenuItem[] = [];
    public cssProperties: CssProperty[] = [
       {
-         name: '--egeo--st-search__icon--font-size',
+         name: '--egeo-st-search__icon--font-size',
          description: 'Icon font size',
          default: '$egeo-font-size-14'
       },
@@ -61,7 +61,7 @@ export class StSearchDemoComponent {
          default: '$neutral-60'
       },
       {
-         name: '--egeo--st-search__icon--line-height',
+         name: '--egeo-st-search__icon--line-height',
          description: 'Icon line height',
          default: '1'
       },
