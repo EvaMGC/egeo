@@ -95,7 +95,7 @@ export class StDropdownMenuDemoComponent {
       {
          name: '--egeo-st-dropdown-menu__active--border-color',
          description: 'Active menu border color',
-         default: '$action-10'
+         default: '$input-field-onfocus'
       },
       {
          name: '--egeo-st-dropdown-menu__item__hover--bg-color',
