@@ -10,7 +10,6 @@
  */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { JSONSchema4 } from 'json-schema';
-import { formatDate } from '@angular/common';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order } from '../st-table/shared/order';
@@ -222,7 +221,7 @@ export class StDynamicTableComponent {
       const uiDefinition = this.uiDefinitions && this.uiDefinitions[field.id];
 
       if (uiDefinition && uiDefinition.dateFormat) {
-         return formatDate(<string> item[field.id], uiDefinition.dateFormat, this.locale);
+         return StDynamicTableUtils.formatDate(<string> item[field.id], uiDefinition.dateFormat, this.locale);
       }
       return item[field.id];
    }

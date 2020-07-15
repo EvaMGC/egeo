@@ -10,6 +10,8 @@
  */
 
 import { JSONSchema4 } from 'json-schema';
+import { formatDate } from '@angular/common';
+
 import { StDynamicTableHeader, StDynamicTableUISpecification, StDynamicTableUserInterface } from '../st-dynamic-table.model';
 import { StFilterHeader } from '../../st-table/shared/table-header.interface';
 
@@ -70,6 +72,14 @@ export class StDynamicTableUtils {
       }
 
       return filters;
+   }
+
+   public static formatDate(date: string, format: string, locale: string): string {
+      try {
+         return formatDate(date, format, locale);
+      } catch (e) {
+         return date;
+      }
    }
 
    private static _getTypes(key: string, type: string, jsonSchema: JSONSchema4,

@@ -179,19 +179,37 @@ describe('StDynamicTableComponent', () => {
          expect(headerItems[2].classList).not.toContain('st-table__header-item--sortable');
       });
 
-      it('if a property has defined dateFormat, its value is converted to this format', () => {
-         component.uiDefinitions = {
-            fecha_creacion: {
-               dateFormat: 'yyyy-MM-d / HH:mm'
-            }
-         };
-         component.jsonSchema = jsonSchema;
-         fixture.detectChanges();
+      describe('if a property has defined dateFormat ', () => {
+         it('and it is a valid date, its value is converted to this format', () => {
+            component.uiDefinitions = {
+               fecha_creacion: {
+                  dateFormat: 'yyyy-MM-d / HH:mm'
+               }
+            };
+            component.jsonSchema = jsonSchema;
+            fixture.detectChanges();
 
-         let rows: HTMLTableRowElement[] = fixture.nativeElement.querySelectorAll('tbody tr');
+            let rows: HTMLTableRowElement[] = fixture.nativeElement.querySelectorAll('tbody tr');
 
-         expect(rows[0].querySelectorAll('td')[3].innerText).toContain('2020-04-15 / 19:50');
+            expect(rows[0].querySelectorAll('td')[3].innerText).toContain('2020-04-15 / 19:50');
+         });
+
+         it('and it is not a valid date, its value is displayed without formatting them', () => {
+            component.uiDefinitions = {
+               home: {
+                  dateFormat: 'yyyy-MM-d / HH:mm'
+               }
+            };
+            component.jsonSchema = jsonSchema;
+            fixture.detectChanges();
+
+            let rows: HTMLTableRowElement[] = fixture.nativeElement.querySelectorAll('tbody tr');
+
+            expect(rows[0].querySelectorAll('td')[2].innerText).toContain(component.items[0].home);
+         });
       });
+
+
    });
 
    it('if table is filterable, filterable class is only added to filterable fields', () => {
