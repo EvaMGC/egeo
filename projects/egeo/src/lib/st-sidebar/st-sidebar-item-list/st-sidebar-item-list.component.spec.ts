@@ -111,4 +111,15 @@ describe('StSidebarItemList', () => {
       expect(secondClicked.classList).toContain('item--active');
       expect(fixture.nativeElement.querySelector('#complex2').classList).not.toContain('item--expanded');
    });
+
+   it ('When items are changed, expanded items are reset and updated according to new items', () => {
+      component.onSelectItem(component.items[5], 5);
+      expect(component.expanded[5]).toBeTruthy();
+
+      component.items = [
+         { id: 'vault-roles', label: 'Vault Roles' },
+         { id: 'identities', label: 'Identities', result: '56' }];
+
+      expect(component.expanded).toEqual([]);
+   });
 });

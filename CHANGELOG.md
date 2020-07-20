@@ -29,6 +29,7 @@
 * st-sidebar: Do not emit change event after searching something
 * st-header: Fix margin between shortcut buttons
 * st-radio-group: active descendants to always find st-radio child
+* st-sidebar: Reset expanded list when items are changed
 
 **Breaking changes:**
 

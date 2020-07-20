@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { StSidebarItem } from '../st-sidebar-item.interface';
 import { StSidebarVisualMode } from '../st-sidebar-visual-mode';
@@ -41,8 +41,7 @@ import { StSidebarVisualMode } from '../st-sidebar-visual-mode';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StSidebarItemListComponent implements OnInit {
-   /** @Input {StSidebarItem[]} [items=''] List of items displayed on the menu */
-   @Input() items: StSidebarItem[] = [];
+
    /** @Input {boolean} [defaultActive=true] Unset first item as active by default if false */
    @Input() defaultActive: boolean = true;
    /** @Input {number} [deep=0] Deep of the item list in the sidebar */
@@ -55,20 +54,22 @@ export class StSidebarItemListComponent implements OnInit {
    public displayAsComplexModeValue: boolean = false;
    public expanded: boolean[] = [];
 
+   private _items: StSidebarItem[] = [];
    private _active: StSidebarItem;
+
+   /** @Input {StSidebarItem[]} [items=''] List of items displayed on the menu */
+   @Input() get items(): StSidebarItem[] {
+      return this._items;
+   }
+
+   set items(items: StSidebarItem[]) {
+      this._items = items;
+      this._updateStatus();
+   }
 
    /** @Input {string} [active=''] The id of the current active item */
    @Input() get active(): StSidebarItem {
       return this._active;
-   }
-
-   ngOnInit(): void {
-      if (this.defaultActive && !this._active && this.items && this.items.length) {
-         this._active = this.items[0];
-      }
-
-      this._updateStatus();
-      this.displayAsComplexModeValue = this.displayAsComplexMode();
    }
 
    set active(active: StSidebarItem) {
@@ -77,6 +78,14 @@ export class StSidebarItemListComponent implements OnInit {
          this._updateStatus();
       }
    }
+
+   ngOnInit(): void {
+      if (this.defaultActive && !this._active && this._items && this._items.length) {
+         this._active = this._items[0];
+      }
+      this.displayAsComplexModeValue = this.displayAsComplexMode();
+   }
+
 
    getItemClasses(item: StSidebarItem, index: number): any {
       let classes: any = {};
@@ -138,7 +147,8 @@ export class StSidebarItemListComponent implements OnInit {
    }
 
    private _updateStatus(): void {
-      this.items.forEach((item, i) => {
+      this.expanded = [];
+      this._items.forEach((item, i) => {
          if (this.hasActiveChild(item)) {
             this.expanded[i] = true;
          }
@@ -160,7 +170,7 @@ export class StSidebarItemListComponent implements OnInit {
 
    private _closeRestOfItems(itemId: string): void {
       this.expanded.forEach((open, i) => {
-         if (open && this.items[i].id !== itemId) {
+         if (open && this._items[i].id !== itemId) {
             this.expanded[i] = false;
          }
       });
