@@ -24,9 +24,9 @@ import { FormControl } from '@angular/forms';
 })
 export class StDynamicTableDemoComponent {
    public configDoc: any = {
-      html: 'demo/st-table-demo/st-table-demo.component.html',
-      ts: 'demo/st-table-demo/st-table-demo.component.ts',
-      component: 'lib/st-table/st-table.component.ts'
+      html: 'demo/st-table-demo/st-dynamic-table-demo.component.html',
+      ts: 'demo/st-table-demo/st-dynamic-table-demo.component.ts',
+      component: 'lib/st-table/st-dynamic-table.component.ts'
    };
 
    public jsonSchema: JSONSchema4 = {
@@ -68,7 +68,7 @@ export class StDynamicTableDemoComponent {
             'description': 'User status',
             'enum': ['Employed', 'Free', 'Busy']
          },
-         'fecha_creacion': { 'title': 'Fecha creacion', 'description': 'fecha_creacion'}
+         'fecha_creacion': { 'title': 'Fecha creacion', 'description': 'fecha_creacion' }
       }
    };
    public jsonSchemaFk: JSONSchema4 = {
@@ -310,7 +310,7 @@ export class StDynamicTableDemoComponent {
 
    public customFilterFormControl: FormControl = new FormControl();
    public tableFields: StDynamicTableHeader[][] = [];
-   public activeFilters: boolean[][] = [[], [], [], []];
+   public activeFilters: string[][] = [[], [], [], []];
 
    constructor(private _cd: ChangeDetectorRef) {
       this.sortedUsers = _cloneDeep(this.users);
@@ -360,7 +360,11 @@ export class StDynamicTableDemoComponent {
    public onCustomStatusFilter(tablePosition: number): void {
       const filter = this.customFilterFormControl.value;
       this.customFilteredUsers = this.users.filter(_user => _user.status === filter);
-      this.activeFilters[tablePosition][5] = Boolean(filter && filter.length > 0);
+      if (filter && filter.length > 0) {
+         this.activeFilters[tablePosition] = ['status'];
+      } else {
+         this.activeFilters[tablePosition] = [];
+      }
       this._cd.markForCheck();
 
    }

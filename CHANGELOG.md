@@ -42,6 +42,7 @@
 * st-footer: Removed component
 * st-launcher: Removed component
 * st-draggable-card: Removed component
+* st-dynamic-table: Change input 'statusFilter' to 'activeFilterFields' to store the field keys with active filters
 
 ## 21.1.0 (June 26, 2020)
 

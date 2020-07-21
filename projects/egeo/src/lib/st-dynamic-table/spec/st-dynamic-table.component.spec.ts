@@ -15,7 +15,7 @@ import { cloneDeep as _cloneDeep } from 'lodash';
 import { JSONSchema4 } from 'json-schema';
 
 import { StDynamicTableComponent } from '../st-dynamic-table.component';
-import { Order, ORDER_TYPE, StCheckboxComponent, StCheckboxModule, StTableComponent, StTableHeader, StTableModule } from '../..';
+import { Order, ORDER_TYPE, StCheckboxComponent, StCheckboxModule, StFormSchema, StTableComponent, StTableHeader, StTableModule } from '../..';
 
 let fixture: ComponentFixture<StDynamicTableComponent>;
 let component: StDynamicTableComponent;
@@ -478,5 +478,44 @@ describe('StDynamicTableComponent', () => {
 
       rows[0].dispatchEvent(new Event('mouseleave'));
       expect(component.showHoverMenu.emit).toHaveBeenCalledWith(undefined);
+   });
+
+   describe('Should be able to specify the active filtered columns', () => {
+      it('When active filtered columns are introduced as input, status filters are updated', () => {
+         component.statusFilter = [false, false, true];
+         component.activeFilterFields = [];
+         component.jsonSchema = jsonSchema;
+
+         expect(component.statusFilter).toEqual([]);
+
+         component.activeFilterFields = ['home'];
+
+         expect(component.statusFilter[2]).toBeTruthy();
+      });
+
+      it('When json schema is updated, also the filter statuses are updated', () => {
+         component.activeFilterFields = ['home'];
+
+         expect(component.statusFilter[2]).toBeTruthy();
+
+         const _jsonSchema: StFormSchema = _cloneDeep(jsonSchema);
+         _jsonSchema.properties = {};
+         component.jsonSchema = _jsonSchema;
+
+         expect(component.statusFilter).toEqual([]);
+      });
+
+      it('When the UI definitions are updated, also the filter statuses are updated', () => {
+         component.activeFilterFields = ['home'];
+         expect(component.statusFilter[2]).toBeTruthy();
+
+         component.uiDefinitions = {
+            home: {
+               visible: false
+            }
+         };
+
+         expect(component.statusFilter).toEqual([]);
+      });
    });
 });

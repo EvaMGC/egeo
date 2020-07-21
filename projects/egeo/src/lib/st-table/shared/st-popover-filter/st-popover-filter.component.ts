@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import {
-   AfterViewInit,
    ChangeDetectionStrategy,
    Component,
    ElementRef,

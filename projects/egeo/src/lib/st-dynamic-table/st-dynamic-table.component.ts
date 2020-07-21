@@ -99,8 +99,6 @@ export class StDynamicTableComponent {
    @Input() stickyHoverMenu: boolean = false;
    /** @Input {StTableIconClasses} [iconClasses=''] List of icon classes */
    @Input() iconClasses?: StTableIconClasses = new StTableIconClasses();
-   /** @Input {boolean[]} [statusFilter=] List of status filter by column, needed with templateContentFilter */
-   @Input() statusFilter?: boolean[] = [];
    /** @Input {number} [activeHoverMenu=] Position of the current active hover menu */
    @Input() activeHoverMenu?: number;
    /** @Input {boolean} [hasHoverMenu=] It specifies if a menu has to be displayed when user puts the mouse over
@@ -134,12 +132,13 @@ export class StDynamicTableComponent {
    @Input() locale: string = 'en-US';
 
    public fields: StDynamicTableHeader[] = [];
-
+   public statusFilter: boolean[] = [];
    private _jsonSchema: JSONSchema4;
    private _uiDefinitions: StDynamicTableUserInterface;
 
    private _templateContentFilter: TemplateRef<any>;
    private _fkSeparator: string = ' - ';
+   private _activeFilterFields: string[] = [];
 
    constructor(private _cd: ChangeDetectorRef) {
    }
@@ -166,7 +165,6 @@ export class StDynamicTableComponent {
       this._manageFieldsUpdate();
    }
 
-   /** @Input {TemplateRef} [templateContentFilter=undefined] Reference to paint a custom template inside popover content */
    @Input()
    get templateContentFilter(): TemplateRef<any> {
       return this._templateContentFilter;
@@ -174,6 +172,17 @@ export class StDynamicTableComponent {
 
    set templateContentFilter(_templateRef: TemplateRef<any>) {
       this._templateContentFilter = _templateRef;
+   }
+
+   /** @Input {string[]} [activeFilterFields=] List of current filtered fields  */
+   @Input()
+   get activeFilterFields(): string[] {
+      return this._activeFilterFields;
+   }
+
+   set activeFilterFields(_activeFilterFields: string[]) {
+      this._activeFilterFields = _activeFilterFields;
+      this._updateStatusFilters();
    }
 
    public onFilterClick(selectedFilter: any): void {
@@ -238,6 +247,20 @@ export class StDynamicTableComponent {
    private _manageFieldsUpdate(): void {
       this.fields = StDynamicTableUtils.getHeaderFieldsFromJsonSchema(this._jsonSchema, this._uiDefinitions);
       this.updateFields.emit(this.fields);
+      this._updateStatusFilters();
       this._cd.markForCheck();
+   }
+
+   private _updateStatusFilters(): void {
+      this.statusFilter = [];
+
+      if (this._activeFilterFields && this._activeFilterFields.length && this.fields && this.fields.length) {
+         this._activeFilterFields.forEach(_fieldId => {
+            const position = this.fields.findIndex(_field => _field.id === _fieldId);
+            if (position > -1) {
+               this.statusFilter[position] = true;
+            }
+         });
+      }
    }
 }
