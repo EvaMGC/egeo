@@ -110,6 +110,10 @@ export class StDynamicTableComponent {
    @Input() hoverButton: string = 'icon-ellipsis';
    /** @Input {boolean} [selectedAll=] It specifies if all rows are selected */
    @Input() selectedAll?: boolean;
+   /** @Input {string} [locale=en-US] Locale used to format dates */
+   @Input() locale: string = 'en-US';
+   /** @Input {TemplateRef} [templateContentFilter=undefined] Reference to paint a custom template inside popover content */
+   @Input() templateContentFilter?: TemplateRef<any>;
    /** @Output {Order} [changeOrder=''] Event emitted with the new order which has to be applied to the table rows */
    @Output() changeOrder: EventEmitter<Order> = new EventEmitter<Order>();
    /** @Output {boolean} [selectAll=''] Event emitted  when user interacts with the checkbox to select or deselect
@@ -128,8 +132,7 @@ export class StDynamicTableComponent {
    @Output() selectRow: EventEmitter<{ checked: boolean, row: number }> = new EventEmitter<{ checked: boolean, row: number }>();
    /** @Output {StDynamicTableClickCellEvent} [clickCell=] Event emitted when user clicks on a cell */
    @Output() clickCell: EventEmitter<StDynamicTableClickCellEvent> = new EventEmitter<StDynamicTableClickCellEvent>();
-   /** @Input {string} [locale=en-US] Locale used to format dates */
-   @Input() locale: string = 'en-US';
+
 
    public fields: StDynamicTableHeader[] = [];
    public statusFilter: boolean[] = [];
@@ -163,15 +166,6 @@ export class StDynamicTableComponent {
    set uiDefinitions(_uiDefinitions: StDynamicTableUserInterface) {
       this._uiDefinitions = _uiDefinitions;
       this._manageFieldsUpdate();
-   }
-
-   @Input()
-   get templateContentFilter(): TemplateRef<any> {
-      return this._templateContentFilter;
-   }
-
-   set templateContentFilter(_templateRef: TemplateRef<any>) {
-      this._templateContentFilter = _templateRef;
    }
 
    /** @Input {string[]} [activeFilterFields=] List of current filtered fields  */

@@ -22,9 +22,14 @@
       <ng-content select="[popover-filter-button]"></ng-content>
    </div>
    <div pop-over-content class="st-table__popover-content">
-      <ng-container [ngTemplateOutlet]="templateContentFilter"
-                    [ngTemplateOutletContext]="{index:index}">
-      </ng-container>
+      <div *ngIf="templateContentFilter && !hidden"
+           template-filter-submit
+           (submit)="onCloseMenu()">
+         <ng-container
+            [ngTemplateOutlet]="templateContentFilter"
+            [ngTemplateOutletContext]="{index:index}">
+         </ng-container>
+      </div>
       <div class="st-table__popover-content-filter" *ngIf="!templateContentFilter">
 
          <div *ngFor="let filter of field.filters.filterConfig; let indexFilter = index">

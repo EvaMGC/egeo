@@ -18,11 +18,12 @@ import { StTableComponent } from './st-table.component';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
 import { StPopOverModule } from '../st-pop-over/st-pop-over.module';
 import { StClickOutsideModule } from '../directives/st-click-outside/st-click-outside.module';
+import { StPopoverFilterModule } from './shared/st-popover-filter/st-popover-filter.module';
 
 @NgModule({
-   imports: [CommonModule, StCheckboxModule, StPopOverModule, StClickOutsideModule],
-   declarations: [StPopoverFilterComponent, StTableCellComponent, StTableComponent, StTableRowComponent],
-   exports: [StPopoverFilterComponent, StTableCellComponent, StTableComponent, StTableRowComponent]
+   imports: [CommonModule, StCheckboxModule, StPopoverFilterModule],
+   declarations: [StTableCellComponent, StTableComponent, StTableRowComponent],
+   exports: [StTableCellComponent, StTableComponent, StTableRowComponent]
 })
 
 export class StTableModule {

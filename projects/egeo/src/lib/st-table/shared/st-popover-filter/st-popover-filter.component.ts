@@ -8,17 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import {
-   ChangeDetectionStrategy,
-   Component,
-   ElementRef,
-   EventEmitter,
-   HostListener,
-   Input,
-   OnDestroy,
-   Output,
-   TemplateRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, TemplateRef } from '@angular/core';
 import { get as _get } from 'lodash';
 
 import { StTableHeader } from '../../shared/table-header.interface';
@@ -29,7 +19,7 @@ import { StTableHeader } from '../../shared/table-header.interface';
    styleUrls: ['./st-popover-filter.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StPopoverFilterComponent implements OnDestroy {
+export class StPopoverFilterComponent {
    /**
     * @description {Component} [Popover Filter]
     *
@@ -55,7 +45,6 @@ export class StPopoverFilterComponent implements OnDestroy {
    public offsetX: number;
 
    private _hidden: boolean;
-   private _submitButton: HTMLButtonElement;
 
    constructor(private _elementRef: ElementRef) {
 
@@ -70,9 +59,6 @@ export class StPopoverFilterComponent implements OnDestroy {
    set hidden(hidden: boolean) {
       if (!hidden) {
          this.offsetX = (this._elementRef.nativeElement.offsetLeft - this._elementRef.nativeElement.offsetWidth) * -1;
-         this._addSubmitButtonListener();
-      } else {
-         this._removeSubmitButtonListener();
       }
       this._hidden = hidden;
    }
@@ -100,25 +86,6 @@ export class StPopoverFilterComponent implements OnDestroy {
    public onPressEnter(): void {
       if (!this._hidden) {
          this.onFilter();
-      }
-   }
-
-   ngOnDestroy(): void {
-      this._removeSubmitButtonListener();
-   }
-
-   private _addSubmitButtonListener(): void {
-      if (this._elementRef && this._elementRef.nativeElement) {
-         this._submitButton = this._elementRef.nativeElement.querySelector('button[popover-filter-submit]');
-         if (this._submitButton) {
-            this._submitButton.addEventListener('click', this.onCloseMenu.bind(this));
-         }
-      }
-   }
-
-   private _removeSubmitButtonListener(): void {
-      if (this._submitButton) {
-         this._submitButton.removeEventListener('click', this.onCloseMenu.bind(this));
       }
    }
 }

@@ -30,6 +30,7 @@
 * st-header: Fix margin between shortcut buttons
 * st-radio-group: active descendants to always find st-radio child
 * st-sidebar: Reset expanded list when items are changed
+* st-table: Wait for filter template loading in order to add submit button listener
 
 **Breaking changes:**
 
