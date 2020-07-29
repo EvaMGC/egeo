@@ -1,8 +1,15 @@
 # Changelog
 
-## 22.1.0 (upcoming)
+## 23.0.0 (upcoming)
 
-* Pending changelog
+**New features:**
+
+* st-button: Apply new design according to UX specifications
+
+**Breaking changes:**
+
+* st-button: Removed large buttons
+
 
 ## 22.0.0 (upcoming)
 

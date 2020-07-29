@@ -15,39 +15,26 @@
 %button-label-regular {
    color: var(--egeo-theme-neutral-full, $neutral-full);
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-   font-weight: normal;
    font-size: var(--egeo-st-button--font-size, $egeo-font-size-14);
+   font-weight: normal;
+   height: var(--egeo-st-button--height, 36px);
    line-height: var(--egeo-st-button--line-height, $egeo-line-height-18);
-   height: var(--egeo-st-button--height, 40px);
-
+   padding: 0.714rem 1.429rem 0.5rem 1.429rem;
 }
 
 %button-label-small {
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
+   font-size: var(--egeo-st-button__small--font-size, $egeo-font-size-12);
    font-weight: normal;
-   font-size: var(--egeo-st-button__small--font-size, $egeo-font-size-14);
+   height: var(--egeo-st-button__small--height, 30px);
    line-height: var(--egeo-st-button__small--line-height, $egeo-line-height-18);
-   height: var(--egeo-st-button__small--height, 25px);
-}
-
-%button-label-large {
-   color: var(--egeo-theme-neutral-full, $neutral-full);
-   font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-   font-weight: normal;
-   font-size: var(--egeo-st-button__large--font-size, $egeo-font-size-14);
-   line-height: var(--egeo-st-button__large--line-height, $egeo-line-height-22);
-   height: var(--egeo-st-button__large--height, 50px);
-
-   &[disabled] {
-      color: var(--egeo-theme-neutral-20, $neutral-20);
-   }
+   padding: 0.357rem 1.429rem;
 }
 
 %button-toolbar-ico-default {
-   color: var(--egeo-theme-neutral-60, $neutral-60);
    font-family: var(--egeo-theme-icon-font, $egeo-stratio-icons);
-   font-size: var(--egeo-st-button__icon--font-size, $egeo-font-size-18);
-   line-height:  var(--egeo-st-button__icon--line-height, $egeo-line-height-22);
+   font-size: var(--egeo-st-button__icon--font-size, $egeo-font-size-16);
+   line-height: var(--egeo-st-button__icon--line-height, $egeo-line-height-18);
    &[disabled] {
       color: var(--egeo-theme-neutral-20, $neutral-20);
    }
@@ -56,9 +43,9 @@
 .button-link {
    color: var(--egeo-theme-action, $action);
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
-   font-weight: normal;
    font-size: var(--egeo-st-button__link--font-size, $egeo-font-size-14);
-   line-height:  var(--egeo-st-button__link--line-height, $egeo-line-height-20);
+   font-weight: normal;
+   line-height: var(--egeo-st-button__link--line-height, $egeo-line-height-20);
 
    &:hover {
       color: var(--egeo-theme-action-120, $action-120);
@@ -80,14 +67,14 @@
 
 /// STYLES:
 .button {
-   box-sizing: border-box;
    border-radius: 4px;
-   outline: none;
-   white-space: nowrap;
-   overflow: hidden;
-   max-width: 100%;
-   vertical-align: middle;
    border-width: 0;
+   box-sizing: border-box;
+   max-width: 100%;
+   outline: none;
+   overflow: hidden;
+   vertical-align: middle;
+   white-space: nowrap;
 
    &:not([disabled]) {
       cursor: pointer;
@@ -102,37 +89,39 @@
    &.button-borderless,
    &.button-critical {
       @extend %button-label-regular;
-      padding: 0.857rem 1.875rem;
       text-overflow: ellipsis;
 
       &.block {
          width: 100%;
       }
 
-      &.large {
-         @extend %button-label-large;
-         padding: .875rem 2.5rem;
-      }
       &.small {
          @extend %button-label-small;
-         padding: 0.3rem 1rem;
       }
 
       > i {
-         margin-top: 2px;
+         font-size: 16px;
+         vertical-align: top;
 
          & + span {
-            margin-left: 4px;
+            margin-left: 8px;
          }
       }
 
       > span + i {
-         margin-left: 4px;
+         margin-left: 10px;
+      }
+
+      &[disabled], &[disabled]:hover {
+         background-color: var(--egeo-theme-space-5, $space-10);
+         border-color: var(--egeo-theme-space-5, $space-10);
+         color: var(--egeo-theme-space-30, $space-30);
       }
    }
 
    &.button-primary {
       background-color: var(--egeo-theme-action, $action);
+      color: var(--egeo-theme-neutral-full, $neutral-full);
 
       &:hover {
          background-color: var(--egeo-theme-action-120, $action-120);
@@ -141,41 +130,35 @@
       &:active {
          background-color: var(--egeo-theme-action-150, $action-150);
       }
-
-      &[disabled] {
-         background-color: var(--egeo-theme-space-10, $space-10);
-         color: var(--egeo-theme-action-30, $space-30);
-      }
    }
 
    &.button-secondary {
       background-color: var(--egeo-theme-neutral-full, $neutral-full);
-      border: solid var(--egeo-theme-action, $action) 1px;
-      color: var(--egeo-theme-action, $action);
+      border: solid var(--egeo-theme-space-40, $space-40) 1px;
+      color: var(--egeo-theme-space-70, $space-70);
 
       &:hover {
-         color: var(--egeo-theme-action-120, $action-120);
-         border-color: var(--egeo-theme-action-120, $action-120);
+         border-color: var(--egeo-theme-space-50, $space-50);
+         background-color: var(--egeo-theme-action-10, $action-10);
+         color: var(--egeo-theme-space-80, $space-80);
       }
 
-      &[disabled] {
-         color: var(--egeo-theme-action-30, $space-30);
-         border-color: var(--egeo-theme-action-20, $space-20);
+      &:active {
+         border-color: var(--egeo-theme-space-80, $space-80);
+         background-color: var(--egeo-theme-space-10, $space-10);
+         color: var(--egeo-theme-space, $space);
       }
 
-      &.large {
-         color: var(--egeo-theme-action, $action);
-         padding: .875rem 2.4375rem;
-      }
-
-      &.small {
-         color: var(--egeo-theme-action, $action);
-         padding: 0.2rem 1rem;
+      &[disabled], &[disabled]:hover {
+         border-color: var(--egeo-theme-space-20, $space-20);
+         color: var(--egeo-theme-space-30, $space-30);
+         background-color: var(--egeo-theme-neutral-full, $neutral-full);
       }
    }
 
    &.button-critical {
       background-color: var(--egeo-theme-error, $error);
+      border-color: var(--egeo-theme-error, $error);
 
       &:hover {
          background-color: var(--egeo-theme-error-120, $error-120);
@@ -184,62 +167,34 @@
       &:active {
          background-color: var(--egeo-theme-error-140, $error-140);
       }
-
-      &[disabled] {
-         background-color: var(--egeo-theme-space-10, $space-10);
-         color: var(--egeo-theme-space-30, $space-30);
-      }
    }
 
    &.button-borderless {
-      background-color: var(--egeo-theme-space-5, $space-5);
-      color: var(--egeo-theme-space-80, $space-80);
+      background-color: transparent;
+      color: var(--egeo-theme-space-70, $space-70);
 
       &:hover {
-         background-color: var(--egeo-theme-space-10, $space-10);
-         color: var(--egeo-theme-space, $space);
+         background-color: var(--egeo-theme-action-10, $action-10);
+         color: var(--egeo-theme-space-80, $space-80);
       }
 
       &:active {
-         background-color: var(--egeo-theme-space-5, $space-5);
-         color: var(--egeo-theme-space-80, $space-80);
-      }
-
-      &[disabled] {
          background-color: var(--egeo-theme-space-10, $space-10);
-         color: var(--egeo-theme-space-30, $space-30);
+         color: var(--egeo-theme-space, $space);
       }
-
-      &.large {
-         color: var(--egeo-theme-space-80, $space-80);
-      }
-
    }
 
    &.button-toolbar {
       @extend %button-toolbar-ico-default;
       border-radius: 4px;
-      border: solid 1px var(--egeo-theme-neutral-8, $neutral-8);
-      background-color: white;
+      padding: 0.715rem;
 
       &.small {
-         & i {
-            padding: 0.22rem 0.22rem;
-         }
-      }
-
-      &:hover {
-         border: solid 1px var(--egeo-theme-neutral-30, $neutral-30);
-      }
-
-      &[disabled] {
-         border: none;
-         background-color: var(--egeo-theme-neutral-8, $neutral-8);
+         padding: 0.429rem 0.50rem;
       }
 
       i {
          display: block;
-         padding: 0.7142857rem;
       }
    }
 }

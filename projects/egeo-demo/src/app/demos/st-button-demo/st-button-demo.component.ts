@@ -36,7 +36,7 @@ export class StButtonDemoComponent {
       {
          name: '--egeo-st-button__small--font-size',
          description: 'Small button font size',
-         default: '$egeo-font-size-14'
+         default: '$egeo-font-size-12'
       },
       {
          name: '--egeo-st-button__small--line-height',
@@ -44,24 +44,14 @@ export class StButtonDemoComponent {
          default: '$egeo-line-height-18'
       },
       {
-         name: '--egeo-st-button__large--font-size',
-         description: 'Large button font size',
-         default: '$egeo-font-size-14'
-      },
-      {
-         name: '--egeo-st-button__large--line-height',
-         description: 'Large button line height',
-         default: '$egeo-line-height-22'
-      },
-      {
          name: '--egeo-st-button__icon--font-size',
          description: 'Icon button font size',
-         default: '$egeo-font-size-18'
+         default: '$egeo-font-size-16'
       },
       {
          name: '--egeo-st-button__icon--line-height',
          description: 'Icon button line height',
-         default: '$egeo-line-height-22'
+         default: '$egeo-line-height-18'
       },
       {
          name: '--egeo-st-button__link--font-size',
@@ -86,25 +76,12 @@ export class StButtonDemoComponent {
       {
          name: '--egeo-st-button--height',
          description: 'Button line height',
-         default: '40px'
+         default: '36px'
       },
       {
          name: '--egeo-st-button__small--height',
          description: 'Small button line height',
-         default: '25px'
-      },
-      {
-         name: '--egeo-st-button__large--height',
-         description: 'Large button line height',
-         default: '50px'
+         default: '30px'
       }
    ];
-
-   public test1(): void {
-      console.log('You clicked the button 1!');
-   }
-
-   public test2(): void {
-      console.log('You clicked the button 2!');
-   }
 }
