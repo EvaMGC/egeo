@@ -11,7 +11,7 @@
 * st-button: Removed large buttons
 
 
-## 22.0.0 (upcoming)
+## 22.0.0 (July 29, 2020)
 
 **New features:**
 
