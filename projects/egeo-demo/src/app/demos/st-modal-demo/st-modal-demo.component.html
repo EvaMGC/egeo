@@ -11,14 +11,14 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="container-fluid col-md-24">
-      <div class="st-live-example">
+   <section class="row">
+      <div class="demo-layout col-sm-12">
          <h1 class="title">Theme customization</h1>
          <p class="paragraph">You can customize some styles using the following css variables</p>
-         <demo-css-property-table [cssProperties]="cssProperties" class="separator"></demo-css-property-table>
+         <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
       </div>
-      <div class="st-live-example">
-         <h1 class="st-live-example-title">Modals by type of content:</h1>
+      <div class="demo-layout col-sm-12">
+         <h1 class="title">Modals by type of content</h1>
 
          <button class="button button-primary" (click)="showModal()">
             <span>Simple Message Modal</span>
@@ -38,17 +38,19 @@
          <button class="button button-primary" (click)="showFullscreenModalWithComponentAndWithoutContent()">
             <span>Modal fullscreen only with component</span>
          </button>
+      </div>
 
-         <br>
-         <br>
-         <h1 class="st-live-example-title">Modals by size:</h1>
+      <div class="demo-layout col-sm-12">
+         <h1 class="title">Modals by size</h1>
+
          <button class="button button-primary" (click)="showFullscreenModal()">
             <span>Fullscreen modal</span>
          </button>
+      </div>
 
-         <br>
-         <br>
-         <h1 class="st-live-example-title">Other modals:</h1>
+      <div class="demo-layout col-sm-12">
+         <h1 class="title">Other modals</h1>
+
          <button class="button button-primary" (click)="showBasic('delete')">
             <span>Delete modal</span>
          </button>
@@ -65,6 +67,7 @@
             <span>With animation</span>
          </button>
       </div>
+
    </section>
    <st-demo-logger></st-demo-logger>
    <div #loadModal id="modal-container"></div>

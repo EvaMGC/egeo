@@ -13,14 +13,12 @@
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
 
    <section class="container-liquid demo-layout">
+      <h1 class="title">Theme customization</h1>
 
-      <div class="theme-customization">
-         <h1 class="title">Theme customization</h1>
-         <p class="paragraph">You can customize some styles using the following css variables</p>
-         <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
-      </div>
+      <p class="paragraph">You can customize some styles using the following css variables</p>
+      <demo-css-property-table [cssProperties]="cssProperties"></demo-css-property-table>
 
-      <h1 class="title">Regular (36px)</h1>
+      <h1 class="title title--centered">Regular (36px)</h1>
 
       <div class="row">
          <div class="col-md-6 col-sm-12 col-xs-12 table-container">
@@ -279,7 +277,7 @@
       </div>
 
 
-      <h1 class="title">Small (30px)</h1>
+      <h1 class="title title--centered">Small (30px)</h1>
 
       <div class="row">
          <div class="col-md-6 col-sm-12 col-xs-12 table-container">

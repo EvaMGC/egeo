@@ -6,6 +6,10 @@
 
 * st-button: Apply new design according to UX specifications
 
+**Fixed bugs:**
+
+* st-modal: Fix wrong visualization of large titles
+
 **Breaking changes:**
 
 * st-button: Removed large buttons
