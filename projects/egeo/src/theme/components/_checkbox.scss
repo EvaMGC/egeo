@@ -9,8 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 /// tipography EXTENDS (@extend %button-label-regular;):
-@import '../constants/colors';
-@import '../constants/fonts';
+@import '~@stratio/egeo-themes/dist/stratio/constants';
 
 %checkbox-default {
    color: var(--egeo-theme-space-110, $space-110);

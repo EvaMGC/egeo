@@ -13,6 +13,7 @@
 **Breaking changes:**
 
 * st-button: Removed large buttons
+* Remove theme constants in order to import them from egeo-themes dependency
 
 
 ## 22.0.0 (July 29, 2020)
