@@ -10,17 +10,20 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section>
+<section class="demo-layout">
    <h1 class="title">Try it by yourself</h1>
    <p class="paragraph">Dynamic forms are generating using a json schema to define its fields. Here you can try it
       making modifications on the json schema of the editor.</p>
 
-   <div class="textarea-container">
+   <div class="editor-input-container demo-layout">
       <h2 class="subtitle">JSON Schema</h2>
-      <textarea class="textarea st-custom-scrollbar" spellcheck="false" [ngClass]="{error: schemaError}"
-                [ngModel]="jsonSchema | json"
-                (ngModelChange)="onChangeSchema($event)">
-      </textarea>
+
+      <st-editor-input class="editor-input"
+                       [ngModel]="jsonSchema | json"
+                       [validateJson]="true"
+                       [language]="'json'"
+                       (ngModelChange)="onChangeSchema($event)">
+      </st-editor-input>
 
       <div class="form-output">
          <h2>Form Output</h2>
@@ -36,7 +39,7 @@
       </div>
    </div>
 
-   <div class="form-result">
+   <div class="form-result demo-layout">
       <h2 class="subtitle">Generated Form</h2>
 
       <p *ngIf="schemaError" class="schema-error">{{schemaError}}</p>

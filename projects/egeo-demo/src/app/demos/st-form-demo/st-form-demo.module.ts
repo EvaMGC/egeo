@@ -19,6 +19,7 @@ import { StVisualSectionImprovementsDemoComponent } from './visual-section-impro
 import { StVisualFieldImprovementsDemoComponent } from './visual-field-improvements/st-visual-field-improvements-editor-demo';
 import { StThemeCustomization } from '@app/demos/st-form-demo/visual-customization/st-theme-customization-demo';
 import { CssPropertyTableModule } from '@app/shared/css-property-table/css-property-table.module';
+import { StMonacoEditorModule } from '@stratio/st-monaco-editor';
 
 @NgModule({
    imports: [
@@ -30,6 +31,7 @@ import { CssPropertyTableModule } from '@app/shared/css-property-table/css-prope
       StTextareaModule,
       StVerticalIconTabsModule,
       CssPropertyTableModule,
+      StMonacoEditorModule,
       StDemoGeneratorModule.withComponents({ components: [StFormDemoComponent] })
    ],
    declarations: [StFormDemoComponent, StFormEditorDemoComponent, StVisualFieldImprovementsDemoComponent,

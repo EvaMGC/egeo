@@ -14,7 +14,7 @@
 :host {
    padding: 20px 0;
 
-   .form-result, .textarea-container {
+   .form-result, .editor-input-container {
       display: inline-block;
       vertical-align: top;
       width: 50%;
@@ -28,11 +28,11 @@
       padding-top: 0;
    }
 
-   .textarea-container {
+   .editor-input-container {
       height: 50vh;
       padding-right: 20px;
 
-      .textarea-title {
+      .editor-input-title {
          color: $neutral;
          display: inline-block;
          font-size: $egeo-font-size-xlarge;
@@ -44,16 +44,9 @@
          padding: 26px 0;
       }
 
-      .textarea {
-         border: 1px solid $neutral-20;
-         color: $neutral-60;
-         font-family: monospace;
-         font-size: 14px;
+      .editor-input {
          height: 100%;
-         line-height: 1.6em;
-         padding: 15px 20px;
          width: 100%;
-         resize: none;
       }
    }
 
