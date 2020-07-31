@@ -11,11 +11,12 @@
 
 $egeo-fontface-src: 'assets/fonts';
 
-@import '../theme/constants/index';
+@import '~@stratio/egeo-themes/dist/stratio/constants';
 
-@import '../theme/vendors/sanitize';
-@import '../theme/grid/grid';
-@import '../theme/theme';
+@import '../../egeo/src/theme/vendors/sanitize';
+@import '../../egeo/src/theme/grid/grid';
+@import '../../egeo/src/theme/theme';
+
 @import '~prismjs/themes/prism.css';
 
 @import '~@stratio/egeo-ui-base/nunito-sans.css';
