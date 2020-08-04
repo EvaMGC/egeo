@@ -450,7 +450,6 @@ describe('StSelectComponent', () => {
          expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
       });
 
-
       it('when user clicks on the reset button, value of input will turn to the default value', () => {
          const label: HTMLLabelElement = fixture.debugElement.query(By.css('label')).nativeElement;
          label.click();

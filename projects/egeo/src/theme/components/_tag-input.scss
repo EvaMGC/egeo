@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 @import '../utils/forms';
+@import '~@stratio/egeo-themes/dist/stratio/constants';
 
 .st-tag-input {
 
@@ -23,25 +24,28 @@
    }
 
    &__input {
-      min-height: 40px;
-      padding: 5px 15px 1px 15px !important;
+      min-height: 36px;
+      padding: 0 5px 0 5px !important;
       height: 100% !important;
+      line-height: $egeo-line-height-18 !important;
 
       &.error {
          border-color: var(--egeo-theme-error, $error);
       }
 
       &.active {
-         border-color: $input-field-onfocus;
-         .remove-tag-button {
-            color: var(--egeo-theme-neutral-80, $neutral-80);
-         }
+         @extend %st-form-control--focused;
       }
 
       &[disabled] {
          pointer-events: none;
-         border-color: var(--egeo-theme-neutral-20, $neutral-20);
-         background-color: $neutral-14;
+         border-color: var(--egeo-theme-space-40, $space-40);
+         background-color: var(--egeo-theme-space-5, $space-5);
+
+         .st-tag-input__item {
+            background-color: var(--egeo-theme-space-5, $space-5);
+            color: var(--egeo-theme-space-30, $space-30);
+         }
       }
    }
 
@@ -50,8 +54,11 @@
       border-radius: 4px;
       padding: 5px 10px;
       color: var(--egeo-theme-space-110, $space-110);
+      margin: 3px 0;
+
       &:focus {
-         background-color: $input-field-onfocus;
+         background-color: $action;
+         color: var(--egeo-theme-neutral-full, $neutral-full);
       }
    }
 
@@ -67,10 +74,12 @@
    }
 
    &__placeholder {
-      color: var(--egeo-theme-neutral-50, $neutral-50);
+      color: var(--egeo-theme-space-50, $space-50);
+      font-size: $egeo-font-size-14;
+      padding: 0 10px;
 
       &[disabled] {
-         color: var(--egeo-theme-neutral-30, $neutral-30);
+         color: var(--egeo-theme-space-30, $space-30);
       }
    }
 
@@ -90,23 +99,12 @@
    }
 
    .info-message {
-      font-size: $egeo-font-size-14;
+      font-size: $egeo-font-size-12;
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;
       line-height: $egeo-line-height-18;
       letter-spacing: normal;
       color: var(--egeo-theme-neutral-60, $neutral-60);
-   }
-
-   .remove-tag-button {
-      font-size: $egeo-font-size-12;
-      line-height: $egeo-line-height-xxxsmall;
-      color: var(--egeo-theme-space-50, $space-50);
-      margin-left: 10px;
-      cursor: pointer;
-      &:hover {
-         color: var(--egeo-theme-neutral, $neutral);
-      }
    }
 }

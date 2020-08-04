@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { StDropDownMenuItem, StDropDownMenuGroup } from '@stratio/egeo';
@@ -18,7 +18,7 @@ import { StDropDownMenuItem, StDropDownMenuGroup } from '@stratio/egeo';
    templateUrl: 'st-tag-input-demo.component.html',
    styleUrls: ['./st-tag-input-demo.component.scss']
 })
-export class StTagInputDemoComponent implements OnInit {
+export class StTagInputDemoComponent implements OnInit, AfterViewInit {
    public configDoc: any = {
       html: 'demo/st-tag-input-demo/st-tag-input-demo.component.html',
       ts: 'demo/st-tag-input-demo/st-tag-input-demo.component.ts',
@@ -117,12 +117,15 @@ export class StTagInputDemoComponent implements OnInit {
          'tag-input-reactive-autocomplete': [this.tags.reactiveDisabled],
          'tag-input-auto-completed-group-list': [this.tags.autoCompletedGroupList, Validators.compose([Validators.minLength(2), Validators.maxLength(5)])]
       });
+      this.reactiveForm.valueChanges.subscribe(res => console.log('Reactive Form', res));
    }
 
    ngOnInit(): void {
-      this.reactiveForm.valueChanges.subscribe(res => console.log('Reactive Form', res));
-      this.templateDrivenForm.valueChanges.subscribe(res => console.log('Template Driven Form', res));
       this.filteredGroupList = _cloneDeep(this.groupList);
+   }
+
+   ngAfterViewInit(): void {
+      this.templateDrivenForm.valueChanges.subscribe(res => console.log('Template Driven Form', res));
    }
 
    onSubmitReactiveForm(): void {

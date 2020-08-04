@@ -53,7 +53,7 @@ export class SelectDemoComponent {
       {
          name: '--egeo-st-select__arrow--margin',
          description: 'Arrow icon margin',
-         default: ' 5px 8px 0 0'
+         default: '5px 10px 0 0'
       }
    ];
 

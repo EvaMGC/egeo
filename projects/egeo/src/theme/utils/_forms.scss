@@ -10,13 +10,18 @@
  */
 @import '~@stratio/egeo-themes/dist/stratio/constants';
 
+%st-form-control--focused {
+   border-color: var(--egeo-theme-action, $action) !important;
+   box-shadow: 0 0 4px 0 rgba(18, 139, 221, 0.2) !important;
+}
+
 %st-form-control {
    font-weight: 400;
-   font-size: var(--egeo-st-form-control--font-size, $egeo-font-size-xsmall);
+   font-size: var(--egeo-st-form-control--font-size, $egeo-font-size-14);
    line-height: var(--egeo-st-form-control--line-height, $egeo-line-height-20);
    color: var(--egeo-theme-space-110, $space-110);
    background-color: var(--egeo-theme-neutral-full, $neutral-full);
-   border: 1px solid var(--egeo-theme-neutral-30, $neutral-30);
+   border: 1px solid var(--egeo-theme-space-40, $space-40);
    padding: 10px 17px 10px 15px;
    border-radius: 4px;
    vertical-align: bottom;
@@ -32,17 +37,13 @@
       color: var(--egeo-theme-neutral-50, $neutral-50);
    }
 
-   &:focus {
-      border-color: var(--egeo-theme-action, $action);
+   &:hover {
+      border-color: var(--egeo-theme-space-70, $space-70);
    }
 
-   &:disabled {
-      border-color: var(--egeo-theme-neutral-20, $neutral-20);
-      color: var(--egeo-theme-neutral-2, $neutral-2);
-
-      &::placeholder {
-         color: var(--egeo-theme-neutral-40, $neutral-40);
-      }
+   &:focus {
+      border-color: var(--egeo-theme-action, $action);
+      box-shadow: 0 0 4px 0 rgba(18, 139, 221, 0.2);
    }
 }
 
@@ -58,15 +59,23 @@
 }
 
 %st-form-small-globals {
-   padding: 6px 15px 5px 9px;
+   padding: 5px 15px 5px 9px;
    --egeo-st-form-control--height: 30px;
 
-   + i.st-search-icon {
-      top: 9px;
+   input, textarea {
+      font-size: $egeo-font-size-12;
    }
 
-   + .st-form-control-reset-button {
-      --egeo-st-form-control__reset-button--line-height: 36px;
+   i.st-search-icon {
+      top: 0;
+      margin-top: 9px;
    }
+
+   .st-form-control-reset-button {
+      line-height: 32px;
+      font-size: $egeo-font-size-14;
+      right: -25px;
+   }
+
 }
 

@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 @import '~@stratio/egeo-themes/dist/stratio/constants';
+@import '../utils/forms';
 
 .st-label {
    display: inline-block;
@@ -20,10 +21,15 @@
 }
 
 .st-form-field {
+   &.small {
+      @extend %st-form-small-globals;
+   }
+
    .st-label {
-      color: var(--egeo-theme-space-70, $space-70);
+      color: var(--egeo-theme-space-80, $space-80);
+
       &.active {
-         color: var(--egeo-theme-action, $action);
+         color: var(--egeo-theme-space-110, $space-110);
       }
    }
 
@@ -32,23 +38,22 @@
       &:focus {
          border-color: var(--egeo-theme-action, $action);
       }
+
       &:disabled {
-         border-color: var(--egeo-theme-neutral-20, $neutral-20);
-         background-color: var(--egeo-theme-neural-14, $neutral-14);
-         color: var(--egeo-theme-neutral-30, $neutral-30);
          overflow: auto;
          resize: none;
          cursor: not-allowed;
-      }
-      &:disabled:placeholder {
-         color: var(--egeo-theme-neutral-30, $neutral-30);
+         border-color: var(--egeo-theme-space-40, $space-40);
+         color: var(--egeo-theme-space-50, $space-50);
+         background-color: var(--egeo-theme-space-5, $space-5);
+
+         &::placeholder {
+            color: var(--egeo-theme-space-50, $space-50);
+         }
       }
    }
 
    &.ng-invalid:not(.ng-pristine) {
-      .st-label {
-         color: var(--egeo-theme-error, $error);
-      }
       input,
       textarea {
          border-color: var(--egeo-theme-error, $error);

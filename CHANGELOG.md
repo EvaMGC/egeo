@@ -5,8 +5,9 @@
 **New features:**
 
 * st-button: Apply new design according to UX specifications
-* st-select: Apply new heights according to UX specifications. Regular (36px) and small (30px)
-* st-input: Apply new heights according to UX specifications. Regular (36px) and small (30px)
+* st-select: Apply new design and heights according to UX specifications. Regular (36px) and small (30px)
+* st-input: Apply new design and heights according to UX specifications. Regular (36px) and small (30px)
+* st-tag-input: Apply new design and heights according to UX specifications. Regular (36px) and small (30px)
 
 **Fixed bugs:**
 

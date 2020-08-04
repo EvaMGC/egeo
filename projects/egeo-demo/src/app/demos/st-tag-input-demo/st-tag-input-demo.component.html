@@ -33,6 +33,7 @@
                 [id]="'tag-input-reactive-demo'" [placeholder]="'Add tags separated by commas'" infoMessage="This is an informative message"
                 [tooltip]="'This is a Tag Input component tooltip'" [forbiddenValues]="['test']">
             </st-tag-input>
+            <br>
             <span>Output: {{reactiveForm.controls['tag-input-reactive'].value | json}}</span>
          </div>
          <div class="example">
@@ -40,6 +41,7 @@
                 infoMessage="This is an informative message" [placeholder]="'Add tags separated by commas'" [tooltip]="'This is a Tag Input component tooltip'"
                 type="number">
             </st-tag-input>
+            <br>
             <span>Output: {{reactiveForm.controls['tag-input-number'].value | json}}</span>
          </div>
          <div class="example">
@@ -48,6 +50,7 @@
                 [id]="'tag-input-reactive-demo'" [placeholder]="'Add tags separated by commas'" infoMessage="This is an informative message"
                 [tooltip]="'This is a Tag Input component tooltip'" type="integer">
             </st-tag-input>
+            <br>
             <span>Output: {{reactiveForm.controls['tag-input-integer'].value | json}}</span>
          </div>
 
@@ -56,6 +59,7 @@
                 [errorMessage]="errorReactiveMessage" [label]="'Tag Input with pattern of a valid IP'" [id]="'tag-input-reactive-required-demo'"
                 [placeholder]="'Add tags separated by commas'" infoMessage="This is an informative message" [tooltip]="'This is a Tag Input component tooltip'">
             </st-tag-input>
+            <br>
             <span>Output: {{reactiveForm.controls['tag-input-reactive-required'].value | json}}</span>
          </div>
          <div class="example">
@@ -64,7 +68,6 @@
                 [label]="'Tag Input with disable'" [id]="'tag-input-reactive-disabled-demo'" [placeholder]="'Add tags separated by commas'"
                 infoMessage="This is an informative message" [tooltip]="'This is a Tag Input component tooltip'">
             </st-tag-input>
-
          </div>
          <div class="example">
 
@@ -73,6 +76,7 @@
                 [placeholder]="'Add tags separated by commas'" [tooltip]="'This is a Tag Input component tooltip'" infoMessage="This is an informative message"
                 (input)="onFilterList($event)">
             </st-tag-input>
+            <br>
             <span>Output: {{reactiveForm.controls['tag-input-reactive-autocomplete'].value | json}}</span>
 
          </div>
@@ -83,6 +87,7 @@
                 [tooltip]="'This is a Tag Input component tooltip'" [withAutocomplete]="true" [autocompleteList]="filteredGroupList" [errorMessage]="getGroupAutoCompletedErrorMessage()"
                 infoMessage="This is an informative message" (input)="onFilterGroupList($event)" [charsToShowAutocompleteList]="0">
             </st-tag-input>
+            <br>
             <span>Output: {{reactiveForm.controls['tag-input-auto-completed-group-list'].value | json}}</span>
          </div>
 

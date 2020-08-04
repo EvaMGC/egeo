@@ -238,33 +238,6 @@ describe('StTagInputComponent', () => {
       expect(comp.items.length).toEqual(simpleTags.length - 2);
    });
 
-   describe('Should remove tag when user clicks on the remove button of a tag', () => {
-      it('if input tag is disabled, remove button is not displayed and tag can not be removed', () => {
-         comp.items = _cloneDeep(simpleTags);
-         comp.disabled = true;
-         fixture.detectChanges();
-
-         expect(fixture.nativeElement.querySelector('.icon-cross.remove-tag-button')).toBeNull();
-      });
-
-      it('if input tag is not disabled, remove button is displayed and tag is removed when user clicks on it', () => {
-         comp.items = _cloneDeep(simpleTags);
-         comp.disabled = false;
-         fixture.detectChanges();
-
-         const removeButtons = fixture.nativeElement.querySelectorAll('.icon-cross.remove-tag-button');
-
-         expect(removeButtons.length).toBe(simpleTags.length);
-
-         removeButtons[1].click();
-         fixture.detectChanges();
-
-         expect(comp.items.length).toBe(simpleTags.length - 1);
-         expect(comp.items[1]).toEqual(simpleTags[2]);
-         expect(fixture.nativeElement.querySelectorAll('.icon-cross.remove-tag-button').length).toBe(simpleTags.length - 1);
-      });
-   });
-
    it('Should add tag when press enter, comma or tab with input text', () => {
       const id: string = 'test-id';
       (fixture.elementRef.nativeElement as HTMLElement).id = id;

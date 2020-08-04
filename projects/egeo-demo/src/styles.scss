@@ -124,7 +124,7 @@ main {
       line-height: $egeo-line-height-xxxlarge;
       letter-spacing: normal;
       color: $neutral;
-      height: 100px;
+      min-height: 100px;
    }
 
    .title {

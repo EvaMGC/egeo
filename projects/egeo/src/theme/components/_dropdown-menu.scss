@@ -30,7 +30,7 @@
    border-radius: var(--egeo-st-dropdown-menu--border-radius, 4px);
 
    &.active {
-      border-color: var(--egeo-st-dropdown-menu__active--border-color, $input-field-onfocus);
+      border-color: var(--egeo-st-dropdown-menu__active--border-color, $action);
    }
 
    ul {
@@ -78,18 +78,19 @@
       }
 
       &:hover, &:focus {
-         background-color: var(--egeo-st-dropdown-menu__item__hover--bg-color, var(--egeo-theme-space-5, $space-5));
+         background-color: var(--egeo-st-dropdown-menu__item__hover--bg-color, var(--egeo-theme-action-10, $action-10));
          outline: none;
       }
 
       &.selected {
-         background-color: var(--egeo-st-dropdown-menu__item__selected--bg-color, var(--egeo-theme-action-10, $action-10));
+         background-color: var(--egeo-st-dropdown-menu__item__selected--bg-color, var(--egeo-theme-space-10, $space-10));
       }
 
       &.disabled {
          & *:not(i) {
-            color: var(--egeo-st-dropdown-menu__item__disabled--color, var(--egeo-theme-space-40, $space-40)) !important;
+            color: var(--egeo-st-dropdown-menu__item__disabled--color, var(--egeo-theme-space-50, $space-50)) !important;
          }
+         background-color: var(--egeo-theme-space-10, $space-10);
          cursor: default;
       }
 
@@ -176,6 +177,7 @@
       font-size: var(--egeo-st-dropdown-menu__menu-list__item--font-size, $egeo-font-size-14);
       min-height: var(--egeo-st-dropdown-menu__menu-list__item--min-height, 40px);
       padding: var(--egeo-st-dropdown-menu__menu-list__item--padding, 10px 20px);
+      background-color: transparent;
 
       &:hover {
          background-color: var(--egeo-st-dropdown-menu__menu-list__item__hover--bg-color, var(--egeo-theme-action-10, $action-10));

@@ -26,7 +26,7 @@
    <div (click)="onButtonClick()" (keypress)="onButtonKeyPress($event)" #button class="button-container"
         (clickOutside)="onClickOutside()">
       <div>
-         <label *ngIf="hasLabel" [ngClass]="{disabled: disabled, error: showError()}"
+         <label *ngIf="hasLabel" [ngClass]="{disabled: disabled, error: showError(), active: expandedMenu}"
                 st-label
                 for="inputId"
                 class="st-label"
