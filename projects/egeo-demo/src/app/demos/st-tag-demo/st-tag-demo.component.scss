@@ -20,33 +20,42 @@
 
 .inline {
    display: inline-flex;
-   width: 100%;
    justify-content: center;
+   width: 100%;
 
    .tag:not(:last-of-type) {
       margin-right: 50px;
    }
 }
 
+span, .st-tag {
+   margin-bottom: 20px;
+}
+
+.st-tag {
+   margin-right: 20px;
+}
+
 .tag-container {
-   justify-content: space-between;
    display: flex;
+   justify-content: space-between;
 
    .column {
       display: inline-flex;
       flex-direction: column;
+      margin: 0 auto;
       text-align: right;
-      margin: auto;
+      white-space: nowrap;
 
-      span, st-tag {
-         margin-bottom: 20px;
+      st-tag {
+         margin: 0 auto 24px auto;
       }
    }
 
    .tag-row {
-      width: 100%;
       display: flex;
       justify-content: space-around;
+      width: 100%;
    }
 }
 

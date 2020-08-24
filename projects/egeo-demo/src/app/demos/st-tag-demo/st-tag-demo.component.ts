@@ -34,8 +34,17 @@ export class StTagDemoComponent {
    public tagWithIcon: StTagItem = {
       id: 'complexTag',
       text: 'Tag title',
-      icon: 'icon-lock',
+      icon: 'icon-edit-2',
       bubble: 'This is the bubble for this tag with icon'
    };
+
+
+   public tagWithRightIcon: StTagItem = {
+      id: 'complexTag',
+      text: 'Tag title',
+      rightIcon: 'icon-unlock',
+      bubble: 'This is the bubble for this tag with icon'
+   };
+
 
 }

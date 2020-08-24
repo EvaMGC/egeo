@@ -10,6 +10,7 @@
 * st-tag-input: Apply new design and heights according to UX specifications. Regular (36px) and small (30px)
 * theme: Added `.st-label-group` to style a group title label with a `<p>` tag
 * theme: Added `.st-inline-group` css class to set a group of controls as inline, so we get a horizontal disposition
+* st-tag: Apply new behaviour and design defined by UX
 
 **Fixed bugs:**
 
@@ -20,6 +21,7 @@
 * st-button: Removed large buttons
 * Remove theme constants in order to import them from egeo-themes dependency
 * st-button: 'button-toolbar' class has to be used together with 'button-primary', 'button-secondary', 'button-borderless' or 'button-critical'
+* st-tag: Removed input 'removable' and output 'remove'. Changed to property 'rightIcon' in StTagItem model and output 'clickButton'
 
 **Refactor:**
 

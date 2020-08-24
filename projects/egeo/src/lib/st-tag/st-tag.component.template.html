@@ -10,22 +10,23 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div (click)="onClick(tag)"
+<div class="st-tag__container" (click)="onClick(tag)"
      (mouseenter)="onChangeBubbleVisibility(true)"
      (mouseleave)="onChangeBubbleVisibility(false)">
 
-   <div class="st-tag__text"><span *ngIf="tag.icon" class="st-tag__icon {{tag.icon}}"></span>{{tag.text}}</div>
+   <i *ngIf="tag.icon" class="st-tag__icon {{tag.icon}}"></i>
+   <div class="st-tag__text">{{tag.text}}</div>
 
-   <span *ngIf="removable" (click)="onRemove()"
-         class="st-tag__remove-button"><i class="icon-cross"></i>
+   <span *ngIf="tag.rightIcon" (click)="onClickButton()"
+         class="st-tag__right-button"><i class="{{ tag.rightIcon }}"></i>
    </span>
-   <st-bubble *ngIf="tag.bubble" class="st-tag__bubble-container"
-              [animation]="false"
-              [showArrow]="true"
-              [small]="true"
-              [offset]="{x: 20, y: 5}"
-              [hidden]="!showBubble"
-              [text]="tag.bubble">
-      <span bubble-button></span>
-   </st-bubble>
 </div>
+<st-bubble *ngIf="tag.bubble" class="st-tag__bubble-container"
+           [animation]="false"
+           [showArrow]="true"
+           [small]="true"
+           [offset]="{x: 20, y: 5}"
+           [hidden]="!showBubble"
+           [text]="tag.bubble">
+   <span bubble-button></span>
+</st-bubble>

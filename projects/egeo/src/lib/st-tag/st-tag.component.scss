@@ -17,7 +17,7 @@
    font-style: normal;
    font-stretch: normal;
    letter-spacing: normal;
-   padding: 0 10px;
+   padding: 0 8px;
    text-align: center;
    position: relative;
 
@@ -35,11 +35,7 @@
       margin-right: 5px;
    }
 
-   .st-tag__remove-button {
-      display: inline-flex;
-      align-items: center;
-      justify-self: right;
+   .st-tag__right-button {
       cursor: pointer;
-      justify-content: flex-end;
    }
 }

@@ -11,8 +11,12 @@
 @import '~@stratio/egeo-themes/dist/stratio/constants';
 
 %tag-events {
+   &--clickable:not([disabled]) {
+      cursor: pointer;
+   }
+
    &:not([disabled]):hover {
-      background-color: var(--egeo-theme-action-10, $action-10) ;
+      background-color: var(--egeo-theme-action-10, $action-10);
       color: var(--egeo-theme-action, $action);
    }
 
@@ -24,130 +28,115 @@
 
 .st-tag {
    background-color: var(--egeo-theme-space-10, $space-10);
-   color: black;
+   color: var(--egeo-theme-space-110, $space-110);
    font-family: var(--egeo-theme-main-font, $egeo-nunito-sans);
    font-size: $egeo-font-size-11;
    vertical-align: middle;
-   height: 20px;
-   .st-tag__text {
-      line-height: $egeo-line-height-22;
-      font-size: $egeo-font-size-11;
+   height: 18px;
+   white-space: nowrap;
+
+   &__container {
+      display: inline-flex;
+      width: 100%;
    }
 
-   .st-tag__remove-button {
-      height: 20px;
+   .st-tag__text {
+      line-height: $egeo-line-height-18;
+      font-size: $egeo-font-size-12;
    }
 
    &__icon {
       font-size: $egeo-font-size-10;
-   }
-
-   &--selected {
-      background-color: var(--egeo-theme-action, $action) !important;
-
-      .st-tag__text, .st-tag__icon, .st-tag__remove-button {
-         color: white !important;
-      }
-   }
-
-   &__text, &__icon, &__remove-button {
-      text-align: center;
-      vertical-align: middle;
-   }
-
-   &__icon {
-      vertical-align: initial;
-   }
-
-   &__text {
-      max-width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-   }
-
-   &--removable {
-      .st-tag__text {
-         max-width: calc(86% - 10px);
-      }
-   }
-
-   &:not(.st-tag--removable) {
-      .st-tag__text {
-         max-width: 100%;
-      }
+      float: left;
    }
 
    &--clickable {
       cursor: pointer;
    }
 
-   &__remove-button {
+   &--selected {
+      background-color: var(--egeo-theme-action, $action) !important;
+
+      .st-tag__text, .st-tag__icon, .st-tag__right-button {
+         color: white !important;
+      }
+   }
+
+   &__icon, &__right-button {
+      text-align: center;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
+   }
+
+   &__text {
+      display: inline-flex;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+
+   &:not(.removable) {
+      .st-tag__text {
+         max-width: 100%;
+      }
+   }
+
+   &__right-button {
       color: var(--egeo-theme-space-70, $space-70);
-      font-size: $egeo-font-size-11;
-      float: right;
-      width: 14%;
       margin-left: 10px;
    }
 
-   &.small {
+   &.info {
+      background-color: var(--egeo-theme-action-10, $action-10);
+      color: var(--egeo-theme-action, $action);
+   }
+
+   &:not(.informative) {
       @extend %tag-events;
-      height: 20px;
+   }
+
+   &.small {
+      height: 18px;
 
       .st-tag__text {
-         line-height: $egeo-line-height-22;
-         font-size: $egeo-font-size-11;
+         line-height: $egeo-line-height-18;
+         font-size: $egeo-font-size-12;
       }
 
-      .st-tag__remove-button {
-         height: 20px;
-      }
-
-      &__icon {
-         font-size: $egeo-font-size-10;
+      .st-tag__icon, .st-tag__right-button {
+         height: 18px;
+         font-size: $egeo-font-size-12;
       }
 
    }
 
    &.medium {
-      @extend %tag-events;
-      height: 23px;
+      height: 24px;
 
       .st-tag__text {
-         line-height: $egeo-line-height-24;
+         line-height: $egeo-line-height-26;
          font-size: $egeo-font-size-12;
       }
 
-      .st-tag__remove-button {
-         height: 23px;
-      }
-
-      &__icon {
-         font-size: $egeo-font-size-11;
+      .st-tag__icon, .st-tag__right-button {
+         height: 24px;
+         font-size: $egeo-font-size-12;
       }
    }
 
    &.large {
-      @extend %tag-events;
       height: 30px;
 
       .st-tag__text {
          font-size: $egeo-font-size-14;
-         line-height: $egeo-line-height-32;
+         line-height: 2.19em;
       }
 
-      .st-tag__remove-button {
+      .st-tag__icon, .st-tag__right-button {
          height: 30px;
+         font-size: $egeo-font-size-14;
       }
-
-      .st-tag__icon {
-         font-size: $egeo-font-size-12;
-      }
-   }
-
-   &.info {
-      background-color: var(--egeo-theme-action-10, $action-10) ;
-      color: var(--egeo-theme-action, $action);
    }
 
    &.error {

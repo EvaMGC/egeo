@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-import { ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 import { StTagItem } from './st-tag.model';
 
@@ -36,31 +36,41 @@ import { StTagItem } from './st-tag.model';
    selector: 'st-tag',
    templateUrl: 'st-tag.component.template.html',
    styleUrls: ['st-tag.component.scss'],
-   host: { 'class': 'st-tag' }
-})
+   changeDetection: ChangeDetectionStrategy.OnPush})
 
 export class StTagComponent {
    /** @Input {StTagItem} [tag=] Item that contains the tag info  */
    @Input() tag: StTagItem;
-   /** @Input {boolean} [removable=] Boolean to display or not the cross icon to remove tag */
-   @HostBinding('class.st-tag--removable')
-   @Input() removable: boolean;
-   /** @Input {boolean} [clickable=true] Boolean to set tag as clicklable or not */
-   @HostBinding('class.st-tag--clickable')
-   @Input() clickable: boolean = true;
-   /** @Output {StTagItem} [remove=] Even emitted when cross icon is clicked  */
-   @Output() remove: EventEmitter<StTagItem> = new EventEmitter<StTagItem>();
+   /** @Input {string} [class=] Classes applied from outside */
+   @Input() class: string;
+   /** @Input {boolean} [clickable=] Boolean to specify if tag can be clickable */
+   @Input() clickable: boolean;
+   /** @Output {boolean} [clickButton=] Even emitted when right icon is clicked  */
+   @Output() clickButton: EventEmitter<boolean> = new EventEmitter<boolean>();
    /** @Output {StTagItem} [click=] Event emitted when tag is clicked */
    @Output() click: EventEmitter<StTagItem> = new EventEmitter<StTagItem>();
 
    showBubble: boolean;
+   @HostBinding('class')
+   classes: string;
 
    constructor(private _cd: ChangeDetectorRef) {
 
    }
 
-   onRemove(): void {
-      this.remove.emit(this.tag);
+   ngOnInit(): void {
+      this.classes = 'st-tag';
+      if (this.clickable) {
+         this.classes += ' st-tag--clickable';
+      }
+      this.classes += ' ' + this.class;
+      this._cd.markForCheck();
+   }
+
+   onClickButton(): void {
+      if (!this.clickable) {
+         this.clickButton.emit(true);
+      }
    }
 
    onClick(filter: StTagItem): void {
